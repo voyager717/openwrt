@@ -1,1 +1,0 @@
---ipv6 --igd2 --leasefile --portinuse --firewall=iptables --disable-fork

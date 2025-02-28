@@ -1,7 +1,0 @@
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/install/strip.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/install/local.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/install.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/list_install_components.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/rebuild_cache.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/edit_cache.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libnl-tiny-2020-08-05-c291088f/CMakeFiles/nl-tiny.dir

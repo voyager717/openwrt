@@ -1,8 +1,0 @@
-/usr/lib/liblucihttp.so.0.1
-/usr/lib/liblucihttp.so.0
-/usr/lib/liblucihttp.so
-/usr/include/lucihttp/utils.h
-/usr/include/lucihttp/multipart-parser.h
-/usr/include/lucihttp/urlencoded-parser.h
-/usr/lib/lua/lucihttp.so
-/usr/include/lucihttp/lua.h

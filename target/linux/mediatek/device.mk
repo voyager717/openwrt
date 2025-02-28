@@ -1,0 +1,6 @@
+DEVICE_NAME := ZBT-Z8102AX
+DEVICE_VENDOR := ZBTLink
+DEVICE_MODEL := Z8102AX
+DEVICE_DTS := mt7981-spim-nand-rfb-z8102ax
+DEVICE_PACKAGES := kmod-mt7915e kmod-mt7981-firmware mt7981-wo-firmware
+TARGET_DEVICES += zbt-z8102ax

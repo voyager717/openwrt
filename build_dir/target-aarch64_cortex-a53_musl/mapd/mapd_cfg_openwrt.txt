@@ -1,4 +1,0 @@
-#lan interface for device
-lan_interface=eth0
-#wan interface for device
-wan_interface=eth1

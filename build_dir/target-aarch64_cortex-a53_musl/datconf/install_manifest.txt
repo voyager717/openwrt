@@ -1,9 +1,0 @@
-/usr/include/libkvcutil.h
-/usr/lib/libkvcutil.so.1.0.0.0
-/usr/lib/libkvcutil.so.1
-/usr/lib/libkvcutil.so
-/usr/bin/kvcedit
-/usr/include/libdatconf.h
-/usr/lib/libdatconf.a
-/usr/bin/datconf
-/usr/lib/lua/datconf.so

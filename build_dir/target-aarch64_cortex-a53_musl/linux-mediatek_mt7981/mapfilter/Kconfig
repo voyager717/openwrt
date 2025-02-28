@@ -1,6 +1,0 @@
-config MAP_FILTER_SUPPORT
-	tristate "MAP netfilter support."
-	default n
-	---help---
-		if you want to 1905 daemon work, you must enable this option.
-

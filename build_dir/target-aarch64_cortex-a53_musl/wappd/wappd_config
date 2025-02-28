@@ -1,5 +1,0 @@
-CONFIG_DPP_SUPPORT=n
-include $(TOPDIR)/.config
-ifeq ($(CONFIG_MAP_R3_SUPPORT), y)
-CONFIG_DPP_SUPPORT=y
-endif

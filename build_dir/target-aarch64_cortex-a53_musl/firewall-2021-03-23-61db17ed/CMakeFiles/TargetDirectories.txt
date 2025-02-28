@@ -1,7 +1,0 @@
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/install/strip.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/install/local.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/install.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/list_install_components.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/rebuild_cache.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/edit_cache.dir
-/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/firewall-2021-03-23-61db17ed/CMakeFiles/firewall3.dir

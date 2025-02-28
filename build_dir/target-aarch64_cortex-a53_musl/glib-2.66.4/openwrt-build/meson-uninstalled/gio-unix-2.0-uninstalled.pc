@@ -1,9 +1,0 @@
-prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4/openwrt-build
-srcdir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4
-libdir=${prefix}/lib
-includedir=${prefix}/include
-
-Name: GIO unix specific APIs
-Description: unix specific headers for glib I/O library
-Version: 2.66.4
-Requires: gobject-2.0, gio-2.0
