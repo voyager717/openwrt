@@ -32,7 +32,11 @@ print_comments() {
 	echo '# Direction: '"$2"
 	echo '# Stats:     '"$3"
 	echo ''
+<<<<<<< HEAD
 }
+=======
+}	
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 get_device() {
 	( config_load network; scan_interfaces; config_get "$1" ifname )

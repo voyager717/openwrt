@@ -36,6 +36,7 @@
 		read-only;
 	};
 };
+<<<<<<< HEAD
 
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000>;
@@ -62,3 +63,5 @@
 		};
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

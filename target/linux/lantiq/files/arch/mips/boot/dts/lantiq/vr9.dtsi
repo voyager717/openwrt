@@ -120,6 +120,25 @@
 			ranges = <0x0 0x203000 0x100>;
 			big-endian;
 
+<<<<<<< HEAD
+=======
+			gphy0: gphy@20 {
+				compatible = "lantiq,xrx200-gphy";
+				reg = <0x20 0x4>;
+
+				resets = <&reset0 31 30>, <&reset1 7 7>;
+				reset-names = "gphy", "gphy2";
+			};
+
+			gphy1: gphy@68 {
+				compatible = "lantiq,xrx200-gphy";
+				reg = <0x68 0x4>;
+
+				resets = <&reset0 29 28>, <&reset1 6 6>;
+				reset-names = "gphy", "gphy2";
+			};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset0: reset-controller@10 {
 				compatible = "lantiq,xrx200-reset";
 				reg = <0x10 4>, <0x14 4>;
@@ -207,7 +226,10 @@
 			compatible = "lantiq,xrx200-pinctrl";
 			#gpio-cells = <2>;
 			gpio-controller;
+<<<<<<< HEAD
 			gpio-ranges = <&gpio 0 0 50>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0xe100b10 0xa0>;
 
 			gphy0_led0_pins: gphy0-led0 {
@@ -394,8 +416,11 @@
 		};
 
 		usb0: usb@e101000 {
+<<<<<<< HEAD
 			#address-cells = <1>;
 			#size-cells = <0>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			status = "disabled";
 			compatible = "lantiq,xrx200-usb";
 			reg = <0xe101000 0x1000
@@ -405,6 +430,7 @@
 			dr_mode = "host";
 			phys = <&usb_phy0>;
 			phy-names = "usb2-phy";
+<<<<<<< HEAD
 
 			ehci_port1: port@1 {
 				reg = <1>;
@@ -415,6 +441,11 @@
 		usb1: usb@e106000 {
 			#address-cells = <1>;
 			#size-cells = <0>;
+=======
+		};
+
+		usb1: usb@e106000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			status = "disabled";
 			compatible = "lantiq,xrx200-usb";
 			reg = <0xe106000 0x1000>;
@@ -423,6 +454,7 @@
 			dr_mode = "host";
 			phys = <&usb_phy1>;
 			phy-names = "usb2-phy";
+<<<<<<< HEAD
 
 			ehci_port2: port@1 {
 				reg = <1>;
@@ -500,6 +532,26 @@
 				speed = <1000>;
 				full-duplex;
 			};
+=======
+		};
+
+		eth0: eth@e108000 {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			compatible = "lantiq,xrx200-net";
+			reg = <	0xe108000 0x3000 /* switch */
+				0xe10b100 0x70 /* mdio */
+				0xe10b1d8 0x30 /* mii */
+				0xe10b308 0x30 /* pmac */
+			>;
+			interrupt-parent = <&icu0>;
+			interrupts = <75 73 72>;
+			resets = <&reset0 21 16>, <&reset0 8 8>;
+			reset-names = "switch", "ppe";
+			lantiq,phys = <&gphy0>, <&gphy1>;
+			pinctrl-0 = <&mdio_pins>;
+			pinctrl-names = "default";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		mei@e116000 {
@@ -528,7 +580,11 @@
 			reg = <0xd900000 0x1000>;
 
 			interrupt-parent = <&icu0>;
+<<<<<<< HEAD
 			interrupts = <161 144 145 146 147>;
+=======
+			interrupts = <161 144>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			phys = <&pcie0_phy LANTIQ_PCIE_PHY_MODE_36MHZ>;
 			phy-names = "pcie";
@@ -558,10 +614,13 @@
 			interrupt-map-mask = <0xf800 0x0 0x0 0x7>;
 			interrupt-map = <0x7000 0 0 1 &icu0 30 1>; /* slot 14, irq 30 */
 			req-mask = <0x1>; /* GNT1 */
+<<<<<<< HEAD
 
 			device_type = "pci";
 
 			resets = <&reset0 13 13>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 

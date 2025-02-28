@@ -65,9 +65,22 @@ _v() {
 	[ -n "$VERBOSE" ] && [ "$VERBOSE" -ge 1 ] && echo "$*" >&2
 }
 
+<<<<<<< HEAD
 v() {
 	_v "$(date) upgrade: $@"
 	logger -p info -t upgrade "$@"
+=======
+_vn() {
+	[ -n "$VERBOSE" ] && [ "$VERBOSE" -ge 1 ] && echo -n "$*" >&2
+}
+
+v() {
+	_v "$(date) upgrade: $@"
+}
+
+vn() {
+	_vn "$(date) upgrade: $@"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 json_string() {
@@ -88,7 +101,12 @@ get_image() { # <source> [ <command> ]
 	if [ -z "$cmd" ]; then
 		local magic="$(dd if="$from" bs=2 count=1 2>/dev/null | hexdump -n 2 -e '1/1 "%02x"')"
 		case "$magic" in
+<<<<<<< HEAD
 			1f8b) cmd="busybox zcat";;
+=======
+			1f8b) cmd="zcat";;
+			425a) cmd="bzcat";;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			*) cmd="cat";;
 		esac
 	fi
@@ -127,6 +145,7 @@ get_magic_fat32() {
 	(get_image "$@" | dd bs=1 count=5 skip=82) 2>/dev/null
 }
 
+<<<<<<< HEAD
 identify_magic_long() {
 	local magic=$1
 	case "$magic" in
@@ -154,6 +173,8 @@ identify_magic_long() {
 	esac
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 part_magic_efi() {
 	local magic=$(get_magic_gpt "$@")
 	[ "$magic" = "EFI PART" ]
@@ -166,6 +187,7 @@ part_magic_fat() {
 }
 
 export_bootdevice() {
+<<<<<<< HEAD
 	local cmdline uuid blockdev uevent line class
 	local MAJOR MINOR DEVNAME DEVTYPE
 	local rootpart="$(cmdline_get_var root)"
@@ -219,6 +241,73 @@ export_bootdevice() {
 		export BOOTDEV_MAJOR=$MAJOR
 		export BOOTDEV_MINOR=$MINOR
 		return 0
+=======
+	local cmdline bootdisk rootpart uuid blockdev uevent line class
+	local MAJOR MINOR DEVNAME DEVTYPE
+
+	if read cmdline < /proc/cmdline; then
+		case "$cmdline" in
+			*root=*)
+				rootpart="${cmdline##*root=}"
+				rootpart="${rootpart%% *}"
+			;;
+		esac
+
+		case "$bootdisk" in
+			/dev/*)
+				uevent="/sys/class/block/${bootdisk##*/}/uevent"
+			;;
+		esac
+
+		case "$rootpart" in
+			PARTUUID=[a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9][a-f0-9]-[a-f0-9][a-f0-9])
+				uuid="${rootpart#PARTUUID=}"
+				uuid="${uuid%-[a-f0-9][a-f0-9]}"
+				for blockdev in $(find /dev -type b); do
+					set -- $(dd if=$blockdev bs=1 skip=440 count=4 2>/dev/null | hexdump -v -e '4/1 "%02x "')
+					if [ "$4$3$2$1" = "$uuid" ]; then
+						uevent="/sys/class/block/${blockdev##*/}/uevent"
+						break
+					fi
+				done
+			;;
+			PARTUUID=????????-????-????-????-??????????02)
+				uuid="${rootpart#PARTUUID=}"
+				uuid="${uuid%02}00"
+				for disk in $(find /dev -type b); do
+					set -- $(dd if=$disk bs=1 skip=568 count=16 2>/dev/null | hexdump -v -e '8/1 "%02x "" "2/1 "%02x""-"6/1 "%02x"')
+					if [ "$4$3$2$1-$6$5-$8$7-$9" = "$uuid" ]; then
+						uevent="/sys/class/block/${disk##*/}/uevent"
+						break
+					fi
+				done
+			;;
+			/dev/*)
+				uevent="/sys/class/block/${rootpart##*/}/../uevent"
+			;;
+			0x[a-f0-9][a-f0-9][a-f0-9] | 0x[a-f0-9][a-f0-9][a-f0-9][a-f0-9] | \
+			[a-f0-9][a-f0-9][a-f0-9] | [a-f0-9][a-f0-9][a-f0-9][a-f0-9])
+				rootpart=0x${rootpart#0x}
+				for class in /sys/class/block/*; do
+					while read line; do
+						export -n "$line"
+					done < "$class/uevent"
+					if [ $((rootpart/256)) = $MAJOR -a $((rootpart%256)) = $MINOR ]; then
+						uevent="$class/../uevent"
+					fi
+				done
+			;;
+		esac
+
+		if [ -e "$uevent" ]; then
+			while read line; do
+				export -n "$line"
+			done < "$uevent"
+			export BOOTDEV_MAJOR=$MAJOR
+			export BOOTDEV_MINOR=$MINOR
+			return 0
+		fi
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 
 	return 1
@@ -232,7 +321,11 @@ export_partdevice() {
 		while read line; do
 			export -n "$line"
 		done < "$uevent"
+<<<<<<< HEAD
 		if [ "$BOOTDEV_MAJOR" = "$MAJOR" -a $(($BOOTDEV_MINOR + $offset)) = "$MINOR" -a -b "/dev/$DEVNAME" ]; then
+=======
+		if [ $BOOTDEV_MAJOR = $MAJOR -a $(($BOOTDEV_MINOR + $offset)) = $MINOR -a -b "/dev/$DEVNAME" ]; then
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			export "$var=$DEVNAME"
 			return 0
 		fi

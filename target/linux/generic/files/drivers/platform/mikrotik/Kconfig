@@ -1,5 +1,9 @@
 menuconfig MIKROTIK
 	bool "Platform support for MikroTik RouterBoard virtual devices"
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	  Say Y here to get to see options for the MikroTik RouterBoard platform.
 	  This option alone does not add any kernel code.
@@ -15,6 +19,7 @@ config MIKROTIK_RB_SYSFS
 	help
 	  This driver exposes RouterBoot configuration in sysfs.
 
+<<<<<<< HEAD
 config NVMEM_LAYOUT_MIKROTIK
 	tristate "RouterBoot NVMEM layout support"
 	depends on NVMEM_LAYOUTS
@@ -28,4 +33,6 @@ config MIKROTIK_WLAN_DECOMPRESS_LZ77
 	  Allow Mikrotik LZ77 factory flashed Wi-Fi calibration data to be
 	  decompressed
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif # MIKROTIK

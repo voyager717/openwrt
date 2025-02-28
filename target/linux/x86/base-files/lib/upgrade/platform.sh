@@ -62,7 +62,12 @@ platform_do_bootloader_upgrade() {
 			-m "/tmp/device.map" \
 			-d "/tmp/boot/boot/grub" \
 			-r "hd0,${parttable}1" \
+<<<<<<< HEAD
 			"/dev/$diskdev"
+=======
+			"/dev/$diskdev" \
+		&& touch /tmp/boot/boot/grub/upgraded
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		umount /tmp/boot
 	fi

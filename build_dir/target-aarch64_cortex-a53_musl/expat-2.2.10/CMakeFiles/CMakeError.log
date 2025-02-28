@@ -1,0 +1,131 @@
+Determining if the arc4random_buf exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_d0a6f/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_d0a6f.dir/build.make CMakeFiles/cmTC_d0a6f.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d0a6f.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10=expat-2.2.10 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_d0a6f.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'arc4random_buf' undeclared (first use in this function)
+   return ((int*)(&arc4random_buf))[argc];
+                   ^~~~~~~~~~~~~~
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_d0a6f.dir/build.make:85: CMakeFiles/cmTC_d0a6f.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_d0a6f/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef arc4random_buf
+  return ((int*)(&arc4random_buf))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the arc4random exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_75094/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_75094.dir/build.make CMakeFiles/cmTC_75094.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_75094.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10=expat-2.2.10 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_75094.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'arc4random' undeclared (first use in this function); did you mean 'srandom'?
+   return ((int*)(&arc4random))[argc];
+                   ^~~~~~~~~~
+                   srandom
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_75094.dir/build.make:85: CMakeFiles/cmTC_75094.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_75094/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <stdlib.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef arc4random
+  return ((int*)(&arc4random))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the off_t exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_2e31a/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_2e31a.dir/build.make CMakeFiles/cmTC_2e31a.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2e31a.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10=expat-2.2.10 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_2e31a.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: expected expression before 'off_t'
+   return ((int*)(&off_t))[argc];
+                   ^~~~~
+gmake[5]: *** [CMakeFiles/cmTC_2e31a.dir/build.make:85: CMakeFiles/cmTC_2e31a.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_2e31a/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef off_t
+  return ((int*)(&off_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the size_t exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_049ea/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_049ea.dir/build.make CMakeFiles/cmTC_049ea.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_049ea.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10=expat-2.2.10 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_049ea.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: expected expression before 'size_t'
+   return ((int*)(&size_t))[argc];
+                   ^~~~~~
+gmake[5]: *** [CMakeFiles/cmTC_049ea.dir/build.make:85: CMakeFiles/cmTC_049ea.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_049ea/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/expat-2.2.10/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <sys/types.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef size_t
+  return ((int*)(&size_t))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}

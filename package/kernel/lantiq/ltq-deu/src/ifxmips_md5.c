@@ -64,6 +64,14 @@
 #define MD5_HASH_WORDS      4
 #define HASH_START   IFX_HASH_CON
 
+<<<<<<< HEAD
+=======
+static spinlock_t lock;
+#define CRTCL_SECT_INIT        spin_lock_init(&lock)
+#define CRTCL_SECT_START       spin_lock_irqsave(&lock, flag)
+#define CRTCL_SECT_END         spin_unlock_irqrestore(&lock, flag)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 //#define CRYPTO_DEBUG
 #ifdef CRYPTO_DEBUG
 extern char debug_level;
@@ -81,6 +89,21 @@ struct md5_ctx {
 
 extern int disable_deudma;
 
+<<<<<<< HEAD
+=======
+/*! \fn static u32 endian_swap(u32 input)
+ *  \ingroup IFX_MD5_FUNCTIONS
+ *  \brief perform dword level endian swap   
+ *  \param input value of dword that requires to be swapped  
+*/ 
+static u32 endian_swap(u32 input)
+{
+    u8 *ptr = (u8 *)&input;
+    
+    return ((ptr[3] << 24) | (ptr[2] << 16) | (ptr[1] << 8) | ptr[0]);     
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn static void md5_transform(u32 *hash, u32 const *in)
  *  \ingroup IFX_MD5_FUNCTIONS
  *  \brief main interface to md5 hardware   
@@ -93,6 +116,7 @@ static void md5_transform(struct md5_ctx *mctx, u32 *hash, u32 const *in)
     volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
     unsigned long flag;
 
+<<<<<<< HEAD
     CRTCL_SECT_HASH_START;
 
     MD5_HASH_INIT;
@@ -107,6 +131,20 @@ static void md5_transform(struct md5_ctx *mctx, u32 *hash, u32 const *in)
     for (i = 0; i < 16; i++) {
         hashs->MR = in[i];
 //      printk("in[%d]: %08x\n", i, in[i]);
+=======
+    CRTCL_SECT_START;
+
+    if (mctx->started) { 
+        hashs->D1R = endian_swap(*((u32 *) hash + 0));
+    	hashs->D2R = endian_swap(*((u32 *) hash + 1));
+        hashs->D3R = endian_swap(*((u32 *) hash + 2));
+        hashs->D4R = endian_swap(*((u32 *) hash + 3));
+    }
+
+    for (i = 0; i < 16; i++) {
+        hashs->MR = endian_swap(in[i]);
+//	printk("in[%d]: %08x\n", i, endian_swap(in[i]));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     };
 
     //wait for processing
@@ -114,6 +152,7 @@ static void md5_transform(struct md5_ctx *mctx, u32 *hash, u32 const *in)
         // this will not take long
     }
 
+<<<<<<< HEAD
     *((u32 *) hash + 0) = hashs->D1R;
     *((u32 *) hash + 1) = hashs->D2R;
     *((u32 *) hash + 2) = hashs->D3R;
@@ -122,6 +161,16 @@ static void md5_transform(struct md5_ctx *mctx, u32 *hash, u32 const *in)
     CRTCL_SECT_HASH_END;
 
     mctx->started = 1;
+=======
+    *((u32 *) hash + 0) = endian_swap (hashs->D1R);
+    *((u32 *) hash + 1) = endian_swap (hashs->D2R);
+    *((u32 *) hash + 2) = endian_swap (hashs->D3R);
+    *((u32 *) hash + 3) = endian_swap (hashs->D4R);
+
+    mctx->started = 1; 
+
+    CRTCL_SECT_END;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 /*! \fn static inline void md5_transform_helper(struct md5_ctx *ctx)
@@ -143,7 +192,16 @@ static inline void md5_transform_helper(struct md5_ctx *ctx)
 static int md5_init(struct shash_desc *desc)
 {
     struct md5_ctx *mctx = shash_desc_ctx(desc);
+<<<<<<< HEAD
     //volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
+=======
+    volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
+
+    hash->controlr.ENDI = 0;
+    hash->controlr.SM = 1;
+    hash->controlr.ALGO = 1;    // 1 = md5  0 = sha1
+    hash->controlr.INIT = 1;    // Initialize the hash operation by writing a '1' to the INIT bit.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     mctx->byte_count = 0;
     mctx->started = 0;
@@ -200,8 +258,13 @@ static int md5_final(struct shash_desc *desc, u8 *out)
     const unsigned int offset = mctx->byte_count & 0x3f;
     char *p = (char *)mctx->block + offset;
     int padding = 56 - (offset + 1);
+<<<<<<< HEAD
     //volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
     //unsigned long flag;
+=======
+    volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
+    unsigned long flag;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     *p++ = 0x80;
     if (padding < 0) {
@@ -212,12 +275,33 @@ static int md5_final(struct shash_desc *desc, u8 *out)
     }
 
     memset(p, 0, padding);
+<<<<<<< HEAD
     mctx->block[14] = le32_to_cpu(mctx->byte_count << 3);
     mctx->block[15] = le32_to_cpu(mctx->byte_count >> 29);
 
     md5_transform(mctx, mctx->hash, mctx->block);                                                 
 
     memcpy(out, mctx->hash, MD5_DIGEST_SIZE);
+=======
+    mctx->block[14] = endian_swap(mctx->byte_count << 3);
+    mctx->block[15] = endian_swap(mctx->byte_count >> 29);
+
+#if 0
+    le32_to_cpu_array(mctx->block, (sizeof(mctx->block) -
+                      sizeof(u64)) / sizeof(u32));
+#endif
+
+    md5_transform(mctx, mctx->hash, mctx->block);                                                 
+
+    CRTCL_SECT_START;
+
+    *((u32 *) out + 0) = endian_swap (hashs->D1R);
+    *((u32 *) out + 1) = endian_swap (hashs->D2R);
+    *((u32 *) out + 2) = endian_swap (hashs->D3R);
+    *((u32 *) out + 3) = endian_swap (hashs->D4R);
+
+    CRTCL_SECT_END;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     // Wipe context
     memset(mctx, 0, sizeof(*mctx));
@@ -238,7 +322,11 @@ static struct shash_alg ifxdeu_md5_alg = {
                 .cra_name       =       "md5",
                 .cra_driver_name=       "ifxdeu-md5",
                 .cra_priority   =       300,
+<<<<<<< HEAD
                 .cra_flags      =       CRYPTO_ALG_TYPE_HASH | CRYPTO_ALG_KERN_DRIVER_ONLY,
+=======
+                .cra_flags      =       CRYPTO_ALG_TYPE_HASH,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                 .cra_blocksize  =       MD5_HMAC_BLOCK_SIZE,
                 .cra_module     =       THIS_MODULE,
     }
@@ -256,6 +344,11 @@ int ifxdeu_init_md5 (void)
     if ((ret = crypto_register_shash(&ifxdeu_md5_alg)))
         goto md5_err;
 
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_INIT;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     printk (KERN_NOTICE "IFX DEU MD5 initialized%s.\n", disable_deudma ? "" : " (DMA)");
     return ret;
 
@@ -274,3 +367,7 @@ void ifxdeu_fini_md5 (void)
     crypto_unregister_shash(&ifxdeu_md5_alg);
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

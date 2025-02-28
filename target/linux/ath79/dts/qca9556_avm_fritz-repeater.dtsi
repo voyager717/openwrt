@@ -34,6 +34,7 @@
 				label = "urlader";
 				reg = <0x0 0x20000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -44,6 +45,8 @@
 						reg = <0x198a 0x844>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {

@@ -65,7 +65,11 @@ define KernelPackage/ata-ahci-platform
     $(LINUX_DIR)/drivers/ata/ahci_platform.ko \
     $(LINUX_DIR)/drivers/ata/libahci_platform.ko
   AUTOLOAD:=$(call AutoLoad,40,libahci libahci_platform ahci_platform,1)
+<<<<<<< HEAD
   $(call AddDepends/ata,@TARGET_ipq806x||TARGET_layerscape||TARGET_rockchip||TARGET_sunxi)
+=======
+  $(call AddDepends/ata,@TARGET_ipq806x||TARGET_layerscape||TARGET_sunxi)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/ata-ahci-platform/description
@@ -89,6 +93,7 @@ endef
 
 $(eval $(call KernelPackage,ata-artop))
 
+<<<<<<< HEAD
 define KernelPackage/ata-ahci-dwc
   TITLE:=Synopsys DWC AHCI SATA
   KCONFIG:= \
@@ -101,6 +106,23 @@ define KernelPackage/ata-ahci-dwc
 endef
 
 $(eval $(call KernelPackage,ata-ahci-dwc))
+=======
+
+define KernelPackage/ata-marvell-sata
+  TITLE:=Marvell Serial ATA support
+  KCONFIG:=CONFIG_SATA_MV
+  FILES:=$(LINUX_DIR)/drivers/ata/sata_mv.ko
+  AUTOLOAD:=$(call AutoLoad,41,sata_mv,1)
+  $(call AddDepends/ata)
+endef
+
+define KernelPackage/ata-marvell-sata/description
+ SATA support for marvell chipsets
+endef
+
+$(eval $(call KernelPackage,ata-marvell-sata))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/ata-nvidia-sata
   TITLE:=Nvidia Serial ATA support
@@ -215,7 +237,11 @@ $(eval $(call KernelPackage,dax))
 define KernelPackage/dm
   SUBMENU:=$(BLOCK_MENU)
   TITLE:=Device Mapper
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-manager +kmod-dax +KERNEL_KEYS:kmod-keys-encrypted
+=======
+  DEPENDS:=+kmod-crypto-manager +kmod-dax
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   # All the "=n" are unnecessary, they're only there
   # to stop the config from asking the question.
   # MIRROR is M because I've needed it for pvmove.
@@ -240,7 +266,11 @@ define KernelPackage/dm
     $(LINUX_DIR)/drivers/md/dm-log.ko \
     $(LINUX_DIR)/drivers/md/dm-mirror.ko \
     $(LINUX_DIR)/drivers/md/dm-region-hash.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,30,dm-mod dm-log dm-region-hash dm-mirror dm-crypt,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,30,dm-mod dm-log dm-region-hash dm-mirror dm-crypt)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/dm/description
@@ -275,7 +305,11 @@ define KernelPackage/iscsi-initiator
 	CONFIG_INET \
 	CONFIG_SCSI_LOWLEVEL=y \
 	CONFIG_ISCSI_TCP \
+<<<<<<< HEAD
 	CONFIG_SCSI_ISCSI_ATTRS
+=======
+	CONFIG_SCSI_ISCSI_ATTRS=y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(LINUX_DIR)/drivers/scsi/iscsi_tcp.ko \
 	$(LINUX_DIR)/drivers/scsi/libiscsi.ko \
@@ -462,7 +496,11 @@ define KernelPackage/loop
 	CONFIG_BLK_DEV_LOOP \
 	CONFIG_BLK_DEV_CRYPTOLOOP=n
   FILES:=$(LINUX_DIR)/drivers/block/loop.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,30,loop,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,30,loop)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/loop/description
@@ -505,6 +543,7 @@ endef
 $(eval $(call KernelPackage,nbd))
 
 
+<<<<<<< HEAD
 define KernelPackage/nvme
   SUBMENU:=$(BLOCK_MENU)
   TITLE:=NVM Express block device
@@ -528,11 +567,14 @@ endef
 $(eval $(call KernelPackage,nvme))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/scsi-core
   SUBMENU:=$(BLOCK_MENU)
   TITLE:=SCSI device support
   KCONFIG:= \
 	CONFIG_SCSI \
+<<<<<<< HEAD
 	CONFIG_SCSI_COMMON \
 	CONFIG_BLK_DEV_SD
   FILES:= \
@@ -540,6 +582,13 @@ define KernelPackage/scsi-core
 	$(LINUX_DIR)/drivers/scsi/scsi_common.ko \
 	$(LINUX_DIR)/drivers/scsi/sd_mod.ko
   AUTOLOAD:=$(call AutoLoad,40,scsi_mod scsi_common sd_mod,1)
+=======
+	CONFIG_BLK_DEV_SD
+  FILES:= \
+	$(LINUX_DIR)/drivers/scsi/scsi_mod.ko \
+	$(LINUX_DIR)/drivers/scsi/sd_mod.ko
+  AUTOLOAD:=$(call AutoLoad,40,scsi_mod sd_mod,1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,scsi-core))
@@ -559,6 +608,7 @@ endef
 $(eval $(call KernelPackage,scsi-generic))
 
 
+<<<<<<< HEAD
 define KernelPackage/cdrom
   TITLE:=Kernel library module for CD / DVD drives
   KCONFIG:=CONFIG_CDROM
@@ -577,6 +627,18 @@ define KernelPackage/scsi-cdrom
     CONFIG_BLK_DEV_SR \
     CONFIG_BLK_DEV_SR_VENDOR=n
   FILES:=$(LINUX_DIR)/drivers/scsi/sr_mod.ko
+=======
+define KernelPackage/scsi-cdrom
+  SUBMENU:=$(BLOCK_MENU)
+  TITLE:=Kernel support for CD / DVD drives
+  DEPENDS:=+kmod-scsi-core
+  KCONFIG:= \
+    CONFIG_BLK_DEV_SR \
+    CONFIG_BLK_DEV_SR_VENDOR=n
+  FILES:= \
+    $(LINUX_DIR)/drivers/cdrom/cdrom.ko \
+    $(LINUX_DIR)/drivers/scsi/sr_mod.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,45,sr_mod)
 endef
 

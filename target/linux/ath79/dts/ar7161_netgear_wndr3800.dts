@@ -5,10 +5,13 @@
 / {
 	compatible = "netgear,wndr3800", "qca,ar7161";
 	model = "Netgear WNDR3800";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &eth0;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &partitions {
@@ -32,6 +35,7 @@
 		openwrt,ih-type = <IH_TYPE_FILESYSTEM>;
 	};
 
+<<<<<<< HEAD
 	partition@ff0000 {
 		label = "art";
 		reg = <0xff0000 0x010000>;
@@ -84,3 +88,11 @@
 	nvmem-cells = <&macaddr_art_6>;
 	nvmem-cell-names = "mac-address";
 };
+=======
+	art: partition@ff0000 {
+		label = "art";
+		reg = <0xff0000 0x010000>;
+		read-only;
+	};
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

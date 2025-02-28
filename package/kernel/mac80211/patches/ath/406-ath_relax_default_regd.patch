@@ -39,7 +39,11 @@
  bool ath_is_world_regd(struct ath_regulatory *reg)
  {
  	return is_wwr_sku(ath_regd_get_eepromRD(reg));
+<<<<<<< HEAD
 @@ -659,6 +667,9 @@ ath_regd_init_wiphy(struct ath_regulator
+=======
+@@ -658,6 +666,9 @@ ath_regd_init_wiphy(struct ath_regulator
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	if (IS_ENABLED(CPTCFG_ATH_USER_REGD))
  		return 0;
  

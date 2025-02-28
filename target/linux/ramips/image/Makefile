@@ -5,9 +5,14 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+<<<<<<< HEAD
 DEVICE_VARS += LOADER_TYPE LOADER_FLASH_OFFS LZMA_TEXT_START
 DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
 DEVICE_VARS += NETGEAR_ENC_MODEL NETGEAR_ENC_REGION NETGEAR_ENC_HW_ID_LIST NETGEAR_ENC_MODEL_LIST
+=======
+DEVICE_VARS += LOADER_TYPE LOADER_FLASH_OFFS
+DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 DEVICE_VARS += BUFFALO_TAG_PLATFORM BUFFALO_TAG_VERSION BUFFALO_TAG_MINOR
 DEVICE_VARS += SEAMA_SIGNATURE SEAMA_MTDBLOCK
 DEVICE_VARS += SERCOMM_HWNAME SERCOMM_HWID SERCOMM_HWVER SERCOMM_SWVER
@@ -15,7 +20,11 @@ DEVICE_VARS += SERCOMM_PAD JCG_MAXSIZE
 
 loadaddr-y := 0x80000000
 loadaddr-$(CONFIG_TARGET_ramips_rt288x) := 0x88000000
+<<<<<<< HEAD
 loadaddr-$(CONFIG_TARGET_ramips_mt7621) := 0x80001000
+=======
+loadaddr-$(CONFIG_TARGET_ramips_mt7621) := 0x81001000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ldrplatform-y := ralink
 ldrplatform-$(CONFIG_TARGET_ramips_mt7621) := mt7621
@@ -23,15 +32,30 @@ ldrplatform-$(CONFIG_TARGET_ramips_mt7621) := mt7621
 ldrflashstart-y := 0x1c000000
 ldrflashstart-$(CONFIG_TARGET_ramips_mt7621) := 0x1fc00000
 
+<<<<<<< HEAD
 LOADADDR := $(loadaddr-y)
+=======
+KERNEL_LOADADDR := $(loadaddr-y)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 LOADER_PLATFORM := $(ldrplatform-y)
 LOADER_FLASH_START := $(ldrflashstart-y)
 
 KERNEL_DTB = kernel-bin | append-dtb | lzma
 
+<<<<<<< HEAD
 define Build/jcg-header
 	$(STAGING_DIR_HOST)/bin/jcgimage -v $(1) \
 		$(if $(JCG_MAXSIZE), -m $$(($(call exp_units,$(JCG_MAXSIZE)))),) \
+=======
+define Build/edimax-header
+	$(STAGING_DIR_HOST)/bin/mkedimaximg -i $@ -o $@.new $(1)
+	@mv $@.new $@
+endef
+
+define Build/jcg-header
+	$(STAGING_DIR_HOST)/bin/jcgimage -v $(1) \
+		$(if $(JCG_MAXSIZE), -m $$(($(subst k, * 1024,$(JCG_MAXSIZE)))),) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		-u $@ -o $@.new
 	mv $@.new $@
 endef
@@ -42,9 +66,13 @@ define Build/loader-common
 		PKG_BUILD_DIR="$@.src" \
 		TARGET_DIR="$(dir $@)" LOADER_NAME="$(notdir $@)" \
 		BOARD="$(BOARDNAME)" PLATFORM="$(LOADER_PLATFORM)" \
+<<<<<<< HEAD
 		LZMA_TEXT_START=$(LZMA_TEXT_START) \
 		LOADADDR=$(LOADADDR) \
 		SUBTARGET=$(SUBTARGET) \
+=======
+		LZMA_TEXT_START=0x81800000 LOADADDR=$(KERNEL_LOADADDR) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1) compile loader.$(LOADER_TYPE)
 	mv "$@.$(LOADER_TYPE)" "$@"
 	rm -rf $@.src
@@ -87,6 +115,7 @@ define Build/mkdlinkfw-factory
 	mv $@.new $@
 endef
 
+<<<<<<< HEAD
 define Build/mkdlinkfw-loader
 	-$(STAGING_DIR_HOST)/bin/mkdlinkfw \
 		-k $(KDIR)/loader-$(DEVICE_NAME).bin \
@@ -100,6 +129,11 @@ endef
 define Build/netis-tail
 	echo -n $(1) >> $@
 	echo -n $(UIMAGE_NAME)-yun | $(MKHASH) md5 | \
+=======
+define Build/netis-tail
+	echo -n $(1) >> $@
+	echo -n $(UIMAGE_NAME)-yun | $(STAGING_DIR_HOST)/bin/mkhash md5 | \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		sed 's/../\\\\x&/g' | xargs echo -ne >> $@
 endef
 
@@ -111,7 +145,11 @@ endef
 define Build/relocate-kernel
 	rm -rf $@.relocate
 	$(CP) ../../generic/image/relocate $@.relocate
+<<<<<<< HEAD
 	$(MAKE) -C $@.relocate KERNEL_ADDR=$(if $(1),$(1),$(KERNEL_LOADADDR)) CROSS_COMPILE=$(TARGET_CROSS)
+=======
+	$(MAKE) -C $@.relocate KERNEL_ADDR=$(KERNEL_LOADADDR) CROSS_COMPILE=$(TARGET_CROSS)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	( \
 		dd if=$@.relocate/loader.bin bs=32 conv=sync && \
 		perl -e '@s = stat("$@"); print pack("V", @s[7])' && \
@@ -140,9 +178,15 @@ define Build/sign-dlink-ru
 endef
 
 define Build/trx
+<<<<<<< HEAD
 	-$(STAGING_DIR_HOST)/bin/trx $(1) \
 		-o $@ \
 		-m $$(($(call exp_units,$(IMAGE_SIZE)))) \
+=======
+	$(STAGING_DIR_HOST)/bin/trx $(1) \
+		-o $@ \
+		-m $$(($(subst k, * 1024,$(IMAGE_SIZE)))) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		-f $(IMAGE_KERNEL) \
 		-a 4 -f $(IMAGE_ROOTFS)
 endef
@@ -152,12 +196,15 @@ define Build/uimage-padhdr
 	mv $@.new $@
 endef
 
+<<<<<<< HEAD
 define Build/uimage-sgehdr
 	uimage_sgehdr -i $@ -o $@.new -m $(DEVICE_MODEL) \
 		-h $(DEVICE_VARIANT) -s V1.00000
 	mv $@.new $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/umedia-header
 	fix-u-media-header -T 0x46 -B $(1) -i $@ -o $@.new && mv $@.new $@
 endef
@@ -167,6 +214,7 @@ define Build/wrg-header
 	mv $@.new $@
 endef
 
+<<<<<<< HEAD
 define Device/Default
   PROFILES = Default
   BLOCKSIZE := 64k
@@ -187,11 +235,35 @@ define Device/Default
 endef
 
 define Device/netgear_sercomm_nor
+=======
+define Build/zyimage
+	$(STAGING_DIR_HOST)/bin/zyimage $(1) $@
+endef
+
+define Device/Default
+  PROFILES = Default
+  KERNEL := $(KERNEL_DTB) | uImage lzma
+  SOC := $(DEFAULT_SOC)
+  DEVICE_DTS_DIR := ../dts
+  DEVICE_DTS = $$(SOC)_$(1)
+  IMAGES := sysupgrade.bin
+  COMPILE :=
+  sysupgrade_bin := append-kernel | append-rootfs | pad-rootfs
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size
+endef
+
+define Device/netgear_sercomm_nor
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VENDOR := NETGEAR
   IMAGES += factory.img
   IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | \
 	pad-rootfs
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.img := pad-extra $$$$(SERCOMM_PAD) | $$(IMAGE/default) | \
 	pad-to $$$$(BLOCKSIZE) | sercom-footer | pad-to 128 | \
 	zip $$$$(SERCOMM_HWNAME).bin | sercom-seal
@@ -206,7 +278,11 @@ define Device/seama
   # - 36 bytes of META data (4-bytes aligned)
   IMAGE/default := append-kernel | pad-offset $$$$(BLOCKSIZE) 64 | append-rootfs
   IMAGE/sysupgrade.bin := \
+<<<<<<< HEAD
 	$$(IMAGE/default) | seama | pad-rootfs | check-size | append-metadata
+=======
+	$$(IMAGE/default) | seama | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.bin := \
 	$$(IMAGE/default) | pad-rootfs -x 64 | seama | seama-seal | check-size
   SEAMA_SIGNATURE :=
@@ -214,6 +290,7 @@ endef
 
 define Device/uimage-lzma-loader
   LOADER_TYPE := bin
+<<<<<<< HEAD
   KERNEL/lzma-loader := kernel-bin | append-dtb | lzma | loader-kernel
   KERNEL := $$(KERNEL/lzma-loader) | uImage none
 endef
@@ -223,6 +300,9 @@ define Device/seama-lzma-loader
   $(Device/uimage-lzma-loader)
   KERNEL := $$(KERNEL/lzma-loader) | relocate-kernel | lzma -a0
   KERNEL_INITRAMFS := $$(KERNEL/lzma-loader) | uImage none
+=======
+  KERNEL := kernel-bin | append-dtb | lzma | loader-kernel | uImage none
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 include $(SUBTARGET).mk

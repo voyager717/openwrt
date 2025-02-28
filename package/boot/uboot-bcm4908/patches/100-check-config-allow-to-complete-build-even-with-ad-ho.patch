@@ -22,7 +22,11 @@ Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
 
 --- a/scripts/check-config.sh
 +++ b/scripts/check-config.sh
+<<<<<<< HEAD
 @@ -50,14 +50,13 @@ cat `find ${srctree} -name "Kconfig*"` |
+=======
+@@ -50,14 +50,13 @@ cat `find ${srctree} -name "Kconfig*"` |sed -n \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	|sort |uniq > ${ok}
  comm -23 ${suspects} ${ok} >${new_adhoc}
  if [ -s ${new_adhoc} ]; then

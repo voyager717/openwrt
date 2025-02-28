@@ -8,17 +8,28 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnfnetlink
+<<<<<<< HEAD
 PKG_VERSION:=1.0.2
 PKG_RELEASE:=1
+=======
+PKG_VERSION:=1.0.1
+PKG_RELEASE:=4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:= \
 	http://www.netfilter.org/projects/libnfnetlink/files/ \
 	ftp://ftp.netfilter.org/pub/libnfnetlink/
+<<<<<<< HEAD
 PKG_HASH:=b064c7c3d426efb4786e60a8e6859b82ee2f2c5e49ffeea640cfe4fe33cbc376
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 PKG_LICENSE:=GPL-2.0+
 PKG_CPE_ID:=cpe:/a:netfilter:libnfnetlink
+=======
+PKG_HASH:=f270e19de9127642d2a11589ef2ec97ef90a649a74f56cf9a96306b04817b51a
+PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+PKG_LICENSE:=GPL-2.0+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_FIXUP:=autoreconf
 

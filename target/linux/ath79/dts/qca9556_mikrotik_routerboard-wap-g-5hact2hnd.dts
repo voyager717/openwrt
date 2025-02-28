@@ -11,6 +11,10 @@
 
 	aliases {
 		mdio-gpio1 = &mdio2;
+<<<<<<< HEAD
+=======
+		serial0 = &uart;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	keys {
@@ -72,6 +76,10 @@
 			partition@0 {
 				label = "RouterBoot";
 				reg = <0x0 0x20000>;
+<<<<<<< HEAD
+=======
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				compatible = "mikrotik,routerboot-partitions";
 				#address-cells = <1>;
 				#size-cells = <1>;
@@ -82,7 +90,11 @@
 					read-only;
 				};
 
+<<<<<<< HEAD
 				hard_config {
+=======
+				hard_config: hard_config {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					read-only;
 				};
 
@@ -98,6 +110,10 @@
 				};
 
 				soft_config {
+<<<<<<< HEAD
+=======
+					label = "soft_config";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				};
 			};
 

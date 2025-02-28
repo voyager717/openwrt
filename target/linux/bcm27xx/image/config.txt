@@ -4,7 +4,11 @@
 
 ################################################################################
 # For overclocking and various other settings, see:
+<<<<<<< HEAD
 # https://www.raspberrypi.com/documentation/computers/config_txt.html
+=======
+# https://www.raspberrypi.org/documentation/configuration/config-txt/README.md
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ################################################################################
 
 # OpenWrt config

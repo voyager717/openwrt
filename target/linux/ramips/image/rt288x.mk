@@ -12,6 +12,10 @@ define Build/gemtek-header
 endef
 
 define Device/airlink101_ar670w
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VENDOR := Airlink
   DEVICE_MODEL := AR670W
   IMAGE_SIZE := 3840k
@@ -37,8 +41,14 @@ endef
 TARGET_DEVICES += airlink101_ar725w
 
 define Device/asus_rt-n15
+<<<<<<< HEAD
   IMAGE_SIZE := 3776k
   DEVICE_VENDOR := ASUS
+=======
+  BLOCKSIZE := 64k
+  IMAGE_SIZE := 3776k
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := RT-N15
   DEVICE_PACKAGES := kmod-switch-rtl8366s
   SUPPORTED_DEVICES += rt-n15
@@ -54,11 +64,18 @@ define Device/belkin_f5d8235-v1
   DEVICE_PACKAGES := kmod-switch-rtl8366s kmod-usb-ohci kmod-usb-ohci-pci \
 	kmod-usb2 kmod-usb2-pci kmod-usb-ledtrig-usbport
   SUPPORTED_DEVICES += f5d8235-v1
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += belkin_f5d8235-v1
 
 define Device/buffalo_wli-tx4-ag300n
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3776k
   DEVICE_VENDOR := Buffalo
   DEVICE_MODEL := WLI-TX4-AG300N
@@ -69,6 +86,10 @@ endef
 TARGET_DEVICES += buffalo_wli-tx4-ag300n
 
 define Device/buffalo_wzr-agl300nh
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3776k
   DEVICE_VENDOR := Buffalo
   DEVICE_MODEL := WZR-AGL300NH
@@ -79,6 +100,10 @@ endef
 TARGET_DEVICES += buffalo_wzr-agl300nh
 
 define Device/dlink_dap-1522-a1
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3712k
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DAP-1522
@@ -94,6 +119,10 @@ endef
 TARGET_DEVICES += dlink_dap-1522-a1
 
 define Device/ralink_v11st-fe
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3776k
   DEVICE_VENDOR := Ralink
   DEVICE_MODEL := V11ST-FE

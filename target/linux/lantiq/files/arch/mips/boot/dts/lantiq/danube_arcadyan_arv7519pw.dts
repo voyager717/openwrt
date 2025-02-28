@@ -144,8 +144,12 @@
 
 &gsw {
 	phy-mode = "mii";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_boardconfig_16>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&boardconfig 0x16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &localbus {
@@ -179,6 +183,7 @@
 				label = "board_config";
 				reg = <0xfe0000 0x20000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -189,6 +194,8 @@
 						reg = <0x16 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -201,14 +208,22 @@
 	pinctrl-names = "default";
 
 	lantiq,external-clock;
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	req-mask = <0xf>;
 
 	wifi@0,0 {
 		compatible = "pci0,0";
 		reg = <0x7000 0 0 0 0>;
 		ralink,mtd-eeprom = <&boardconfig 0x410>;
+<<<<<<< HEAD
 		ralink,eeprom-swap;
+=======
+		ralink,mtd-eeprom-swap;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

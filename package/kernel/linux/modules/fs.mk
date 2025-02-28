@@ -10,7 +10,11 @@ FS_MENU:=Filesystems
 define KernelPackage/fs-9p
   SUBMENU:=$(FS_MENU)
   TITLE:=Plan 9 Resource Sharing Support
+<<<<<<< HEAD
   DEPENDS:=+kmod-9pnet +kmod-fs-netfs
+=======
+  DEPENDS:=+kmod-9pnet
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=\
 	CONFIG_9P_FS \
 	CONFIG_9P_FS_POSIX_ACL=n \
@@ -67,9 +71,16 @@ $(eval $(call KernelPackage,fs-autofs4))
 define KernelPackage/fs-btrfs
   SUBMENU:=$(FS_MENU)
   TITLE:=BTRFS filesystem support
+<<<<<<< HEAD
   DEPENDS:=+kmod-lib-crc32c +kmod-lib-lzo +kmod-lib-zlib-inflate +kmod-lib-zlib-deflate +kmod-lib-raid6 +kmod-lib-xor +kmod-lib-zstd +kmod-crypto-blake2b +kmod-crypto-xxhash
   KCONFIG:=\
 	CONFIG_BTRFS_FS \
+=======
+  DEPENDS:=+kmod-lib-crc32c +kmod-lib-lzo +kmod-lib-zlib-inflate +kmod-lib-zlib-deflate +kmod-lib-raid6 +kmod-lib-xor +kmod-lib-zstd
+  KCONFIG:=\
+	CONFIG_BTRFS_FS \
+	CONFIG_BTRFS_FS_POSIX_ACL=n \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_BTRFS_FS_CHECK_INTEGRITY=n
   FILES:=\
 	$(LINUX_DIR)/fs/btrfs/btrfs.ko
@@ -83,6 +94,7 @@ endef
 $(eval $(call KernelPackage,fs-btrfs))
 
 
+<<<<<<< HEAD
 define KernelPackage/fs-smbfs-common
   SUBMENU:=$(FS_MENU)
   TITLE:=SMBFS common dependencies support
@@ -102,6 +114,8 @@ endef
 $(eval $(call KernelPackage,fs-smbfs-common))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/fs-cifs
   SUBMENU:=$(FS_MENU)
   TITLE:=CIFS support
@@ -109,17 +123,26 @@ define KernelPackage/fs-cifs
 	CONFIG_CIFS \
 	CONFIG_CIFS_DFS_UPCALL=n \
 	CONFIG_CIFS_UPCALL=n
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/fs/smb/client/cifs.ko
   AUTOLOAD:=$(call AutoLoad,30,cifs)
   $(call AddDepends/nls)
   DEPENDS+= \
     +kmod-fs-smbfs-common \
+=======
+  FILES:=$(LINUX_DIR)/fs/cifs/cifs.ko
+  AUTOLOAD:=$(call AutoLoad,30,cifs)
+  $(call AddDepends/nls)
+  DEPENDS+= \
+    +kmod-crypto-md4 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     +kmod-crypto-md5 \
     +kmod-crypto-sha256 \
     +kmod-crypto-sha512 \
     +kmod-crypto-cmac \
     +kmod-crypto-hmac \
+<<<<<<< HEAD
     +kmod-crypto-aead \
     +kmod-crypto-ccm \
     +kmod-crypto-ecb \
@@ -127,6 +150,13 @@ define KernelPackage/fs-cifs
     +kmod-asn1-decoder \
     +kmod-oid-registry \
     +kmod-dnsresolver
+=======
+    +kmod-crypto-arc4 \
+    +kmod-crypto-aead \
+    +kmod-crypto-ccm \
+    +kmod-crypto-ecb \
+    +kmod-crypto-des
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/fs-cifs/description
@@ -185,6 +215,7 @@ endef
 $(eval $(call KernelPackage,fs-efivarfs))
 
 
+<<<<<<< HEAD
 define KernelPackage/fs-exfat
   SUBMENU:=$(FS_MENU)
   TITLE:=exFAT filesystem support
@@ -203,6 +234,8 @@ endef
 $(eval $(call KernelPackage,fs-exfat))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/fs-exportfs
   SUBMENU:=$(FS_MENU)
   TITLE:=exportfs kernel server support
@@ -262,13 +295,20 @@ $(eval $(call KernelPackage,fs-f2fs))
 define KernelPackage/fs-fscache
   SUBMENU:=$(FS_MENU)
   TITLE:=General filesystem local cache manager
+<<<<<<< HEAD
   DEPENDS:=+kmod-fs-netfs
   KCONFIG:=\
 	CONFIG_FSCACHE \
+=======
+  DEPENDS:=
+  KCONFIG:=\
+	CONFIG_FSCACHE=m \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_FSCACHE_STATS=y \
 	CONFIG_FSCACHE_HISTOGRAM=n \
 	CONFIG_FSCACHE_DEBUG=n \
 	CONFIG_FSCACHE_OBJECT_LIST=n \
+<<<<<<< HEAD
 	CONFIG_CACHEFILES \
 	CONFIG_CACHEFILES_DEBUG=n \
 	CONFIG_CACHEFILES_HISTOGRAM=n \
@@ -278,6 +318,13 @@ define KernelPackage/fs-fscache
 	$(LINUX_DIR)/fs/fscache/fscache.ko \
 	$(LINUX_DIR)/fs/cachefiles/cachefiles.ko
   AUTOLOAD:=$(call AutoLoad,29,fscache cachefiles)
+=======
+	CONFIG_CACHEFILES=y \
+	CONFIG_CACHEFILES_DEBUG=n \
+	CONFIG_CACHEFILES_HISTOGRAM=n
+  FILES:=$(LINUX_DIR)/fs/fscache/fscache.ko
+  AUTOLOAD:=$(call AutoLoad,29,fscache)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,fs-fscache))
@@ -286,7 +333,10 @@ $(eval $(call KernelPackage,fs-fscache))
 define KernelPackage/fs-hfs
   SUBMENU:=$(FS_MENU)
   TITLE:=HFS filesystem support
+<<<<<<< HEAD
   DEPENDS:=+kmod-cdrom
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_HFS_FS
   FILES:=$(LINUX_DIR)/fs/hfs/hfs.ko
   AUTOLOAD:=$(call AutoLoad,30,hfs)
@@ -303,7 +353,10 @@ $(eval $(call KernelPackage,fs-hfs))
 define KernelPackage/fs-hfsplus
   SUBMENU:=$(FS_MENU)
   TITLE:=HFS+ filesystem support
+<<<<<<< HEAD
   DEPENDS:=+kmod-cdrom
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_HFSPLUS_FS
   FILES:=$(LINUX_DIR)/fs/hfsplus/hfsplus.ko
   AUTOLOAD:=$(call AutoLoad,30,hfsplus)
@@ -320,7 +373,11 @@ $(eval $(call KernelPackage,fs-hfsplus))
 define KernelPackage/fs-isofs
   SUBMENU:=$(FS_MENU)
   TITLE:=ISO9660 filesystem support
+<<<<<<< HEAD
   DEPENDS:=+kmod-lib-zlib-inflate +kmod-cdrom
+=======
+  DEPENDS:=+kmod-lib-zlib-inflate
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_ISO9660_FS CONFIG_JOLIET=y CONFIG_ZISOFS=n
   FILES:=$(LINUX_DIR)/fs/isofs/isofs.ko
   AUTOLOAD:=$(call AutoLoad,30,isofs)
@@ -340,7 +397,10 @@ define KernelPackage/fs-jfs
   KCONFIG:=CONFIG_JFS_FS
   FILES:=$(LINUX_DIR)/fs/jfs/jfs.ko
   AUTOLOAD:=$(call AutoLoad,30,jfs,1)
+<<<<<<< HEAD
   DEPENDS:=+kmod-nls-ucs2-utils
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/nls)
 endef
 
@@ -350,6 +410,7 @@ endef
 
 $(eval $(call KernelPackage,fs-jfs))
 
+<<<<<<< HEAD
 
 define KernelPackage/fs-ksmbd
   SUBMENU:=$(FS_MENU)
@@ -387,6 +448,8 @@ endef
 $(eval $(call KernelPackage,fs-ksmbd))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/fs-minix
   SUBMENU:=$(FS_MENU)
   TITLE:=Minix filesystem support
@@ -419,6 +482,7 @@ endef
 $(eval $(call KernelPackage,fs-msdos))
 
 
+<<<<<<< HEAD
 define KernelPackage/fs-netfs
   SUBMENU:=$(FS_MENU)
   TITLE:=Network Filesystems support
@@ -430,6 +494,8 @@ endef
 $(eval $(call KernelPackage,fs-netfs))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/fs-nfs
   SUBMENU:=$(FS_MENU)
   TITLE:=NFS filesystem client support
@@ -453,6 +519,7 @@ $(eval $(call KernelPackage,fs-nfs))
 define KernelPackage/fs-nfs-common
   SUBMENU:=$(FS_MENU)
   TITLE:=Common NFS filesystem modules
+<<<<<<< HEAD
   DEPENDS:=+kmod-oid-registry
   KCONFIG:= \
 	CONFIG_LOCKD \
@@ -464,6 +531,12 @@ define KernelPackage/fs-nfs-common
 	CONFIG_NFS_V4_1_MIGRATION=n \
 	CONFIG_NFS_V4_2=y \
 	CONFIG_NFS_V4_2_READ_PLUS=n
+=======
+  KCONFIG:= \
+	CONFIG_LOCKD \
+	CONFIG_SUNRPC \
+	CONFIG_GRACE_PERIOD
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(LINUX_DIR)/fs/lockd/lockd.ko \
 	$(LINUX_DIR)/net/sunrpc/sunrpc.ko \
@@ -491,9 +564,16 @@ define KernelPackage/fs-nfs-common-rpcsec
 	CONFIG_SUNRPC_GSS \
 	CONFIG_RPCSEC_GSS_KRB5
   FILES:= \
+<<<<<<< HEAD
 	$(LINUX_DIR)/net/sunrpc/auth_gss/auth_rpcgss.ko \
 	$(LINUX_DIR)/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko
   AUTOLOAD:=$(call AutoLoad,31,auth_rpcgss rpcsec_gss_krb5)
+=======
+	$(LINUX_DIR)/lib/oid_registry.ko \
+	$(LINUX_DIR)/net/sunrpc/auth_gss/auth_rpcgss.ko \
+	$(LINUX_DIR)/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko
+  AUTOLOAD:=$(call AutoLoad,31,oid_registry auth_rpcgss rpcsec_gss_krb5)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/fs-nfs-common-rpcsec/description
@@ -548,8 +628,12 @@ define KernelPackage/fs-nfsd
 	CONFIG_NFSD_BLOCKLAYOUT=n \
 	CONFIG_NFSD_SCSILAYOUT=n \
 	CONFIG_NFSD_FLEXFILELAYOUT=n \
+<<<<<<< HEAD
 	CONFIG_NFSD_FAULT_INJECTION=n \
 	CONFIG_NFSD_V4_2_INTER_SSC=n
+=======
+	CONFIG_NFSD_FAULT_INJECTION=n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/fs/nfsd/nfsd.ko
   AUTOLOAD:=$(call AutoLoad,40,nfsd)
 endef
@@ -563,7 +647,11 @@ $(eval $(call KernelPackage,fs-nfsd))
 
 define KernelPackage/fs-ntfs
   SUBMENU:=$(FS_MENU)
+<<<<<<< HEAD
   TITLE:=NTFS filesystem read-only (old driver) support
+=======
+  TITLE:=NTFS filesystem support
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_NTFS_FS
   FILES:=$(LINUX_DIR)/fs/ntfs/ntfs.ko
   AUTOLOAD:=$(call AutoLoad,30,ntfs)
@@ -571,13 +659,18 @@ define KernelPackage/fs-ntfs
 endef
 
 define KernelPackage/fs-ntfs/description
+<<<<<<< HEAD
  Kernel module for limited NTFS filesystem support. Support for writing
  is extremely limited and disabled as a result.
+=======
+ Kernel module for NTFS filesystem support
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,fs-ntfs))
 
 
+<<<<<<< HEAD
 define KernelPackage/fs-ntfs3
   SUBMENU:=$(FS_MENU)
   TITLE:=NTFS filesystem read & write (new driver) support
@@ -597,6 +690,8 @@ endef
 $(eval $(call KernelPackage,fs-ntfs3))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/fs-reiserfs
   SUBMENU:=$(FS_MENU)
   TITLE:=ReiserFS filesystem support
@@ -634,7 +729,11 @@ define KernelPackage/fs-udf
   KCONFIG:=CONFIG_UDF_FS
   FILES:=$(LINUX_DIR)/fs/udf/udf.ko
   AUTOLOAD:=$(call AutoLoad,30,udf)
+<<<<<<< HEAD
   DEPENDS:=+kmod-lib-crc-itu-t +kmod-cdrom
+=======
+  DEPENDS:=+kmod-lib-crc-itu-t
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/nls)
 endef
 
@@ -654,7 +753,11 @@ define KernelPackage/fs-vfat
   FILES:= \
 	$(LINUX_DIR)/fs/fat/fat.ko \
 	$(LINUX_DIR)/fs/fat/vfat.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,30,fat vfat,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,30,fat vfat)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/nls,cp437 iso8859-1 utf8)
 endef
 
@@ -694,6 +797,7 @@ define KernelPackage/fuse/description
 endef
 
 $(eval $(call KernelPackage,fuse))
+<<<<<<< HEAD
 
 
 define KernelPackage/pstore
@@ -713,3 +817,5 @@ define KernelPackage/pstore/description
 endef
 
 $(eval $(call KernelPackage,pstore))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

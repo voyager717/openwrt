@@ -1,0 +1,10 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4/openwrt-build
+srcdir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: GModule
+Description: Dynamic module loader for GLib
+Version: 2.66.4
+Requires: gmodule-no-export-2.0, glib-2.0
+Libs: -Wl,--export-dynamic

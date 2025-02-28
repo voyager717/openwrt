@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2015 OpenWrt.org
 #
@@ -9,6 +13,7 @@ board_config_update
 board=$(board_name)
 
 case "$board" in
+<<<<<<< HEAD
 askey,rt4230w-rev6)
 	ucidef_set_led_netdev "wan-port-link" "WAN-PORT-LINK" "qca8k-0.0:00:green:wan" "wan" "link_10 link_100 link_1000"
 	ucidef_set_led_netdev "wan-port-activity" "WAN-PORT-ACTIVITY" "qca8k-0.0:00:amber:wan" "wan" "tx rx"
@@ -24,6 +29,11 @@ askey,rt4230w-rev6)
 buffalo,wxr-2533dhp)
 	ucidef_set_led_wlan "wlan" "WLAN" "white:wireless" "phy0tpt"
 	ucidef_set_led_netdev "wan" "WAN" "white:internet" "wan"
+=======
+buffalo,wxr-2533dhp)
+	ucidef_set_led_wlan "wlan" "WLAN" "white:wireless" "phy0tpt"
+	ucidef_set_led_switch "wan" "WAN" "white:internet" "switch0" "0x20"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 compex,wpq864)
 	ucidef_set_led_usbport "usb" "USB" "green:usb" "usb1-port1" "usb2-port1"
@@ -33,6 +43,7 @@ edgecore,ecw5410)
 	ucidef_set_led_wlan "wlan2g" "WLAN2G" "green:wlan2g" "phy1tpt"
 	ucidef_set_led_wlan "wlan5g" "WLAN5G" "green:wlan5g" "phy0tpt"
 	;;
+<<<<<<< HEAD
 extreme,ap3935)
 	ucidef_set_led_netdev "wan" "wan" "orange:lan1" "eth1"
 	ucidef_set_led_netdev "lan" "lan" "orange:lan2" "eth0"
@@ -75,10 +86,20 @@ nec,wg2600hp3)
 	ucidef_set_led_netdev "lan4-port-10" "LAN4-PORT-10" "qca8k-0.0:04:green:lan-1" "lan4" "tx rx link_10"
 	ucidef_set_led_netdev "lan4-port-100" "LAN4-PORT-100" "qca8k-0.0:04:green:lan-2" "lan4" "tx rx link_100"
 	ucidef_set_led_netdev "lan4-port-1000" "LAN4-PORT-1000" "qca8k-0.0:04:green:lan-3" "lan4" "tx rx link_1000"
+=======
+nec,wg2600hp)
+	ucidef_set_led_wlan "wlan2g" "WLAN2G" "green:wlan2g" "phy1tpt"
+	ucidef_set_led_wlan "wlan5g" "WLAN5G" "green:wlan5g" "phy0tpt"
+	ucidef_set_led_switch "wan" "WAN" "green:active" "switch0" "0x2"
+	;;
+nec,wg2600hp3)
+	ucidef_set_led_switch "wan" "WAN" "green:active" "switch0" "0x2"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 netgear,d7800 |\
 netgear,r7500 |\
 netgear,r7500v2 |\
+<<<<<<< HEAD
 netgear,r7800 |\
 netgear,xr450 |\
 netgear,xr500)
@@ -100,6 +121,19 @@ tplink,ad7200)
 	ucidef_set_led_usbport "usb2" "USB 2" "blue:usb3" "usb3-port1" "usb4-port1"
 	ucidef_set_led_netdev "wan" "wan" "blue:wan" "wan"
 	ucidef_set_led_netdev "lan" "lan" "blue:lan" "br-lan"
+=======
+netgear,r7800)
+	ucidef_set_led_usbport "usb1" "USB 1" "white:usb1" "usb1-port1" "usb2-port1"
+	ucidef_set_led_usbport "usb2" "USB 2" "white:usb2" "usb3-port1" "usb4-port1"
+	ucidef_set_led_switch "wan" "WAN" "white:wan" "switch0" "0x20"
+	ucidef_set_led_ide "esata" "eSATA" "white:esata"
+	;;
+tplink,ad7200)
+	ucidef_set_led_usbport "usb1" "USB 1" "blue:usb1" "usb1-port1" "usb2-port1"
+	ucidef_set_led_usbport "usb2" "USB 2" "blue:usb3" "usb3-port1" "usb4-port1"
+	ucidef_set_led_switch "wan" "wan" "blue:wan" "switch0" "0x02"
+	ucidef_set_led_switch "lan" "lan" "blue:lan" "switch0" "0x3c"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_wlan "wlan2g" "wlan2g" "blue:wlan2g" "phy2tpt"
 	ucidef_set_led_wlan "wlan5g" "wlan5g" "blue:wlan5g" "phy1tpt"
 	ucidef_set_led_netdev "wlan60g" "wlan60g" "blue:wlan60g" "wlan0"
@@ -107,6 +141,7 @@ tplink,ad7200)
 tplink,c2600)
 	ucidef_set_led_usbport "usb1" "USB 1" "white:usb_2" "usb1-port1" "usb2-port1"
 	ucidef_set_led_usbport "usb2" "USB 2" "white:usb_4" "usb3-port1" "usb4-port1"
+<<<<<<< HEAD
 	ucidef_set_led_netdev "wan" "wan" "white:wan" "wan"
 	ucidef_set_led_netdev "lan" "lan" "white:lan" "br-lan"
 	;;
@@ -119,6 +154,20 @@ tplink,vr2600v)
 	;;
 zyxel,nbg6817)
 	ucidef_set_led_netdev "wan" "WAN" "white:internet" "wan"
+=======
+	ucidef_set_led_switch "wan" "wan" "white:wan" "switch0" "0x20"
+	ucidef_set_led_switch "lan" "lan" "white:lan" "switch0" "0x1e"
+	;;
+tplink,vr2600v)
+	ucidef_set_led_usbport "usb" "USB" "white:usb" "usb1-port1" "usb2-port1" "usb3-port1" "usb4-port1"
+	ucidef_set_led_switch "lan" "lan" "white:lan" "switch0" "0x1e"
+	ucidef_set_led_wlan "wlan2g" "WLAN2G" "white:wlan2g" "phy0tpt"
+	ucidef_set_led_wlan "wlan5g" "WLAN5G" "white:wlan5g" "phy1tpt"
+	ucidef_set_led_switch "wan" "wan" "white:wan" "switch0" "0x20"
+	;;
+zyxel,nbg6817)
+	ucidef_set_led_netdev "wan" "WAN" "white:internet" "eth1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 esac
 

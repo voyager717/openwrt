@@ -38,6 +38,7 @@ $$(if $$($(1)), \
 endef
 
 
+<<<<<<< HEAD
 define Host/SetToolchainInfo
 	if [ -f $(CONFIG_TOOLCHAIN_ROOT)/info.mk ]; then \
 		$(CP) $(CONFIG_TOOLCHAIN_ROOT)/info.mk $(TOOLCHAIN_DIR)/; \
@@ -46,6 +47,8 @@ define Host/SetToolchainInfo
 	fi
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Host/Prepare
 	$(call toolchain_test,CONFIG_SOFT_FLOAT,softfloat)
 	$(call toolchain_test,CONFIG_IPV6,ipv6)
@@ -61,12 +64,18 @@ endef
 
 define Host/Install
 	$(call toolchain_util,--wrap "$(TOOLCHAIN_DIR)/bin")
+<<<<<<< HEAD
 	$(call Host/SetToolchainInfo)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Host/Clean
 	rm -rf $(TOOLCHAIN_DIR)/bin
+<<<<<<< HEAD
 	rm -rf $(TOOLCHAIN_DIR)/info.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call HostBuild))

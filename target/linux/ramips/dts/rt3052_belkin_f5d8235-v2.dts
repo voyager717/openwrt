@@ -25,6 +25,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
+<<<<<<< HEAD
 			partition@0 {
 				label = "uboot";
 				reg = <0x0 0x50000>;
@@ -43,6 +44,12 @@
 						reg = <0x40004 0x6>;
 					};
 				};
+=======
+			uboot: partition@0 {
+				label = "uboot";
+				reg = <0x0 0x50000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -56,7 +63,11 @@
 				reg = <0x7e0000 0x10000>;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
+=======
+			factory: partition@7f0000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "factory";
 				reg = <0x7f0000 0x10000>;
 			};
@@ -129,8 +140,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_40004>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x40004>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	pinctrl-names = "default";
 	pinctrl-0 = <&rgmii_pins>;
 };
@@ -149,8 +164,12 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_uboot_40000>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&uboot 0x40000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &otg {

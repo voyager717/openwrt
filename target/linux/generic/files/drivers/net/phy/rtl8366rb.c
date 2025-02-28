@@ -1503,6 +1503,10 @@ MODULE_DEVICE_TABLE(of, rtl8366rb_match);
 static struct platform_driver rtl8366rb_driver = {
 	.driver = {
 		.name		= RTL8366RB_DRIVER_NAME,
+<<<<<<< HEAD
+=======
+		.owner		= THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		.of_match_table = of_match_ptr(rtl8366rb_match),
 	},
 	.probe		= rtl8366rb_probe,

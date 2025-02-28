@@ -506,9 +506,21 @@ static int b53_configure_ports_of(struct b53_device *dev)
 		if (fixed_link) {
 			u32 spd;
 			u8 po = GMII_PO_LINK;
+<<<<<<< HEAD
 			phy_interface_t mode;
 
 			of_get_phy_mode(pn, &mode);
+=======
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)
+			phy_interface_t mode;
+#else
+			int mode = of_get_phy_mode(pn);
+#endif
+
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 5, 0)
+			of_get_phy_mode(pn, &mode);
+#endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			if (!of_property_read_u32(fixed_link, "speed", &spd)) {
 				switch (spd) {
@@ -523,7 +535,11 @@ static int b53_configure_ports_of(struct b53_device *dev)
 						po |= PORT_OVERRIDE_SPEED_2000M;
 					else
 						po |= GMII_PO_SPEED_2000M;
+<<<<<<< HEAD
 					fallthrough;
+=======
+					/* fall through */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				case 1000:
 					po |= GMII_PO_SPEED_1000M;
 					break;
@@ -1611,8 +1627,13 @@ static int b53_switch_init(struct b53_device *dev)
 	return b53_switch_reset(dev);
 }
 
+<<<<<<< HEAD
 struct b53_device *b53_swconfig_switch_alloc(struct device *base, struct b53_io_ops *ops,
 					     void *priv)
+=======
+struct b53_device *b53_switch_alloc(struct device *base, struct b53_io_ops *ops,
+				    void *priv)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct b53_device *dev;
 
@@ -1627,9 +1648,15 @@ struct b53_device *b53_swconfig_switch_alloc(struct device *base, struct b53_io_
 
 	return dev;
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(b53_swconfig_switch_alloc);
 
 int b53_swconfig_switch_detect(struct b53_device *dev)
+=======
+EXPORT_SYMBOL(b53_switch_alloc);
+
+int b53_switch_detect(struct b53_device *dev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	u32 id32;
 	u16 tmp;
@@ -1694,9 +1721,15 @@ int b53_swconfig_switch_detect(struct b53_device *dev)
 		return b53_read8(dev, B53_MGMT_PAGE, B53_REV_ID,
 				 &dev->core_rev);
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(b53_swconfig_switch_detect);
 
 int b53_swconfig_switch_register(struct b53_device *dev)
+=======
+EXPORT_SYMBOL(b53_switch_detect);
+
+int b53_switch_register(struct b53_device *dev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	int ret;
 
@@ -1706,7 +1739,11 @@ int b53_swconfig_switch_register(struct b53_device *dev)
 		dev->sw_dev.alias = dev->pdata->alias;
 	}
 
+<<<<<<< HEAD
 	if (!dev->chip_id && b53_swconfig_switch_detect(dev))
+=======
+	if (!dev->chip_id && b53_switch_detect(dev))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		return -EINVAL;
 
 	ret = b53_switch_init(dev);
@@ -1717,7 +1754,11 @@ int b53_swconfig_switch_register(struct b53_device *dev)
 
 	return register_switch(&dev->sw_dev, NULL);
 }
+<<<<<<< HEAD
 EXPORT_SYMBOL(b53_swconfig_switch_register);
+=======
+EXPORT_SYMBOL(b53_switch_register);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 MODULE_AUTHOR("Jonas Gorski <jogo@openwrt.org>");
 MODULE_DESCRIPTION("B53 switch library");

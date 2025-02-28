@@ -15,19 +15,28 @@ endef
 
 ### Image scripts ###
 define Build/boot-common
+<<<<<<< HEAD
 	echo $(IMG_PART_SIGNATURE) > $@-partuuid.txt
 	sed \
 		-e 's#@ROOT@#PARTUUID=$(IMG_PART_SIGNATURE)-02#g' \
 		cmdline.txt > $@-cmdline.txt
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	rm -f $@.boot
 	mkfs.fat -n boot -C $@.boot $(FAT32_BLOCKS)
 	mcopy -i $@.boot $(KDIR)/COPYING.linux ::
 	mcopy -i $@.boot $(KDIR)/LICENCE.broadcom ::
+<<<<<<< HEAD
 	mcopy -i $@.boot $@-cmdline.txt ::cmdline.txt
 	mcopy -i $@.boot config.txt ::
 	mcopy -i $@.boot distroconfig.txt ::
 	mcopy -i $@.boot $@-partuuid.txt ::partuuid.txt
+=======
+	mcopy -i $@.boot cmdline.txt ::
+	mcopy -i $@.boot config.txt ::
+	mcopy -i $@.boot distroconfig.txt ::
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mcopy -i $@.boot $(IMAGE_KERNEL) ::$(KERNEL_IMG)
 	$(foreach dts,$(shell echo $(DEVICE_DTS)),mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb ::;)
 	mmd -i $@.boot ::/overlays
@@ -55,7 +64,10 @@ define Build/boot-2711
 endef
 
 define Build/sdcard-img
+<<<<<<< HEAD
 	SIGNATURE="$(IMG_PART_SIGNATURE)" \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	./gen_rpi_sdcard_img.sh $@ $@.boot $(IMAGE_ROOTFS) \
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) $(CONFIG_TARGET_ROOTFS_PARTSIZE)
 endef
@@ -71,6 +83,7 @@ define Device/Default
 endef
 
 define Device/rpi
+<<<<<<< HEAD
   DEVICE_MODEL := A/A+/B/B+/CM/Zero/ZeroW
   DEVICE_DTS := \
 	broadcom/bcm2708-rpi-b broadcom/bcm2708-rpi-b-rev1 broadcom/bcm2708-rpi-b-plus \
@@ -82,13 +95,27 @@ define Device/rpi
 	rpi-cm \
 	rpi-zero rpi-zero-w \
 	raspberrypi,model-a raspberrypi,model-a-plus \
+=======
+  DEVICE_MODEL := B/B+/CM/Zero/ZeroW
+  DEVICE_DTS := \
+	bcm2708-rpi-b bcm2708-rpi-b-rev1 bcm2708-rpi-b-plus \
+	bcm2708-rpi-cm \
+	bcm2708-rpi-zero bcm2708-rpi-zero-w
+  SUPPORTED_DEVICES := \
+	rpi-b rpi-b-plus rpi-cm rpi-zero rpi-zero-w \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	raspberrypi,model-b raspberrypi,model-b-plus raspberrypi,model-b-rev2 \
 	raspberrypi,compute-module raspberrypi,compute-module-1 \
 	raspberrypi,model-zero raspberrypi,model-zero-w
   DEVICE_PACKAGES := \
 	cypress-firmware-43430-sdio \
+<<<<<<< HEAD
 	brcmfmac-nvram-43430-sdio \
 	kmod-brcmfmac wpad-basic-mbedtls
+=======
+	cypress-nvram-43430-sdio-rpi-zero-w \
+	kmod-brcmfmac wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 ifeq ($(SUBTARGET),bcm2708)
   TARGET_DEVICES += rpi
@@ -98,6 +125,7 @@ define Device/rpi-2
   DEVICE_MODEL := 2B/2B 1.2
   DEVICE_VARIANT := (32bit)
   DEVICE_ALT0_VENDOR := Raspberry Pi
+<<<<<<< HEAD
   DEVICE_ALT0_MODEL := 3A+/3B/3B+/CM3/Zero2/Zero2W
   DEVICE_ALT0_VARIANT := (32bit)
   DEVICE_ALT1_VENDOR := Raspberry Pi
@@ -128,6 +156,30 @@ define Device/rpi-2
 	cypress-firmware-43455-sdio \
 	brcmfmac-nvram-43455-sdio \
 	kmod-brcmfmac wpad-basic-mbedtls
+=======
+  DEVICE_ALT0_MODEL := 3B/3B+/3CM
+  DEVICE_ALT0_VARIANT := (32bit)
+  DEVICE_ALT1_VENDOR := Raspberry Pi
+  DEVICE_ALT1_MODEL := 4B/400/4CM
+  DEVICE_ALT1_VARIANT := (32bit)
+  DEVICE_DTS := \
+	bcm2709-rpi-2-b bcm2710-rpi-2-b \
+	bcm2710-rpi-3-b bcm2710-rpi-3-b-plus \
+	bcm2711-rpi-4-b bcm2711-rpi-400 \
+	bcm2710-rpi-cm3 bcm2711-rpi-cm4
+  SUPPORTED_DEVICES := \
+	rpi-2-b rpi-3-b rpi-3-b-plus rpi-cm \
+	raspberrypi,2-model-b raspberrypi,2-model-b-rev2 \
+	raspberrypi,3-model-b raspberrypi,3-model-b-plus \
+	raspberrypi,3-compute-module raspberrypi,compute-module-3 \
+	raspberrypi,400 raspberrypi,4-compute-module raspberrypi,4-model-b
+  DEVICE_PACKAGES := \
+	cypress-firmware-43430-sdio \
+	cypress-nvram-43430-sdio-rpi-3b \
+	cypress-firmware-43455-sdio \
+	cypress-nvram-43455-sdio-rpi-3b-plus cypress-nvram-43455-sdio-rpi-4b \
+	kmod-brcmfmac wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.img.gz := boot-common | boot-2708 | boot-2711 | sdcard-img | gzip | append-metadata
   IMAGE/factory.img.gz := boot-common | boot-2708 | boot-2711 | sdcard-img | gzip
 endef
@@ -136,7 +188,11 @@ ifeq ($(SUBTARGET),bcm2709)
 endif
 
 define Device/rpi-3
+<<<<<<< HEAD
   DEVICE_MODEL := 3A+/3B/3B+/CM3/Zero2/Zero2W
+=======
+  DEVICE_MODEL := 3B/3B+/3CM
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VARIANT := (64bit)
   DEVICE_ALT0_VENDOR := Raspberry Pi
   DEVICE_ALT0_MODEL := 2B-1.2
@@ -145,6 +201,7 @@ define Device/rpi-3
   DEVICE_DTS := \
 	broadcom/bcm2710-rpi-2-b \
 	broadcom/bcm2710-rpi-3-b broadcom/bcm2710-rpi-3-b-plus \
+<<<<<<< HEAD
 	broadcom/bcm2710-rpi-cm3 \
 	broadcom/bcm2710-rpi-zero-2 broadcom/bcm2710-rpi-zero-2-w
   SUPPORTED_DEVICES := \
@@ -162,13 +219,31 @@ define Device/rpi-3
 	cypress-firmware-43455-sdio \
 	brcmfmac-nvram-43455-sdio \
 	kmod-brcmfmac wpad-basic-mbedtls
+=======
+	broadcom/bcm2710-rpi-cm3
+  SUPPORTED_DEVICES := \
+	rpi-3-b rpi-3-b-plus \
+	raspberrypi,2-model-b-rev2 \
+	raspberrypi,3-model-b raspberrypi,3-model-b-plus \
+	raspberrypi,3-compute-module raspberrypi,compute-module-3
+  DEVICE_PACKAGES := \
+	cypress-firmware-43430-sdio \
+	cypress-nvram-43430-sdio-rpi-3b \
+	cypress-firmware-43455-sdio \
+	cypress-nvram-43455-sdio-rpi-3b-plus \
+	kmod-brcmfmac wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 ifeq ($(SUBTARGET),bcm2710)
   TARGET_DEVICES += rpi-3
 endif
 
 define Device/rpi-4
+<<<<<<< HEAD
   DEVICE_MODEL := 4B/400/CM4
+=======
+  DEVICE_MODEL := 4B/400/4CM
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VARIANT := (64bit)
   KERNEL_IMG := kernel8.img
   DEVICE_DTS := \
@@ -181,10 +256,15 @@ define Device/rpi-4
 	raspberrypi,4-model-b
   DEVICE_PACKAGES := \
 	cypress-firmware-43455-sdio \
+<<<<<<< HEAD
 	brcmfmac-nvram-43455-sdio \
 	kmod-brcmfmac wpad-basic-mbedtls \
 	kmod-usb-net-lan78xx \
 	kmod-r8169
+=======
+	cypress-nvram-43455-sdio-rpi-4b \
+	kmod-brcmfmac wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.img.gz := boot-common | boot-2711 | sdcard-img | gzip | append-metadata
   IMAGE/factory.img.gz := boot-common | boot-2711 | sdcard-img | gzip
 endef
@@ -192,6 +272,7 @@ ifeq ($(SUBTARGET),bcm2711)
   TARGET_DEVICES += rpi-4
 endif
 
+<<<<<<< HEAD
 define Device/rpi-5
   DEVICE_MODEL := 5
   KERNEL_IMG := kernel_2712.img
@@ -209,4 +290,6 @@ ifeq ($(SUBTARGET),bcm2712)
   TARGET_DEVICES += rpi-5
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildImage))

@@ -5,7 +5,11 @@
 
 #include "images.h"
 
+<<<<<<< HEAD
 const char * const xpm_load[] = {
+=======
+const char *xpm_load[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 5 1",
 ". c None",
 "# c #000000",
@@ -35,7 +39,11 @@ const char * const xpm_load[] = {
 "###############.......",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_save[] = {
+=======
+const char *xpm_save[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 5 1",
 ". c None",
 "# c #000000",
@@ -65,7 +73,11 @@ const char * const xpm_save[] = {
 "..##################..",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_back[] = {
+=======
+const char *xpm_back[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 3 1",
 ". c None",
 "# c #000083",
@@ -93,7 +105,11 @@ const char * const xpm_back[] = {
 "......................",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_tree_view[] = {
+=======
+const char *xpm_tree_view[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 2 1",
 ". c None",
 "# c #000000",
@@ -120,7 +136,11 @@ const char * const xpm_tree_view[] = {
 "......................",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_single_view[] = {
+=======
+const char *xpm_single_view[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 2 1",
 ". c None",
 "# c #000000",
@@ -147,7 +167,11 @@ const char * const xpm_single_view[] = {
 "......................",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_split_view[] = {
+=======
+const char *xpm_split_view[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "22 22 2 1",
 ". c None",
 "# c #000000",
@@ -174,7 +198,11 @@ const char * const xpm_split_view[] = {
 "......................",
 "......................"};
 
+<<<<<<< HEAD
 const char * const xpm_symbol_no[] = {
+=======
+const char *xpm_symbol_no[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -191,7 +219,11 @@ const char * const xpm_symbol_no[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_symbol_mod[] = {
+=======
+const char *xpm_symbol_mod[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -208,7 +240,11 @@ const char * const xpm_symbol_mod[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_symbol_yes[] = {
+=======
+const char *xpm_symbol_yes[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -225,7 +261,11 @@ const char * const xpm_symbol_yes[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_choice_no[] = {
+=======
+const char *xpm_choice_no[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -242,7 +282,11 @@ const char * const xpm_choice_no[] = {
 "    ....    ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_choice_yes[] = {
+=======
+const char *xpm_choice_yes[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -259,7 +303,11 @@ const char * const xpm_choice_yes[] = {
 "    ....    ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_menu[] = {
+=======
+const char *xpm_menu[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -276,7 +324,11 @@ const char * const xpm_menu[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_menu_inv[] = {
+=======
+const char *xpm_menu_inv[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -293,7 +345,11 @@ const char * const xpm_menu_inv[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_menuback[] = {
+=======
+const char *xpm_menuback[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",
@@ -310,7 +366,11 @@ const char * const xpm_menuback[] = {
 " .......... ",
 "            "};
 
+<<<<<<< HEAD
 const char * const xpm_void[] = {
+=======
+const char *xpm_void[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "12 12 2 1",
 "  c white",
 ". c black",

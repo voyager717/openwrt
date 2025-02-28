@@ -7,6 +7,7 @@
 	model = "AVM FRITZ!Box 7362 SL";
 };
 
+<<<<<<< HEAD
 &gpio {
 	pinctrl-names = "default";
 	pinctrl-0 = <&state_default>;
@@ -26,6 +27,14 @@
 		};
 	};
 
+=======
+&state_default {
+	pcie-rst {
+		lantiq,pins = "io21";
+		lantiq,open-drain = <1>;
+		lantiq,output = <1>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -35,6 +44,7 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 		compatible = "jedec,spi-nor";
+<<<<<<< HEAD
 		reg = <4>;
 		spi-max-frequency = <1000000>;
 
@@ -72,12 +82,37 @@
 				label = "tffs (2)";
 				read-only;
 			};
+=======
+		reg = <4 0>;
+		spi-max-frequency = <1000000>;
+
+		urlader: partition@0 {
+			reg = <0x0 0x40000>;
+			label = "urlader";
+			read-only;
+		};
+
+		partition@40000 {
+			reg = <0x40000 0x60000>;
+			label = "tffs (1)";
+			read-only;
+		};
+
+		partition@A0000 {
+			reg = <0xA0000 0x60000>;
+			label = "tffs (2)";
+			read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
 
 &localbus {
+<<<<<<< HEAD
 	flash1: flash@1 {
+=======
+	flash@1 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "lantiq,nand-xway";
 		lantiq,cs1 = <1>;
 		bank-width = <1>;
@@ -86,7 +121,11 @@
 		pinctrl-0 = <&nand_pins>, <&nand_cs1_pins>;
 		pinctrl-names = "default";
 
+<<<<<<< HEAD
 		nand-ecc-engine = <&flash1>;
+=======
+		nand-ecc-mode = "on-die";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -114,6 +153,7 @@
 		#address-cells = <2>;
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_urlader_a91 (-2)>;
@@ -132,3 +172,5 @@
 	compatible = "pci168c,0030";
 	qca,no-eeprom; /* load from ath9k-eeprom-pci-0000:01:00.0.bin */
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

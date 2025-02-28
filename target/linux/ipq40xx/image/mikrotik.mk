@@ -5,6 +5,7 @@ define Device/mikrotik_nor
 	KERNEL_NAME := vmlinux
 	KERNEL := kernel-bin | append-dtb-elf
 	IMAGES = sysupgrade.bin
+<<<<<<< HEAD
 	IMAGE/sysupgrade.bin := append-kernel | yaffs-filesystem -L | \
 		pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
 		check-size | append-metadata
@@ -28,10 +29,18 @@ define Device/mikrotik_cap-ac
 endef
 TARGET_DEVICES += mikrotik_cap-ac
 
+=======
+	IMAGE/sysupgrade.bin := append-kernel | kernel2minor -s 1024 | \
+		pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
+		append-metadata | check-size
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_hap-ac2
 	$(call Device/mikrotik_nor)
 	DEVICE_MODEL := hAP ac2
 	SOC := qcom-ipq4018
+<<<<<<< HEAD
 	DEVICE_PACKAGES := -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers
 endef
 TARGET_DEVICES += mikrotik_hap-ac2
@@ -63,10 +72,18 @@ define Device/mikrotik_lhgg-60ad
 endef
 TARGET_DEVICES += mikrotik_lhgg-60ad
 
+=======
+	DEVICE_PACKAGES := ipq-wifi-mikrotik_hap-ac2 -kmod-ath10k-ct \
+		kmod-ath10k-ct-smallbuffers
+endef
+TARGET_DEVICES += mikrotik_hap-ac2
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_sxtsq-5-ac
 	$(call Device/mikrotik_nor)
 	DEVICE_MODEL := SXTsq 5 ac (RBSXTsqG-5acD)
 	SOC := qcom-ipq4018
+<<<<<<< HEAD
 	DEVICE_PACKAGES := rssileds
 endef
 TARGET_DEVICES += mikrotik_sxtsq-5-ac
@@ -98,3 +115,8 @@ define Device/mikrotik_wap-ac-lte
 	DEVICE_ALT0_MODEL := wAP ac LTE6
 endef
 TARGET_DEVICES += mikrotik_wap-ac-lte
+=======
+	DEVICE_PACKAGES := ipq-wifi-mikrotik_sxtsq-5-ac rssileds
+endef
+TARGET_DEVICES += mikrotik_sxtsq-5-ac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

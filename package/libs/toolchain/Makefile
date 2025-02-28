@@ -7,7 +7,11 @@
 
 include $(TOPDIR)/rules.mk
 PKG_NAME:=toolchain
+<<<<<<< HEAD
 PKG_RELEASE:=4
+=======
+PKG_RELEASE:=3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=GPL-3.0-with-GCC-exception
@@ -27,7 +31,11 @@ define Package/gcc/Default
   SECTION:=libs
   CATEGORY:=Base system
   URL:=http://gcc.gnu.org/
+<<<<<<< HEAD
   VERSION:=$(LIBGCC_VERSION)-r$(PKG_RELEASE)
+=======
+  VERSION:=$(LIBGCC_VERSION)-$(PKG_RELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libgcc
@@ -83,6 +91,7 @@ define Package/libatomic/config
 	endmenu
 endef
 
+<<<<<<< HEAD
 define Package/libquadmath
 $(call Package/gcc/Default)
   DEPENDS:=@TARGET_x86||TARGET_x86_64 +libgcc
@@ -110,6 +119,8 @@ define Package/libquadmath/config
 	endmenu
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/libstdcpp
 $(call Package/gcc/Default)
   NAME:=libstdc++
@@ -142,7 +153,11 @@ define Package/libasan
 $(call Package/gcc/Default)
   NAME:=libasan
   TITLE:=Runtime library for AddressSanitizer in GCC
+<<<<<<< HEAD
   DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips64 @!mips64el @!arc
+=======
+  DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips @!mipsel @!mips64 @!mips64el @!arc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=5
 endef
 
@@ -171,7 +186,11 @@ define Package/libtsan
 $(call Package/gcc/Default)
   NAME:=libtsan
   TITLE:=Runtime library for ThreadSanitizer in GCC
+<<<<<<< HEAD
   DEPENDS:=@USE_GLIBC +librt +libstdcpp @!loongarch64 @!mips @!mipsel @!mips64 @!mips64el @!arc
+=======
+  DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips @!mipsel @!mips64 @!mips64el @!arc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=0
 endef
 
@@ -200,7 +219,11 @@ define Package/liblsan
 $(call Package/gcc/Default)
   NAME:=liblsan
   TITLE:=Runtime library for LeakSanitizer in GCC
+<<<<<<< HEAD
   DEPENDS:=@USE_GLIBC +librt +libstdcpp @!loongarch64 @!mips @!mipsel @!mips64 @!mips64el @!arc
+=======
+  DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips @!mipsel @!mips64 @!mips64el @!arc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=0
 endef
 
@@ -229,7 +252,11 @@ define Package/libubsan
 $(call Package/gcc/Default)
   NAME:=libubsan
   TITLE:=Runtime library for UndefinedBehaviorSanitizer in GCC
+<<<<<<< HEAD
   DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips64 @!mips64el @!arc
+=======
+  DEPENDS:=@USE_GLIBC +librt +libstdcpp @!mips @!mipsel @!mips64 @!mips64el @!arc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=1
 endef
 
@@ -257,7 +284,11 @@ endef
 define Package/libc/Default
   SECTION:=libs
   CATEGORY:=Base system
+<<<<<<< HEAD
   VERSION:=$(LIBC_VERSION)-r$(PKG_RELEASE)
+=======
+  VERSION:=$(LIBC_VERSION)-$(PKG_RELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEPENDS:=+libgcc
   URL:=$(LIBC_URL)
 endef
@@ -481,9 +512,12 @@ define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
 endef
 
+<<<<<<< HEAD
 define Build/Quilt
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 LIBGCC_A=$(lastword $(wildcard $(TOOLCHAIN_DIR)/lib/gcc/*/*/libgcc_pic.a))
 LIBGCC_MAP=$(lastword $(wildcard $(TOOLCHAIN_DIR)/lib/gcc/*/*/libgcc.map))
 LIBGCC_SO=$(lastword $(wildcard $(TOOLCHAIN_DIR)/lib/libgcc_s.so.*))
@@ -512,11 +546,14 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
 	$(CP) $(TOOLCHAIN_DIR)/lib/libatomic.so.* $(1)/lib/
   endef
 
+<<<<<<< HEAD
   define Package/libquadmath/install
 	$(INSTALL_DIR) $(1)/lib
 	$(CP) $(TOOLCHAIN_DIR)/lib/libquadmath.so.* $(1)/lib/
   endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   define Package/libgfortran/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(TOOLCHAIN_DIR)/lib/libgfortran.so.* $(1)/usr/lib/
@@ -525,7 +562,10 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   define Package/libstdcpp/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(TOOLCHAIN_DIR)/lib/libstdc++.so.* $(1)/usr/lib/
+<<<<<<< HEAD
 	rm -rf $(1)/usr/lib/*-gdb.py
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   endef
 
   define Package/libasan/install
@@ -551,12 +591,23 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   define Package/glibc/install
 	$(CP) ./glibc-files/* $(1)/
 	rm -f $(1)/etc/localtime
+<<<<<<< HEAD
 	$(INSTALL_DIR) $(1)/lib
 	$(CP) \
 		$(TOOLCHAIN_DIR)/lib/ld*.so.* \
 		$(1)/lib/
 	for file in libanl libc libcidn libcrypt libdl libm libnsl libnss_dns libnss_files libresolv libutil; do \
 		for file in $(TOOLCHAIN_DIR)/lib/$$$$file.so.*; do \
+=======
+	$(LN) /tmp/localtime $(1)/etc/localtime
+	$(INSTALL_DIR) $(1)/lib
+	$(CP) \
+		$(TOOLCHAIN_DIR)/lib/ld*.so.* \
+		$(TOOLCHAIN_DIR)/lib/ld-$(LIBC_SO_VERSION).so \
+		$(1)/lib/
+	for file in libanl libc libcidn libcrypt libdl libm libnsl libnss_dns libnss_files libresolv libutil; do \
+		for file in $(TOOLCHAIN_DIR)/lib/$$$$file.so.* $(TOOLCHAIN_DIR)/lib/$$$$file-$(LIBC_SO_VERSION).so; do \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			if [ -e "$$$$file" ]; then \
 				$(CP) $$$$file $(1)/lib/; \
 			fi; \
@@ -578,7 +629,10 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   endef
 
   define Package/libc/install
+<<<<<<< HEAD
     echo $(LIBC_VERSION)-r$(PKG_RELEASE) > $(TMP_DIR)/libc.version; \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     $(call Package/$(LIBC)/install,$1)
   endef
 
@@ -596,6 +650,10 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   ifneq ($(CONFIG_USE_MUSL),y)
 	$(CP) \
 		$(TOOLCHAIN_DIR)/lib/libpthread.so.* \
+<<<<<<< HEAD
+=======
+		$(TOOLCHAIN_DIR)/lib/libpthread-$(LIBC_SO_VERSION).so \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1)/lib/
   endif
   endef
@@ -615,6 +673,10 @@ ifeq ($(CONFIG_EXTERNAL_TOOLCHAIN),)
   ifneq ($(CONFIG_USE_MUSL),y)
 	$(CP) \
 		$(TOOLCHAIN_DIR)/lib/librt.so.* \
+<<<<<<< HEAD
+=======
+		$(TOOLCHAIN_DIR)/lib/librt-$(LIBC_SO_VERSION).so \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1)/lib/
   endif
   endef
@@ -687,6 +749,7 @@ else
 	exit 0
   endef
 
+<<<<<<< HEAD
   define Package/glibc/install
   endef
 
@@ -699,12 +762,18 @@ else
 
   define Package/libc/install
 	echo $(LIBC_VERSION)-r$(PKG_RELEASE) > $(TMP_DIR)/libc.version; \
+=======
+  define Package/libc/install
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	for file in $(call qstrip,$(CONFIG_LIBC_FILE_SPEC)); do \
 		$(INSTALL_DIR) $(1)/lib ; \
 		$(CP) $(call qstrip,$(CONFIG_LIBC_ROOT_DIR))/$$$$file $(1)/lib/ ; \
 	done ; \
 	exit 0
+<<<<<<< HEAD
 	$(call Package/$(LIBC)/install,$1)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   endef
 
   define Package/libpthread/install
@@ -739,6 +808,7 @@ else
 	exit 0
   endef
 
+<<<<<<< HEAD
   define Package/libquadmath/install
 	for file in $(call qstrip,$(CONFIG_LIBQUADMATH_FILE_SPEC)); do \
 		$(INSTALL_DIR) $(1)/lib ; \
@@ -747,6 +817,8 @@ else
 	exit 0
   endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   define Package/libgomp/install
 	for file in $(call qstrip,$(CONFIG_LIBGOMP_FILE_SPEC)); do \
 		$(INSTALL_DIR) $(1)/lib ; \
@@ -778,7 +850,10 @@ endif
 $(eval $(call BuildPackage,libc))
 $(eval $(call BuildPackage,libgcc))
 $(eval $(call BuildPackage,libatomic))
+<<<<<<< HEAD
 $(eval $(call BuildPackage,libquadmath))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,libstdcpp))
 $(eval $(call BuildPackage,libasan))
 $(eval $(call BuildPackage,libtsan))

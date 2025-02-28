@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/uci-defaults.sh
 
@@ -10,6 +14,7 @@ case "$board" in
 	ucidef_set_led_netdev "lan" "LAN" "orange:eth0" "eth0"
 	ucidef_set_led_switch "wan" "WAN" "orange:eth1" "switch0" "0x04"
 	;;
+<<<<<<< HEAD
 8dev,carambola3)
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth0" "link"
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1" "link"
@@ -23,12 +28,17 @@ alcatel,hh40v)
 alfa-network,ap121f|\
 alfa-network,ap121fe|\
 alfa-network,wifi-camppro-nano-duo|\
+=======
+alfa-network,ap121f|\
+alfa-network,ap121fe|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 avm,fritz450e|\
 glinet,6408|\
 glinet,6416|\
 glinet,gl-ar300m-lite|\
 glinet,gl-ar300m16|\
 pcs,cap324|\
+<<<<<<< HEAD
 tplink,cpe605-v1|\
 tplink,cpe610-v1|\
 tplink,cpe610-v2|\
@@ -43,6 +53,12 @@ tplink,tl-wdr6500-v2)
 	ucidef_set_led_switch "lan3" "LAN3" "green:lan3" "switch0" "0x08"
 	ucidef_set_led_switch "lan4" "LAN4" "green:lan4" "switch0" "0x10"
 	;;
+=======
+tplink,cpe610-v1|\
+tplink,cpe610-v2)
+	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth0"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 alfa-network,n2q)
 	ucidef_set_led_netdev "lan2" "LAN2" "orange:lan2" "eth1"
 	ucidef_set_led_switch "lan1" "LAN1" "orange:lan1" "switch0" "0x10"
@@ -60,10 +76,14 @@ alfa-network,n5q)
 	ucidef_set_led_rssi "signal3" "SIGNAL3" "green:signal3" "wlan0" "50" "100"
 	ucidef_set_led_rssi "signal4" "SIGNAL4" "green:signal4" "wlan0" "75" "100"
 	;;
+<<<<<<< HEAD
 alfa-network,pi-wifi4|\
 watchguard,ap100|\
 watchguard,ap200|\
 watchguard,ap300)
+=======
+alfa-network,pi-wifi4)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_netdev "lan_data" "LAN_DATA" "orange:lan_data" "eth0" "tx rx"
 	ucidef_set_led_netdev "lan_link" "LAN_LINK" "green:lan_link" "eth0" "link"
 	;;
@@ -71,6 +91,7 @@ alfa-network,r36a)
 	ucidef_set_led_netdev "lan" "LAN" "blue:lan" "eth0"
 	ucidef_set_led_switch "wan" "WAN" "blue:wan" "switch0" "0x10"
 	;;
+<<<<<<< HEAD
 alfa-network,tube-2hq)
 	ucidef_set_led_netdev "lan" "LAN" "blue:lan" "eth0"
 	ucidef_set_rssimon "wlan0" "200000" "1"
@@ -99,6 +120,8 @@ asus,rp-ac66)
 	ucidef_set_led_rssi "rssimedium-wlan1" "RSSIMEDIUM" "red:rssimedium-wlan1" "wlan1" "1" "79"
 	ucidef_set_led_rssi "rssihigh-wlan1" "RSSIHIGH" "green:rssihigh-wlan1" "wlan1" "70" "100"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 avm,fritz1750e)
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth0"
 	ucidef_set_rssimon "wlan1" "200000" "1"
@@ -123,8 +146,12 @@ tplink,archer-c59-v1|\
 tplink,archer-c59-v2|\
 tplink,archer-c60-v1|\
 tplink,archer-c60-v2|\
+<<<<<<< HEAD
 tplink,archer-c60-v3|\
 tplink,tl-wr841hp-v3)
+=======
+tplink,archer-c60-v3)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x1e"
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	;;
@@ -138,8 +165,13 @@ avm,fritzdvbc)
 	;;
 buffalo,wzr-hp-g300nh-rb|\
 buffalo,wzr-hp-g300nh-s)
+<<<<<<< HEAD
 	ucidef_set_led_netdev "router" "Router" "green:router" "eth1"
 	;;
+=======
+        ucidef_set_led_netdev "router" "Router" "green:router" "eth1"
+        ;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 comfast,cf-e110n-v2)
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth1"
 	ucidef_set_led_switch "wan" "WAN" "green:wan" "switch0" "0x02"
@@ -185,10 +217,13 @@ comfast,cf-e314n-v2)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "green:rssimediumhigh" "wlan0" "51" "100"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "green:rssihigh" "wlan0" "76" "100"
 	;;
+<<<<<<< HEAD
 comfast,cf-e375ac)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x04"
 	ucidef_set_led_switch "wan" "WAN" "red:wan" "switch0" "0x02"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 comfast,cf-e5)
 	ucidef_set_led_switch "lan" "LAN" "blue:lan" "switch0" "0x02"
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1"
@@ -204,7 +239,10 @@ comfast,cf-e560ac)
 	ucidef_set_led_switch "lan3" "LAN3" "blue:lan3" "switch0" "0x08"
 	ucidef_set_led_switch "lan4" "LAN4" "blue:lan4" "switch0" "0x10"
 	;;
+<<<<<<< HEAD
 comfast,cf-ew71-v2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 comfast,cf-ew72|\
 openmesh,om2p-v2|\
 openmesh,om2p-hs-v1|\
@@ -221,9 +259,13 @@ enterasys,ws-ap3705i|\
 openmesh,mr900-v1|\
 openmesh,mr900-v2|\
 openmesh,mr1750-v1|\
+<<<<<<< HEAD
 openmesh,mr1750-v2|\
 tplink,cpe710-v1|\
 tplink,cpe710-v2)
+=======
+openmesh,mr1750-v2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_netdev "lan" "LAN" "blue:lan" "eth0"
 	;;
 compex,wpj344-16m|\
@@ -234,6 +276,7 @@ compex,wpj531-16m)
 	ucidef_set_led_rssi "sig3" "SIG3" "green:sig3" "wlan0" "65" "100"
 	ucidef_set_led_rssi "sig4" "SIG4" "green:sig4" "wlan0" "50" "100"
 	;;
+<<<<<<< HEAD
 dell,apl26-0ae)
 	ucidef_set_led_switch "lan1" "LAN1" "amber:lan-1" "switch0" "0x04"
 	ucidef_set_led_switch "lan2" "LAN2" "amber:lan-2" "switch0" "0x08"
@@ -245,6 +288,11 @@ devolo,magic-2-wifi)
 dlink,covr-p2500-a1)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x0e" "" "link"
 	;;
+=======
+devolo,magic-2-wifi)
+	ucidef_set_led_netdev "plcw" "dLAN" "white:dlan" "eth0.1" "rx"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 dlink,dap-1330-a1|\
 dlink,dap-1365-a1)
 	ucidef_set_rssimon "wlan0" "200000" "1"
@@ -253,6 +301,12 @@ dlink,dap-1365-a1)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "green:rssimediumhigh" "wlan0" "51" "100"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "green:rssihigh" "wlan0" "76" "100"
 	;;
+<<<<<<< HEAD
+=======
+dlink,dir-859-a1)
+	ucidef_set_led_switch "internet" "WAN" "green:internet" "switch0" "0x20"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 engenius,ens202ext-v1|\
 engenius,enstationac-v1)
 	ucidef_set_rssimon "wlan0" "200000" "1"
@@ -278,7 +332,10 @@ qxwlan,e750a-v4-16m)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x02"
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	;;
+<<<<<<< HEAD
 glinet,gl-x300b|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 glinet,gl-x750)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	;;
@@ -289,6 +346,7 @@ joyit,jt-or750i|\
 yuncore,xd3200)
 	ucidef_set_led_default "ath10k" "ath10k-disable" "ath10k-phy0" "0"
 	;;
+<<<<<<< HEAD
 hiwifi,hc6361)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1"
 	ucidef_set_led_wlan "wlan" "WLAN" "blue:wlan" "phy0tpt"
@@ -298,6 +356,8 @@ kuwfi,c910)
 	ucidef_set_led_switch "lan1" "LAN1" "white:lan1" "switch0" "0x10"
 	ucidef_set_led_switch "lan2" "LAN2" "white:lan2" "switch0" "0x02"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 meraki,mr12|\
 tplink,cpe210-v2|\
 tplink,cpe210-v3)
@@ -311,10 +371,13 @@ tplink,cpe210-v3)
 meraki,mr16)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth0"
 	;;
+<<<<<<< HEAD
 moxa,awk-1137c)
 	ucidef_set_led_switch "wan" "LAN1" "green:lan1" "switch0" "0x02"
 	ucidef_set_led_switch "lan" "LAN2" "green:lan2" "switch0" "0x04"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 netgear,wnr2200-8m|\
 netgear,wnr2200-16m)
 	ucidef_set_led_netdev "wan-amber" "WAN (amber)" "amber:wan" "eth0"
@@ -332,6 +395,7 @@ openmesh,om2p-hs-v4)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth0"
 	ucidef_set_led_switch "lan" "LAN" "blue:lan" "switch0" "0x02"
 	;;
+<<<<<<< HEAD
 openmesh,om2p-v1)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth0"
 	ucidef_set_led_switch "lan" "LAN" "blue:lan" "switch0" "0x10"
@@ -344,6 +408,8 @@ openmesh,om5p-an)
 	ucidef_set_led_netdev "lan" "LAN" "blue:lan" "eth0"
 	ucidef_set_led_switch "wan" "WAN" "blue:wan" "switch0" "0x02"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 pcs,cr3000)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1"
 	ucidef_set_led_switch "lan1" "LAN1" "blue:lan1" "switch0" "0x04"
@@ -351,6 +417,7 @@ pcs,cr3000)
 	ucidef_set_led_switch "lan3" "LAN3" "blue:lan3" "switch0" "0x10"
 	ucidef_set_led_switch "lan4" "LAN4" "blue:lan4" "switch0" "0x02"
 	;;
+<<<<<<< HEAD
 qca,ap143-8m|\
 qca,ap143-16m)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
@@ -386,6 +453,14 @@ teltonika,rut300)
 	ucidef_set_led_switch "lan3" "LAN3" "yellow:lan3" "switch0" "0x08"
 	ucidef_set_led_switch "lan4" "LAN4" "yellow:lan4" "switch0" "0x04"
 	;;
+=======
+qihoo,c301)
+	ucidef_set_led_wlan "wlan" "WLAN" "green:wlan" "phy0tpt"
+	;;
+samsung,wam250)
+	ucidef_set_led_netdev "lan" "LAN" "white:lan" "eth0"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 tplink,archer-a7-v5|\
 tplink,archer-c7-v4|\
 tplink,archer-c7-v5)
@@ -395,9 +470,12 @@ tplink,archer-c7-v5)
 	ucidef_set_led_switch "lan3" "LAN3" "green:lan3" "switch0" "0x10"
 	ucidef_set_led_switch "lan4" "LAN4" "green:lan4" "switch0" "0x20"
 	;;
+<<<<<<< HEAD
 tplink,archer-a9-v6)
 	ucidef_set_led_switch "wan" "WAN" "green:wan" "switch0" "0x02"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 tplink,archer-c2-v3|\
 tplink,tl-wr1043nd-v4|\
 tplink,tl-wr1043n-v5)
@@ -454,7 +532,10 @@ tplink,cpe510-v3)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "green:link3" "wlan0" "51" "100" "-50" "13"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "green:link4" "wlan0" "76" "100" "-75" "13"
 	;;
+<<<<<<< HEAD
 comfast,cf-e380ac-v2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 tplink,tl-wr902ac-v1)
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth0"
 	ucidef_set_led_netdev "internet" "Internet" "green:internet" "eth0"
@@ -462,8 +543,12 @@ tplink,tl-wr902ac-v1)
 tplink,re355-v1|\
 tplink,re450-v1|\
 tplink,re450-v2|\
+<<<<<<< HEAD
 tplink,re450-v3|\
 tplink,re455-v1)
+=======
+tplink,re450-v3)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_netdev "lan_data" "LAN Data" "green:lan_data" "eth0" "tx rx"
 	ucidef_set_led_netdev "lan_link" "LAN Link" "green:lan_link" "eth0" "link"
 	;;
@@ -475,7 +560,10 @@ tplink,tl-mr6400-v1)
 tplink,tl-wpa8630-v1)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x3c"
 	;;
+<<<<<<< HEAD
 tplink,tl-wr841hp-v2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 tplink,tl-wr842n-v2)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	ucidef_set_led_switch "lan1" "LAN1" "green:lan1" "switch0" "0x04"
@@ -483,17 +571,23 @@ tplink,tl-wr842n-v2)
 	ucidef_set_led_switch "lan3" "LAN3" "green:lan3" "switch0" "0x10"
 	ucidef_set_led_switch "lan4" "LAN4" "green:lan4" "switch0" "0x02"
 	;;
+<<<<<<< HEAD
 tplink,tl-wr941hp-v1)
 	ucidef_set_led_netdev "wan" "WAN" "blue:wan" "eth1" "link tx rx"
 	ucidef_set_led_switch "lan" "LAN" "blue:lan" "switch0" "0x1e"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 trendnet,tew-823dru)
 	ucidef_set_led_netdev "wan" "WAN" "green:planet" "eth0"
 	;;
 ubnt,bullet-ac|\
 ubnt,nanobeam-ac|\
 ubnt,nanobeam-ac-gen2|\
+<<<<<<< HEAD
 ubnt,nanobeam-ac-xc|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ubnt,nanostation-ac|\
 ubnt,powerbeam-5ac-gen2)
 	ucidef_set_rssimon "wlan0" "200000" "1"
@@ -502,11 +596,23 @@ ubnt,powerbeam-5ac-gen2)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "blue:rssi2" "wlan0" "51" "100"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "blue:rssi3" "wlan0" "76" "100"
 	;;
+<<<<<<< HEAD
 ubnt,bullet-m-xw|\
 ubnt,nanostation-loco-m-xw|\
 ubnt,nanostation-m-xw|\
 ubnt,powerbeam-m2-xw|\
 ubnt,powerbeam-m5-xw|\
+=======
+ubnt,bullet-m-ar7240|\
+ubnt,bullet-m-ar7241|\
+ubnt,bullet-m-xw|\
+ubnt,nanobridge-m|\
+ubnt,nanostation-loco-m|\
+ubnt,nanostation-loco-m-xw|\
+ubnt,nanostation-m|\
+ubnt,nanostation-m-xw|\
+ubnt,picostation-m|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ubnt,powerbridge-m|\
 ubnt,rocket-m)
 	ucidef_set_rssimon "wlan0" "200000" "1"
@@ -515,6 +621,7 @@ ubnt,rocket-m)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "green:link3" "wlan0" "51" "100"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "green:link4" "wlan0" "76" "100"
 	;;
+<<<<<<< HEAD
 ubnt,uk-ultra)
 	ucidef_set_rssimon "wlan0" "200000" "1"
 	ucidef_set_led_rssi "rssilow" "RSSILOW" "white:rssi0" "wlan0" "1" "100"
@@ -522,6 +629,8 @@ ubnt,uk-ultra)
 	ucidef_set_led_rssi "rssimediumhigh" "RSSIMEDIUMHIGH" "white:rssi2" "wlan0" "51" "100"
 	ucidef_set_led_rssi "rssihigh" "RSSIHIGH" "white:rssi3" "wlan0" "76" "100"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 wallys,dr531)
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth0"
 	ucidef_set_led_switch "wan" "WAN" "green:wan" "switch0" "0x2"
@@ -545,6 +654,7 @@ yuncore,a770)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth1"
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x10"
 	;;
+<<<<<<< HEAD
 yuncore,cpe830)
 	ucidef_set_rssimon "wlan0" "200000" "1"
 	ucidef_set_led_rssi "wifi_low" "WIFILOW" "green:signal0" "wlan0" "1" "100"
@@ -552,13 +662,18 @@ yuncore,cpe830)
 	ucidef_set_led_rssi "wifi_mediumhigh" "WIFIMEDIUMHIGH" "green:signal2" "wlan0" "51" "100"
 	ucidef_set_led_rssi "wifi_high" "WIFIHIGH" "green:signal3" "wlan0" "76" "100"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 zbtlink,zbt-wd323)
 	ucidef_set_led_switch "lan1" "LAN1" "orange:lan1" "switch0" "0x10"
 	ucidef_set_led_switch "lan2" "LAN2" "orange:lan2" "switch0" "0x08"
 	;;
+<<<<<<< HEAD
 zyxel,nwa1100-nh)
 	ucidef_set_led_netdev "lan_data" "LAN_DATA" "amber:lan" "eth0" "tx rx"
 	ucidef_set_led_netdev "lan_link" "LAN_LINK" "green:lan" "eth0" "link"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 esac
 
 board_config_flush

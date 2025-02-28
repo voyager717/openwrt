@@ -126,12 +126,17 @@ static int ptm_stop(struct net_device *);
   static unsigned int ptm_poll(int, unsigned int);
   static int ptm_napi_poll(struct napi_struct *, int);
 static int ptm_hard_start_xmit(struct sk_buff *, struct net_device *);
+<<<<<<< HEAD
 static int ptm_ioctl(struct net_device *, struct ifreq *, void __user *, int);
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,6,0)
 static void ptm_tx_timeout(struct net_device *);
 #else
 static void ptm_tx_timeout(struct net_device *, unsigned int txqueue);
 #endif
+=======
+static int ptm_ioctl(struct net_device *, struct ifreq *, int);
+static void ptm_tx_timeout(struct net_device *);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*
  *  DSL Data LED
@@ -247,7 +252,11 @@ static struct net_device_ops g_ptm_netdev_ops = {
     .ndo_start_xmit      = ptm_hard_start_xmit,
     .ndo_validate_addr   = eth_validate_addr,
     .ndo_set_mac_address = eth_mac_addr,
+<<<<<<< HEAD
     .ndo_siocdevprivate  = ptm_ioctl,
+=======
+    .ndo_do_ioctl        = ptm_ioctl,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     .ndo_tx_timeout      = ptm_tx_timeout,
 };
 
@@ -277,8 +286,11 @@ static int g_showtime = 0;
 
 static void ptm_setup(struct net_device *dev, int ndev)
 {
+<<<<<<< HEAD
     u8 addr[ETH_ALEN];
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #if defined(CONFIG_IFXMIPS_DSL_CPE_MEI) || defined(CONFIG_IFXMIPS_DSL_CPE_MEI_MODULE)
     netif_carrier_off(dev);
 #endif
@@ -287,6 +299,7 @@ static void ptm_setup(struct net_device *dev, int ndev)
     dev->netdev_ops      = &g_ptm_netdev_ops;
     /* Allow up to 1508 bytes, for RFC4638 */
     dev->max_mtu         = ETH_DATA_LEN + 8;
+<<<<<<< HEAD
 #if (LINUX_VERSION_CODE < KERNEL_VERSION(5,19,0))
     netif_napi_add(dev, &g_ptm_priv_data.itf[ndev].napi, ptm_napi_poll, 25);
 #else
@@ -301,6 +314,17 @@ static void ptm_setup(struct net_device *dev, int ndev)
     addr[4] = 0x23;
     addr[5] = 0x75 + ndev;
     eth_hw_addr_set(dev, addr);
+=======
+    netif_napi_add(dev, &g_ptm_priv_data.itf[ndev].napi, ptm_napi_poll, 25);
+    dev->watchdog_timeo  = ETH_WATCHDOG_TIMEOUT;
+
+    dev->dev_addr[0] = 0x00;
+    dev->dev_addr[1] = 0x20;
+    dev->dev_addr[2] = 0xda;
+    dev->dev_addr[3] = 0x86;
+    dev->dev_addr[4] = 0x23;
+    dev->dev_addr[5] = 0x75 + ndev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static struct net_device_stats *ptm_get_stats(struct net_device *dev)
@@ -459,7 +483,11 @@ PTM_HARD_START_XMIT_FAIL:
     return NETDEV_TX_OK;
 }
 
+<<<<<<< HEAD
 static int ptm_ioctl(struct net_device *dev, struct ifreq *ifr, void __user *data, int cmd)
+=======
+static int ptm_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     int ndev;
 
@@ -469,6 +497,7 @@ static int ptm_ioctl(struct net_device *dev, struct ifreq *ifr, void __user *dat
     switch ( cmd )
     {
     case IFX_PTM_MIB_CW_GET:
+<<<<<<< HEAD
         ((PTM_CW_IF_ENTRY_T *)data)->ifRxNoIdleCodewords   = WAN_MIB_TABLE[ndev].wrx_nonidle_cw;
         ((PTM_CW_IF_ENTRY_T *)data)->ifRxIdleCodewords     = WAN_MIB_TABLE[ndev].wrx_idle_cw;
         ((PTM_CW_IF_ENTRY_T *)data)->ifRxCodingViolation   = WAN_MIB_TABLE[ndev].wrx_err_cw;
@@ -497,17 +526,55 @@ static int ptm_ioctl(struct net_device *dev, struct ifreq *ifr, void __user *dat
         {
             CFG_ETH_EFMTC_CRC->rx_tc_crc_check  = 1;
             CFG_ETH_EFMTC_CRC->rx_tc_crc_len    = ((IFX_PTM_CFG_T *)data)->RxTcCrcLen;
+=======
+        ((PTM_CW_IF_ENTRY_T *)ifr->ifr_data)->ifRxNoIdleCodewords   = WAN_MIB_TABLE[ndev].wrx_nonidle_cw;
+        ((PTM_CW_IF_ENTRY_T *)ifr->ifr_data)->ifRxIdleCodewords     = WAN_MIB_TABLE[ndev].wrx_idle_cw;
+        ((PTM_CW_IF_ENTRY_T *)ifr->ifr_data)->ifRxCodingViolation   = WAN_MIB_TABLE[ndev].wrx_err_cw;
+        ((PTM_CW_IF_ENTRY_T *)ifr->ifr_data)->ifTxNoIdleCodewords   = 0;
+        ((PTM_CW_IF_ENTRY_T *)ifr->ifr_data)->ifTxIdleCodewords     = 0;
+        break;
+    case IFX_PTM_MIB_FRAME_GET:
+        ((PTM_FRAME_MIB_T *)ifr->ifr_data)->RxCorrect   = WAN_MIB_TABLE[ndev].wrx_correct_pdu;
+        ((PTM_FRAME_MIB_T *)ifr->ifr_data)->TC_CrcError = WAN_MIB_TABLE[ndev].wrx_tccrc_err_pdu;
+        ((PTM_FRAME_MIB_T *)ifr->ifr_data)->RxDropped   = WAN_MIB_TABLE[ndev].wrx_nodesc_drop_pdu + WAN_MIB_TABLE[ndev].wrx_len_violation_drop_pdu;
+        ((PTM_FRAME_MIB_T *)ifr->ifr_data)->TxSend      = WAN_MIB_TABLE[ndev].wtx_total_pdu;
+        break;
+    case IFX_PTM_CFG_GET:
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxEthCrcPresent = CFG_ETH_EFMTC_CRC->rx_eth_crc_present;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxEthCrcCheck   = CFG_ETH_EFMTC_CRC->rx_eth_crc_check;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcCheck    = CFG_ETH_EFMTC_CRC->rx_tc_crc_check;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcLen      = CFG_ETH_EFMTC_CRC->rx_tc_crc_len;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxEthCrcGen     = CFG_ETH_EFMTC_CRC->tx_eth_crc_gen;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcGen      = CFG_ETH_EFMTC_CRC->tx_tc_crc_gen;
+        ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcLen      = CFG_ETH_EFMTC_CRC->tx_tc_crc_len;
+        break;
+    case IFX_PTM_CFG_SET:
+        CFG_ETH_EFMTC_CRC->rx_eth_crc_present   = ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxEthCrcPresent ? 1 : 0;
+        CFG_ETH_EFMTC_CRC->rx_eth_crc_check     = ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxEthCrcCheck ? 1 : 0;
+        if ( ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcCheck && (((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcLen == 16 || ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcLen == 32) )
+        {
+            CFG_ETH_EFMTC_CRC->rx_tc_crc_check  = 1;
+            CFG_ETH_EFMTC_CRC->rx_tc_crc_len    = ((IFX_PTM_CFG_T *)ifr->ifr_data)->RxTcCrcLen;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
         else
         {
             CFG_ETH_EFMTC_CRC->rx_tc_crc_check  = 0;
             CFG_ETH_EFMTC_CRC->rx_tc_crc_len    = 0;
         }
+<<<<<<< HEAD
         CFG_ETH_EFMTC_CRC->tx_eth_crc_gen       = ((IFX_PTM_CFG_T *)data)->TxEthCrcGen ? 1 : 0;
         if ( ((IFX_PTM_CFG_T *)data)->TxTcCrcGen && (((IFX_PTM_CFG_T *)data)->TxTcCrcLen == 16 || ((IFX_PTM_CFG_T *)data)->TxTcCrcLen == 32) )
         {
             CFG_ETH_EFMTC_CRC->tx_tc_crc_gen    = 1;
             CFG_ETH_EFMTC_CRC->tx_tc_crc_len    = ((IFX_PTM_CFG_T *)data)->TxTcCrcLen;
+=======
+        CFG_ETH_EFMTC_CRC->tx_eth_crc_gen       = ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxEthCrcGen ? 1 : 0;
+        if ( ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcGen && (((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcLen == 16 || ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcLen == 32) )
+        {
+            CFG_ETH_EFMTC_CRC->tx_tc_crc_gen    = 1;
+            CFG_ETH_EFMTC_CRC->tx_tc_crc_len    = ((IFX_PTM_CFG_T *)ifr->ifr_data)->TxTcCrcLen;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
         else
         {
@@ -522,11 +589,15 @@ static int ptm_ioctl(struct net_device *dev, struct ifreq *ifr, void __user *dat
     return 0;
 }
 
+<<<<<<< HEAD
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,6,0)
 static void ptm_tx_timeout(struct net_device *dev)
 #else
 static void ptm_tx_timeout(struct net_device *dev, unsigned int txqueue)
 #endif
+=======
+static void ptm_tx_timeout(struct net_device *dev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     int ndev;
 
@@ -1491,6 +1562,7 @@ static int ltq_ptm_probe(struct platform_device *pdev)
             goto REGISTER_NETDEV_FAIL;
     }
 
+<<<<<<< HEAD
     g_ptm_priv_data.irq = platform_get_irq(pdev, 0);
     if (g_ptm_priv_data.irq < 0) {
         err("platform_get_irq fail");
@@ -1499,6 +1571,10 @@ static int ltq_ptm_probe(struct platform_device *pdev)
 
     /*  register interrupt handler  */
     ret = request_irq(g_ptm_priv_data.irq, mailbox_irq_handler, 0, "ptm_mailbox_isr", &g_ptm_priv_data);
+=======
+    /*  register interrupt handler  */
+    ret = request_irq(PPE_MAILBOX_IGU1_INT, mailbox_irq_handler, 0, "ptm_mailbox_isr", &g_ptm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     if ( ret ) {
         if ( ret == -EBUSY ) {
             err("IRQ may be occupied by other driver, please reconfig to disable it.");
@@ -1508,7 +1584,11 @@ static int ltq_ptm_probe(struct platform_device *pdev)
         }
         goto REQUEST_IRQ_PPE_MAILBOX_IGU1_INT_FAIL;
     }
+<<<<<<< HEAD
     disable_irq(g_ptm_priv_data.irq);
+=======
+    disable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     ret = ifx_pp32_start(0);
     if ( ret ) {
@@ -1518,7 +1598,11 @@ static int ltq_ptm_probe(struct platform_device *pdev)
     IFX_REG_W32(0, MBOX_IGU1_IER);
     IFX_REG_W32(~0, MBOX_IGU1_ISRC);
 
+<<<<<<< HEAD
     enable_irq(g_ptm_priv_data.irq);
+=======
+    enable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
     proc_file_create();
@@ -1540,7 +1624,11 @@ static int ltq_ptm_probe(struct platform_device *pdev)
     return 0;
 
 PP32_START_FAIL:
+<<<<<<< HEAD
     free_irq(g_ptm_priv_data.irq, &g_ptm_priv_data);
+=======
+    free_irq(PPE_MAILBOX_IGU1_INT, &g_ptm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 REQUEST_IRQ_PPE_MAILBOX_IGU1_INT_FAIL:
     i = ARRAY_SIZE(g_net_dev);
 REGISTER_NETDEV_FAIL:
@@ -1578,7 +1666,11 @@ static int ltq_ptm_remove(struct platform_device *pdev)
 
     ifx_pp32_stop(0);
 
+<<<<<<< HEAD
     free_irq(g_ptm_priv_data.irq, &g_ptm_priv_data);
+=======
+    free_irq(PPE_MAILBOX_IGU1_INT, &g_ptm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     for ( i = 0; i < ARRAY_SIZE(g_net_dev); i++ )
         unregister_netdev(g_net_dev[i]);
@@ -1600,6 +1692,10 @@ static struct platform_driver ltq_ptm_driver = {
        .remove = ltq_ptm_remove,
        .driver = {
                .name = "ptm",
+<<<<<<< HEAD
+=======
+               .owner = THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                .of_match_table = ltq_ptm_match,
        },
 };

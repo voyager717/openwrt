@@ -22,7 +22,11 @@ define KernelPackage/ppfe
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Freescale PPFE Driver support
   DEPENDS:=@TARGET_layerscape
+<<<<<<< HEAD
   KCONFIG:=CONFIG_FSL_PPFE \
+=======
+  KCONFIG:=CONFIG_FSL_PPFE=y \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   	CONFIG_FSL_PPFE_UTIL_DISABLED=y
   FILES:=$(LINUX_DIR)/drivers/staging/fsl_ppfe/pfe.ko
   AUTOLOAD:=$(call AutoLoad,35,pfe)

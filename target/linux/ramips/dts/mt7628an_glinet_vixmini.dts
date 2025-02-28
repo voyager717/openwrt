@@ -8,5 +8,9 @@
 };
 
 &firmware_part {
+<<<<<<< HEAD
 	reg = <0x50000 0x7b0000>;
+=======
+		reg = <0x50000 0x7b0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "comfast,cf-wr800n", "ralink,mt7620n-soc";
@@ -33,8 +36,12 @@
 		};
 
 		led_wps: wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -87,6 +94,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -105,6 +113,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -117,6 +131,7 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
 };
@@ -124,6 +139,13 @@
 &wmac {
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	mtd-mac-address = <&factory 0x4>;
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &state_default {

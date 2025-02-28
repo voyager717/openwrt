@@ -6,8 +6,13 @@ RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
 
 platform_check_image() {
 	case "$(board_name)" in
+<<<<<<< HEAD
 	asus,rt-ac42u |\
 	asus,rt-ac58u)
+=======
+	asus,rt-ac58u)
+		CI_UBIPART="UBI_DEV"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		local ubidev=$(nand_find_ubi $CI_UBIPART)
 		local asus_root=$(nand_find_volume $ubidev jffs2)
 
@@ -25,6 +30,7 @@ Once this is done. Retry.
 EOF
 		return 1
 		;;
+<<<<<<< HEAD
 	zte,mf18a |\
 	zte,mf282plus|\
 	zte,mf286d |\
@@ -54,6 +60,8 @@ Once this is done. Retry.
 EOF
 		return 1
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 	return 0;
 }
@@ -84,6 +92,7 @@ zyxel_do_upgrade() {
 	fi
 }
 
+<<<<<<< HEAD
 platform_do_upgrade_mikrotik_nand() {
 	local fw_mtd=$(find_mtd_part kernel)
 	fw_mtd="${fw_mtd/block/}"
@@ -102,6 +111,8 @@ platform_do_upgrade_mikrotik_nand() {
 	nand_do_upgrade "$1"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 platform_do_upgrade() {
 	case "$(board_name)" in
 	8dev,jalapeno |\
@@ -116,6 +127,7 @@ platform_do_upgrade() {
 	edgecore,ecw5211 |\
 	edgecore,oap100 |\
 	engenius,eap2200 |\
+<<<<<<< HEAD
 	glinet,gl-a1300 |\
 	glinet,gl-ap1300 |\
 	luma,wrtq-329acn |\
@@ -134,6 +146,14 @@ platform_do_upgrade() {
 		CI_DATAPART="rootfs_data"
 		emmc_do_upgrade "$1"
 		;;
+=======
+	glinet,gl-ap1300 |\
+	luma,wrtq-329acn |\
+	mobipromo,cm520-79f |\
+	qxwlan,e2600ac-c2)
+		nand_do_upgrade "$1"
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	alfa-network,ap120c-ac)
 		part="$(awk -F 'ubi.mtd=' '{printf $2}' /proc/cmdline | sed -e 's/ .*$//')"
 		if [ "$part" = "rootfs1" ]; then
@@ -149,8 +169,13 @@ platform_do_upgrade() {
 		CI_KERNPART="linux"
 		nand_do_upgrade "$1"
 		;;
+<<<<<<< HEAD
 	asus,rt-ac42u |\
 	asus,rt-ac58u)
+=======
+	asus,rt-ac58u)
+		CI_UBIPART="UBI_DEV"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		CI_KERNPART="linux"
 		nand_do_upgrade "$1"
 		;;
@@ -161,6 +186,7 @@ platform_do_upgrade() {
 	compex,wpj419)
 		nand_do_upgrade "$1"
 		;;
+<<<<<<< HEAD
 	google,wifi)
 		export_bootdevice
 		export_partdevice CI_ROOTDEV 0
@@ -205,6 +231,22 @@ platform_do_upgrade() {
 	netgear,srs60)
 		platform_do_upgrade_netgear_orbi_upgrade "$1"
 		;;
+=======
+	linksys,ea6350v3 |\
+	linksys,ea8300 |\
+	linksys,mr8300)
+		platform_do_upgrade_linksys "$1"
+		;;
+	meraki,mr33)
+		CI_KERNPART="part.safe"
+		nand_do_upgrade "$1"
+		;;
+	mikrotik,hap-ac2|\
+	mikrotik,sxtsq-5-ac)
+		[ "$(rootfs_type)" = "tmpfs" ] && mtd erase firmware
+		default_do_upgrade "$1"
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	openmesh,a42 |\
 	openmesh,a62 |\
 	plasmacloud,pa1200 |\
@@ -212,6 +254,7 @@ platform_do_upgrade() {
 		PART_NAME="inactive"
 		platform_do_upgrade_dualboot_datachk "$1"
 		;;
+<<<<<<< HEAD
 	sony,ncp-hg100-cellular)
 		sony_emmc_do_upgrade "$1"
 		;;
@@ -227,6 +270,8 @@ platform_do_upgrade() {
 		CI_UBIPART="rootfs"
 		nand_do_upgrade "$1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zyxel,nbg6617)
 		zyxel_do_upgrade "$1"
 		;;
@@ -235,6 +280,7 @@ platform_do_upgrade() {
 		;;
 	esac
 }
+<<<<<<< HEAD
 
 platform_copy_config() {
 	case "$(board_name)" in
@@ -246,3 +292,5 @@ platform_copy_config() {
 	esac
 	return 0;
 }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -38,11 +38,16 @@
   \brief ifx sha1 hmac functions
 */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* Project header */
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/mm.h>
 #include <linux/crypto.h>
+<<<<<<< HEAD
 #include <crypto/internal/hash.h>
 #include <linux/version.h>
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,11,0)
@@ -50,6 +55,10 @@
 #else
 #include <crypto/sha1.h>
 #endif
+=======
+#include <linux/cryptohash.h>
+#include <crypto/internal/hash.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <linux/types.h>
 #include <linux/scatterlist.h>
 #include <asm/byteorder.h>
@@ -64,14 +73,25 @@
 #endif
 
 #define SHA1_DIGEST_SIZE    20
+<<<<<<< HEAD
 #define SHA1_BLOCK_WORDS    16
 #define SHA1_HASH_WORDS     5
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define SHA1_HMAC_BLOCK_SIZE    64
 #define SHA1_HMAC_DBN_TEMP_SIZE 1024 // size in dword, needed for dbn workaround 
 #define HASH_START   IFX_HASH_CON
 
 #define SHA1_HMAC_MAX_KEYLEN 64
 
+<<<<<<< HEAD
+=======
+static spinlock_t lock;
+#define CRTCL_SECT_INIT        spin_lock_init(&lock)
+#define CRTCL_SECT_START       spin_lock_irqsave(&lock, flag)
+#define CRTCL_SECT_END         spin_unlock_irqrestore(&lock, flag)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CRYPTO_DEBUG
 extern char debug_level;
 #define DPRINTF(level, format, args...) if (level < debug_level) printk(KERN_INFO "[%s %s %d]: " format, __FILE__, __func__, __LINE__, ##args);
@@ -84,6 +104,7 @@ struct sha1_hmac_ctx {
 
     u8 buffer[SHA1_HMAC_BLOCK_SIZE];
     u8 key[SHA1_HMAC_MAX_KEYLEN];
+<<<<<<< HEAD
     u32 hash[SHA1_HASH_WORDS];
     u32 dbn;
     int started;
@@ -96,6 +117,17 @@ struct sha1_hmac_ctx {
 extern int disable_deudma;
 
 static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final);
+=======
+    u32 state[5];
+    u32 dbn;
+    u64 count;
+
+};
+
+static u32 temp[SHA1_HMAC_DBN_TEMP_SIZE];  
+
+extern int disable_deudma;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*! \fn static void sha1_hmac_transform(struct crypto_tfm *tfm, u32 const *in)
  *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
@@ -107,6 +139,7 @@ static int sha1_hmac_transform(struct shash_desc *desc, u32 const *in)
 {
     struct sha1_hmac_ctx *sctx =  crypto_shash_ctx(desc->tfm);
 
+<<<<<<< HEAD
     if ( ((sctx->dbn<<4)+1) > SHA1_HMAC_DBN_TEMP_SIZE )
     {
         //printk("SHA1_HMAC_DBN_TEMP_SIZE exceeded\n");
@@ -116,6 +149,16 @@ static int sha1_hmac_transform(struct shash_desc *desc, u32 const *in)
     memcpy(&sctx->temp[sctx->dbn], in, 64); //dbn workaround
     sctx->dbn += 1;
 
+=======
+    memcpy(&temp[sctx->dbn<<4], in, 64); //dbn workaround
+    sctx->dbn += 1;
+    
+    if ( (sctx->dbn<<4) > SHA1_HMAC_DBN_TEMP_SIZE )
+    {
+        printk("SHA1_HMAC_DBN_TEMP_SIZE exceeded\n");
+    }
+   
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     return 0;
 }
 
@@ -129,6 +172,7 @@ static int sha1_hmac_transform(struct shash_desc *desc, u32 const *in)
 static int sha1_hmac_setkey(struct crypto_shash *tfm, const u8 *key, unsigned int keylen)
 {
     struct sha1_hmac_ctx *sctx = crypto_shash_ctx(tfm);
+<<<<<<< HEAD
     int err;
 
     if (keylen > SHA1_HMAC_MAX_KEYLEN) {
@@ -155,6 +199,26 @@ static int sha1_hmac_setkey(struct crypto_shash *tfm, const u8 *key, unsigned in
     return 0;
 }
 
+=======
+    volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
+    
+    if (keylen > SHA1_HMAC_MAX_KEYLEN) {
+	printk("Key length exceeds maximum key length\n");
+	return -EINVAL;
+    }
+
+    //printk("Setting keys of len: %d\n", keylen);
+     
+    hashs->KIDX |= 0x80000000; //reset keys back to 0
+    memcpy(&sctx->key, key, keylen);
+    sctx->keylen = keylen;
+
+    return 0;
+         
+}
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn int sha1_hmac_setkey_hw(struct crypto_tfm *tfm, const u8 *key, unsigned int keylen)
  *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
  *  \brief sets sha1 hmac key  into hw registers 
@@ -166,11 +230,19 @@ static int sha1_hmac_setkey_hw(const u8 *key, unsigned int keylen)
 {
     volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
     int i, j;
+<<<<<<< HEAD
+=======
+    unsigned long flag;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     u32 *in_key = (u32 *)key;        
 
     j = 0;
 
+<<<<<<< HEAD
     hash->KIDX |= 0x80000000; //reset keys back to 0
+=======
+    CRTCL_SECT_START;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     for (i = 0; i < keylen; i+=4)
     {
          hash->KIDX = j;
@@ -179,6 +251,10 @@ static int sha1_hmac_setkey_hw(const u8 *key, unsigned int keylen)
          j++;
     }
 
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_END;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     return 0;
 }
 
@@ -193,8 +269,12 @@ static int sha1_hmac_init(struct shash_desc *desc)
 
     //printk("debug ln: %d, fn: %s\n", __LINE__, __func__);
     sctx->dbn = 0; //dbn workaround
+<<<<<<< HEAD
     sctx->started = 0;
     sctx->count = 0;
+=======
+    sha1_hmac_setkey_hw(sctx->key, sctx->keylen);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     return 0;
 }
@@ -232,14 +312,21 @@ static int sha1_hmac_update(struct shash_desc *desc, const u8 *data,
     return 0;
 }
 
+<<<<<<< HEAD
 /*! \fn static int sha1_hmac_final(struct crypto_tfm *tfm, u8 *out)
  *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
  *  \brief call sha1_hmac_final_impl with hash_final true   
+=======
+/*! \fn static void sha1_hmac_final(struct crypto_tfm *tfm, u8 *out)
+ *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
+ *  \brief ompute final sha1 hmac value   
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \param tfm linux crypto algo transform  
  *  \param out final sha1 hmac output value  
 */                                 
 static int sha1_hmac_final(struct shash_desc *desc, u8 *out)
 {
+<<<<<<< HEAD
     return sha1_hmac_final_impl(desc, out, true);
 }
 
@@ -252,6 +339,9 @@ static int sha1_hmac_final(struct shash_desc *desc, u8 *out)
 */                                 
 static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final)
 {
+=======
+    //struct sha1_hmac_ctx *sctx = shash_desc_ctx(desc);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     struct sha1_hmac_ctx *sctx =  crypto_shash_ctx(desc->tfm);
     u32 index, padlen;
     u64 t;
@@ -261,6 +351,7 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
     unsigned long flag;
     int i = 0;
     int dbn;
+<<<<<<< HEAD
     u32 *in = sctx->temp[0];
 
     if (hash_final) {
@@ -303,6 +394,39 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
     }
     asm("sync");
 
+=======
+    u32 *in = &temp[0];
+        
+    t = sctx->count + 512; // need to add 512 bit of the IPAD operation
+    bits[7] = 0xff & t;
+    t >>= 8;
+    bits[6] = 0xff & t;
+    t >>= 8;
+    bits[5] = 0xff & t;
+    t >>= 8;
+    bits[4] = 0xff & t;
+    t >>= 8;
+    bits[3] = 0xff & t;
+    t >>= 8;
+    bits[2] = 0xff & t;
+    t >>= 8;
+    bits[1] = 0xff & t;
+    t >>= 8;
+    bits[0] = 0xff & t;
+
+    /* Pad out to 56 mod 64 */
+    index = (sctx->count >> 3) & 0x3f;
+    padlen = (index < 56) ? (56 - index) : ((64 + 56) - index);
+    sha1_hmac_update (desc, padding, padlen);
+
+    /* Append length */
+    sha1_hmac_update (desc, bits, sizeof bits);
+
+    CRTCL_SECT_START;
+    
+    hashs->DBN = sctx->dbn;
+    
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     //for vr9 change, ENDI = 1
     *IFX_HASH_CON = HASH_CON_VALUE; 
 
@@ -311,6 +435,7 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
         // this will not take long
     }
 
+<<<<<<< HEAD
     if (sctx->started) {
         hashs->D1R = *((u32 *) sctx->hash + 0);
         hashs->D2R = *((u32 *) sctx->hash + 1);
@@ -345,6 +470,30 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
         while (! hashs->controlr.DGRY) {
             // this will not take long
         }
+=======
+    for (dbn = 0; dbn < sctx->dbn; dbn++)
+    {
+    for (i = 0; i < 16; i++) {
+        hashs->MR = in[i];
+    };
+
+    hashs->controlr.GO = 1;
+    asm("sync");
+
+    //wait for processing
+    while (hashs->controlr.BSY) {
+            // this will not take long
+    }
+    
+    in += 16;
+}
+
+
+#if 1
+    //wait for digest ready
+    while (! hashs->controlr.DGRY) {
+        // this will not take long
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 #endif
 
@@ -354,6 +503,7 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
     *((u32 *) out + 3) = hashs->D4R;
     *((u32 *) out + 4) = hashs->D5R;
 
+<<<<<<< HEAD
     CRTCL_SECT_HASH_END;
 
     if (hash_final) {
@@ -362,11 +512,20 @@ static int sha1_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_fina
         sctx->dbn = 0;
     }
     //printk("debug ln: %d, fn: %s\n", __LINE__, __func__);
+=======
+    memset(&sctx->buffer[0], 0, SHA1_HMAC_BLOCK_SIZE);
+    sctx->count = 0; 
+ 
+    //printk("debug ln: %d, fn: %s\n", __LINE__, __func__);
+    CRTCL_SECT_END;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     return 0;
 
 }
 
+<<<<<<< HEAD
 /*! \fn void sha1_hmac_init_tfm(struct crypto_tfm *tfm)
  *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
  *  \brief initialize pointers in sha1_hmac_ctx
@@ -419,6 +578,31 @@ static struct shash_alg ifxdeu_sha1_hmac_alg = {
         }
 };
 
+=======
+/*
+ * \brief SHA1-HMAC function mappings
+*/
+static struct shash_alg ifxdeu_sha1_hmac_alg = {
+        .digestsize     =       SHA1_DIGEST_SIZE,
+        .init           =       sha1_hmac_init,
+        .update         =       sha1_hmac_update,
+        .final          =       sha1_hmac_final,
+        .setkey         =       sha1_hmac_setkey,
+        .descsize       =       sizeof(struct sha1_hmac_ctx),
+        .base           =       {
+                .cra_name       =       "hmac(sha1)",
+                .cra_driver_name=       "ifxdeu-sha1_hmac",
+                .cra_priority   =       400,
+		.cra_ctxsize    =	sizeof(struct sha1_hmac_ctx),
+                .cra_flags      =       CRYPTO_ALG_TYPE_HASH,
+                .cra_blocksize  =       SHA1_HMAC_BLOCK_SIZE,
+                .cra_module     =       THIS_MODULE,
+        }
+
+};
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn int ifxdeu_init_sha1_hmac (void)
  *  \ingroup IFX_SHA1_HMAC_FUNCTIONS
  *  \brief initialize sha1 hmac driver    
@@ -432,6 +616,11 @@ int ifxdeu_init_sha1_hmac (void)
     if ((ret = crypto_register_shash(&ifxdeu_sha1_hmac_alg)))
         goto sha1_err;
 
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_INIT;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     printk (KERN_NOTICE "IFX DEU SHA1_HMAC initialized%s.\n", disable_deudma ? "" : " (DMA)");
     return ret;
 
@@ -451,3 +640,7 @@ void ifxdeu_fini_sha1_hmac (void)
 
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

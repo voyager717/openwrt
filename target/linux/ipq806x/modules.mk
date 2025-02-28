@@ -14,6 +14,7 @@ define KernelPackage/phy-qcom-ipq806x-usb/description
 endef
 
 $(eval $(call KernelPackage,phy-qcom-ipq806x-usb))
+<<<<<<< HEAD
 
 
 define KernelPackage/sound-soc-ipq8064-storm
@@ -43,3 +44,5 @@ define KernelPackage/sound-soc-ipq8064-storm/description
 endef
 
 $(eval $(call KernelPackage,sound-soc-ipq8064-storm))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

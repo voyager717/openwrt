@@ -11,6 +11,10 @@
 #include <time.h>
 #include <unistd.h>
 #include <getopt.h>
+<<<<<<< HEAD
+=======
+#include <sys/stat.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <sys/time.h>
 #include <errno.h>
 
@@ -35,11 +39,18 @@ enum input_mode {
 	olddefconfig,
 	yes2modconfig,
 	mod2yesconfig,
+<<<<<<< HEAD
 	mod2noconfig,
 	fatalrecursive,
 };
 static enum input_mode input_mode = oldaskconfig;
 static int input_mode_opt;
+=======
+	fatalrecursive,
+};
+static enum input_mode input_mode = oldaskconfig;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int indent = 1;
 static int tty_stdio;
 static int sync_kconfig;
@@ -84,6 +95,7 @@ static void xfgets(char *str, int size, FILE *in)
 		printf("%s", str);
 }
 
+<<<<<<< HEAD
 static void set_randconfig_seed(void)
 {
 	unsigned int seed;
@@ -317,6 +329,12 @@ static void conf_rewrite_tristates(tristate old_val, tristate new_val)
 
 static int conf_askvalue(struct symbol *sym, const char *def)
 {
+=======
+static int conf_askvalue(struct symbol *sym, const char *def)
+{
+	enum symbol_type type = sym_get_type(sym);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!sym_has_value(sym))
 		printf("(NEW) ");
 
@@ -338,12 +356,33 @@ static int conf_askvalue(struct symbol *sym, const char *def)
 			return 0;
 		}
 		/* fall through */
+<<<<<<< HEAD
 	default:
 		fflush(stdout);
 		xfgets(line, sizeof(line), stdin);
 		break;
 	}
 
+=======
+	case oldaskconfig:
+		fflush(stdout);
+		xfgets(line, sizeof(line), stdin);
+		return 1;
+	default:
+		break;
+	}
+
+	switch (type) {
+	case S_INT:
+	case S_HEX:
+	case S_STRING:
+		printf("%s\n", def);
+		return 1;
+	default:
+		;
+	}
+	printf("%s", line);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 1;
 }
 
@@ -356,7 +395,11 @@ static int conf_string(struct menu *menu)
 		printf("%*s%s ", indent - 1, "", menu->prompt->text);
 		printf("(%s) ", sym->name);
 		def = sym_get_string_value(sym);
+<<<<<<< HEAD
 		if (def)
+=======
+		if (sym_get_string_value(sym))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			printf("[%s] ", def);
 		if (!conf_askvalue(sym, def))
 			return 0;
@@ -552,7 +595,11 @@ static int conf_choice(struct menu *menu)
 			print_help(child);
 			continue;
 		}
+<<<<<<< HEAD
 		sym_set_tristate_value(child->sym, yes);
+=======
+		sym_set_choice_value(sym, child->sym);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		for (child = child->list; child; child = child->next) {
 			indent += 2;
 			conf(child);
@@ -638,6 +685,7 @@ static void check_conf(struct menu *menu)
 		return;
 
 	sym = menu->sym;
+<<<<<<< HEAD
 	if (sym && !sym_has_value(sym) &&
 	    (sym_is_changeable(sym) ||
 	     (sym_is_choice(sym) && sym_get_tristate_value(sym) == yes))) {
@@ -658,6 +706,36 @@ static void check_conf(struct menu *menu)
 			rootEntry = menu_get_parent_menu(menu);
 			conf(rootEntry);
 			break;
+=======
+	if (sym && !sym_has_value(sym)) {
+		if (sym_is_changeable(sym) ||
+		    (sym_is_choice(sym) && sym_get_tristate_value(sym) == yes)) {
+			if (input_mode == listnewconfig) {
+				if (sym->name) {
+					const char *str;
+
+					if (sym->type == S_STRING) {
+						str = sym_get_string_value(sym);
+						str = sym_escape_string_value(str);
+						printf("%s%s=%s\n", CONFIG_, sym->name, str);
+						free((void *)str);
+					} else {
+						str = sym_get_string_value(sym);
+						printf("%s%s=%s\n", CONFIG_, sym->name, str);
+					}
+				}
+			} else if (input_mode == helpnewconfig) {
+				printf("-----\n");
+				print_help(menu);
+				printf("-----\n");
+
+			} else {
+				if (!conf_cnt++)
+					printf("*\n* Restart config...\n*\n");
+				rootEntry = menu_get_parent_menu(menu);
+				conf(rootEntry);
+			}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 	}
 
@@ -665,6 +743,7 @@ static void check_conf(struct menu *menu)
 		check_conf(child);
 }
 
+<<<<<<< HEAD
 static const struct option long_opts[] = {
 	{"help",          no_argument,       NULL,            'h'},
 	{"silent",        no_argument,       NULL,            's'},
@@ -685,11 +764,31 @@ static const struct option long_opts[] = {
 	{"mod2yesconfig", no_argument,       &input_mode_opt, mod2yesconfig},
 	{"mod2noconfig",  no_argument,       &input_mode_opt, mod2noconfig},
 	{"fatalrecursive",no_argument,       &input_mode_opt, fatalrecursive},
+=======
+static struct option long_opts[] = {
+	{"oldaskconfig",    no_argument,       NULL, oldaskconfig},
+	{"oldconfig",       no_argument,       NULL, oldconfig},
+	{"syncconfig",      no_argument,       NULL, syncconfig},
+	{"defconfig",       required_argument, NULL, defconfig},
+	{"savedefconfig",   required_argument, NULL, savedefconfig},
+	{"allnoconfig",     no_argument,       NULL, allnoconfig},
+	{"allyesconfig",    no_argument,       NULL, allyesconfig},
+	{"allmodconfig",    no_argument,       NULL, allmodconfig},
+	{"alldefconfig",    no_argument,       NULL, alldefconfig},
+	{"randconfig",      no_argument,       NULL, randconfig},
+	{"listnewconfig",   no_argument,       NULL, listnewconfig},
+	{"helpnewconfig",   no_argument,       NULL, helpnewconfig},
+	{"olddefconfig",    no_argument,       NULL, olddefconfig},
+	{"yes2modconfig",   no_argument,       NULL, yes2modconfig},
+	{"mod2yesconfig",   no_argument,       NULL, mod2yesconfig},
+	{"fatalrecursive",  no_argument,       NULL, fatalrecursive},
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	{NULL, 0, NULL, 0}
 };
 
 static void conf_usage(const char *progname)
 {
+<<<<<<< HEAD
 	printf("Usage: %s [options] <kconfig-file>\n", progname);
 	printf("\n");
 	printf("Generic options:\n");
@@ -700,6 +799,11 @@ static void conf_usage(const char *progname)
 	printf("  --fatalrecursive        Treat recursive dependency as error.\n");
 	printf("\n");
 	printf("Mode options:\n");
+=======
+
+	printf("Usage: %s [-s] [--fatalrecursive] [option] <kconfig-file>\n", progname);
+	printf("[option] is _one_ of the following:\n");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	printf("  --listnewconfig         List new options\n");
 	printf("  --helpnewconfig         List new options and help text\n");
 	printf("  --oldaskconfig          Start a new configuration using a line-oriented program\n");
@@ -716,8 +820,11 @@ static void conf_usage(const char *progname)
 	printf("  --randconfig            New config with random answer to all options\n");
 	printf("  --yes2modconfig         Change answers from yes to mod if possible\n");
 	printf("  --mod2yesconfig         Change answers from mod to yes if possible\n");
+<<<<<<< HEAD
 	printf("  --mod2noconfig          Change answers from mod to no if possible\n");
 	printf("  (If none of the above is given, --oldaskconfig is the default)\n");
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 int main(int ac, char **av)
@@ -730,6 +837,7 @@ int main(int ac, char **av)
 
 	tty_stdio = isatty(0) && isatty(1);
 
+<<<<<<< HEAD
 	while ((opt = getopt_long(ac, av, "hr:w:s", long_opts, NULL)) != -1) {
 		switch (opt) {
 		case 'h':
@@ -773,13 +881,90 @@ int main(int ac, char **av)
 		default:
 			break;
 		}
+=======
+	while ((opt = getopt_long(ac, av, "r:w:s", long_opts, NULL)) != -1) {
+		if (opt == 's') {
+			conf_set_message_callback(NULL);
+			continue;
+		}
+		switch (opt) {
+		case syncconfig:
+			/*
+			 * syncconfig is invoked during the build stage.
+			 * Suppress distracting "configuration written to ..."
+			 */
+			conf_set_message_callback(NULL);
+			sync_kconfig = 1;
+			break;
+		case defconfig:
+		case savedefconfig:
+			defconfig_file = optarg;
+			break;
+		case randconfig:
+		{
+			struct timeval now;
+			unsigned int seed;
+			char *seed_env;
+
+			/*
+			 * Use microseconds derived seed,
+			 * compensate for systems where it may be zero
+			 */
+			gettimeofday(&now, NULL);
+			seed = (unsigned int)((now.tv_sec + 1) * (now.tv_usec + 1));
+
+			seed_env = getenv("KCONFIG_SEED");
+			if( seed_env && *seed_env ) {
+				char *endp;
+				int tmp = (int)strtol(seed_env, &endp, 0);
+				if (*endp == '\0') {
+					seed = tmp;
+				}
+			}
+			fprintf( stderr, "KCONFIG_SEED=0x%X\n", seed );
+			srand(seed);
+			break;
+		}
+		case oldaskconfig:
+		case oldconfig:
+		case allnoconfig:
+		case allyesconfig:
+		case allmodconfig:
+		case alldefconfig:
+		case listnewconfig:
+		case helpnewconfig:
+		case olddefconfig:
+		case yes2modconfig:
+		case mod2yesconfig:
+			break;
+		case fatalrecursive:
+			recursive_is_error = 1;
+			continue;
+		case 'r':
+			input_file = optarg;
+			continue;
+		case 'w':
+			output_file = optarg;
+			continue;
+		case '?':
+			conf_usage(progname);
+			exit(1);
+			break;
+		}
+		input_mode = (enum input_mode)opt;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	if (ac == optind) {
 		fprintf(stderr, "%s: Kconfig file missing\n", av[0]);
 		conf_usage(progname);
 		exit(1);
 	}
+<<<<<<< HEAD
 	conf_parse(av[optind]);
+=======
+	name = av[optind];
+	conf_parse(name);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	//zconfdump(stdout);
 
 	switch (input_mode) {
@@ -802,7 +987,10 @@ int main(int ac, char **av)
 	case olddefconfig:
 	case yes2modconfig:
 	case mod2yesconfig:
+<<<<<<< HEAD
 	case mod2noconfig:
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	case allnoconfig:
 	case allyesconfig:
 	case allmodconfig:
@@ -849,6 +1037,7 @@ int main(int ac, char **av)
 	case savedefconfig:
 		break;
 	case yes2modconfig:
+<<<<<<< HEAD
 		conf_rewrite_tristates(yes, mod);
 		break;
 	case mod2yesconfig:
@@ -856,6 +1045,12 @@ int main(int ac, char **av)
 		break;
 	case mod2noconfig:
 		conf_rewrite_tristates(mod, no);
+=======
+		conf_rewrite_mod_or_yes(def_y2m);
+		break;
+	case mod2yesconfig:
+		conf_rewrite_mod_or_yes(def_m2y);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	case oldaskconfig:
 		rootEntry = &rootmenu;

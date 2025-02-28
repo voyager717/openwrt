@@ -10,7 +10,11 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=drv_tapi
 PKG_VERSION:=3.13.0
+<<<<<<< HEAD
 PKG_RELEASE:=6
+=======
+PKG_RELEASE:=4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE:=drv_tapi-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=@OPENWRT
@@ -19,7 +23,10 @@ PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 
 PKG_CHECK_FORMAT_SECURITY:=0
 PKG_FIXUP:=autoreconf
+<<<<<<< HEAD
 PKG_EXTMOD_SUBDIRS:=src
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -40,9 +47,12 @@ define KernelPackage/ltq-tapi/config
 	source "$(SOURCE)/Config.in"
 endef
 
+<<<<<<< HEAD
 MAKE_FLAGS += \
 	$(KERNEL_MAKE_FLAGS)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CONFIGURE_ARGS += \
 	ARCH=$(LINUX_KARCH) \
 	--enable-linux-26 \

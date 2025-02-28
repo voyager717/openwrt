@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openssl
+<<<<<<< HEAD
 PKG_VERSION:=3.0.16
 PKG_RELEASE:=1
 PKG_BUILD_FLAGS:=no-mips16 gc-sections no-lto
@@ -24,6 +25,29 @@ PKG_SOURCE_URL:= \
 PKG_HASH:=57e03c50feab5d31b152af2b764f10379aecd8ee92f16c985983ce4a99f7ef86
 
 PKG_LICENSE:=Apache-2.0
+=======
+PKG_BASE:=1.1.1
+PKG_BUGFIX:=q
+PKG_VERSION:=$(PKG_BASE)$(PKG_BUGFIX)
+PKG_RELEASE:=1
+PKG_USE_MIPS16:=0
+ENGINES_DIR=engines-1.1
+
+PKG_BUILD_PARALLEL:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:= \
+	http://www.openssl.org/source/ \
+	http://www.openssl.org/source/old/$(PKG_BASE)/ \
+	http://ftp.fi.muni.cz/pub/openssl/source/ \
+	http://ftp.fi.muni.cz/pub/openssl/source/old/$(PKG_BASE)/ \
+	ftp://ftp.pca.dfn.de/pub/tools/net/openssl/source/ \
+	ftp://ftp.pca.dfn.de/pub/tools/net/openssl/source/old/$(PKG_BASE)/
+
+PKG_HASH:=d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca
+
+PKG_LICENSE:=OpenSSL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE_FILES:=LICENSE
 PKG_MAINTAINER:=Eneas U de Queiroz <cotequeiroz@gmail.com>
 PKG_CPE_ID:=cpe:/a:openssl:openssl
@@ -36,7 +60,10 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_NO_DEPRECATED \
 	CONFIG_OPENSSL_OPTIMIZE_SPEED \
 	CONFIG_OPENSSL_PREFER_CHACHA_OVER_GCM \
+<<<<<<< HEAD
 	CONFIG_OPENSSL_SMALL_FOOTPRINT \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_OPENSSL_WITH_ARIA \
 	CONFIG_OPENSSL_WITH_ASM \
 	CONFIG_OPENSSL_WITH_ASYNC \
@@ -48,6 +75,10 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_WITH_DTLS \
 	CONFIG_OPENSSL_WITH_EC2M \
 	CONFIG_OPENSSL_WITH_ERROR_MESSAGES \
+<<<<<<< HEAD
+=======
+	CONFIG_OPENSSL_WITH_GOST \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_OPENSSL_WITH_IDEA \
 	CONFIG_OPENSSL_WITH_MDC2 \
 	CONFIG_OPENSSL_WITH_NPN \
@@ -61,7 +92,10 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_WITH_WHIRLPOOL
 
 include $(INCLUDE_DIR)/package.mk
+<<<<<<< HEAD
 include $(INCLUDE_DIR)/openssl-module.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifneq ($(CONFIG_CCACHE),)
 HOSTCC=$(HOSTCC_NOCACHE)
@@ -70,7 +104,11 @@ endif
 
 define Package/openssl/Default
   TITLE:=Open source SSL toolkit
+<<<<<<< HEAD
   URL:=https://www.openssl.org/
+=======
+  URL:=http://www.openssl.org/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SECTION:=libs
   CATEGORY:=Libraries
 endef
@@ -92,10 +130,16 @@ $(call Package/openssl/Default)
   DEPENDS:=+OPENSSL_WITH_COMPRESSION:zlib \
 	   +OPENSSL_ENGINE_BUILTIN_AFALG:kmod-crypto-user \
 	   +OPENSSL_ENGINE_BUILTIN_DEVCRYPTO:kmod-cryptodev \
+<<<<<<< HEAD
 	   +OPENSSL_ENGINE_BUILTIN_PADLOCK:kmod-crypto-hw-padlock \
 	   +(arm||armeb||mips||mipsel||powerpc||arc):libatomic
   TITLE+= (libraries)
   ABI_VERSION:=$(firstword $(subst .,$(space),$(PKG_VERSION)))
+=======
+	   +OPENSSL_ENGINE_BUILTIN_PADLOCK:kmod-crypto-hw-padlock
+  TITLE+= (libraries)
+  ABI_VERSION:=1.1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   MENU:=1
 endef
 
@@ -126,8 +170,11 @@ endef
 
 define Package/libopenssl-conf/conffiles
 /etc/ssl/openssl.cnf
+<<<<<<< HEAD
 $(if $(CONFIG_OPENSSL_ENGINE_BUILTIN_DEVCRYPTO),/etc/ssl/modules.cnf.d/devcrypto.cnf)
 $(if $(CONFIG_OPENSSL_ENGINE_BUILTIN_PADLOCK),/etc/ssl/modules.cnf.d/padlock.cnf)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libopenssl-conf/description
@@ -135,6 +182,7 @@ $(call Package/openssl/Default/description)
 This package installs the OpenSSL configuration file /etc/ssl/openssl.cnf.
 endef
 
+<<<<<<< HEAD
 ifneq ($(CONFIG_OPENSSL_ENGINE_BUILTIN_PADLOCK)$(CONFIG_OPENSSL_ENGINE_BUILTIN_DEVCRYPTO),)
 define Package/libopenssl-conf/postinst
 #!/bin/sh
@@ -173,32 +221,60 @@ define Package/libopenssl-afalg
   TITLE:=AFALG hardware acceleration engine
   DEPENDS += @KERNEL_AIO +PACKAGE_libopenssl-afalg:kmod-crypto-user \
 	     @!OPENSSL_ENGINE_BUILTIN
+=======
+define Package/libopenssl-afalg
+  $(call Package/openssl/Default)
+  SUBMENU:=SSL
+  TITLE:=AFALG hardware acceleration engine
+  DEPENDS:=libopenssl @OPENSSL_ENGINE @KERNEL_AIO \
+	   +PACKAGE_libopenssl-afalg:kmod-crypto-user +libopenssl-conf @!OPENSSL_ENGINE_BUILTIN
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libopenssl-afalg/description
 This package adds an engine that enables hardware acceleration
 through the AF_ALG kernel interface.
+<<<<<<< HEAD
 See https://www.openssl.org/docs/man3.0/man5/config.html#Engine-Configuration
+=======
+To use it, you need to configure the engine in /etc/ssl/openssl.cnf
+See https://www.openssl.org/docs/man1.1.1/man5/config.html#Engine-Configuration-Module
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 and https://openwrt.org/docs/techref/hardware/cryptographic.hardware.accelerators
 The engine_id is "afalg"
 endef
 
+<<<<<<< HEAD
 $(eval $(call Package/openssl/add-engine,devcrypto))
 define Package/libopenssl-devcrypto
   $(call Package/openssl/Default)
   $(call Package/openssl/engine/Default)
   TITLE:=/dev/crypto hardware acceleration engine
   DEPENDS += +PACKAGE_libopenssl-devcrypto:kmod-cryptodev @!OPENSSL_ENGINE_BUILTIN
+=======
+define Package/libopenssl-devcrypto
+  $(call Package/openssl/Default)
+  SUBMENU:=SSL
+  TITLE:=/dev/crypto hardware acceleration engine
+  DEPENDS:=libopenssl @OPENSSL_ENGINE +PACKAGE_libopenssl-devcrypto:kmod-cryptodev +libopenssl-conf \
+	   @!OPENSSL_ENGINE_BUILTIN
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libopenssl-devcrypto/description
 This package adds an engine that enables hardware acceleration
 through the /dev/crypto kernel interface.
+<<<<<<< HEAD
 See https://www.openssl.org/docs/man3.0/man5/config.html#Engine-Configuration
+=======
+To use it, you need to configure the engine in /etc/ssl/openssl.cnf
+See https://www.openssl.org/docs/man1.1.1/man5/config.html#Engine-Configuration-Module
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 and https://openwrt.org/docs/techref/hardware/cryptographic.hardware.accelerators
 The engine_id is "devcrypto"
 endef
 
+<<<<<<< HEAD
 $(eval $(call Package/openssl/add-engine,padlock))
 define Package/libopenssl-padlock
   $(call Package/openssl/Default)
@@ -206,16 +282,33 @@ define Package/libopenssl-padlock
   TITLE:=VIA Padlock hardware acceleration engine
   DEPENDS += @TARGET_x86 +PACKAGE_libopenssl-padlock:kmod-crypto-hw-padlock \
 	     @!OPENSSL_ENGINE_BUILTIN
+=======
+define Package/libopenssl-padlock
+  $(call Package/openssl/Default)
+  SUBMENU:=SSL
+  TITLE:=VIA Padlock hardware acceleration engine
+  DEPENDS:=libopenssl @OPENSSL_ENGINE @TARGET_x86 +PACKAGE_libopenssl-padlock:kmod-crypto-hw-padlock \
+	   +libopenssl-conf @!OPENSSL_ENGINE_BUILTIN
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libopenssl-padlock/description
 This package adds an engine that enables VIA Padlock hardware acceleration.
+<<<<<<< HEAD
 See https://www.openssl.org/docs/man3.0/man5/config.html#Engine-Configuration
+=======
+To use it, you need to configure it in /etc/ssl/openssl.cnf.
+See https://www.openssl.org/docs/man1.1.1/man5/config.html#Engine-Configuration-Module
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 and https://openwrt.org/docs/techref/hardware/cryptographic.hardware.accelerators
 The engine_id is "padlock"
 endef
 
+<<<<<<< HEAD
 OPENSSL_OPTIONS:= shared no-tests
+=======
+OPENSSL_OPTIONS:= shared
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifndef CONFIG_OPENSSL_WITH_BLAKE2
   OPENSSL_OPTIONS += no-blake2
@@ -287,9 +380,13 @@ endif
 
 ifeq ($(CONFIG_OPENSSL_OPTIMIZE_SPEED),y)
   TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS)) -O3
+<<<<<<< HEAD
 endif
 
 ifeq ($(CONFIG_OPENSSL_SMALL_FOOTPRINT),y)
+=======
+else
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   OPENSSL_OPTIONS += -DOPENSSL_SMALL_FOOTPRINT
 endif
 
@@ -303,7 +400,11 @@ ifdef CONFIG_OPENSSL_ENGINE
       OPENSSL_OPTIONS += enable-devcryptoeng
     endif
     ifndef CONFIG_OPENSSL_ENGINE_BUILTIN_PADLOCK
+<<<<<<< HEAD
       OPENSSL_OPTIONS += no-padlockeng
+=======
+      OPENSSL_OPTIONS += no-hw-padlock
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     endif
   else
     ifdef CONFIG_PACKAGE_libopenssl-devcrypto
@@ -313,13 +414,24 @@ ifdef CONFIG_OPENSSL_ENGINE
       OPENSSL_OPTIONS += no-afalgeng
     endif
     ifndef CONFIG_PACKAGE_libopenssl-padlock
+<<<<<<< HEAD
       OPENSSL_OPTIONS += no-padlockeng
+=======
+      OPENSSL_OPTIONS += no-hw-padlock
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     endif
   endif
 else
   OPENSSL_OPTIONS += no-engine
 endif
 
+<<<<<<< HEAD
+=======
+ifndef CONFIG_OPENSSL_WITH_GOST
+  OPENSSL_OPTIONS += no-gost
+endif
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifndef CONFIG_OPENSSL_WITH_DTLS
   OPENSSL_OPTIONS += no-dtls
 endif
@@ -354,7 +466,11 @@ endif
 
 OPENSSL_TARGET:=linux-$(call qstrip,$(CONFIG_ARCH))-openwrt
 
+<<<<<<< HEAD
 STAMP_CONFIGURED := $(STAMP_CONFIGURED)_$(shell echo $(OPENSSL_OPTIONS) | $(MKHASH) md5)
+=======
+STAMP_CONFIGURED := $(STAMP_CONFIGURED)_$(shell echo $(OPENSSL_OPTIONS) | mkhash md5)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Configure
 	(cd $(PKG_BUILD_DIR); \
@@ -363,7 +479,10 @@ define Build/Configure
 			--libdir=lib \
 			--openssldir=/etc/ssl \
 			--cross-compile-prefix="$(TARGET_CROSS)" \
+<<<<<<< HEAD
 			$(TARGET_CFLAGS) \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			$(TARGET_CPPFLAGS) \
 			$(TARGET_LDFLAGS) \
 			$(OPENSSL_OPTIONS) && \
@@ -371,7 +490,12 @@ define Build/Configure
 	)
 endef
 
+<<<<<<< HEAD
 TARGET_CFLAGS += $(FPIC)
+=======
+TARGET_CFLAGS += $(FPIC) -ffunction-sections -fdata-sections
+TARGET_LDFLAGS += -Wl,--gc-sections
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Compile
 	+$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
@@ -408,6 +532,7 @@ define Package/libopenssl/install
 endef
 
 define Package/libopenssl-conf/install
+<<<<<<< HEAD
 	$(INSTALL_DIR) $(1)/etc/ssl/modules.cnf.d $(1)/etc/config $(1)/etc/init.d
 	$(CP) $(PKG_INSTALL_DIR)/etc/ssl/openssl.cnf $(1)/etc/ssl/
 	$(INSTALL_BIN) ./files/openssl.init $(1)/etc/init.d/openssl
@@ -421,6 +546,10 @@ define Package/libopenssl-conf/install
 	$(if $(CONFIG_OPENSSL_ENGINE_BUILTIN_PADLOCK),
 		$(CP) ./files/padlock.cnf $(1)/etc/ssl/modules.cnf.d/
 		echo -e "\nconfig engine 'padlock'\n\toption enabled '1'\n\toption builtin '1'" >> $(1)/etc/config/openssl)
+=======
+	$(INSTALL_DIR) $(1)/etc/ssl
+	$(CP) $(PKG_INSTALL_DIR)/etc/ssl/openssl.cnf $(1)/etc/ssl/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/openssl-util/install
@@ -428,10 +557,31 @@ define Package/openssl-util/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/openssl $(1)/usr/bin/
 endef
 
+<<<<<<< HEAD
+=======
+define Package/libopenssl-afalg/install
+	$(INSTALL_DIR) $(1)/usr/lib/$(ENGINES_DIR)
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/lib/$(ENGINES_DIR)/afalg.so $(1)/usr/lib/$(ENGINES_DIR)
+endef
+
+define Package/libopenssl-devcrypto/install
+	$(INSTALL_DIR) $(1)/usr/lib/$(ENGINES_DIR)
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/lib/$(ENGINES_DIR)/devcrypto.so $(1)/usr/lib/$(ENGINES_DIR)
+endef
+
+define Package/libopenssl-padlock/install
+	$(INSTALL_DIR) $(1)/usr/lib/$(ENGINES_DIR)
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/lib/$(ENGINES_DIR)/*padlock.so $(1)/usr/lib/$(ENGINES_DIR)
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,libopenssl))
 $(eval $(call BuildPackage,libopenssl-conf))
 $(eval $(call BuildPackage,libopenssl-afalg))
 $(eval $(call BuildPackage,libopenssl-devcrypto))
+<<<<<<< HEAD
 $(eval $(call BuildPackage,libopenssl-legacy))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,libopenssl-padlock))
 $(eval $(call BuildPackage,openssl-util))

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "comfast,cf-ew72", "qca,qca9531";
@@ -24,20 +27,32 @@
 		pinctrl-0 = <&jtag_disable_pins>;
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		led_wan: wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -66,6 +81,7 @@
 
 &pcie0 {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -73,6 +89,8 @@
 		nvmem-cells = <&precal_art_5000>, <&macaddr_art_0 2>;
 		nvmem-cell-names = "pre-calibration", "mac-address";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -94,6 +112,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@10000 {
 				label = "art";
 				reg = <0x010000 0x010000>;
@@ -118,6 +137,12 @@
 						reg = <0x5000 0x2f20>;
 					};
 				};
+=======
+			art: partition@10000 {
+				label = "art";
+				reg = <0x010000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -140,6 +165,7 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 1>;
 	nvmem-cell-names = "mac-address";
 };
@@ -147,11 +173,25 @@
 &eth1 {
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+	mtd-mac-address-increment = <1>;
+};
+
+&eth1 {
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 3>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x0>;
+	mtd-mac-address-increment = <3>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

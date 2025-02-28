@@ -83,6 +83,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x030000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -97,6 +98,8 @@
 						reg = <0x2e018 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@30000 {
@@ -105,6 +108,7 @@
 				compatible = "denx,uimage";
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -119,6 +123,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -129,6 +139,7 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_2e010>;
 	nvmem-cell-names = "mac-address";
 };
@@ -136,13 +147,24 @@
 &eth1 {
 	nvmem-cells = <&macaddr_uboot_2e018>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x2e010>;
+};
+
+&eth1 {
+	mtd-mac-address = <&uboot 0x2e018>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {

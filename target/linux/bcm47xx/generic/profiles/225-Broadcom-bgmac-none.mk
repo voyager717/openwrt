@@ -4,7 +4,11 @@
 
 define Profile/Broadcom-bgmac-none
   NAME:=Broadcom SoC, bgmac Ethernet, No WiFi
+<<<<<<< HEAD
   PACKAGES:=-wpad-basic-mbedtls kmod-bgmac
+=======
+  PACKAGES:=-wpad-basic-wolfssl kmod-bgmac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Profile/Broadcom-bgmac-none/Description

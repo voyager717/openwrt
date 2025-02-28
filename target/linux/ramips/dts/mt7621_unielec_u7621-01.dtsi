@@ -4,11 +4,24 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "unielec,u7621-01", "mediatek,mt7621-soc";
 
+<<<<<<< HEAD
+=======
+	aliases {
+		led-boot = &led_status;
+		led-failsafe = &led_status;
+		led-running = &led_status;
+		led-upgrade = &led_status;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	gpio-export {
 		compatible = "gpio-export";
 		#size-cells = <0>;
@@ -29,12 +42,25 @@
 			linux,code = <KEY_RESTART>;
 		};
 	};
+<<<<<<< HEAD
+=======
+
+	leds {
+		compatible = "gpio-leds";
+
+		led_status: status {
+			label = "green:status";
+			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &pcie1 { // MT7603EN
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
@@ -44,10 +70,31 @@
 
 		led {
 			led-active-low;
+=======
+&pcie0 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0000 0 0 0 0>;
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+		ieee80211-freq-limit = <2400000 2500000>;
+	};
+};
+
+&pcie1 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0000 0 0 0 0>;
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+		ieee80211-freq-limit = <5000000 6000000>;
+
+		led {
+			led-sources = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
 
+<<<<<<< HEAD
 &pcie2 { // MT7612E
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
@@ -66,10 +113,24 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+&gmac0 {
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0xe000>;
+			mtd-mac-address-increment = <1>;
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan1";

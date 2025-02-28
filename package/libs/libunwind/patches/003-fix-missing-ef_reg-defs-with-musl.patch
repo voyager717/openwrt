@@ -1,6 +1,10 @@
 --- a/include/libunwind-mips.h
 +++ b/include/libunwind-mips.h
+<<<<<<< HEAD
 @@ -121,6 +121,42 @@ typedef enum
+=======
+@@ -114,6 +114,42 @@ typedef enum
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
    }
  mips_regnum_t;
  

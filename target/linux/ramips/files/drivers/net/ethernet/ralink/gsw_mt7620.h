@@ -12,8 +12,11 @@
  *   Copyright (C) 2013-2015 Michael Lee <igvtee@gmail.com>
  */
 
+<<<<<<< HEAD
 #include <linux/reset.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifndef _RALINK_GSW_MT7620_H__
 #define _RALINK_GSW_MT7620_H__
 
@@ -92,7 +95,10 @@ enum {
 
 struct mt7620_gsw {
 	struct device		*dev;
+<<<<<<< HEAD
 	struct reset_control	*rst_ephy;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	void __iomem		*base;
 	int			irq;
 	bool			ephy_disable;

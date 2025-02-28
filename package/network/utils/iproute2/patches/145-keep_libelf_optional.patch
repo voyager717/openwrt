@@ -1,6 +1,10 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -217,7 +217,7 @@ EOF
+=======
+@@ -235,7 +235,7 @@ EOF
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  check_elf()
  {

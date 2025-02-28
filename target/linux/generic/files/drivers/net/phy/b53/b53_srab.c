@@ -342,7 +342,11 @@ static int b53_srab_probe(struct platform_device *pdev)
 	if (!pdata)
 		return -EINVAL;
 
+<<<<<<< HEAD
 	dev = b53_swconfig_switch_alloc(&pdev->dev, &b53_srab_ops, pdata->regs);
+=======
+	dev = b53_switch_alloc(&pdev->dev, &b53_srab_ops, pdata->regs);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!dev)
 		return -ENOMEM;
 
@@ -351,7 +355,11 @@ static int b53_srab_probe(struct platform_device *pdev)
 
 	platform_set_drvdata(pdev, dev);
 
+<<<<<<< HEAD
 	return b53_swconfig_switch_register(dev);
+=======
+	return b53_switch_register(dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static int b53_srab_remove(struct platform_device *pdev)

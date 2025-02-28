@@ -263,7 +263,11 @@ extern void ase_fw_ver(unsigned int *major, unsigned int *minor)
     *minor = FW_VER_ID->minor;
 }
 
+<<<<<<< HEAD
 int ase_init(struct platform_device *pdev)
+=======
+void ase_init(struct platform_device *pdev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     init_pmu();
 
@@ -276,8 +280,11 @@ int ase_init(struct platform_device *pdev)
     init_atm_tc();
 
     clear_share_buffer();
+<<<<<<< HEAD
 
     return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ase_shutdown(void)

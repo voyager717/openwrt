@@ -8,6 +8,7 @@
 
 #include "dialog.h"
 
+<<<<<<< HEAD
 static int hscroll;
 static int begin_reached, end_reached, page_length;
 static const char *buf, *page;
@@ -126,11 +127,25 @@ static void print_position(WINDOW *win)
 	wmove(win, getmaxy(win) - 3, getmaxx(win) - 9);
 	wprintw(win, "(%3d%%)", percent);
 }
+=======
+static void back_lines(int n);
+static void print_page(WINDOW *win, int height, int width, update_text_fn
+		       update_text, void *data);
+static void print_line(WINDOW *win, int row, int width);
+static char *get_line(void);
+static void print_position(WINDOW * win);
+
+static int hscroll;
+static int begin_reached, end_reached, page_length;
+static char *buf;
+static char *page;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*
  * refresh window content
  */
 static void refresh_text_box(WINDOW *dialog, WINDOW *box, int boxh, int boxw,
+<<<<<<< HEAD
 			     int cur_y, int cur_x)
 {
 	start = page - buf;
@@ -143,14 +158,34 @@ static void refresh_text_box(WINDOW *dialog, WINDOW *box, int boxh, int boxw,
 	end = page - buf;
 }
 
+=======
+			     int cur_y, int cur_x, update_text_fn update_text,
+			     void *data)
+{
+	print_page(box, boxh, boxw, update_text, data);
+	print_position(dialog);
+	wmove(dialog, cur_y, cur_x);	/* Restore cursor position */
+	wrefresh(dialog);
+}
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*
  * Display text from a file in a dialog box.
  *
  * keys is a null-terminated array
+<<<<<<< HEAD
  */
 int dialog_textbox(const char *title, const char *tbuf, int initial_height,
 		   int initial_width, int *_vscroll, int *_hscroll,
 		   int (*extra_key_cb)(int, size_t, size_t, void *), void *data)
+=======
+ * update_text() may not add or remove any '\n' or '\0' in tbuf
+ */
+int dialog_textbox(const char *title, char *tbuf, int initial_height,
+		   int initial_width, int *keys, int *_vscroll, int *_hscroll,
+		   update_text_fn update_text, void *data)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	int i, x, y, cur_x, cur_y, key = 0;
 	int height, width, boxh, boxw;
@@ -230,7 +265,12 @@ do_resize:
 
 	/* Print first page of text */
 	attr_clear(box, boxh, boxw, dlg.dialog.atr);
+<<<<<<< HEAD
 	refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+	refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x, update_text,
+			 data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	while (!done) {
 		key = wgetch(dialog);
@@ -249,7 +289,12 @@ do_resize:
 				begin_reached = 1;
 				page = buf;
 				refresh_text_box(dialog, box, boxh, boxw,
+<<<<<<< HEAD
 						 cur_y, cur_x);
+=======
+						 cur_y, cur_x, update_text,
+						 data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			}
 			break;
 		case 'G':	/* Last page */
@@ -259,7 +304,12 @@ do_resize:
 			/* point to last char in buf */
 			page = buf + strlen(buf);
 			back_lines(boxh);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case 'K':	/* Previous line */
 		case 'k':
@@ -268,7 +318,12 @@ do_resize:
 				break;
 
 			back_lines(page_length + 1);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case 'B':	/* Previous page */
 		case 'b':
@@ -277,7 +332,12 @@ do_resize:
 			if (begin_reached)
 				break;
 			back_lines(page_length + boxh);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case 'J':	/* Next line */
 		case 'j':
@@ -286,7 +346,12 @@ do_resize:
 				break;
 
 			back_lines(page_length - 1);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case KEY_NPAGE:	/* Next page */
 		case ' ':
@@ -295,7 +360,12 @@ do_resize:
 				break;
 
 			begin_reached = 0;
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case '0':	/* Beginning of line */
 		case 'H':	/* Scroll left */
@@ -310,7 +380,12 @@ do_resize:
 				hscroll--;
 			/* Reprint current page to scroll horizontally */
 			back_lines(page_length);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case 'L':	/* Scroll right */
 		case 'l':
@@ -320,7 +395,12 @@ do_resize:
 			hscroll++;
 			/* Reprint current page to scroll horizontally */
 			back_lines(page_length);
+<<<<<<< HEAD
 			refresh_text_box(dialog, box, boxh, boxw, cur_y, cur_x);
+=======
+			refresh_text_box(dialog, box, boxh, boxw, cur_y,
+					 cur_x, update_text, data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case KEY_ESC:
 			if (on_key_esc(dialog) == KEY_ESC)
@@ -333,9 +413,17 @@ do_resize:
 			on_key_resize();
 			goto do_resize;
 		default:
+<<<<<<< HEAD
 			if (extra_key_cb && extra_key_cb(key, start, end, data)) {
 				done = true;
 				break;
+=======
+			for (i = 0; keys[i]; i++) {
+				if (key == keys[i]) {
+					done = true;
+					break;
+				}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			}
 		}
 	}
@@ -356,3 +444,140 @@ do_resize:
 		*_hscroll = hscroll;
 	return key;
 }
+<<<<<<< HEAD
+=======
+
+/*
+ * Go back 'n' lines in text. Called by dialog_textbox().
+ * 'page' will be updated to point to the desired line in 'buf'.
+ */
+static void back_lines(int n)
+{
+	int i;
+
+	begin_reached = 0;
+	/* Go back 'n' lines */
+	for (i = 0; i < n; i++) {
+		if (*page == '\0') {
+			if (end_reached) {
+				end_reached = 0;
+				continue;
+			}
+		}
+		if (page == buf) {
+			begin_reached = 1;
+			return;
+		}
+		page--;
+		do {
+			if (page == buf) {
+				begin_reached = 1;
+				return;
+			}
+			page--;
+		} while (*page != '\n');
+		page++;
+	}
+}
+
+/*
+ * Print a new page of text.
+ */
+static void print_page(WINDOW *win, int height, int width, update_text_fn
+		       update_text, void *data)
+{
+	int i, passed_end = 0;
+
+	if (update_text) {
+		char *end;
+
+		for (i = 0; i < height; i++)
+			get_line();
+		end = page;
+		back_lines(height);
+		update_text(buf, page - buf, end - buf, data);
+	}
+
+	page_length = 0;
+	for (i = 0; i < height; i++) {
+		print_line(win, i, width);
+		if (!passed_end)
+			page_length++;
+		if (end_reached && !passed_end)
+			passed_end = 1;
+	}
+	wnoutrefresh(win);
+}
+
+/*
+ * Print a new line of text.
+ */
+static void print_line(WINDOW * win, int row, int width)
+{
+	char *line;
+
+	line = get_line();
+	line += MIN(strlen(line), hscroll);	/* Scroll horizontally */
+	wmove(win, row, 0);	/* move cursor to correct line */
+	waddch(win, ' ');
+	waddnstr(win, line, MIN(strlen(line), width - 2));
+
+	/* Clear 'residue' of previous line */
+#if OLD_NCURSES
+	{
+		int x = getcurx(win);
+		int i;
+		for (i = 0; i < width - x; i++)
+			waddch(win, ' ');
+	}
+#else
+	wclrtoeol(win);
+#endif
+}
+
+/*
+ * Return current line of text. Called by dialog_textbox() and print_line().
+ * 'page' should point to start of current line before calling, and will be
+ * updated to point to start of next line.
+ */
+static char *get_line(void)
+{
+	int i = 0;
+	static char line[MAX_LEN + 1];
+
+	end_reached = 0;
+	while (*page != '\n') {
+		if (*page == '\0') {
+			end_reached = 1;
+			break;
+		} else if (i < MAX_LEN)
+			line[i++] = *(page++);
+		else {
+			/* Truncate lines longer than MAX_LEN characters */
+			if (i == MAX_LEN)
+				line[i++] = '\0';
+			page++;
+		}
+	}
+	if (i <= MAX_LEN)
+		line[i] = '\0';
+	if (!end_reached)
+		page++;		/* move past '\n' */
+
+	return line;
+}
+
+/*
+ * Print current position
+ */
+static void print_position(WINDOW * win)
+{
+	int percent;
+
+	wattrset(win, dlg.position_indicator.atr);
+	wbkgdset(win, dlg.position_indicator.atr & A_COLOR);
+	percent = (page - buf) * 100 / strlen(buf);
+	wmove(win, getmaxy(win) - 3, getmaxx(win) - 9);
+	wprintw(win, "(%3d%%)", percent);
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

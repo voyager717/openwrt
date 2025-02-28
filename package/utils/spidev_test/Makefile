@@ -9,8 +9,12 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=spidev-test
+<<<<<<< HEAD
 PKG_VERSION:=$(LINUX_VERSION)
 PKG_RELEASE:=1
+=======
+PKG_RELEASE:=$(LINUX_VERSION)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_DIR:=$(LINUX_DIR)/tools/spi-$(TARGET_DIR_NAME)
 PKG_BUILD_PARALLEL:=1
 
@@ -21,7 +25,11 @@ define Package/spidev-test
   CATEGORY:=Utilities
   DEPENDS:=+kmod-spi-dev
   TITLE:=SPI testing utility
+<<<<<<< HEAD
   VERSION:=$(LINUX_VERSION)-r$(PKG_RELEASE)
+=======
+  VERSION:=$(LINUX_VERSION)-$(PKG_RELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   URL:=http://www.kernel.org
 endef
 

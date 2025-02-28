@@ -8,6 +8,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
 };
@@ -15,6 +16,13 @@
 &gmac1 {
 	nvmem-cells = <&macaddr_factory_e006 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0xe000>;
+};
+
+&wan {
+	mtd-mac-address = <&factory 0xe006>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &partitions {
@@ -50,6 +58,7 @@
 };
 
 &wifi {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e006 1>;
 	nvmem-cell-names = "eeprom", "mac-address";
 };
@@ -70,4 +79,8 @@
 			#nvmem-cell-cells = <1>;
 		};
 	};
+=======
+	mtd-mac-address = <&factory 0xe006>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

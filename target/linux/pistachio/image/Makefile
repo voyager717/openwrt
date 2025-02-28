@@ -5,7 +5,11 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+<<<<<<< HEAD
 KERNEL_LOADADDR := 0x80100000
+=======
+KERNEL_LOADADDR := 0x80400000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/Default
   PROFILES := Default
@@ -15,7 +19,10 @@ define Device/Default
   KERNEL_SUFFIX := -kernel.itb
   KERNEL_INSTALL := 1
   KERNEL_IN_UBI := 1
+<<<<<<< HEAD
   DEVICE_DTS_CONFIG := config@1
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := factory.ubi sysupgrade.tar
   IMAGE/factory.ubi := append-ubi
   IMAGE/sysupgrade.tar := sysupgrade-tar

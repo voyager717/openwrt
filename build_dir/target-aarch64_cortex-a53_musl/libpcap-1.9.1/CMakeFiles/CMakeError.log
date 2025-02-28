@@ -1,0 +1,464 @@
+Determining if the include file bitypes.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_13abc/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_13abc.dir/build.make CMakeFiles/cmTC_13abc.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_13abc.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_13abc.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: bitypes.h: No such file or directory
+ #include <bitypes.h>
+          ^~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_13abc.dir/build.make:85: CMakeFiles/cmTC_13abc.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_13abc/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/ioccom.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_a13e1/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_a13e1.dir/build.make CMakeFiles/cmTC_a13e1.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a13e1.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_a13e1.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: sys/ioccom.h: No such file or directory
+ #include <sys/ioccom.h>
+          ^~~~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_a13e1.dir/build.make:85: CMakeFiles/cmTC_a13e1.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_a13e1/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/sockio.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_e7c1e/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_e7c1e.dir/build.make CMakeFiles/cmTC_e7c1e.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e7c1e.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_e7c1e.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: sys/sockio.h: No such file or directory
+ #include <sys/sockio.h>
+          ^~~~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_e7c1e.dir/build.make:85: CMakeFiles/cmTC_e7c1e.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_e7c1e/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/types.h;sys/socket.h;net/if.h;net/pfvar.h exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_780a8/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_780a8.dir/build.make CMakeFiles/cmTC_780a8.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_780a8.dir/HAVE_NET_PFVAR_H.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_780a8.dir/HAVE_NET_PFVAR_H.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CheckIncludeFiles/HAVE_NET_PFVAR_H.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CheckIncludeFiles/HAVE_NET_PFVAR_H.c:5:10: fatal error: net/pfvar.h: No such file or directory
+ #include <net/pfvar.h>
+          ^~~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_780a8.dir/build.make:85: CMakeFiles/cmTC_780a8.dir/HAVE_NET_PFVAR_H.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_780a8/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <net/if.h>
+#include <net/pfvar.h>
+
+
+int main(void){return 0;}
+
+Performing C SOURCE FILE Test HAVE_GNU_STRERROR_R failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_571ea/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_571ea.dir/build.make CMakeFiles/cmTC_571ea.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_571ea.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DHAVE_GNU_STRERROR_R  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_571ea.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c:5:14: error: conflicting types for 'strerror_r'
+ extern char *strerror_r(int, char *, size_t);
+              ^~~~~~~~~~
+In file included from /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c:2:
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/string.h:64:5: note: previous declaration of 'strerror_r' was here
+ int strerror_r (int, char *, size_t);
+     ^~~~~~~~~~
+gmake[5]: *** [CMakeFiles/cmTC_571ea.dir/build.make:85: CMakeFiles/cmTC_571ea.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_571ea/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+#define _GNU_SOURCE
+#include <string.h>
+
+/* Define it GNU-style; that will cause an error if it's not GNU-style */
+extern char *strerror_r(int, char *, size_t);
+
+int
+main(void)
+{
+	return 0;
+}
+
+Determining if the function putmsg exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_3aa26/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_3aa26.dir/build.make CMakeFiles/cmTC_3aa26.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_3aa26.dir/CheckFunctionExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DCHECK_FUNCTION_EXISTS=putmsg -o CMakeFiles/cmTC_3aa26.dir/CheckFunctionExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host/share/cmake-3.19/Modules/CheckFunctionExists.c
+Linking C executable cmTC_3aa26
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3aa26.dir/link.txt --verbose=1
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DCHECK_FUNCTION_EXISTS=putmsg -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/usr/lib -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib -DPIC -fPIC -specs=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/include/hardened-ld-pie.specs -znow -zrelro  -rdynamic CMakeFiles/cmTC_3aa26.dir/CheckFunctionExists.c.o -o cmTC_3aa26 
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib/gcc/aarch64-openwrt-linux-musl/8.4.0/../../../../aarch64-openwrt-linux-musl/bin/ld: CMakeFiles/cmTC_3aa26.dir/CheckFunctionExists.c.o: in function `main':
+CheckFunctionExists.c:(.text.startup+0x10): undefined reference to `putmsg'
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib/gcc/aarch64-openwrt-linux-musl/8.4.0/../../../../aarch64-openwrt-linux-musl/bin/ld: CheckFunctionExists.c:(.text.startup+0x18): undefined reference to `putmsg'
+collect2: error: ld returned 1 exit status
+gmake[5]: *** [CMakeFiles/cmTC_3aa26.dir/build.make:106: cmTC_3aa26] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_3aa26/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function putmsg exists in the str failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_818a1/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_818a1.dir/build.make CMakeFiles/cmTC_818a1.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_818a1.dir/CheckFunctionExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DCHECK_FUNCTION_EXISTS=putmsg -o CMakeFiles/cmTC_818a1.dir/CheckFunctionExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host/share/cmake-3.19/Modules/CheckFunctionExists.c
+Linking C executable cmTC_818a1
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host/bin/cmake -E cmake_link_script CMakeFiles/cmTC_818a1.dir/link.txt --verbose=1
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DCHECK_FUNCTION_EXISTS=putmsg -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/usr/lib -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib -DPIC -fPIC -specs=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/include/hardened-ld-pie.specs -znow -zrelro  -rdynamic CMakeFiles/cmTC_818a1.dir/CheckFunctionExists.c.o -o cmTC_818a1  -lstr 
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib/gcc/aarch64-openwrt-linux-musl/8.4.0/../../../../aarch64-openwrt-linux-musl/bin/ld: cannot find -lstr
+collect2: error: ld returned 1 exit status
+gmake[5]: *** [CMakeFiles/cmTC_818a1.dir/build.make:106: cmTC_818a1] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_818a1/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the getnetbyname_r exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_f24b5/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_f24b5.dir/build.make CMakeFiles/cmTC_f24b5.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f24b5.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_f24b5.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'getnetbyname_r' undeclared (first use in this function); did you mean 'getnetbyname'?
+   return ((int*)(&getnetbyname_r))[argc];
+                   ^~~~~~~~~~~~~~
+                   getnetbyname
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_f24b5.dir/build.make:85: CMakeFiles/cmTC_f24b5.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_f24b5/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <netdb.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getnetbyname_r
+  return ((int*)(&getnetbyname_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the getprotobyname_r exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_448c7/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_448c7.dir/build.make CMakeFiles/cmTC_448c7.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_448c7.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_448c7.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'getprotobyname_r' undeclared (first use in this function); did you mean 'getprotobyname'?
+   return ((int*)(&getprotobyname_r))[argc];
+                   ^~~~~~~~~~~~~~~~
+                   getprotobyname
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_448c7.dir/build.make:85: CMakeFiles/cmTC_448c7.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_448c7/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <netdb.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef getprotobyname_r
+  return ((int*)(&getprotobyname_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Performing C SOURCE FILE Test HAVE_STRUCT_SOCKADDR_SA_LEN failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_aceb5/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_aceb5.dir/build.make CMakeFiles/cmTC_aceb5.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_aceb5.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DHAVE_STRUCT_SOCKADDR_SA_LEN  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_aceb5.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/src.c:6:38: error: 'struct sockaddr' has no member named 'sa_len'
+   (void)sizeof(((struct sockaddr *)0)->sa_len);
+                                      ^~
+gmake[5]: *** [CMakeFiles/cmTC_aceb5.dir/build.make:85: CMakeFiles/cmTC_aceb5.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_aceb5/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+#include <sys/socket.h>
+
+int main()
+{
+  (void)sizeof(((struct sockaddr *)0)->sa_len);
+  return 0;
+}
+
+Determining if the ffs exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_bfcb8/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_bfcb8.dir/build.make CMakeFiles/cmTC_bfcb8.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_bfcb8.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_bfcb8.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'ffs' undeclared (first use in this function)
+   return ((int*)(&ffs))[argc];
+                   ^~~
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_bfcb8.dir/build.make:85: CMakeFiles/cmTC_bfcb8.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_bfcb8/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <strings.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef ffs
+  return ((int*)(&ffs))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if the ether_hostton exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_515a1/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_515a1.dir/build.make CMakeFiles/cmTC_515a1.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_515a1.dir/CheckSymbolExists.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_515a1.dir/CheckSymbolExists.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: error: 'ether_hostton' undeclared (first use in this function); did you mean 'ether_header'?
+   return ((int*)(&ether_hostton))[argc];
+                   ^~~~~~~~~~~~~
+                   ether_header
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8:19: note: each undeclared identifier is reported only once for each function it appears in
+gmake[5]: *** [CMakeFiles/cmTC_515a1.dir/build.make:85: CMakeFiles/cmTC_515a1.dir/CheckSymbolExists.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_515a1/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+File /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <net/ethernet.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef ether_hostton
+  return ((int*)(&ether_hostton))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if files sys/types.h;net/bpf.h exist failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_17d60/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_17d60.dir/build.make CMakeFiles/cmTC_17d60.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_17d60.dir/HAVE_NET_BPF_H.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_17d60.dir/HAVE_NET_BPF_H.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CheckIncludeFiles/HAVE_NET_BPF_H.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CheckIncludeFiles/HAVE_NET_BPF_H.c:3:10: fatal error: net/bpf.h: No such file or directory
+ #include <net/bpf.h>
+          ^~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_17d60.dir/build.make:85: CMakeFiles/cmTC_17d60.dir/HAVE_NET_BPF_H.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_17d60/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+Source:
+/* */
+#include <sys/types.h>
+#include <net/bpf.h>
+
+
+int main(void){return 0;}
+
+Determining if the include file net/pfilt.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_174c4/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_174c4.dir/build.make CMakeFiles/cmTC_174c4.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_174c4.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_174c4.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: net/pfilt.h: No such file or directory
+ #include <net/pfilt.h>
+          ^~~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_174c4.dir/build.make:85: CMakeFiles/cmTC_174c4.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_174c4/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file net/enet.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_fcbe3/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_fcbe3.dir/build.make CMakeFiles/cmTC_fcbe3.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fcbe3.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_fcbe3.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: net/enet.h: No such file or directory
+ #include <net/enet.h>
+          ^~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_fcbe3.dir/build.make:85: CMakeFiles/cmTC_fcbe3.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_fcbe3/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file net/nit.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_c5d63/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_c5d63.dir/build.make CMakeFiles/cmTC_c5d63.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c5d63.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_c5d63.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: net/nit.h: No such file or directory
+ #include <net/nit.h>
+          ^~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_c5d63.dir/build.make:85: CMakeFiles/cmTC_c5d63.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_c5d63/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/net/nit.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_4940a/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_4940a.dir/build.make CMakeFiles/cmTC_4940a.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4940a.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_4940a.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: sys/net/nit.h: No such file or directory
+ #include <sys/net/nit.h>
+          ^~~~~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_4940a.dir/build.make:85: CMakeFiles/cmTC_4940a.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_4940a/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file net/raw.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_c69d7/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_c69d7.dir/build.make CMakeFiles/cmTC_c69d7.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c69d7.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_c69d7.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: net/raw.h: No such file or directory
+ #include <net/raw.h>
+          ^~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_c69d7.dir/build.make:85: CMakeFiles/cmTC_c69d7.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_c69d7/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file sys/dlpi.h exists failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_d2586/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_d2586.dir/build.make CMakeFiles/cmTC_d2586.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d2586.dir/CheckIncludeFile.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc   -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1=libpcap-1.9.1 -Wformat -Werror=format-security -DPIC -fPIC -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro  -o CMakeFiles/cmTC_d2586.dir/CheckIncludeFile.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:10: fatal error: sys/dlpi.h: No such file or directory
+ #include <sys/dlpi.h>
+          ^~~~~~~~~~~~
+compilation terminated.
+gmake[5]: *** [CMakeFiles/cmTC_d2586.dir/build.make:85: CMakeFiles/cmTC_d2586.dir/CheckIncludeFile.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_d2586/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libpcap-1.9.1/CMakeFiles/CMakeTmp'
+
+
+

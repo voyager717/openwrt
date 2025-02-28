@@ -23,7 +23,11 @@ released)
 	elif [ "$SEEN" -ge 5 -a -n "$OVERLAY" ]
 	then
 		echo "FACTORY RESET" > /dev/console
+<<<<<<< HEAD
 		factoryreset -y && reboot &
+=======
+		jffs2reset -y && reboot &
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 ;;
 esac

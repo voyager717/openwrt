@@ -1,0 +1,9 @@
+prefix='/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/hostpkg'
+exec_prefix="/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/hostpkg"
+datarootdir="${prefix}/share"
+datadir="${datarootdir}"
+docdir="${datarootdir}/doc/gettext"
+ACLOCALDIR="${datadir}/aclocal"
+GETTEXTSRCDIR="${datarootdir}/gettext"
+GETTEXTSRCPODIR="${datarootdir}/gettext/po"
+EXAMPLESCONFIGDIR="${datarootdir}/doc/gettext/examples/config"

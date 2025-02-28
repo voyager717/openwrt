@@ -225,17 +225,26 @@ define KernelPackage/sound-soc-imx
 	$(LINUX_DIR)/sound/soc/fsl/snd-soc-fsl-ssi.ko \
 	$(LINUX_DIR)/sound/soc/fsl/imx-pcm-dma.ko
   AUTOLOAD:=$(call AutoLoad,56,snd-soc-imx-audmux snd-soc-fsl-ssi snd-soc-imx-pcm)
+<<<<<<< HEAD
   DEPENDS:=@TARGET_imx +kmod-sound-soc-core
+=======
+  DEPENDS:=@TARGET_imx6 +kmod-sound-soc-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
 define KernelPackage/sound-soc-imx/description
+<<<<<<< HEAD
  Support for i.MX Platform sound (ssi/audmux/pcm)
+=======
+ Support for i.MX6 Platform sound (ssi/audmux/pcm)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,sound-soc-imx))
 
 
+<<<<<<< HEAD
 define KernelPackage/sound-soc-mt7986
   TITLE:=MediaTek MT7986 Audio support
   KCONFIG:=CONFIG_SND_SOC_MT7986 CONFIG_SND_SOC_MT7986_WM8960
@@ -270,6 +279,8 @@ endef
 $(eval $(call KernelPackage,sound-soc-mt7986-wm8960))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sound-soc-imx-sgtl5000
   TITLE:=IMX SoC support for SGTL5000
   KCONFIG:=CONFIG_SND_SOC_IMX_SGTL5000
@@ -277,17 +288,26 @@ define KernelPackage/sound-soc-imx-sgtl5000
 	$(LINUX_DIR)/sound/soc/codecs/snd-soc-sgtl5000.ko \
 	$(LINUX_DIR)/sound/soc/fsl/snd-soc-imx-sgtl5000.ko
   AUTOLOAD:=$(call AutoLoad,57,snd-soc-sgtl5000 snd-soc-imx-sgtl5000)
+<<<<<<< HEAD
   DEPENDS:=@TARGET_imx +kmod-sound-soc-imx +kmod-regmap-i2c
+=======
+  DEPENDS:=@TARGET_imx6 +kmod-sound-soc-imx
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
 define KernelPackage/sound-soc-imx-sgtl5000/description
+<<<<<<< HEAD
  Support for i.MX Platform sound SGTL5000 codec
+=======
+ Support for i.MX6 Platform sound SGTL5000 codec
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,sound-soc-imx-sgtl5000))
 
 
+<<<<<<< HEAD
 define KernelPackage/sound-soc-wm8960
   TITLE:=SoC WM8960 codec support
   KCONFIG:=CONFIG_SND_SOC_WM8960
@@ -300,6 +320,8 @@ endef
 $(eval $(call KernelPackage,sound-soc-wm8960))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sound-soc-spdif
   TITLE:=SoC S/PDIF codec support
   KCONFIG:=CONFIG_SND_SOC_SPDIF
@@ -314,6 +336,7 @@ endef
 $(eval $(call KernelPackage,sound-soc-spdif))
 
 
+<<<<<<< HEAD
 define KernelPackage/sound-soc-dmic
   TITLE:=Generic Digital Microphone CODEC
   KCONFIG:=CONFIG_SND_SOC_DMIC
@@ -325,6 +348,8 @@ endef
 $(eval $(call KernelPackage,sound-soc-dmic))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/pcspkr
   DEPENDS:=@TARGET_x86 +kmod-input-core
   TITLE:=PC speaker support
@@ -361,7 +386,10 @@ $(eval $(call KernelPackage,sound-dummy))
 define KernelPackage/sound-hda-core
   SUBMENU:=$(SOUND_MENU)
   TITLE:=HD Audio Sound Core Support
+<<<<<<< HEAD
   DEPENDS:=+kmod-ledtrig-audio
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_SND_HDA_CORE \
 	CONFIG_SND_HDA_HWDEP=y \
@@ -580,7 +608,11 @@ define KernelPackage/sound-hda-intel
 	CONFIG_SND_HDA_INTEL
   FILES:= \
 	$(LINUX_DIR)/sound/pci/hda/snd-hda-intel.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/sound/hda/snd-intel-dspcfg.ko
+=======
+	$(LINUX_DIR)/sound/hda/snd-intel-nhlt.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,snd-hda-intel)
   $(call AddDepends/sound,kmod-sound-hda-core)
 endef

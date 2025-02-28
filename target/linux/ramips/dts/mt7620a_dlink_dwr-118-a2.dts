@@ -2,8 +2,11 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/mtd/partitions/uimage.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dwr-118-a2", "ralink,mt7620a-soc";
@@ -34,8 +37,12 @@
 		compatible = "gpio-leds";
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 		};
 
@@ -45,8 +52,12 @@
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 1 GPIO_ACTIVE_LOW>;
 		};
 
@@ -56,8 +67,12 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
@@ -108,13 +123,18 @@
 			};
 
 			partition@10000 {
+<<<<<<< HEAD
 				compatible = "openwrt,uimage", "denx,uimage";
 				openwrt,ih-magic = <IH_MAGIC_OKLI>;
 				openwrt,offset = <0x10000>;
+=======
+				compatible = "amit,jimage";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "firmware";
 				reg = <0x10000 0xfe0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "config";
 				reg = <0xff0000 0x10000>;
@@ -131,6 +151,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			config: partition@ff0000 {
+				label = "config";
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -159,8 +185,13 @@
 	wifi@0,0 {
 		reg = <0x0000 0 0 0 0>;
 		ieee80211-freq-limit = <5000000 6000000>;
+<<<<<<< HEAD
 		nvmem-cells = <&macaddr_config_e4a8 2>;
 		nvmem-cell-names = "mac-address";
+=======
+		mtd-mac-address = <&config 0xe4a8>;
+		mtd-mac-address-increment = <(2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		led {
 			led-sources = <2>;

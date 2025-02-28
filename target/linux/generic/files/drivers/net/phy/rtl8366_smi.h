@@ -23,6 +23,7 @@ struct dentry;
 struct inode;
 struct file;
 
+<<<<<<< HEAD
 typedef enum rtl8367b_chip_e {
 	RTL8367B_CHIP_UNKNOWN,
  /* Family B */
@@ -35,6 +36,8 @@ typedef enum rtl8367b_chip_e {
 	RTL8367B_CHIP_RTL8367S_VB /* chip with exception in extif assignment */
 } rtl8367b_chip_t;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 struct rtl8366_mib_counter {
 	unsigned	base;
 	unsigned	offset;
@@ -75,10 +78,14 @@ struct rtl8366_smi {
 	u16			dbg_reg;
 	u8			dbg_vlan_4k_page;
 #endif
+<<<<<<< HEAD
 	u32			phy_id;
 	rtl8367b_chip_t		rtl8367b_chip;
 	struct mii_bus		*ext_mbus;
 	struct rtl8366_vlan_mc *emu_vlanmc;
+=======
+	struct mii_bus		*ext_mbus;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 struct rtl8366_vlan_mc {
@@ -130,6 +137,13 @@ int rtl8366_smi_write_reg_noack(struct rtl8366_smi *smi, u32 addr, u32 data);
 int rtl8366_smi_read_reg(struct rtl8366_smi *smi, u32 addr, u32 *data);
 int rtl8366_smi_rmwr(struct rtl8366_smi *smi, u32 addr, u32 mask, u32 data);
 
+<<<<<<< HEAD
+=======
+int rtl8366_reset_vlan(struct rtl8366_smi *smi);
+int rtl8366_enable_vlan(struct rtl8366_smi *smi, int enable);
+int rtl8366_enable_all_ports(struct rtl8366_smi *smi, int enable);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CONFIG_RTL8366_SMI_DEBUG_FS
 int rtl8366_debugfs_open(struct inode *inode, struct file *file);
 #endif

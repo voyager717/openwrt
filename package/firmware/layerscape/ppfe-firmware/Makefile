@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ppfe
+<<<<<<< HEAD
 PKG_VERSION:=6.6.3.1.0.0
 PKG_RELEASE:=1
 
@@ -15,6 +16,15 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/nxp-qoriq/qoriq-engine-pfe-bin
 PKG_SOURCE_VERSION:=lf-6.6.3-1.0.0
 PKG_MIRROR_HASH:=836da0d1ace6c5896c434940b5f06ae9ddcb871959e9f5aa3df75d67e39aec41
+=======
+PKG_VERSION:=LSDK-20.04
+PKG_RELEASE:=1
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/NXP/qoriq-engine-pfe-bin.git
+PKG_SOURCE_VERSION:=d3a8ef0760c54ddc243039c86389497e37be90ab
+PKG_MIRROR_HASH:=64be93b8249d298e7b5fd0846787835f0659b6ab6c55b40b809366c79e272eb8
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_FLAGS:=nonshared
 

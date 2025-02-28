@@ -24,8 +24,11 @@ define Host/Install
 	$(INSTALL_BIN) $(HOST_BUILD_DIR)/flock $(STAGING_DIR_HOST)/bin/
 endef
 
+<<<<<<< HEAD
 define Host/Clean
 	rm -f $(STAGING_DIR_HOST)/bin/flock
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call HostBuild))

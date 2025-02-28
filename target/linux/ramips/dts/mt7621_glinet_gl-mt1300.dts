@@ -14,7 +14,11 @@
 		led-failsafe = &led_run;
 		led-running = &led_run;
 		led-upgrade = &led_run;
+<<<<<<< HEAD
 		label-mac-device = &gmac1;
+=======
+		label-mac-device = &wan;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -67,7 +71,12 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
+=======
+		spi-max-frequency = <80000000>;
+		m25p,fast-read;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		broken-flash-reset;
 
 		partitions {
@@ -87,6 +96,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -107,6 +117,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -126,12 +142,17 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4000 1>;
 	nvmem-cell-names = "mac-address";
 };
@@ -147,6 +168,10 @@
 
 &ethphy4 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&factory 0x4000>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -160,6 +185,15 @@
 			status = "okay";
 			label = "lan2";
 		};
+<<<<<<< HEAD
+=======
+
+		wan: port@4 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0x4000>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

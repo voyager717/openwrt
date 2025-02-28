@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uboot-layerscape
+<<<<<<< HEAD
 PKG_VERSION:=6.6.23.2.0.0
 PKG_RELEASE:=1
 
@@ -15,6 +16,15 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/nxp-qoriq/u-boot
 PKG_SOURCE_VERSION:=lf-6.6.23-2.0.0
 PKG_MIRROR_HASH:=41e089fde1d0b3b0998e6af33d5f4c2b62860bda6cd1e6a0e8d47dfd5749005d
+=======
+PKG_VERSION:=LSDK-20.04-update-290520
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot
+PKG_SOURCE_VERSION:=1e55b2f9e7f56b76569089b9e950f49c1579580e
+PKG_MIRROR_HASH:=46aace27e1367f40b424a64215d524a99c3bd62f49057550039e72d5a1ab7edb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
@@ -30,16 +40,25 @@ endef
 define U-Boot/fsl_ls1012a-frdm
   NAME:=NXP LS1012AFRDM
   UBOOT_CONFIG:=ls1012afrdm_tfa
+<<<<<<< HEAD
+=======
+  ENV_SIZE:=0x40000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define U-Boot/fsl_ls1012a-rdb
   NAME:=NXP LS1012ARDB
   UBOOT_CONFIG:=ls1012ardb_tfa
+<<<<<<< HEAD
+=======
+  ENV_SIZE:=0x40000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define U-Boot/fsl_ls1012a-frwy-sdboot
   NAME:=NXP LS1012AFRWY
   UBOOT_CONFIG:=ls1012afrwy_tfa
+<<<<<<< HEAD
 endef
 
 define U-Boot/fsl_ls1028a-rdb
@@ -50,6 +69,9 @@ endef
 define U-Boot/fsl_ls1028a-rdb-sdboot
   NAME:=NXP LS1028ARDB SD Card Boot
   UBOOT_CONFIG:=ls1028ardb_tfa
+=======
+  ENV_SIZE:=0x10000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define U-Boot/fsl_ls1043a-rdb
@@ -134,8 +156,11 @@ UBOOT_TARGETS := \
   fsl_ls1012a-frdm \
   fsl_ls1012a-rdb \
   fsl_ls1012a-frwy-sdboot \
+<<<<<<< HEAD
   fsl_ls1028a-rdb \
   fsl_ls1028a-rdb-sdboot \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   fsl_ls1043a-rdb \
   fsl_ls1043a-rdb-sdboot \
   fsl_ls1046a-frwy \

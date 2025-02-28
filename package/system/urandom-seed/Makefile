@@ -18,9 +18,12 @@ define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
 endef
 
+<<<<<<< HEAD
 define Build/Quilt
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/Compile/Default
 endef
 Build/Compile = $(Build/Compile/Default)

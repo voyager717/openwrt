@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -35,27 +38,43 @@
 		compatible = "gpio-leds";
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 		};
 
@@ -89,6 +108,7 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	status = "okay";
 
 	nvmem-cells = <&eeprom_factory_20000>, <&macaddr_factory_1f100 0>;
@@ -112,4 +132,11 @@
 			#nvmem-cell-cells = <1>;
 		};
 	};
+=======
+	mtd-mac-address = <&factory 0x1f100>;
+};
+
+&ethernet {
+	mtd-mac-address = <&factory 0x1f100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

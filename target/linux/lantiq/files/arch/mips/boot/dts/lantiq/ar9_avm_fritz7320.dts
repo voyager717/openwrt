@@ -1,8 +1,11 @@
 #include "ar9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/mtd/partitions/uimage.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "avm,fritz7320", "lantiq,xway", "lantiq,ar9";
@@ -46,8 +49,12 @@
 	leds {
 		compatible = "gpio-leds";
 		power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -60,8 +67,12 @@
 			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
 		};
 		wlan: wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
 		info_green: info_green {
@@ -82,7 +93,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 50 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 50 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 
@@ -94,13 +109,18 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 51 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 51 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
 
 &gsw {
 	phy-mode = "mii";
+<<<<<<< HEAD
 	phy-handle = <&phy0>;
 	nvmem-cells = <&macaddr_ath9k_cal_a91 (-2)>;
 	nvmem-cell-names = "mac-address";
@@ -114,6 +134,10 @@
 			reset-gpios = <&gpio 36 GPIO_ACTIVE_LOW>;
 		};
 	};
+=======
+	mtd-mac-address = <&ath9k_cal 0xa91>;
+	mtd-mac-address-increment = <(-2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &gpio {
@@ -121,12 +145,15 @@
 	pinctrl-0 = <&state_default>;
 
 	state_default: pinmux {
+<<<<<<< HEAD
 		phy-rst {
 			lantiq,pins = "io36";
 			lantiq,pull = <0>;
 			lantiq,open-drain;
 			lantiq,output = <1>;
 		};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		usb0_vbus {
 			lantiq,pins = "io50";
 			lantiq,pull = <0>;
@@ -157,6 +184,7 @@
 				label = "urlader";
 				reg = <0x00000 0x20000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -181,6 +209,13 @@
 				reg = <0x20000 0xf60000>;
 				openwrt,ih-magic = <IH_MAGIC_OKLI>;
 				openwrt,offset = <0x11000>;
+=======
+			};
+
+			partition@20000 {
+				label = "firmware";
+				reg = <0x20000 0xf60000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@f80000 {
@@ -207,6 +242,7 @@
 		    <&pci_req3_pins>, <&pci_req4_pins>;
 
 	req-mask = <0xf>;
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 
 	wifi@0,0 {
@@ -214,6 +250,14 @@
 		reg = <0x7000 0 0 0 0>;
 		nvmem-cells = <&cal_ath9k_cal_985>;
 		nvmem-cell-names = "calibration";
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+
+	wifi@0,0 {
+		compatible = "pci0,0";
+		reg = <0x7000 0 0 0 0>;
+		qca,no-eeprom; /* load from ath9k-eeprom-pci-0000:00:0e.0.bin */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

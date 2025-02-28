@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libpcap
+<<<<<<< HEAD
 PKG_VERSION:=1.10.5
 PKG_RELEASE:=1
 
@@ -27,6 +28,22 @@ PKG_CONFIG_DEPENDS := \
 	CONFIG_PCAP_HAS_USB \
 	CONFIG_PCAP_HAS_BT \
 	CONFIG_PCAP_HAS_NETFILTER
+=======
+PKG_VERSION:=1.9.1
+PKG_RELEASE:=3.1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=http://www.tcpdump.org/release/
+PKG_HASH:=635237637c5b619bcceba91900666b64d56ecb7be63f298f601ec786ce087094
+
+PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
+
+PKG_ASLR_PIE_REGULAR:=1
+PKG_BUILD_PARALLEL:=1
+
+PKG_LICENSE:=BSD-3-Clause
+PKG_LICENSE_FILES:=LICENSE
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
@@ -65,6 +82,7 @@ endif
 CMAKE_OPTIONS += \
 	-DBUILD_SHARED_LIBS=ON \
 	-DBUILD_WITH_LIBNL=OFF \
+<<<<<<< HEAD
 	-DINET6=O$(if $(CONFIG_IPV6),N,FF) \
 	-DPCAP_SUPPORT_NETFILTER=O$(if $(CONFIG_PCAP_HAS_NETFILTER),N,FF)
 
@@ -75,6 +93,13 @@ CMAKE_OPTIONS += \
 	-DDISABLE_DBUS=ON \
 	-DDISABLE_DPDK=ON \
 	-DDISABLE_LINUX_USBMON=O$(if $(CONFIG_PCAP_HAS_USB),FF,N) \
+=======
+
+# grep 'option(DISABLE_' CMakeLists.txt | cut -f2 -d'(' | cut -f1 -d' ' | sort --unique
+CMAKE_OPTIONS += \
+	-DDISABLE_DAG=ON \
+	-DDISABLE_DBUS=ON \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	-DDISABLE_NETMAP=ON \
 	-DDISABLE_RDMA=ON \
 	-DDISABLE_SEPTEL=ON \
@@ -86,6 +111,15 @@ CMAKE_OPTIONS += \
 	-DBDEBUG=OFF \
 	-DYYDEBUG=OFF \
 
+<<<<<<< HEAD
+=======
+CMAKE_OPTIONS += $(if $(CONFIG_PCAP_HAS_USB)       ,,-DDISABLE_USB=ON)
+CMAKE_OPTIONS += $(if $(CONFIG_PCAP_HAS_BT)        ,,-DDISABLE_BLUETOOTH=ON)
+CMAKE_OPTIONS += $(if $(CONFIG_PCAP_HAS_NETFILTER) ,,-DPCAP_SUPPORT_NETFILTER=OFF)
+
+CMAKE_OPTIONS += $(if $(CONFIG_IPV6),-DINET6=ON,-DINET6=OFF)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/InstallDev
 	$(call Build/InstallDev/cmake,$(1))
 	$(SED) \
@@ -101,8 +135,13 @@ define Package/libpcap/install
 endef
 
 define Package/rpcapd/install
+<<<<<<< HEAD
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/rpcapd $(1)/usr/sbin/
+=======
+	$(INSTALL_DIR) $(1)/usr/bin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/rpcapd $(1)/usr/bin/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call BuildPackage,libpcap))

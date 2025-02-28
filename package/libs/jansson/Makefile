@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=jansson
+<<<<<<< HEAD
 PKG_VERSION:=2.14
 PKG_RELEASE:=3
 
@@ -20,6 +21,16 @@ PKG_LICENSE_FILES:=LICENSE
 PKG_CPE_ID:=cpe:/a:jansson_project:jansson
 
 PKG_BUILD_FLAGS:=lto
+=======
+PKG_VERSION:=2.13.1
+PKG_RELEASE:=2
+PKG_LICENSE:=MIT
+PKG_LICENSE_FILES:=LICENSE
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE_URL:=http://www.digip.org/jansson/releases/
+PKG_HASH:=ee90a0f879d2b7b7159124ff22b937a2a9a8c36d3bb65d1da7dd3f04370a10bd
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
@@ -43,9 +54,18 @@ define Package/jansson/description
   Jansson is a C library for encoding, decoding and manipulating JSON data
 endef
 
+<<<<<<< HEAD
 define Package/jansson/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libjansson*so.* $(1)/usr/lib/
+=======
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto
+
+define Package/jansson/install
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libjansson*so* $(1)/usr/lib/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call BuildPackage,jansson))

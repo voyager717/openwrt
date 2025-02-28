@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,tl-mr3420-v3", "qca,qca9531";
@@ -85,29 +88,47 @@
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&led_gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_fail {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&led_gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&led_gpio 6 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
 			gpios = <&led_gpio 7 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port0>;
+=======
+			label = "green:usb";
+			gpios = <&led_gpio 7 GPIO_ACTIVE_LOW>;
+			trigger-sources = <&hub_port>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,default-trigger = "usbport";
 		};
 
@@ -154,6 +175,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -166,6 +188,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -174,6 +198,7 @@
 				reg = <0x020000 0x3d0000>;
 			};
 
+<<<<<<< HEAD
 			partition@3f0000 {
 				label = "art";
 				reg = <0x3f0000 0x010000>;
@@ -188,6 +213,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@3f0000 {
+				label = "art";
+				reg = <0x3f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -198,6 +229,7 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 1>;
 	nvmem-cell-names = "mac-address";
 };
@@ -205,17 +237,41 @@
 &eth1 {
 	nvmem-cells = <&macaddr_uboot_1fc00 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <1>;
+};
+
+&eth1 {
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
 
 &usb0 {
 	status = "okay";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&uboot 0x1fc00>;
+};
+
+&usb0 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {

@@ -5,6 +5,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=px5g-wolfssl
+<<<<<<< HEAD
 PKG_RELEASE:=9
 PKG_LICENSE:=GPL-2.0-or-later
 
@@ -14,6 +15,15 @@ PKG_MAINTAINER:=Paul Spooren <mail@aparcar.org>
 
 PKG_CONFIG_DEPENDS:=CONFIG_WOLFSSL_ALT_NAMES
 
+=======
+PKG_RELEASE:=$(COMMITCOUNT)
+PKG_LICENSE:=GPL-2.0-or-later
+
+PKG_USE_MIPS16:=0
+
+PKG_MAINTAINER:=Paul Spooren <mail@aparcar.org>
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/package.mk
 
 define Package/px5g-wolfssl

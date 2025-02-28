@@ -3,12 +3,22 @@
  * Device Tree Source for Netgear WNDAP620 and WNDAP660
  */
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "apm82181.dtsi"
 
 / {
 	aliases {
 		serial0 = &UART0;
+<<<<<<< HEAD
+=======
+		led-boot = &status;
+		led-failsafe = &failsafe;
+		led-running = &status;
+		led-upgrade = &status;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -28,6 +38,7 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &ndfc {
 	status = "okay";
 	/* 32 MiB SLC NAND Flash */
@@ -40,6 +51,13 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
+=======
+&EBC0 {
+	ndfc@1,0 {
+		status = "okay";
+		/* 32 MiB SLC NAND Flash */
+		nand {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			partition@0 {
 				label = "u-boot";
 				reg = <0x00000000 0x00100000>;
@@ -48,6 +66,7 @@
 
 			partition@100000 {
 				label = "u-boot-env";
+<<<<<<< HEAD
 				reg = <0x00100000 0x0004000>;
 				read-only;
 
@@ -94,6 +113,29 @@
 					label = "ubi";
 					reg = <0x005f0000 0x014d0000>;
 				};
+=======
+				reg = <0x00100000 0x00010000>;
+				read-only;
+			};
+
+			partition@110000,0 {
+				label = "firmware";
+				reg = <0x00110000 0x01ac0000>;
+			};
+
+			partition@110000,1 {
+				/*
+				 * The u-boot bootloader will look at this
+				 * offset (0x110000) for an uImage binary.
+				 */
+				label = "kernel";
+				reg = <0x00110000 0x003f0000>;
+			};
+
+			partition@500000 {
+				label = "ubi";
+				reg = <0x00500000 0x016d0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@1bd0000 {
@@ -110,13 +152,21 @@
 
 			partition@1be0000 {
 				label = "var";
+<<<<<<< HEAD
 				reg = <0x01be0000 0x00400000>;
+=======
+				reg = <0x01be0000 0x0400000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				read-only;
 			};
 
 			partition@1fe0000 {
 				label = "manudata";
+<<<<<<< HEAD
 				reg = <0x01fe0000 0x00020000>;
+=======
+				reg   = <0x01fe0000 0x20000 >;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				read-only;
 			};
 		};
@@ -151,7 +201,11 @@
 	keys {
 		compatible = "gpio-keys";
 
+<<<<<<< HEAD
 		button-restart {
+=======
+		reset {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			label = "Reset Button";
 			gpios = <&GPIO0 16 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
@@ -164,6 +218,7 @@
 	LEDS: leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		led-0 {
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_POWER;
@@ -173,10 +228,20 @@
 		led-1 {
 			color = <LED_COLOR_ID_AMBER>;
 			function = LED_FUNCTION_FAULT;
+=======
+		status: power {
+			label = "wndap6x0:green:power";
+			gpios = <&GPIO0 18 GPIO_ACTIVE_HIGH>;
+		};
+
+		failsafe: test {
+			label = "wndap6x0:amber:test";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&GPIO0 17 GPIO_ACTIVE_HIGH>;
 			panic-indicator;
 		};
 
+<<<<<<< HEAD
 		led-2 {
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_LAN;
@@ -195,6 +260,20 @@
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_WLAN;
 			function-enumerator = <1>;
+=======
+		activity {
+			label = "wndap6x0:green:activity";
+			gpios = <&GPIO0 21 GPIO_ACTIVE_HIGH>;
+		};
+
+		wlan2g {
+			label = "wndap6x0:green:wlan2g";
+			gpios = <&GPIO0 19 GPIO_ACTIVE_HIGH>;
+		};
+
+		wlan5g {
+			label = "wndap6x0:green:wlan5g";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&GPIO0 20 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -227,7 +306,12 @@
 
 	rtl8367b {
 		compatible = "realtek,rtl8367b";
+<<<<<<< HEAD
 		realtek,extif = <5 1 2 1 1 1 1 1 1 2>;
+=======
+		cpu_port = <5>;
+		realtek,extif0 = <1 2 1 1 1 1 1 1 2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		mii-bus = <&mdio0>;
 	};
 };
@@ -236,6 +320,13 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
+=======
+&MSI {
+	status = "okay";
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &IIC0 {
 	status = "okay";
 
@@ -246,3 +337,7 @@
 		read-only;
 	};
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From: Felix Fietkau <nbd@nbd.name>
 Date: Wed, 15 Jun 2016 17:31:48 +0200
 Subject: [PATCH] hostapd: implement fallback for incomplete survey data
@@ -5,29 +6,68 @@ Subject: [PATCH] hostapd: implement fallback for incomplete survey data
 --- a/src/ap/acs.c
 +++ b/src/ap/acs.c
 @@ -471,17 +471,17 @@ static int acs_get_bw_center_chan(int fr
+=======
+--- a/src/ap/acs.c
++++ b/src/ap/acs.c
+@@ -302,18 +302,12 @@ static void acs_fail(struct hostapd_ifac
+ static long double
+ acs_survey_interference_factor(struct freq_survey *survey, s8 min_nf)
+ {
+-	long double factor, busy, total;
++	long double factor, busy = 0, total;
+ 
+ 	if (survey->filled & SURVEY_HAS_CHAN_TIME_BUSY)
+ 		busy = survey->channel_time_busy;
+ 	else if (survey->filled & SURVEY_HAS_CHAN_TIME_RX)
+ 		busy = survey->channel_time_rx;
+-	else {
+-		/* This shouldn't really happen as survey data is checked in
+-		 * acs_sanity_check() */
+-		wpa_printf(MSG_ERROR, "ACS: Survey data missing");
+-		return 0;
+-	}
+ 
+ 	total = survey->channel_time;
+ 
+@@ -415,20 +409,19 @@ static int acs_usable_vht160_chan(const
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  static int acs_survey_is_sufficient(struct freq_survey *survey)
  {
  	if (!(survey->filled & SURVEY_HAS_NF)) {
 +		survey->nf = -95;
+<<<<<<< HEAD
  		wpa_printf(MSG_INFO,
  			   "ACS: Survey for freq %d is missing noise floor",
  			   survey->freq);
+=======
+ 		wpa_printf(MSG_INFO, "ACS: Survey is missing noise floor");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -		return 0;
  	}
  
  	if (!(survey->filled & SURVEY_HAS_CHAN_TIME)) {
 +		survey->channel_time = 0;
+<<<<<<< HEAD
  		wpa_printf(MSG_INFO,
  			   "ACS: Survey for freq %d is missing channel time",
  			   survey->freq);
+=======
+ 		wpa_printf(MSG_INFO, "ACS: Survey is missing channel time");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -		return 0;
  	}
  
  	if (!(survey->filled & SURVEY_HAS_CHAN_TIME_BUSY) &&
+<<<<<<< HEAD
 @@ -489,7 +489,6 @@ static int acs_survey_is_sufficient(stru
  		wpa_printf(MSG_INFO,
  			   "ACS: Survey for freq %d is missing RX and busy time (at least one is required)",
  			   survey->freq);
+=======
+ 	    !(survey->filled & SURVEY_HAS_CHAN_TIME_RX)) {
+ 		wpa_printf(MSG_INFO,
+ 			   "ACS: Survey is missing RX and busy time (at least one is required)");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -		return 0;
  	}
  

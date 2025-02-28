@@ -131,10 +131,13 @@ void __exit lqdeu_fini_async_des(void);
 void __exit deu_fini (void);
 int deu_dma_init (void);
 
+<<<<<<< HEAD
 extern spinlock_t ltq_deu_hash_lock;
 #define CRTCL_SECT_HASH_INIT        spin_lock_init(&ltq_deu_hash_lock)
 #define CRTCL_SECT_HASH_START       spin_lock_irqsave(&ltq_deu_hash_lock, flag)
 #define CRTCL_SECT_HASH_END         spin_unlock_irqrestore(&ltq_deu_hash_lock, flag)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 #define DEU_WAKELIST_INIT(queue) \

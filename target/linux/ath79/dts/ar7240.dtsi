@@ -6,7 +6,11 @@
 	usb_phy: usb-phy {
 		compatible = "qca,ar7200-usb-phy";
 
+<<<<<<< HEAD
 		reset-names = "phy", "usb-ohci-dll";
+=======
+		reset-names = "usb-phy", "usb-ohci-dll";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst 4>, <&rst 3>;
 
 		#phy-cells = <0>;
@@ -15,10 +19,13 @@
 	};
 };
 
+<<<<<<< HEAD
 &gpio {
 	ngpios = <18>;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &ahb {
 	usb: usb@1b000000 {
 		compatible = "generic-ohci";
@@ -27,6 +34,7 @@
 		interrupts = <3>;
 
 		resets = <&rst 5>;
+<<<<<<< HEAD
 
 		phy-names = "usb";
 		phys = <&usb_phy>;
@@ -40,6 +48,14 @@
 			reg = <1>;
 			#trigger-source-cells = <0>;
 		};
+=======
+		reset-names = "usb-host";
+
+		phy-names = "usb-phy";
+		phys = <&usb_phy>;
+
+		status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

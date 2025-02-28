@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ls-rcw
+<<<<<<< HEAD
 PKG_VERSION:=6.6.23.2.0.0
 PKG_RELEASE:=1
 
@@ -15,6 +16,15 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/nxp-qoriq/rcw
 PKG_SOURCE_VERSION:=lf-6.6.23-2.0.0
 PKG_MIRROR_HASH:=f5e62ac040564eb97f4d1c58496a1586a470008469cb4daee6d7c70be7fdfa07
+=======
+PKG_VERSION:=LSDK-20.04-update-290520
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://source.codeaurora.org/external/qoriq/qoriq-components/rcw
+PKG_SOURCE_VERSION:=e0fab6d9b61003caef577f7474c2fac61e6ba2ff
+PKG_MIRROR_HASH:=b6bc66e27b7c6db31101fdc2e6be7255181861bd38d8f25eb5eb80c468983eb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_FLAGS:=nonshared
 
@@ -31,8 +41,11 @@ BOARDS := \
   ls1012a-rdb \
   ls1012a-frdm \
   ls1012a-frwy-sdboot \
+<<<<<<< HEAD
   ls1028a-rdb \
   ls1028a-rdb-sdboot \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ls1043a-rdb \
   ls1043a-rdb-sdboot \
   ls1046a-frwy \
@@ -49,8 +62,11 @@ BOARDS := \
 RCW_ls1012a-rdb         :=ls1012ardb/R_SPNH_3508/rcw_1000_default.bin
 RCW_ls1012a-frdm        :=ls1012afrdm/N_SSNP_3305/rcw_800.bin
 RCW_ls1012a-frwy-sdboot :=ls1012afrwy/N_SSNP_3305/rcw_1000_default.bin
+<<<<<<< HEAD
 RCW_ls1028a-rdb         :=ls1028ardb/R_SQPP_0x85bb/rcw_1300.bin
 RCW_ls1028a-rdb-sdboot  :=ls1028ardb/R_SQPP_0x85bb/rcw_1500_sdboot.bin
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 RCW_ls1043a-rdb         :=ls1043ardb/RR_FQPP_1455/rcw_1600.bin
 RCW_ls1043a-rdb-sdboot  :=ls1043ardb/RR_FQPP_1455/rcw_1600_sdboot.bin
 RCW_ls1046a-frwy        :=ls1046afrwy/NN_NNQNNPNP_3040_0506/rcw_1600_qspiboot.bin

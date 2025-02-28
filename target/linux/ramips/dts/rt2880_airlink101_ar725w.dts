@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "airlink101,ar725w", "ralink,rt2880-soc";
@@ -36,6 +39,7 @@
 				label = "u-boot-env";
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				reg = <0x40000 0x10000>;
 				label = "factory";
@@ -54,6 +58,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				reg = <0x40000 0x10000>;
+				label = "factory";
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -68,26 +78,43 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		wpsred {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		wpsblue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		wps {
 			label = "wps";
@@ -112,8 +139,12 @@
 
 &ethernet {
 	status = "okay";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	port@0 {
 		phy-handle = <&phy0>;
@@ -131,6 +162,11 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	status = "okay";
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

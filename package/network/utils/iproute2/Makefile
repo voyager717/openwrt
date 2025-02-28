@@ -8,19 +8,31 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=iproute2
+<<<<<<< HEAD
 PKG_VERSION:=6.13.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@KERNEL/linux/utils/net/iproute2
 PKG_HASH:=a43aa43338d882b44d01e549f3f105a92ae9feea32a82fae45a88e7a49302819
+=======
+PKG_VERSION:=5.11.0
+PKG_RELEASE:=3
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@KERNEL/linux/utils/net/iproute2
+PKG_HASH:=c5e2ea108212b3445051b35953ec267f9f3469e1d5c67ac034ab559849505c54
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_PARALLEL:=1
 PKG_BUILD_DEPENDS:=iptables
 PKG_LICENSE:=GPL-2.0
 PKG_CPE_ID:=cpe:/a:iproute2_project:iproute2
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=gc-sections lto
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/kernel.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/nls.mk
@@ -59,6 +71,7 @@ $(call Package/iproute2/Default)
   DEFAULT_VARIANT:=1
   PROVIDES:=tc
   ALTERNATIVES:=200:/sbin/tc:/usr/libexec/tc-tiny
+<<<<<<< HEAD
   DEPENDS:=+kmod-sched-core +(PACKAGE_devlink||PACKAGE_rdma):libmnl
 endef
 
@@ -69,6 +82,9 @@ $(call Package/iproute2/Default)
   PROVIDES:=tc
   ALTERNATIVES:=300:/sbin/tc:/usr/libexec/tc-bpf
   DEPENDS:=+kmod-sched-core +(PACKAGE_devlink||PACKAGE_rdma):libmnl +libbpf
+=======
+  DEPENDS:=+kmod-sched-core +libxtables +tc-mod-iptables +(PACKAGE_devlink||PACKAGE_rdma):libmnl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/tc-full
@@ -76,8 +92,19 @@ $(call Package/iproute2/Default)
   TITLE:=Traffic control utility (full)
   VARIANT:=tcfull
   PROVIDES:=tc
+<<<<<<< HEAD
   ALTERNATIVES:=400:/sbin/tc:/usr/libexec/tc-full
   DEPENDS:=+kmod-sched-core +(PACKAGE_devlink||PACKAGE_rdma):libmnl +libbpf +libxtables
+=======
+  ALTERNATIVES:=300:/sbin/tc:/usr/libexec/tc-full
+  DEPENDS:=+kmod-sched-core +libxtables +tc-mod-iptables +libbpf +(PACKAGE_devlink||PACKAGE_rdma):libmnl
+endef
+
+define Package/tc-mod-iptables
+$(call Package/iproute2/Default)
+  TITLE:=Traffic control module - iptables action
+  DEPENDS:=+libxtables
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/genl
@@ -95,7 +122,11 @@ endef
 define Package/ss
 $(call Package/iproute2/Default)
   TITLE:=Socket statistics utility
+<<<<<<< HEAD
   DEPENDS:=+libnl-tiny +(PACKAGE_devlink||PACKAGE_rdma):libmnl +libbpf +kmod-netlink-diag
+=======
+  DEPENDS:=+libnl-tiny +(PACKAGE_devlink||PACKAGE_rdma):libmnl +kmod-netlink-diag
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/nstat
@@ -128,15 +159,19 @@ endif
 
 ifeq ($(BUILD_VARIANT),tctiny)
   LIBBPF_FORCE:=off
+<<<<<<< HEAD
 endif
 
 ifeq ($(BUILD_VARIANT),tcbpf)
   HAVE_ELF:=y
   LIBBPF_FORCE:=on
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SHARED_LIBS:=y
 endif
 
 ifeq ($(BUILD_VARIANT),tcfull)
+<<<<<<< HEAD
   #enable iptables/xtables requirement only if tciptables variant is selected
   TC_CONFIG_XT:=y
   TC_CONFIG_XT_OLD:=y
@@ -151,6 +186,11 @@ else
   TC_CONFIG_XT_OLD:=n
   TC_CONFIG_XT_OLD_H:=n
   TC_CONFIG_IPSET:=n
+=======
+  HAVE_ELF:=y
+  LIBBPF_FORCE:=on
+  SHARED_LIBS:=y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 ifdef CONFIG_PACKAGE_devlink
@@ -166,6 +206,7 @@ define Build/Configure
 		> $(PKG_BUILD_DIR)/include/SNAPSHOT.h
 endef
 
+<<<<<<< HEAD
 TARGET_LDFLAGS += -Wl,--as-needed
 TARGET_CPPFLAGS += -I$(STAGING_DIR)/usr/include/libnl-tiny
 
@@ -174,10 +215,21 @@ MAKE_FLAGS += \
 	SHARED_LIBS=$(SHARED_LIBS) \
 	IP_CONFIG_TINY=$(IP_CONFIG_TINY) \
 	BUILD_VARIANT=$(BUILD_VARIANT) \
+=======
+TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto
+TARGET_LDFLAGS += -Wl,--gc-sections -Wl,--as-needed
+TARGET_CPPFLAGS += -I$(STAGING_DIR)/usr/include/libnl-tiny
+
+MAKE_FLAGS += \
+	KERNEL_INCLUDE="$(LINUX_DIR)/user_headers/include" \
+	SHARED_LIBS=$(SHARED_LIBS) \
+	IP_CONFIG_TINY=$(IP_CONFIG_TINY) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	LIBBPF_FORCE=$(LIBBPF_FORCE) \
 	HAVE_ELF=$(HAVE_ELF) \
 	HAVE_MNL=$(HAVE_MNL) \
 	HAVE_CAP=$(HAVE_CAP) \
+<<<<<<< HEAD
 	HAVE_TIRPC=n \
 	IPT_LIB_DIR=/usr/lib/iptables \
 	XT_LIB_DIR=/usr/lib/iptables \
@@ -185,6 +237,10 @@ MAKE_FLAGS += \
 	TC_CONFIG_XT_OLD=$(TC_CONFIG_XT_OLD) \
 	TC_CONFIG_XT_OLD_H=$(TC_CONFIG_XT_OLD_H) \
 	TC_CONFIG_IPSET=$(TC_CONFIG_IPSET) \
+=======
+	IPT_LIB_DIR=/usr/lib/iptables \
+	XT_LIB_DIR=/usr/lib/iptables \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	FPIC="$(FPIC)" \
 	$(if $(findstring c,$(OPENWRT_VERBOSE)),V=1,V='')
 
@@ -215,16 +271,27 @@ define Package/tc-tiny/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tc/tc $(1)/usr/libexec/tc-tiny
 endef
 
+<<<<<<< HEAD
 define Package/tc-bpf/install
 	$(INSTALL_DIR) $(1)/usr/libexec
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tc/tc $(1)/usr/libexec/tc-bpf
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/tc-full/install
 	$(INSTALL_DIR) $(1)/usr/libexec
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tc/tc $(1)/usr/libexec/tc-full
 endef
 
+<<<<<<< HEAD
+=======
+define Package/tc-mod-iptables/install
+	$(INSTALL_DIR) $(1)/usr/lib/tc
+	$(CP) $(PKG_BUILD_DIR)/tc/m_xt.so $(1)/usr/lib/tc
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/genl/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/genl/genl $(1)/usr/sbin/
@@ -258,8 +325,13 @@ endef
 $(eval $(call BuildPackage,ip-tiny))
 $(eval $(call BuildPackage,ip-full))
 $(eval $(call BuildPackage,tc-tiny))
+<<<<<<< HEAD
 $(eval $(call BuildPackage,tc-bpf))
 $(eval $(call BuildPackage,tc-full))
+=======
+$(eval $(call BuildPackage,tc-full))
+$(eval $(call BuildPackage,tc-mod-iptables))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,genl))
 $(eval $(call BuildPackage,ip-bridge))
 $(eval $(call BuildPackage,ss))

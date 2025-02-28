@@ -24,7 +24,12 @@
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -66,6 +71,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -84,6 +90,12 @@
 						reg = <0x2e 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -96,8 +108,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_2e>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x2e>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -105,6 +121,10 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

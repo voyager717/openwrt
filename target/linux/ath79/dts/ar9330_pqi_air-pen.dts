@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "PQI Air-Pen";
@@ -20,15 +23,23 @@
 		compatible = "gpio-leds";
 
 		led_wlan: wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 23 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -85,6 +96,7 @@
 				reg = <0x040000 0x010000>;
 			};
 
+<<<<<<< HEAD
 			partition@50000 {
 				label = "art";
 				reg = <0x050000 0x010000>;
@@ -103,6 +115,12 @@
 						reg = <0x1002 0x6>;
 					};
 				};
+=======
+			art: partition@50000 {
+				label = "art";
+				reg = <0x050000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@60000 {
@@ -129,8 +147,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_1002>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x1002>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -149,6 +171,11 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -2,6 +2,7 @@
 #
 # Copyright (C) 2013-2016 OpenWrt.org
 
+<<<<<<< HEAD
 define KernelPackage/mfd-ac100
     SUBMENU:=$(OTHER_MENU)
     TITLE:=X-Powers AC100 MFD support
@@ -40,6 +41,13 @@ define KernelPackage/rtc-sunxi
     SUBMENU:=$(OTHER_MENU)
     TITLE:=Sunxi SoC built-in RTC support
     DEPENDS:=@(TARGET_sunxi&&RTC_SUPPORT)
+=======
+define KernelPackage/rtc-sunxi
+    SUBMENU:=$(OTHER_MENU)
+    TITLE:=Sunxi SoC built-in RTC support
+    DEPENDS:=@TARGET_sunxi
+    $(call AddDepends/rtc)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     KCONFIG:= \
 	CONFIG_RTC_DRV_SUNXI \
 	CONFIG_RTC_CLASS=y
@@ -55,20 +63,33 @@ $(eval $(call KernelPackage,rtc-sunxi))
 
 define KernelPackage/sunxi-ir
     SUBMENU:=$(OTHER_MENU)
+<<<<<<< HEAD
     TITLE:=Sunxi SoC built-in IR support
     DEPENDS:=@(TARGET_sunxi&&RTC_SUPPORT) +kmod-input-core
+=======
+    TITLE:=Sunxi SoC built-in IR support (A20)
+    DEPENDS:=@TARGET_sunxi +kmod-input-core
+    $(call AddDepends/rtc)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     KCONFIG:= \
 	CONFIG_MEDIA_SUPPORT=y \
 	CONFIG_MEDIA_RC_SUPPORT=y \
 	CONFIG_RC_DEVICES=y \
+<<<<<<< HEAD
 	CONFIG_RC_CORE=y \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_IR_SUNXI
     FILES:=$(LINUX_DIR)/drivers/media/rc/sunxi-cir.ko
     AUTOLOAD:=$(call AutoLoad,50,sunxi-cir)
 endef
 
 define KernelPackage/sunxi-ir/description
+<<<<<<< HEAD
  Support for the AllWinner sunXi SoC's onboard IR
+=======
+ Support for the AllWinner sunXi SoC's onboard IR (A20)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,sunxi-ir))

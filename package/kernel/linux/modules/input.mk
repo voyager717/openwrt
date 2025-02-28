@@ -11,7 +11,11 @@ define KernelPackage/hid
   SUBMENU:=$(INPUT_MODULES_MENU)
   TITLE:=HID Devices
   DEPENDS:=+kmod-input-core +kmod-input-evdev
+<<<<<<< HEAD
   KCONFIG:=CONFIG_HID CONFIG_HID_SUPPORT=y CONFIG_HIDRAW=y CONFIG_HID_BATTERY_STRENGTH=y
+=======
+  KCONFIG:=CONFIG_HID CONFIG_HIDRAW=y CONFIG_HID_BATTERY_STRENGTH=y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/hid/hid.ko
   AUTOLOAD:=$(call AutoLoad,61,hid)
 endef
@@ -92,7 +96,11 @@ $(eval $(call KernelPackage,input-gpio-keys))
 define KernelPackage/input-gpio-keys-polled
   SUBMENU:=$(INPUT_MODULES_MENU)
   TITLE:=Polled GPIO key support
+<<<<<<< HEAD
   DEPENDS:=@GPIO_SUPPORT +kmod-input-core
+=======
+  DEPENDS:=@GPIO_SUPPORT +kmod-input-polldev
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_KEYBOARD_GPIO_POLLED \
 	CONFIG_INPUT_KEYBOARD=y
@@ -142,6 +150,24 @@ endef
 $(eval $(call KernelPackage,input-joydev))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/input-polldev
+  SUBMENU:=$(INPUT_MODULES_MENU)
+  TITLE:=Polled Input device support
+  DEPENDS:=+kmod-input-core
+  KCONFIG:=CONFIG_INPUT_POLLDEV
+  FILES:=$(LINUX_DIR)/drivers/input/input-polldev.ko
+endef
+
+define KernelPackage/input-polldev/description
+ Kernel module for support of polled input devices
+endef
+
+$(eval $(call KernelPackage,input-polldev))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/input-matrixkmap
   SUBMENU:=$(INPUT_MODULES_MENU)
   TITLE:=Input matrix devices support
@@ -164,8 +190,15 @@ define KernelPackage/input-touchscreen-ads7846
   DEPENDS:=+kmod-hwmon-core +kmod-input-core +kmod-spi-bitbang
   KCONFIG:= \
 	CONFIG_INPUT_TOUCHSCREEN=y \
+<<<<<<< HEAD
 	CONFIG_TOUCHSCREEN_ADS7846
   FILES:=$(LINUX_DIR)/drivers/input/touchscreen/ads7846.ko
+=======
+	CONFIG_TOUCHSCREEN_PROPERTIES=y \
+	CONFIG_TOUCHSCREEN_ADS7846
+  FILES:=$(LINUX_DIR)/drivers/input/touchscreen/ads7846.ko \
+	$(LINUX_DIR)/drivers/input/touchscreen/of_touchscreen.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,ads7846)
 endef
 
@@ -176,6 +209,7 @@ endef
 $(eval $(call KernelPackage,input-touchscreen-ads7846))
 
 
+<<<<<<< HEAD
 define KernelPackage/input-touchscreen-edt-ft5x06
   SUBMENU:=$(INPUT_MODULES_MENU)
   TITLE:=EDT FT5x06 and Focaltech FT6236 based touchscreens
@@ -199,6 +233,12 @@ define KernelPackage/keyboard-imx
   SUBMENU:=$(INPUT_MODULES_MENU)
   TITLE:=IMX keypad support
   DEPENDS:=@(TARGET_mxs||TARGET_imx) +kmod-input-matrixkmap
+=======
+define KernelPackage/keyboard-imx
+  SUBMENU:=$(INPUT_MODULES_MENU)
+  TITLE:=IMX keypad support
+  DEPENDS:=@(TARGET_mxs||TARGET_imx6) +kmod-input-matrixkmap
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_KEYBOARD_IMX \
 	CONFIG_INPUT_KEYBOARD=y

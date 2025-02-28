@@ -18,9 +18,12 @@ preinit_ip_config() {
 	fi
 
 	ip link set dev $netdev up
+<<<<<<< HEAD
 	if [ -n "$vid" ]; then
 		ip link set dev $1 up
 	fi
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ip -4 address add $pi_ip/$pi_netmask broadcast $pi_broadcast dev $1
 }
 
@@ -63,6 +66,7 @@ preinit_config_switch() {
 	json_select ..
 }
 
+<<<<<<< HEAD
 preinit_config_port() {
 	local original
 	local dev_port
@@ -92,6 +96,8 @@ preinit_config_port() {
 	ip link set "$original" name "$netdev"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 preinit_config_board() {
 	/bin/board_detect /tmp/board.json
 
@@ -102,6 +108,7 @@ preinit_config_board() {
 	json_init
 	json_load "$(cat /tmp/board.json)"
 
+<<<<<<< HEAD
 	# Find the current highest eth*
 	max_eth=$(grep -o '^ *eth[0-9]*:' /proc/net/dev | tr -dc '[0-9]\n' | sort -n | tail -1)
 	# Find and move netdevs using eth*s we are configuring
@@ -130,6 +137,8 @@ preinit_config_board() {
 		json_select ..
 	done
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	json_select network
 		json_select "lan"
 			json_get_vars device

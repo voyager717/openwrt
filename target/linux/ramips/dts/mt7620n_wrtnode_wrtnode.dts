@@ -1,7 +1,10 @@
 #include "mt7620n.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "wrtnode,wrtnode", "ralink,mt7620n-soc";
@@ -18,8 +21,12 @@
 		compatible = "gpio-leds";
 
 		led_indicator: indicator {
+<<<<<<< HEAD
 			function = LED_FUNCTION_INDICATOR;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:indicator";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio1 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -54,6 +61,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -72,6 +80,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -92,15 +106,23 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	mediatek,portmap = "wllll";
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &state_default {

@@ -4,17 +4,27 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "yuncore,ax820", "mediatek,mt7621-soc";
 	model = "YunCore AX820";
 
 	aliases {
+<<<<<<< HEAD
 		led-boot = &led_system;
 		led-failsafe = &led_system;
 		led-running = &led_system;
 		led-upgrade = &led_system;
+=======
+		led-boot = &led_status_green;
+		led-failsafe = &led_status_green;
+		led-running = &led_status_green;
+		led-upgrade = &led_status_green;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -24,6 +34,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		/* At least 2 AX820 variants are known and cannot be distinguished (same hw rev):
 		   - System LED green GPIO 15; red and blue apparently not connected
 		   - System LED red GPIO 15, WLAN2G LED green GPIO 14, WLAN5G LED blue GPIO 16
@@ -60,6 +71,12 @@
 			function = LED_FUNCTION_LAN;
 			gpios = <&switch0 3 GPIO_ACTIVE_LOW>;
 		};
+=======
+		led_status_green: status_green {
+			label = "green:status";
+			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	watchdog {
@@ -87,7 +104,11 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
+=======
+		spi-max-frequency = <80000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		m25p,fast-read;
 
 		partitions {
@@ -111,6 +132,7 @@
 			 * firmware, so we do not use it either
 			 */
 
+<<<<<<< HEAD
 			partition@50000 {
 				label = "Factory";
 				reg = <0x50000 0x40000>;
@@ -135,6 +157,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@50000 {
+				label = "Factory";
+				reg = <0x50000 0x40000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@90000 {
@@ -154,13 +182,18 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>, <&precal_factory_e10>;
 		nvmem-cell-names = "eeprom", "precal";
 		mediatek,disable-radar-background;
+=======
+		mediatek,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -183,6 +216,20 @@
 	#gpio-cells = <2>;
 
 	ports {
+=======
+	mtd-mac-address = <&factory 0xe000>;
+};
+
+&switch0 {
+	ports {
+		port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0xe000>;
+			mtd-mac-address-increment = <1>;
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan";

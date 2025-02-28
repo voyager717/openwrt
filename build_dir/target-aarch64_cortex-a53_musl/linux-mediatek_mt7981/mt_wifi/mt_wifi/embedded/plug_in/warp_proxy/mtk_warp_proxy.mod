@@ -1,0 +1,2 @@
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_mt7981/mt_wifi/mt_wifi_ap/../mt_wifi/embedded/plug_in/warp_proxy/warp_proxy.o /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/linux-mediatek_mt7981/mt_wifi/mt_wifi_ap/../mt_wifi/embedded/plug_in/warp_proxy/chips/warp_wifi_mt7981.o
+

@@ -72,9 +72,15 @@
 +
 +static int do_lock(void)
 +{
+<<<<<<< HEAD
 +	pid_t pid;
 +	int flags;
 +	char pidstr[12];
+=======
++	int pid;
++	int flags;
++	char pidstr[8];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +
 +	if ((fd = open(file, O_RDWR | O_CREAT | O_EXCL, 0700)) < 0) {
 +		if ((fd = open(file, O_RDWR)) < 0) {
@@ -109,7 +115,11 @@
 +		if (!waitonly) {
 +			lseek(fd, 0, SEEK_SET);
 +			ftruncate(fd, 0);
+<<<<<<< HEAD
 +			snprintf(pidstr, sizeof(pidstr), "%d\n", pid);
+=======
++			sprintf(pidstr, "%d\n", pid);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +			write(fd, pidstr, strlen(pidstr));
 +			close(fd);
 +		}

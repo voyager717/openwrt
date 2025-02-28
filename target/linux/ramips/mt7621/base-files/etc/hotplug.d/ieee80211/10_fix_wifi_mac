@@ -10,6 +10,7 @@ PHYNBR=${DEVPATH##*/phy}
 board=$(board_name)
 
 case "$board" in
+<<<<<<< HEAD
 	arcadyan,we420223-99)
 		if [ "$PHYNBR" = "0" ]; then
 			mac24=$(macaddr_add "$(get_mac_label)" "0xf00001")
@@ -122,10 +123,17 @@ case "$board" in
 			macaddr_setbit_la "$(macaddr_add $hw_mac_addr 3)" > /sys${DEVPATH}/macaddress
 		fi
 		;;
+=======
+	glinet,gl-mt1300)
+		[ "$PHYNBR" = "1" ] && \
+			macaddr_add "$(mtd_get_mac_binary factory 0x4)" 1 > /sys${DEVPATH}/macaddress
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	jcg,q20)
 		[ "$PHYNBR" = "1" ] && \
 			macaddr_setbit_la "$(mtd_get_mac_binary Factory 0x4)" > /sys${DEVPATH}/macaddress
 		;;
+<<<<<<< HEAD
 	keenetic,kn-1910)
 		lan_mac_addr="$(mtd_get_mac_binary RF-EEPROM 0x4)"
 		[ "$PHYNBR" = "1" ] && \
@@ -142,10 +150,18 @@ case "$board" in
 	linksys,ea7500-v2|\
 	linksys,ea8100-v1|\
 	linksys,ea8100-v2)
+=======
+	linksys,e5600|\
+	linksys,ea7300-v1|\
+	linksys,ea7300-v2|\
+	linksys,ea7500-v2|\
+	linksys,ea8100-v1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		hw_mac_addr=$(mtd_get_mac_ascii devinfo hw_mac_addr)
 		[ "$PHYNBR" = "0" ] && macaddr_add $hw_mac_addr 1 > /sys${DEVPATH}/macaddress
 		[ "$PHYNBR" = "1" ] && macaddr_add $hw_mac_addr 2 > /sys${DEVPATH}/macaddress
 		;;
+<<<<<<< HEAD
 	belkin,rt1800|\
 	linksys,e7350)
 		hw_mac_addr=$(mtd_get_mac_ascii Config wan_hwaddr)
@@ -246,4 +262,10 @@ case "$board" in
 		[ "$PHYNBR" = "0" ] && macaddr_add $hw_mac_addr 1 > /sys${DEVPATH}/macaddress
 		[ "$PHYNBR" = "1" ] && macaddr_add $hw_mac_addr 2 > /sys${DEVPATH}/macaddress
 		;;
+=======
+	yuncore,ax820)
+		[ "$PHYNBR" = "1" ] && \
+			macaddr_setbit_la "$(mtd_get_mac_binary Factory 0xe000)" > /sys${DEVPATH}/macaddress
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 esac

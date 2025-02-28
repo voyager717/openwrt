@@ -18,7 +18,11 @@ for pkg in `find $pkg_dir -name '*.ipk' | sort`; do
 	[[ "$name" = "libc" ]] && continue
 	echo "Generating index for package $pkg" >&2
 	file_size=$(stat -L -c%s $pkg)
+<<<<<<< HEAD
 	sha256sum=$($MKHASH sha256 $pkg)
+=======
+	sha256sum=$(mkhash sha256 $pkg)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	# Take pains to make variable value sed-safe
 	sed_safe_pkg=`echo $pkg | sed -e 's/^\.\///g' -e 's/\\//\\\\\\//g'`
 	tar -xzOf $pkg ./control.tar.gz | tar xzOf - ./control | sed -e "s/^Description:/Filename: $sed_safe_pkg\\

@@ -2,7 +2,11 @@
 
 / {
 	compatible = "zyxel,p-2812hnu-f3", "zyxel,p-2812hnu", "lantiq,xway", "lantiq,vr9";
+<<<<<<< HEAD
 	model = "Zyxel P-2812HNU-F3";
+=======
+	model = "ZyXEL P-2812HNU-F3";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pci0 {
@@ -51,8 +55,11 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 
+<<<<<<< HEAD
 		nand-use-soft-ecc-engine;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		partition@0 {
 			label = "kernel";
 			reg = <0x0 0x200000>;

@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7620a_tplink_re2x0-v1.dtsi"
 
 / {
@@ -19,20 +22,32 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio1 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 0 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
 		};
 

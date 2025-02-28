@@ -26,7 +26,10 @@ proto_wireguard_init_config() {
 proto_wireguard_setup_peer() {
 	local peer_config="$1"
 
+<<<<<<< HEAD
 	local disabled
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local public_key
 	local preshared_key
 	local allowed_ips
@@ -35,7 +38,10 @@ proto_wireguard_setup_peer() {
 	local endpoint_port
 	local persistent_keepalive
 
+<<<<<<< HEAD
 	config_get_bool disabled "${peer_config}" "disabled" 0
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	config_get public_key "${peer_config}" "public_key"
 	config_get preshared_key "${peer_config}" "preshared_key"
 	config_get allowed_ips "${peer_config}" "allowed_ips"
@@ -44,11 +50,14 @@ proto_wireguard_setup_peer() {
 	config_get endpoint_port "${peer_config}" "endpoint_port"
 	config_get persistent_keepalive "${peer_config}" "persistent_keepalive"
 
+<<<<<<< HEAD
 	if [ "${disabled}" -eq 1 ]; then
 		# skip disabled peers
 		return 0
 	fi
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if [ -z "$public_key" ]; then
 		echo "Skipping peer config $peer_config because public key is not defined."
 		return 0
@@ -102,6 +111,7 @@ proto_wireguard_setup_peer() {
 	fi
 }
 
+<<<<<<< HEAD
 ensure_key_is_generated() {
 	local private_key
 	private_key="$(uci get network."$1".private_key)"
@@ -119,6 +129,8 @@ ensure_key_is_generated() {
 	fi
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 proto_wireguard_setup() {
 	local config="$1"
 	local wg_dir="/tmp/wireguard"
@@ -128,8 +140,11 @@ proto_wireguard_setup() {
 	local listen_port
 	local mtu
 
+<<<<<<< HEAD
 	ensure_key_is_generated "${config}"
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	config_load network
 	config_get private_key "${config}" "private_key"
 	config_get listen_port "${config}" "listen_port"

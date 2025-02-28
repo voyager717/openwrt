@@ -5,6 +5,15 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 
+<<<<<<< HEAD
+=======
+/ {
+	aliases {
+		label-mac-device = &eth0;
+	};
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie {
 	status = "okay";
 };
@@ -12,6 +21,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
@@ -29,8 +43,19 @@
 
 	phy-mode = "sgmii";
 	phy-handle = <&phy0>;
+<<<<<<< HEAD
+=======
+
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -98,9 +98,12 @@ proto_464xlat_teardown() {
 		ip -6 rule del from all lookup local
 		ip -6 rule add from all lookup local pref 0
 	fi
+<<<<<<< HEAD
 
 	# Kill conntracks SNATed to 192.0.0.1
 	echo 192.0.0.1 > /proc/net/nf_conntrack
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 proto_464xlat_init_config() {

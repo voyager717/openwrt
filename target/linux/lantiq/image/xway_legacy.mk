@@ -6,7 +6,11 @@ define Device/arcadyan_arv4518pwr01
 	kmod-ltq-adsl-danube-mei kmod-ltq-adsl-danube \
 	kmod-ltq-adsl-danube-fw-a kmod-ltq-atm-danube \
 	ltq-adsl-app ppp-mod-pppoa \
+<<<<<<< HEAD
 	kmod-ath5k wpad-basic-mbedtls
+=======
+	kmod-ath5k wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += ARV4518PWR01
   DEFAULT := n
 endef
@@ -20,7 +24,11 @@ define Device/arcadyan_arv4518pwr01a
 	kmod-ltq-adsl-danube-mei kmod-ltq-adsl-danube \
 	kmod-ltq-adsl-danube-fw-a kmod-ltq-atm-danube \
 	ltq-adsl-app ppp-mod-pppoa \
+<<<<<<< HEAD
 	kmod-ath5k wpad-basic-mbedtls
+=======
+	kmod-ath5k wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += ARV4518PWR01A
   DEFAULT := n
 endef
@@ -38,7 +46,11 @@ define Device/arcadyan_arv4520pw
 	kmod-ltq-adsl-danube-mei kmod-ltq-adsl-danube \
 	kmod-ltq-adsl-danube-fw-b kmod-ltq-atm-danube \
 	ltq-adsl-app ppp-mod-pppoa \
+<<<<<<< HEAD
 	kmod-rt61-pci wpad-basic-mbedtls
+=======
+	kmod-rt61-pci wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += ARV4520PW
   DEFAULT := n
 endef
@@ -51,7 +63,11 @@ define Device/arcadyan_arv4525pw
   DEVICE_ALT0_MODEL := Speedport W502V
   DEVICE_ALT0_VARIANT := Typ A
   IMAGE_SIZE := 3776k
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ath5k wpad-basic-mbedtls \
+=======
+  DEVICE_PACKAGES := kmod-ath5k wpad-basic-wolfssl \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	kmod-ltq-adsl-danube-mei kmod-ltq-adsl-danube \
 	kmod-ltq-adsl-danube-fw-b kmod-ltq-atm-danube \
 	ltq-adsl-app ppp-mod-pppoa -swconfig
@@ -67,7 +83,11 @@ define Device/arcadyan_arv452cqw
   DEVICE_ALT0_MODEL := Easybox 801
   IMAGE_SIZE := 3776k
   DEVICE_PACKAGES := kmod-usb-dwc2 kmod-usb-ledtrig-usbport \
+<<<<<<< HEAD
 	kmod-ath5k wpad-basic-mbedtls \
+=======
+	kmod-ath5k wpad-basic-wolfssl \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	kmod-ltq-adsl-danube-mei kmod-ltq-adsl-danube \
 	kmod-ltq-adsl-danube-fw-b kmod-ltq-atm-danube \
 	ltq-adsl-app ppp-mod-pppoa

@@ -79,6 +79,7 @@
 				label = "config";
 				reg = <0x20000 0x10000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -107,6 +108,14 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			};
+
+			art: partition@30000 {
+				label = "art";
+				reg = <0x30000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@40000 {
@@ -135,6 +144,7 @@
 };
 
 &usb {
+<<<<<<< HEAD
 	status = "okay";
 };
 
@@ -155,6 +165,31 @@
 	port@4 {
 		label = "internal wwan modem";
 		reg = <4>;
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	port@1 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <1>;
+
+		port@1 {
+			compatible = "usb-a-connector";
+			reg = <1>;
+		};
+
+		port@3 {
+			label = "RS-232 serial adapter";
+			reg = <3>;
+		};
+
+		port@4 {
+			label = "internal wwan modem";
+			reg = <4>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -165,8 +200,14 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_config_0 2>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&config 0x0>;
+	mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pinmux {

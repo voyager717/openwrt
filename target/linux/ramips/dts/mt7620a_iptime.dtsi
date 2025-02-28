@@ -28,6 +28,7 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
+<<<<<<< HEAD
 			partition@0 {
 				label = "u-boot";
 				reg = <0x0 0x20000>;
@@ -50,6 +51,12 @@
 						reg = <0x1fc20 0x6>;
 					};
 				};
+=======
+			uboot: partition@0 {
+				label = "u-boot";
+				reg = <0x0 0x20000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -67,8 +74,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc20>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ehci {
@@ -87,8 +98,12 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_uboot_1f800>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&uboot 0x1f800>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 
 		led {
@@ -101,6 +116,11 @@
 &wmac {
 	pinctrl-names = "default";
 	pinctrl-0 = <&wled_pins>;
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_uboot_1f400>;
 	nvmem-cell-names = "eeprom";
+=======
+
+	ralink,mtd-eeprom = <&uboot 0x1f400>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

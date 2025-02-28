@@ -1,0 +1,36 @@
+unwind-c.o: \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/unwind-c.c \
+ ../.././gcc/tconfig.h ../.././gcc/auto-host.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/ansidecl.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../gcc/tsystem.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-initial/gcc/include/stddef.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-initial/gcc/include/float.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/filenames.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/hashtab.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/ansidecl.h \
+ auto-target.h unwind.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/unwind-pe.h
+
+../.././gcc/tconfig.h:
+
+../.././gcc/auto-host.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/ansidecl.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../gcc/tsystem.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-initial/gcc/include/stddef.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-initial/gcc/include/float.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/filenames.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/hashtab.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/../include/ansidecl.h:
+
+auto-target.h:
+
+unwind.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libgcc/unwind-pe.h:

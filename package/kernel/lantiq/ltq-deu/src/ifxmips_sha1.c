@@ -38,11 +38,16 @@
   \brief ifx deu sha1 functions
 */
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* Project header */
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/mm.h>
 #include <linux/crypto.h>
+<<<<<<< HEAD
 #include <linux/version.h>
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,11,0)
 #include <crypto/sha.h>
@@ -50,6 +55,10 @@
 #include <crypto/sha1.h>
 #endif
 #include <crypto/hash.h>
+=======
+#include <linux/cryptohash.h>
+#include <crypto/sha.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <crypto/internal/hash.h>
 #include <linux/types.h>
 #include <linux/scatterlist.h>
@@ -69,6 +78,14 @@
 #define SHA1_HMAC_BLOCK_SIZE    64
 #define HASH_START   IFX_HASH_CON
 
+<<<<<<< HEAD
+=======
+static spinlock_t lock;
+#define CRTCL_SECT_INIT        spin_lock_init(&lock)
+#define CRTCL_SECT_START       spin_lock_irqsave(&lock, flag)
+#define CRTCL_SECT_END         spin_unlock_irqrestore(&lock, flag)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 //#define CRYPTO_DEBUG
 #ifdef CRYPTO_DEBUG
 extern char debug_level;
@@ -90,21 +107,34 @@ struct sha1_ctx {
 
 extern int disable_deudma;
 
+<<<<<<< HEAD
 /*! \fn static void sha1_transform1 (u32 *state, const u32 *in)
+=======
+
+/*! \fn static void sha1_transform (u32 *state, const u32 *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \ingroup IFX_SHA1_FUNCTIONS
  *  \brief main interface to sha1 hardware   
  *  \param state current state 
  *  \param in 64-byte block of input  
 */                                 
+<<<<<<< HEAD
 static void sha1_transform1 (struct sha1_ctx *sctx, u32 *state, const u32 *in)
+=======
+static void sha1_transform (struct sha1_ctx *sctx, u32 *state, const u32 *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     int i = 0;
     volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
     unsigned long flag;
 
+<<<<<<< HEAD
     CRTCL_SECT_HASH_START;
 
     SHA_HASH_INIT;
+=======
+    CRTCL_SECT_START;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     /* For context switching purposes, the previous hash output
      * is loaded back into the output register 
@@ -137,18 +167,34 @@ static void sha1_transform1 (struct sha1_ctx *sctx, u32 *state, const u32 *in)
 
     sctx->started = 1;
 
+<<<<<<< HEAD
     CRTCL_SECT_HASH_END;
 }
 
 /*! \fn static void sha1_init1(struct crypto_tfm *tfm)
+=======
+    CRTCL_SECT_END;
+}
+
+/*! \fn static void sha1_init(struct crypto_tfm *tfm)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \ingroup IFX_SHA1_FUNCTIONS
  *  \brief initialize sha1 hardware   
  *  \param tfm linux crypto algo transform  
 */                                 
+<<<<<<< HEAD
 static int sha1_init1(struct shash_desc *desc)
 {
     struct sha1_ctx *sctx = shash_desc_ctx(desc);
     
+=======
+static int sha1_init(struct shash_desc *desc)
+{
+    struct sha1_ctx *sctx = shash_desc_ctx(desc);
+    
+    SHA_HASH_INIT;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     sctx->started = 0;
     sctx->count = 0;
     return 0;
@@ -172,9 +218,15 @@ static int sha1_update(struct shash_desc * desc, const u8 *data,
 
     if ((j + len) > 63) {
         memcpy (&sctx->buffer[j], data, (i = 64 - j));
+<<<<<<< HEAD
         sha1_transform1 (sctx, sctx->state, (const u32 *)sctx->buffer);
         for (; i + 63 < len; i += 64) {
             sha1_transform1 (sctx, sctx->state, (const u32 *)&data[i]);
+=======
+        sha1_transform (sctx, sctx->state, (const u32 *)sctx->buffer);
+        for (; i + 63 < len; i += 64) {
+            sha1_transform (sctx, sctx->state, (const u32 *)&data[i]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 
         j = 0;
@@ -199,8 +251,13 @@ static int sha1_final(struct shash_desc *desc, u8 *out)
     u64 t;
     u8 bits[8] = { 0, };
     static const u8 padding[64] = { 0x80, };
+<<<<<<< HEAD
     //volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
     //unsigned long flag;
+=======
+    volatile struct deu_hash_t *hashs = (struct deu_hash_t *) HASH_START;
+    unsigned long flag;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     t = sctx->count;
     bits[7] = 0xff & t;
@@ -227,7 +284,19 @@ static int sha1_final(struct shash_desc *desc, u8 *out)
     /* Append length */
     sha1_update (desc, bits, sizeof bits);
 
+<<<<<<< HEAD
     memcpy(out, sctx->hash, SHA1_DIGEST_SIZE);
+=======
+    CRTCL_SECT_START;
+
+    *((u32 *) out + 0) = hashs->D1R;
+    *((u32 *) out + 1) = hashs->D2R;
+    *((u32 *) out + 2) = hashs->D3R;
+    *((u32 *) out + 3) = hashs->D4R;
+    *((u32 *) out + 4) = hashs->D5R;
+
+    CRTCL_SECT_END;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     // Wipe context
     memset (sctx, 0, sizeof *sctx);
@@ -240,7 +309,11 @@ static int sha1_final(struct shash_desc *desc, u8 *out)
 */
 static struct shash_alg ifxdeu_sha1_alg = {
         .digestsize     =       SHA1_DIGEST_SIZE,
+<<<<<<< HEAD
         .init           =       sha1_init1,
+=======
+        .init           =       sha1_init,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         .update         =       sha1_update,
         .final          =       sha1_final,
         .descsize       =       sizeof(struct sha1_ctx),
@@ -249,7 +322,11 @@ static struct shash_alg ifxdeu_sha1_alg = {
                 .cra_name       =       "sha1",
                 .cra_driver_name=       "ifxdeu-sha1",
                 .cra_priority   =       300,
+<<<<<<< HEAD
                 .cra_flags      =       CRYPTO_ALG_TYPE_HASH | CRYPTO_ALG_KERN_DRIVER_ONLY,
+=======
+                .cra_flags      =       CRYPTO_ALG_TYPE_HASH,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                 .cra_blocksize  =       SHA1_HMAC_BLOCK_SIZE,
                 .cra_module     =       THIS_MODULE,
         }
@@ -268,6 +345,11 @@ int ifxdeu_init_sha1 (void)
     if ((ret = crypto_register_shash(&ifxdeu_sha1_alg)))
         goto sha1_err;
 
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_INIT;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     printk (KERN_NOTICE "IFX DEU SHA1 initialized%s.\n", disable_deudma ? "" : " (DMA)");
     return ret;
 
@@ -286,3 +368,8 @@ void ifxdeu_fini_sha1 (void)
 
 
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

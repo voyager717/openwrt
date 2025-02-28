@@ -6,7 +6,10 @@
 				"bind",
 				"brk",
 				"clock_gettime",
+<<<<<<< HEAD
 				"clock_gettime64",
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				"close",
 				"connect",
 				"epoll_create",
@@ -19,6 +22,7 @@
 				"fcntl",
 				"fcntl64",
 				"fstat",
+<<<<<<< HEAD
 				"ftruncate",
 				"getdents64",
 				"getsockname",
@@ -29,6 +33,10 @@
 				"mmap2",
 				"munmap",
 				"newfstatat",
+=======
+				"getsockname",
+				"ioctl",
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				"open",
 				"openat",
 				"pipe",
@@ -46,10 +54,15 @@
 				"setsockopt",
 				"sigreturn",
 				"socket",
+<<<<<<< HEAD
 				"statx",
 				"time",
 				"uname",
 				"unlinkat",
+=======
+				"time",
+				"uname",
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				"write",
 				"writev"
 			],

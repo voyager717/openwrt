@@ -4,34 +4,59 @@ include $(INCLUDE_DIR)/image.mk
 KERNEL_LOADADDR = 0x80060000
 
 DEVICE_VARS += LOADER_FLASH_OFFS LOADER_TYPE
+<<<<<<< HEAD
 DEVICE_VARS += LOADER_FLASH_MAX LOADER_KERNEL_MAGIC LZMA_TEXT_START
 DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
 DEVICE_VARS += RAS_BOARD RAS_ROOTFS_SIZE RAS_VERSION
 DEVICE_VARS += SEAMA_SIGNATURE SEAMA_MTDBLOCK
+=======
+DEVICE_VARS += LOADER_FLASH_MAX LOADER_KERNEL_MAGIC
+DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
+DEVICE_VARS += RAS_BOARD RAS_ROOTFS_SIZE RAS_VERSION
+
+define Build/combined-image
+	sh $(TOPDIR)/scripts/combined-image.sh \
+		"$(IMAGE_KERNEL)" \
+		"$@" \
+		"$@.new"
+	@mv $@.new $@
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/loader-common
 	rm -rf $@.src
 	$(MAKE) -C lzma-loader \
 		PKG_BUILD_DIR="$@.src" \
 		TARGET_DIR="$(dir $@)" LOADER_NAME="$(notdir $@)" \
+<<<<<<< HEAD
 		LZMA_TEXT_START=$(LZMA_TEXT_START) \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1) compile loader.$(LOADER_TYPE)
 	mv "$@.$(LOADER_TYPE)" "$@"
 	rm -rf $@.src
 endef
 
 define Build/loader-kernel
+<<<<<<< HEAD
 	$(call Build/loader-common, \
 		LOADER_DATA="$@" \
 		BOARD="$(DEVICE_NAME)" )
+=======
+	$(call Build/loader-common,LOADER_DATA="$@")
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/loader-okli-compile
 	$(call Build/loader-common, \
 		FLASH_OFFS=$(LOADER_FLASH_OFFS) \
 		FLASH_MAX=$(LOADER_FLASH_MAX) \
+<<<<<<< HEAD
 		KERNEL_MAGIC=$(LOADER_KERNEL_MAGIC) \
 		BOARD="$(DEVICE_NAME)" )
+=======
+		KERNEL_MAGIC=$(LOADER_KERNEL_MAGIC) )
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 # Arguments: <output name> <kernel offset>
@@ -45,10 +70,13 @@ define Build/append-loader-okli
 	cat "$(KDIR)/loader-$(word 1,$(1)).$(LOADER_TYPE)" >> "$@"
 endef
 
+<<<<<<< HEAD
 define Build/append-loader-okli-uimage
 	cat "$(KDIR)/loader-$(word 1,$(1)).uImage" >> "$@"
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/relocate-kernel
 	rm -rf $@.relocate
 	$(CP) ../../generic/image/relocate $@.relocate
@@ -75,6 +103,7 @@ define Device/Default
   LOADER_FLASH_MAX :=
   LOADER_FLASH_OFFS :=
   LOADER_TYPE :=
+<<<<<<< HEAD
   LZMA_TEXT_START := 0x81800000
   COMPILE :=
   IMAGES := sysupgrade.bin
@@ -105,6 +134,12 @@ define Device/seama
   IMAGE/factory.bin := $$(IMAGE/default) | pad-rootfs -x 64 | seama | \
 	seama-seal | check-size
   SEAMA_SIGNATURE :=
+=======
+  COMPILE :=
+  IMAGES := sysupgrade.bin
+  IMAGE/sysupgrade.bin = append-kernel | pad-to $$$$(BLOCKSIZE) | \
+	append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 include $(SUBTARGET).mk
@@ -117,7 +152,10 @@ endif
 ifeq ($(SUBTARGET),tiny)
 include tiny-netgear.mk
 include tiny-tp-link.mk
+<<<<<<< HEAD
 include tiny-ubnt.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 $(eval $(call BuildImage))

@@ -1,6 +1,10 @@
 --- a/iptables/xtables-legacy-multi.c
 +++ b/iptables/xtables-legacy-multi.c
+<<<<<<< HEAD
 @@ -28,8 +28,10 @@ static const struct subcommand multi_sub
+=======
+@@ -32,8 +32,10 @@ static const struct subcommand multi_sub
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  
  #endif

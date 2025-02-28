@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #!/bin/sh
+=======
+#! /bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # A little script I whipped up to make it easy to
 # patch source trees and have sane error handling
 # -Erik

@@ -1,9 +1,15 @@
 #!/bin/sh /etc/rc.common
+<<<<<<< HEAD
 # SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2013-2020 OpenWrt.org
 
 START=11
+=======
+# (C) 2013 openwrt.org
+
+START=40
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 boot() {
 	/sbin/block mount

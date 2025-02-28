@@ -9,16 +9,20 @@
  * option) any later version.
  */
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /include/ "fsl/p1020si-pre.dtsi"
 / {
 	model = "Aerohive HiveAP-330";
 	compatible = "aerohive,hiveap-330";
 
 	aliases {
+<<<<<<< HEAD
 		led-boot = &led_power_green;
 		led-failsafe = &led_fault_red;
 		led-running = &led_power_green;
@@ -130,6 +134,28 @@
 		ranges = <0x0 0x0 0x0 0xec000000 0x4000000>;
 
 		nor@0 {
+=======
+		led-boot = &tricolor_green;
+		led-failsafe = &tricolor_red;
+		led-running = &tricolor_green;
+		led-upgrade = &tricolor_red;
+		label-mac-device = &enet0;
+	};
+
+	chosen {
+		bootargs-override = "console=ttyS0,9600";
+	};
+
+	memory {
+		device_type = "memory";
+	};
+
+	board_lbc: lbc: localbus@ffe05000 {
+		reg = <0 0xffe05000 0 0x1000>;
+		ranges = <0x0 0x0 0x0 0xec000000 0x4000000>;
+
+		nor@0,0 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			#address-cells = <1>;
 			#size-cells = <1>;
 			compatible = "cfi-flash";
@@ -137,6 +163,7 @@
 			bank-width = <2>;
 			device-width = <1>;
 
+<<<<<<< HEAD
 			partitions {
 				compatible = "fixed-partitions";
 				#address-cells = <1>;
@@ -205,12 +232,73 @@
 					label = "u-boot";
 					read-only;
 				};
+=======
+			partition@0 {
+				reg = <0x0 0x40000>;
+				label = "dtb";
+			};
+
+			partition@40000 {
+				reg = <0x40000 0x40000>;
+				label = "initrd";
+			};
+
+			partition@80000 {
+				reg = <0x80000 0x27c0000>;
+				label = "rootfs";
+			};
+
+			partition@2840000 {
+				reg = <0x2840000 0x800000>;
+				label = "kernel";
+			};
+
+			partition@3040000 {
+				reg = <0x3040000 0xec0000>;
+				label = "stock-jffs2";
+				read-only;
+			};
+
+			hwinfo: partition@3f00000 {
+				reg = <0x3f00000 0x20000>;
+				label = "hw-info";
+				read-only;
+			};
+
+			partition@3f20000 {
+				reg = <0x3f20000 0x20000>;
+				label = "boot-info";
+				read-only;
+			};
+
+			partition@3f40000 {
+				reg = <0x3f40000 0x20000>;
+				label = "boot-info-backup";
+				read-only;
+			};
+
+			partition@3f60000 {
+				reg = <0x3f60000 0x20000>;
+				label = "u-boot-env";
+			};
+
+			partition@3f80000 {
+				reg = <0x3f80000 0x80000>;
+				label = "u-boot";
+				read-only;
+			};
+
+			firmware@0 {
+				reg = <0x0 0x3040000>;
+				label = "firmware";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 
 	board_soc: soc: soc@ffe00000 {
 		ranges = <0x0 0x0 0xffe00000 0x100000>;
+<<<<<<< HEAD
 		bus-frequency = <266666664>;
 
 		spi0: spi@7000 {
@@ -223,6 +311,8 @@
 				spi-max-frequency = <5000000>;
 			};
 		};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		i2c@3100 {
 			tpm@29 {
@@ -234,6 +324,7 @@
 				compatible = "national,lp5521";
 				reg = <0x32>;
 				clock-mode = /bits/ 8 <2>;
+<<<<<<< HEAD
 				#address-cells = <1>;
 				#size-cells = <0>;
 
@@ -307,17 +398,48 @@
 				compatible = "adi,ds28cn01";
 				reg = <0x51>;
 				read-only;
+=======
+				tricolor_red: chan0 {
+					chan-name = "hiveap-330:red:tricolor0";
+					led-cur = /bits/ 8 <0x2f>;
+					max-cur = /bits/ 8 <0x5f>;
+				};
+				tricolor_green:chan1 {
+					chan-name = "hiveap-330:green:tricolor0";
+					led-cur = /bits/ 8 <0x2f>;
+					max-cur = /bits/ 8 <0x5f>;
+				};
+				chan2 {
+					chan-name = "hiveap-330:blue:tricolor0";
+					led-cur = /bits/ 8 <0x2f>;
+					max-cur = /bits/ 8 <0x5f>;
+				};
+			};
+
+			/* Most likely SoC boot config */
+			eeprom@51 {
+				compatible = "eeprom";
+				reg = <0x51>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 
 		mdio@24000 {
 			phy0: ethernet-phy@0 {
+<<<<<<< HEAD
 				/* interrupts = <3 1 0 0>; */
+=======
+				interrupts = <3 1 0 0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				reg = <0x1>;
 			};
 
 			phy1: ethernet-phy@1 {
+<<<<<<< HEAD
 				/* interrupts = <2 1 0 0>; */
+=======
+				interrupts = <2 1 0 0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				reg = <0x2>;
 			};
 		};
@@ -331,6 +453,7 @@
 		};
 
 		enet0: ethernet@b0000 {
+<<<<<<< HEAD
 			rx-stash-idx = <0x00>;
 			rx-stash-len = <0x60>;
 			bd-stash;
@@ -339,6 +462,12 @@
 			phy-connection-type = "rgmii-id";
 			nvmem-cells = <&macaddr_hwinfo_0 0>;
 			nvmem-cell-names = "mac-address";
+=======
+			status = "okay";
+			phy-handle = <&phy0>;
+			phy-connection-type = "rgmii-id";
+			mtd-mac-address = <&hwinfo 0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		enet1: ethernet@b1000 {
@@ -346,6 +475,7 @@
 		};
 
 		enet2: ethernet@b2000 {
+<<<<<<< HEAD
 			rx-stash-idx = <0x00>;
 			rx-stash-len = <0x60>;
 			bd-stash;
@@ -354,6 +484,13 @@
 			phy-connection-type = "rgmii-id";
 			nvmem-cells = <&macaddr_hwinfo_0 1>;
 			nvmem-cell-names = "mac-address";
+=======
+			status = "okay";
+			phy-handle = <&phy1>;
+			phy-connection-type = "rgmii-id";
+			mtd-mac-address = <&hwinfo 0>;
+			mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		gpio0: gpio-controller@fc00 {
@@ -371,22 +508,48 @@
 
 	pci0: pcie@ffe09000 {
 		reg = <0x0 0xffe09000 0x0 0x1000>;
+<<<<<<< HEAD
 		ranges = <0x2000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x20000000>,
 			 <0x1000000 0x0 0x00000000 0x0 0xffc30000 0x0 0x10000>;
 		pcie@0 {
 			ranges = <0x2000000 0x0 0xa0000000 0x2000000 0x0 0xa0000000 0x0 0x20000000>,
 				 <0x1000000 0x0 0x00000000 0x1000000 0x0 0x00000000 0x0 0x00100000>;
+=======
+		ranges = <0x2000000 0x0 0xa0000000 0x0 0xa0000000 0x0 0x20000000
+			0x1000000 0x0 0x00000000 0x0 0xffc30000 0x0 0x10000>;
+		pcie@0 {
+			ranges = <0x2000000 0x0 0xa0000000
+				  0x2000000 0x0 0xa0000000
+				  0x0 0x20000000
+
+				  0x1000000 0x0 0x0
+				  0x1000000 0x0 0x0
+				  0x0 0x100000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 
 	pci1: pcie@ffe0a000 {
 		reg = <0x0 0xffe0a000 0x0 0x1000>;
+<<<<<<< HEAD
 		ranges = <0x2000000 0x0 0xc0000000 0x0 0xc0000000 0x0 0x20000000>,
 			 <0x1000000 0x0 0x00000000 0x0 0xffc20000 0x0 0x10000>;
 
 		pcie@0 {
 			ranges = <0x2000000 0x0 0xc0000000 0x2000000 0x0 0xc0000000 0x0 0x20000000>,
 				 <0x1000000 0x0 0x00000000 0x1000000 0x0 0x00000000 0x0 0x00100000>;
+=======
+		ranges = <0x2000000 0x0 0xc0000000 0x0 0xc0000000 0x0 0x20000000
+		      0x1000000 0x0 0x00000000 0x0 0xffc20000 0x0 0x10000>;
+		pcie@0 {
+			ranges = <0x2000000 0x0 0xc0000000
+			      0x2000000 0x0 0xc0000000
+				  0x0 0x20000000
+
+				  0x1000000 0x0 0x0
+				  0x1000000 0x0 0x0
+				  0x0 0x100000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 
@@ -395,6 +558,7 @@
 
 		reset {
 			label = "Reset button";
+<<<<<<< HEAD
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
@@ -422,3 +586,11 @@
 		/delete-property/ pci1;
 	};
 };
+=======
+			gpios = <&gpio0 8 1>; /* active low */
+			linux,code = <0x198>; /* KEY_RESTART */
+		};
+	};
+};
+/include/ "fsl/p1020si-post.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -1,4 +1,5 @@
 #
+<<<<<<< HEAD
 # Copyright (C) 2021 OpenWrt.org
 #
 
@@ -17,6 +18,16 @@ platform_get_rootfs() {
 				rootpartuuid="${rootpartuuid%% *}"
 				rootfsdev="$(blkid -o device -t PARTUUID="${rootpartuuid}")"
 			;;
+=======
+# Copyright (C) 2014 OpenWrt.org
+#
+
+platform_get_rootfs() {
+	local rootfsdev
+
+	if read cmdline < /proc/cmdline; then
+		case "$cmdline" in
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			*root=*)
 				rootfsdev="${cmdline##*root=}"
 				rootfsdev="${rootfsdev%% *}"
@@ -27,6 +38,7 @@ platform_get_rootfs() {
 	fi
 }
 
+<<<<<<< HEAD
 platform_get_n821_disk() {
 	local partnum=$1
 	local DEVNAME
@@ -61,6 +73,24 @@ platform_copy_config() {
 		;;
 	cisco,vedge1000)
 		platform_copy_config_helper "$(platform_get_n821_disk 1)" ext2
+=======
+platform_copy_config() {
+	case "$(board_name)" in
+	erlite)
+		mount -t vfat /dev/sda1 /mnt
+		cp -af "$UPGRADE_BACKUP" "/mnt/$BACKUP_FILE"
+		umount /mnt
+		;;
+	itus,shield-router)
+		mount -t vfat /dev/mmcblk1p1 /mnt
+		cp -af "$UPGRADE_BACKUP" "/mnt/$BACKUP_FILE"
+		umount /mnt
+		;;
+	ubnt,edgerouter-4)
+		mount -t vfat /dev/mmcblk0p1 /mnt
+		cp -af "$UPGRADE_BACKUP" "/mnt/$BACKUP_FILE"
+		umount /mnt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	esac
 }
@@ -84,6 +114,7 @@ platform_do_flash() {
 		echo "flashing Itus Kernel to /boot/$kernel (/dev/mmblk1p1)"
 		tar -Oxf $tar_file "$board_dir/kernel" > /boot/$kernel
 	else
+<<<<<<< HEAD
 		if [ "${board}" = "cisco,vedge1000" ]; then
 			local rootpartuuid
 			rootpartuuid="$(/usr/sbin/blkid -o value -s PARTUUID "${rootfs}")"
@@ -97,13 +128,20 @@ platform_do_flash() {
 		else
 			mount -t vfat "${kernel}" /boot
 		fi
+=======
+		mount -t vfat /dev/$kernel /boot
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		[ -f /boot/vmlinux.64 -a ! -L /boot/vmlinux.64 ] && {
 			mv /boot/vmlinux.64 /boot/vmlinux.64.previous
 			mv /boot/vmlinux.64.md5 /boot/vmlinux.64.md5.previous
 		}
 
+<<<<<<< HEAD
 		echo "flashing kernel to $(awk '/\/boot/ {print $1}' /proc/mounts)"
+=======
+		echo "flashing kernel to /dev/$kernel"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		tar xf $tar_file $board_dir/kernel -O > /boot/vmlinux.64
 		md5sum /boot/vmlinux.64 | cut -f1 -d " " > /boot/vmlinux.64.md5
 	fi
@@ -121,6 +159,7 @@ platform_do_upgrade() {
 	local rootfs="$(platform_get_rootfs)"
 	local kernel=
 
+<<<<<<< HEAD
 	if [ ! -b "${rootfs}" ] && [ "${board}" = "cisco,vedge1000" ]; then
 		# Default to the built-in USB disk for N821
 		rootfs="$(platform_get_n821_disk 2)"
@@ -135,13 +174,26 @@ platform_do_upgrade() {
 	ubnt,erlite|\
 	ubnt,usg)
 		kernel=/dev/sda1
+=======
+	[ -b "${rootfs}" ] || return 1
+	case "$board" in
+	er | \
+	ubnt,edgerouter-4)
+		kernel=mmcblk0p1
+		;;
+	erlite)
+		kernel=sda1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	itus,shield-router)
 		kernel=ItusrouterImage
 		;;
+<<<<<<< HEAD
 	cisco,vedge1000)
 		kernel="$(platform_get_n821_disk 1)"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*)
 		return 1
 	esac
@@ -161,12 +213,18 @@ platform_check_image() {
 
 	case "$board" in
 	er | \
+<<<<<<< HEAD
 	itus,shield-router | \
 	ubnt,edgerouter-4 | \
 	ubnt,edgerouter-6p | \
 	ubnt,erlite | \
 	ubnt,usg | \
 	cisco,vedge1000)
+=======
+	erlite | \
+	itus,shield-router | \
+	ubnt,edgerouter-4)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		local kernel_length=$(tar xf $tar_file $board_dir/kernel -O | wc -c 2> /dev/null)
 		local rootfs_length=$(tar xf $tar_file $board_dir/root -O | wc -c 2> /dev/null)
 		[ "$kernel_length" = 0 -o "$rootfs_length" = 0 ] && {

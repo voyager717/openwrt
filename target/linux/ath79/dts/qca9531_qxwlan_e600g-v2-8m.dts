@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9531_qxwlan_e600g.dtsi"
 
 / {
@@ -11,8 +14,12 @@
 
 &leds {
 	wlan {
+<<<<<<< HEAD
 		function = LED_FUNCTION_WLAN;
 		color = <LED_COLOR_ID_BLUE>;
+=======
+		label = "blue:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		linux,default-trigger = "phy0tpt";
 	};
@@ -26,10 +33,13 @@
 	};
 };
 
+<<<<<<< HEAD
 &pcie0 {
 	/delete-node/ wifi@0,0;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &usb_phy {
 	status = "okay";
 };

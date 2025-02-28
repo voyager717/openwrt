@@ -9,6 +9,7 @@ define Device/mikrotik_routerboard-493g
 endef
 TARGET_DEVICES += mikrotik_routerboard-493g
 
+<<<<<<< HEAD
 define Device/mikrotik_routerboard-750-r2
   $(Device/mikrotik_nor)
   SOC := qca9533
@@ -39,17 +40,24 @@ define Device/mikrotik_routerboard-911g-xhpnd
 endef
 TARGET_DEVICES += mikrotik_routerboard-911g-xhpnd
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_routerboard-912uag-2hpnd
   $(Device/mikrotik_nand)
   SOC := ar9342
   DEVICE_MODEL := RouterBOARD 912UAG-2HPnD
+<<<<<<< HEAD
   DEVICE_ALT0_VENDOR := Mikrotik
   DEVICE_ALT0_MODEL := RouterBOARD 912UAG-5HPnD
   DEVICE_PACKAGES += kmod-usb-ehci kmod-usb2 rssileds
+=======
+  DEVICE_PACKAGES += kmod-usb-ehci kmod-usb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += rb-912uag-2hpnd
 endef
 TARGET_DEVICES += mikrotik_routerboard-912uag-2hpnd
 
+<<<<<<< HEAD
 define Device/mikrotik_routerboard-911g-5hpacd
   $(Device/mikrotik_nand)
   SOC := qca9558
@@ -59,12 +67,18 @@ define Device/mikrotik_routerboard-911g-5hpacd
 endef
 TARGET_DEVICES += mikrotik_routerboard-911g-5hpacd
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_routerboard-921gs-5hpacd-15s
   $(Device/mikrotik_nand)
   SOC := qca9558
   DEVICE_MODEL := RouterBOARD 921GS-5HPacD-15s (mANTBox 15s)
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct kmod-i2c-gpio \
 	kmod-sfp
+=======
+  DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += rb-921gs-5hpacd-r2
 endef
 TARGET_DEVICES += mikrotik_routerboard-921gs-5hpacd-15s
@@ -79,6 +93,7 @@ define Device/mikrotik_routerboard-922uags-5hpacd
 endef
 TARGET_DEVICES += mikrotik_routerboard-922uags-5hpacd
 
+<<<<<<< HEAD
 define Device/mikrotik_routerboard-951g-2hnd
   $(Device/mikrotik_nand)
   SOC := ar9344
@@ -106,6 +121,8 @@ define Device/mikrotik_routerboard-951ui-2nd
 endef
 TARGET_DEVICES += mikrotik_routerboard-951ui-2nd
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_routerboard-952ui-5ac2nd
   $(Device/mikrotik_nor)
   SOC := qca9533
@@ -116,6 +133,7 @@ define Device/mikrotik_routerboard-952ui-5ac2nd
 endef
 TARGET_DEVICES += mikrotik_routerboard-952ui-5ac2nd
 
+<<<<<<< HEAD
 define Device/mikrotik_routerboard-962uigs-5hact2hnt
   $(Device/mikrotik_nor)
   SOC := qca9558
@@ -127,6 +145,8 @@ define Device/mikrotik_routerboard-962uigs-5hact2hnt
 endef
 TARGET_DEVICES += mikrotik_routerboard-962uigs-5hact2hnt
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_routerboard-lhg-2nd
   $(Device/mikrotik_nor)
   SOC := qca9533
@@ -135,6 +155,7 @@ define Device/mikrotik_routerboard-lhg-2nd
 endef
 TARGET_DEVICES += mikrotik_routerboard-lhg-2nd
 
+<<<<<<< HEAD
 define Device/mikrotik_routerboard-lhg-5nd
   $(Device/mikrotik_nor)
   SOC := ar9344
@@ -144,6 +165,8 @@ define Device/mikrotik_routerboard-lhg-5nd
 endef
 TARGET_DEVICES += mikrotik_routerboard-lhg-5nd
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mikrotik_routerboard-map-2nd
   $(Device/mikrotik_nor)
   SOC := qca9533
@@ -184,6 +207,7 @@ define Device/mikrotik_routerboard-wapr-2nd
   $(Device/mikrotik_nor)
   SOC := qca9533
   DEVICE_MODEL := RouterBOARD wAPR-2nD (wAP R)
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-usb2 rssileds
   IMAGE_SIZE := 16256k
 endef
@@ -196,3 +220,9 @@ define Device/mikrotik_routerboard-wap-2nd
   IMAGE_SIZE := 16256k
 endef
 TARGET_DEVICES += mikrotik_routerboard-wap-2nd
+=======
+  DEVICE_PACKAGES += rssileds
+  IMAGE_SIZE := 16256k
+endef
+TARGET_DEVICES += mikrotik_routerboard-wapr-2nd
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

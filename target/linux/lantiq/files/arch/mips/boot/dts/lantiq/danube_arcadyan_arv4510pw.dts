@@ -203,7 +203,11 @@
 		0x7800 0 0 2 &icu0 66
 		0x7800 0 0 3 &icu0 66
 	>;
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	req-mask = <0x7>;
 };
 

@@ -1,0 +1,6 @@
+ADD_SUBDIRECTORY(cram)
+
+IF(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+  ADD_SUBDIRECTORY(fuzz)
+  ADD_SUBDIRECTORY(fuzz-multipart-parser)
+ENDIF()

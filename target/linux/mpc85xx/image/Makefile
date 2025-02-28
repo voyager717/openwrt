@@ -3,10 +3,15 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+<<<<<<< HEAD
 DEVICE_VARS += DTB_SIZE
 
 define Build/pad-dtb
 	$(call Image/BuildDTB,$(DTS_DIR)/$(DEVICE_DTS).dts,$(dir $@)/image-$(DEVICE_DTS).dtb,,--space $(DTB_SIZE))
+=======
+define Build/copy-file
+	cat "$(1)" > "$@"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/Default

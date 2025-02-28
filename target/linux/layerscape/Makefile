@@ -6,9 +6,13 @@ include $(TOPDIR)/rules.mk
 
 BOARD:=layerscape
 BOARDNAME:=NXP Layerscape
+<<<<<<< HEAD
 
 KERNEL_PATCHVER:=6.6
 
+=======
+KERNEL_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 FEATURES:=squashfs nand usb pcie gpio fpu ubifs ext4 rootfs-part boot-part
 SUBTARGETS:=armv8_64b armv7
 

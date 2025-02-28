@@ -3,6 +3,7 @@
 # Copyright (C) 2012-2016 OpenWrt.org
 # Copyright (C) 2016 LEDE-project.org
 
+<<<<<<< HEAD
 DTS_DIR := $(DTS_DIR)/marvell
 
 define Build/fortigate-header
@@ -35,6 +36,8 @@ define Build/seil-header
   mv $@.new $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dsa-migration
   DEVICE_COMPAT_VERSION := 1.1
   DEVICE_COMPAT_MESSAGE := Config cannot be migrated from swconfig to DSA
@@ -46,6 +49,7 @@ define Device/kernel-size-migration
 	Upgrade via sysupgrade mechanism is not possible, so new installation via factory style image is required.
 endef
 
+<<<<<<< HEAD
 define Device/buffalo_ls220de
   $(Device/NAND-128K)
   DEVICE_VENDOR := Buffalo
@@ -61,6 +65,8 @@ define Device/buffalo_ls220de
 endef
 TARGET_DEVICES += buffalo_ls220de
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/buffalo_ls421de
   $(Device/NAND-128K)
   DEVICE_VENDOR := Buffalo
@@ -78,6 +84,7 @@ define Device/buffalo_ls421de
 endef
 TARGET_DEVICES += buffalo_ls421de
 
+<<<<<<< HEAD
 define Device/ctera_c200-v2
   PAGESIZE := 2048
   SUBPAGESIZE := 512
@@ -96,6 +103,8 @@ define Device/ctera_c200-v2
 endef
 TARGET_DEVICES += ctera_c200-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/cznic_turris-omnia
   DEVICE_VENDOR := CZ.NIC
   DEVICE_MODEL := Turris Omnia
@@ -105,17 +114,27 @@ define Device/cznic_turris-omnia
   KERNEL_INITRAMFS := kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(DEVICE_DTS).dtb
   DEVICE_PACKAGES :=  \
     mkf2fs e2fsprogs kmod-fs-vfat kmod-nls-cp437 kmod-nls-iso8859-1 \
+<<<<<<< HEAD
     wpad-basic-mbedtls kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct \
     kmod-mt7915-firmware partx-utils kmod-i2c-mux-pca954x kmod-leds-turris-omnia \
     kmod-turris-omnia-mcu kmod-gpio-button-hotplug omnia-eeprom omnia-mcu-firmware \
     omnia-mcutool kmod-dsa-mv88e6xxx
   IMAGES := sysupgrade.img.gz
   IMAGE/sysupgrade.img.gz := boot-scr | boot-img | sdcard-img | gzip | append-metadata
+=======
+    wpad-basic-wolfssl kmod-ath9k kmod-ath10k-ct ath10k-firmware-qca988x-ct \
+    partx-utils kmod-i2c-mux-pca954x
+  IMAGES := $$(IMAGE_PREFIX)-sysupgrade.img.gz omnia-medkit-$$(IMAGE_PREFIX)-initramfs.tar.gz
+  IMAGE/$$(IMAGE_PREFIX)-sysupgrade.img.gz := boot-scr | boot-img | sdcard-img | gzip | append-metadata
+  IMAGE/omnia-medkit-$$(IMAGE_PREFIX)-initramfs.tar.gz := omnia-medkit-initramfs | gzip
+  IMAGE_NAME = $$(2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-385-turris-omnia
   BOOT_SCRIPT := turris-omnia
 endef
 TARGET_DEVICES += cznic_turris-omnia
 
+<<<<<<< HEAD
 define Device/fortinet
   DEVICE_VENDOR := Fortinet
   SOC := armada-385
@@ -183,6 +202,8 @@ define Device/fortinet_fwf-51e
 endef
 TARGET_DEVICES += fortinet_fwf-51e
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/globalscale_mirabox
   $(Device/NAND-512K)
   DEVICE_VENDOR := Globalscale
@@ -192,6 +213,7 @@ define Device/globalscale_mirabox
 endef
 TARGET_DEVICES += globalscale_mirabox
 
+<<<<<<< HEAD
 define Device/iij_sa-w2
   DEVICE_VENDOR := IIJ
   DEVICE_MODEL := SA-W2
@@ -220,6 +242,8 @@ define Device/iptime_nas1dual
 endef
 TARGET_DEVICES += iptime_nas1dual
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/kobol_helios4
   DEVICE_VENDOR := Kobol
   DEVICE_MODEL := Helios4
@@ -229,7 +253,11 @@ define Device/kobol_helios4
   IMAGES := sdcard.img.gz
   IMAGE/sdcard.img.gz := boot-scr | boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
   SOC := armada-388
+<<<<<<< HEAD
   UBOOT := helios4-u-boot-with-spl.kwb
+=======
+  UBOOT := helios4-u-boot-spl.kwb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BOOT_SCRIPT := clearfog
 endef
 TARGET_DEVICES += kobol_helios4
@@ -237,7 +265,11 @@ TARGET_DEVICES += kobol_helios4
 define Device/linksys
   $(Device/NAND-128K)
   DEVICE_VENDOR := Linksys
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mwlwifi wpad-basic-mbedtls
+=======
+  DEVICE_PACKAGES := kmod-mwlwifi wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += factory.img
   IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | \
 	append-ubi | pad-to $$$$(PAGESIZE)
@@ -251,7 +283,11 @@ define Device/linksys_wrt1200ac
   DEVICE_ALT0_VENDOR := Linksys
   DEVICE_ALT0_MODEL := Caiman
   DEVICE_DTS := armada-385-linksys-caiman
+<<<<<<< HEAD
   DEVICE_PACKAGES += mwlwifi-firmware-88w8864 kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += mwlwifi-firmware-88w8864
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-385-linksys-caiman linksys,caiman
 endef
 TARGET_DEVICES += linksys_wrt1200ac
@@ -267,7 +303,11 @@ define Device/linksys_wrt1900acs
   DEVICE_ALT1_VENDOR := Linksys
   DEVICE_ALT1_MODEL := Shelby
   DEVICE_DTS := armada-385-linksys-shelby
+<<<<<<< HEAD
   DEVICE_PACKAGES += mwlwifi-firmware-88w8864 kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += mwlwifi-firmware-88w8864
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-385-linksys-shelby linksys,shelby
 endef
 TARGET_DEVICES += linksys_wrt1900acs
@@ -280,7 +320,11 @@ define Device/linksys_wrt1900ac-v1
   DEVICE_ALT0_VENDOR := Linksys
   DEVICE_ALT0_MODEL := Mamba
   DEVICE_DTS := armada-xp-linksys-mamba
+<<<<<<< HEAD
   DEVICE_PACKAGES += mwlwifi-firmware-88w8864 kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += mwlwifi-firmware-88w8864
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_SIZE := 4096k
   SUPPORTED_DEVICES += armada-xp-linksys-mamba linksys,mamba
 endef
@@ -294,7 +338,11 @@ define Device/linksys_wrt1900ac-v2
   DEVICE_ALT0_VENDOR := Linksys
   DEVICE_ALT0_MODEL := Cobra
   DEVICE_DTS := armada-385-linksys-cobra
+<<<<<<< HEAD
   DEVICE_PACKAGES += mwlwifi-firmware-88w8864 kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += mwlwifi-firmware-88w8864
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-385-linksys-cobra linksys,cobra
 endef
 TARGET_DEVICES += linksys_wrt1900ac-v2
@@ -306,8 +354,12 @@ define Device/linksys_wrt3200acm
   DEVICE_ALT0_VENDOR := Linksys
   DEVICE_ALT0_MODEL := Rango
   DEVICE_DTS := armada-385-linksys-rango
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-btmrvl kmod-mwifiex-sdio mwlwifi-firmware-88w8964 \
 	kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += kmod-btmrvl kmod-mwifiex-sdio mwlwifi-firmware-88w8964
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-385-linksys-rango linksys,rango
 endef
 TARGET_DEVICES += linksys_wrt3200acm
@@ -319,8 +371,12 @@ define Device/linksys_wrt32x
   DEVICE_ALT0_VENDOR := Linksys
   DEVICE_ALT0_MODEL := Venom
   DEVICE_DTS := armada-385-linksys-venom
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-btmrvl kmod-mwifiex-sdio mwlwifi-firmware-88w8964 \
 	kmod-dsa-mv88e6xxx
+=======
+  DEVICE_PACKAGES += kmod-btmrvl kmod-mwifiex-sdio mwlwifi-firmware-88w8964
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_SIZE := 6144k
   KERNEL := kernel-bin | append-dtb
   SUPPORTED_DEVICES += armada-385-linksys-venom linksys,venom
@@ -341,7 +397,10 @@ define Device/marvell_a370-rd
   DEVICE_VENDOR := Marvell
   DEVICE_MODEL := Armada 370 RD (RD-88F6710-A1)
   DEVICE_DTS := armada-370-rd
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-dsa-mv88e6xxx
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += armada-370-rd
 endef
 TARGET_DEVICES += marvell_a370-rd
@@ -409,7 +468,11 @@ define Device/solidrun_clearfog-base-a1
   IMAGES := sdcard.img.gz
   IMAGE/sdcard.img.gz := boot-scr | boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
   DEVICE_DTS := armada-388-clearfog-base armada-388-clearfog-pro
+<<<<<<< HEAD
   UBOOT := clearfog-u-boot-with-spl.kwb
+=======
+  UBOOT := clearfog-u-boot-spl.kwb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BOOT_SCRIPT := clearfog
   SUPPORTED_DEVICES += armada-388-clearfog-base
   DEVICE_COMPAT_VERSION := 1.1
@@ -427,11 +490,16 @@ define Device/solidrun_clearfog-pro-a1
   IMAGES := sdcard.img.gz
   IMAGE/sdcard.img.gz := boot-scr | boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
   DEVICE_DTS := armada-388-clearfog-pro armada-388-clearfog-base
+<<<<<<< HEAD
   UBOOT := clearfog-u-boot-with-spl.kwb
+=======
+  UBOOT := clearfog-u-boot-spl.kwb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BOOT_SCRIPT := clearfog
   SUPPORTED_DEVICES += armada-388-clearfog armada-388-clearfog-pro
 endef
 TARGET_DEVICES += solidrun_clearfog-pro-a1
+<<<<<<< HEAD
 
 define Device/synology_ds213j
   DEVICE_VENDOR := Synology
@@ -468,3 +536,5 @@ define Device/wd_cloud-mirror-gen2
   IMAGE/uImage-factory.bin := append-kernel
 endef
 TARGET_DEVICES += wd_cloud-mirror-gen2
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

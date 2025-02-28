@@ -10,6 +10,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "rgmii";
@@ -31,8 +36,12 @@
 
 	pll-data = <0x06000000 0x00000101 0x00001616>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_pridata_400 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&pridata 0x400>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-mode = "rgmii";
 	phy-handle = <&phy0>;

@@ -7,9 +7,15 @@
 ###
 ### The script compares locally compiled package with the package indexes
 ### available upstream. This way the storage impact of optimizations or
+<<<<<<< HEAD
 ### feature modifications is easy to see.
 ###
 ### If no environmental variables are set the script reads the current
+=======
+### feature modifiactions is easy to see.
+###
+### If no environmental variables are set the scritp reads the current
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ### .config file. The evaluated env variables are the following:
 ###
 ###   TARGET SUBTARGET ARCH PACKAGES BIN_DIR BASE_URL CHECK_INSTALLED
@@ -21,6 +27,7 @@
 ###   -p --package-size 	Check IPK package size and not installed size
 ###   -h --help 		This message
 
+<<<<<<< HEAD
 eval "$(grep \
 	-e ^CONFIG_TARGET_BOARD= \
 	-e ^CONFIG_TARGET_SUBTARGET= \
@@ -35,6 +42,19 @@ SUBTARGET=${SUBTARGET:-$CONFIG_TARGET_SUBTARGET}
 ARCH=${ARCH:-$CONFIG_TARGET_ARCH_PACKAGES}
 PACKAGES=${PACKAGES:-$CONFIG_PACKAGES}
 BIN_DIR=${CONFIG_BINARY_FOLDER:-./bin}
+=======
+CONFIG_TARGET=$(sed -n 's/^CONFIG_TARGET_BOARD="\(.*\)"$/\1/p' .config)
+CONFIG_SUBTARGET=$(sed -n 's/^CONFIG_TARGET_SUBTARGET="\(.*\)"$/\1/p' .config)
+CONFIG_ARCH=$(sed -n 's/^CONFIG_TARGET_ARCH_PACKAGES="\(.*\)"$/\1/p' .config)
+CONFIG_PACKAGES=$(sed -n 's/^CONFIG_PACKAGE_\(.*\)=y$/\1/p' .config | tr '\n' ' ')
+CONFIG_BIN_DIR=$(sed -n 's/^CONFIG_BINARY_DIR="\(.*\)"$/\1/p' .config)
+
+TARGET=${TARGET:-$CONFIG_TARGET}
+SUBTARGET=${SUBTARGET:-$CONFIG_SUBTARGET}
+ARCH=${ARCH:-$CONFIG_ARCH}
+PACKAGES=${PACKAGES:-$CONFIG_PACKAGES}
+BIN_DIR=${CONFIG_BIN_DIR:-./bin}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 BASE_URL="${BASE_URL:-https://downloads.openwrt.org/snapshots}"
 CHECK_INSTALLED="${CHECK_INSTALLED:-y}"
 
@@ -75,7 +95,10 @@ package_size () {
 }
 
 compare_sizes () {
+<<<<<<< HEAD
 	TOTAL_DIFF="0"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	for PACKAGE in $PACKAGES; do
 		if [ "$PACKAGE" = "libc" ]; then
 			continue
@@ -93,8 +116,12 @@ compare_sizes () {
 			SIZE_LOCAL=$(tar tzvf "$PACKAGE_FILE" ./data.tar.gz | awk '{ print $3 }')
 		fi
 		SIZE_UPSTREAM=$(package_size "$TMP_INDEX" "$PACKAGE")
+<<<<<<< HEAD
 		SIZE_DIFF="$((SIZE_LOCAL - SIZE_UPSTREAM))"
 		TOTAL_DIFF="$((TOTAL_DIFF + SIZE_DIFF))"
+=======
+		SIZE_DIFF="$((SIZE_LOCAL-SIZE_UPSTREAM))"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if [ "$SIZE_DIFF" -gt 0 ]; then
 			SIZE_DIFF="+$SIZE_DIFF"
 		fi
@@ -104,7 +131,10 @@ compare_sizes () {
 			echo "$PACKAGE is missing upstream"
 		fi
 	done
+<<<<<<< HEAD
 	echo "~~~~~~~	total change	${TOTAL_DIFF}"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 if [ "$1" = "-h" ]; then

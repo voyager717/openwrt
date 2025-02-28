@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "glinet,gl-usb150", "qca,ar9331";
@@ -22,15 +25,23 @@
 		compatible = "gpio-leds";
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
@@ -61,8 +72,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -107,6 +122,7 @@
 				reg = <0x050000 0xfa0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -125,6 +141,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -133,6 +155,10 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

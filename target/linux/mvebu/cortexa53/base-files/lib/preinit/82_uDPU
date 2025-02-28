@@ -8,14 +8,22 @@ preinit_mount_udpu() {
 	. /lib/upgrade/common.sh
 
 	case $(board_name) in
+<<<<<<< HEAD
 	methode,udpu|\
 	methode,edpu)
+=======
+	methode,udpu)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		# Check which device is detected
 		[ -b "/dev/mmcblk0" ] && mmcdev="/dev/mmcblk0" || mmcdev="/dev/mmcblk1"
 
 		if [ -b "${mmcdev}p4" ]; then
 			mkdir /misc
+<<<<<<< HEAD
 			mount -o compress_algorithm=zstd -t f2fs ${mmcdev}p4 /misc
+=======
+			mount -t f2fs ${mmcdev}p4 /misc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			[ -f "/misc/$BACKUP_FILE" ] && {
 				echo "- Restoring configuration files -"
 				tar xzf "/misc/$BACKUP_FILE" -C /

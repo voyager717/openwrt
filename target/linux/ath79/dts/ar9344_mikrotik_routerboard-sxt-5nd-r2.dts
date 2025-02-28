@@ -1,12 +1,17 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 #include "ar9344_mikrotik_routerboard.dtsi"
+=======
+#include "ar9344_mikrotik_routerboard-sxt-5n.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "mikrotik,routerboard-sxt-5nd-r2", "qca,ar9344";
 	model = "MikroTik RouterBOARD SXT 5nD r2 (SXT Lite5)";
+<<<<<<< HEAD
 
 	gpio-export {
 		compatible = "gpio-export";
@@ -115,4 +120,6 @@
 			reg = <0x0400000 0x7c00000>;
 		};
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

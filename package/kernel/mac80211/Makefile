@@ -10,6 +10,7 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=mac80211
 
+<<<<<<< HEAD
 PKG_VERSION:=6.12.6
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-2.0-only
@@ -20,15 +21,37 @@ PKG_HASH:=28ec39425a1b3270e1422d92a8131a6a3d8919cc13e8ee250c315e55d922ba68
 
 PKG_SOURCE:=backports-$(PKG_VERSION).tar.xz
 PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/$(if $(BUILD_VARIANT),$(PKG_NAME)-$(BUILD_VARIANT)/)backports-$(PKG_VERSION)
+=======
+PKG_VERSION:=5.10.110-1
+PKG_RELEASE:=1
+PKG_SOURCE_URL:=@KERNEL/linux/kernel/projects/backports/stable/v5.10.110/
+PKG_HASH:=3d958154080c059adaf26512430fd1a8888d65a2228e5e70e48d028201e148b1
+
+PKG_SOURCE:=backports-$(PKG_VERSION).tar.xz
+PKG_BUILD_DIR:=$(KERNEL_BUILD_DIR)/backports-$(PKG_VERSION)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_PARALLEL:=1
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 
 PKG_DRIVERS = \
+<<<<<<< HEAD
 	mac80211-hwsim \
 	mt7601u \
 	rsi91x rsi91x-usb rsi91x-sdio\
 	wlcore wl12xx wl18xx
+=======
+	adm8211 \
+	airo \
+	hermes hermes-pci hermes-pcmcia hermes-plx\
+	lib80211 \
+	mac80211-hwsim \
+	mt7601u \
+	p54-common p54-pci p54-usb \
+	rsi91x rsi91x-usb rsi91x-sdio\
+	wlcore wl12xx wl18xx \
+	zd1211rw
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_PACKAGE_kmod-mac80211 \
@@ -50,6 +73,7 @@ define KernelPackage/mac80211/Default
   MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 endef
 
+<<<<<<< HEAD
 # config_pacakge:
 # 1 = OpenWrt KernelPackage name
 # 2 = Optional list of variants for which the module may be selected:
@@ -60,6 +84,13 @@ mac80211_variant_check=$(if $(ALL_VARIANTS),$(filter $(BUILD_VARIANT),$(if $(1),
 
 config-y:= \
 	WLAN \
+=======
+config_package=$(if $(CONFIG_PACKAGE_kmod-$(1)),m)
+
+config-y:= \
+	WLAN \
+	CFG80211_WEXT \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CFG80211_CERTIFICATION_ONUS \
 	MAC80211_RC_MINSTREL \
 	MAC80211_RC_MINSTREL_HT \
@@ -81,10 +112,17 @@ config-y:= \
 	WLAN_VENDOR_TI \
 	WLAN_VENDOR_ZYDAS \
 
+<<<<<<< HEAD
 config-$(call config_package,cfg80211,$(ALL_VARIANTS)) += CFG80211
 config-$(CONFIG_PACKAGE_CFG80211_TESTMODE) += NL80211_TESTMODE
 
 config-$(call config_package,mac80211,$(ALL_VARIANTS)) += MAC80211
+=======
+config-$(call config_package,cfg80211) += CFG80211
+config-$(CONFIG_PACKAGE_CFG80211_TESTMODE) += NL80211_TESTMODE
+
+config-$(call config_package,mac80211) += MAC80211
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(CONFIG_PACKAGE_MAC80211_MESH) += MAC80211_MESH
 
 include ath.mk
@@ -100,7 +138,11 @@ PKG_CONFIG_DEPENDS += \
 define KernelPackage/cfg80211
   $(call KernelPackage/mac80211/Default)
   TITLE:=cfg80211 - wireless configuration API
+<<<<<<< HEAD
   DEPENDS+= +iw +!WIFI_SCRIPTS_UCODE:iwinfo +wifi-scripts +wireless-regdb +USE_RFKILL:kmod-rfkill
+=======
+  DEPENDS+= +iw +wireless-regdb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=$(PKG_VERSION)-$(PKG_RELEASE)
   FILES:= \
 	$(PKG_BUILD_DIR)/compat/compat.ko \
@@ -129,7 +171,11 @@ define KernelPackage/mac80211
   $(call KernelPackage/mac80211/Default)
   TITLE:=Linux 802.11 Wireless Networking Stack
   # +kmod-crypto-cmac is a runtime only dependency of net/mac80211/aes_cmac.c
+<<<<<<< HEAD
   DEPENDS+= +kmod-cfg80211 +kmod-crypto-cmac +kmod-crypto-ccm +kmod-crypto-gcm +hostapd-common
+=======
+  DEPENDS+= +kmod-cfg80211 +hostapd-common
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=\
 	CONFIG_AVERAGE=y
   FILES:= $(PKG_BUILD_DIR)/net/mac80211/mac80211.ko
@@ -168,11 +214,115 @@ define KernelPackage/mac80211/description
 Generic IEEE 802.11 Networking Stack (mac80211)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mac80211-hwsim
   $(call KernelPackage/mac80211/Default)
   TITLE:=mac80211 HW simulation device
   DEPENDS+= +kmod-mac80211 +@DRIVER_11BE_SUPPORT +@DRIVER_11AX_SUPPORT +@DRIVER_11AC_SUPPORT
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/virtual/mac80211_hwsim.ko
+=======
+define KernelPackage/adm8211
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=ADMTek 8211 support
+  DEPENDS+=@PCI_SUPPORT +kmod-mac80211 +kmod-eeprom-93cx6
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/admtek/adm8211.ko
+  AUTOLOAD:=$(call AutoProbe,adm8211)
+endef
+
+define KernelPackage/airo
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Cisco Aironet driver
+  DEPENDS+=@PCI_SUPPORT +@DRIVER_WEXT_SUPPORT +kmod-cfg80211 @TARGET_x86 @BROKEN
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/cisco/airo.ko
+  AUTOLOAD:=$(call AutoProbe,airo)
+endef
+
+define KernelPackage/airo/description
+ Kernel support for Cisco Aironet cards
+endef
+
+define KernelPackage/hermes
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Hermes 802.11b chipset support
+  DEPENDS:=@PCI_SUPPORT||PCMCIA_SUPPORT +kmod-cfg80211 +@DRIVER_WEXT_SUPPORT +kmod-crypto-michael-mic
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/orinoco/orinoco.ko
+  AUTOLOAD:=$(call AutoProbe,orinoco)
+endef
+
+define KernelPackage/hermes/description
+ Kernel support for Hermes 802.11b chipsets
+endef
+
+define KernelPackage/hermes-pci
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Intersil Prism 2.5 PCI support
+  DEPENDS:=@PCI_SUPPORT +kmod-hermes
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/orinoco/orinoco_pci.ko
+  AUTOLOAD:=$(call AutoProbe,orinoco_pci)
+endef
+
+define KernelPackage/hermes-pci/description
+ Kernel modules for Intersil Prism 2.5 PCI support
+endef
+
+define KernelPackage/hermes-plx
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=PLX9052 based PCI adaptor
+  DEPENDS:=@PCI_SUPPORT +kmod-hermes
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/orinoco/orinoco_plx.ko
+  AUTOLOAD:=$(call AutoProbe,orinoco_plx)
+endef
+
+define KernelPackage/hermes-plx/description
+ Kernel modules for Hermes in PLX9052 based PCI adaptors
+endef
+
+define KernelPackage/hermes-pcmcia
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Hermes based PCMCIA adaptors
+  DEPENDS:=@PCMCIA_SUPPORT +kmod-hermes +kmod-pcmcia-core
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/orinoco/orinoco_cs.ko
+  AUTOLOAD:=$(call AutoProbe,orinoco_cs)
+endef
+
+define KernelPackage/hermes-pcmcia/description
+ Kernel modules for Hermes based PCMCIA adaptors
+endef
+
+
+define KernelPackage/lib80211
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=802.11 Networking stack
+  DEPENDS:=+kmod-cfg80211 +kmod-crypto-hash +kmod-crypto-ccm
+  FILES:= \
+	$(PKG_BUILD_DIR)/net/wireless/lib80211.ko \
+	$(PKG_BUILD_DIR)/net/wireless/lib80211_crypt_wep.ko \
+	$(PKG_BUILD_DIR)/net/wireless/lib80211_crypt_ccmp.ko \
+	$(PKG_BUILD_DIR)/net/wireless/lib80211_crypt_tkip.ko
+  AUTOLOAD:=$(call AutoProbe, \
+	lib80211 \
+	lib80211_crypt_wep \
+	lib80211_crypt_ccmp \
+	lib80211_crypt_tkip \
+  )
+endef
+
+define KernelPackage/lib80211/description
+ Kernel modules for 802.11 Networking stack
+ Includes:
+ - lib80211
+ - lib80211_crypt_wep
+ - lib80211_crypt_tkip
+ - lib80211_crytp_ccmp
+endef
+
+
+define KernelPackage/mac80211-hwsim
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=mac80211 HW simulation device
+  DEPENDS+= +kmod-mac80211 +@DRIVER_11AC_SUPPORT +@DRIVER_11N_SUPPORT
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/mac80211_hwsim.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,mac80211_hwsim)
 endef
 
@@ -180,15 +330,58 @@ endef
 define KernelPackage/mt7601u
   $(call KernelPackage/mac80211/Default)
   TITLE:=MT7601U-based USB dongles Wireless Driver
+<<<<<<< HEAD
   DEPENDS+= +kmod-mac80211 @USB_SUPPORT +kmod-usb-core +mt7601u-firmware
+=======
+  DEPENDS+= +kmod-mac80211 +@DRIVER_11N_SUPPORT @USB_SUPPORT +kmod-usb-core +mt7601u-firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/mediatek/mt7601u/mt7601u.ko
   AUTOLOAD:=$(call AutoProbe,mt7601u)
+endef
+
+<<<<<<< HEAD
+define KernelPackage/rsi91x
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Redpine Signals Inc 91x WLAN driver support
+  DEPENDS+= +kmod-mac80211 +rs9113-firmware
+=======
+define KernelPackage/p54/Default
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Prism54 Drivers
+endef
+
+define KernelPackage/p54/description
+  Kernel module for Prism54 chipsets (mac80211)
+endef
+
+define KernelPackage/p54-common
+  $(call KernelPackage/p54/Default)
+  DEPENDS+= @(PCI_SUPPORT||USB_SUPPORT) +kmod-mac80211 +kmod-lib-crc-ccitt
+  TITLE+= (COMMON)
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/p54/p54common.ko
+endef
+
+define KernelPackage/p54-pci
+  $(call KernelPackage/p54/Default)
+  TITLE+= (PCI)
+  DEPENDS+= @PCI_SUPPORT +kmod-p54-common +p54-pci-firmware
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/p54/p54pci.ko
+  AUTOLOAD:=$(call AutoProbe,p54pci)
+endef
+
+define KernelPackage/p54-usb
+  $(call KernelPackage/p54/Default)
+  TITLE+= (USB)
+  DEPENDS+= @USB_SUPPORT +kmod-usb-core +kmod-p54-common +p54-usb-firmware
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/intersil/p54/p54usb.ko
+  AUTOLOAD:=$(call AutoProbe,p54usb)
 endef
 
 define KernelPackage/rsi91x
   $(call KernelPackage/mac80211/Default)
   TITLE:=Redpine Signals Inc 91x WLAN driver support
-  DEPENDS+= +kmod-mac80211 +rs9113-firmware
+  DEPENDS+= +kmod-mac80211 +rs9113-firmware +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/rsi/rsi_91x.ko
 endef
 
@@ -212,7 +405,11 @@ endef
 define KernelPackage/wlcore
   $(call KernelPackage/mac80211/Default)
   TITLE:=TI common driver part
+<<<<<<< HEAD
   DEPENDS+= +kmod-mmc +kmod-mac80211
+=======
+  DEPENDS+= +kmod-mmc +kmod-mac80211 +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ti/wlcore/wlcore.ko \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ti/wlcore/wlcore_sdio.ko
@@ -250,6 +447,26 @@ define KernelPackage/wl18xx/description
 endef
 
 
+<<<<<<< HEAD
+=======
+ZD1211FW_NAME:=zd1211-firmware
+ZD1211FW_VERSION:=1.4
+define Download/zd1211rw
+  FILE:=$(ZD1211FW_NAME)-$(ZD1211FW_VERSION).tar.bz2
+  URL:=@SF/zd1211/
+  HASH:=866308f6f59f7075f075d4959dff2ede47735c751251fecd1496df1ba4d338e1
+endef
+$(eval $(call Download,zd1211rw))
+
+define KernelPackage/zd1211rw
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Zydas ZD1211 support
+  DEPENDS+= @USB_SUPPORT +kmod-usb-core +kmod-mac80211
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/zydas/zd1211rw/zd1211rw.ko
+  AUTOLOAD:=$(call AutoProbe,zd1211rw)
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifdef CONFIG_PACKAGE_MAC80211_DEBUGFS
   config-y += \
 	CFG80211_DEBUGFS \
@@ -261,14 +478,39 @@ ifdef CONFIG_PACKAGE_MAC80211_TRACING
 	IWLWIFI_DEVICE_TRACING
 endif
 
+<<<<<<< HEAD
+=======
+config-$(call config_package,lib80211) += LIB80211 LIB80211_CRYPT_WEP LIB80211_CRYPT_CCMP LIB80211_CRYPT_TKIP
+
+config-$(call config_package,airo) += AIRO
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(call config_package,mac80211-hwsim) += MAC80211_HWSIM
 config-$(call config_package,mt7601u) += MT7601U
 config-y += WL_MEDIATEK
 
+<<<<<<< HEAD
+=======
+config-$(call config_package,p54-common) += P54_COMMON
+config-$(call config_package,p54-pci) += P54_PCI
+config-$(call config_package,p54-usb) += P54_USB
+
+config-$(call config_package,hermes) += HERMES
+config-$(call config_package,hermes-pci) += PCI_HERMES
+config-$(call config_package,hermes-plx) += PLX_HERMES
+config-$(call config_package,hermes-pcmcia) += PCMCIA_HERMES
+config-y += HERMES_PRISM
+
+config-$(call config_package,adm8211) += ADM8211
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(call config_package,wlcore) += WLCORE WLCORE_SDIO
 config-$(call config_package,wl12xx) += WL12XX
 config-$(call config_package,wl18xx) += WL18XX
 config-y += WL_TI WILINK_PLATFORM_DATA
+<<<<<<< HEAD
+=======
+config-$(call config_package,zd1211rw) += ZD1211RW
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(call config_package,rsi91x) += RSI_91X
 config-$(call config_package,rsi91x-usb) += RSI_USB
 config-$(call config_package,rsi91x-sdio) += RSI_SDIO
@@ -281,8 +523,13 @@ ifeq ($(BUILD_VARIANT),smallbuffers)
 	C_DEFINES+= -DCONFIG_ATH10K_SMALLBUFFERS
 endif
 
+<<<<<<< HEAD
 MAKE_OPTS:= \
 	$(subst -C $(LINUX_DIR),-C "$(PKG_BUILD_DIR)",$(KERNEL_MAKEOPTS)) \
+=======
+MAKE_OPTS:= -C "$(PKG_BUILD_DIR)" \
+	$(KERNEL_MAKE_FLAGS) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	EXTRA_CFLAGS="-I$(PKG_BUILD_DIR)/include $(IREMAP_CFLAGS) $(C_DEFINES)" \
 	KLIB_BUILD="$(LINUX_DIR)" \
 	MODPROBE=true \
@@ -305,6 +552,12 @@ define Build/Prepare
 	mkdir -p $(PKG_BUILD_DIR)
 	$(PKG_UNPACK)
 	$(Build/Patch)
+<<<<<<< HEAD
+=======
+	$(TAR) -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(IPW2100_NAME)-$(IPW2100_VERSION).tgz
+	$(TAR) -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(IPW2200_NAME)-$(IPW2200_VERSION).tgz
+	$(TAR) -C $(PKG_BUILD_DIR) -xjf $(DL_DIR)/$(ZD1211FW_NAME)-$(ZD1211FW_VERSION).tar.bz2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	rm -rf \
 		$(PKG_BUILD_DIR)/include/linux/ssb \
 		$(PKG_BUILD_DIR)/include/linux/bcma \
@@ -315,14 +568,22 @@ define Build/Prepare
 		$(PKG_BUILD_DIR)/include/linux/crc8.h \
 		$(PKG_BUILD_DIR)/include/linux/eeprom_93cx6.h \
 		$(PKG_BUILD_DIR)/include/linux/wl12xx.h \
+<<<<<<< HEAD
 		$(PKG_BUILD_DIR)/include/linux/mhi.h \
+=======
+		$(PKG_BUILD_DIR)/include/linux/spi/libertas_spi.h \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(PKG_BUILD_DIR)/include/net/ieee80211.h \
 		$(PKG_BUILD_DIR)/backport-include/linux/bcm47xx_nvram.h
 
 	echo 'compat-wireless-$(PKG_VERSION)-$(PKG_RELEASE)-$(REVISION)' > $(PKG_BUILD_DIR)/compat_version
 endef
 
+<<<<<<< HEAD
 ifneq ($(CONFIG_PACKAGE_kmod-cfg80211),)
+=======
+ifneq ($(CONFIG_PACKAGE_kmod-cfg80211)$(CONFIG_PACKAGE_kmod-lib80211),)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  define Build/Compile/kmod
 	rm -rf $(PKG_BUILD_DIR)/modules
 	+$(MAKE) $(PKG_JOBS) $(MAKE_OPTS) modules
@@ -333,6 +594,10 @@ endif
 ifeq ($(strip $(CONFIG_EXTERNAL_KERNEL_TREE)),"")
   ifeq ($(strip $(CONFIG_KERNEL_GIT_CLONE_URI)),"")
     define Build/Configure
+<<<<<<< HEAD
+=======
+	  cmp $(PKG_BUILD_DIR)/include/linux/ath9k_platform.h $(LINUX_DIR)/include/linux/ath9k_platform.h
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	  cmp $(PKG_BUILD_DIR)/include/linux/ath5k_platform.h $(LINUX_DIR)/include/linux/ath5k_platform.h
 	  cmp $(PKG_BUILD_DIR)/include/linux/rt2x00_platform.h $(LINUX_DIR)/include/linux/rt2x00_platform.h
     endef
@@ -344,6 +609,7 @@ define Build/Patch
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/build,build/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/subsys,subsys/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath,ath/)
+<<<<<<< HEAD
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath5k,ath5k/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath9k,ath9k/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath10k,ath10k/)
@@ -354,6 +620,11 @@ define Build/Patch
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/brcm,brcm/)
 	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rtl,rtl/)
+=======
+	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rt2x00,rt2x00/)
+	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
+	$(call PatchDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/brcm,brcm/)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(if $(QUILT),touch $(PKG_BUILD_DIR)/.quilt_used)
 endef
 
@@ -361,6 +632,7 @@ define Quilt/Refresh/Package
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/build,build/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/subsys,subsys/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath,ath/)
+<<<<<<< HEAD
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath5k,ath5k/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath9k,ath9k/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/ath10k,ath10k/)
@@ -371,6 +643,11 @@ define Quilt/Refresh/Package
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/brcm,brcm/)
 	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rtl,rtl/)
+=======
+	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/rt2x00,rt2x00/)
+	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/mwl,mwl/)
+	$(call Quilt/RefreshDir,$(PKG_BUILD_DIR),$(PATCH_DIR)/brcm,brcm/)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/Compile
@@ -393,6 +670,23 @@ define Build/InstallDev
 endef
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/cfg80211/install
+	$(INSTALL_DIR) $(1)/lib/wifi $(1)/lib/netifd/wireless
+	$(INSTALL_DATA) ./files/lib/wifi/mac80211.sh $(1)/lib/wifi
+	$(INSTALL_DATA) ./files/lib/netifd/mac80211.sh $(1)/lib/netifd
+	$(INSTALL_BIN) ./files/lib/netifd/wireless/mac80211.sh $(1)/lib/netifd/wireless
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/ieee80211
+	$(INSTALL_DATA) ./files/mac80211.hotplug $(1)/etc/hotplug.d/ieee80211/10-wifi-detect
+endef
+
+define KernelPackage/zd1211rw/install
+	$(INSTALL_DIR) $(1)/lib/firmware/zd1211
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/$(ZD1211FW_NAME)/zd1211* $(1)/lib/firmware/zd1211
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(foreach drv,$(PKG_DRIVERS),$(call KernelPackage,$(drv))))
 $(eval $(call KernelPackage,cfg80211))
 $(eval $(call KernelPackage,mac80211))

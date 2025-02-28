@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_VERSION:=2020.04
+<<<<<<< HEAD
 PKG_RELEASE:=11
+=======
+PKG_RELEASE:=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_HASH:=fe732aaf037d9cc3c0909bad8362af366ae964bbdac6913a34081ff4ad565372
 
@@ -17,12 +21,15 @@ include $(INCLUDE_DIR)/package.mk
 
 define U-Boot/Default
   BUILD_TARGET:=kirkwood
+<<<<<<< HEAD
   BUILD_SUBTARGET:=generic
 endef
 
 define U-Boot/dns320l
   NAME:=D-Link DNS-320L
   BUILD_DEVICES:=dlink_dns320l
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define U-Boot/dockstar
@@ -70,11 +77,14 @@ define U-Boot/nas220
   BUILD_DEVICES:=seagate_blackarmor-nas220
 endef
 
+<<<<<<< HEAD
 define U-Boot/netgear_ms2110
   NAME:=Netgear Stora (MS2000/2110)
   BUILD_DEVICES:=netgear_stora
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define U-Boot/nsa310
   NAME:=Zyxel NSA310
   BUILD_DEVICES:=zyxel_nsa310b
@@ -105,6 +115,7 @@ define U-Boot/pogoplugv4
   BUILD_DEVICES:=cloudengines_pogoplugv4
 endef
 
+<<<<<<< HEAD
 define U-Boot/sheevaplug
   NAME:=Globalscale SheevaPlug
   BUILD_DEVICES:=globalscale_sheevaplug
@@ -112,19 +123,29 @@ endef
 
 UBOOT_TARGETS := \
 	dns320l \
+=======
+UBOOT_TARGETS := \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	dockstar dockstar_second_stage \
 	goflexhome \
 	ib62x0 ib62x0_second_stage \
 	iconnect iconnect_second_stage \
 	l-50 \
 	nas220 \
+<<<<<<< HEAD
 	netgear_ms2110 \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	nsa310 \
 	nsa310s \
 	nsa325 \
 	pogo_e02 pogo_e02_second_stage \
+<<<<<<< HEAD
 	pogoplugv4 \
 	sheevaplug
+=======
+	pogoplugv4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Configure
 	$(if $(findstring _second_stage,$(BUILD_VARIANT)),

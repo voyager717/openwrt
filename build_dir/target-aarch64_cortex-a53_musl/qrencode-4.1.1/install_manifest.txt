@@ -1,0 +1,7 @@
+/usr/share/man/man1/qrencode.1
+/usr/lib/pkgconfig/libqrencode.pc
+/usr/include/qrencode.h
+/usr/lib/libqrencode.so.4.1.1
+/usr/lib/libqrencode.so.4
+/usr/lib/libqrencode.so
+/usr/bin/qrencode

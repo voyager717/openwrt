@@ -4,6 +4,7 @@
 
 get_device_irq() {
 	local device="$1"
+<<<<<<< HEAD
 	local line
 	local seconds="0"
 
@@ -13,6 +14,10 @@ get_device_irq() {
 		seconds="$(( seconds + 2 ))"
 		sleep 2
 	done
+=======
+
+	local line=$(grep -m 1 "${device}\$" /proc/interrupts)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	echo ${line} | sed 's/:.*//'
 }
 
@@ -29,6 +34,7 @@ set_interface_core() {
 }
 
 case "$(board_name)" in
+<<<<<<< HEAD
 armsom,sige7|\
 friendlyarm,nanopc-t6|\
 friendlyarm,nanopi-r3s|\
@@ -58,6 +64,11 @@ friendlyarm,nanopi-r6s)
 	set_interface_core 2 "eth0"
 	set_interface_core 4 "eth1"
 	set_interface_core 8 "eth2"
+=======
+friendlyarm,nanopi-r2s)
+	set_interface_core 2 "eth0"
+	set_interface_core 4 "eth1" "xhci-hcd:usb3"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 esac
 

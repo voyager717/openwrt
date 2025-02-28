@@ -87,7 +87,11 @@ config BUSYBOX_CONFIG_SHELL_ASH
 	depends on !BUSYBOX_CONFIG_NOMMU
 
 config BUSYBOX_CONFIG_ASH
+<<<<<<< HEAD
 	bool "ash (80 kb)"
+=======
+	bool "ash (78 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_ASH
 	depends on !BUSYBOX_CONFIG_NOMMU
 	select BUSYBOX_CONFIG_SHELL_ASH
@@ -222,7 +226,11 @@ config BUSYBOX_CONFIG_ASH_CMDCMD
 
 endif # ash options
 config BUSYBOX_CONFIG_CTTYHACK
+<<<<<<< HEAD
 	bool "cttyhack (2.7 kb)"
+=======
+	bool "cttyhack (2.4 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_CTTYHACK
 	help
 	One common problem reported on the mailing list is the "can't
@@ -265,7 +273,11 @@ config BUSYBOX_CONFIG_CTTYHACK
 
 	# getty 115200 $(cttyhack)
 config BUSYBOX_CONFIG_HUSH
+<<<<<<< HEAD
 	bool "hush (70 kb)"
+=======
+	bool "hush (68 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_HUSH
 	select BUSYBOX_CONFIG_SHELL_HUSH
 	help
@@ -299,6 +311,14 @@ config BUSYBOX_CONFIG_HUSH_BRACE_EXPANSION
 	help
 	Enable {abc,def} extension.
 
+<<<<<<< HEAD
+=======
+config BUSYBOX_CONFIG_HUSH_LINENO_VAR
+	bool "$LINENO variable"
+	default BUSYBOX_DEFAULT_HUSH_LINENO_VAR
+	depends on BUSYBOX_CONFIG_HUSH_BASH_COMPAT
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_HUSH_BASH_SOURCE_CURDIR
 	bool "'source' and '.' builtins search current directory after $PATH"
 	default BUSYBOX_DEFAULT_HUSH_BASH_SOURCE_CURDIR   # do not encourage non-standard behavior
@@ -306,11 +326,14 @@ config BUSYBOX_CONFIG_HUSH_BASH_SOURCE_CURDIR
 	help
 	This is not compliant with standards. Avoid if possible.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_HUSH_LINENO_VAR
 	bool "$LINENO variable (bashism)"
 	default BUSYBOX_DEFAULT_HUSH_LINENO_VAR
 	depends on BUSYBOX_CONFIG_SHELL_HUSH
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_HUSH_INTERACTIVE
 	bool "Interactive mode"
 	default BUSYBOX_DEFAULT_HUSH_INTERACTIVE

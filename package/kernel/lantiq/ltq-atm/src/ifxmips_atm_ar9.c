@@ -194,15 +194,22 @@ void ar9_fw_ver(unsigned int *major, unsigned int *minor)
     *minor = FW_VER_ID->minor;
 }
 
+<<<<<<< HEAD
 int ar9_init(struct platform_device *pdev)
+=======
+void ar9_init(struct platform_device *pdev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	init_pmu();
 	reset_ppe(pdev);
 	init_ema();
 	init_mailbox();
 	clear_share_buffer();
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ar9_shutdown(void)

@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions.sh
 . /lib/functions/uci-defaults.sh
 . /lib/functions/system.sh
 
+<<<<<<< HEAD
 _filter_port_list_ordered() {
 	local ports="$1"
 	local excluded="$2"
@@ -16,11 +21,23 @@ filter_port_list() {
 
 filter_port_list_reverse() {
 	_filter_port_list_ordered "$1" "$2" "-r"
+=======
+ucidef_set_poe() {
+	json_select_object poe
+		json_add_string "budget" "$1"
+		json_select_array ports
+			for port in $2; do
+				json_add_string "" "$port"
+			done
+		json_select ..
+	json_select ..
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 board=$(board_name)
 board_config_update
 
+<<<<<<< HEAD
 lan_list=$(ls -1 -v -d /sys/class/net/lan* | xargs -n1 basename | xargs)
 
 ucidef_set_bridge_device switch
@@ -73,10 +90,40 @@ for lan in $lan_list; do
 	ucidef_set_network_device_mac $lan $lan_mac_start
 	[ -z "$lan_mac_end" ] || [ "$lan_mac_start" == "$lan_mac_end" ] && lan_mac_start=$(macaddr_setbit_la $lan_mac_start)
 	lan_mac_start=$(macaddr_add $lan_mac_start 1)
+=======
+lan_list=""
+for lan in /sys/class/net/lan*; do
+	lan_list="$lan_list $(basename $lan)"
+done
+ucidef_set_bridge_device switch
+ucidef_set_interface_wan "$lan_list"
+ucidef_set_interface "lan" device "lan1:t" protocol "static" vlan 100
+
+lan_mac=""
+wan_mac=""
+label_mac=""
+case $board in
+*)
+	wan_mac=$(mtd_get_mac_ascii u-boot-env ethaddr)
+	label_mac=$lan_mac
+	;;
+esac
+
+lan_mac=$(macaddr_setbit_la $wan_mac)
+
+ucidef_set_interface_macaddr "lan" $lan_mac
+ucidef_set_interface_macaddr "wan" $wan_mac
+ucidef_set_bridge_mac "$wan_mac"
+ucidef_set_network_device_mac eth0 $wan_mac
+for lan in $lan_list; do
+	ucidef_set_network_device_mac $lan $lan_mac
+	lan_mac=$(macaddr_add $lan_mac 1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 done
 [ -n "$label_mac" ] && ucidef_set_label_macaddr $label_mac
 
 case $board in
+<<<<<<< HEAD
 d-link,dgs-1210-10mp-f)
 	ucidef_set_poe 130 "$(filter_port_list "$lan_list" "lan9 lan10")"
 	;;
@@ -122,11 +169,19 @@ netgear,gs310tp-v1)
 	;;
 zyxel,gs1900-10hp)
 	ucidef_set_poe 77 "$(filter_port_list "$lan_list" "lan9 lan10")"
+=======
+netgear,gs110tpp-v1)
+	ucidef_set_poe 130 "$lan_list"
+	;;
+zyxel,gs1900-10hp)
+	ucidef_set_poe 77 "$lan_list"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 zyxel,gs1900-8hp-v1|\
 zyxel,gs1900-8hp-v2)
 	ucidef_set_poe 70 "$lan_list"
 	;;
+<<<<<<< HEAD
 zyxel,gs1900-24ep)
 	ucidef_set_poe 130 "lan1 lan2 lan3 lan4 lan5 lan6 lan7 lan8 lan9 lan10 lan11 lan12"
 	;;
@@ -134,6 +189,8 @@ zyxel,gs1900-24hp-v1|\
 zyxel,gs1900-24hp-v2)
 	ucidef_set_poe 170 "$(filter_port_list "$lan_list" "lan25 lan26")"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 esac
 
 board_config_flush

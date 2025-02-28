@@ -5,6 +5,7 @@
 # See /LICENSE for more information.
 #
 
+<<<<<<< HEAD
 config TARGET_DEFAULT_LAN_IP_FROM_PREINIT
 	bool "Use preinit IP configuration as default LAN IP" if IMAGEOPT
 	default n
@@ -12,6 +13,8 @@ config TARGET_DEFAULT_LAN_IP_FROM_PREINIT
 		Enabling this will set the default LAN IP address and netmask
 		to the preinit values set in the image config.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 menuconfig PREINITOPT
 	bool "Preinit configuration options" if IMAGEOPT
 	default n
@@ -44,7 +47,11 @@ config TARGET_PREINIT_DISABLE_FAILSAFE
 config TARGET_PREINIT_TIMEOUT
 	int
 	prompt "Failsafe/Debug wait timeout" if PREINITOPT
+<<<<<<< HEAD
 	default 4
+=======
+	default 2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 		How long to wait for failsafe mode to be entered or for
 		a debug option to be pressed before continuing with a
@@ -126,7 +133,11 @@ menuconfig INITOPT
 		prompt "Environment variables to set when starting init (start with none)" if INITOPT
 		default ""
 		help
+<<<<<<< HEAD
 			Should be a space separated list of variable assignments.  These
+=======
+			Should be a space seperated list of variable assignments.  These
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			variables will be present in the environment.  Spaces may not be
 			present (including through expansion) even in a quoted string
 			(env doesn't understanding quoting).
@@ -190,7 +201,11 @@ if VERSIONOPT
 	config VERSION_REPO
 		string
 		prompt "Release repository"
+<<<<<<< HEAD
 		default "https://downloads.openwrt.org/snapshots"
+=======
+		default "https://downloads.openwrt.org/releases/21.02-SNAPSHOT"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		help
 			This is the repository address embedded in the image, it defaults
 			to the trunk snapshot repo; the url may contain the following placeholders:
@@ -241,12 +256,15 @@ if VERSIONOPT
 		help
 			This an URL to provide users seeking support
 
+<<<<<<< HEAD
 	config VERSION_FIRMWARE_URL
 		string
 		prompt "Firmware URL"
 		help
 			This is an URL to provide users for downloading firmware
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	config VERSION_PRODUCT
 		string
 		prompt "Product name"

@@ -30,6 +30,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &pcie {
 	wifi@0,0 {
@@ -37,3 +38,5 @@
 		nvmem-cell-names = "calibration";
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

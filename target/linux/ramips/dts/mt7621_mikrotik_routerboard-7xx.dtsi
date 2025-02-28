@@ -13,6 +13,7 @@
 			gpio-export,output = <0>;
 			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
 		};
+<<<<<<< HEAD
 	};
 
 	reg_usb_power: regulator {
@@ -30,6 +31,17 @@
 	vbus-supply = <&reg_usb_power>;
 };
 
+=======
+
+		usb_power {
+			gpio-export,name = "usb_power";
+			gpio-export,output = <1>;
+			gpios = <&gpio 12 GPIO_ACTIVE_HIGH>;
+		};
+	};
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &keys {
 	mode {
 		label = "mode";
@@ -48,44 +60,62 @@
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
 		port0: port@0 {
 			status = "okay";
 			label = "wan";
 
 			nvmem-cells = <&macaddr_hard 0>;
 			nvmem-cell-names = "mac-address";
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@1 {
 			status = "okay";
 			label = "lan2";
+<<<<<<< HEAD
 
 			nvmem-cells = <&macaddr_hard 1>;
 			nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@2 {
 			status = "okay";
 			label = "lan3";
+<<<<<<< HEAD
 
 			nvmem-cells = <&macaddr_hard 2>;
 			nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@3 {
 			status = "okay";
 			label = "lan4";
+<<<<<<< HEAD
 
 			nvmem-cells = <&macaddr_hard 3>;
 			nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@4 {
 			status = "okay";
 			label = "lan5";
+<<<<<<< HEAD
 
 			nvmem-cells = <&macaddr_hard 4>;
 			nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

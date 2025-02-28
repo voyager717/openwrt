@@ -156,6 +156,12 @@ struct symbol {
 /* choice values need to be set before calculating this symbol value */
 #define SYMBOL_NEED_SET_CHOICE_VALUES  0x100000
 
+<<<<<<< HEAD
+=======
+/* Set symbol to y if allnoconfig; used for symbols that hide others */
+#define SYMBOL_ALLNOCONFIG_Y 0x200000
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define SYMBOL_MAXLENGTH	256
 #define SYMBOL_HASHSIZE		9973
 
@@ -276,14 +282,26 @@ struct jump_key {
 	struct list_head entries;
 	size_t offset;
 	struct menu *target;
+<<<<<<< HEAD
 };
 
+=======
+	int index;
+};
+
+#define JUMP_NB			9
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 extern struct file *file_list;
 extern struct file *current_file;
 struct file *lookup_file(const char *name);
 
 extern struct symbol symbol_yes, symbol_no, symbol_mod;
 extern struct symbol *modules_sym;
+<<<<<<< HEAD
+=======
+extern struct symbol *sym_defconfig_list;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 extern int cdebug;
 struct expr *expr_alloc_symbol(struct symbol *sym);
 struct expr *expr_alloc_one(enum expr_type type, struct expr *ce);

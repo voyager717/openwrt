@@ -29,9 +29,17 @@ EXCLUDE_DIRS:= \
 	*/man \
 	*/info \
 	*/root-* \
+<<<<<<< HEAD
 	*.install.clean \
 	*.install.flags \
 	*.install \
+=======
+	initial \
+	*.install.clean \
+	*.install.flags \
+	*.install \
+	*/doc \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*/share/locale
 
 SDK_DIRS = \
@@ -44,10 +52,17 @@ GIT_COMMIT:=$(shell git rev-parse HEAD 2>/dev/null)
 GIT_BRANCH:=$(filter-out master HEAD,$(shell git rev-parse --abbrev-ref HEAD 2>/dev/null))
 GIT_TAGNAME:=$(shell git show-ref --tags --dereference 2>/dev/null | sed -ne '/^$(GIT_COMMIT) / { s|^.*/||; s|\^.*||; p }')
 
+<<<<<<< HEAD
 BASE_FEED:=$(if $(GIT_URL),src-git-full base $(GIT_URL)$(if $(GIT_BRANCH),;$(GIT_BRANCH),$(if $(GIT_TAGNAME),;$(GIT_TAGNAME))))
 BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),$(shell cd $(TOPDIR); LC_ALL=C git svn info 2>/dev/null | sed -ne 's/^URL: /src-gitsvn base /p'))
 BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),$(shell cd $(TOPDIR); LC_ALL=C svn info 2>/dev/null | sed -ne 's/^URL: /src-svn base /p'))
 BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),src-git-full base $(PROJECT_GIT)/openwrt/openwrt.git$(if $(GIT_BRANCH),;$(GIT_BRANCH),$(if $(GIT_TAGNAME),;$(GIT_TAGNAME))))
+=======
+BASE_FEED:=$(if $(GIT_URL),src-git base $(GIT_URL)$(if $(GIT_BRANCH),;$(GIT_BRANCH),$(if $(GIT_TAGNAME),;$(GIT_TAGNAME))))
+BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),$(shell cd $(TOPDIR); LC_ALL=C git svn info 2>/dev/null | sed -ne 's/^URL: /src-gitsvn base /p'))
+BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),$(shell cd $(TOPDIR); LC_ALL=C svn info 2>/dev/null | sed -ne 's/^URL: /src-svn base /p'))
+BASE_FEED:=$(if $(BASE_FEED),$(BASE_FEED),src-git base $(PROJECT_GIT)/openwrt/openwrt.git$(if $(GIT_BRANCH),;$(GIT_BRANCH),$(if $(GIT_TAGNAME),;$(GIT_TAGNAME))))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 KDIR_BASE = $(patsubst $(TOPDIR)/%,%,$(LINUX_DIR))
 KDIR_ARCHES = $(LINUX_KARCH)
@@ -68,10 +83,13 @@ KERNEL_FILES_ARCH = \
 	kernel/asm-offsets.s \
 	kernel/module.lds
 
+<<<<<<< HEAD
 ifeq ($(LINUX_KARCH),powerpc)
   KERNEL_FILES_ARCH += lib/crtsavres.o
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 KERNEL_FILES_BASE := \
 	.config \
 	Makefile \
@@ -90,18 +108,28 @@ KERNEL_FILES := $(patsubst $(TOPDIR)/%,%,$(wildcard $(addprefix $(LINUX_DIR)/,$(
 #
 USERSPACE_UTILS_FILES := \
 	tools/build \
+<<<<<<< HEAD
 	tools/leds \
 	tools/power/cpupower \
 	tools/scripts \
 	tools/spi \
 	tools/thermal/tmon \
 	tools/usb/usbip
+=======
+	tools/scripts \
+	tools/usb/usbip \
+	tools/spi
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 USERSPACE_FILES := $(patsubst $(TOPDIR)/%,%,$(wildcard $(addprefix $(LINUX_DIR)/,$(USERSPACE_UTILS_FILES))))
 
 all: compile
 
+<<<<<<< HEAD
 $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
+=======
+$(BIN_DIR)/$(SDK_NAME).tar.xz: clean
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mkdir -p \
 		$(SDK_BUILD_DIR)/dl \
 		$(SDK_BUILD_DIR)/package \
@@ -121,7 +149,10 @@ $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
 		$(TAR) -xf - -C $(SDK_BUILD_DIR)
 
 	(cd $(SDK_BUILD_DIR); find $(STAGING_SUBDIR_HOST)/bin $(STAGING_SUBDIR_HOST)/usr/bin \
+<<<<<<< HEAD
 		$(STAGING_SUBDIR_HOST)/llvm-bpf/bin $(STAGING_SUBDIR_HOST)/llvm-bpf/libexec \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(STAGING_SUBDIR_TOOLCHAIN)/bin $(STAGING_SUBDIR_TOOLCHAIN)/*/bin $(STAGING_SUBDIR_TOOLCHAIN)/libexec \
 		$(KDIR_BASE) \
 		-type f | $(BUNDLER_COMMAND))
@@ -130,15 +161,21 @@ $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
 		find \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/bin \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/usr/bin \
+<<<<<<< HEAD
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/llvm-bpf/bin \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/llvm-bpf/libexec \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TOOLCHAIN)/bin \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TOOLCHAIN)/*/bin \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_TOOLCHAIN)/libexec \
 			-type f; \
 		find \
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/lib \
+<<<<<<< HEAD
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/llvm-bpf/lib \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			$(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/usr/lib \
 			-type f -name \*.so\*; \
 	) | xargs strip 2>/dev/null >/dev/null
@@ -156,7 +193,11 @@ $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
 		./files/Config.in \
 		./files/Makefile \
 		./files/include/prepare.mk \
+<<<<<<< HEAD
 		./files/README.md \
+=======
+		./files/README.SDK \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(SDK_BUILD_DIR)/
 	mkdir -p $(SDK_BUILD_DIR)/package/kernel
 	$(CP) \
@@ -168,8 +209,11 @@ $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
 		$(SDK_BUILD_DIR)/package/kernel/
 
 	-rm -rf $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/.prereq-build
+<<<<<<< HEAD
 	-rm -rf $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/doc
 	-rm -rf $(SDK_BUILD_DIR)/$(STAGING_SUBDIR_HOST)/share/doc
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	-rm -f $(SDK_BUILD_DIR)/feeds.conf.default
 	$(if $(BASE_FEED),echo "$(BASE_FEED)" > $(SDK_BUILD_DIR)/feeds.conf.default)
@@ -185,16 +229,29 @@ $(BIN_DIR)/$(SDK_NAME).tar.zst: clean
 	find $(SDK_BUILD_DIR) -name .svn | $(XARGS) rm -rf
 	find $(SDK_BUILD_DIR) -name CVS | $(XARGS) rm -rf
 	-make -C $(SDK_BUILD_DIR)/scripts/config clean
+<<<<<<< HEAD
 
 	(cd $(BUILD_DIR); \
 		tar -I '$(STAGING_DIR_HOST)/bin/zstd -T0 --ultra -20' -cf $@ $(SDK_NAME) \
+=======
+	(cd $(BUILD_DIR); \
+		tar -I '$(STAGING_DIR_HOST)/bin/xz -7e -T$(if $(filter 1,$(NPROC)),2,0)' -cf $@ $(SDK_NAME) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		--mtime="$(shell date --date=@$(SOURCE_DATE_EPOCH))"; \
 	)
 
 download:
 prepare:
+<<<<<<< HEAD
 compile: $(BIN_DIR)/$(SDK_NAME).tar.zst
 install: compile
 
 clean:
 	rm -rf $(SDK_BUILD_DIR) $(BIN_DIR)/$(SDK_NAME).tar.zst
+=======
+compile: $(BIN_DIR)/$(SDK_NAME).tar.xz
+install: compile
+
+clean:
+	rm -rf $(SDK_BUILD_DIR) $(BIN_DIR)/$(SDK_NAME).tar.xz
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -10,10 +10,18 @@ SUBTARGETS:=le be le64 be64
 INITRAMFS_EXTRA_FILES:=
 FEATURES:=cpiogz ext4 ramdisk squashfs targz
 
+<<<<<<< HEAD
 KERNEL_PATCHVER:=6.6
 
 include $(INCLUDE_DIR)/target.mk
 
 DEFAULT_PACKAGES += wpad-basic-mbedtls kmod-mac80211-hwsim kmod-pcnet32 mkf2fs e2fsprogs
+=======
+KERNEL_PATCHVER:=5.4
+
+include $(INCLUDE_DIR)/target.mk
+
+DEFAULT_PACKAGES += wpad-basic-wolfssl kmod-mac80211-hwsim kmod-pcnet32 mkf2fs e2fsprogs
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call BuildTarget))

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "Qihoo 360 C301";
@@ -22,14 +25,22 @@
 		pinctrl-0 = <&jtag_disable_pins>;
 
 		led_wlan_g: wlan_g {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 
 		led_wlan_o: wlan_o {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
@@ -51,7 +62,11 @@
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		regulator-always-on;
+<<<<<<< HEAD
 		gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
+=======
+		gpio = <&gpio 18 GPIO_ACTIVE_LOW>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	usb_vbus: reg_usb_vbus {
@@ -59,9 +74,14 @@
 		regulator-name = "usb_vbus";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		regulator-always-on;
 		gpios = <&gpio 19 GPIO_ACTIVE_HIGH>;
 		enable-active-high;
+=======
+		enable-active-high;
+		gpio = <&gpio 19 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -107,6 +127,11 @@
 	pinctrl-0 = <&pmx_spi_cs1>;
 
 	flash@0 {
+<<<<<<< HEAD
+=======
+		#address-cells = <1>;
+		#size-cells = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "jedec,spi-nor";
 		reg = <0>;
 		spi-max-frequency = <25000000>;
@@ -161,6 +186,7 @@
 				label = "radiocfg";
 				reg = <0xff0000 0x10000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -175,11 +201,18 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 
 	flash@1 {
+<<<<<<< HEAD
+=======
+		#address-cells = <1>;
+		#size-cells = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "jedec,spi-nor";
 		reg = <1>;
 		spi-max-frequency = <25000000>;
@@ -209,6 +242,10 @@
 
 &usb_phy {
 	status = "okay";
+<<<<<<< HEAD
+=======
+	phy-supply = <&usb_vbus>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -217,16 +254,23 @@
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
 		reg = <0 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&cal_radiocfg_5000>;
 		nvmem-cell-names = "calibration";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&cal_radiocfg_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {

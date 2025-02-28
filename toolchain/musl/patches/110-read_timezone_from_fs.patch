@@ -1,6 +1,10 @@
 --- a/src/time/__tz.c
 +++ b/src/time/__tz.c
+<<<<<<< HEAD
 @@ -32,6 +32,9 @@ static int r0[5], r1[5];
+=======
+@@ -25,6 +25,9 @@ static int r0[5], r1[5];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  static const unsigned char *zi, *trans, *index, *types, *abbrevs, *abbrevs_end;
  static size_t map_size;
  
@@ -10,7 +14,11 @@
  static char old_tz_buf[32];
  static char *old_tz = old_tz_buf;
  static size_t old_tz_size = sizeof old_tz_buf;
+<<<<<<< HEAD
 @@ -133,6 +136,15 @@ static void do_tzset()
+=======
+@@ -125,6 +128,15 @@ static void do_tzset()
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		"/usr/share/zoneinfo/\0/share/zoneinfo/\0/etc/zoneinfo/\0";
  
  	s = getenv("TZ");

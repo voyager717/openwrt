@@ -8,7 +8,11 @@ PROG=/usr/sbin/umdns
 IFACES=""
 
 load_ifaces() {
+<<<<<<< HEAD
 	local network="$(uci -q get umdns.@umdns[-1].network)"
+=======
+	local network="$(uci get umdns.@umdns[-1].network)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	for n in $network; do
 		local device
 		json_load "$(ifstatus $n)"
@@ -29,12 +33,17 @@ reload_service() {
 }
 
 start_service() {
+<<<<<<< HEAD
 	local network="$(uci -q get umdns.@umdns[-1].network)"
+=======
+	local network="$(uci get umdns.@umdns[-1].network)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	procd_open_instance
 	procd_set_param command "$PROG"
 	[ -f /etc/seccomp/umdns.json ] && procd_set_param seccomp /etc/seccomp/umdns.json
 	procd_set_param respawn
+<<<<<<< HEAD
 
 	procd_open_data
 	json_add_array firewall
@@ -52,6 +61,8 @@ start_service() {
 	json_close_array
 	procd_close_data
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	procd_open_trigger
 	procd_add_config_trigger "config.change" "umdns" /etc/init.d/umdns reload
 	for n in $network; do
@@ -59,10 +70,14 @@ start_service() {
 	done
 	procd_add_raw_trigger "instance.update" 5000 "/bin/ubus" "call" "umdns" "reload"
 	procd_close_trigger
+<<<<<<< HEAD
 	[ "$(uci get umdns.@umdns[-1].jail)" = 1 ] && {
 		procd_add_jail umdns ubus log
 		[ -d /etc/umdns ] && procd_add_jail_mount "/etc/umdns"
 	}
+=======
+	[ "$(uci get umdns.@umdns[-1].jail)" = 1 ] && procd_add_jail umdns ubus log
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	procd_close_instance
 }
 

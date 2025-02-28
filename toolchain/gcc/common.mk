@@ -23,11 +23,15 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=gcc
 GCC_VERSION:=$(call qstrip,$(CONFIG_GCC_VERSION))
 PKG_VERSION:=$(firstword $(subst +, ,$(GCC_VERSION)))
+<<<<<<< HEAD
 GCC_MAJOR_VERSION:=$(word 1,$(subst ., ,$(PKG_VERSION)))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 GCC_DIR:=$(PKG_NAME)-$(PKG_VERSION)
 
 PKG_SOURCE_URL:=@GNU/gcc/gcc-$(PKG_VERSION)
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:gnu:gcc
 
 ifeq ($(PKG_VERSION),11.3.0)
@@ -47,6 +51,26 @@ ifeq ($(PKG_VERSION),14.2.0)
 endif
 
 PATCH_DIR=../patches-$(GCC_MAJOR_VERSION).x
+=======
+
+ifeq ($(PKG_VERSION),7.5.0)
+  PKG_HASH:=b81946e7f01f90528a1f7352ab08cc602b9ccc05d4e44da4bd501c5a189ee661
+endif
+
+ifeq ($(PKG_VERSION),8.4.0)
+  PKG_HASH:=e30a6e52d10e1f27ed55104ad233c30bd1e99cfb5ff98ab022dc941edd1b2dd4
+endif
+
+ifeq ($(PKG_VERSION),9.3.0)
+  PKG_HASH:=71e197867611f6054aa1119b13a0c0abac12834765fe2d81f35ac57f84f742d1
+endif
+
+ifeq ($(PKG_VERSION),10.2.0)
+  PKG_HASH:=b8dd4368bb9c7f0b98188317ee0254dd8cc99d1e3a18d0ff146c855fe16c1d8c
+endif
+
+PATCH_DIR=../patches/$(GCC_VERSION)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 BUGURL=http://bugs.openwrt.org/
 PKGVERSION=OpenWrt GCC $(PKG_VERSION) $(REVISION)
@@ -75,22 +99,36 @@ TAR_OPTIONS += \
 	--exclude-from='$(CURDIR)/../exclude-testsuite' --exclude=gcc/ada/*.ad* \
 	--exclude=libjava
 
+<<<<<<< HEAD
 # this needs to be without -L/-lzstd flags or other parts fail to build
 # use an absolute path to ensure it really picks up our version
 export ac_cv_search_ZSTD_compress=$(STAGING_DIR_HOST)/lib/libzstd.a -pthread
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 export libgcc_cv_fixed_point=no
 ifdef CONFIG_INSTALL_GCCGO
   export libgo_cv_c_split_stack_supported=no
 endif
 
 ifdef CONFIG_GCC_USE_GRAPHITE
+<<<<<<< HEAD
   GRAPHITE_CONFIGURE:= --with-isl=$(STAGING_DIR_HOST)
+=======
+  GRAPHITE_CONFIGURE:= --with-isl=$(TOPDIR)/staging_dir/host
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 else
   GRAPHITE_CONFIGURE:= --without-isl --without-cloog
 endif
 
 GCC_CONFIGURE:= \
 	SHELL="$(BASH)" \
+<<<<<<< HEAD
+=======
+	$(if $(shell gcc --version 2>&1 | grep -E "Apple.(LLVM|clang)"), \
+		CFLAGS="-O2 -fbracket-depth=512 -pipe" \
+		CXXFLAGS="-O2 -fbracket-depth=512 -pipe" \
+	) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(HOST_SOURCE_DIR)/configure \
 		--with-bugurl=$(BUGURL) \
 		--with-pkgversion="$(PKGVERSION)" \
@@ -113,6 +151,7 @@ GCC_CONFIGURE:= \
 		$(if $(CONFIG_mips64)$(CONFIG_mips64el),--with-arch=mips64 \
 			--with-abi=$(call qstrip,$(CONFIG_MIPS64_ABI))) \
 		$(if $(CONFIG_arc),--with-cpu=$(CONFIG_CPU_TYPE)) \
+<<<<<<< HEAD
 		$(if $(CONFIG_powerpc64), $(if $(CONFIG_USE_MUSL),--with-abi=elfv2)) \
 		--with-system-zlib=$(STAGING_DIR_HOST) \
 		--with-zstd=$(STAGING_DIR_HOST) \
@@ -123,6 +162,15 @@ GCC_CONFIGURE:= \
 		--with-diagnostics-color=auto-if-env \
 		--enable-__cxa_atexit \
 		--enable-libstdcxx-dual-abi \
+=======
+		--with-gmp=$(TOPDIR)/staging_dir/host \
+		--with-mpfr=$(TOPDIR)/staging_dir/host \
+		--with-mpc=$(TOPDIR)/staging_dir/host \
+		--disable-decimal-float \
+		--with-diagnostics-color=auto-if-env \
+		--enable-__cxa_atexit \
+		--disable-libstdcxx-dual-abi \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		--with-default-libstdcxx-abi=new
 ifneq ($(CONFIG_mips)$(CONFIG_mipsel),)
   GCC_CONFIGURE += --with-mips-plt
@@ -174,6 +222,7 @@ ifeq ($(CONFIG_TARGET_x86)$(CONFIG_USE_GLIBC)$(CONFIG_INSTALL_GCCGO),yyy)
   TARGET_CFLAGS+=-fno-split-stack
 endif
 
+<<<<<<< HEAD
 CFLAGS:=$(HOST_CFLAGS) -pipe
 ifneq ($(shell gcc --version 2>&1 | grep -E "Apple.(LLVM|clang)"),)
   CFLAGS+= -fbracket-depth=512
@@ -189,12 +238,22 @@ GCC_CONFIGURE+= \
 GCC_MAKE:= \
 	export SHELL="$(BASH)"; \
 	$(MAKE)
+=======
+GCC_MAKE:= \
+	export SHELL="$(BASH)"; \
+	$(MAKE) \
+		CFLAGS="$(HOST_CFLAGS)" \
+		CFLAGS_FOR_TARGET="$(TARGET_CFLAGS)" \
+		CXXFLAGS_FOR_TARGET="$(TARGET_CFLAGS)" \
+		GOCFLAGS_FOR_TARGET="$(TARGET_CFLAGS)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Host/SetToolchainInfo
 	$(SED) 's,TARGET_CROSS=.*,TARGET_CROSS=$(REAL_GNU_TARGET_NAME)-,' $(TOOLCHAIN_DIR)/info.mk
 	$(SED) 's,GCC_VERSION=.*,GCC_VERSION=$(GCC_VERSION),' $(TOOLCHAIN_DIR)/info.mk
 endef
 
+<<<<<<< HEAD
 
 ifeq ($(GCC_MAJOR_VERSION),11)
 	GCC_VERSION_FILE:=gcc/version.c
@@ -202,6 +261,8 @@ else
 	GCC_VERSION_FILE:=gcc/genversion.cc
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifneq ($(GCC_PREPARE),)
   define Host/Prepare
 	$(call Host/SetToolchainInfo)
@@ -210,7 +271,12 @@ ifneq ($(GCC_PREPARE),)
 	$(CP) $(SCRIPT_DIR)/config.{guess,sub} $(HOST_SOURCE_DIR)/
 	$(SED) 's,^MULTILIB_OSDIRNAMES,# MULTILIB_OSDIRNAMES,' $(HOST_SOURCE_DIR)/gcc/config/*/t-*
 	$(SED) 'd' $(HOST_SOURCE_DIR)/gcc/DEV-PHASE
+<<<<<<< HEAD
 	$(SED) 's, DATESTAMP,,' $(HOST_SOURCE_DIR)/$(GCC_VERSION_FILE)
+=======
+	$(SED) 's, DATESTAMP,,' $(HOST_SOURCE_DIR)/gcc/version.c
+	#(cd $(HOST_SOURCE_DIR)/libstdc++-v3; autoconf;);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(SED) 's,gcc_no_link=yes,gcc_no_link=no,' $(HOST_SOURCE_DIR)/libstdc++-v3/configure
 	mkdir -p $(GCC_BUILD_DIR)
   endef

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "TP-Link TL-MR3040 V2";
@@ -23,15 +26,23 @@
 		pinctrl-0 = <&switch_led_disable_pins>;
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 26 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		led_lan: lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 
@@ -75,7 +86,11 @@
 		regulator-name = "usb_vbus";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		gpios = <&gpio 18 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 18 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -85,9 +100,22 @@
 };
 
 &usb {
+<<<<<<< HEAD
 	dr_mode = "host";
 	vbus-supply = <&reg_usb_vbus>;
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	dr_mode = "host";
+	vbus-supply = <&reg_usb_vbus>;
+	status = "okay";
+
+	hub_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
@@ -111,6 +139,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -121,6 +150,8 @@
 						reg = <0x1fc00 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -129,6 +160,7 @@
 				reg = <0x020000 0x3d0000>;
 			};
 
+<<<<<<< HEAD
 			partition@3f0000 {
 				label = "art";
 				reg = <0x3f0000 0x010000>;
@@ -143,6 +175,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@3f0000 {
+				label = "art";
+				reg = <0x3f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -151,8 +189,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	gmac-config {
 		device = <&gmac>;
 
@@ -170,6 +212,11 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

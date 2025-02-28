@@ -80,6 +80,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -102,6 +103,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -121,8 +128,12 @@
 	wifi0: wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <2400000 2500000>;
 	};
 };
@@ -131,13 +142,18 @@
 	wifi1: wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
 };
@@ -153,10 +169,21 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan4";

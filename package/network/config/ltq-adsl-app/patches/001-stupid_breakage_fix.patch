@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 --- a/src/dsl_cpe_cli_access.c
 +++ b/src/dsl_cpe_cli_access.c
 @@ -1142,7 +1142,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_Auto
+=======
+--- a/src/dsl_cpe_cli_access.c	2016-05-27 12:34:43.612485449 -0700
++++ b/src/dsl_cpe_cli_access.c	2016-05-27 12:45:37.491727862 -0700
+@@ -1142,7 +1142,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
        if ((ret < 0) && (autobootCtrl.accessCtl.nReturn < DSL_SUCCESS))
        {
@@ -9,7 +15,11 @@
        }
        else
        {
+<<<<<<< HEAD
 @@ -1213,7 +1213,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_Auto
+=======
+@@ -1213,7 +1213,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
     if ((ret < 0) && (pData.accessCtl.nReturn < DSL_SUCCESS))
     {
@@ -18,7 +28,11 @@
     }
     else
     {
+<<<<<<< HEAD
 @@ -1290,7 +1290,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_Line
+=======
+@@ -1290,7 +1290,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
     if ((ret < 0) && (pData.accessCtl.nReturn < DSL_SUCCESS))
     {
@@ -27,7 +41,11 @@
     }
     else
     {
+<<<<<<< HEAD
 @@ -1355,7 +1355,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_Reso
+=======
+@@ -1355,7 +1355,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                    pCtx, &resourceUsageStatisticsData);
           if (ret < 0)
           {
@@ -36,7 +54,11 @@
           }
           else
           {
+<<<<<<< HEAD
 @@ -3084,7 +3084,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_G997
+=======
+@@ -3084,7 +3084,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
     if ((ret < 0) && (pData->accessCtl.nReturn < DSL_SUCCESS))
     {
@@ -45,7 +67,11 @@
     }
     else
     {
+<<<<<<< HEAD
 @@ -4654,7 +4654,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_G997
+=======
+@@ -4654,7 +4654,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
     if ((ret < 0) && (pData.accessCtl.nReturn < DSL_SUCCESS))
     {
@@ -54,7 +80,11 @@
     }
     else
     {
+<<<<<<< HEAD
 @@ -5714,7 +5714,7 @@ DSL_CLI_LOCAL DSL_int_t DSL_CPE_CLI_G997
+=======
+@@ -5714,7 +5714,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
     if ((ret < 0) && (pData.accessCtl.nReturn < DSL_SUCCESS))
     {

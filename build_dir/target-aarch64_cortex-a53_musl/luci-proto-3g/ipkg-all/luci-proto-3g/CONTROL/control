@@ -1,0 +1,11 @@
+Package: luci-proto-3g
+Version: git-22.046.84868-a7b0fe1
+Depends: libc, comgt
+Source: feeds/luci/protocols/luci-proto-3g
+SourceName: luci-proto-3g
+Section: luci
+SourceDateEpoch: 1644968068
+Maintainer: OpenWrt LuCI community
+Architecture: all
+Installed-Size: 1762
+Description:  Support for 3G

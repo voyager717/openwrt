@@ -1,7 +1,10 @@
 #include "ar9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "zte,h201l", "lantiq,xway", "lantiq,ar9";
@@ -53,8 +56,12 @@
 		compatible = "gpio-leds";
 
 		power_green: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -71,6 +78,7 @@
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
@@ -83,6 +91,17 @@
 		led_usb: usb {
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
+		};
+		wifi: wifi {
+			label = "green:wlan";
+			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
+		};
+		led_usb: usb {
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -96,6 +115,14 @@
 			gpio-export,output = <1>;
 			gpios = <&gpio 38 GPIO_ACTIVE_HIGH>;
 		};
+<<<<<<< HEAD
+=======
+		usb {
+			gpio-export,name = "usb";
+			gpio-export,output = <1>;
+			gpios = <&gpio 28 GPIO_ACTIVE_HIGH>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		wifi {
 			gpio-export,name = "wifi";
 			gpio-export,output = <1>;
@@ -103,6 +130,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	usb_phy: regulator-usb-phy {
 		compatible = "regulator-fixed";
 
@@ -115,6 +143,8 @@
 		enable-active-high;
 	};
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	usb_vbus: regulator-usb-vbus {
 		compatible = "regulator-fixed";
 
@@ -123,7 +153,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 36 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 36 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -173,7 +207,10 @@
 
 &usb_phy0 {
 	status = "okay";
+<<<<<<< HEAD
 	phy-supply = <&usb_phy>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 

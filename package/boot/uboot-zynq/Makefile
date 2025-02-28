@@ -18,7 +18,10 @@ include $(INCLUDE_DIR)/host-build.mk
 
 define U-Boot/Default
   BUILD_TARGET:=zynq
+<<<<<<< HEAD
   BUILD_SUBTARGET:=generic
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   UBOOT_IMAGE:=spl/boot.bin u-boot.img
   UBOOT_CONFIG:=zynq_$(1)
   UENV:=default
@@ -61,4 +64,9 @@ endef
 define Package/u-boot/install/default
 endef
 
+<<<<<<< HEAD
+=======
+Build/Exports:=$(Host/Exports)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage/U-Boot))

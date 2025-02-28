@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "cudy,wr1000", "mediatek,mt7628an-soc";
@@ -47,8 +50,12 @@
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 39 GPIO_ACTIVE_LOW>;
 		};
 
@@ -59,8 +66,12 @@
 		};
 
 		led_wps: wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -91,6 +102,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -113,6 +125,12 @@
 						reg = <0x28 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -140,8 +158,12 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 
 		led {
@@ -153,6 +175,7 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
@@ -161,6 +184,12 @@
 &ethernet {
 	nvmem-cells = <&macaddr_factory_28>;
 	nvmem-cell-names = "mac-address";
+=======
+};
+
+&ethernet {
+	mtd-mac-address = <&factory 0x28>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {

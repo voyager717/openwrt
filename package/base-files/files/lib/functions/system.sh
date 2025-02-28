@@ -61,6 +61,7 @@ find_mtd_chardev() {
 	echo "${INDEX:+$PREFIX$INDEX}"
 }
 
+<<<<<<< HEAD
 get_mac_ascii() {
 	local part="$1"
 	local key="$2"
@@ -72,10 +73,16 @@ get_mac_ascii() {
 	[ -n "$mac_dirty" ] && macaddr_canonicalize "$mac_dirty"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 mtd_get_mac_ascii() {
 	local mtdname="$1"
 	local key="$2"
 	local part
+<<<<<<< HEAD
+=======
+	local mac_dirty
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	part=$(find_mtd_part "$mtdname")
 	if [ -z "$part" ]; then
@@ -83,6 +90,7 @@ mtd_get_mac_ascii() {
 		return
 	fi
 
+<<<<<<< HEAD
 	get_mac_ascii "$part" "$key"
 }
 
@@ -112,11 +120,15 @@ mtd_get_mac_encrypted_arcadyan() {
 		echo "mtd_get_mac_encrypted_arcadyan: Neither uencrypt nor openssl was found!" >&2
 		return
 	fi
+=======
+	mac_dirty=$(strings "$part" | sed -n 's/^'"$key"'=//p')
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	# "canonicalize" mac
 	[ -n "$mac_dirty" ] && macaddr_canonicalize "$mac_dirty"
 }
 
+<<<<<<< HEAD
 mtd_get_mac_encrypted_deco() {
 	local mtdname="$1"
 
@@ -152,6 +164,13 @@ mtd_get_mac_text() {
 	local offset=$((${2:-0}))
 	local length="${3:-17}"
 	local part
+=======
+mtd_get_mac_text() {
+	local mtdname=$1
+	local offset=$(($2))
+	local part
+	local mac_dirty
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	part=$(find_mtd_part "$mtdname")
 	if [ -z "$part" ]; then
@@ -159,9 +178,21 @@ mtd_get_mac_text() {
 		return
 	fi
 
+<<<<<<< HEAD
 	[ $((offset + length)) -le $(mtd_get_part_size "$mtdname") ] || return
 
 	macaddr_canonicalize $(dd bs=1 if="$part" skip="$offset" count="$length" 2>/dev/null)
+=======
+	if [ -z "$offset" ]; then
+		echo "mtd_get_mac_text: offset missing!" >&2
+		return
+	fi
+
+	mac_dirty=$(dd if="$part" bs=1 skip="$offset" count=17 2>/dev/null)
+
+	# "canonicalize" mac
+	[ -n "$mac_dirty" ] && macaddr_canonicalize "$mac_dirty"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 mtd_get_mac_binary() {
@@ -197,6 +228,7 @@ mtd_get_part_size() {
 	done < /proc/mtd
 }
 
+<<<<<<< HEAD
 mmc_get_mac_ascii() {
 	local part_name="$1"
 	local key="$2"
@@ -220,6 +252,8 @@ mmc_get_mac_binary() {
 	get_mac_binary "$part" "$offset"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 macaddr_add() {
 	local mac=$1
 	local val=$2
@@ -230,6 +264,7 @@ macaddr_add() {
 	echo $oui:$nic
 }
 
+<<<<<<< HEAD
 macaddr_generate_from_mmc_cid() {
 	local mmc_dev=$1
 
@@ -238,6 +273,8 @@ macaddr_generate_from_mmc_cid() {
 	echo "$(macaddr_unsetbit_mc "$(macaddr_setbit_la "${mac_base}")")"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 macaddr_geteui() {
 	local mac=$1
 	local sep=$2
@@ -279,6 +316,15 @@ macaddr_random() {
 	echo "$(macaddr_unsetbit_mc "$(macaddr_setbit_la "${randsrc}")")"
 }
 
+<<<<<<< HEAD
+=======
+macaddr_2bin() {
+	local mac=$1
+
+	echo -ne \\x${mac//:/\\x}
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 macaddr_canonicalize() {
 	local mac="$1"
 	local canon=""
@@ -311,7 +357,10 @@ macaddr_canonicalize() {
 
 	printf "%02x:%02x:%02x:%02x:%02x:%02x" 0x${canon// / 0x} 2>/dev/null
 }
+<<<<<<< HEAD
 
 dt_is_enabled() {
 	grep -q okay "/proc/device-tree/$1/status"
 }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

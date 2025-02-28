@@ -1,0 +1,12 @@
+Package: luci-mod-status
+Version: git-22.089.70019-d4f0b06
+Depends: libc, luci-base, libiwinfo20210430, libiwinfo-lua
+Source: feeds/luci/modules/luci-mod-status
+SourceName: luci-mod-status
+License: Apache-2.0
+Section: luci
+SourceDateEpoch: 1648668419
+Maintainer: OpenWrt LuCI community
+Architecture: aarch64_cortex-a53
+Installed-Size: 29114
+Description:  LuCI Status Pages

@@ -1,0 +1,43 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/libzstd_shared.dir/common/debug.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/entropy_common.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/error_private.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/fse_decompress.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/pool.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/threading.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/xxhash.c.o"
+  "CMakeFiles/libzstd_shared.dir/common/zstd_common.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/fse_compress.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/hist.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/huf_compress.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_compress.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_compress_literals.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_compress_sequences.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_compress_superblock.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_double_fast.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_fast.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_lazy.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_ldm.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstd_opt.c.o"
+  "CMakeFiles/libzstd_shared.dir/compress/zstdmt_compress.c.o"
+  "CMakeFiles/libzstd_shared.dir/decompress/huf_decompress.c.o"
+  "CMakeFiles/libzstd_shared.dir/decompress/zstd_ddict.c.o"
+  "CMakeFiles/libzstd_shared.dir/decompress/zstd_decompress.c.o"
+  "CMakeFiles/libzstd_shared.dir/decompress/zstd_decompress_block.c.o"
+  "CMakeFiles/libzstd_shared.dir/deprecated/zbuff_common.c.o"
+  "CMakeFiles/libzstd_shared.dir/deprecated/zbuff_compress.c.o"
+  "CMakeFiles/libzstd_shared.dir/deprecated/zbuff_decompress.c.o"
+  "CMakeFiles/libzstd_shared.dir/dictBuilder/cover.c.o"
+  "CMakeFiles/libzstd_shared.dir/dictBuilder/divsufsort.c.o"
+  "CMakeFiles/libzstd_shared.dir/dictBuilder/fastcover.c.o"
+  "CMakeFiles/libzstd_shared.dir/dictBuilder/zdict.c.o"
+  "libzstd.pdb"
+  "libzstd.so"
+  "libzstd.so.1"
+  "libzstd.so.1.4.8"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/libzstd_shared.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,6 +1,10 @@
 --- a/ip/Makefile
 +++ b/ip/Makefile
+<<<<<<< HEAD
 @@ -19,6 +19,13 @@ RTMONOBJ=rtmon.o
+=======
+@@ -17,6 +17,13 @@ RTMONOBJ=rtmon.o
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  include ../config.mk
  
@@ -12,9 +16,15 @@
 +STATIC_SYM_SOURCES:=$(filter-out $(STATIC_SYM_FILTER),$(wildcard *.c))
 +
  ALLOBJ=$(IPOBJ) $(RTMONOBJ)
+<<<<<<< HEAD
  SCRIPTS=routel
  TARGETS=ip rtmon
 @@ -48,7 +55,7 @@ else
+=======
+ SCRIPTS=ifcfg rtpr routel routef
+ TARGETS=ip rtmon
+@@ -46,7 +53,7 @@ else
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  ip: static-syms.o
  static-syms.o: static-syms.h
@@ -25,11 +35,16 @@
  		sed -n '/'$$s'[^ ]* =/{s:.* \([^ ]*'$$s'[^ ]*\) .*:extern char \1[] __attribute__((weak)); if (!strcmp(sym, "\1")) return \1;:;p}' $$files ; \
 --- a/ip/ip.c
 +++ b/ip/ip.c
+<<<<<<< HEAD
 @@ -59,11 +59,17 @@ static void usage(void)
+=======
+@@ -64,10 +64,16 @@ static void usage(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	fprintf(stderr,
  		"Usage: ip [ OPTIONS ] OBJECT { COMMAND | help }\n"
  		"       ip [ -force ] -batch filename\n"
 +#ifndef IPROUTE2_TINY
+<<<<<<< HEAD
  		"where  OBJECT := { address | addrlabel | fou | help | ila | ioam | l2tp | link |\n"
  		"                   macsec | maddress | monitor | mptcp | mroute | mrule |\n"
  		"                   neighbor | neighbour | netconf | netns | nexthop | ntable |\n"
@@ -39,11 +54,25 @@
 +		"where  OBJECT := { address | help | link | maddress | monitor |\n"
 +		"                   neighbor | neighbour | netns | route |\n"
 +		"                   rule | stats | token | tunnel }\n"
+=======
+ 		"where  OBJECT := { link | address | addrlabel | route | rule | neigh | ntable |\n"
+ 		"                   tunnel | tuntap | maddress | mroute | mrule | monitor | xfrm |\n"
+ 		"                   netns | l2tp | fou | macsec | tcp_metrics | token | netconf | ila |\n"
+ 		"                   vrf | sr | nexthop | mptcp }\n"
++#else
++		"where  OBJECT := { link | address | route | rule | neigh | tunnel | maddress |\n"
++		"                   mroute | mrule | monitor | netns | macsec | token | ila |\n"
++		"                   vrf | sr }\n"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +#endif
  		"       OPTIONS := { -V[ersion] | -s[tatistics] | -d[etails] | -r[esolve] |\n"
  		"                    -h[uman-readable] | -iec | -j[son] | -p[retty] |\n"
  		"                    -f[amily] { inet | inet6 | mpls | bridge | link } |\n"
+<<<<<<< HEAD
 @@ -86,37 +92,49 @@ static const struct cmd {
+=======
+@@ -90,36 +96,50 @@ static const struct cmd {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	int (*func)(int argc, char **argv);
  } cmds[] = {
  	{ "address",	do_ipaddr },
@@ -63,9 +92,15 @@
 +#ifndef IPROUTE2_TINY
  	{ "l2tp",	do_ipl2tp },
  	{ "fou",	do_ipfou },
+<<<<<<< HEAD
  	{ "ila",	do_ipila },
  	{ "macsec",	do_ipmacsec },
 +#endif
+=======
++#endif
+ 	{ "ila",	do_ipila },
+ 	{ "macsec",	do_ipmacsec },
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	{ "tunnel",	do_iptunnel },
  	{ "tunl",	do_iptunnel },
 +#ifndef IPROUTE2_TINY
@@ -78,6 +113,7 @@
  	{ "monitor",	do_ipmonitor },
 +#ifndef IPROUTE2_TINY
  	{ "xfrm",	do_xfrm },
+<<<<<<< HEAD
  	{ "mroute",	do_multiroute },
  	{ "mrule",	do_multirule },
 +#endif
@@ -93,6 +129,24 @@
  	{ "help",	do_help },
  	{ "stats",	do_ipstats },
  	{ 0 }
+=======
++#endif
+ 	{ "mroute",	do_multiroute },
+ 	{ "mrule",	do_multirule },
+ 	{ "netns",	do_netns },
++#ifndef IPROUTE2_TINY
+ 	{ "netconf",	do_ipnetconf },
++#endif
+ 	{ "vrf",	do_ipvrf},
+ 	{ "sr",		do_seg6 },
++#ifndef IPROUTE2_TINY
+ 	{ "nexthop",	do_ipnh },
+ 	{ "mptcp",	do_mptcp },
++#endif
+ 	{ "help",	do_help },
+ 	{ 0 }
+ };
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/lib/Makefile
 +++ b/lib/Makefile
 @@ -3,6 +3,10 @@ include ../config.mk
@@ -105,4 +159,8 @@
 +
  UTILOBJ = utils.o utils_math.o rt_names.o ll_map.o ll_types.o ll_proto.o ll_addr.o \
  	inet_proto.o namespace.o json_writer.o json_print.o json_print_math.o \
+<<<<<<< HEAD
  	names.o color.o bpf_legacy.o bpf_glue.o exec.o fs.o cg_map.o ppp_proto.o
+=======
+ 	names.o color.o bpf_legacy.o bpf_glue.o exec.o fs.o cg_map.o
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

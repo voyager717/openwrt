@@ -7,11 +7,14 @@
 	model = "I-O DATA WN-AX1167GR2";
 };
 
+<<<<<<< HEAD
 /* override EEPROM size to 0x4da8 for MT7615 */
 &eeprom_factory_0 {
 	reg = <0x0 0x4da8>;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &partitions {
 	partition@6b00000 {
 		label = "Backup";
@@ -24,7 +27,11 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

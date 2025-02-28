@@ -1,0 +1,68 @@
+Index: src/odhcp6c.c
+===================================================================
+--- a/src/odhcp6c.c
++++ b/src/odhcp6c.c
+@@ -67,6 +67,7 @@ static char *ifname = NULL;
+ 
+ static unsigned int script_sync_delay = 10;
+ static unsigned int script_accu_delay = 1;
++static bool update_lifetimes = true;
+ 
+ static struct odhcp6c_opt opts[] = {
+ 	{ .code = DHCPV6_OPT_CLIENTID, .flags = OPT_INTERNAL | OPT_NO_PASSTHRU, .str = NULL },
+@@ -186,12 +187,16 @@ int main(_unused int argc, char* const a
+ 	unsigned int ra_options = RA_RDNSS_DEFAULT_LIFETIME;
+ 	unsigned int ra_holdoff_interval = RA_MIN_ADV_INTERVAL;
+ 
+-	while ((c = getopt(argc, argv, "S::N:V:P:FB:c:i:r:Ru:Ux:s:kt:m:Lhedp:fav")) != -1) {
++	while ((c = getopt(argc, argv, "S::N:V:P:FB:c:i:r:Ru:Ux:s:kt:m:Lhedp:favQ")) != -1) {
+ 		switch (c) {
+ 		case 'S':
+ 			allow_slaac_only = (optarg) ? atoi(optarg) : -1;
+ 			break;
+ 
++		case 'Q':
++			update_lifetimes = false;
++			break;
++
+ 		case 'N':
+ 			if (!strcmp(optarg, "force")) {
+ 				ia_na_mode = IA_MODE_FORCE;
+@@ -623,6 +628,7 @@ static int usage(void)
+ 	"	-k		Don't send a RELEASE when stopping\n"
+ 	"	-t <seconds>	Maximum timeout for DHCPv6-SOLICIT (120)\n"
+ 	"	-m <seconds>	Minimum time between accepting RA updates (3)\n"
++	"	-Q		Do not track or update address lifetimes\n"
+ 	"	-L		Ignore default lifetime for RDNSS records\n"
+ 	"	-U		Ignore Server Unicast option\n"
+ 	"\nInvocation options:\n"
+@@ -830,11 +836,24 @@ static void odhcp6c_expire_list(enum odh
+ 		else if (c->valid != UINT32_MAX)
+ 			c->valid -= elapsed;
+ 
+-		if (!c->valid) {
+-			odhcp6c_remove_state(state, ((uint8_t*)c) - start, odhcp6c_entry_size(c));
+-			start = odhcp6c_get_state(state, &len);
+-		} else
+-			c = odhcp6c_next_entry(c);
++		if (update_lifetimes)
++		{
++			if (c->preferred < elapsed)
++				c->preferred = 0;
++			else if (c->preferred != UINT32_MAX)
++				c->preferred -= elapsed;
++
++			if (c->valid < elapsed)
++				c->valid = 0;
++			else if (c->valid != UINT32_MAX)
++				c->valid -= elapsed;		
++
++			if (!c->valid) {
++				odhcp6c_remove_state(state, ((uint8_t*)c) - start, odhcp6c_entry_size(c));
++				start = odhcp6c_get_state(state, &len);
++			} else
++				c = odhcp6c_next_entry(c);
++		}
+ 	}
+ }
+ 

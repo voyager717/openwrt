@@ -1,3 +1,7 @@
 ::sysinit:/etc/init.d/rcS S boot
 ::shutdown:/etc/init.d/rcS K shutdown
+<<<<<<< HEAD
 ::askconsole:/usr/libexec/login.sh
+=======
+ttyS0::respawnlate:/usr/libexec/login.sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

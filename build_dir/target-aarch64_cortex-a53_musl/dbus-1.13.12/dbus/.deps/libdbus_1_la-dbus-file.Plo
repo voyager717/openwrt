@@ -1,0 +1,35 @@
+libdbus_1_la-dbus-file.lo: dbus-file.c \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stdc-predef.h \
+ ../config.h dbus-file.h ../dbus/dbus-string.h ../dbus/dbus-macros.h \
+ ../dbus/dbus-types.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stddef.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/bits/alltypes.h \
+ ../dbus/dbus-arch-deps.h ../dbus/dbus-memory.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stdarg.h \
+ ../dbus/dbus-errors.h ../dbus/dbus-protocol.h
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stdc-predef.h:
+
+../config.h:
+
+dbus-file.h:
+
+../dbus/dbus-string.h:
+
+../dbus/dbus-macros.h:
+
+../dbus/dbus-types.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stddef.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/bits/alltypes.h:
+
+../dbus/dbus-arch-deps.h:
+
+../dbus/dbus-memory.h:
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/stdarg.h:
+
+../dbus/dbus-errors.h:
+
+../dbus/dbus-protocol.h:

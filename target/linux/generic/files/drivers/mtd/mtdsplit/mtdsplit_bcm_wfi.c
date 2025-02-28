@@ -31,7 +31,10 @@
 
 #define CFERAM_NAME		"cferam"
 #define CFERAM_NAME_LEN		(sizeof(CFERAM_NAME) - 1)
+<<<<<<< HEAD
 #define CFERAM_NAME_MAX_LEN	32
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define KERNEL_NAME		"vmlinux.lz"
 #define KERNEL_NAME_LEN		(sizeof(KERNEL_NAME) - 1)
 #define OPENWRT_NAME		"1-openwrt"
@@ -158,6 +161,7 @@ static int parse_bcm_wfi(struct mtd_info *master,
 			 const struct mtd_partition **pparts,
 			 uint8_t *buf, loff_t off, loff_t size, bool cfe_part)
 {
+<<<<<<< HEAD
 	struct device_node *mtd_node;
 	struct mtd_partition *parts;
 	loff_t cfe_off, kernel_off, rootfs_off;
@@ -174,12 +178,24 @@ static int parse_bcm_wfi(struct mtd_info *master,
 	if (cferam_name_len > 0)
 		cferam_name_len--;
 
+=======
+	struct mtd_partition *parts;
+	loff_t cfe_off, kernel_off, rootfs_off;
+	unsigned int num_parts = BCM_WFI_PARTS, cur_part = 0;
+	int ret;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (cfe_part) {
 		num_parts++;
 		cfe_off = off;
 
+<<<<<<< HEAD
 		ret = jffs2_find_file(master, buf, cferam_name,
 				      cferam_name_len, &cfe_off,
+=======
+		ret = jffs2_find_file(master, buf, CFERAM_NAME,
+				      CFERAM_NAME_LEN, &cfe_off,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				      size - (cfe_off - off), NULL, NULL);
 		if (ret)
 			return ret;

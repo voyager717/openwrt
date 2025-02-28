@@ -12,6 +12,7 @@
 };
 
 &partitions {
+<<<<<<< HEAD
 	partition@0 {
 		label = "u-boot";
 		reg = <0x000000 0x010000>;
@@ -28,6 +29,12 @@
 				#nvmem-cell-cells = <1>;
 			};
 		};
+=======
+	uboot: partition@0 {
+		label = "u-boot";
+		reg = <0x000000 0x010000>;
+		read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	partition@10000 {
@@ -42,6 +49,7 @@
 		read-only;
 	};
 
+<<<<<<< HEAD
 	partition@7f0000 {
 		label = "art";
 		reg = <0x7f0000 0x010000>;
@@ -60,10 +68,17 @@
 				reg = <0x5000 0x844>;
 			};
 		};
+=======
+	art: partition@7f0000 {
+		label = "art";
+		reg = <0x7f0000 0x010000>;
+		read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_fc00 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -80,4 +95,11 @@
 &wmac {
 	nvmem-cells = <&macaddr_uboot_fc00 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-mac-address = <&uboot 0x0fc00>;
+};
+
+&wmac {
+	mtd-mac-address = <&uboot 0x0fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

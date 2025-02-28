@@ -9,13 +9,20 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sysfsutils
 PKG_VERSION:=2.1.0
+<<<<<<< HEAD
 PKG_RELEASE:=4
+=======
+PKG_RELEASE:=3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/linux-diag
 PKG_HASH:=e865de2c1f559fff0d3fc936e660c0efaf7afe662064f2fb97ccad1ec28d208a
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:sysfsutils_project:sysfsutils
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=COPYING cmd/GPL lib/LGPL

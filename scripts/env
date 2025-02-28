@@ -61,7 +61,11 @@ env_init() {
 	mkdir -p "$ENVDIR" || error "Failed to create the environment directory"
 	cd "$ENVDIR" || error "Failed to switch to the environment directory"
 	[ -d .git ] || { 
+<<<<<<< HEAD
 		git init -b master &&
+=======
+		git init &&
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		touch .config &&
 		mkdir files &&
 		git add . && 

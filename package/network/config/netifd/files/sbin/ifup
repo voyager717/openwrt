@@ -1,6 +1,10 @@
 #!/bin/sh
 
 ifup_all=
+<<<<<<< HEAD
+=======
+setup_wifi=
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 if_call() {
 	local interface="$1"
@@ -13,6 +17,10 @@ case "$0" in
 	*ifdown) modes=down;;
 	*ifup)
 		modes="down up"
+<<<<<<< HEAD
+=======
+		setup_wifi=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 	*) echo "Invalid command: $0";;
 esac
@@ -23,6 +31,13 @@ while :; do
 			ifup_all=1
 			shift
 		;;
+<<<<<<< HEAD
+=======
+		-w)
+			setup_wifi=
+			shift
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		*)
 			break
 		;;
@@ -34,6 +49,10 @@ if [ -n "$ifup_all" ]; then
 	for interface in $(ubus -S list 'network.interface.*'); do
 		if_call "${interface##network.interface.}"
 	done
+<<<<<<< HEAD
+=======
+	[ -n "$setup_wifi" ] && /sbin/wifi up
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	exit
 else
 	ubus -S list "network.interface.$1" > /dev/null || {
@@ -42,3 +61,32 @@ else
 	}
 	if_call "$1"
 fi
+<<<<<<< HEAD
+=======
+
+if [ -n "$setup_wifi" ] && grep -sq config /etc/config/wireless; then
+	. /lib/functions.sh
+
+	find_related_radios() {
+		local wdev wnet
+		config_get wdev "$1" device
+		config_get wnet "$1" network
+
+		if [ -n "$wdev" ]; then
+			for wnet in $wnet; do
+				if [ "$wnet" = "$network" ]; then
+					append radio_devs "$wdev" "$N"
+				fi
+			done
+		fi
+	}
+
+	network="$1"
+	config_load wireless
+	config_foreach find_related_radios wifi-iface
+
+	for dev in $(echo "$radio_devs" | sort -u); do
+		/sbin/wifi up "$dev"
+	done
+fi
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

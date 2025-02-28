@@ -108,6 +108,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &spi0 {
 	status = "okay";
 
@@ -162,6 +163,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &gpio1 {
 	status = "okay";
 };
@@ -183,8 +186,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -192,6 +199,10 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From: Felix Fietkau <nbd@nbd.name>
 Date: Tue, 18 May 2021 12:50:17 +0200
 Subject: [PATCH] hostapd: add patch for disabling automatic bridging of vlan
@@ -20,6 +21,11 @@ was provided by the config
 --- a/src/ap/ap_config.h
 +++ b/src/ap/ap_config.h
 @@ -121,6 +121,7 @@ struct hostapd_ssid {
+=======
+--- a/src/ap/ap_config.h
++++ b/src/ap/ap_config.h
+@@ -115,6 +115,7 @@ struct hostapd_ssid {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #define DYNAMIC_VLAN_OPTIONAL 1
  #define DYNAMIC_VLAN_REQUIRED 2
  	int dynamic_vlan;
@@ -29,6 +35,7 @@ was provided by the config
  #define DYNAMIC_VLAN_NAMING_END 2
 --- a/src/ap/vlan_full.c
 +++ b/src/ap/vlan_full.c
+<<<<<<< HEAD
 @@ -475,6 +475,9 @@ void vlan_newlink(const char *ifname, st
  	if (!vlan)
  		return;
@@ -47,3 +54,26 @@ was provided by the config
  	ifconfig_up(ifname);
  }
  
+=======
+@@ -466,6 +466,9 @@ void vlan_newlink(const char *ifname, st
+ 
+ 	wpa_printf(MSG_DEBUG, "VLAN: vlan_newlink(%s)", ifname);
+ 
++	if (hapd->conf->ssid.vlan_no_bridge)
++		return;
++
+ 	for (vlan = hapd->conf->vlan; vlan; vlan = vlan->next) {
+ 		if (vlan->configured ||
+ 		    os_strcmp(ifname, vlan->ifname) != 0)
+--- a/hostapd/config_file.c
++++ b/hostapd/config_file.c
+@@ -3400,6 +3400,8 @@ static int hostapd_config_fill(struct ho
+ #ifndef CONFIG_NO_VLAN
+ 	} else if (os_strcmp(buf, "dynamic_vlan") == 0) {
+ 		bss->ssid.dynamic_vlan = atoi(pos);
++	} else if (os_strcmp(buf, "vlan_no_bridge") == 0) {
++		bss->ssid.vlan_no_bridge = atoi(pos);
+ 	} else if (os_strcmp(buf, "per_sta_vif") == 0) {
+ 		bss->ssid.per_sta_vif = atoi(pos);
+ 	} else if (os_strcmp(buf, "vlan_file") == 0) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

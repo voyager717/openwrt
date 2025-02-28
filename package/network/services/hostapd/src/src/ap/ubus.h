@@ -27,7 +27,10 @@ struct hostapd_iface;
 struct hostapd_data;
 struct hapd_interfaces;
 struct rrm_measurement_beacon_report;
+<<<<<<< HEAD
 struct sta_info;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #ifdef UBUS_SUPPORT
 
@@ -44,8 +47,11 @@ void hostapd_ubus_add_iface(struct hostapd_iface *iface);
 void hostapd_ubus_free_iface(struct hostapd_iface *iface);
 void hostapd_ubus_add_bss(struct hostapd_data *hapd);
 void hostapd_ubus_free_bss(struct hostapd_data *hapd);
+<<<<<<< HEAD
 void hostapd_ubus_add_vlan(struct hostapd_data *hapd, struct hostapd_vlan *vlan);
 void hostapd_ubus_remove_vlan(struct hostapd_data *hapd, struct hostapd_vlan *vlan);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct hostapd_ubus_request *req);
 void hostapd_ubus_handle_link_measurement(struct hostapd_data *hapd, const u8 *data, size_t len);
@@ -54,8 +60,11 @@ void hostapd_ubus_notify_beacon_report(struct hostapd_data *hapd,
 				       const u8 *addr, u8 token, u8 rep_mode,
 				       struct rrm_measurement_beacon_report *rep,
 				       size_t len);
+<<<<<<< HEAD
 void hostapd_ubus_notify_radar_detected(struct hostapd_iface *iface, int frequency,
 					int chan_width, int cf1, int cf2);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 void hostapd_ubus_notify_bss_transition_response(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 status_code,
@@ -63,6 +72,7 @@ void hostapd_ubus_notify_bss_transition_response(
 	const u8 *candidate_list, u16 candidate_list_len);
 void hostapd_ubus_add(struct hapd_interfaces *interfaces);
 void hostapd_ubus_free(struct hapd_interfaces *interfaces);
+<<<<<<< HEAD
 int hostapd_ubus_notify_bss_transition_query(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 reason,
 	const u8 *candidate_list, u16 candidate_list_len);
@@ -74,6 +84,8 @@ void hostapd_ubus_notify_csa(struct hostapd_data *hapd, int freq);
 void hostapd_ubus_notify_apup_newpeer(
 	struct hostapd_data *hapd, const u8 *addr, const char *ifname);
 #endif // def CONFIG_APUP
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #else
 
@@ -95,6 +107,7 @@ static inline void hostapd_ubus_free_bss(struct hostapd_data *hapd)
 {
 }
 
+<<<<<<< HEAD
 static inline void hostapd_ubus_add_vlan(struct hostapd_data *hapd, struct hostapd_vlan *vlan)
 {
 }
@@ -103,6 +116,8 @@ static inline void hostapd_ubus_remove_vlan(struct hostapd_data *hapd, struct ho
 {
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct hostapd_ubus_request *req)
 {
 	return 0;
@@ -123,10 +138,13 @@ static inline void hostapd_ubus_notify_beacon_report(struct hostapd_data *hapd,
 						     size_t len)
 {
 }
+<<<<<<< HEAD
 static inline void hostapd_ubus_notify_radar_detected(struct hostapd_iface *iface, int frequency,
 						      int chan_width, int cf1, int cf2)
 {
 }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static inline void hostapd_ubus_notify_bss_transition_response(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 status_code,
@@ -142,6 +160,7 @@ static inline void hostapd_ubus_add(struct hapd_interfaces *interfaces)
 static inline void hostapd_ubus_free(struct hapd_interfaces *interfaces)
 {
 }
+<<<<<<< HEAD
 
 static inline int hostapd_ubus_notify_bss_transition_query(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 reason,
@@ -161,6 +180,8 @@ hostapd_ubus_notify_csa(struct hostapd_data *hapd, int freq)
 {
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #endif
 
 #endif

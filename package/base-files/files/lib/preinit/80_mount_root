@@ -9,11 +9,16 @@ missing_lines() {
 	IFS=":"
 	while read line; do
 		set -- $line
+<<<<<<< HEAD
 		grep -q "^$1:" "$file2" || echo "$line"
+=======
+		grep -q "^$1:" "$file2" || echo "$*"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	done < "$file1"
 	IFS="$oIFS"
 }
 
+<<<<<<< HEAD
 # Rootfs mount options can be passed by declaring in the kernel
 # cmdline as much options as needed prefixed with "rootfs_mount_options."
 #
@@ -42,6 +47,16 @@ do_mount_root() {
 		cd /
 		[ -f /sysupgrade.tgz ] && tar xzf /sysupgrade.tgz
 		[ -f /tmp/sysupgrade.tar ] && tar xf /tmp/sysupgrade.tar
+=======
+do_mount_root() {
+	mount_root
+	boot_run_hook preinit_mount_root
+	[ -f /sysupgrade.tgz ] && {
+		echo "- config restore -"
+		cp /etc/passwd /etc/group /etc/shadow /tmp
+		cd /
+		tar xzf /sysupgrade.tgz
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		missing_lines /tmp/passwd /etc/passwd >> /etc/passwd
 		missing_lines /tmp/group /etc/group >> /etc/group
 		missing_lines /tmp/shadow /etc/shadow >> /etc/shadow

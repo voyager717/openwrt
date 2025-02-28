@@ -11,6 +11,7 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/iwinfo.git
+<<<<<<< HEAD
 PKG_SOURCE_DATE:=2025-02-06
 PKG_SOURCE_VERSION:=9cec6b4dd2df80d4c02bad322a5db14203a92cba
 PKG_MIRROR_HASH:=cf85caf5f343bf607dd8fbb412e1ea9f1b4474607a6d18f61e333f068124a966
@@ -21,6 +22,15 @@ PKG_BUILD_FLAGS:=no-lto
 PKG_CONFIG_DEPENDS:=CONFIG_WIFI_SCRIPTS_UCODE
 
 IWINFO_ABI_VERSION:=20230701
+=======
+PKG_SOURCE_DATE:=2022-04-26
+PKG_SOURCE_VERSION:=dc6847eb5ec8747867bc20f1024723c6397c1df7
+PKG_MIRROR_HASH:=3f243cf75f4cec02e9e8ecc2087577146845346c0172808f64dea066f84f88d4
+PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+PKG_LICENSE:=GPL-2.0
+
+IWINFO_ABI_VERSION:=20210430
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -63,7 +73,11 @@ define Package/iwinfo
   SECTION:=utils
   CATEGORY:=Utilities
   TITLE:=Generalized Wireless Information utility
+<<<<<<< HEAD
   DEPENDS:=+libiwinfo @!WIFI_SCRIPTS_UCODE
+=======
+  DEPENDS:=+libiwinfo
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/iwinfo/description

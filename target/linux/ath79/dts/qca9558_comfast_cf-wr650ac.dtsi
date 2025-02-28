@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	keys {
@@ -22,8 +25,12 @@
 		compatible = "gpio-leds";
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
@@ -86,7 +93,11 @@
 	status = "okay";
 
 	pll-data = <0xa6000000 0x00000101 0x00001616>;
+<<<<<<< HEAD
 
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
@@ -97,7 +108,11 @@
 	status = "okay";
 
 	pll-data = <0x03000101 0x00000101 0x00001616>;
+<<<<<<< HEAD
 
+=======
+	mtd-mac-address = <&art 0x6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
@@ -106,6 +121,12 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x18>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 // This node is required for the Ethernet ports to work correctly.

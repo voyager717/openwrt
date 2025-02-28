@@ -79,6 +79,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x030000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -89,6 +90,8 @@
 						reg = <0x2e010 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@30000 {
@@ -97,6 +100,7 @@
 				reg = <0x030000 0xfc0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -111,6 +115,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -119,6 +129,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
@@ -136,8 +151,12 @@
 
 	pll-data = <0x03000101 0x00000101 0x00001919>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_2e010>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x2e010>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-mode = "sgmii";
 	phy-handle = <&phy0>;
 };
@@ -150,6 +169,7 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &usb_phy1 {
 	status = "okay";
 };
@@ -163,4 +183,10 @@
 
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+&wmac {
+	status = "okay";
+
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -31,7 +31,10 @@ define Host/Install
 endef
 
 define Host/Clean
+<<<<<<< HEAD
 	rm -f $(STAGING_DIR_HOST)/bin/lzma
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call HostBuild))

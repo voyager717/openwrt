@@ -1,0 +1,21 @@
+Source-Makefile: package/mtk/applications/wappd/Makefile
+
+Package: wapp
+Submenu: Applications
+Version: 1
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread +USE_UCLIBC:libpthread +USE_UCLIBC:librt +libkvcutil +libopenssl +libnl-tiny
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: MTK Properties
+Category: MTK Properties
+Repository: base
+Title: wapp daemon
+Maintainer: 
+Source: wappd-60bcf478.tar.bz2
+Type: ipkg
+Description:   wifi app daemon
+
+@@
+
+

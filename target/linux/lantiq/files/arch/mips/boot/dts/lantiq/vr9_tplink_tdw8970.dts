@@ -4,6 +4,7 @@
 	compatible = "tplink,tdw8970", "tplink,tdw89x0", "lantiq,xway", "lantiq,vr9";
 	model = "TP-LINK TD-W8970";
 };
+<<<<<<< HEAD
 
 &boardconfig {
 	cal_boardconfig_21000: calibration@21000 {
@@ -16,3 +17,5 @@
 	nvmem-cells = <&macaddr_ath9k_cal_f100 2>, <&cal_boardconfig_21000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

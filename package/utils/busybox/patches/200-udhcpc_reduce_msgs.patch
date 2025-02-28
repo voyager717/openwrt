@@ -1,18 +1,32 @@
 --- a/networking/udhcp/dhcpc.c
 +++ b/networking/udhcp/dhcpc.c
+<<<<<<< HEAD
 @@ -711,6 +711,7 @@ static int bcast_or_ucast(struct dhcp_pa
  static NOINLINE int send_discover(uint32_t requested)
+=======
+@@ -712,6 +712,7 @@ static int bcast_or_ucast(struct dhcp_pa
+ static NOINLINE int send_discover(uint32_t xid, uint32_t requested)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  {
  	struct dhcp_packet packet;
 +	static int msgs = 0;
  
  	/* Fill in: op, htype, hlen, cookie, chaddr fields,
+<<<<<<< HEAD
  	 * xid field, message type option:
 @@ -725,6 +726,7 @@ static NOINLINE int send_discover(uint32
+=======
+ 	 * random xid field (we override it below),
+@@ -729,6 +730,7 @@ static NOINLINE int send_discover(uint32
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	 */
  	add_client_options(&packet);
  
 +	if (msgs++ < 3)
+<<<<<<< HEAD
  	bb_simple_info_msg("broadcasting discover");
+=======
+ 	bb_info_msg("sending %s", "discover");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	return raw_bcast_from_client_data_ifindex(&packet, INADDR_ANY);
  }

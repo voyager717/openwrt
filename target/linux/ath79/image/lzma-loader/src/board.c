@@ -10,7 +10,10 @@
 
 #include <stddef.h>
 #include "config.h"
+<<<<<<< HEAD
 #include "printf.h"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ar71xx_regs.h"
 
 #define READREG(r)	*(volatile unsigned int *)(r)
@@ -51,6 +54,7 @@ static void tlwr1043nd_init(void)
 static inline void tlwr1043nd_init(void) {}
 #endif
 
+<<<<<<< HEAD
 #if defined(CONFIG_BOARD_MERAKI_MR18) || \
     defined(CONFIG_BOARD_NEC_WG1400HP) || \
     defined(CONFIG_BOARD_NEC_WG1800HP) || \
@@ -353,4 +357,9 @@ void board_init(void)
 	mr18_init();
 	huawei_ap_init();
 	nec_aterm_init();
+=======
+void board_init(void)
+{
+	tlwr1043nd_init();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

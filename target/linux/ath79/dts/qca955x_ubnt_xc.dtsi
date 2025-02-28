@@ -7,6 +7,7 @@
 
 &pcie0 {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -14,6 +15,8 @@
 		nvmem-cells = <&cal_art_5000>;
 		nvmem-cell-names = "calibration";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -53,6 +56,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -71,6 +75,12 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};

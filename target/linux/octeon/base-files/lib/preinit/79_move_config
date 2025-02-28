@@ -4,14 +4,20 @@ move_config() {
 	. /lib/upgrade/common.sh
 
 	local device="$1"
+<<<<<<< HEAD
 	local fstype="$2"
 	[ -n "$device" ] && [ -b "$device" ] && {
 		mount -t "${fstype}" "$device" /mnt
+=======
+	[ -n "$device" ] && [ -b "$device" ] && {
+		mount -t vfat "$device" /mnt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		[ -f "/mnt/$BACKUP_FILE" ] && mv -f "/mnt/$BACKUP_FILE" /
 		umount /mnt
 	}
 }
 
+<<<<<<< HEAD
 octeon_get_n821_disk() {
 	local partnum=$1
 	local MAJOR MINOR DEVNAME DEVTYPE
@@ -21,10 +27,13 @@ octeon_get_n821_disk() {
 	echo "/dev/${DEVNAME}${partnum}"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 octeon_move_config() {
 	. /lib/functions.sh
 
 	case "$(board_name)" in
+<<<<<<< HEAD
 		ubnt,erlite|\
 		ubnt,usg)
 			move_config "/dev/sda1" "vfat"
@@ -44,6 +53,17 @@ octeon_move_config() {
 			move_config "$(octeon_get_n821_disk 1)" "ext2"
 			;;
 
+=======
+		erlite)
+			move_config "/dev/sda1"
+			;;
+		itus,shield-router)
+			move_config "/dev/mmcblk1p1"
+			;;
+		ubnt,edgerouter-4)
+			move_config "/dev/mmcblk0p1"
+			;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 }
 

@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9533_mikrotik_routerboard-16m.dtsi"
 
 / {
@@ -35,8 +38,12 @@
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -53,12 +60,15 @@
 	};
 };
 
+<<<<<<< HEAD
 &wmac {
 	status = "okay";
 
 	qca,no-eeprom;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &eth0 {
 	status = "okay";
 
@@ -77,6 +87,7 @@
 &pcie0 {
 	status = "okay";
 };
+<<<<<<< HEAD
 
 &usb0 {
 	status = "okay";
@@ -85,3 +96,5 @@
 &usb_phy {
 	status = "okay";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -9,16 +9,26 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=bsdiff
 PKG_VERSION:=4.3
+<<<<<<< HEAD
 PKG_RELEASE:=2
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.daemonology.net/bsdiff/
+=======
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=http://www.daemonology.net/bsdiff/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_HASH:=18821588b2dc5bf159aa37d3bcb7b885d85ffd1e19f23a0c57a58723fea85f48
 PKG_MAINTAINER:=Hauke Mehrtens <hauke@hauke-m.de>
 HOST_BUILD_DEPENDS:=bzip2/host
 
 PKG_LICENSE:=BSD-2-Clause
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:daemonology:bsdiff
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
@@ -28,7 +38,11 @@ define Package/bsdiff
   CATEGORY:=Utilities
   DEPENDS:=+libbz2
   TITLE:=Binary diff tool
+<<<<<<< HEAD
   URL:=https://www.daemonology.net/bsdiff/
+=======
+  URL:=http://www.daemonology.net/bsdiff/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/bspatch
@@ -36,7 +50,11 @@ define Package/bspatch
   CATEGORY:=Utilities
   DEPENDS:=+libbz2
   TITLE:=Binary patch tool
+<<<<<<< HEAD
   URL:=https://www.daemonology.net/bsdiff/
+=======
+  URL:=http://www.daemonology.net/bsdiff/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 

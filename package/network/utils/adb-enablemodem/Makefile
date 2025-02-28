@@ -1,7 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=adb-enablemodem
+<<<<<<< HEAD
 PKG_VERSION:=2017.03.05
+=======
+PKG_VERSION:=2017-03-05
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_RELEASE:=1
 
 include $(INCLUDE_DIR)/package.mk

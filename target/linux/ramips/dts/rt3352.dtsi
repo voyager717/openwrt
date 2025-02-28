@@ -5,12 +5,15 @@
 	#size-cells = <1>;
 	compatible = "ralink,rt3352-soc";
 
+<<<<<<< HEAD
 	aliases {
 		spi0 = &spi0;
 		spi1 = &spi1;
 		serial0 = &uartlite;
 	};
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -32,6 +35,15 @@
 		compatible = "mti,cpu-interrupt-controller";
 	};
 
+<<<<<<< HEAD
+=======
+	aliases {
+		spi0 = &spi0;
+		spi1 = &spi1;
+		serial0 = &uartlite;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	palmbus: palmbus@10000000 {
 		compatible = "palmbus";
 		reg = <0x10000000 0x200000>;
@@ -40,6 +52,7 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 
+<<<<<<< HEAD
 		sysc: syscon@0 {
 			compatible = "ralink,rt3352-sysc", "syscon";
 			reg = <0x0 0x100>;
@@ -53,17 +66,35 @@
 
 			clocks = <&sysc 4>;
 
+=======
+		sysc: sysc@0 {
+			compatible = "ralink,rt3352-sysc", "ralink,rt3050-sysc", "syscon";
+			reg = <0x0 0x100>;
+		};
+
+		timer: timer@100 {
+			compatible = "ralink,rt3352-timer", "ralink,rt2880-timer";
+			reg = <0x100 0x20>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-parent = <&intc>;
 			interrupts = <1>;
 		};
 
 		watchdog: watchdog@120 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-wdt";
 			reg = <0x120 0x10>;
 
 			clocks = <&sysc 5>;
 
 			resets = <&sysc 8>;
+=======
+			compatible = "ralink,rt3352-wdt", "ralink,rt2880-wdt";
+			reg = <0x120 0x10>;
+
+			resets = <&rstctrl 8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "wdt";
 
 			interrupt-parent = <&intc>;
@@ -71,7 +102,11 @@
 		};
 
 		intc: intc@200 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-intc";
+=======
+			compatible = "ralink,rt3352-intc", "ralink,rt2880-intc";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x200 0x100>;
 
 			interrupt-controller;
@@ -82,20 +117,37 @@
 		};
 
 		memc: memc@300 {
+<<<<<<< HEAD
 			compatible = "ralink,rt3050-memc";
 			reg = <0x300 0x100>;
 
+=======
+			compatible = "ralink,rt3352-memc", "ralink,rt3050-memc";
+			reg = <0x300 0x100>;
+
+			resets = <&rstctrl 20>;
+			reset-names = "mc";
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-parent = <&intc>;
 			interrupts = <3>;
 		};
 
 		uart: uart@500 {
+<<<<<<< HEAD
 			compatible = "ralink,rt3052-uart", "ralink,rt2880-uart", "ns16550a";
 			reg = <0x500 0x100>;
 
 			clocks = <&sysc 6>;
 
 			resets = <&sysc 12>;
+=======
+			compatible = "ralink,rt3352-uart", "ralink,rt2880-uart", "ns16550a";
+			reg = <0x500 0x100>;
+
+			resets = <&rstctrl 12>;
+			reset-names = "uart";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			interrupt-parent = <&intc>;
 			interrupts = <5>;
@@ -106,12 +158,17 @@
 		};
 
 		gpio0: gpio@600 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
+=======
+			compatible = "ralink,rt3352-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x600 0x34>;
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
 			interrupt-controller;
@@ -125,17 +182,38 @@
 
 		gpio1: gpio@638 {
 			compatible = "ralink,rt2880-gpio";
+=======
+			ralink,gpio-base = <0>;
+			ralink,num-gpios = <24>;
+			ralink,register-map = [ 00 04 08 0c
+						20 24 28 2c
+						30 34 ];
+			resets = <&rstctrl 13>;
+			reset-names = "pio";
+
+			interrupt-parent = <&intc>;
+			interrupts = <6>;
+		};
+
+		gpio1: gpio@638 {
+			compatible = "ralink,rt3352-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x638 0x24>;
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
 			interrupt-controller;
 			#interrupt-cells = <2>;
 
 			ngpios = <16>;
+=======
+			ralink,gpio-base = <24>;
+			ralink,num-gpios = <16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						10 14 18 1c
 						20 24 ];
@@ -144,18 +222,27 @@
 		};
 
 		gpio2: gpio@660 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
+=======
+			compatible = "ralink,rt3352-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x660 0x24>;
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
 			interrupt-controller;
 			#interrupt-cells = <2>;
 
 			ngpios = <6>;
+=======
+			ralink,gpio-base = <40>;
+			ralink,num-gpios = <6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						10 14 18 1c
 						20 24 ];
@@ -167,9 +254,13 @@
 			compatible = "ralink,rt2880-i2c";
 			reg = <0x900 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 7>;
 
 			resets = <&sysc 16>;
+=======
+			resets = <&rstctrl 16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "i2c";
 
 			#address-cells = <1>;
@@ -185,9 +276,13 @@
 			compatible = "ralink,rt3352-i2s";
 			reg = <0xa00 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 8>;
 
 			resets = <&sysc 17>;
+=======
+			resets = <&rstctrl 17>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "i2s";
 
 			interrupt-parent = <&intc>;
@@ -204,14 +299,22 @@
 		};
 
 		spi0: spi@b00 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-spi";
+=======
+			compatible = "ralink,rt3352-spi", "ralink,rt2880-spi";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0xb00 0x40>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 9>;
 
 			resets = <&sysc 18>;
+=======
+			resets = <&rstctrl 18>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "spi";
 
 			pinctrl-names = "default";
@@ -221,12 +324,20 @@
 		};
 
 		spi1: spi@b40 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-spi";
+=======
+			compatible = "ralink,rt3352-spi", "ralink,rt2880-spi";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0xb40 0x60>;
 			#address-cells = <1>;
 			#size-cells = <0>;
 
+<<<<<<< HEAD
 			resets = <&sysc 18>;
+=======
+			resets = <&rstctrl 18>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "spi";
 
 			pinctrl-names = "default";
@@ -236,12 +347,20 @@
 		};
 
 		uartlite: uartlite@c00 {
+<<<<<<< HEAD
 			compatible = "ralink,rt3052-uart", "ralink,rt2880-uart", "ns16550a";
 			reg = <0xc00 0x100>;
 
 			clocks = <&sysc 11>;
 
 			resets = <&sysc 19>;
+=======
+			compatible = "ralink,rt3352-uart", "ralink,rt2880-uart", "ns16550a";
+			reg = <0xc00 0x100>;
+
+			resets = <&rstctrl 19>;
+			reset-names = "uartl";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			interrupt-parent = <&intc>;
 			interrupts = <12>;
@@ -256,7 +375,11 @@
 			compatible = "ralink,rt3883-gdma";
 			reg = <0x2800 0x800>;
 
+<<<<<<< HEAD
 			resets = <&sysc 14>;
+=======
+			resets = <&rstctrl 14>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "dma";
 
 			interrupt-parent = <&intc>;
@@ -322,6 +445,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	ethernet: ethernet@10100000 {
 		compatible = "ralink,rt3050-eth";
 		reg = <0x10100000 0x10000>;
@@ -330,6 +454,24 @@
 
 		resets = <&sysc 21>, <&sysc 23>;
 		reset-names = "fe", "esw";
+=======
+	rstctrl: rstctrl {
+		compatible = "ralink,rt3352-reset", "ralink,rt2880-reset";
+		#reset-cells = <1>;
+	};
+
+	clkctrl: clkctrl {
+		compatible = "ralink,rt2880-clock";
+		#clock-cells = <1>;
+	};
+
+	ethernet: ethernet@10100000 {
+		compatible = "ralink,rt3352-eth", "ralink,rt3050-eth";
+		reg = <0x10100000 0x10000>;
+
+		resets = <&rstctrl 21>;
+		reset-names = "fe";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		interrupt-parent = <&cpuintc>;
 		interrupts = <5>;
@@ -338,11 +480,19 @@
 	};
 
 	esw: esw@10110000 {
+<<<<<<< HEAD
 		compatible = "ralink,rt3050-esw";
 		reg = <0x10110000 0x8000>;
 
 		resets = <&sysc 24>;
 		reset-names = "ephy";
+=======
+		compatible = "ralink,rt3352-esw", "ralink,rt3050-esw";
+		reg = <0x10110000 0x8000>;
+
+		resets = <&rstctrl 23>;
+		reset-names = "esw";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		interrupt-parent = <&intc>;
 		interrupts = <17>;
@@ -353,16 +503,26 @@
 		#phy-cells = <0>;
 
 		ralink,sysctl = <&sysc>;
+<<<<<<< HEAD
 		resets = <&sysc 22>, <&sysc 25>;
 		reset-names = "host", "device";
+=======
+		resets = <&rstctrl 22 &rstctrl 25>;
+		reset-names = "host", "device";
+		clocks = <&clkctrl 18 &clkctrl 20>;
+		clock-names = "host", "device";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	wmac: wmac@10180000 {
 		compatible = "ralink,rt3352-wmac", "ralink,rt2880-wmac";
 		reg = <0x10180000 0x40000>;
 
+<<<<<<< HEAD
 		clocks = <&sysc 13>;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		interrupt-parent = <&cpuintc>;
 		interrupts = <6>;
 

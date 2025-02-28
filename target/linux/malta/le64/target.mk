@@ -1,6 +1,10 @@
 ARCH:=mips64el
 CPU_TYPE:=mips64r2
 SUBTARGET:=le64
+<<<<<<< HEAD
+=======
+FEATURES+=source-only
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 BOARDNAME:=Little Endian (64-bits)
 
 define Target/Description

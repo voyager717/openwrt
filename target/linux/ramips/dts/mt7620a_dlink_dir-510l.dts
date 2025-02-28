@@ -3,9 +3,13 @@
 #include "mt7620a.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/mtd/partitions/uimage.h>
+=======
+#include <dt-bindings/gpio/gpio.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dir-510l", "ralink,mt7620a-soc";
@@ -42,14 +46,22 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 14 GPIO_ACTIVE_HIGH>;
 		};
 
 		status-red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -89,13 +101,18 @@
 			};
 
 			partition@210000 {
+<<<<<<< HEAD
 				compatible = "openwrt,uimage", "denx,uimage";
 				openwrt,ih-magic = <IH_MAGIC_OKLI>;
 				openwrt,offset = <0x10000>;
+=======
+				compatible = "amit,jimage";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "firmware";
 				reg = <0x210000 0xde0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "config";
 				reg = <0xff0000 0x10000>;
@@ -116,6 +133,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			config: partition@ff0000 {
+				label = "config";
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -136,8 +159,14 @@
 &pcie0 {
 	mt76x0e@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_config_e05d>, <&macaddr_config_e490 2>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mtd-mac-address = <&config 0xe490>;
+		mtd-mac-address-increment = <(2)>;
+		mediatek,mtd-eeprom = <&config 0xe05d>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

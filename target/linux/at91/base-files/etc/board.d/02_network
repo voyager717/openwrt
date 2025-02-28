@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2014-2015 OpenWrt.org
 #
@@ -8,7 +12,11 @@ board_config_update
 
 case "$(board_name)" in
 
+<<<<<<< HEAD
 atmel,sama5d3-xplained|microchip,sama7g5ek)
+=======
+atmel,sama5d3-xplained)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_interfaces_lan_wan "eth0" "eth1"
 	;;
 

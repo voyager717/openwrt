@@ -49,9 +49,18 @@
 };
 
 &gpio {
+<<<<<<< HEAD
 	gpio-line-names =
 		"",     "", "", "", "LED", "RDY",  "",  "MDC",
 		"MDIO", "", "", "";
+=======
+	ngpios = <31>;
+	gpio-line-names =
+		"",     "", "", "", "LED", "RDY",  "",  "MDC",
+		"MDIO", "", "", "", "",    "",     "",  "",
+		"",     "", "", "", "",    "",     "",  "",
+		"",     "", "", "", "",    "",     "",  "";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {
@@ -81,10 +90,18 @@
 			};
 
 			hard_config {
+<<<<<<< HEAD
+=======
+				label = "hard_config";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				read-only;
 			};
 
 			bios {
+<<<<<<< HEAD
+=======
+				label = "bios";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				size = <0x1000>;
 				read-only;
 			};
@@ -95,6 +112,10 @@
 			};
 
 			soft_config {
+<<<<<<< HEAD
+=======
+				label = "soft_config";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};

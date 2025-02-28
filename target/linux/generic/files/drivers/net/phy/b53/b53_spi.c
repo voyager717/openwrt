@@ -288,14 +288,22 @@ static int b53_spi_probe(struct spi_device *spi)
 	struct b53_device *dev;
 	int ret;
 
+<<<<<<< HEAD
 	dev = b53_swconfig_switch_alloc(&spi->dev, &b53_spi_ops, spi);
+=======
+	dev = b53_switch_alloc(&spi->dev, &b53_spi_ops, spi);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!dev)
 		return -ENOMEM;
 
 	if (spi->dev.platform_data)
 		dev->pdata = spi->dev.platform_data;
 
+<<<<<<< HEAD
 	ret = b53_swconfig_switch_register(dev);
+=======
+	ret = b53_switch_register(dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (ret)
 		return ret;
 

@@ -12,6 +12,10 @@ config DROPBEAR_CURVE25519
 
 config DROPBEAR_ECC
 	bool "Elliptic curve cryptography (ECC)"
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 		Enables basic support for elliptic curve cryptography (ECC)
 		in key exchange and public key authentication.
@@ -24,10 +28,18 @@ config DROPBEAR_ECC
 
 		Increases binary size by about 24 kB (MIPS).
 
+<<<<<<< HEAD
 		Note: select DROPBEAR_ECC_FULL if full ECC support is required.
 
 config DROPBEAR_ECC_FULL
 	bool "Elliptic curve cryptography (ECC), full support"
+=======
+		If full ECC support is required, also select DROPBEAR_ECC_FULL.
+
+config DROPBEAR_ECC_FULL
+	bool "Elliptic curve cryptography (ECC), full support"
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	depends on DROPBEAR_ECC
 	help
 		Enables full support for elliptic curve cryptography (ECC)
@@ -65,6 +77,7 @@ config DROPBEAR_CHACHA20POLY1305
 
 		Increases binary size by about 4 kB (MIPS).
 
+<<<<<<< HEAD
 config DROPBEAR_U2F
 	bool "U2F/FIDO support"
 	default y
@@ -114,13 +127,48 @@ config DROPBEAR_PUTUTLINE
 	help
 		Dropbear will use pututline() to write the utmp structure into
 		the utmp file.
+=======
+config DROPBEAR_ZLIB
+	bool "Enable compression"
+	default n
+	help
+		Enables compression using shared zlib library.
+
+		Increases binary size by about 0.1 kB (MIPS) and requires additional 62 kB (MIPS)
+		for a shared zlib library.
+
+config DROPBEAR_UTMP
+	bool "Utmp support"
+	default n
+	depends on BUSYBOX_CONFIG_FEATURE_UTMP
+	help
+		This enables dropbear utmp support, the file /var/run/utmp is used to
+		track who is currently logged in.
+
+config DROPBEAR_PUTUTLINE
+	bool "Pututline support"
+	default n
+	depends on DROPBEAR_UTMP
+	help
+		Dropbear will use pututline() to write the utmp structure into the utmp file.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 config DROPBEAR_DBCLIENT
 	bool "Build dropbear with dbclient"
 	default y
 
+<<<<<<< HEAD
 config DROPBEAR_ASKPASS
 	bool "Enable askpass helper support"
+=======
+config DROPBEAR_SCP
+	bool "Build dropbear with scp"
+	default y
+
+config DROPBEAR_ASKPASS
+	bool "Enable askpass helper support"
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	depends on DROPBEAR_DBCLIENT
 	help
 		This enables support for ssh-askpass helper in dropbear client
@@ -128,6 +176,7 @@ config DROPBEAR_ASKPASS
 
 		Increases binary size by about 0.1 kB (MIPS).
 
+<<<<<<< HEAD
 config DROPBEAR_DBCLIENT_AGENTFORWARD
 	bool "Enable agent forwarding in dbclient [LEGACY/SECURITY]"
 	default y
@@ -193,4 +242,6 @@ config DROPBEAR_MODERN_ONLY
 		Consider enabling this option if you're building own OpenWrt
 		image and using modern SSH software everywhere.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endmenu

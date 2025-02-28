@@ -2,11 +2,18 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
 	compatible = "zyxel,keenetic-viva", "ralink,mt7620a-soc";
 	model = "Zyxel Keenetic Viva";
+=======
+
+/ {
+	compatible = "zyxel,keenetic-viva", "ralink,mt7620a-soc";
+	model = "ZyXEL Keenetic Viva";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	aliases {
 		led-boot = &led_power_green;
@@ -19,22 +26,34 @@
 		compatible = "gpio-leds";
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		power_alert {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
@@ -44,8 +63,12 @@
 		};
 
 		led_power_green: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -85,7 +108,12 @@
 
 	rtl8367rb {
 		compatible = "realtek,rtl8367b";
+<<<<<<< HEAD
 		realtek,extif = <7 1 0 1 1 1 1 1 1 2>;
+=======
+		cpu_port = <7>;
+		realtek,extif2 = <1 0 1 1 1 1 1 1 2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		mii-bus = <&mdio0>;
 	};
 };
@@ -115,6 +143,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -133,6 +162,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -155,8 +190,12 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&rgmii2_pins &mdio_pins>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	port@4 {
 		status = "okay";
@@ -181,8 +220,12 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ehci {

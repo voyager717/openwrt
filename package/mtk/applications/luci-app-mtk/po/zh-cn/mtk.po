@@ -1,0 +1,312 @@
+msgid "WiFi configuration"
+msgstr "WiFi配置"
+
+msgid "Web Console"
+msgstr "Web控制台"
+
+msgid "Press Enter to execute. Press Shift+Enter to start a new line."
+msgstr "按“Enter”执行.按Shift+Enter开始新的一行."
+
+msgid "Wireless Overview"
+msgstr "无线概况"
+
+msgid "SAVE AND APPLY"
+msgstr "保存&应用"
+
+msgid "SAVE"
+msgstr "保存"
+
+msgid "RESET"
+msgstr "复位"
+
+msgid "Driver version"
+msgstr "驱动版本"
+
+msgid "Work mode"
+msgstr "工作模式"
+
+msgid "Disconnected"
+msgstr "未连接"
+
+msgid "RELOAD"
+msgstr "重载"
+
+msgid "CONFIG"
+msgstr "配置"
+
+msgid "CONNECT"
+msgstr "连接"
+
+msgid "DISABLE"
+msgstr "禁用"
+
+msgid "REMOVE"
+msgstr "移除"
+
+msgid "Basic"
+msgstr "基础设置"
+
+msgid "Advanced"
+msgstr "高级设置"
+
+msgid "Channel"
+msgstr "信道"
+
+msgid "Country Code"
+msgstr "国家代码"
+
+msgid "Country Region"
+msgstr "国家地区"
+
+msgid "Channel BandWidth"
+msgstr "信道带宽"
+
+msgid "HT TX Stream"
+msgstr "传送天线"
+
+msgid "HT RX Stream"
+msgstr "接收天线"
+
+msgid "TX Power"
+msgstr "无线电功率"
+
+msgid "Current Band"
+msgstr "当前频带"
+
+msgid "range 1-100, default 100"
+msgstr "范围 1-100,默认 100"
+
+msgid "range 1-100, default 100"
+msgstr "范围 1-100,默认 100"
+
+msgid "Basic"
+msgstr "基本设置"
+
+msgid "Stations"
+msgstr "已连接站点"
+
+msgid "MAC Addr"
+msgstr "MAC地址"
+
+msgid "TX Rate"
+msgstr "发射速率"
+
+msgid "RX Rate"
+msgstr "接收速率"
+
+msgid "Connect Time"
+msgstr "连接时间"
+
+msgid "Auth Mode"
+msgstr "加密方式"
+
+msgid "Hidden"
+msgstr "隐藏"
+
+msgid "Hidden"
+msgstr "隐藏"
+
+msgid "AP Isolation"
+msgstr "客户端隔离"
+
+msgid "WMM Capable"
+msgstr "WMM"
+
+msgid "Mode"
+msgstr "模式"
+
+msgid "IGMP Snooping"
+msgstr "IGMP窥探"
+
+msgid "Access Policy"
+msgstr "访问策略"
+
+msgid "Disable"
+msgstr "禁用"
+
+msgid "disable"
+msgstr "禁用"
+
+msgid "Enable"
+msgstr "开启"
+
+msgid "White List"
+msgstr "白名单"
+
+msgid "Black List"
+msgstr "黑名单"
+
+msgid "one MAC one line."
+msgstr "一个MAC地址一行."
+
+msgid "empty lines will be ignored."
+msgstr "空行将被忽略."
+
+msgid "lines start with # will be ignored."
+msgstr "以 # 开头的行将被忽略."
+
+msgid "invalid MAC will be ignored."
+msgstr "无效的MAC将被忽略."
+
+msgid "Reload"
+msgstr "重载"
+
+msgid "Config"
+msgstr "配置"
+
+msgid "Add"
+msgstr "新增"
+
+msgid "Save and Apply"
+msgstr "保存&应用"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Reset"
+msgstr "复位"
+
+msgid "Connect"
+msgstr "连接"
+
+msgid "Wireless is disabled or not associated"
+msgstr "无线禁用或者未连接"
+
+msgid "To access ApCli WPS tab please enable ApClient Mode"
+msgstr "要访问ApCli WPS选项卡，请启用ApClient模式"
+
+msgid "ApClient Mode"
+msgstr "AP客户端模式"
+
+msgid "AP Client"
+msgstr "AP客户端"
+
+msgid "APCli WPS"
+msgstr "AP客户端WPS"
+
+msgid "Please wait while the request is being processed."
+msgstr "请求正在处理，请稍后."
+
+msgid "MAC Repeater Mode"
+msgstr "MAC中继模式"
+
+msgid "Root AP SSID"
+msgstr "主机AP SSID"
+
+msgid "Root AP Channel"
+msgstr "主机AP信道"
+
+msgid "Root AP Authentication Mode"
+msgstr "主机AP认证方式"
+
+msgid "This will overwrite channel of AP!"
+msgstr "此操作将会覆盖AP信道!"
+
+msgid "SSID Length"
+msgstr "SSID长度"
+
+msgid "Security"
+msgstr "安全性"
+
+msgid "Signal"
+msgstr "信号"
+
+msgid "RSSI"
+msgstr "信号强度"
+
+msgid "Action"
+msgstr "动作"
+
+msgid "AuthMode"
+msgstr "自动模式"
+
+msgid "WPS Config"
+msgstr "WPS配置"
+
+msgid "WPS Role:"
+msgstr "WPS角色"
+
+msgid "AP Client PIN:"
+msgstr "AP客户端PIN:"
+
+msgid "PIN Action:"
+msgstr "PIN动作"
+
+msgid "WPS Mode"
+msgstr "WPS模式"
+
+msgid "WPS Scan"
+msgstr "WPS搜索"
+
+msgid "Root AP Info"
+msgstr "主AP信息"
+
+msgid "Root AP MAC Address (Optional)"
+msgstr "主AP MAC地址(可选)"
+
+msgid "WPS Status"
+msgstr "WPS状态"
+
+msgid "ExtCh"
+msgstr ""
+
+msgid "WPS START"
+msgstr "WPS启动"
+
+msgid "CANCEL"
+msgstr "取消"
+
+msgid "RANDOM NEW PINCODE"
+msgstr "随机新PIN码"
+
+msgid "Random New PINCode"
+msgstr "随机新PIN码"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "WPS Start"
+msgstr "WPS启动"
+
+msgid "Root AP Encryption"
+msgstr "主AP加密方式"
+
+msgid "Root AP WPA Key"
+msgstr "主AP秘钥"
+
+msgid "Site Survey"
+msgstr "勘察情况"
+
+msgid "Start Scan"
+msgstr "开始扫描"
+
+msgid "Scan Wireless Network"
+msgstr "扫描无线网络"
+
+msgid ""
+msgstr ""
+
+msgid ""
+msgstr ""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

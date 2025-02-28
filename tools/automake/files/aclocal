@@ -1,2 +1,6 @@
 #!/usr/bin/env sh
+<<<<<<< HEAD
 ${STAGING_DIR_HOST}/bin/aclocal.real $ACLOCAL_INCLUDE $@
+=======
+aclocal.real $ACLOCAL_INCLUDE $@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

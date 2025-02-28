@@ -1,4 +1,8 @@
 #!/bin/sh /etc/rc.common
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # SPDX-License-Identifier: GPL-2.0-only
 
 START=99
@@ -8,9 +12,12 @@ boot() {
 	glinet,gl-ar300m-nand)
 		fw_setenv bootcount 0
 		;;
+<<<<<<< HEAD
 	linksys,ea4500-v3)
 		[ $(fw_printenv -n auto_recovery) = yes ] && \
 			fw_setenv auto_recovery no
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 }

@@ -84,6 +84,7 @@ endef
 $(eval $(call KernelPackage,i2c-algo-pcf))
 
 
+<<<<<<< HEAD
 I2C_CCGS_UCSI_MODULES:= \
   CONFIG_I2C_CCGX_UCSI:drivers/i2c/busses/i2c-ccgx-ucsi
 
@@ -127,6 +128,8 @@ endef
 $(eval $(call KernelPackage,i2c-designware-pci))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 I2C_GPIO_MODULES:= \
   CONFIG_I2C_GPIO:drivers/i2c/busses/i2c-gpio
 
@@ -169,6 +172,7 @@ endef
 $(eval $(call KernelPackage,i2c-i801))
 
 
+<<<<<<< HEAD
 I2C_MLXCPLD_MODULES:= \
   CONFIG_I2C_MLXCPLD:drivers/i2c/busses/i2c-mlxcpld
 
@@ -187,6 +191,8 @@ endef
 $(eval $(call KernelPackage,i2c-mlxcpld))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 I2C_MUX_MODULES:= \
   CONFIG_I2C_MUX:drivers/i2c/i2c-mux
 
@@ -218,6 +224,7 @@ endef
 $(eval $(call KernelPackage,i2c-mux-gpio))
 
 
+<<<<<<< HEAD
 I2C_MUX_MLXCPLD_MODULES:= \
   CONFIG_I2C_MUX_MLXCPLD:drivers/i2c/muxes/i2c-mux-mlxcpld
 
@@ -252,6 +259,8 @@ endef
 $(eval $(call KernelPackage,i2c-mux-reg))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 I2C_MUX_PCA9541_MODULES:= \
   CONFIG_I2C_MUX_PCA9541:drivers/i2c/muxes/i2c-mux-pca9541
 

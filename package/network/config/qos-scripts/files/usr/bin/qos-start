@@ -1,4 +1,8 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 qos-stop
+=======
+qos-stop 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /usr/lib/qos/generate.sh all | sh

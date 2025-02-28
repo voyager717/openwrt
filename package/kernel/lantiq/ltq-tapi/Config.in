@@ -32,7 +32,11 @@ config VOICE_CPE_TAPI_DECT
 config VOICE_CPE_TAPI_KPI
 	bool "KPI (Kernel Packet Interface)"
 	depends on PACKAGE_kmod-ltq-tapi
+<<<<<<< HEAD
 	default n
+=======
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 		Option to enable the generic kernel level packet interface
 		which allows accelerated packet transfer for various purposes.
@@ -43,7 +47,11 @@ config VOICE_CPE_TAPI_KPI
 config VOICE_CPE_TAPI_QOS
 	bool "QOS for accelerated RTP packet handling"
 	depends on PACKAGE_kmod-ltq-tapi
+<<<<<<< HEAD
 	default n
+=======
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 		Option to enable an accelerated RTP packet transfer inside
 		the LINUX kernel space. This option requires the KPI2UDP

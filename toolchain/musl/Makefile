@@ -9,7 +9,11 @@ HOST_BUILD_PARALLEL:=1
 
 MUSL_MAKEOPTS = -C $(HOST_BUILD_DIR) \
 	DESTDIR="$(TOOLCHAIN_DIR)/" \
+<<<<<<< HEAD
 	LIBCC="$(shell $(TARGET_CC) -print-libgcc-file-name)"
+=======
+	LIBCC="$(subst libgcc.a,libgcc_initial.a,$(shell $(TARGET_CC) -print-libgcc-file-name))"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Host/SetToolchainInfo
 	$(SED) 's,^\(LIBC_TYPE\)=.*,\1=$(PKG_NAME),' $(TOOLCHAIN_DIR)/info.mk

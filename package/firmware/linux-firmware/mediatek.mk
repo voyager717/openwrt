@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 Package/mt7601u-firmware = $(call Package/firmware-default,MediaTek MT7601U firmware,,LICENCE.mediatek)
 define Package/mt7601u-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	$(INSTALL_DATA) \
 		$(PKG_BUILD_DIR)/mediatek/mt7601u.bin \
 		$(1)/lib/firmware/mediatek
+=======
+Package/mt7601u-firmware = $(call Package/firmware-default,MediaTek MT7601U firmware)
+define Package/mt7601u-firmware/install
+	$(INSTALL_DIR) $(1)/lib/firmware
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/mt7601u.bin \
+		$(1)/lib/firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 $(eval $(call BuildPackage,mt7601u-firmware))
 
@@ -42,7 +51,11 @@ define Package/rt73-usb-firmware/install
 endef
 $(eval $(call BuildPackage,rt73-usb-firmware))
 
+<<<<<<< HEAD
 Package/mt7622bt-firmware = $(call Package/firmware-default,mt7622bt firmware,,LICENCE.mediatek)
+=======
+Package/mt7622bt-firmware = $(call Package/firmware-default,mt7622bt firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/mt7622bt-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	$(INSTALL_DATA) \
@@ -50,6 +63,7 @@ define Package/mt7622bt-firmware/install
 		$(1)/lib/firmware/mediatek
 endef
 $(eval $(call BuildPackage,mt7622bt-firmware))
+<<<<<<< HEAD
 
 Package/mt7921bt-firmware = $(call Package/firmware-default,mt7921bt firmware,,LICENCE.mediatek)
 define Package/mt7921bt-firmware/install
@@ -115,3 +129,5 @@ define Package/mt7988-wo-firmware/install
 		$(1)/lib/firmware/mediatek/mt7988
 endef
 $(eval $(call BuildPackage,mt7988-wo-firmware))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

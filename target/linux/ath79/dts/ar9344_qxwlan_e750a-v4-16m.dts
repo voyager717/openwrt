@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ar9344_qxwlan_e750x.dtsi"
 
 / {
@@ -11,14 +14,22 @@
 
 &leds {
 	lan {
+<<<<<<< HEAD
 		function = LED_FUNCTION_LAN;
 		color = <LED_COLOR_ID_GREEN>;
+=======
+		label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 19 GPIO_ACTIVE_LOW>;
 	};
 
 	wan {
+<<<<<<< HEAD
 		function = LED_FUNCTION_WAN;
 		color = <LED_COLOR_ID_GREEN>;
+=======
+		label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 	};
 };
@@ -28,15 +39,24 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_pridata_400 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&pridata 0x400>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_pridata_400 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&pridata 0x400>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;

@@ -1,0 +1,28 @@
+<version>
+  1.15
+</version>
+ 
+<headers>
+  popt.h
+</headers>
+ 
+<libs>
+  /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/popt-1.16/.libs/libpopt.so
+</libs>
+
+<include_paths>
+  /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/popt-1.16
+</include_paths>
+
+<gcc_options>
+  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/popt-1.16=popt-1.16 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DPIC -fPIC  -Wall -W -D_GNU_SOURCE -D_REENTRANT
+</gcc_options>
+
+<opaque_types>
+</opaque_types>
+<skip_interfaces>
+</skip_interfaces>
+<include_preamble>
+</include_preamble>
+<libs_depend>
+</libs_depend>

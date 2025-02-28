@@ -17,7 +17,11 @@ Cc: Simon Glass <sjg@chromium.org>
 
 --- a/tools/fit_image.c
 +++ b/tools/fit_image.c
+<<<<<<< HEAD
 @@ -774,9 +774,14 @@ static int fit_handle_file(struct image_
+=======
+@@ -726,9 +726,14 @@ static int fit_handle_file(struct image_
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		}
  		*cmd = '\0';
  	} else if (params->datafile) {

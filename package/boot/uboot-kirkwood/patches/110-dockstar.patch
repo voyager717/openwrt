@@ -5,7 +5,11 @@
  #define CONFIG_KW88F6281	1	/* SOC Name */
  #define CONFIG_SKIP_LOWLEVEL_INIT	/* disable board lowlevel_init */
 +#define CONFIG_SYS_MVFS
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  /*
   * mv-common.h should be defined after CMD configs since it used them
 @@ -37,19 +38,15 @@
@@ -20,7 +24,11 @@
 +	"ubi part ubi; " \
 +	"ubi read 0x800000 kernel; " \
 +	"bootm 0x800000"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #define CONFIG_EXTRA_ENV_SETTINGS \
 -	"console=console=ttyS0,115200\0" \
 -	"mtdids=nand0=orion_nand\0" \
@@ -32,7 +40,11 @@
 +	"mtdids=nand0=orion_nand\0"		\
 +	"mtdparts="CONFIG_MTDPARTS_DEFAULT "\0"	\
 +	"bootargs_root=\0"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  /*
   * Ethernet Driver configuration
 --- a/configs/dockstar_defconfig

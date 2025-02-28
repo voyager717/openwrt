@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "GL.iNet GL-AR150";
@@ -22,8 +25,12 @@
 		compatible = "gpio-leds";
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -34,8 +41,12 @@
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
@@ -62,6 +73,7 @@
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 		};
 	};
+<<<<<<< HEAD
 
 	reg_power_usb: regulator {
 		compatible = "regulator-fixed";
@@ -78,10 +90,21 @@
 
 	dr_mode = "host";
 	vbus-supply = <&reg_power_usb>;
+=======
+};
+
+&usb {
+	dr_mode = "host";
+	status = "okay";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
 	status = "okay";
+<<<<<<< HEAD
+=======
+	gpios = <&gpio 6 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -103,17 +126,26 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
+=======
+			partition@1 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "u-boot-env";
 				reg = <0x040000 0x010000>;
 			};
 
+<<<<<<< HEAD
 			partition@50000 {
+=======
+			partition@2 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				compatible = "denx,uimage";
 				label = "firmware";
 				reg = <0x050000 0xfa0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -132,6 +164,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@3 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -140,15 +178,23 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -161,6 +207,11 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

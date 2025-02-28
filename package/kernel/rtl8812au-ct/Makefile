@@ -1,16 +1,27 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=rtl8812au-ct
+<<<<<<< HEAD
 PKG_RELEASE=1
+=======
+PKG_RELEASE=2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=
 
 PKG_SOURCE_URL:=https://github.com/greearb/rtl8812AU_8821AU_linux.git
+<<<<<<< HEAD
 PKG_MIRROR_HASH:=880c0ddd968a8f4bfdf4263318e925635c9abe4cc20a79bbdc905d46e00018d0
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_DATE:=2022-10-26
 PKG_SOURCE_VERSION:=9b2b203a217e1320602a0eb07c338a1bfca0f5a6
+=======
+PKG_MIRROR_HASH:=fa689e034cad9e4683ea784b8f3cb590492ab5c68e8babd492a4e8bf2de3b114
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_DATE:=2020-01-12
+PKG_SOURCE_VERSION:=e0d586aa93cb8687dd7dc0e593b6a820df2d6e1d
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Ben Greear <greearb@candelatech.com>
 PKG_BUILD_PARALLEL:=1
@@ -24,7 +35,11 @@ include $(INCLUDE_DIR)/package.mk
 define KernelPackage/rtl8812au-ct
   SUBMENU:=Wireless Drivers
   TITLE:=Driver for Realtek 8812 AU devices comfast 912-ac, etc
+<<<<<<< HEAD
   DEPENDS:=+kmod-cfg80211 +kmod-usb-core +@DRIVER_11AC_SUPPORT
+=======
+  DEPENDS:=+kmod-cfg80211 +kmod-usb-core +@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=\
 	$(PKG_BUILD_DIR)/rtl8812au.ko
   AUTOLOAD:=$(call AutoProbe,rtl8812au)
@@ -39,14 +54,23 @@ NOSTDINC_FLAGS := \
 	-I$(STAGING_DIR)/usr/include/mac80211-backport/uapi \
 	-I$(STAGING_DIR)/usr/include/mac80211 \
 	-I$(STAGING_DIR)/usr/include/mac80211/uapi \
+<<<<<<< HEAD
 	-include backport/backport.h \
 	-Wno-error=address \
 	-Wno-error=stringop-overread
+=======
+	-include backport/backport.h
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 NOSTDINC_FLAGS+=-DCONFIG_IOCTL_CFG80211 -DRTW_USE_CFG80211_STA_EVENT -DBUILD_OPENWRT
 
 define Build/Compile
+<<<<<<< HEAD
 	+$(KERNEL_MAKE) $(PKG_JOBS) \
+=======
+	+$(MAKE) $(PKG_JOBS) -C "$(LINUX_DIR)" \
+		$(KERNEL_MAKE_FLAGS) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		M="$(PKG_BUILD_DIR)" \
 		NOSTDINC_FLAGS="$(NOSTDINC_FLAGS)" \
 		modules

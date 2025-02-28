@@ -1,0 +1,48 @@
+# Variable needed by LTLIBINTL.
+top_builddir=../..
+
+# Variable needed by xgettext.
+GETTEXTDATADIR="$abs_top_srcdir"
+export GETTEXTDATADIR
+
+OBJEXT="o"
+EXEEXT=""
+CC="aarch64-openwrt-linux-musl-gcc"
+CFLAGS="-Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/gettext-0.19.8.1=gettext-0.19.8.1 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DPIC -fPIC -D__UCLIBC__ "
+CXX="aarch64-openwrt-linux-musl-g++"
+CXXFLAGS="-Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/gettext-0.19.8.1=gettext-0.19.8.1 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro -DPIC -fPIC -D__UCLIBC__ "
+CPPFLAGS="-I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/usr/include -I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include/fortify -I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/include "
+LDFLAGS="-L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/usr/lib -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/lib -znow -zrelro "
+LTLIBINTL="${top_builddir}/intl/libintl.la  "
+JAVA_CHOICE="no"
+BUILDJAVA="no"
+TESTJAVA="no"
+CSHARP_CHOICE="any"
+BUILDCSHARP="no"
+TESTCSHARP="no"
+TESTLIBASPRINTF="no"
+GLIBC2="no"
+LOCALE_FR="none"
+LOCALE_FR_UTF8="none"
+LOCALE_JA="none"
+host_os="linux-gnu"
+ARCHIVE_VERSION="0.19.8"
+
+: ${GETTEXT=tstgettext}
+: ${NGETTEXT=tstngettext}
+: ${XGETTEXT=xgettext}
+: ${MSGATTRIB=msgattrib}
+: ${MSGCAT=msgcat}
+: ${MSGCMP=msgcmp}
+: ${MSGCOMM=msgcomm}
+: ${MSGCONV=msgconv}
+: ${MSGEN=msgen}
+: ${MSGEXEC=msgexec}
+: ${MSGFILTER=msgfilter}
+: ${MSGFMT=msgfmt}
+: ${MSGGREP=msggrep}
+: ${MSGINIT=msginit}
+: ${MSGMERGE=msgmerge}
+: ${MSGUNFMT=msgunfmt}
+: ${MSGUNIQ=msguniq}
+: ${RECODE=recode}

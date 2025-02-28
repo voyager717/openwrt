@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -29,8 +32,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -52,6 +59,7 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_f100 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -61,4 +69,7 @@
 
 	nvmem-cells = <&eeprom_factory_20000>, <&macaddr_factory_f100 0>;
 	nvmem-cell-names = "eeprom", "mac-address";
+=======
+	mtd-mac-address = <&factory 0xf100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

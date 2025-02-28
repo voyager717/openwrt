@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_wrtnode_wrtnode2.dtsi"
 
 / {
@@ -20,8 +23,12 @@
 		pinctrl-0 = <&led_pins>;
 
 		led_indicator: indicator {
+<<<<<<< HEAD
 			function = LED_FUNCTION_INDICATOR;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:indicator";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 		};
 	};

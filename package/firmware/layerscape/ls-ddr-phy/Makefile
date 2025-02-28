@@ -6,6 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ls-ddr-phy
+<<<<<<< HEAD
 PKG_VERSION:=6.6.3.1.0.0
 PKG_RELEASE:=1
 
@@ -13,6 +14,15 @@ PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/NXP/ddr-phy-binary.git
 PKG_SOURCE_VERSION:=lf-6.6.3-1.0.0
 PKG_MIRROR_HASH:=7a1a35b3060adba875c507be3a5c800fa0c461103aaeb8eb0eab11f1f4b8139f
+=======
+PKG_VERSION:=LSDK-20.04-update-290520
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://github.com/NXP/ddr-phy-binary.git
+PKG_SOURCE_VERSION:=fbc036b88acb6c06ffed02c898cbae9856ec75ba
+PKG_MIRROR_HASH:=84e2bdea99384211971bb23ba9ed18b5839628ff2aa0738d2978bbdf841638cb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_DEPENDS:=tfa-layerscape/host
 
 PKG_LICENSE:=EULA

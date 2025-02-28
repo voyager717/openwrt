@@ -2,6 +2,7 @@
 # Copyright (C) 2010 Vertical Communications
 
 failsafe_shell() {
+<<<<<<< HEAD
 	local consoles="$(cat /sys/class/tty/console/active)"
 	[ -n "$consoles" ] || consoles=console
 	for console in $consoles; do
@@ -18,6 +19,15 @@ failsafe_shell() {
 		[ -c "/dev/$console" ] && start-stop-daemon -Sb -p /dev/null -- env -i ash -c "while true; do setsid -c env -i USER=root LOGNAME=root SHELL=/bin/ash TERM="$term" ash --login <\"/dev/$console\" >\"/dev/$console\" 2>\"/dev/$console\"; sleep 1; done"
 	done
 
+=======
+	local console="$(sed -e 's/ /\n/g' /proc/cmdline | grep '^console=' | head -1 | sed -e 's/^console=//' -e 's/,.*//')"
+	[ -n "$console" ] || console=console
+	[ -c "/dev/$console" ] || return 0
+	while true; do
+		ash --login <"/dev/$console" >"/dev/$console" 2>"/dev/$console"
+		sleep 1
+	done &
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 boot_hook_add failsafe failsafe_shell

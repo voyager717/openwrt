@@ -2,6 +2,7 @@
 
 / {
 	compatible = "zyxel,p-2812hnu-f1", "zyxel,p-2812hnu", "lantiq,xway", "lantiq,vr9";
+<<<<<<< HEAD
 	model = "Zyxel P-2812HNU-F1";
 
 	leds {
@@ -16,6 +17,23 @@
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ehci_port2>;
 			linux,default-trigger = "usbport";
+=======
+	model = "ZyXEL P-2812HNU-F1";
+
+	aliases {
+		led-usb = &led_usb1;
+		led-usb2 = &led_usb2;
+	};
+
+	leds {
+		led_usb1: usb1 {
+			label = "green:usb1";
+			gpios = <&gpio 38 GPIO_ACTIVE_LOW>;
+		};
+		led_usb2: usb2 {
+			label = "green:usb2";
+			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -30,8 +48,11 @@
 		pinctrl-0 = <&nand_pins>, <&nand_cs1_pins>;
 		pinctrl-names = "default";
 
+<<<<<<< HEAD
 		nand-use-soft-ecc-engine;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		partitions {
 			compatible = "fixed-partitions";
 			#address-cells = <1>;
@@ -47,11 +68,19 @@
 			};
 			partition@60000 {
 				label = "kernel";
+<<<<<<< HEAD
 				reg = <0x60000 0x500000>;
 			};
 			partition@560000 {
 				label = "ubi";
 				reg = <0x560000 0x7aa0000>;
+=======
+				reg = <0x60000 0x300000>;
+			};
+			partition@360000 {
+				label = "ubi";
+				reg = <0x360000 0x7ca0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};

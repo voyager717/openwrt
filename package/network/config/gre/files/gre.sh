@@ -291,6 +291,13 @@ proto_grev6tap_init_config() {
 }
 
 [ -n "$INCLUDE_ONLY" ] || {
+<<<<<<< HEAD
 	[ -d /sys/module/ip_gre ] && { add_protocol gre; add_protocol gretap; }
 	[ -d /sys/module/ip6_gre ] && { add_protocol grev6; add_protocol grev6tap; }
+=======
+	[ -f /lib/modules/$(uname -r)/gre.ko ] && add_protocol gre
+	[ -f /lib/modules/$(uname -r)/gre.ko ] && add_protocol gretap
+	[ -f /lib/modules/$(uname -r)/ip6_gre.ko ] && add_protocol grev6
+	[ -f /lib/modules/$(uname -r)/ip6_gre.ko ] && add_protocol grev6tap
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

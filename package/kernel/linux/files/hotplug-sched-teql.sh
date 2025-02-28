@@ -12,7 +12,11 @@ config_get teql $INTERFACE teql
 
 if [ "$teql" != "" ]; then
     logger Adding device $DEVICE to TEQL master $teql
+<<<<<<< HEAD
     modprobe sch_teql
+=======
+    insmod sch_teql
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     tc qdisc add dev $DEVICE root $teql
 
     # The kernel doesn't let us bring it up until it has at least one

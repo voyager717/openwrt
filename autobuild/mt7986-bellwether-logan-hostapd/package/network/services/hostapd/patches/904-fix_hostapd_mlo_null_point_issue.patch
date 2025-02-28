@@ -1,0 +1,17 @@
+--- a/src/ml/ml.c
++++ b/src/ml/ml.c
+@@ -436,13 +436,13 @@ int ml_group_deinit(struct hostapd_data
+ 			ml_group->ml_link_num--;
+ 		}
+ 	}
+-	hapd->ml_group = NULL;
+
+ 	/* free ml group by ml group owner */
+ 	if (ml_group->ctx == hapd) {
+ 		os_free(ml_group->links);
+ 		os_free(ml_group);
+ 	}
++	hapd->ml_group = NULL;
+
+ 	return 0;
+ }

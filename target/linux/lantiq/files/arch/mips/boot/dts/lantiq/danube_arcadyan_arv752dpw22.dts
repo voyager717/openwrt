@@ -1,7 +1,10 @@
 #include "danube.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "arcadyan,arv752dpw22", "lantiq,xway", "lantiq,danube";
@@ -18,6 +21,10 @@
 		led-upgrade = &power_red;
 
 		led-dsl = &internet_red;
+<<<<<<< HEAD
+=======
+		led-usb = &umts;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		led-wifi = &wifi;
 	};
 
@@ -55,8 +62,12 @@
 	leds {
 		compatible = "gpio-leds";
 		power_blue: power1 {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 		internet_red: internet {
@@ -68,8 +79,12 @@
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 		power_red: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -80,9 +95,12 @@
 		umts: umts {
 			label = "red:umts";
 			gpios = <&gpiomm 3 GPIO_ACTIVE_LOW>;
+<<<<<<< HEAD
 			trigger-sources = <&ehci_port1>,
 					  <&ehci_port2>, <&uhci_port2>;
 			linux,default-trigger = "usbport";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 		wifi: wifi {
 			label = "red:wifi";
@@ -134,7 +152,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpiomm 0 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpiomm 0 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -174,8 +196,12 @@
 
 &gsw {
 	phy-mode = "mii";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_boardconfig_16>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&boardconfig 0x16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &localbus {
@@ -210,6 +236,7 @@
 				label = "board_config";
 				reg = <0x7f0000 0x10000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -220,6 +247,8 @@
 						reg = <0x16 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -248,13 +277,18 @@
 		0x7800 0 0 2 &icu0 135
 		0x7800 0 0 3 &icu0 135
 	>;
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	req-mask = <0x3>;
 
 	wifi@1814,3592 {
 		compatible = "pci1814,3592";
 		reg = <0x7000 0 0 0 0>;
 		ralink,mtd-eeprom = <&boardconfig 0x410>;
+<<<<<<< HEAD
 		ralink,eeprom-swap;
 		nvmem-cells = <&macaddr_boardconfig_16>;
 		nvmem-cell-names = "mac-address";
@@ -282,6 +316,10 @@
 			reg = <2>;
 			#trigger-source-cells = <0>;
 		};
+=======
+		ralink,mtd-eeprom-swap;
+		mtd-mac-address = <&boardconfig 0x16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

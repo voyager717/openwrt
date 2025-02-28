@@ -6,7 +6,11 @@
 	usb_phy: usb-phy {
 		compatible = "qca,ar7200-usb-phy";
 
+<<<<<<< HEAD
 		reset-names = "phy", "suspend-override";
+=======
+		reset-names = "usb-phy", "usb-suspend-override";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst 4>, <&rst 3>;
 
 		#phy-cells = <0>;
@@ -16,7 +20,11 @@
 };
 
 &gpio {
+<<<<<<< HEAD
 	ngpios = <18>;
+=======
+	ngpios = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ahb {
@@ -27,10 +35,15 @@
 		interrupts = <3>;
 
 		resets = <&rst 5>;
+<<<<<<< HEAD
+=======
+		reset-names = "usb-host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		has-transaction-translator;
 		caps-offset = <0x100>;
 
+<<<<<<< HEAD
 		phy-names = "usb";
 		phys = <&usb_phy>;
 
@@ -43,6 +56,12 @@
 			reg = <1>;
 			#trigger-source-cells = <0>;
 		};
+=======
+		phy-names = "usb-phy";
+		phys = <&usb_phy>;
+
+		status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

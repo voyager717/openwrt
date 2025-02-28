@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7620a_zbtlink_zbt-we1026.dtsi"
 
 / {
@@ -12,20 +15,32 @@
 		compatible = "gpio-leds";
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 2 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 3 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 4 GPIO_ACTIVE_LOW>;
 		};
 

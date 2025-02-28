@@ -32,7 +32,11 @@
 };
 
 &ahb {
+<<<<<<< HEAD
 	pcie: pcie@180c0000 {
+=======
+	pcie: pcie-controller@180c0000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "qcom,ar9340-pci", "qcom,ar7240-pci";
 		#address-cells = <3>;
 		#size-cells = <2>;
@@ -46,8 +50,11 @@
 		interrupt-parent = <&intc2>;
 		interrupts = <1>;
 
+<<<<<<< HEAD
 		device_type = "pci";
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst 6>, <&rst 7>;
 		reset-names = "hc", "phy";
 

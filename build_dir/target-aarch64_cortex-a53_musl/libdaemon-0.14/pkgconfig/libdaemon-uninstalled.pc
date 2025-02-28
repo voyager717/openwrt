@@ -1,0 +1,8 @@
+libdir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libdaemon-0.14/libdaemon/.libs
+includedir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/libdaemon-0.14
+
+Name: libdaemon
+Description: a lightweight C library that eases the writing of UNIX daemons
+Version: 0.14
+Libs: -L${libdir} -R${libdir} -ldaemon
+Cflags: -D_REENTRANT -I${includedir}

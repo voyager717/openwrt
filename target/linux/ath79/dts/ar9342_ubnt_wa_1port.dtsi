@@ -5,6 +5,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <4>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy4: ethernet-phy@4 {
 		reg = <4>;
 	};
@@ -16,8 +21,12 @@
 	/* default for ar934x, except for 1000M and 10M */
 	pll-data = <0x02000000 0x00000101 0x00001313>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-mode = "rgmii-id";
 	phy-handle = <&phy4>;

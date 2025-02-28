@@ -25,7 +25,11 @@
 
 		fdt_linux_RAX220 {
 			description = "dtb";
+<<<<<<< HEAD
 			data = /incbin/("${dts_dir}/broadcom/bcmbca/bcm4908-netgear-raxe500.dtb");
+=======
+			data = /incbin/("${dts_dir}/broadcom/bcm4908/bcm4908-netgear-raxe500.dtb");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			arch = "arm64";
 			type = "flat_dt";
 			compression = "none";

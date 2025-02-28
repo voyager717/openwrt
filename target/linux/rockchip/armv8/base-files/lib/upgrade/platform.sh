@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 REQUIRE_IMAGE_METADATA=1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 platform_check_image() {
 	local diskdev partdev diff
 

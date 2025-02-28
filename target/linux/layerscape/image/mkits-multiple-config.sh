@@ -198,11 +198,14 @@ parse_args() {
 			usage;;
 		esac
 	done
+<<<<<<< HEAD
 	shift $(($OPTIND - 1))
 	[ $# -gt 0 ] && {
 		echo "Failed to parse all passed arguments (unrecognized: \"$@\")"
 		exit 1
 	}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	[ -n "${OUTPUT}" ] || OUTPUT=fitimage.its
 	[ -n "${VERSION}" ] || VERSION="Unknown"
 	[ -n "${ARCH}" ] || ARCH=arm

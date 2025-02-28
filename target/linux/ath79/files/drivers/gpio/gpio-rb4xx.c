@@ -105,7 +105,10 @@ static int rb4xx_gpio_probe(struct platform_device *pdev)
 	struct device *parent = dev->parent;
 	struct rb4xx_gpio *gpio;
 	u32 val;
+<<<<<<< HEAD
 	int err;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!parent)
 		return -ENODEV;
@@ -118,10 +121,14 @@ static int rb4xx_gpio_probe(struct platform_device *pdev)
 	gpio->cpld	= dev_get_drvdata(parent);
 	gpio->dev	= dev;
 	gpio->values	= 0;
+<<<<<<< HEAD
 
 	err = devm_mutex_init(&pdev->dev, &gpio->lock);
 	if (err)
 		return err;
+=======
+	mutex_init(&gpio->lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gpio->chip.label		= "rb4xx-gpio";
 	gpio->chip.parent		= dev;
@@ -138,7 +145,21 @@ static int rb4xx_gpio_probe(struct platform_device *pdev)
 	if (!of_property_read_u32(dev->of_node, "base", &val))
 		gpio->chip.base = val;
 
+<<<<<<< HEAD
 	return devm_gpiochip_add_data(&pdev->dev, &gpio->chip, gpio);
+=======
+	return gpiochip_add_data(&gpio->chip, gpio);
+}
+
+static int rb4xx_gpio_remove(struct platform_device *pdev)
+{
+	struct rb4xx_gpio *gpio = platform_get_drvdata(pdev);
+
+	gpiochip_remove(&gpio->chip);
+	mutex_destroy(&gpio->lock);
+
+	return 0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static const struct platform_device_id rb4xx_gpio_id_table[] = {
@@ -149,6 +170,10 @@ MODULE_DEVICE_TABLE(platform, rb4xx_gpio_id_table);
 
 static struct platform_driver rb4xx_gpio_driver = {
 	.probe = rb4xx_gpio_probe,
+<<<<<<< HEAD
+=======
+	.remove = rb4xx_gpio_remove,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.id_table = rb4xx_gpio_id_table,
 	.driver = {
 		.name = "rb4xx-gpio",

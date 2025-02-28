@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "sercomm,na502", "mediatek,mt7621-soc";
@@ -21,8 +24,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
@@ -53,8 +60,12 @@
 		};
 
 		bluetooth {
+<<<<<<< HEAD
 			function = LED_FUNCTION_BLUETOOTH;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:bluetooth";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -98,6 +109,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &ethernet {
 	pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>;
 };
@@ -105,6 +117,10 @@
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000 0>;
 	nvmem-cell-names = "mac-address";
+=======
+&gmac0 {
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &nand {
@@ -127,6 +143,7 @@
 			read-only;
 		};
 
+<<<<<<< HEAD
 		partition@100000 {
 			label = "factory";
 			reg = <0x100000 0x40000>;
@@ -150,6 +167,11 @@
 					#nvmem-cell-cells = <1>;
 				};
 			};
+=======
+		factory: partition@100000 {
+			label = "factory";
+			reg = <0x100000 0x40000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@140000 {
@@ -193,22 +215,42 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &pcie1 {
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
 		nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 1>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+&pcie0 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0000 0 0 0 0>;
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+		mtd-mac-address = <&factory 0xe000>;
+		mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
 
+<<<<<<< HEAD
 &pcie2 {
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0 0 0 0 0>;
 		nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000 2>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+&pcie1 {
+	wifi@0,0 {
+		compatible = "mediatek,mt76";
+		reg = <0x0 0 0 0 0>;
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+		mtd-mac-address = <&factory 0xe000>;
+		mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <2400000 2500000>;
 	};
 };

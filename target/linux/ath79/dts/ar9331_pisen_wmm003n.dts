@@ -41,7 +41,11 @@
 		regulator-name = "usb_vbus";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 8 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -63,6 +67,7 @@
 				reg = <0x0 0x20000>;
 				label = "u-boot";
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -73,6 +78,8 @@
 						reg = <0x1fc00 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			firmware: partition@20000 {
@@ -81,6 +88,7 @@
 				label = "firmware";
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				reg = <0x7f0000 0x10000>;
 				label = "art";
@@ -95,6 +103,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@7f0000 {
+				reg = <0x7f0000 0x10000>;
+				label = "art";
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -103,8 +117,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -131,7 +149,12 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&macaddr_uboot_1fc00>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -8,6 +8,7 @@ json_init
 json_add_array env
 hotplugobj=""
 
+<<<<<<< HEAD
 oldIFS=$IFS
 IFS=$'\n'
 for var in $(env); do
@@ -17,6 +18,8 @@ for var in $(env); do
 done
 IFS=$oldIFS
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 case "$1" in
 	add | del | old | arp-add | arp-del)
 		json_add_string "" "MACADDR=$2"

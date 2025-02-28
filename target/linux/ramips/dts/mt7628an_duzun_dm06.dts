@@ -66,8 +66,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -96,7 +100,11 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
+=======
+		spi-max-frequency = <60000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		m25p,fast-read;
 
 		partitions {
@@ -116,6 +124,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -130,6 +139,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {

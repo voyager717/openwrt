@@ -4,13 +4,21 @@
 
 define Profile/Broadcom-b43
   NAME:=Broadcom SoC, all Ethernet, BCM43xx WiFi (b43, default)
+<<<<<<< HEAD
   PACKAGES:=kmod-b43
+=======
+  PACKAGES:=kmod-b43 kmod-b43legacy
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Profile/Broadcom-b43/Description
 	Package set compatible with hardware any Broadcom BCM47xx or BCM535x
 	SoC with Broadcom BCM43xx Wifi cards using the mac80211, b43 and
+<<<<<<< HEAD
 	b44, tg3 or bgmac Ethernet driver.
+=======
+	b43legacy drivers and b44, tg3 or bgmac Ethernet driver.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call Profile,Broadcom-b43))

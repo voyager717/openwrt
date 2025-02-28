@@ -1,0 +1,11 @@
+names.lo: \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/names.cc \
+ /usr/include/stdc-predef.h cc1plugin-config.h \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/names.hh \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/../include/gcc-c-fe.def \
+ /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/../include/gcc-cp-fe.def
+/usr/include/stdc-predef.h:
+cc1plugin-config.h:
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/names.hh:
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/../include/gcc-c-fe.def:
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libcc1/../include/gcc-cp-fe.def:

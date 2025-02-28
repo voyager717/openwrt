@@ -1,5 +1,6 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 ${STAGING_DIR_HOST}/bin/pkg-config.real \
 --keep-system-cflags \
 --keep-system-libs \
@@ -9,3 +10,11 @@ ${STAGING_DIR_HOST}/bin/pkg-config.real \
 --define-variable=exec_prefix="${STAGING_PREFIX}" \
 --define-variable=bindir="${STAGING_PREFIX}/bin" \
 $PKG_CONFIG_EXTRAARGS "$@"
+=======
+pkg-config.real \
+--keep-system-cflags \
+--keep-system-libs \
+--define-variable=prefix="${STAGING_PREFIX}" \
+--define-variable=exec_prefix="${STAGING_PREFIX}" \
+--define-variable=bindir="${STAGING_PREFIX}/bin" "$@"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

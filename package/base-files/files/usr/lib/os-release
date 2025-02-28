@@ -7,7 +7,10 @@ VERSION_ID="%v"
 HOME_URL="%u"
 BUG_URL="%b"
 SUPPORT_URL="%s"
+<<<<<<< HEAD
 FIRMWARE_URL="%f"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 BUILD_ID="%R"
 OPENWRT_BOARD="%S"
 OPENWRT_ARCH="%A"
@@ -17,4 +20,7 @@ OPENWRT_DEVICE_MANUFACTURER_URL="%m"
 OPENWRT_DEVICE_PRODUCT="%P"
 OPENWRT_DEVICE_REVISION="%h"
 OPENWRT_RELEASE="%D %V %C"
+<<<<<<< HEAD
 OPENWRT_BUILD_DATE="%B"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

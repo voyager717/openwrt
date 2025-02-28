@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define Build/MultiImage
         rm -rf $@.fakerd $@.new
 
@@ -60,6 +61,22 @@ define Device/aerohive_hiveap-330
     Note that after this sysupgrade, the AP will be unavailable for 7 \n$\
     minutes to reformat flash."
 
+=======
+define Device/aerohive_hiveap-330
+  DEVICE_VENDOR := Aerohive
+  DEVICE_MODEL := HiveAP-330
+  DEVICE_PACKAGES := kmod-tpm-i2c-atmel
+  BLOCKSIZE := 128k
+  KERNEL := kernel-bin | gzip | uImage gzip
+  KERNEL_SIZE := 8m
+  KERNEL_INITRAMFS := copy-file $(KDIR)/vmlinux-initramfs | uImage none
+  IMAGES := fdt.bin sysupgrade.bin
+  IMAGE/fdt.bin := append-dtb
+  IMAGE/sysupgrade.bin := append-dtb | pad-to 256k | check-size 256k | \
+	append-uImage-fakehdr ramdisk | pad-to 256k | check-size 512k | \
+	append-rootfs | pad-rootfs $$(BLOCKSIZE) | pad-to 41216k | check-size 41216k | \
+	append-kernel | append-metadata
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += aerohive_hiveap-330
 
@@ -67,16 +84,21 @@ define Device/enterasys_ws-ap3710i
   DEVICE_VENDOR := Enterasys
   DEVICE_MODEL := WS-AP3710i
   BLOCKSIZE := 128k
+<<<<<<< HEAD
   KERNEL_NAME := simpleImage.ws-ap3710i
   KERNEL_ENTRY := 0x1500000
   KERNEL_LOADADDR := 0x1500000
   KERNEL = kernel-bin | uImage none
   KERNEL_INITRAMFS := kernel-bin | uImage none
+=======
+  KERNEL = kernel-bin | lzma | fit lzma $(KDIR)/image-$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := sysupgrade.bin
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
 endef
 TARGET_DEVICES += enterasys_ws-ap3710i
 
+<<<<<<< HEAD
 define Device/extreme-networks_ws-ap3825i
   DEVICE_VENDOR := Extreme Networks
   DEVICE_MODEL := WS-AP3825i
@@ -113,6 +135,12 @@ define Device/ocedo_panda
   DEVICE_VENDOR := OCEDO
   DEVICE_MODEL := Panda
   DEVICE_PACKAGES := kmod-rtc-ds1307
+=======
+define Device/ocedo_panda
+  DEVICE_VENDOR := OCEDO
+  DEVICE_MODEL := Panda
+  DEVICE_PACKAGES := kmod-rtc-ds1307 uboot-envtools
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL = kernel-bin | gzip | fit gzip $(KDIR)/image-$$(DEVICE_DTS).dtb
   PAGESIZE := 2048
   SUBPAGESIZE := 512
@@ -120,7 +148,13 @@ define Device/ocedo_panda
   IMAGES := fdt.bin sysupgrade.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
   IMAGE/fdt.bin := append-dtb
+<<<<<<< HEAD
   DEVICE_COMPAT_VERSION := 1.1
   DEVICE_COMPAT_MESSAGE := Config cannot be migrated from swconfig to DSA
 endef
 TARGET_DEVICES += ocedo_panda
+=======
+endef
+TARGET_DEVICES += ocedo_panda
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

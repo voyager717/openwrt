@@ -234,7 +234,10 @@ define Device/tplink_tl-wpa8630p-v2
     so the JFFS2 settings partition MUST be reformatted to avoid data corruption. \
     Backup your settings before upgrading, then during sysupgrade, \
     de-select "Keep settings" and select "Force" to continue (equivilant to "sysupgrade -n -F").
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/tplink_tl-wpa8630p-v2-int
@@ -481,7 +484,10 @@ define Device/tplink_tl-wr941-v2
   $(Device/tplink-4m)
   SOC := ar9132
   DEVICE_MODEL := TL-WR941ND
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-dsa-mv88e6060
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VARIANT := v2/v3
   DEVICE_ALT0_VENDOR := TP-Link
   DEVICE_ALT0_MODEL := TL-WR941N
@@ -505,6 +511,7 @@ define Device/tplink_tl-wr941-v4
 endef
 TARGET_DEVICES += tplink_tl-wr941-v4
 
+<<<<<<< HEAD
 define Device/tplink_tl-wr941nd-v5
   $(Device/tplink-4mlzma)
   SOC := ar9341
@@ -515,6 +522,8 @@ define Device/tplink_tl-wr941nd-v5
 endef
 TARGET_DEVICES += tplink_tl-wr941nd-v5
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-wr941nd-v6
   $(Device/tplink-4mlzma)
   SOC := tp9343

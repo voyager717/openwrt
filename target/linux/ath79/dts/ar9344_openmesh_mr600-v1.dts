@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ar9344_openmesh_mr600.dtsi"
 
 / {
@@ -25,14 +28,22 @@
 		};
 
 		wps_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_orange: power_orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};

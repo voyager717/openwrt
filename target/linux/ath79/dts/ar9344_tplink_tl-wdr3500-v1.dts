@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ar9344_tplink_tl-wdrxxxx.dtsi"
 
 / {
@@ -15,8 +18,12 @@
 
 &leds {
 	usb {
+<<<<<<< HEAD
 		function = LED_FUNCTION_USB;
 		color = <LED_COLOR_ID_GREEN>;
+=======
+		label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		linux,default-trigger = "usbport";
 		trigger-sources = <&hub_port>;
@@ -45,13 +52,25 @@
 };
 
 &usb {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &wmac {
 	status = "okay";
 	nvmem-cells = <&macaddr_uboot_1fc00 0>, <&cal_art_1000>;
@@ -69,13 +88,27 @@
 		nvmem-cells = <&macaddr_uboot_1fc00 1>, <&cal_art_5000>;
 		nvmem-cell-names = "mac-address", "calibration";
 	};
+=======
+&ath9k {
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <1>;
+};
+
+&wmac {
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 (-1)>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -89,6 +122,11 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 2>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

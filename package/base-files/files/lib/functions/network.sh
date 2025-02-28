@@ -90,6 +90,7 @@ network_get_prefix6() {
 	__network_ifstatus "$1" "$2" "['ipv6-prefix'][0]['address','mask']" "/"
 }
 
+<<<<<<< HEAD
 # determine first IPv6 prefix assignment of given logical interface
 # 1: destination variable
 # 2: interface
@@ -97,6 +98,8 @@ network_get_prefix_assignment6() {
 	__network_ifstatus "$1" "$2" "['ipv6-prefix-assignment'][0]['address','mask']" "/"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # determine all IPv4 addresses of given logical interface
 # 1: destination variable
 # 2: interface
@@ -194,6 +197,7 @@ network_get_prefixes6() {
 	__network_ifstatus "$1" "$2" "['ipv6-prefix'][*]['address','mask']" "/ "
 }
 
+<<<<<<< HEAD
 # determine all IPv6 prefix assignments of given logical interface
 # 1: destination variable
 # 2: interface
@@ -201,6 +205,8 @@ network_get_prefix_assignments6() {
 	__network_ifstatus "$1" "$2" "['ipv6-prefix-assignment'][*]['address','mask']" "/ "
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # determine IPv4 gateway of given logical interface
 # 1: destination variable
 # 2: interface

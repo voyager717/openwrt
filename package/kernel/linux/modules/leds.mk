@@ -38,6 +38,7 @@ endef
 
 $(eval $(call KernelPackage,ledtrig-activity))
 
+<<<<<<< HEAD
 define KernelPackage/ledtrig-audio
   SUBMENU:=$(LEDS_MENU)
   TITLE:=LED Audio Mute Trigger
@@ -53,6 +54,8 @@ endef
 
 $(eval $(call KernelPackage,ledtrig-audio))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/ledtrig-gpio
   SUBMENU:=$(LEDS_MENU)
   TITLE:=LED GPIO Trigger
@@ -67,7 +70,10 @@ endef
 
 $(eval $(call KernelPackage,ledtrig-gpio))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/ledtrig-transient
   SUBMENU:=$(LEDS_MENU)
   TITLE:=LED Transient Trigger
@@ -115,6 +121,7 @@ endef
 $(eval $(call KernelPackage,ledtrig-pattern))
 
 
+<<<<<<< HEAD
 define KernelPackage/ledtrig-tty
   SUBMENU:=$(LEDS_MENU)
   TITLE:=LED Trigger for TTY devices
@@ -201,6 +208,8 @@ endef
 $(eval $(call KernelPackage,leds-pca955x))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/leds-pca963x
   SUBMENU:=$(LEDS_MENU)
   TITLE:=PCA963x LED support
@@ -232,6 +241,7 @@ endef
 
 $(eval $(call KernelPackage,leds-pwm))
 
+<<<<<<< HEAD
 
 define KernelPackage/leds-st1202
   SUBMENU:=LED modules
@@ -267,6 +277,8 @@ endef
 $(eval $(call KernelPackage,leds-tlc591xx))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/leds-uleds
   SUBMENU:=$(LEDS_MENU)
   TITLE:=Userspace LEDs
@@ -280,6 +292,7 @@ define KernelPackage/leds-uleds/description
 endef
 
 $(eval $(call KernelPackage,leds-uleds))
+<<<<<<< HEAD
 
 
 define KernelPackage/input-leds
@@ -331,3 +344,5 @@ define KernelPackage/leds-lp5562/description
 endef
 
 $(eval $(call KernelPackage,leds-lp5562))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -50,8 +50,11 @@
 #include <linux/delay.h>
 #include <asm/byteorder.h>
 #include <crypto/algapi.h>
+<<<<<<< HEAD
 #include <crypto/des.h>
 #include <crypto/internal/skcipher.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ifxmips_deu.h"
 
 #if defined(CONFIG_DANUBE) 
@@ -107,18 +110,29 @@ void des_dma_memory_copy(u32 *outcopy, u32 *out_dma, u8 *out_arg, int nbytes);
 void ifx_deu_des (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
              u8 *iv_arg, u32 nbytes, int encdec, int mode);
 
+<<<<<<< HEAD
 struct ifx_deu_des_ctx {
+=======
+struct des_ctx {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         int controlr_M;
         int key_length;
         u8 iv[DES_BLOCK_SIZE];
         u32 expkey[DES3_EDE_EXPKEY_WORDS];
+<<<<<<< HEAD
         struct des_ctx des_context;
         struct des3_ede_ctx des3_ede_context;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 extern int disable_multiblock;
 extern int disable_deudma;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn	int des_setkey(struct crypto_tfm *tfm, const u8 *key, unsigned int keylen)
  *  \ingroup IFX_DES_FUNCTIONS
  *  \brief sets DES key   
@@ -129,6 +143,7 @@ extern int disable_deudma;
 int des_setkey(struct crypto_tfm *tfm, const u8 *key,
                       unsigned int keylen)
 {
+<<<<<<< HEAD
         struct ifx_deu_des_ctx *dctx = crypto_tfm_ctx(tfm);
         int err;
 
@@ -142,11 +157,18 @@ int des_setkey(struct crypto_tfm *tfm, const u8 *key,
                         err = 0;
         }
 
+=======
+        struct des_ctx *dctx = crypto_tfm_ctx(tfm);
+
+        //printk("setkey in %s\n", __FILE__);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         dctx->controlr_M = 0;   // des
         dctx->key_length = keylen;
 
         memcpy ((u8 *) (dctx->expkey), key, keylen);
 
+<<<<<<< HEAD
         if (err)
                 memset(dctx, 0, sizeof(*dctx));
 
@@ -165,6 +187,11 @@ int des_setkey_skcipher (struct crypto_skcipher *tfm, const u8 *in_key, unsigned
 {
     return des_setkey(crypto_skcipher_tfm(tfm), in_key, key_len);
 }
+=======
+        return 0;
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*! \fn void ifx_deu_des(void *ctx_arg, u8 *out_arg, const u8 *in_arg, u8 *iv_arg, u32 nbytes, int encdec, int mode)
  *  \ingroup IFX_DES_FUNCTIONS
@@ -182,7 +209,11 @@ void ifx_deu_des (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
              u8 *iv_arg, u32 nbytes, int encdec, int mode)
 {
         volatile struct des_t *des = (struct des_t *) DES_3DES_START;
+<<<<<<< HEAD
         struct ifx_deu_des_ctx *dctx = ctx_arg;
+=======
+        struct des_ctx *dctx = ctx_arg;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         u32 *key = dctx->expkey;
         unsigned long flag;
 
@@ -205,13 +236,20 @@ void ifx_deu_des (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
                         des->K3HR = DEU_ENDIAN_SWAP(*((u32 *) key + 4));
                         des->K3LR = DEU_ENDIAN_SWAP(*((u32 *) key + 5));
                         /* no break; */
+<<<<<<< HEAD
                         fallthrough;
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                 case 16:
                         des->K2HR = DEU_ENDIAN_SWAP(*((u32 *) key + 2));
                         des->K2LR = DEU_ENDIAN_SWAP(*((u32 *) key + 3));
 
                         /* no break; */
+<<<<<<< HEAD
                         fallthrough;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                 case 8:
                         des->K1HR = DEU_ENDIAN_SWAP(*((u32 *) key + 0));
                         des->K1LR = DEU_ENDIAN_SWAP(*((u32 *) key + 1));
@@ -285,6 +323,11 @@ void ifx_deu_des (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
  *  \param mode operation mode such as ebc, cbc 
 */   
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn  void ifx_deu_des_ecb (void *ctx, uint8_t *dst, const uint8_t *src, uint8_t *iv, size_t nbytes, int encdec, int inplace)
  *  \ingroup IFX_DES_FUNCTIONS
  *  \brief sets DES hardware to ECB mode   
@@ -296,6 +339,10 @@ void ifx_deu_des (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
  *  \param encdec 1 for encrypt; 0 for decrypt  
  *  \param inplace not used  
 */
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void ifx_deu_des_ecb (void *ctx, uint8_t *dst, const uint8_t *src,
                 uint8_t *iv, size_t nbytes, int encdec, int inplace)
 {
@@ -370,31 +417,51 @@ void ifx_deu_des_ctr (void *ctx, uint8_t *dst, const uint8_t *src,
      ifx_deu_des (ctx, dst, src, iv, nbytes, encdec, 4);
 }
 
+<<<<<<< HEAD
 /*! \fn void ifx_deu_des_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+=======
+/*! \fn void des_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \ingroup IFX_DES_FUNCTIONS
  *  \brief encrypt DES_BLOCK_SIZE of data   
  *  \param tfm linux crypto algo transform  
  *  \param out output bytestream  
  *  \param in input bytestream  
 */                                               
+<<<<<<< HEAD
 void ifx_deu_des_encrypt (struct crypto_tfm *tfm, uint8_t * out, const uint8_t * in)
 {
      struct ifx_deu_des_ctx *ctx = crypto_tfm_ctx(tfm);
+=======
+void des_encrypt (struct crypto_tfm *tfm, uint8_t * out, const uint8_t * in)
+{
+     struct des_ctx *ctx = crypto_tfm_ctx(tfm);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      ifx_deu_des (ctx, out, in, NULL, DES_BLOCK_SIZE,
                     CRYPTO_DIR_ENCRYPT, 0);
 
 }
 
+<<<<<<< HEAD
 /*! \fn void ifx_deu_des_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+=======
+/*! \fn void des_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \ingroup IFX_DES_FUNCTIONS
  *  \brief encrypt DES_BLOCK_SIZE of data   
  *  \param tfm linux crypto algo transform  
  *  \param out output bytestream  
  *  \param in input bytestream  
 */                                               
+<<<<<<< HEAD
 void ifx_deu_des_decrypt (struct crypto_tfm *tfm, uint8_t * out, const uint8_t * in)
 {
      struct ifx_deu_des_ctx *ctx = crypto_tfm_ctx(tfm);
+=======
+void des_decrypt (struct crypto_tfm *tfm, uint8_t * out, const uint8_t * in)
+{
+     struct des_ctx *ctx = crypto_tfm_ctx(tfm);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      ifx_deu_des (ctx, out, in, NULL, DES_BLOCK_SIZE,
                     CRYPTO_DIR_DECRYPT, 0);
 }
@@ -423,6 +490,7 @@ void ifx_deu_des_decrypt (struct crypto_tfm *tfm, uint8_t * out, const uint8_t *
 int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
                     unsigned int keylen)
 {
+<<<<<<< HEAD
         struct ifx_deu_des_ctx *dctx = crypto_tfm_ctx(tfm);
         int err;
 
@@ -436,11 +504,18 @@ int des3_ede_setkey(struct crypto_tfm *tfm, const u8 *key,
                         err = 0;
         }
 
+=======
+        struct des_ctx *dctx = crypto_tfm_ctx(tfm);
+
+        //printk("setkey in %s\n", __FILE__);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         dctx->controlr_M = keylen / 8 + 1;      // 3DES EDE1 / EDE2 / EDE3 Mode
         dctx->key_length = keylen;
 
         memcpy ((u8 *) (dctx->expkey), key, keylen);
 
+<<<<<<< HEAD
         if (err)
                 memset(dctx, 0, sizeof(*dctx));
 
@@ -458,6 +533,9 @@ int des3_ede_setkey_skcipher(struct crypto_skcipher *tfm, const u8 *key,
                     unsigned int keylen)
 {
         return des3_ede_setkey(crypto_skcipher_tfm(tfm), key, keylen);
+=======
+        return 0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 /*
@@ -467,9 +545,15 @@ struct crypto_alg ifxdeu_des_alg = {
         .cra_name               =       "des",
         .cra_driver_name        =       "ifxdeu-des",
         .cra_priority           =       300,
+<<<<<<< HEAD
         .cra_flags              =       CRYPTO_ALG_TYPE_CIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY,
         .cra_blocksize          =       DES_BLOCK_SIZE,
         .cra_ctxsize            =       sizeof(struct ifx_deu_des_ctx),
+=======
+        .cra_flags              =       CRYPTO_ALG_TYPE_CIPHER,
+        .cra_blocksize          =       DES_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         .cra_module             =       THIS_MODULE,
         .cra_alignmask          =       3,
         .cra_list               =       LIST_HEAD_INIT(ifxdeu_des_alg.cra_list),
@@ -477,8 +561,13 @@ struct crypto_alg ifxdeu_des_alg = {
         .cia_min_keysize        =       DES_KEY_SIZE,
         .cia_max_keysize        =       DES_KEY_SIZE,
         .cia_setkey             =       des_setkey,
+<<<<<<< HEAD
         .cia_encrypt            =       ifx_deu_des_encrypt,
         .cia_decrypt            =       ifx_deu_des_decrypt } }
+=======
+        .cia_encrypt            =       des_encrypt,
+        .cia_decrypt            =       des_decrypt } }
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /*
@@ -488,13 +577,20 @@ struct crypto_alg ifxdeu_des3_ede_alg = {
         .cra_name               =       "des3_ede",
         .cra_driver_name        =       "ifxdeu-des3_ede",
         .cra_priority           =       300,
+<<<<<<< HEAD
         .cra_flags              =       CRYPTO_ALG_TYPE_CIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY,
         .cra_blocksize          =       DES3_EDE_BLOCK_SIZE,
         .cra_ctxsize            =       sizeof(struct ifx_deu_des_ctx),
+=======
+        .cra_flags              =       CRYPTO_ALG_TYPE_CIPHER,
+        .cra_blocksize          =       DES_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         .cra_module             =       THIS_MODULE,
         .cra_alignmask          =       3,
         .cra_list               =       LIST_HEAD_INIT(ifxdeu_des3_ede_alg.cra_list),
         .cra_u                  =       { .cipher = {
+<<<<<<< HEAD
         .cia_min_keysize        =       DES3_EDE_KEY_SIZE,
         .cia_max_keysize        =       DES3_EDE_KEY_SIZE,
         .cia_setkey             =       des3_ede_setkey,
@@ -516,18 +612,51 @@ int ecb_des_encrypt(struct skcipher_request *req)
         unsigned int enc_bytes, nbytes;
 
         err = skcipher_walk_virt(&walk, req, false);
+=======
+        .cia_min_keysize        =       DES_KEY_SIZE,
+        .cia_max_keysize        =       DES_KEY_SIZE,
+        .cia_setkey             =       des3_ede_setkey,
+        .cia_encrypt            =       des_encrypt,
+        .cia_decrypt            =       des_decrypt } }
+};
+
+/*! \fn int ecb_des_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_DES_FUNCTIONS
+ *  \brief ECB DES encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+*/                                 
+int ecb_des_encrypt(struct blkcipher_desc *desc,
+                    struct scatterlist *dst, struct scatterlist *src,
+                    unsigned int nbytes)
+{
+        struct des_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+        struct blkcipher_walk walk;
+        int err;
+        unsigned int enc_bytes;
+
+        blkcipher_walk_init(&walk, dst, src, nbytes);
+        err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         while ((nbytes = enc_bytes = walk.nbytes)) {
                 enc_bytes -= (nbytes % DES_BLOCK_SIZE);
                 ifx_deu_des_ecb(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                                NULL, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
                 nbytes &= DES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
                 err = skcipher_walk_done(&walk, nbytes);
+=======
+                err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 
         return err;
 }
 
+<<<<<<< HEAD
 /*! \fn int ecb_des_decrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief ECB DES decrypt using linux crypto skcipher
@@ -543,13 +672,40 @@ int ecb_des_decrypt(struct skcipher_request *req)
 
         DPRINTF(1, "\n");
         err = skcipher_walk_virt(&walk, req, false);
+=======
+/*! \fn int ecb_des_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_DES_FUNCTIONS
+ *  \brief ECB DES decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ecb_des_decrypt(struct blkcipher_desc *desc,
+                    struct scatterlist *dst, struct scatterlist *src,
+                    unsigned int nbytes)
+{
+        struct des_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+        struct blkcipher_walk walk;
+        int err;
+        unsigned int dec_bytes;
+
+        DPRINTF(1, "\n");
+        blkcipher_walk_init(&walk, dst, src, nbytes);
+        err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         while ((nbytes = dec_bytes = walk.nbytes)) {
                 dec_bytes -= (nbytes % DES_BLOCK_SIZE);
                 ifx_deu_des_ecb(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                                NULL, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
                 nbytes &= DES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
                 err = skcipher_walk_done(&walk, nbytes);
+=======
+                err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 
         return err;
@@ -557,6 +713,7 @@ int ecb_des_decrypt(struct skcipher_request *req)
 
 /*
  * \brief DES function mappings
+<<<<<<< HEAD
 */
 struct skcipher_alg ifxdeu_ecb_des_alg = {
         .base.cra_name          =       "ecb(des)",
@@ -572,10 +729,33 @@ struct skcipher_alg ifxdeu_ecb_des_alg = {
         .setkey                 =       des_setkey_skcipher,
         .encrypt                =       ecb_des_encrypt,
         .decrypt                =       ecb_des_decrypt,
+=======
+*/ 
+struct crypto_alg ifxdeu_ecb_des_alg = {
+        .cra_name               =       "ecb(des)",
+        .cra_driver_name        =       "ifxdeu-ecb(des)",
+        .cra_priority           =       400,
+        .cra_flags              =       CRYPTO_ALG_TYPE_BLKCIPHER,
+        .cra_blocksize          =       DES_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+        .cra_type               =       &crypto_blkcipher_type,
+        .cra_module             =       THIS_MODULE,
+        .cra_list               =       LIST_HEAD_INIT(ifxdeu_ecb_des_alg.cra_list),
+        .cra_u                  =       {
+                .blkcipher = {
+                        .min_keysize            =       DES_KEY_SIZE,
+                        .max_keysize            =       DES_KEY_SIZE,
+                        .setkey                 =       des_setkey,
+                        .encrypt                =       ecb_des_encrypt,
+                        .decrypt                =       ecb_des_decrypt,
+                }
+        }
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /*
  * \brief DES function mappings
+<<<<<<< HEAD
 */
 struct skcipher_alg ifxdeu_ecb_des3_ede_alg = {
         .base.cra_name          =       "ecb(des3_ede)",
@@ -608,6 +788,51 @@ int cbc_des_encrypt(struct skcipher_request *req)
 
         DPRINTF(1, "\n");
         err = skcipher_walk_virt(&walk, req, false);
+=======
+*/ 
+struct crypto_alg ifxdeu_ecb_des3_ede_alg = {
+        .cra_name               =       "ecb(des3_ede)",
+        .cra_driver_name        =       "ifxdeu-ecb(des3_ede)",
+        .cra_priority           =       400,
+        .cra_flags              =       CRYPTO_ALG_TYPE_BLKCIPHER,
+        .cra_blocksize          =       DES3_EDE_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+        .cra_type               =       &crypto_blkcipher_type,
+        .cra_module             =       THIS_MODULE,
+        .cra_list               =       LIST_HEAD_INIT(ifxdeu_ecb_des3_ede_alg.cra_list),
+        .cra_u                  =       {
+                .blkcipher = {
+                        .min_keysize            =       DES3_EDE_KEY_SIZE,
+                        .max_keysize            =       DES3_EDE_KEY_SIZE,
+                        .setkey                 =       des3_ede_setkey,
+                        .encrypt                =       ecb_des_encrypt,
+                        .decrypt                =       ecb_des_decrypt,
+                }
+        }
+};
+
+/*! \fn int cbc_des_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_DES_FUNCTIONS
+ *  \brief CBC DES encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int cbc_des_encrypt(struct blkcipher_desc *desc,
+                    struct scatterlist *dst, struct scatterlist *src,
+                    unsigned int nbytes)
+{
+        struct des_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+        struct blkcipher_walk walk;
+        int err;
+        unsigned int enc_bytes;
+
+        DPRINTF(1, "\n");
+        blkcipher_walk_init(&walk, dst, src, nbytes);
+        err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         while ((nbytes = enc_bytes = walk.nbytes)) {
                 u8 *iv = walk.iv;
@@ -615,12 +840,17 @@ int cbc_des_encrypt(struct skcipher_request *req)
                 ifx_deu_des_cbc(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                                iv, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
                 nbytes &= DES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
                 err = skcipher_walk_done(&walk, nbytes);
+=======
+                err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 
         return err;
 }
 
+<<<<<<< HEAD
 /*! \fn int cbc_des_encrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief CBC DES decrypt using linux crypto skcipher
@@ -636,6 +866,29 @@ int cbc_des_decrypt(struct skcipher_request *req)
 
         DPRINTF(1, "\n");
         err = skcipher_walk_virt(&walk, req, false);
+=======
+/*! \fn int cbc_des_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_DES_FUNCTIONS
+ *  \brief CBC DES decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int cbc_des_decrypt(struct blkcipher_desc *desc,
+                    struct scatterlist *dst, struct scatterlist *src,
+                    unsigned int nbytes)
+{
+        struct des_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+        struct blkcipher_walk walk;
+        int err;
+        unsigned int dec_bytes;
+
+        DPRINTF(1, "\n");
+        blkcipher_walk_init(&walk, dst, src, nbytes);
+        err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         while ((nbytes = dec_bytes = walk.nbytes)) {
                 u8 *iv = walk.iv;
@@ -643,7 +896,11 @@ int cbc_des_decrypt(struct skcipher_request *req)
                 ifx_deu_des_cbc(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                                iv, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
                 nbytes &= DES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
                 err = skcipher_walk_done(&walk, nbytes);
+=======
+                err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 
         return err;
@@ -651,6 +908,7 @@ int cbc_des_decrypt(struct skcipher_request *req)
 
 /*
  * \brief DES function mappings
+<<<<<<< HEAD
 */
 struct skcipher_alg ifxdeu_cbc_des_alg = {
         .base.cra_name          =       "cbc(des)",
@@ -667,10 +925,34 @@ struct skcipher_alg ifxdeu_cbc_des_alg = {
         .setkey                 =       des_setkey_skcipher,
         .encrypt                =       cbc_des_encrypt,
         .decrypt                =       cbc_des_decrypt,
+=======
+*/ 
+struct crypto_alg ifxdeu_cbc_des_alg = {
+        .cra_name               =       "cbc(des)",
+        .cra_driver_name        =       "ifxdeu-cbc(des)",
+        .cra_priority           =       400,
+        .cra_flags              =       CRYPTO_ALG_TYPE_BLKCIPHER,
+        .cra_blocksize          =       DES_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+        .cra_type               =       &crypto_blkcipher_type,
+        .cra_module             =       THIS_MODULE,
+        .cra_list               =       LIST_HEAD_INIT(ifxdeu_cbc_des_alg.cra_list),
+        .cra_u                  =       {
+                .blkcipher = {
+                        .min_keysize            =       DES_KEY_SIZE,
+                        .max_keysize            =       DES_KEY_SIZE,
+                        .ivsize                 =       DES_BLOCK_SIZE,
+                        .setkey                 =       des_setkey,
+                        .encrypt                =       cbc_des_encrypt,
+                        .decrypt                =       cbc_des_decrypt,
+                }
+        }
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /*
  * \brief DES function mappings
+<<<<<<< HEAD
 */
 struct skcipher_alg ifxdeu_cbc_des3_ede_alg = {
         .base.cra_name          =       "cbc(des3_ede)",
@@ -687,6 +969,29 @@ struct skcipher_alg ifxdeu_cbc_des3_ede_alg = {
         .setkey                 =       des3_ede_setkey_skcipher,
         .encrypt                =       cbc_des_encrypt,
         .decrypt                =       cbc_des_decrypt,
+=======
+*/ 
+struct crypto_alg ifxdeu_cbc_des3_ede_alg = {
+        .cra_name               =       "cbc(des3_ede)",
+        .cra_driver_name        =       "ifxdeu-cbc(des3_ede)",
+        .cra_priority           =       400,
+        .cra_flags              =       CRYPTO_ALG_TYPE_BLKCIPHER,
+        .cra_blocksize          =       DES3_EDE_BLOCK_SIZE,
+        .cra_ctxsize            =       sizeof(struct des_ctx),
+        .cra_type               =       &crypto_blkcipher_type,
+        .cra_module             =       THIS_MODULE,
+        .cra_list               =       LIST_HEAD_INIT(ifxdeu_cbc_des3_ede_alg.cra_list),
+        .cra_u                  =       {
+                .blkcipher = {
+                        .min_keysize            =       DES3_EDE_KEY_SIZE,
+                        .max_keysize            =       DES3_EDE_KEY_SIZE,
+                        .ivsize                 =       DES_BLOCK_SIZE,
+                        .setkey                 =       des3_ede_setkey,
+                        .encrypt                =       cbc_des_encrypt,
+                        .decrypt                =       cbc_des_decrypt,
+                }
+        }
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /*! \fn int ifxdeu_init_des (void)
@@ -697,17 +1002,28 @@ int ifxdeu_init_des (void)
 {
     int ret = -ENOSYS;
 
+<<<<<<< HEAD
         des_chip_init();
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         ret = crypto_register_alg(&ifxdeu_des_alg);
         if (ret < 0)
                 goto des_err;
 
+<<<<<<< HEAD
         ret = crypto_register_skcipher(&ifxdeu_ecb_des_alg);
         if (ret < 0)
                 goto ecb_des_err;
 
         ret = crypto_register_skcipher(&ifxdeu_cbc_des_alg);
+=======
+        ret = crypto_register_alg(&ifxdeu_ecb_des_alg);
+        if (ret < 0)
+                goto ecb_des_err;
+
+        ret = crypto_register_alg(&ifxdeu_cbc_des_alg);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         if (ret < 0)
                 goto cbc_des_err;
 
@@ -715,6 +1031,7 @@ int ifxdeu_init_des (void)
         if (ret < 0)
                 goto des3_ede_err;
 
+<<<<<<< HEAD
         ret = crypto_register_skcipher(&ifxdeu_ecb_des3_ede_alg);
         if (ret < 0)
                 goto ecb_des3_ede_err;
@@ -723,6 +1040,17 @@ int ifxdeu_init_des (void)
         if (ret < 0)
                 goto cbc_des3_ede_err;
 
+=======
+        ret = crypto_register_alg(&ifxdeu_ecb_des3_ede_alg);
+        if (ret < 0)
+                goto ecb_des3_ede_err;
+
+        ret = crypto_register_alg(&ifxdeu_cbc_des3_ede_alg);
+        if (ret < 0)
+                goto cbc_des3_ede_err;
+
+        des_chip_init();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         CRTCL_SECT_INIT;
 
 
@@ -735,11 +1063,19 @@ des_err:
         printk(KERN_ERR "IFX des initialization failed!\n");
         return ret;
 ecb_des_err:
+<<<<<<< HEAD
         crypto_unregister_skcipher(&ifxdeu_ecb_des_alg);
         printk (KERN_ERR "IFX ecb_des initialization failed!\n");
         return ret;
 cbc_des_err:
         crypto_unregister_skcipher(&ifxdeu_cbc_des_alg);
+=======
+        crypto_unregister_alg(&ifxdeu_ecb_des_alg);
+        printk (KERN_ERR "IFX ecb_des initialization failed!\n");
+        return ret;
+cbc_des_err:
+        crypto_unregister_alg(&ifxdeu_cbc_des_alg);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         printk (KERN_ERR "IFX cbc_des initialization failed!\n");
         return ret;
 des3_ede_err:
@@ -747,11 +1083,19 @@ des3_ede_err:
         printk(KERN_ERR "IFX des3_ede initialization failed!\n");
         return ret;
 ecb_des3_ede_err:
+<<<<<<< HEAD
         crypto_unregister_skcipher(&ifxdeu_ecb_des3_ede_alg);
         printk (KERN_ERR "IFX ecb_des3_ede initialization failed!\n");
         return ret;
 cbc_des3_ede_err:
         crypto_unregister_skcipher(&ifxdeu_cbc_des3_ede_alg);
+=======
+        crypto_unregister_alg(&ifxdeu_ecb_des3_ede_alg);
+        printk (KERN_ERR "IFX ecb_des3_ede initialization failed!\n");
+        return ret;
+cbc_des3_ede_err:
+        crypto_unregister_alg(&ifxdeu_cbc_des3_ede_alg);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         printk (KERN_ERR "IFX cbc_des3_ede initialization failed!\n");
         return ret;
 
@@ -764,6 +1108,7 @@ cbc_des3_ede_err:
 void ifxdeu_fini_des (void)
 {
         crypto_unregister_alg (&ifxdeu_des_alg);
+<<<<<<< HEAD
         crypto_unregister_skcipher (&ifxdeu_ecb_des_alg);
         crypto_unregister_skcipher (&ifxdeu_cbc_des_alg);
         crypto_unregister_alg (&ifxdeu_des3_ede_alg);
@@ -771,3 +1116,13 @@ void ifxdeu_fini_des (void)
         crypto_unregister_skcipher (&ifxdeu_cbc_des3_ede_alg);
 
 }
+=======
+        crypto_unregister_alg (&ifxdeu_ecb_des_alg);
+        crypto_unregister_alg (&ifxdeu_cbc_des_alg);
+        crypto_unregister_alg (&ifxdeu_des3_ede_alg);
+        crypto_unregister_alg (&ifxdeu_ecb_des3_ede_alg);
+        crypto_unregister_alg (&ifxdeu_cbc_des3_ede_alg);
+
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

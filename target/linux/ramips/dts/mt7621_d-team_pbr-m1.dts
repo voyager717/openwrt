@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "d-team,pbr-m1", "mediatek,mt7621-soc";
@@ -23,8 +26,12 @@
 		compatible = "gpio-leds";
 
 		power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 31 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -130,6 +137,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -156,6 +164,12 @@
 						reg = <0xe006 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -186,8 +200,12 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
@@ -195,6 +213,7 @@
 &pcie1 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
 	};
@@ -207,6 +226,14 @@
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+	};
+};
+
+&gmac0 {
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -234,8 +261,12 @@
 		port@4 {
 			status = "okay";
 			label = "wan";
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_factory_e006>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&factory 0xe006>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

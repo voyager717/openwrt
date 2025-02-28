@@ -85,7 +85,11 @@ swconfig_trig_update_port_mask(struct led_trigger *trigger)
 	sw_trig = (void *) trigger;
 
 	port_mask = 0;
+<<<<<<< HEAD
 	spin_lock(&trigger->leddev_list_lock);
+=======
+	read_lock(&trigger->leddev_list_lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	list_for_each(entry, &trigger->led_cdevs) {
 		struct led_classdev *led_cdev;
 		struct swconfig_trig_data *trig_data;
@@ -98,7 +102,11 @@ swconfig_trig_update_port_mask(struct led_trigger *trigger)
 			read_unlock(&trig_data->lock);
 		}
 	}
+<<<<<<< HEAD
 	spin_unlock(&trigger->leddev_list_lock);
+=======
+	read_unlock(&trigger->leddev_list_lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	sw_trig->port_mask = port_mask;
 
@@ -418,14 +426,22 @@ swconfig_trig_update_leds(struct switch_led_trigger *sw_trig)
 	struct led_trigger *trigger;
 
 	trigger = &sw_trig->trig;
+<<<<<<< HEAD
 	spin_lock(&trigger->leddev_list_lock);
+=======
+	read_lock(&trigger->leddev_list_lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	list_for_each(entry, &trigger->led_cdevs) {
 		struct led_classdev *led_cdev;
 
 		led_cdev = list_entry(entry, struct led_classdev, trig_list);
 		swconfig_trig_led_event(sw_trig, led_cdev);
 	}
+<<<<<<< HEAD
 	spin_unlock(&trigger->leddev_list_lock);
+=======
+	read_unlock(&trigger->leddev_list_lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void

@@ -30,7 +30,10 @@ PKG_BUILD_PARALLEL:=1
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
+<<<<<<< HEAD
 include $(INCLUDE_DIR)/host-build.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Package/musl-fts
   SECTION:=libs
@@ -44,7 +47,10 @@ define Package/musl-fts/description
   The musl-fts package implements the fts(3) functions fts_open, fts_read, fts_children, fts_set and fts_close, which are missing in musl libc.
 endef
 
+<<<<<<< HEAD
 HOST_CONFIGURE_ARGS += --disable-shared --with-pic
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
@@ -60,4 +66,7 @@ define Package/musl-fts/install
 endef
 
 $(eval $(call BuildPackage,musl-fts))
+<<<<<<< HEAD
 $(eval $(call HostBuild))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

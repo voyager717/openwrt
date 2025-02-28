@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 --- a/src/svr-authpubkey.c
 +++ b/src/svr-authpubkey.c
 @@ -78,6 +78,13 @@ static void send_msg_userauth_pk_ok(cons
@@ -45,6 +46,39 @@
  		authfile = fopen(filename, "r");
  		if (!authfile) {
 @@ -543,27 +557,41 @@ static int checkpubkeyperms() {
+=======
+--- a/svr-authpubkey.c
++++ b/svr-authpubkey.c
+@@ -386,14 +386,19 @@ static int checkpubkey(const char* keyal
+ 		goto out;
+ 	}
+ 
+-	/* we don't need to check pw and pw_dir for validity, since
+-	 * its been done in checkpubkeyperms. */
+-	len = strlen(ses.authstate.pw_dir);
+-	/* allocate max required pathname storage,
+-	 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
+-	filename = m_malloc(len + 22);
+-	snprintf(filename, len + 22, "%s/.ssh/authorized_keys", 
+-				ses.authstate.pw_dir);
++	if (ses.authstate.pw_uid != 0) {
++		/* we don't need to check pw and pw_dir for validity, since
++		 * its been done in checkpubkeyperms. */
++		len = strlen(ses.authstate.pw_dir);
++		/* allocate max required pathname storage,
++		 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
++		filename = m_malloc(len + 22);
++		snprintf(filename, len + 22, "%s/.ssh/authorized_keys",
++					ses.authstate.pw_dir);
++	} else {
++		filename = m_malloc(30);
++		strncpy(filename, "/etc/dropbear/authorized_keys", 30);
++	}
+ 
+ #if DROPBEAR_SVR_MULTIUSER
+ 	/* open the file as the authenticating user. */
+@@ -474,27 +479,36 @@ static int checkpubkeyperms() {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		goto out;
  	}
  
@@ -53,23 +87,49 @@
 -	len += 22;
 -	filename = m_malloc(len);
 -	strlcpy(filename, ses.authstate.pw_dir, len);
+<<<<<<< HEAD
 +	if (ses.authstate.pw_uid == 0) {
 +		if (checkfileperm(global_authkeys_dir) != DROPBEAR_SUCCESS) {
 +			goto out;
 +		}
  
+=======
+-
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -	/* check ~ */
 -	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
 -		goto out;
 -	}
+<<<<<<< HEAD
 +		len = n_global_authkeys_dir + n_authkeys_file;
 +		filename = m_malloc(len);
+=======
++	if (ses.authstate.pw_uid == 0) {
++		if (checkfileperm("/etc/dropbear") != DROPBEAR_SUCCESS) {
++			goto out;
++		}
++		if (checkfileperm("/etc/dropbear/authorized_keys") != DROPBEAR_SUCCESS) {
++			goto out;
++		}
++	} else {
++		/* allocate max required pathname storage,
++		 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
++		len += 22;
++		filename = m_malloc(len);
++		strlcpy(filename, ses.authstate.pw_dir, len);
++
++		/* check ~ */
++		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
++			goto out;
++		}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
 -	/* check ~/.ssh */
 -	strlcat(filename, "/.ssh", len);
 -	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
 -		goto out;
 -	}
+<<<<<<< HEAD
 +		snprintf(filename, len, "%s/%s", global_authkeys_dir, authkeys_file);
 +		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
 +			goto out;
@@ -79,11 +139,19 @@
 +		if (checkfileperm(ses.authstate.pw_dir) != DROPBEAR_SUCCESS) {
 +			goto out;
 +		}
+=======
++		/* check ~/.ssh */
++		strlcat(filename, "/.ssh", len);
++		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
++			goto out;
++		}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
 -	/* now check ~/.ssh/authorized_keys */
 -	strlcat(filename, "/authorized_keys", len);
 -	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
 -		goto out;
+<<<<<<< HEAD
 +		/* allocate max required pathname storage,
 +		 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
 +		len += n_user_authkeys_dir + n_authkeys_file + 1;
@@ -98,6 +166,10 @@
 +		/* now check ~/.ssh/authorized_keys */
 +		snprintf(filename, len, "%s/%s/%s", ses.authstate.pw_dir,
 +		         user_authkeys_dir, authkeys_file);
+=======
++		/* now check ~/.ssh/authorized_keys */
++		strlcat(filename, "/authorized_keys", len);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
 +			goto out;
 +		}

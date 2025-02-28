@@ -7,7 +7,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=flex
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:westes:flex
+=======
+PKG_CPE_ID:=cpe:/a:flex_project:flex
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_VERSION:=2.6.4
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -21,6 +25,7 @@ include $(INCLUDE_DIR)/host-build.mk
 
 HOST_CONFIGURE_ARGS += --disable-shared
 
+<<<<<<< HEAD
 define Host/Compile
 	$(call Host/Compile/Default,SUBDIRS='src tools')
 endef
@@ -36,6 +41,15 @@ endef
 
 define Host/Clean
 	rm -f $(STAGING_DIR_HOST)/bin/lex
+=======
+define Host/Install
+	$(call Host/Install/Default)
+	$(LN) flex $(STAGING_DIR_HOST)/bin/lex
+endef
+
+define Host/Clean
+	-$(MAKE) -C $(HOST_BUILD_DIR) uninstall
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(call Host/Clean/Default)
 endef
 

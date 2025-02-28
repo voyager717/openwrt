@@ -1,6 +1,10 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -241,7 +241,7 @@ int main(int argc, char **argv) {
+=======
+@@ -259,7 +259,7 @@ int main(int argc, char **argv) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  }
  EOF
  
@@ -9,7 +13,11 @@
      local ret=$?
  
      rm -f $TMPDIR/libbpf_test.c $TMPDIR/libbpf_test
+<<<<<<< HEAD
 @@ -259,7 +259,7 @@ int main(int argc, char **argv) {
+=======
+@@ -277,7 +277,7 @@ int main(int argc, char **argv) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  }
  EOF
  

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	aliases {
@@ -12,6 +15,10 @@
 		led-failsafe = &led_system;
 		led-running = &led_system;
 		led-upgrade = &led_system;
+<<<<<<< HEAD
+=======
+		label-mac-device = &eth0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	leds {
@@ -24,8 +31,12 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port0>;
 			linux,default-trigger = "usbport";
@@ -44,14 +55,22 @@
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_fail {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
@@ -76,8 +95,12 @@
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -113,7 +136,18 @@
 };
 
 &usb0 {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port0: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -135,6 +169,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
@@ -157,9 +196,19 @@
 	pll-data = <0x03000101 0x00000101 0x00001919>;
 
 	phy-mode = "sgmii";
+<<<<<<< HEAD
+=======
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-handle = <&phy0>;
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

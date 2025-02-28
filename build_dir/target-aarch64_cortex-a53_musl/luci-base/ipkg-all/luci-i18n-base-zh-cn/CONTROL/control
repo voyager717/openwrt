@@ -1,0 +1,11 @@
+Package: luci-i18n-base-zh-cn
+Version: git-22.240.58472-bdaec14
+Depends: libc, luci-base
+Source: feeds/luci/modules/luci-base
+SourceName: luci-i18n-base-zh-cn
+License: MIT
+Section: luci
+SourceDateEpoch: 1662154375
+Architecture: all
+Installed-Size: 37927
+Description:  Translation for luci-base - 简体中文 (Chinese Simplified)

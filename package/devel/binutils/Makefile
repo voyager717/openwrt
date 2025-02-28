@@ -8,16 +8,28 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=binutils
+<<<<<<< HEAD
 PKG_VERSION:=2.42
 PKG_RELEASE:=1
+=======
+PKG_VERSION:=2.35.1
+PKG_RELEASE:=2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE_URL:=@GNU/binutils
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
 PKG_VERSION:=$(PKG_VERSION)
+<<<<<<< HEAD
 PKG_HASH:=f6e4d41fd5fc778b06b7891457b3620da5ecea1006c6a4a41ae998109f85a800
 
 PKG_FIXUP:=patch-libtool
 PKG_LIBTOOL_PATHS:=. gas bfd opcodes gprof gprofng binutils ld libiberty gold intl libctf libsframe
+=======
+PKG_HASH:=3ced91db9bf01182b7e420eab68039f2083aed0a214c0424e257eae3ddee8607
+
+PKG_FIXUP:=autoreconf
+PKG_LIBTOOL_PATHS:=. gas bfd opcodes gprof binutils ld libiberty gold intl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_REMOVE_FILES:=libtool.m4
 PKG_INSTALL:=1
 
@@ -25,7 +37,11 @@ PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=GPL-3.0+
 PKG_CPE_ID:=cpe:/a:gnu:binutils
 PKG_BUILD_PARALLEL:=1
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=no-mips16
+=======
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/nls.mk
 include $(INCLUDE_DIR)/package.mk
@@ -87,11 +103,15 @@ CONFIGURE_ARGS += \
 	--enable-shared \
 	--enable-install-libiberty \
 	--enable-install-libbfd \
+<<<<<<< HEAD
 	--enable-install-libctf \
 	--with-system-zlib \
 	--without-zstd \
 	--without-msgpack \
 	--disable-gprofng
+=======
+	--enable-install-libctf
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Install
 	$(call Build/Install/Default)
@@ -109,7 +129,10 @@ endef
 define Package/libbfd/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libbfd*.so* $(1)/usr/lib/
+<<<<<<< HEAD
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libsframe*.so* $(1)/usr/lib/
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libctf/install

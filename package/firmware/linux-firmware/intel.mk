@@ -3,8 +3,11 @@ define Package/ibt-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/intel
 	$(CP) \
 		$(PKG_BUILD_DIR)/intel/*.bseq \
+<<<<<<< HEAD
 		$(PKG_BUILD_DIR)/intel/ibt*.sfi \
 		$(PKG_BUILD_DIR)/intel/ibt*.ddc \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1)/lib/firmware/intel
 endef
 $(eval $(call BuildPackage,ibt-firmware))
@@ -170,6 +173,7 @@ define Package/iwlwifi-firmware-iwl9260/install
 endef
 $(eval $(call BuildPackage,iwlwifi-firmware-iwl9260))
 
+<<<<<<< HEAD
 Package/iwlwifi-firmware-ax101 = $(call Package/firmware-default,Intel AX101 firmware)
 define Package/iwlwifi-firmware-ax101/install
 	$(INSTALL_DIR) $(1)/lib/firmware
@@ -215,6 +219,8 @@ define Package/iwlwifi-firmware-be200/install
 endef
 $(eval $(call BuildPackage,iwlwifi-firmware-be200))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 Package/e100-firmware = $(call Package/firmware-default,Intel e100)
 define Package/e100-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/e100
@@ -223,6 +229,7 @@ define Package/e100-firmware/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/e100/d102e_ucode.bin $(1)/lib/firmware/e100/
 endef
 $(eval $(call BuildPackage,e100-firmware))
+<<<<<<< HEAD
 
 i915_deps:=+i915-firmware-dmc +i915-firmware-guc +i915-firmware-huc +i915-firmware-gsc
 Package/i915-firmware = $(call Package/firmware-default,Intel I915 firmware \(meta package\),$(i915_deps),LICENSE.i915)
@@ -270,3 +277,5 @@ define Package/i915-firmware-gsc/install
 	done
 endef
 $(eval $(call BuildPackage,i915-firmware-gsc))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

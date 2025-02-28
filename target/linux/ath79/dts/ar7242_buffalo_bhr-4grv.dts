@@ -15,6 +15,7 @@
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -29,4 +30,7 @@
 			reg = <0x0 0x6>;
 		};
 	};
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

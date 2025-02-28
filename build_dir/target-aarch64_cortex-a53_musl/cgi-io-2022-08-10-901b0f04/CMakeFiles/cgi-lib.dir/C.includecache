@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/multipart_parser.c
+multipart_parser.h
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/multipart_parser.h
+stdio.h
+-
+stdarg.h
+-
+string.h
+-
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/multipart_parser.h
+stdlib.h
+-
+ctype.h
+-
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/util.c
+ctype.h
+-
+stddef.h
+-
+stdbool.h
+-
+stdlib.h
+-
+string.h
+-
+unistd.h
+-
+stdio.h
+-
+util.h
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/util.h
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/cgi-io-2022-08-10-901b0f04/util.h
+stdbool.h
+-
+

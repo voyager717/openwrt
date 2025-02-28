@@ -7,7 +7,11 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ltq-vdsl-fw
 PKG_VERSION:=6.8.6
+<<<<<<< HEAD
 PKG_RELEASE:=4
+=======
+PKG_RELEASE:=3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 
@@ -19,7 +23,11 @@ define Package/ltq-vdsl-vr9-vectoring-fw-installer
   TITLE:=VDSL2 Vectoring Firmware installer
   SECTION:=net
   CATEGORY:=Network
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy) +kmod-ltq-vdsl-vr9
+=======
+  DEPENDS:=@TARGET_lantiq_xrx200 +kmod-ltq-vdsl-vr9
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/Prepare

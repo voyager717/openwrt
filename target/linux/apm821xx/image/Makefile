@@ -3,12 +3,21 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/image.mk
 
+<<<<<<< HEAD
+=======
+DEVICE_VARS += DTB_SIZE
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/boot-img
 	$(RM) -rf $@.bootdir
 	mkdir -p $@.bootdir/boot
 
 	$(CP) $@.scr $@.bootdir/boot/boot.scr
+<<<<<<< HEAD
 	$(CP) $(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb $@.bootdir/boot/$(DEVICE_DTB)
+=======
+	$(CP) $(IMAGE_KERNEL).dtb $@.bootdir/boot/$(DEVICE_DTB)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(CP) $(IMAGE_KERNEL) $@.bootdir/boot/uImage
 
 	genext2fs --block-size $(BLOCKSIZE:%k=%Ki) \
@@ -17,8 +26,12 @@ define Build/boot-img
 
 	# convert it to revision 1 - needed for u-boot ext2load
 	$(STAGING_DIR_HOST)/bin/tune2fs -O filetype $@.boot
+<<<<<<< HEAD
 	# Ignore errors because file system was intentionally broken with tune2fs
 	-$(STAGING_DIR_HOST)/bin/e2fsck -pDf $@.boot > /dev/null
+=======
+	$(STAGING_DIR_HOST)/bin/e2fsck -pDf $@.boot > /dev/null
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/boot-script
@@ -27,8 +40,21 @@ define Build/boot-script
 		$@.scr
 endef
 
+<<<<<<< HEAD
 define Build/export-dtb
 	cp $(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb $@
+=======
+define Build/copy-file
+	cat "$(1)" > "$@"
+endef
+
+define Build/dtb
+	$(call Image/BuildDTB,../dts/$(DEVICE_DTS).dts,$@.dtb,,--space $(DTB_SIZE))
+endef
+
+define Build/export-dtb
+	cp $(IMAGE_KERNEL).dtb $@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/MuImage-initramfs
@@ -53,15 +79,25 @@ define Build/MuImage-initramfs
 	# part of the legacy multi image. Since we need to put the
 	# device tree stuff into part 3.
 
+<<<<<<< HEAD
 	-$(STAGING_DIR_HOST)/bin/mkimage -A $(LINUX_KARCH) -O linux -T multi -C $(1) \
 		-a $(KERNEL_LOADADDR) -e $(KERNEL_ENTRY) -n '$(BOARD_NAME) initramfs' \
 		-d $@:$@.fakerd:$(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb $@.new
+=======
+	-$(STAGING_DIR_HOST)/bin/mkimage -A $(LINUX_KARCH) -O linux -T multi \
+		-C $(1) -a $(KERNEL_LOADADDR) -e $(KERNEL_ENTRY) \
+		-n '$(BOARD_NAME) initramfs' -d $@:$@.fakerd:$@.dtb $@.new
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mv $@.new $@
 	rm -rf $@.fakerd
 endef
 
 define Build/prepend-dtb
+<<<<<<< HEAD
 	cat "$(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb" "$@" > "$@.new"
+=======
+	cat "$@.dtb.uimage" "$@" > "$@.new"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mv "$@.new" "$@"
 endef
 

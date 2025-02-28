@@ -1,27 +1,48 @@
+<<<<<<< HEAD
 # SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2006-2013 OpenWrt.org
 #
+=======
+#
+# Copyright (C) 2006-2013 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libnl
+<<<<<<< HEAD
 PKG_VERSION:=3.10.0
+=======
+PKG_VERSION:=3.5.0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/thom311/libnl/releases/download/libnl$(subst .,_,$(PKG_VERSION))
+<<<<<<< HEAD
 PKG_HASH:=49b3e2235fdb58f5910bbb3ed0de8143b71ffc220571540502eb6c2471f204f5
 
 PKG_LICENSE:=LGPL-2.1
 PKG_LICENSE_FILES:=COPYING
 PKG_CPE_ID:=cpe:/a:libnl_project:libnl
+=======
+PKG_HASH:=352133ec9545da76f77e70ccb48c9d7e5324d67f6474744647a7ed382b5e05fa
+PKG_LICENSE:=LGPL-2.1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_INSTALL:=1
 PKG_FIXUP:=autoreconf
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=gc-sections
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/package.mk
 
 define Package/libnl/default
@@ -55,6 +76,7 @@ $(call Package/libnl/default)
   DEPENDS:=+libnl-route
 endef
 
+<<<<<<< HEAD
 define Package/libnl-cli
 $(call Package/libnl/default)
   TITLE:=CLI Netlink Library
@@ -65,6 +87,12 @@ define Package/libnl
 $(call Package/libnl/default)
   TITLE:=Full Netlink Library
   DEPENDS:=+libnl-genl +libnl-route +libnl-nf +libnl-cli
+=======
+define Package/libnl
+$(call Package/libnl/default)
+  TITLE:=Full Netlink Library
+  DEPENDS:=+libnl-genl +libnl-route +libnl-nf
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libnl-core/description
@@ -83,16 +111,23 @@ define Package/libnl-nf/description
  Netfilter Netlink Library Functions
 endef
 
+<<<<<<< HEAD
 define Package/libnl-cli/description
  CLI Netlink Library Functions
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/libnl/description
  Socket handling, connection management, sending and receiving of data,
  message construction and parsing, object caching system, etc.
 endef
 
+<<<<<<< HEAD
 TARGET_CFLAGS += $(FPIC)
+=======
+TARGET_CFLAGS += -ffunction-sections -fdata-sections $(FPIC)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 CONFIGURE_ARGS += \
 	--disable-debug
@@ -108,7 +143,10 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-genl-3.so $(1)/usr/lib/libnl-genl.so
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-nf-3.so $(1)/usr/lib/libnl-nf.so
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-route-3.so $(1)/usr/lib/libnl-route.so
+<<<<<<< HEAD
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-cli-3.so $(1)/usr/lib/libnl-cli.so
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libnl-core/install
@@ -131,11 +169,14 @@ define Package/libnl-nf/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-nf-3.so.* $(1)/usr/lib/
 endef
 
+<<<<<<< HEAD
 define Package/libnl-cli/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libnl-cli-3.so.* $(1)/usr/lib/
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/libnl/install
 	:
 endef
@@ -144,5 +185,8 @@ $(eval $(call BuildPackage,libnl-core))
 $(eval $(call BuildPackage,libnl-genl))
 $(eval $(call BuildPackage,libnl-route))
 $(eval $(call BuildPackage,libnl-nf))
+<<<<<<< HEAD
 $(eval $(call BuildPackage,libnl-cli))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,libnl))

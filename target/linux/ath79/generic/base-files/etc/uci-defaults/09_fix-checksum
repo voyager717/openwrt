@@ -21,7 +21,10 @@ dlink,dap-3320-a1|\
 dlink,dap-3662-a1)
 	fixwrgg
 	;;
+<<<<<<< HEAD
 dlink,dir-629-a1|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 qihoo,c301)
 	fix_seama_header
 	;;

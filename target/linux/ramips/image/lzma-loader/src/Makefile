@@ -23,7 +23,10 @@ FLASH_START	:=
 FLASH_OFFS	:=
 FLASH_MAX	:=
 PLATFORM	:=
+<<<<<<< HEAD
 SUBTARGET	:=
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CACHE_FLAGS	:=
 
 CC		:= $(CROSS_COMPILE)gcc
@@ -32,6 +35,11 @@ OBJCOPY		:= $(CROSS_COMPILE)objcopy
 OBJDUMP		:= $(CROSS_COMPILE)objdump
 
 
+<<<<<<< HEAD
+=======
+include $(PLATFORM).mk
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 BIN_FLAGS	:= -O binary -R .reginfo -R .note -R .comment -R .mdebug \
 		   -R .MIPS.abiflags -S
 
@@ -53,6 +61,7 @@ LDFLAGS		+= -flto -fwhole-program -Wl,-z,max-page-size=4096
 
 O_FORMAT 	= $(shell $(OBJDUMP) -i | head -2 | grep elf32)
 
+<<<<<<< HEAD
 OBJECTS		:= head.o loader.o cache.o board.o printf.o LzmaDecode.o
 
 ifeq ($(strip $(SUBTARGET)),)
@@ -74,6 +83,9 @@ endif
 ifeq ($(strip $(SUBTARGET)),rt3883)
 CFLAGS	+= -DSOC_RT3883
 endif
+=======
+OBJECTS		:= head.o loader.o cache.o board-$(PLATFORM).o printf.o LzmaDecode.o
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifneq ($(strip $(LOADER_DATA)),)
 OBJECTS		+= data.o

@@ -149,6 +149,11 @@ proto_vti6_init_config() {
 }
 
 [ -n "$INCLUDE_ONLY" ] || {
+<<<<<<< HEAD
 	[ -d /sys/module/ip_vti ] && add_protocol vti
 	[ -d /sys/module/ip6_vti ] && add_protocol vti6
+=======
+	[ -f /lib/modules/$(uname -r)/ip_vti.ko ] && add_protocol vti
+	[ -f /lib/modules/$(uname -r)/ip6_vti.ko ] && add_protocol vti6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

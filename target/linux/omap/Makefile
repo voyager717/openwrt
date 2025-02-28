@@ -7,12 +7,20 @@ include $(TOPDIR)/rules.mk
 ARCH:=arm
 BOARD:=omap
 BOARDNAME:=TI OMAP3/4/AM33xx
+<<<<<<< HEAD
 FEATURES:=usb usbgadget ext4 targz fpu audio display nand rootfs-part squashfs
 CPU_TYPE:=cortex-a8
 CPU_SUBTYPE:=vfpv3
 SUBTARGETS:=generic
 
 KERNEL_PATCHVER:=6.6
+=======
+FEATURES:=usb usbgadget ext4 targz fpu audio display nand squashfs
+CPU_TYPE:=cortex-a8
+CPU_SUBTYPE:=vfpv3
+
+KERNEL_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 KERNELNAME:=zImage dtbs
 

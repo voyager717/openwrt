@@ -1,4 +1,5 @@
 PKG_DRIVERS += \
+<<<<<<< HEAD
 	rtlwifi rtlwifi-pci rtlwifi-btcoexist rtlwifi-usb rtl8192c-common rtl8192d-common \
 	rtl8192ce rtl8192se rtl8192de rtl8192cu rtl8192du rtl8723-common rtl8723be \
 	rtl8723bs rtl8821ae rtl8xxxu rtw88 rtw88-pci rtw88-usb rtw88-sdio rtw88-8821c \
@@ -7,6 +8,15 @@ PKG_DRIVERS += \
 	rtw88-88xxa rtw88-8821a rtw88-8812a rtw88-8821au rtw88-8812au \
 	rtw88-8723du rtw89 rtw89-pci rtw89-8851be rtw89-8852ae rtw89-8852b-common \
 	rtw89-8852be rtw89-8852ce rtw89-8922ae
+=======
+	rtl8180 rtl8187 \
+	rtlwifi rtlwifi-pci rtlwifi-btcoexist rtlwifi-usb rtl8192c-common \
+	rtl8192ce rtl8192se rtl8192de rtl8192cu rtl8723bs rtl8821ae \
+	rtl8xxxu rtw88
+
+config-$(call config_package,rtl8180) += RTL8180
+config-$(call config_package,rtl8187) += RTL8187
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 config-$(call config_package,rtlwifi) += RTL_CARDS RTLWIFI
 config-$(call config_package,rtlwifi-pci) += RTLWIFI_PCI
@@ -15,9 +25,13 @@ config-$(call config_package,rtlwifi-usb) += RTLWIFI_USB
 config-$(call config_package,rtl8192c-common) += RTL8192C_COMMON
 config-$(call config_package,rtl8192ce) += RTL8192CE
 config-$(call config_package,rtl8192se) += RTL8192SE
+<<<<<<< HEAD
 config-$(call config_package,rtl8192d-common) += RTL8192D_COMMON
 config-$(call config_package,rtl8192de) += RTL8192DE
 config-$(call config_package,rtl8192du) += RTL8192DU
+=======
+config-$(call config_package,rtl8192de) += RTL8192DE
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(call config_package,rtl8192cu) += RTL8192CU
 config-$(call config_package,rtl8821ae) += RTL8821AE
 config-$(CONFIG_PACKAGE_RTLWIFI_DEBUG) += RTLWIFI_DEBUG
@@ -25,6 +39,7 @@ config-$(CONFIG_PACKAGE_RTLWIFI_DEBUG) += RTLWIFI_DEBUG
 config-$(call config_package,rtl8xxxu) += RTL8XXXU
 config-y += RTL8XXXU_UNTESTED
 
+<<<<<<< HEAD
 config-$(call config_package,rtl8723-common) += RTL8723_COMMON
 config-$(call config_package,rtl8723be) += RTL8723BE
 
@@ -68,6 +83,36 @@ config-$(call config_package,rtw89-8922ae) += RTW89_8922A RTW89_8922AE
 config-$(CONFIG_PACKAGE_RTW89_DEBUG) += RTW89_DEBUG
 config-$(CONFIG_PACKAGE_RTW89_DEBUGFS) += RTW89_DEBUGFS
 config-$(CONFIG_PACKAGE_RTW89_DEBUGMSG) += RTW89_DEBUGMSG
+=======
+config-$(call config_package,rtl8723bs) += RTL8723BS
+config-y += STAGING
+
+config-$(call config_package,rtw88) += RTW88 RTW88_CORE RTW88_PCI
+config-y += RTW88_8822BE RTW88_8822CE RTW88_8723DE
+
+define KernelPackage/rtl818x/Default
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Realtek Drivers for RTL818x devices
+  URL:=https://wireless.wiki.kernel.org/en/users/drivers/rtl8187
+  DEPENDS+= +kmod-eeprom-93cx6 +kmod-mac80211
+endef
+
+define KernelPackage/rtl8180
+  $(call KernelPackage/rtl818x/Default)
+  DEPENDS+= @PCI_SUPPORT
+  TITLE+= (RTL8180 PCI)
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtl818x/rtl8180/rtl818x_pci.ko
+  AUTOLOAD:=$(call AutoProbe,rtl818x_pci)
+endef
+
+define KernelPackage/rtl8187
+$(call KernelPackage/rtl818x/Default)
+  DEPENDS+= @USB_SUPPORT +kmod-usb-core
+  TITLE+= (RTL8187 USB)
+  FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtl818x/rtl8187/rtl8187.ko
+  AUTOLOAD:=$(call AutoProbe,rtl8187)
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/rtlwifi/config
 	config PACKAGE_RTLWIFI_DEBUG
@@ -81,7 +126,11 @@ endef
 define KernelPackage/rtlwifi
   $(call KernelPackage/mac80211/Default)
   TITLE:=Realtek common driver part
+<<<<<<< HEAD
   DEPENDS+= @(PCI_SUPPORT||USB_SUPPORT) +kmod-mac80211
+=======
+  DEPENDS+= @(PCI_SUPPORT||USB_SUPPORT) +kmod-mac80211 +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtlwifi/rtlwifi.ko
   HIDDEN:=1
 endef
@@ -137,6 +186,7 @@ define KernelPackage/rtl8192se
   AUTOLOAD:=$(call AutoProbe,rtl8192se)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/rtl8192d-common
   $(call KernelPackage/mac80211/Default)
   TITLE:=Realtek RTL8192DE/RTL8192DU common support module
@@ -149,10 +199,17 @@ define KernelPackage/rtl8192de
   $(call KernelPackage/mac80211/Default)
   TITLE:=Realtek RTL8192DE/RTL8188DE support
   DEPENDS+= +kmod-rtlwifi-pci +kmod-rtl8192d-common +rtl8192de-firmware
+=======
+define KernelPackage/rtl8192de
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Realtek RTL8192DE/RTL8188DE support
+  DEPENDS+= +kmod-rtlwifi-pci +rtl8192de-firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= $(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtlwifi/rtl8192de/rtl8192de.ko
   AUTOLOAD:=$(call AutoProbe,rtl8192de)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/rtl8192du
   $(call KernelPackage/mac80211/Default)
   TITLE:=Realtek RTL8192DU support
@@ -161,6 +218,8 @@ define KernelPackage/rtl8192du
   AUTOLOAD:=$(call AutoProbe,rtl8192du)
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/rtl8192cu
   $(call KernelPackage/mac80211/Default)
   TITLE:=Realtek RTL8192CU/RTL8188CU support
@@ -209,6 +268,7 @@ define KernelPackage/rtl8xxxu/description
   Please report your results!
 endef
 
+<<<<<<< HEAD
 define KernelPackage/rtw88/config
 	config PACKAGE_RTW88_DEBUG
 		bool "Realtek wireless debugging (rtw88)"
@@ -435,6 +495,22 @@ define KernelPackage/rtl8723be
   DEPENDS+= +kmod-rtlwifi-btcoexist +kmod-rtlwifi-pci +kmod-rtl8723-common +rtl8723be-firmware
   FILES:= $(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtlwifi/rtl8723be/rtl8723be.ko
   AUTOLOAD:=$(call AutoProbe,rtl8723be)
+=======
+define KernelPackage/rtw88
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Realtek RTL8822BE/RTL8822CE/RTL8723DE
+  DEPENDS+= @(PCI_SUPPORT) +kmod-mac80211 +@DRIVER_11AC_SUPPORT +@DRIVER_11N_SUPPORT
+  FILES:=\
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8822be.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8822b.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8822ce.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8822c.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8723de.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_8723d.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_core.ko \
+	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw88/rtw88_pci.ko
+  AUTOLOAD:=$(call AutoProbe,rtw88_8822be rtw88_8822ce rtw88_8723de)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/rtl8723bs
@@ -450,6 +526,7 @@ define KernelPackage/rtl8723bs/description
  on the 1st gen Intel Compute Stick, the CHIP and many other Intel Atom and ARM
  based devices.
 endef
+<<<<<<< HEAD
 
 define KernelPackage/rtw89/config
 	config PACKAGE_RTW89_DEBUG
@@ -550,3 +627,5 @@ define KernelPackage/rtw89-8922ae
 	$(PKG_BUILD_DIR)/drivers/net/wireless/realtek/rtw89/rtw89_8922ae.ko
   AUTOLOAD:=$(call AutoProbe,rtw89_8922ae)
 endef
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

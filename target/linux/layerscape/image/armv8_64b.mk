@@ -5,12 +5,21 @@
 define Device/Default
   PROFILES := Default
   IMAGES := firmware.bin sysupgrade.bin
+<<<<<<< HEAD
   DEVICE_DTS_DIR := $(DTS_DIR)/freescale
   DEVICE_DTS = $(subst _,-,$(1))
   FILESYSTEMS := squashfs
   KERNEL := kernel-bin | gzip | uImage gzip
   KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(DEVICE_DTS_DIR)/$$(DEVICE_DTS).dtb
   KERNEL_LOADADDR := 0x80000000
+=======
+  FILESYSTEMS := squashfs
+  KERNEL := kernel-bin | gzip | uImage gzip
+  KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+  KERNEL_LOADADDR := 0x80080000
+  KERNEL_ENTRY_POINT := 0x80080000
+  DEVICE_DTS = freescale/$(subst _,-,$(1))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 64m
   IMAGE/sysupgrade.bin = \
     ls-append-dtb $$(DEVICE_DTS) | pad-to 1M | \
@@ -20,7 +29,11 @@ define Device/Default
 endef
 
 define Device/fsl-sdboot
+<<<<<<< HEAD
   KERNEL = kernel-bin | gzip | fit gzip $$(DEVICE_DTS_DIR)/$$(DEVICE_DTS).dtb
+=======
+  KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := sdcard.img.gz sysupgrade.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
@@ -30,7 +43,11 @@ define Device/fsl_ls1012a-frdm
   DEVICE_MODEL := FRDM-LS1012A
   DEVICE_PACKAGES += \
     layerscape-ppfe \
+<<<<<<< HEAD
     ~trusted-firmware-a-ls1012a-frdm \
+=======
+    tfa-ls1012a-frdm \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     kmod-ppfe
   BLOCKSIZE := 256KiB
   IMAGE/firmware.bin := \
@@ -46,7 +63,12 @@ define Device/fsl_ls1012a-frdm
     append-kernel | pad-to $$(BLOCKSIZE) | \
     append-rootfs | pad-rootfs | \
     check-size $(LS_SYSUPGRADE_IMAGE_SIZE) | append-metadata
+<<<<<<< HEAD
   KERNEL := kernel-bin | gzip | fit gzip $$(DEVICE_DTS_DIR)/$$(DEVICE_DTS).dtb
+=======
+  KERNEL := kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+  KERNEL_INITRAMFS := kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += fsl_ls1012a-frdm
 
@@ -56,7 +78,11 @@ define Device/fsl_ls1012a-rdb
   DEVICE_MODEL := LS1012A-RDB
   DEVICE_PACKAGES += \
     layerscape-ppfe \
+<<<<<<< HEAD
     ~trusted-firmware-a-ls1012a-rdb \
+=======
+    tfa-ls1012a-rdb \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     kmod-hwmon-ina2xx \
     kmod-iio-fxas21002c-i2c \
     kmod-iio-fxos8700-i2c \
@@ -80,9 +106,15 @@ define Device/fsl_ls1012a-frwy-sdboot
   DEVICE_MODEL := FRWY-LS1012A
   DEVICE_PACKAGES += \
     layerscape-ppfe \
+<<<<<<< HEAD
     ~trusted-firmware-a-ls1012a-frwy-sdboot \
     kmod-ppfe
   DEVICE_DTS := fsl-ls1012a-frwy
+=======
+    tfa-ls1012a-frwy-sdboot \
+    kmod-ppfe
+  DEVICE_DTS := freescale/fsl-ls1012a-frwy
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += firmware.bin
   IMAGE/firmware.bin := \
     ls-clean | \
@@ -99,6 +131,7 @@ define Device/fsl_ls1012a-frwy-sdboot
 endef
 TARGET_DEVICES += fsl_ls1012a-frwy-sdboot
 
+<<<<<<< HEAD
 define Device/fsl_ls1028a-rdb
   DEVICE_VENDOR := NXP
   DEVICE_MODEL := LS1028A-RDB
@@ -145,17 +178,29 @@ define Device/fsl_ls1028a-rdb-sdboot
 endef
 TARGET_DEVICES += fsl_ls1028a-rdb-sdboot
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/fsl_ls1043a-rdb
   $(Device/fix-sysupgrade)
   DEVICE_VENDOR := NXP
   DEVICE_MODEL := LS1043A-RDB
   DEVICE_VARIANT := Default
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1043a-rdb \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
     kmod-hwmon-lm90
+=======
+    layerscape-fman \
+    tfa-ls1043a-rdb \
+    fmc fmc-eth-config \
+    kmod-ahci-qoriq \
+    kmod-hwmon-ina2xx \
+    kmod-hwmon-lm90
+  DEVICE_DTS := freescale/fsl-ls1043a-rdb-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/firmware.bin := \
     ls-clean | \
     ls-append $(1)-bl2.pbl | pad-to 1M | \
@@ -175,12 +220,22 @@ define Device/fsl_ls1043a-rdb-sdboot
   DEVICE_MODEL := LS1043A-RDB
   DEVICE_VARIANT := SD Card Boot
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1043a-rdb-sdboot \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
     kmod-hwmon-lm90
   DEVICE_DTS := fsl-ls1043a-rdb
+=======
+    layerscape-fman \
+    tfa-ls1043a-rdb-sdboot \
+    fmc fmc-eth-config \
+    kmod-ahci-qoriq \
+    kmod-hwmon-ina2xx \
+    kmod-hwmon-lm90
+  DEVICE_DTS := freescale/fsl-ls1043a-rdb-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sdcard.img.gz := \
     ls-clean | \
     ls-append-sdhead $(1) | pad-to 4K | \
@@ -198,8 +253,14 @@ define Device/fsl_ls1046a-frwy
   DEVICE_MODEL := FRWY-LS1046A
   DEVICE_VARIANT := Default
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1046a-frwy
+=======
+    layerscape-fman \
+    tfa-ls1046a-frwy
+  DEVICE_DTS := freescale/fsl-ls1046a-frwy-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/firmware.bin := \
     ls-clean | \
     ls-append $(1)-bl2.pbl | pad-to 1M | \
@@ -218,9 +279,15 @@ define Device/fsl_ls1046a-frwy-sdboot
   DEVICE_MODEL := FRWY-LS1046A
   DEVICE_VARIANT := SD Card Boot
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1046a-frwy-sdboot
   DEVICE_DTS := fsl-ls1046a-frwy
+=======
+    layerscape-fman \
+    tfa-ls1046a-frwy-sdboot
+  DEVICE_DTS := freescale/fsl-ls1046a-frwy-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sdcard.img.gz := \
     ls-clean | \
     ls-append-sdhead $(1) | pad-to 4K | \
@@ -239,11 +306,21 @@ define Device/fsl_ls1046a-rdb
   DEVICE_MODEL := LS1046A-RDB
   DEVICE_VARIANT := Default
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1046a-rdb \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
     kmod-hwmon-lm90
+=======
+    layerscape-fman \
+    tfa-ls1046a-rdb \
+    fmc fmc-eth-config \
+    kmod-ahci-qoriq \
+    kmod-hwmon-ina2xx \
+    kmod-hwmon-lm90
+  DEVICE_DTS := freescale/fsl-ls1046a-rdb-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/firmware.bin := \
     ls-clean | \
     ls-append $(1)-bl2.pbl | pad-to 1M | \
@@ -263,12 +340,22 @@ define Device/fsl_ls1046a-rdb-sdboot
   DEVICE_MODEL := LS1046A-RDB
   DEVICE_VARIANT := SD Card Boot
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-fman \
     ~trusted-firmware-a-ls1046a-rdb-sdboot \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
     kmod-hwmon-lm90
   DEVICE_DTS := fsl-ls1046a-rdb
+=======
+    layerscape-fman \
+    tfa-ls1046a-rdb-sdboot \
+    fmc fmc-eth-config \
+    kmod-ahci-qoriq \
+    kmod-hwmon-ina2xx \
+    kmod-hwmon-lm90
+  DEVICE_DTS := freescale/fsl-ls1046a-rdb-sdk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sdcard.img.gz := \
     ls-clean | \
     ls-append-sdhead $(1) | pad-to 4K | \
@@ -287,9 +374,15 @@ define Device/fsl_ls1088a-rdb
   DEVICE_MODEL := LS1088A-RDB
   DEVICE_VARIANT := Default
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-mc \
     ~layerscape-dpl \
     ~trusted-firmware-a-ls1088a-rdb \
+=======
+    layerscape-mc \
+    layerscape-dpl \
+    tfa-ls1088a-rdb \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     restool \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
@@ -315,14 +408,24 @@ define Device/fsl_ls1088a-rdb-sdboot
   DEVICE_MODEL := LS1088A-RDB
   DEVICE_VARIANT := SD Card Boot
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-mc \
     ~layerscape-dpl \
     ~trusted-firmware-a-ls1088a-rdb-sdboot \
+=======
+    layerscape-mc \
+    layerscape-dpl \
+    tfa-ls1088a-rdb-sdboot \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     restool \
     kmod-ahci-qoriq \
     kmod-hwmon-ina2xx \
     kmod-hwmon-lm90
+<<<<<<< HEAD
   DEVICE_DTS := fsl-ls1088a-rdb
+=======
+  DEVICE_DTS := freescale/fsl-ls1088a-rdb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sdcard.img.gz := \
     ls-clean | \
     ls-append-sdhead $(1) | pad-to 4K | \
@@ -342,9 +445,15 @@ define Device/fsl_ls2088a-rdb
   DEVICE_VENDOR := NXP
   DEVICE_MODEL := LS2088ARDB
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-mc \
     ~layerscape-dpl \
     ~trusted-firmware-a-ls2088a-rdb \
+=======
+    layerscape-mc \
+    layerscape-dpl \
+    tfa-ls2088a-rdb \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     restool \
     kmod-ahci-qoriq
   IMAGE/firmware.bin := \
@@ -366,10 +475,17 @@ define Device/fsl_lx2160a-rdb
   DEVICE_MODEL := LX2160A-RDB
   DEVICE_VARIANT := Rev2.0 silicon
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-mc \
     ~layerscape-dpl \
     ~layerscape-ddr-phy \
     ~trusted-firmware-a-lx2160a-rdb \
+=======
+    layerscape-mc \
+    layerscape-dpl \
+    layerscape-ddr-phy \
+    tfa-lx2160a-rdb \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     restool
   IMAGE/firmware.bin := \
     ls-clean | \
@@ -392,12 +508,21 @@ define Device/fsl_lx2160a-rdb-sdboot
   DEVICE_MODEL := LX2160A-RDB
   DEVICE_VARIANT := Rev2.0 silicon SD Card Boot
   DEVICE_PACKAGES += \
+<<<<<<< HEAD
     ~layerscape-mc \
     ~layerscape-dpl \
     ~layerscape-ddr-phy \
     ~trusted-firmware-a-lx2160a-rdb-sdboot \
     restool
   DEVICE_DTS := fsl-lx2160a-rdb
+=======
+    layerscape-mc \
+    layerscape-dpl \
+    layerscape-ddr-phy \
+    tfa-lx2160a-rdb-sdboot \
+    restool
+  DEVICE_DTS := freescale/fsl-lx2160a-rdb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sdcard.img.gz := \
     ls-clean | \
     ls-append-sdhead $(1) | pad-to 4K | \
@@ -413,6 +538,7 @@ define Device/fsl_lx2160a-rdb-sdboot
 endef
 TARGET_DEVICES += fsl_lx2160a-rdb-sdboot
 
+<<<<<<< HEAD
 define Device/traverse_ten64_mtd
   DEVICE_VENDOR := Traverse
   DEVICE_MODEL := Ten64 (NAND boot)
@@ -444,3 +570,36 @@ define Device/traverse_ten64_mtd
 endef
 TARGET_DEVICES += traverse_ten64_mtd
 
+=======
+define Device/traverse_ls1043
+  DEVICE_VENDOR := Traverse
+  DEVICE_MODEL := LS1043 Boards
+  KERNEL_NAME := Image
+  KERNEL_SUFFIX := -kernel.itb
+  KERNEL_INSTALL := 1
+  FDT_LOADADDR = 0x90000000
+  FILESYSTEMS := ubifs
+  MKUBIFS_OPTS := -m 1 -e 262016 -c 128
+  DEVICE_PACKAGES += \
+    layerscape-fman \
+    uboot-envtools \
+    kmod-i2c-mux-pca954x \
+    kmod-hwmon-core \
+    kmod-gpio-pca953x kmod-input-gpio-keys-polled \
+    kmod-rtc-isl1208
+  DEVICE_DESCRIPTION = \
+    Build images for Traverse LS1043 boards. This generates a single image \
+    capable of booting on any of the boards in this family.
+  DEVICE_DTS = freescale/traverse-ls1043s
+  DEVICE_DTS_DIR = $(LINUX_DIR)/arch/arm64/boot/dts
+  DEVICE_DTS_CONFIG = ls1043s
+  KERNEL := kernel-bin | gzip | traverse-fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb $$(FDT_LOADADDR)
+  KERNEL_INITRAMFS := kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb $$(FDT_LOADADDR)
+  IMAGES = root sysupgrade.bin
+  IMAGE/root = append-rootfs
+  IMAGE/sysupgrade.bin = sysupgrade-tar | append-metadata
+  MKUBIFS_OPTS := -m 2048 -e 124KiB -c 4096
+  SUPPORTED_DEVICES := traverse,ls1043s traverse,ls1043v
+endef
+TARGET_DEVICES += traverse_ls1043
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

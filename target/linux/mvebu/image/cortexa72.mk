@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define Device/FitImage
   KERNEL_SUFFIX := -uImage.itb
   KERNEL = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(DEVICE_DTS).dtb
@@ -20,6 +21,8 @@ define Device/globalscale_mochabin
 endef
 TARGET_DEVICES += globalscale_mochabin
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/marvell_armada7040-db
   $(call Device/Default-arm64)
   DEVICE_VENDOR := Marvell
@@ -66,6 +69,7 @@ define Device/marvell_macchiatobin-singleshot
 endef
 TARGET_DEVICES += marvell_macchiatobin-singleshot
 
+<<<<<<< HEAD
 define Device/mikrotik_rb5009
   $(call Device/Default-arm64)
   $(Device/NAND-128K)
@@ -96,11 +100,20 @@ define Device/iei_puzzle-m901
   DEVICE_VENDOR := iEi
   DEVICE_MODEL := Puzzle-M901
   DEVICE_PACKAGES += kmod-rtc-ds1307
+=======
+define Device/iei_puzzle-m901
+  $(call Device/Default-arm64)
+  DEVICE_VENDOR := iEi
+  DEVICE_MODEL := Puzzle-M901
+  SOC := cn9131
+  IMAGE/sdcard.img.gz := boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += iei_puzzle-m901
 
 define Device/iei_puzzle-m902
   $(call Device/Default-arm64)
+<<<<<<< HEAD
   SOC := cn9132
   DEVICE_VENDOR := iEi
   DEVICE_MODEL := Puzzle-M902
@@ -117,3 +130,11 @@ define Device/solidrun_clearfog-pro
   BOOT_SCRIPT := clearfog-pro
 endef
 TARGET_DEVICES += solidrun_clearfog-pro
+=======
+  DEVICE_VENDOR := iEi
+  DEVICE_MODEL := Puzzle-M902
+  SOC := cn9132
+  IMAGE/sdcard.img.gz := boot-img-ext4 | sdcard-img-ext4 | gzip | append-metadata
+endef
+TARGET_DEVICES += iei_puzzle-m902
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

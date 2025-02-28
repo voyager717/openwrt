@@ -63,6 +63,14 @@
 #define MD5_HMAC_DBN_TEMP_SIZE  1024 // size in dword, needed for dbn workaround 
 #define HASH_START   IFX_HASH_CON
 
+<<<<<<< HEAD
+=======
+static spinlock_t lock;
+#define CRTCL_SECT_INIT        spin_lock_init(&lock)
+#define CRTCL_SECT_START       spin_lock_irqsave(&lock, flag)
+#define CRTCL_SECT_END         spin_unlock_irqrestore(&lock, flag)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 //#define CRYPTO_DEBUG
 #ifdef CRYPTO_DEBUG
 extern char debug_level;
@@ -79,6 +87,7 @@ struct md5_hmac_ctx {
     u32 block[MD5_BLOCK_WORDS];
     u64 byte_count;
     u32 dbn;
+<<<<<<< HEAD
     int started;
     unsigned int keylen;
     struct shash_desc *desc;
@@ -88,6 +97,26 @@ struct md5_hmac_ctx {
 extern int disable_deudma;
 
 static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final);
+=======
+    unsigned int keylen;
+};
+
+static u32 temp[MD5_HMAC_DBN_TEMP_SIZE];
+
+extern int disable_deudma;
+
+/*! \fn static u32 endian_swap(u32 input)
+ *  \ingroup IFX_MD5_HMAC_FUNCTIONS
+ *  \brief perform dword level endian swap   
+ *  \param input value of dword that requires to be swapped  
+*/                                 
+static u32 endian_swap(u32 input)
+{
+    u8 *ptr = (u8 *)&input;
+    
+    return ((ptr[3] << 24) | (ptr[2] << 16) | (ptr[1] << 8) | ptr[0]);     
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*! \fn static void md5_hmac_transform(struct crypto_tfm *tfm, u32 const *in)
  *  \ingroup IFX_MD5_HMAC_FUNCTIONS
@@ -99,6 +128,7 @@ static void md5_hmac_transform(struct shash_desc *desc, u32 const *in)
 {
     struct md5_hmac_ctx *mctx = crypto_shash_ctx(desc->tfm);
 
+<<<<<<< HEAD
     if ( ((mctx->dbn<<4)+1) > MD5_HMAC_DBN_TEMP_SIZE )
     {
         //printk("MD5_HMAC_DBN_TEMP_SIZE exceeded\n");
@@ -107,6 +137,16 @@ static void md5_hmac_transform(struct shash_desc *desc, u32 const *in)
 
     memcpy(&mctx->temp[mctx->dbn], in, 64); //dbn workaround
     mctx->dbn += 1;
+=======
+    memcpy(&temp[mctx->dbn<<4], in, 64); //dbn workaround
+    mctx->dbn += 1;
+    
+    if ( (mctx->dbn<<4) > MD5_HMAC_DBN_TEMP_SIZE )
+    {
+        printk("MD5_HMAC_DBN_TEMP_SIZE exceeded\n");
+    }
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 /*! \fn int md5_hmac_setkey(struct crypto_tfm *tfm, const u8 *key, unsigned int keylen)
@@ -119,6 +159,7 @@ static void md5_hmac_transform(struct shash_desc *desc, u32 const *in)
 static int md5_hmac_setkey(struct crypto_shash *tfm, const u8 *key, unsigned int keylen) 
 {
     struct md5_hmac_ctx *mctx = crypto_shash_ctx(tfm);
+<<<<<<< HEAD
     int err;
     //printk("copying keys to context with length %d\n", keylen);
 
@@ -144,21 +185,53 @@ static int md5_hmac_setkey(struct crypto_shash *tfm, const u8 *key, unsigned int
     return 0;
 }
 
+=======
+    volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
+    //printk("copying keys to context with length %d\n", keylen);
+
+    if (keylen > MAX_HASH_KEYLEN) {
+	printk("Key length more than what DEU hash can handle\n");
+	return -EINVAL;
+    }
+ 
+
+    hash->KIDX |= 0x80000000; // reset all 16 words of the key to '0'
+    memcpy(&mctx->key, key, keylen);
+    mctx->keylen = keylen;
+
+    return 0;
+
+}
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn int md5_hmac_setkey_hw(const u8 *key, unsigned int keylen)
  *  \ingroup IFX_MD5_HMAC_FUNCTIONS
  *  \brief sets md5 hmac key into the hardware registers  
  *  \param key input key  
  *  \param keylen key length greater than 64 bytes IS NOT SUPPORTED  
 */  
+<<<<<<< HEAD
 static int md5_hmac_setkey_hw(const u8 *key, unsigned int keylen)
 {
     volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
+=======
+                               
+static int md5_hmac_setkey_hw(const u8 *key, unsigned int keylen)
+{
+    volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START;
+    unsigned long flag;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     int i, j;
     u32 *in_key = (u32 *)key;        
 
     //printk("\nsetkey keylen: %d\n key: ", keylen);
     
+<<<<<<< HEAD
     hash->KIDX |= 0x80000000; // reset all 16 words of the key to '0'
+=======
+    CRTCL_SECT_START;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     j = 0;
     for (i = 0; i < keylen; i+=4)
     {
@@ -168,6 +241,10 @@ static int md5_hmac_setkey_hw(const u8 *key, unsigned int keylen)
          asm("sync");
          j++;
     }
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_END;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     return 0;
 }
@@ -184,11 +261,19 @@ static int md5_hmac_init(struct shash_desc *desc)
     
 
     mctx->dbn = 0; //dbn workaround
+<<<<<<< HEAD
     mctx->started = 0;
     mctx->byte_count = 0;
 
     return 0;
 }
+=======
+    md5_hmac_setkey_hw(mctx->key, mctx->keylen);
+
+    return 0;
+}
+EXPORT_SYMBOL(md5_hmac_init);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     
 /*! \fn void md5_hmac_update(struct crypto_tfm *tfm, const u8 *data, unsigned int len)
  *  \ingroup IFX_MD5_HMAC_FUNCTIONS
@@ -227,15 +312,24 @@ static int md5_hmac_update(struct shash_desc *desc, const u8 *data, unsigned int
     memcpy(mctx->block, data, len);
     return 0;    
 }
+<<<<<<< HEAD
 
 /*! \fn static int md5_hmac_final(struct crypto_tfm *tfm, u8 *out)
  *  \ingroup IFX_MD5_HMAC_FUNCTIONS
  *  \brief call md5_hmac_final_impl with hash_final true   
+=======
+EXPORT_SYMBOL(md5_hmac_update);
+
+/*! \fn void md5_hmac_final(struct crypto_tfm *tfm, u8 *out)
+ *  \ingroup IFX_MD5_HMAC_FUNCTIONS
+ *  \brief compute final md5 hmac value   
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  *  \param tfm linux crypto algo transform  
  *  \param out final md5 hmac output value  
 */                                 
 static int md5_hmac_final(struct shash_desc *desc, u8 *out)
 {
+<<<<<<< HEAD
     return md5_hmac_final_impl(desc, out, true);
 }
 
@@ -248,6 +342,8 @@ static int md5_hmac_final(struct shash_desc *desc, u8 *out)
 */                                 
 static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final)
 {
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     struct md5_hmac_ctx *mctx = crypto_shash_ctx(desc->tfm);
     const unsigned int offset = mctx->byte_count & 0x3f;
     char *p = (char *)mctx->block + offset;
@@ -256,6 +352,7 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
     unsigned long flag;
     int i = 0;
     int dbn;
+<<<<<<< HEAD
     u32 *in = mctx->temp[0];
 
     if (hash_final) {
@@ -286,6 +383,29 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
     } else {
        hashs->DBN = mctx->dbn + 5;
     }
+=======
+    u32 *in = &temp[0];
+
+
+    *p++ = 0x80;
+    if (padding < 0) {
+        memset(p, 0x00, padding + sizeof (u64));
+        md5_hmac_transform(desc, mctx->block);
+        p = (char *)mctx->block;
+        padding = 56;
+    }
+
+    memset(p, 0, padding);
+    mctx->block[14] = endian_swap((mctx->byte_count + 64) << 3); // need to add 512 bit of the IPAD operation 
+    mctx->block[15] = 0x00000000;
+
+    md5_hmac_transform(desc, mctx->block);
+
+    CRTCL_SECT_START;
+
+    //printk("\ndbn = %d\n", mctx->dbn); 
+    hashs->DBN = mctx->dbn;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     asm("sync");
     
     *IFX_HASH_CON = 0x0703002D; //khs, go, init, ndc, endi, kyue, hmen, md5 	
@@ -295,6 +415,7 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
         // this will not take long
     }
 
+<<<<<<< HEAD
     if (mctx->started) {
         hashs->D1R = *((u32 *) mctx->hash + 0);
         hashs->D2R = *((u32 *) mctx->hash + 1);
@@ -304,6 +425,8 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
         mctx->started = 1;
     }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     for (dbn = 0; dbn < mctx->dbn; dbn++)
     {
         for (i = 0; i < 16; i++) {
@@ -321,12 +444,20 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
         in += 16;
 }
 
+<<<<<<< HEAD
 #if 1
     if (hash_final) {
         //wait for digest ready
         while (! hashs->controlr.DGRY) {
             // this will not take long
         }
+=======
+
+#if 1
+    //wait for digest ready
+    while (! hashs->controlr.DGRY) {
+        // this will not take long
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 #endif
 
@@ -334,6 +465,7 @@ static int md5_hmac_final_impl(struct shash_desc *desc, u8 *out, bool hash_final
     *((u32 *) out + 1) = hashs->D2R;
     *((u32 *) out + 2) = hashs->D3R;
     *((u32 *) out + 3) = hashs->D4R;
+<<<<<<< HEAD
 
     CRTCL_SECT_HASH_END;
 
@@ -373,10 +505,31 @@ static void md5_hmac_exit_tfm(struct crypto_tfm *tfm)
     kfree(mctx->temp);
     kfree(mctx->desc);
 }
+=======
+    *((u32 *) out + 4) = hashs->D5R;
+
+    /* reset the context after we finish with the hash */
+    mctx->byte_count = 0;
+    memset(&mctx->hash[0], 0, sizeof(MD5_HASH_WORDS));
+    memset(&mctx->block[0], 0, sizeof(MD5_BLOCK_WORDS));
+    memset(&temp[0], 0, MD5_HMAC_DBN_TEMP_SIZE);
+
+    CRTCL_SECT_END;
+
+
+   return 0;
+}
+
+EXPORT_SYMBOL(md5_hmac_final);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /* 
  * \brief MD5_HMAC function mappings
 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static struct shash_alg ifxdeu_md5_hmac_alg = {
     .digestsize         =       MD5_DIGEST_SIZE,
     .init               =       md5_hmac_init,
@@ -388,12 +541,19 @@ static struct shash_alg ifxdeu_md5_hmac_alg = {
         .cra_name       =       "hmac(md5)",
         .cra_driver_name=       "ifxdeu-md5_hmac",
         .cra_priority   =       400,
+<<<<<<< HEAD
         .cra_ctxsize    =       sizeof(struct md5_hmac_ctx),
         .cra_flags      =       CRYPTO_ALG_TYPE_HASH | CRYPTO_ALG_KERN_DRIVER_ONLY,
         .cra_blocksize  =       MD5_HMAC_BLOCK_SIZE,
         .cra_module     =       THIS_MODULE,
         .cra_init       =       md5_hmac_init_tfm,
         .cra_exit       =       md5_hmac_exit_tfm,
+=======
+        .cra_ctxsize    =	sizeof(struct md5_hmac_ctx),
+        .cra_flags      =       CRYPTO_ALG_TYPE_HASH,
+        .cra_blocksize  =       MD5_HMAC_BLOCK_SIZE,
+        .cra_module     =       THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
 };
 
@@ -410,6 +570,11 @@ int ifxdeu_init_md5_hmac (void)
     if ((ret = crypto_register_shash(&ifxdeu_md5_hmac_alg)))
         goto md5_hmac_err;
 
+<<<<<<< HEAD
+=======
+    CRTCL_SECT_INIT;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     printk (KERN_NOTICE "IFX DEU MD5_HMAC initialized%s.\n", disable_deudma ? "" : " (DMA)");
     return ret;
 
@@ -426,3 +591,8 @@ void ifxdeu_fini_md5_hmac (void)
 {
     crypto_unregister_shash(&ifxdeu_md5_hmac_alg);
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

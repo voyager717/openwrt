@@ -1,6 +1,10 @@
 --- a/tc/Makefile
 +++ b/tc/Makefile
+<<<<<<< HEAD
 @@ -107,6 +107,9 @@ CFLAGS += -DCONFIG_GACT -DCONFIG_GACT_PR
+=======
+@@ -128,6 +128,9 @@ CFLAGS += -DCONFIG_GACT -DCONFIG_GACT_PR
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  ifneq ($(IPT_LIB_DIR),)
  	CFLAGS += -DIPT_LIB_DIR=\"$(IPT_LIB_DIR)\"
  endif

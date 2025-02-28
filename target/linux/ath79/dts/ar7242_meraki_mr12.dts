@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "meraki,mr12", "qca,ar7242";
@@ -17,6 +20,16 @@
 		led-upgrade = &led_power_orange;
 	};
 
+<<<<<<< HEAD
+=======
+	extosc: ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-output-names = "ref";
+		clock-frequency = <40000000>;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	leds {
 		compatible = "gpio-leds";
 
@@ -41,21 +54,33 @@
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_orange: power_orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 16 GPIO_ACTIVE_LOW>;
 			panic-indicator;
 		};
 
 		led_power_green: power_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -74,6 +99,7 @@
 &pcie {
 	status = "okay";
 
+<<<<<<< HEAD
 	wifi@0,0 {
 		compatible = "pci168c,002a";
 		reg = <0x0000 0 0 0 0>;
@@ -83,6 +109,21 @@
 	};
 };
 
+=======
+	wifi@0,0,0 {
+		compatible = "pci168c,002a";
+		reg = <0x0000 0 0 0 0>;
+		qca,no-eeprom;
+		mtd-mac-address = <&config 0x66>;
+		mtd-mac-address-increment = <1>;
+	};
+};
+
+&pll {
+	clocks = <&extosc>;
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &mdio0 {
 	status = "okay";
 
@@ -94,8 +135,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_config_66 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&config 0x66>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	pll-data = <0x02000000 0x00000101 0x00001313>;
 
@@ -110,8 +155,12 @@
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_config_66 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&config 0x66>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -143,6 +192,7 @@
 				label = "config";
 				reg = <0x80000 0x20000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -155,6 +205,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@a0000 {

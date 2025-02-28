@@ -7,10 +7,13 @@
 	model = "Youku YK-L1";
 };
 
+<<<<<<< HEAD
 &flash0 {
 	broken-flash-reset;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &firmware {
 	reg = <0x50000 0x1fb0000>;
 };

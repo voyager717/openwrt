@@ -4,11 +4,18 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
 	compatible = "zyxel,wap6805", "mediatek,mt7621-soc";
 	model = "Zyxel WAP6805";
+=======
+
+/ {
+	compatible = "zyxel,wap6805", "mediatek,mt7621-soc";
+	model = "ZyXEL WAP6805";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	aliases {
 		led-boot = &led_status_green;
@@ -22,8 +29,12 @@
 		compatible = "gpio-leds";
 
 		led_status_red: status_red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_HIGH>;
 		};
 
@@ -33,8 +44,12 @@
 		};
 
 		led_status_green: status_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -76,6 +91,7 @@
 			read-only;
 		};
 
+<<<<<<< HEAD
 		partition@200000 {
 			label = "Factory";
 			reg = <0x200000 0x100000>;
@@ -94,6 +110,12 @@
 					reg = <0xe000 0x6>;
 				};
 			};
+=======
+		factory: partition@200000 {
+			label = "Factory";
+			reg = <0x200000 0x100000>;
+			read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@300000 {
@@ -140,14 +162,22 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &gmac1 {

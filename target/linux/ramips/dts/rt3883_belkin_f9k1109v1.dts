@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include "rt3883.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/leds/common.h>
+=======
+#include "rt3883_belkin_f9k110x.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "belkin,f9k1109v1", "ralink,rt3883-soc";
@@ -45,20 +49,33 @@
 		};
 
 		wps_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
 		};
 
 		wps_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -72,6 +89,7 @@
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
+<<<<<<< HEAD
 
 	rtl8367b {
 		compatible = "realtek,rtl8367b";
@@ -84,12 +102,18 @@
 &ehci {
 	status = "okay";
 
+=======
+};
+
+&ehci {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ehci_port2: port@2 {
 		reg = <2>;
 		#trigger-source-cells = <0>;
 	};
 };
 
+<<<<<<< HEAD
 &ethernet {
 	port@0 {
 		mediatek,fixed-link = <1000 1 1 1>;
@@ -100,11 +124,15 @@
 &ohci {
 	status = "okay";
 
+=======
+&ohci {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ohci_port2: port@2 {
 		reg = <2>;
 		#trigger-source-cells = <0>;
 	};
 };
+<<<<<<< HEAD
 
 &pci {
 	status = "okay";
@@ -194,3 +222,5 @@
 	nvmem-cell-names = "eeprom";
 	ralink,2ghz = <0>;
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

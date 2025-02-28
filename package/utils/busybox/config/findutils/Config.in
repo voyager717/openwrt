@@ -7,7 +7,11 @@
 menu "Finding Utilities"
 
 config BUSYBOX_CONFIG_FIND
+<<<<<<< HEAD
 	bool "find (16 kb)"
+=======
+	bool "find (14 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_FIND
 	help
 	find is used to search your system to find specified files.
@@ -23,13 +27,18 @@ config BUSYBOX_CONFIG_FEATURE_FIND_PRINT0
 	interpreted by other programs.
 
 config BUSYBOX_CONFIG_FEATURE_FIND_MTIME
+<<<<<<< HEAD
 	bool "Enable -mtime: modification time matching"
+=======
+	bool "Enable -mtime: modified time matching"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_FEATURE_FIND_MTIME
 	depends on BUSYBOX_CONFIG_FIND
 	help
 	Allow searching based on the modification time of
 	files, in days.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_FIND_ATIME
 	bool "Enable -atime: access time matching"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_ATIME
@@ -48,12 +57,17 @@ config BUSYBOX_CONFIG_FEATURE_FIND_CTIME
 
 config BUSYBOX_CONFIG_FEATURE_FIND_MMIN
 	bool "Enable -mmin: modification time matching by minutes"
+=======
+config BUSYBOX_CONFIG_FEATURE_FIND_MMIN
+	bool "Enable -mmin: modified time matching by minutes"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_FEATURE_FIND_MMIN
 	depends on BUSYBOX_CONFIG_FIND
 	help
 	Allow searching based on the modification time of
 	files, in minutes.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_FIND_AMIN
 	bool "Enable -amin: access time matching by minutes"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_AMIN
@@ -70,6 +84,8 @@ config BUSYBOX_CONFIG_FEATURE_FIND_CMIN
 	Allow searching based on the status change timestamp of
 	files, in minutes.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_FEATURE_FIND_PERM
 	bool "Enable -perm: permissions matching"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_PERM
@@ -111,6 +127,7 @@ config BUSYBOX_CONFIG_FEATURE_FIND_INUM
 	default BUSYBOX_DEFAULT_FEATURE_FIND_INUM
 	depends on BUSYBOX_CONFIG_FIND
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_FIND_SAMEFILE
 	bool "Enable -samefile: reference file matching"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_SAMEFILE
@@ -118,6 +135,8 @@ config BUSYBOX_CONFIG_FEATURE_FIND_SAMEFILE
 	help
 	Support the 'find -samefile' option for searching by a reference file.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_FEATURE_FIND_EXEC
 	bool "Enable -exec: execute commands"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_EXEC
@@ -136,6 +155,7 @@ config BUSYBOX_CONFIG_FEATURE_FIND_EXEC_PLUS
 	Without this option, -exec + is a synonym for -exec ;
 	(IOW: it works correctly, but without expected speedup)
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_FIND_EXEC_OK
 	bool "Enable -ok: execute confirmed commands"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_EXEC_OK
@@ -143,6 +163,8 @@ config BUSYBOX_CONFIG_FEATURE_FIND_EXEC_OK
 	help
 	Support the 'find -ok' option which prompts before executing.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_FEATURE_FIND_USER
 	bool "Enable -user: username/uid matching"
 	default BUSYBOX_DEFAULT_FEATURE_FIND_USER
@@ -241,19 +263,31 @@ config BUSYBOX_CONFIG_FEATURE_FIND_LINKS
 	help
 	Support the 'find -links' option for matching number of links.
 config BUSYBOX_CONFIG_GREP
+<<<<<<< HEAD
 	bool "grep (8.9 kb)"
+=======
+	bool "grep (8.6 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_GREP
 	help
 	grep is used to search files for a specified pattern.
 
 config BUSYBOX_CONFIG_EGREP
+<<<<<<< HEAD
 	bool "egrep (8 kb)"
+=======
+	bool "egrep (7.8 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_EGREP
 	help
 	Alias to "grep -E".
 
 config BUSYBOX_CONFIG_FGREP
+<<<<<<< HEAD
 	bool "fgrep (8 kb)"
+=======
+	bool "fgrep (7.8 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_FGREP
 	help
 	Alias to "grep -F".
@@ -267,7 +301,11 @@ config BUSYBOX_CONFIG_FEATURE_GREP_CONTEXT
 	context surrounding our matching lines.
 	Print the specified number of context lines (-C).
 config BUSYBOX_CONFIG_XARGS
+<<<<<<< HEAD
 	bool "xargs (7.6 kb)"
+=======
+	bool "xargs (7.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_XARGS
 	help
 	xargs is used to execute a specified command for

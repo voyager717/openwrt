@@ -1077,13 +1077,18 @@ static int rtl8367_led_blinkrate_set(struct rtl8366_smi *smi, unsigned int rate)
 }
 
 #ifdef CONFIG_OF
+<<<<<<< HEAD
 static int rtl8367_extif_init_of(struct rtl8366_smi *smi,
+=======
+static int rtl8367_extif_init_of(struct rtl8366_smi *smi, int id,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				 const char *name)
 {
 	struct rtl8367_extif_config *cfg;
 	const __be32 *prop;
 	int size;
 	int err;
+<<<<<<< HEAD
 	unsigned cpu_port;
 	unsigned id = UINT_MAX;
 
@@ -1108,6 +1113,16 @@ static int rtl8367_extif_init_of(struct rtl8366_smi *smi,
 		dev_err(smi->parent, "wrong cpu_port %u in %s property\n", cpu_port, name);
 		err = -EINVAL;
 		goto err_init;
+=======
+
+	prop = of_get_property(smi->parent->of_node, name, &size);
+	if (!prop)
+		return rtl8367_extif_init(smi, id, NULL);
+
+	if (size != (9 * sizeof(*prop))) {
+		dev_err(smi->parent, "%s property is invalid\n", name);
+		return -EINVAL;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	cfg = kzalloc(sizeof(struct rtl8367_extif_config), GFP_KERNEL);
@@ -1127,6 +1142,7 @@ static int rtl8367_extif_init_of(struct rtl8366_smi *smi,
 	err = rtl8367_extif_init(smi, id, cfg);
 	kfree(cfg);
 
+<<<<<<< HEAD
 err_init:
 	if (id != 0) rtl8367_extif_init(smi, 0, NULL);
 	if (id != 1) rtl8367_extif_init(smi, 1, NULL);
@@ -1135,6 +1151,12 @@ err_init:
 }
 #else
 static int rtl8367_extif_init_of(struct rtl8366_smi *smi,
+=======
+	return err;
+}
+#else
+static int rtl8367_extif_init_of(struct rtl8366_smi *smi, int id,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				 const char *name)
 {
 	return -EINVAL;
@@ -1155,7 +1177,15 @@ static int rtl8367_setup(struct rtl8366_smi *smi)
 
 	/* initialize external interfaces */
 	if (smi->parent->of_node) {
+<<<<<<< HEAD
 		err = rtl8367_extif_init_of(smi, "realtek,extif");
+=======
+		err = rtl8367_extif_init_of(smi, 0, "realtek,extif0");
+		if (err)
+			return err;
+
+		err = rtl8367_extif_init_of(smi, 1, "realtek,extif1");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (err)
 			return err;
 	} else {
@@ -1657,7 +1687,11 @@ static int rtl8367_switch_init(struct rtl8366_smi *smi)
 	int err;
 
 	dev->name = "RTL8367";
+<<<<<<< HEAD
 	dev->cpu_port = smi->cpu_port;
+=======
+	dev->cpu_port = RTL8367_CPU_PORT_NUM;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	dev->ports = RTL8367_NUM_PORTS;
 	dev->vlans = RTL8367_NUM_VIDS;
 	dev->ops = &rtl8367_sw_ops;
@@ -1775,7 +1809,11 @@ static int rtl8367_probe(struct platform_device *pdev)
 	smi->cmd_read = 0xb9;
 	smi->cmd_write = 0xb8;
 	smi->ops = &rtl8367_smi_ops;
+<<<<<<< HEAD
 	smi->cpu_port = UINT_MAX; /* not defined yet */
+=======
+	smi->cpu_port = RTL8367_CPU_PORT_NUM;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	smi->num_ports = RTL8367_NUM_PORTS;
 	smi->num_vlan_mc = RTL8367_NUM_VLANS;
 	smi->mib_counters = rtl8367_mib_counters;
@@ -1834,6 +1872,10 @@ MODULE_DEVICE_TABLE(of, rtl8367_match);
 static struct platform_driver rtl8367_driver = {
 	.driver = {
 		.name		= RTL8367_DRIVER_NAME,
+<<<<<<< HEAD
+=======
+		.owner		= THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CONFIG_OF
 		.of_match_table = of_match_ptr(rtl8367_match),
 #endif

@@ -1,6 +1,10 @@
 --- a/netem/maketable.c
 +++ b/netem/maketable.c
+<<<<<<< HEAD
 @@ -11,7 +11,9 @@
+=======
+@@ -10,7 +10,9 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #include <stdio.h>
  #include <stdlib.h>
  #include <math.h>
@@ -12,7 +16,11 @@
  #include <sys/stat.h>
 --- a/netem/normal.c
 +++ b/netem/normal.c
+<<<<<<< HEAD
 @@ -9,8 +9,12 @@
+=======
+@@ -8,8 +8,12 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #include <string.h>
  #include <limits.h>
  
@@ -27,7 +35,11 @@
  #define TABLEFACTOR NETEM_DIST_SCALE
 --- a/netem/pareto.c
 +++ b/netem/pareto.c
+<<<<<<< HEAD
 @@ -8,8 +8,12 @@
+=======
+@@ -7,8 +7,12 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #include <math.h>
  #include <limits.h>
  
@@ -42,7 +54,11 @@
  #define TABLESIZE	16384
 --- a/netem/paretonormal.c
 +++ b/netem/paretonormal.c
+<<<<<<< HEAD
 @@ -15,10 +15,13 @@
+=======
+@@ -14,10 +14,13 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #include <string.h>
  #include <math.h>
  #include <limits.h>

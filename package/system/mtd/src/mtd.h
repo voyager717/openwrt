@@ -2,7 +2,10 @@
 #define __mtd_h
 
 #include <stdbool.h>
+<<<<<<< HEAD
 #include <stdint.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #if defined(target_bcm47xx) || defined(target_bcm53xx)
 #define target_brcm 1
@@ -13,7 +16,10 @@
 extern int quiet;
 extern int mtdsize;
 extern int erasesize;
+<<<<<<< HEAD
 extern uint32_t opt_trxmagic;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 extern int mtd_open(const char *mtd, bool block);
 extern int mtd_check_open(const char *mtd);

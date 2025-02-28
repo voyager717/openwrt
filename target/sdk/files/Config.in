@@ -18,6 +18,7 @@ menu "Global build settings"
 		bool "Cryptographically sign package lists"
 		default y
 
+<<<<<<< HEAD
 	comment "General build options"
 
 	config BUILD_PATENTED
@@ -79,12 +80,18 @@ menu "Global build settings"
 		help
 		  Specifies arguments passed to the strip command when stripping binaries.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endmenu
 
 menu "Advanced configuration options (for developers)"
 
 	config BROKEN
 		bool "Show broken packages"
+<<<<<<< HEAD
+=======
+		default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	config DOWNLOAD_FOLDER
 		string "Download folder"
@@ -116,6 +123,7 @@ menu "Advanced configuration options (for developers)"
 
 	config CCACHE
 		bool "Use ccache"
+<<<<<<< HEAD
 		help
 		  Compiler cache; see https://ccache.samba.org/
 
@@ -128,11 +136,24 @@ menu "Advanced configuration options (for developers)"
 
 	config BUILD_LOG
 		bool "Enable log files during build process"
+=======
+		default n
+		help
+		  Compiler cache; see https://ccache.samba.org/
+
+	config BUILD_LOG
+		bool "Enable log files during build process"
+		default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		help
 		  If enabled, log files will be written to the ./log directory.
 
 	config SRC_TREE_OVERRIDE
 		bool "Enable package source tree override"
+<<<<<<< HEAD
+=======
+		default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		help
 		  If enabled, you can force a package to use a git tree as source
 		  code instead of the normal tarball. Create a symlink 'git-src'
@@ -148,7 +169,11 @@ config IN_SDK
 config MODULES
 	bool
 	default y
+<<<<<<< HEAD
 	modules
+=======
+	option modules
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 source "Config-build.in"
 source "tmp/.config-package.in"

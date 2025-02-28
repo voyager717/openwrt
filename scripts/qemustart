@@ -109,10 +109,17 @@ Examples
   $SELF malta be -m 64
   $SELF malta le64
   $SELF malta be-glibc
+<<<<<<< HEAD
   $SELF armsr armv7 \\
                 --machine virt,highmem=off \\
                 --kernel bin/targets/armsr/armv7/openwrt-armsr-armv7-generic-kernel.bin \\
                 --rootfs bin/targets/armsr/armv7/openwrt-armsr-armv7-generic-ext4-rootfs.img
+=======
+  $SELF armvirt 32 \\
+                --machine virt,highmem=off \\
+                --kernel bin/targets/armvirt/32/openwrt-armvirt-32-zImage \\
+                --rootfs bin/targets/armvirt/32/openwrt-armvirt-32-root.ext4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 EOF
 }
 
@@ -158,11 +165,18 @@ parse_args() {
 		return 1
 	}
 	[ -n "$o_subtarget" ] || o_subtarget="generic"
+<<<<<<< HEAD
 	eval "$(grep ^CONFIG_BINARY_FOLDER= .config 2>/dev/null)"
 	o_bindir="${CONFIG_BINARY_FOLDER:-bin}/targets/$o_target/$o_subtarget"
 }
 
 start_qemu_armsr() {
+=======
+	o_bindir="bin/targets/$o_target/$o_subtarget"
+}
+
+start_qemu_armvirt() {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local kernel="$o_kernel"
 	local rootfs="$o_rootfs"
 	local mach="${o_mach:-virt}"
@@ -170,6 +184,7 @@ start_qemu_armsr() {
 	local qemu_exe
 
 	case "${o_subtarget%-*}" in
+<<<<<<< HEAD
 		armv7)
 			qemu_exe="qemu-system-arm"
 			cpu="cortex-a15"
@@ -179,6 +194,17 @@ start_qemu_armsr() {
 			qemu_exe="qemu-system-aarch64"
 			cpu="cortex-a57"
 			[ -n "$kernel" ] || kernel="$o_bindir/openwrt-$o_target-${o_subtarget%-*}-generic-initramfs-kernel.bin"
+=======
+		32)
+			qemu_exe="qemu-system-arm"
+			cpu="cortex-a15"
+			[ -n "$kernel" ] || kernel="$o_bindir/openwrt-$o_target-${o_subtarget%-*}-zImage-initramfs"
+			;;
+		64)
+			qemu_exe="qemu-system-aarch64"
+			cpu="cortex-a57"
+			[ -n "$kernel" ] || kernel="$o_bindir/openwrt-$o_target-${o_subtarget%-*}-Image-initramfs"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			;;
 		*)
 			__errmsg "target $o_target: unknown subtarget $o_subtarget"
@@ -309,12 +335,20 @@ start_qemu_x86() {
 			# To use AHCI interface
 			#
 			#	-device ich9-ahci,id=ahci \
+<<<<<<< HEAD
 			#	-device ide-hd,drive=drv0,bus=ahci.0 \
+=======
+			#	-device ide-drive,drive=drv0,bus=ahci.0 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			#	-drive "file=$rootfs,format=raw,id=drv0,if=none" \
 			#
 			# [1] https://dev.openwrt.org/ticket/17947
 			"$qemu_exe" -machine "$mach" -nographic \
+<<<<<<< HEAD
 				-device ide-hd,drive=drv0 \
+=======
+				-device ide-drive,drive=drv0 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				-drive "file=$rootfs,format=raw,id=drv0,if=none" \
 				"${o_qemu_extra[@]}"
 			;;
@@ -328,7 +362,11 @@ start_qemu_x86() {
 
 start_qemu() {
 	case "$o_target" in
+<<<<<<< HEAD
 		armsr)		start_qemu_armsr	;;
+=======
+		armvirt)	start_qemu_armvirt	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		malta)		start_qemu_malta	;;
 		x86)		start_qemu_x86		;;
 		*)

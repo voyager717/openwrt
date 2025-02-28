@@ -5,6 +5,7 @@
 / {
 	compatible = "edimax,ew-7478ac", "ralink,mt7620a-soc";
 	model = "Edimax EW-7478AC";
+<<<<<<< HEAD
 
 	keys {
 		switch_high {
@@ -40,4 +41,6 @@
 			gpios = <&gpio2 29 GPIO_ACTIVE_LOW>;
 		};
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

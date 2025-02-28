@@ -1,7 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=fritz-tools
+<<<<<<< HEAD
 PKG_RELEASE:=3
+=======
+PKG_RELEASE:=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CMAKE_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk

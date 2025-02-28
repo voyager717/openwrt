@@ -7,11 +7,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=quilt
+<<<<<<< HEAD
 PKG_VERSION:=0.68
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SAVANNAH/quilt
 PKG_HASH:=fe8c09de03c106e85b3737c8f03ade147c956b79ed7af485a1c8a3858db38426
+=======
+PKG_VERSION:=0.66
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=@SAVANNAH/quilt
+PKG_HASH:=314b319a6feb13bf9d0f9ffa7ce6683b06919e734a41275087ea457cc9dc6e07
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/host-build.mk
 

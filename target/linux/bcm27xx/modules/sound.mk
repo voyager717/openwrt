@@ -26,6 +26,11 @@ define KernelPackage/sound-soc-bcm2835-i2s
   TITLE:=SoC Audio support for the Broadcom 2835 I2S module
   KCONFIG:= \
     CONFIG_SND_BCM2835_SOC_I2S \
+<<<<<<< HEAD
+=======
+    CONFIG_SND_SOC_AD193X_SPI=n \
+    CONFIG_SND_SOC_AD193X_I2C=n \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     CONFIG_SND_SOC_DMAENGINE_PCM=y \
     CONFIG_SND_SOC_GENERIC_DMAENGINE_PCM=y
   FILES:= \
@@ -45,8 +50,12 @@ $(eval $(call KernelPackage,sound-soc-bcm2835-i2s))
 define KernelPackage/sound-soc-rpi-simple-soundcard
   TITLE:=Support for Raspberry Pi simple soundcards
   KCONFIG:= \
+<<<<<<< HEAD
     CONFIG_SND_RPI_SIMPLE_SOUNDCARD \
     CONFIG_SND_BCM2708_SOC_HIFIBERRY_ADC8X
+=======
+    CONFIG_SND_RPI_SIMPLE_SOUNDCARD
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
     $(LINUX_DIR)/sound/soc/bcm/snd-soc-rpi-simple-soundcard.ko
   AUTOLOAD:=$(call AutoLoad,68,snd-soc-rpi-simple-soundcard)
@@ -364,6 +373,7 @@ endef
 $(eval $(call KernelPackage,sound-soc-audioinjector-pi-soundcard))
 
 
+<<<<<<< HEAD
 define KernelPackage/sound-soc-chipdip-dac
   TITLE:=Support for ChipDip DAC
   KCONFIG:= \
@@ -406,6 +416,8 @@ endef
 $(eval $(call KernelPackage,sound-soc-dacberry-soundcard))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sound-soc-digidac1-soundcard
   TITLE:=Support for RRA DigiDAC1
   KCONFIG:= \
@@ -527,6 +539,7 @@ endef
 $(eval $(call KernelPackage,sound-soc-googlevoicehat))
 
 
+<<<<<<< HEAD
 define KernelPackage/sound-soc-hifiberry-adc
   TITLE:=Support for HifiBerry ADC
   KCONFIG:= \
@@ -553,6 +566,8 @@ endef
 $(eval $(call KernelPackage,sound-soc-hifiberry-adc))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sound-soc-hifiberry-dac
   TITLE:=Support for HifiBerry DAC
   KCONFIG:= \
@@ -709,6 +724,7 @@ define KernelPackage/sound-soc-hifiberry-digi
   TITLE:=Support for HifiBerry Digi / Digi+ / Digi+ Pro
   KCONFIG:= \
     CONFIG_SND_BCM2708_SOC_HIFIBERRY_DIGI \
+<<<<<<< HEAD
     CONFIG_SND_SOC_WM8804 \
     CONFIG_SND_SOC_WM8804_I2C
   FILES:= \
@@ -720,6 +736,16 @@ define KernelPackage/sound-soc-hifiberry-digi
     +kmod-sound-soc-rpi-wm8804-soundcard \
     +kmod-i2c-bcm2835 \
     +kmod-regmap-i2c
+=======
+    CONFIG_SND_SOC_WM8804
+  FILES:= \
+    $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm8804.ko
+  AUTOLOAD:=$(call AutoLoad,68,snd-soc-wm8804)
+  DEPENDS:= \
+    kmod-sound-soc-bcm2835-i2s \
+    +kmod-sound-soc-rpi-wm8804-soundcard \
+    +kmod-i2c-bcm2835
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
@@ -855,6 +881,7 @@ define KernelPackage/sound-soc-justboom-both
   KCONFIG:= \
     CONFIG_SND_BCM2708_SOC_JUSTBOOM_BOTH \
     CONFIG_SND_SOC_PCM512x \
+<<<<<<< HEAD
     CONFIG_SND_SOC_PCM512x_I2C \
     CONFIG_SND_SOC_WM8804 \
     CONFIG_SND_SOC_WM8804_I2C
@@ -866,12 +893,24 @@ define KernelPackage/sound-soc-justboom-both
     $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm8804-i2c.ko
   AUTOLOAD:=$(call AutoLoad,68,snd-soc-pcm512x-i2c snd-soc-pcm512x \
     snd-soc-wm8804-i2c snd-soc-wm8804 \
+=======
+    CONFIG_SND_SOC_WM8804
+  FILES:= \
+    $(LINUX_DIR)/sound/soc/bcm/snd-soc-justboom-both.ko \
+    $(LINUX_DIR)/sound/soc/codecs/snd-soc-pcm512x.ko \
+    $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm8804.ko
+  AUTOLOAD:=$(call AutoLoad,68,snd-soc-pcm512x snd-soc-wm8804 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     snd-soc-justboom-both)
   DEPENDS:= \
     kmod-sound-soc-bcm2835-i2s \
     +kmod-sound-soc-rpi-wm8804-soundcard \
+<<<<<<< HEAD
     +kmod-i2c-bcm2835 \
     +kmod-regmap-i2c
+=======
+    +kmod-i2c-bcm2835
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
@@ -886,6 +925,7 @@ define KernelPackage/sound-soc-justboom-dac
   TITLE:=Support for JustBoom DAC
   KCONFIG:= \
     CONFIG_SND_BCM2708_SOC_JUSTBOOM_DAC \
+<<<<<<< HEAD
     CONFIG_SND_SOC_PCM512x \
     CONFIG_SND_SOC_PCM512x_I2C
   FILES:= \
@@ -898,6 +938,16 @@ define KernelPackage/sound-soc-justboom-dac
     kmod-sound-soc-bcm2835-i2s \
     +kmod-i2c-bcm2835 \
     +kmod-regmap-i2c
+=======
+    CONFIG_SND_SOC_PCM512x
+  FILES:= \
+    $(LINUX_DIR)/sound/soc/bcm/snd-soc-justboom-dac.ko \
+    $(LINUX_DIR)/sound/soc/codecs/snd-soc-pcm512x.ko
+  AUTOLOAD:=$(call AutoLoad,68,snd-soc-pcm512x snd-soc-justboom-dac)
+  DEPENDS:= \
+    kmod-sound-soc-bcm2835-i2s \
+    +kmod-i2c-bcm2835
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
@@ -912,6 +962,7 @@ define KernelPackage/sound-soc-justboom-digi
   TITLE:=Support for JustBoom Digi
   KCONFIG:= \
     CONFIG_SND_BCM2708_SOC_JUSTBOOM_DIGI \
+<<<<<<< HEAD
     CONFIG_SND_SOC_WM8804 \
     CONFIG_SND_SOC_WM8804_I2C
   FILES:= \
@@ -923,6 +974,16 @@ define KernelPackage/sound-soc-justboom-digi
     +kmod-sound-soc-rpi-wm8804-soundcard \
     +kmod-i2c-bcm2835 \
     +kmod-regmap-i2c
+=======
+    CONFIG_SND_SOC_WM8804
+  FILES:= \
+    $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm8804.ko
+  AUTOLOAD:=$(call AutoLoad,68,snd-soc-wm8804)
+  DEPENDS:= \
+    kmod-sound-soc-bcm2835-i2s \
+    +kmod-sound-soc-rpi-wm8804-soundcard \
+    +kmod-i2c-bcm2835
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 
@@ -984,7 +1045,11 @@ define KernelPackage/sound-soc-rpi-cirrus
     CONFIG_MFD_ARIZONA=y \
     CONFIG_MFD_ARIZONA_I2C \
     CONFIG_MFD_CS47L24=n \
+<<<<<<< HEAD
     CONFIG_MFD_WM5102=y \
+=======
+    CONFIG_MFD_WM5102=n \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     CONFIG_MFD_WM5110=n \
     CONFIG_MFD_WM8997=n \
     CONFIG_MFD_WM8998=n \
@@ -997,19 +1062,29 @@ define KernelPackage/sound-soc-rpi-cirrus
     CONFIG_SND_SOC_WM8804 \
     CONFIG_SND_SOC_WM_ADSP
   FILES:= \
+<<<<<<< HEAD
     $(LINUX_DIR)/drivers/firmware/cirrus/cs_dsp.ko \
     $(LINUX_DIR)/drivers/mfd/arizona.ko \
     $(LINUX_DIR)/drivers/mfd/arizona-i2c.ko \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     $(LINUX_DIR)/sound/soc/bcm/snd-soc-rpi-cirrus.ko \
     $(LINUX_DIR)/sound/soc/codecs/snd-soc-arizona.ko \
     $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm-adsp.ko \
     $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm5102.ko \
     $(LINUX_DIR)/sound/soc/codecs/snd-soc-wm8804.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,68,snd-soc-rpi-cirrus)
   DEPENDS:= \
     kmod-sound-soc-bcm2835-i2s \
     +kmod-i2c-bcm2835 \
     +kmod-regmap-i2c
+=======
+  AUTOLOAD:=$(call AutoLoad,68,snd-soc-pcm1794a snd-soc-rpi-cirrus)
+  DEPENDS:= \
+    +kmod-i2c-bcm2835 \
+    kmod-sound-soc-bcm2835-i2s
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/sound)
 endef
 

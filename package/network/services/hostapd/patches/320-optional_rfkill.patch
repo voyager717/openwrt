@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From: Felix Fietkau <nbd@openwrt.org>
 Date: Thu, 8 Jul 2010 18:36:22 +0000
 Subject: [PATCH] hostapd: make rfkill support optional
@@ -5,6 +6,11 @@ Subject: [PATCH] hostapd: make rfkill support optional
 --- a/src/drivers/drivers.mak
 +++ b/src/drivers/drivers.mak
 @@ -54,7 +54,6 @@ NEED_SME=y
+=======
+--- a/src/drivers/drivers.mak
++++ b/src/drivers/drivers.mak
+@@ -50,7 +50,6 @@ NEED_SME=y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  NEED_AP_MLME=y
  NEED_NETLINK=y
  NEED_LINUX_IOCTL=y
@@ -12,7 +18,11 @@ Subject: [PATCH] hostapd: make rfkill support optional
  NEED_RADIOTAP=y
  NEED_LIBNL=y
  endif
+<<<<<<< HEAD
 @@ -111,7 +110,6 @@ DRV_WPA_CFLAGS += -DCONFIG_DRIVER_WEXT
+=======
+@@ -107,7 +106,6 @@ DRV_WPA_CFLAGS += -DCONFIG_DRIVER_WEXT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  CONFIG_WIRELESS_EXTENSION=y
  NEED_NETLINK=y
  NEED_LINUX_IOCTL=y
@@ -20,7 +30,11 @@ Subject: [PATCH] hostapd: make rfkill support optional
  endif
  
  ifdef CONFIG_DRIVER_NDIS
+<<<<<<< HEAD
 @@ -137,7 +135,6 @@ endif
+=======
+@@ -133,7 +131,6 @@ endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  ifdef CONFIG_WIRELESS_EXTENSION
  DRV_WPA_CFLAGS += -DCONFIG_WIRELESS_EXTENSION
  DRV_WPA_OBJS += ../src/drivers/driver_wext.o
@@ -28,7 +42,11 @@ Subject: [PATCH] hostapd: make rfkill support optional
  endif
  
  ifdef NEED_NETLINK
+<<<<<<< HEAD
 @@ -146,6 +143,7 @@ endif
+=======
+@@ -142,6 +139,7 @@ endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  ifdef NEED_RFKILL
  DRV_OBJS += ../src/drivers/rfkill.o

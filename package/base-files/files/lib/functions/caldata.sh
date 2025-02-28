@@ -48,6 +48,7 @@ caldata_extract_ubi() {
 		caldata_die "failed to extract calibration data from $ubi"
 }
 
+<<<<<<< HEAD
 caldata_extract_mmc() {
 	local part=$1
 	local offset=$(($2))
@@ -61,6 +62,8 @@ caldata_extract_mmc() {
 		caldata_die "failed to extract calibration data from $mmc_part"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 caldata_extract_reverse() {
 	local part=$1
 	local offset=$2
@@ -70,7 +73,11 @@ caldata_extract_reverse() {
 	local caldata
 
 	mtd=$(find_mtd_chardev "$part")
+<<<<<<< HEAD
 	reversed=$(hexdump -v -s $offset -n $count -e '1/1 "%02x "' $mtd)
+=======
+	reversed=$(hexdump -v -s $offset -n $count -e '/1 "%02x "' $mtd)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	for byte in $reversed; do
 		caldata="\x${byte}${caldata}"
@@ -122,6 +129,7 @@ caldata_valid() {
 	return $?
 }
 
+<<<<<<< HEAD
 caldata_patch_data() {
 	local data=$1
 	local data_count=$((${#1} / 2))
@@ -152,13 +160,55 @@ caldata_patch_data() {
 			dd of=$target conv=notrunc bs=1 seek=$data_offset count=$data_count || \
 			caldata_die "failed to write data to eeprom file"
 	fi
+=======
+caldata_patch_chksum() {
+	local mac=$1
+	local mac_offset=$(($2))
+	local chksum_offset=$(($3))
+	local target=$4
+	local xor_mac
+	local xor_fw_mac
+	local xor_fw_chksum
+
+	xor_mac=${mac//:/}
+	xor_mac="${xor_mac:0:4} ${xor_mac:4:4} ${xor_mac:8:4}"
+
+	xor_fw_mac=$(hexdump -v -n 6 -s $mac_offset -e '/1 "%02x"' /lib/firmware/$FIRMWARE)
+	xor_fw_mac="${xor_fw_mac:0:4} ${xor_fw_mac:4:4} ${xor_fw_mac:8:4}"
+
+	xor_fw_chksum=$(hexdump -v -n 2 -s $chksum_offset -e '/1 "%02x"' /lib/firmware/$FIRMWARE)
+	xor_fw_chksum=$(xor $xor_fw_chksum $xor_fw_mac $xor_mac)
+
+	printf "%b" "\x${xor_fw_chksum:0:2}\x${xor_fw_chksum:2:2}" | \
+		dd of=$target conv=notrunc bs=1 seek=$chksum_offset count=2
+}
+
+caldata_patch_mac() {
+	local mac=$1
+	local mac_offset=$(($2))
+	local chksum_offset=$3
+	local target=$4
+
+	[ -z "$mac" -o -z "$mac_offset" ] && return
+
+	[ -n "$target" ] || target=/lib/firmware/$FIRMWARE
+
+	[ -n "$chksum_offset" ] && caldata_patch_chksum "$mac" "$mac_offset" "$chksum_offset" "$target"
+
+	macaddr_2bin $mac | dd of=$target conv=notrunc oflag=seek_bytes bs=6 seek=$mac_offset count=1 || \
+		caldata_die "failed to write MAC address to eeprom file"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 ath9k_patch_mac() {
 	local mac=$1
 	local target=$2
 
+<<<<<<< HEAD
 	caldata_patch_data "${mac//:/}" 0x2 "" "$target"
+=======
+	caldata_patch_mac "$mac" 0x2 "" "$target"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 ath9k_patch_mac_crc() {
@@ -167,13 +217,18 @@ ath9k_patch_mac_crc() {
 	local chksum_offset=$((mac_offset - 10))
 	local target=$4
 
+<<<<<<< HEAD
 	caldata_patch_data "${mac//:/}" "$mac_offset" "$chksum_offset" "$target"
+=======
+	caldata_patch_mac "$mac" "$mac_offset" "$chksum_offset" "$target"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 ath10k_patch_mac() {
 	local mac=$1
 	local target=$2
 
+<<<<<<< HEAD
 	caldata_patch_data "${mac//:/}" 0x6 0x2 "$target"
 }
 
@@ -215,4 +270,7 @@ ath11k_set_macflag() {
 	local target=$1
 
 	caldata_patch_data "0100" 0x3e 0xa "$target"
+=======
+	caldata_patch_mac "$mac" 0x6 0x2 "$target"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

@@ -32,6 +32,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -42,6 +43,8 @@
 						reg = <0x1fc00 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -50,6 +53,7 @@
 				reg = <0x020000 0x3d0000>;
 			};
 
+<<<<<<< HEAD
 			partition@3f0000 {
 				label = "art";
 				reg = <0x3f0000 0x010000>;
@@ -64,6 +68,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@3f0000 {
+				label = "art";
+				reg = <0x3f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -74,8 +84,12 @@
 
 	phy-handle = <&swphy0>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -91,6 +105,11 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

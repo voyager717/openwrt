@@ -9,6 +9,7 @@ RAMFS_COPY_BIN='fw_setenv'
 RAMFS_COPY_DATA='/etc/fw_env.config'
 
 platform_check_image() {
+<<<<<<< HEAD
 	local board=$(board_name)
 
 	case "$board" in
@@ -26,6 +27,9 @@ platform_check_image() {
 	*)
 		return 0
 	esac
+=======
+	return 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 platform_do_upgrade() {
@@ -35,7 +39,10 @@ platform_do_upgrade() {
 	engenius,eap350-v1|\
 	engenius,ecb350-v1|\
 	engenius,enh202-v1)
+<<<<<<< HEAD
 		ENV_SCRIPT="/tmp/fw_env"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		IMAGE_LIST="tar tzf $1"
 		IMAGE_CMD="tar xzOf $1"
 		KERNEL_PART="loader"

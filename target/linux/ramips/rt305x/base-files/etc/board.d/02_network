@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions.sh
 . /lib/functions/uci-defaults.sh
@@ -167,10 +171,13 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	zyxel,keenetic-4g-b)
 		ucidef_add_switch "switch0" \
 			"0:lan:1" "1:lan:0" "4:wan" "6@eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zyxel,keenetic-lite-b|\
 	zyxel,keenetic-start)
 		ucidef_add_switch "switch0" \

@@ -1,6 +1,10 @@
 PKG_DRIVERS += \
 	ath ath5k ath6kl ath6kl-sdio ath6kl-usb ath9k ath9k-common ath9k-htc ath10k ath10k-smallbuffers \
+<<<<<<< HEAD
 	ath11k ath11k-ahb ath11k-pci ath12k carl9170 owl-loader ar5523 wil6210 qcom-qmi-helpers
+=======
+	carl9170 owl-loader ar5523 wil6210
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_CONFIG_DEPENDS += \
 	CONFIG_PACKAGE_ATH_DEBUG \
@@ -12,7 +16,10 @@ PKG_CONFIG_DEPENDS += \
 	CONFIG_ATH9K_TX99 \
 	CONFIG_ATH10K_LEDS \
 	CONFIG_ATH10K_THERMAL \
+<<<<<<< HEAD
 	CONFIG_ATH11K_THERMAL \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_ATH_USER_REGD
 
 ifdef CONFIG_PACKAGE_MAC80211_DEBUGFS
@@ -20,8 +27,11 @@ ifdef CONFIG_PACKAGE_MAC80211_DEBUGFS
 	ATH9K_DEBUGFS \
 	ATH9K_HTC_DEBUGFS \
 	ATH10K_DEBUGFS \
+<<<<<<< HEAD
 	ATH11K_DEBUGFS \
 	ATH12K_DEBUGFS \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CARL9170_DEBUGFS \
 	ATH5K_DEBUG \
 	ATH6KL_DEBUG \
@@ -31,19 +41,29 @@ endif
 ifdef CONFIG_PACKAGE_MAC80211_TRACING
   config-y += \
 	ATH10K_TRACING \
+<<<<<<< HEAD
 	ATH11K_TRACING \
 	ATH12K_TRACING \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ATH6KL_TRACING \
 	ATH_TRACEPOINTS \
 	ATH5K_TRACER \
 	WIL6210_TRACING
 endif
 
+<<<<<<< HEAD
 config-$(call config_package,qcom-qmi-helpers) += QCOM_QMI_HELPERS
 config-$(call config_package,ath,regular smallbuffers) += ATH_CARDS ATH_COMMON
 config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH10K_DEBUG ATH11K_DEBUG ATH12K_DEBUG ATH9K_STATION_STATISTICS
 config-$(CONFIG_PACKAGE_ATH_DFS) += ATH9K_DFS_CERTIFIED ATH10K_DFS_CERTIFIED
 config-$(CONFIG_PACKAGE_ATH_SPECTRAL) += ATH9K_COMMON_SPECTRAL ATH10K_SPECTRAL ATH11K_SPECTRAL
+=======
+config-$(call config_package,ath) += ATH_CARDS ATH_COMMON ATH_REG_DYNAMIC_USER_REG_HINTS
+config-$(CONFIG_PACKAGE_ATH_DEBUG) += ATH_DEBUG ATH10K_DEBUG ATH9K_STATION_STATISTICS
+config-$(CONFIG_PACKAGE_ATH_DFS) += ATH9K_DFS_CERTIFIED ATH10K_DFS_CERTIFIED
+config-$(CONFIG_PACKAGE_ATH_SPECTRAL) += ATH9K_COMMON_SPECTRAL ATH10K_SPECTRAL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(CONFIG_PACKAGE_ATH_DYNACK) += ATH9K_DYNACK
 config-$(call config_package,ath9k) += ATH9K
 config-$(call config_package,ath9k-common) += ATH9K_COMMON
@@ -51,13 +71,18 @@ config-$(call config_package,owl-loader) += ATH9K_PCI_NO_EEPROM
 config-$(CONFIG_TARGET_ath79) += ATH9K_AHB
 config-$(CONFIG_TARGET_ipq40xx) += ATH10K_AHB
 config-$(CONFIG_PCI) += ATH9K_PCI
+<<<<<<< HEAD
 config-$(CONFIG_ATH_USER_REGD) += ATH_USER_REGD ATH_REG_DYNAMIC_USER_REG_HINTS
+=======
+config-$(CONFIG_ATH_USER_REGD) += ATH_USER_REGD
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config-$(CONFIG_ATH9K_HWRNG) += ATH9K_HWRNG
 config-$(CONFIG_ATH9K_SUPPORT_PCOEM) += ATH9K_PCOEM
 config-$(CONFIG_ATH9K_TX99) += ATH9K_TX99
 config-$(CONFIG_ATH9K_UBNTHSR) += ATH9K_UBNTHSR
 config-$(CONFIG_ATH10K_LEDS) += ATH10K_LEDS
 config-$(CONFIG_ATH10K_THERMAL) += ATH10K_THERMAL
+<<<<<<< HEAD
 config-$(CONFIG_ATH11K_THERMAL) += ATH11K_THERMAL
 
 config-$(call config_package,ath9k-htc) += ATH9K_HTC
@@ -69,6 +94,19 @@ config-$(call config_package,ath11k-pci) += ATH11K_PCI
 config-$(call config_package,ath12k) += ATH12K
 
 config-$(call config_package,ath5k) += ATH5K ATH5K_PCI
+=======
+
+config-$(call config_package,ath9k-htc) += ATH9K_HTC
+config-$(call config_package,ath10k) += ATH10K ATH10K_PCI
+config-$(call config_package,ath10k-smallbuffers) += ATH10K ATH10K_PCI ATH10K_SMALLBUFFERS
+
+config-$(call config_package,ath5k) += ATH5K
+ifdef CONFIG_TARGET_ath25
+  config-y += ATH5K_AHB
+else
+  config-y += ATH5K_PCI
+endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 config-$(call config_package,ath6kl) += ATH6KL
 config-$(call config_package,ath6kl-sdio) += ATH6KL_SDIO
@@ -97,7 +135,11 @@ define KernelPackage/ath/config
 		bool "Atheros wireless debugging"
 		help
 		  Say Y, if you want to debug atheros wireless drivers.
+<<<<<<< HEAD
 		  Only ath9k & ath10k & ath11k make use of this.
+=======
+		  Only ath9k & ath10k make use of this.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	config PACKAGE_ATH_DFS
 		bool "Enable DFS support"
@@ -129,6 +171,7 @@ define KernelPackage/ath/config
   endif
 endef
 
+<<<<<<< HEAD
 define KernelPackage/qcom-qmi-helpers
   $(call KernelPackage/mac80211/Default)
   TITLE:=Qualcomm QMI backports helpers
@@ -141,6 +184,12 @@ define KernelPackage/ath
   $(call KernelPackage/mac80211/Default)
   TITLE:=Atheros common driver part
   DEPENDS+= @PCI_SUPPORT||USB_SUPPORT||TARGET_ath79 +kmod-mac80211
+=======
+define KernelPackage/ath
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Atheros common driver part
+  DEPENDS+= @PCI_SUPPORT||USB_SUPPORT||TARGET_ath79||TARGET_ath25 +kmod-mac80211
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath.ko
   MENU:=1
 endef
@@ -153,7 +202,11 @@ define KernelPackage/ath5k
   $(call KernelPackage/mac80211/Default)
   TITLE:=Atheros 5xxx wireless cards support
   URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath5k
+<<<<<<< HEAD
   DEPENDS+= @PCI_SUPPORT +kmod-ath
+=======
+  DEPENDS+= @(PCI_SUPPORT||TARGET_ath25) +kmod-ath
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath5k/ath5k.ko
   AUTOLOAD:=$(call AutoProbe,ath5k)
 endef
@@ -168,7 +221,11 @@ define KernelPackage/ath6kl
   TITLE:=Atheros FullMAC wireless devices (common code for ath6kl_sdio and ath6kl_usb)
   URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath6kl
   HIDDEN:=1
+<<<<<<< HEAD
   DEPENDS+= +kmod-ath
+=======
+  DEPENDS+= +kmod-ath +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= $(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath6kl/ath6kl_core.ko
 endef
 
@@ -205,7 +262,11 @@ define KernelPackage/ath9k-common
   TITLE:=Atheros 802.11n wireless devices (common code for ath9k and ath9k_htc)
   URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath9k
   HIDDEN:=1
+<<<<<<< HEAD
   DEPENDS+= @PCI_SUPPORT||USB_SUPPORT||TARGET_ath79 +kmod-ath +kmod-random-core
+=======
+  DEPENDS+= @PCI_SUPPORT||USB_SUPPORT||TARGET_ath79 +kmod-ath +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath9k/ath9k_common.ko \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath9k/ath9k_hw.ko
@@ -232,7 +293,11 @@ define KernelPackage/ath9k/config
 		bool "Add wireless noise as source of randomness to kernel entropy pool"
 		depends on PACKAGE_kmod-ath9k
 		select PACKAGE_kmod-random-core
+<<<<<<< HEAD
 		default y
+=======
+		default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	config ATH9K_SUPPORT_PCOEM
 		bool "Support chips used in PC OEM cards"
@@ -269,13 +334,21 @@ define KernelPackage/ath10k
   $(call KernelPackage/mac80211/Default)
   TITLE:=Atheros 802.11ac wireless cards support
   URL:=https://wireless.wiki.kernel.org/en/users/drivers/ath10k
+<<<<<<< HEAD
   DEPENDS+= @PCI_SUPPORT +kmod-ath +@DRIVER_11AC_SUPPORT \
+=======
+  DEPENDS+= @PCI_SUPPORT +kmod-ath +@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	+ATH10K_THERMAL:kmod-hwmon-core +ATH10K_THERMAL:kmod-thermal
   FILES:= \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath10k/ath10k_core.ko \
 	$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ath10k/ath10k_pci.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoProbe,ath10k_core ath10k_pci)
   MODPARAMS.ath10k_core:=frame_mode=2
+=======
+  AUTOLOAD:=$(call AutoProbe,ath10k_pci)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   VARIANT:=regular
 endef
 
@@ -304,6 +377,7 @@ define KernelPackage/ath10k-smallbuffers
   VARIANT:=smallbuffers
 endef
 
+<<<<<<< HEAD
 define KernelPackage/ath11k
   $(call KernelPackage/mac80211/Default)
   TITLE:=Qualcomm 802.11ax wireless chipset support (common code)
@@ -376,6 +450,12 @@ define KernelPackage/carl9170
   $(call KernelPackage/mac80211/Default)
   TITLE:=Driver for Atheros AR9170 USB sticks
   DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core +carl9170-firmware
+=======
+define KernelPackage/carl9170
+  $(call KernelPackage/mac80211/Default)
+  TITLE:=Driver for Atheros AR9170 USB sticks
+  DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core +@DRIVER_11N_SUPPORT +carl9170-firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/carl9170/carl9170.ko
   AUTOLOAD:=$(call AutoProbe,carl9170)
 endef
@@ -400,7 +480,11 @@ endef
 define KernelPackage/ar5523
   $(call KernelPackage/mac80211/Default)
   TITLE:=Driver for Atheros AR5523 USB sticks
+<<<<<<< HEAD
   DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core
+=======
+  DEPENDS:=@USB_SUPPORT +kmod-mac80211 +kmod-ath +kmod-usb-core +kmod-input-core 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/drivers/net/wireless/ath/ar5523/ar5523.ko
   AUTOLOAD:=$(call AutoProbe,ar5523)
 endef

@@ -8,6 +8,10 @@ Including it allows multiple lua versions to coexist.
 Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
 ---
 
+<<<<<<< HEAD
+=======
+diff --git a/Makefile b/Makefile
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/Makefile
 +++ b/Makefile
 @@ -12,7 +12,7 @@ PLAT= none

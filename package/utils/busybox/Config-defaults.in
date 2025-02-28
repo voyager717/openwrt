@@ -28,9 +28,12 @@ config BUSYBOX_DEFAULT_FEATURE_COMPRESS_USAGE
 config BUSYBOX_DEFAULT_LFS
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_TIME64
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_PAM
 	bool
 	default n
@@ -211,6 +214,7 @@ config BUSYBOX_DEFAULT_PASSWORD_MINLEN
 config BUSYBOX_DEFAULT_MD5_SMALL
 	int
 	default 1
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_SHA1_SMALL
 	int
 	default 3
@@ -241,6 +245,20 @@ config BUSYBOX_DEFAULT_MONOTONIC_SYSCALL
 config BUSYBOX_DEFAULT_IOCTL_HEX2STR_ERROR
 	bool
 	default y
+=======
+config BUSYBOX_DEFAULT_SHA3_SMALL
+	int
+	default 1
+config BUSYBOX_DEFAULT_FEATURE_FAST_TOP
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_ETC_NETWORKS
+	bool
+	default n
+config BUSYBOX_DEFAULT_FEATURE_ETC_SERVICES
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_EDITING
 	bool
 	default y
@@ -255,10 +273,17 @@ config BUSYBOX_DEFAULT_FEATURE_EDITING_HISTORY
 	default 256
 config BUSYBOX_DEFAULT_FEATURE_EDITING_SAVEHISTORY
 	bool
+<<<<<<< HEAD
 	default y
 config BUSYBOX_DEFAULT_FEATURE_EDITING_SAVE_ON_EXIT
 	bool
 	default y
+=======
+	default n
+config BUSYBOX_DEFAULT_FEATURE_EDITING_SAVE_ON_EXIT
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_REVERSE_SEARCH
 	bool
 	default n
@@ -310,6 +335,7 @@ config BUSYBOX_DEFAULT_UNICODE_NEUTRAL_TABLE
 config BUSYBOX_DEFAULT_UNICODE_PRESERVE_BROKEN
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_LOOP_CONFIGURE
 	bool
 	default n
@@ -319,6 +345,32 @@ config BUSYBOX_DEFAULT_NO_LOOP_CONFIGURE
 config BUSYBOX_DEFAULT_TRY_LOOP_CONFIGURE
 	bool
 	default y
+=======
+config BUSYBOX_DEFAULT_FEATURE_NON_POSIX_CP
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_VERBOSE_CP_MESSAGE
+	bool
+	default n
+config BUSYBOX_DEFAULT_FEATURE_USE_SENDFILE
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_COPYBUF_KB
+	int
+	default 4
+config BUSYBOX_DEFAULT_FEATURE_SKIP_ROOTFS
+	bool
+	default n
+config BUSYBOX_DEFAULT_MONOTONIC_SYSCALL
+	bool
+	default y
+config BUSYBOX_DEFAULT_IOCTL_HEX2STR_ERROR
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_HWIB
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_SEAMLESS_XZ
 	bool
 	default n
@@ -357,10 +409,17 @@ config BUSYBOX_DEFAULT_FEATURE_GUNZIP_LONG_OPTIONS
 	default n
 config BUSYBOX_DEFAULT_BUNZIP2
 	bool
+<<<<<<< HEAD
 	default n
 config BUSYBOX_DEFAULT_BZCAT
 	bool
 	default n
+=======
+	default y
+config BUSYBOX_DEFAULT_BZCAT
+	bool
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_UNLZMA
 	bool
 	default n
@@ -387,7 +446,11 @@ config BUSYBOX_DEFAULT_BZIP2_SMALL
 	default 0
 config BUSYBOX_DEFAULT_FEATURE_BZIP2_DECOMPRESS
 	bool
+<<<<<<< HEAD
 	default n
+=======
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_CPIO
 	bool
 	default n
@@ -397,12 +460,15 @@ config BUSYBOX_DEFAULT_FEATURE_CPIO_O
 config BUSYBOX_DEFAULT_FEATURE_CPIO_P
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_CPIO_IGNORE_DEVNO
 	bool
 	default n
 config BUSYBOX_DEFAULT_FEATURE_CPIO_RENUMBER_INODES
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_DPKG
 	bool
 	default n
@@ -496,6 +562,7 @@ config BUSYBOX_DEFAULT_FEATURE_UNZIP_XZ
 config BUSYBOX_DEFAULT_FEATURE_LZMA_FAST
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_VERBOSE
 	bool
 	default n
@@ -508,6 +575,8 @@ config BUSYBOX_DEFAULT_FEATURE_PRESERVE_HARDLINKS
 config BUSYBOX_DEFAULT_FEATURE_HUMAN_READABLE
 	bool
 	default y
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_BASENAME
 	bool
 	default y
@@ -538,9 +607,12 @@ config BUSYBOX_DEFAULT_CHROOT
 config BUSYBOX_DEFAULT_CKSUM
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_CRC32
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_COMM
 	bool
 	default n
@@ -556,9 +628,12 @@ config BUSYBOX_DEFAULT_FEATURE_CP_REFLINK
 config BUSYBOX_DEFAULT_CUT
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_CUT_REGEX
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_DATE
 	bool
 	default y
@@ -592,9 +667,12 @@ config BUSYBOX_DEFAULT_DF
 config BUSYBOX_DEFAULT_FEATURE_DF_FANCY
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_SKIP_ROOTFS
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_DIRNAME
 	bool
 	default y
@@ -862,6 +940,12 @@ config BUSYBOX_DEFAULT_TIMEOUT
 config BUSYBOX_DEFAULT_TOUCH
 	bool
 	default y
+<<<<<<< HEAD
+=======
+config BUSYBOX_DEFAULT_FEATURE_TOUCH_NODEREF
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_TOUCH_SUSV3
 	bool
 	default y
@@ -881,9 +965,12 @@ config BUSYBOX_DEFAULT_TRUNCATE
 	bool
 	default y if TARGET_bcm53xx
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_TSORT
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_TTY
 	bool
 	default n
@@ -938,6 +1025,18 @@ config BUSYBOX_DEFAULT_WHOAMI
 config BUSYBOX_DEFAULT_YES
 	bool
 	default y
+<<<<<<< HEAD
+=======
+config BUSYBOX_DEFAULT_FEATURE_VERBOSE
+	bool
+	default n
+config BUSYBOX_DEFAULT_FEATURE_PRESERVE_HARDLINKS
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_HUMAN_READABLE
+	bool
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_CHVT
 	bool
 	default n
@@ -985,7 +1084,11 @@ config BUSYBOX_DEFAULT_RESET
 	default y
 config BUSYBOX_DEFAULT_RESIZE
 	bool
+<<<<<<< HEAD
 	default y
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_RESIZE_PRINT
 	bool
 	default n
@@ -1082,9 +1185,12 @@ config BUSYBOX_DEFAULT_FEATURE_VI_8BIT
 config BUSYBOX_DEFAULT_FEATURE_VI_COLON
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_VI_COLON_EXPAND
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_VI_YANKMARK
 	bool
 	default y
@@ -1124,9 +1230,12 @@ config BUSYBOX_DEFAULT_FEATURE_VI_UNDO_QUEUE
 config BUSYBOX_DEFAULT_FEATURE_VI_UNDO_QUEUE_MAX
 	int
 	default 0
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_VI_VERBOSE_STATUS
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_ALLOW_EXEC
 	bool
 	default y
@@ -1139,6 +1248,7 @@ config BUSYBOX_DEFAULT_FEATURE_FIND_PRINT0
 config BUSYBOX_DEFAULT_FEATURE_FIND_MTIME
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_FIND_ATIME
 	bool
 	default n
@@ -1154,6 +1264,11 @@ config BUSYBOX_DEFAULT_FEATURE_FIND_AMIN
 config BUSYBOX_DEFAULT_FEATURE_FIND_CMIN
 	bool
 	default n
+=======
+config BUSYBOX_DEFAULT_FEATURE_FIND_MMIN
+	bool
+	default y
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_FIND_PERM
 	bool
 	default y
@@ -1175,18 +1290,24 @@ config BUSYBOX_DEFAULT_FEATURE_FIND_NEWER
 config BUSYBOX_DEFAULT_FEATURE_FIND_INUM
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_FIND_SAMEFILE
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_FIND_EXEC
 	bool
 	default y
 config BUSYBOX_DEFAULT_FEATURE_FIND_EXEC_PLUS
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_FIND_EXEC_OK
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_FIND_USER
 	bool
 	default y
@@ -1339,7 +1460,11 @@ config BUSYBOX_DEFAULT_USE_BB_CRYPT
 	default n
 config BUSYBOX_DEFAULT_USE_BB_CRYPT_SHA
 	bool
+<<<<<<< HEAD
 	default y
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_ADD_SHELL
 	bool
 	default n
@@ -1372,7 +1497,11 @@ config BUSYBOX_DEFAULT_CHPASSWD
 	default n
 config BUSYBOX_DEFAULT_FEATURE_DEFAULT_PASSWD_ALGO
 	string
+<<<<<<< HEAD
 	default "sha256"
+=======
+	default "md5"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_CRYPTPW
 	bool
 	default n
@@ -1807,7 +1936,11 @@ config BUSYBOX_DEFAULT_FEATURE_SETPRIV_CAPABILITY_NAMES
 	default n
 config BUSYBOX_DEFAULT_SETSID
 	bool
+<<<<<<< HEAD
 	default y
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_SWAPON
 	bool
 	default y
@@ -1828,6 +1961,7 @@ config BUSYBOX_DEFAULT_SWITCH_ROOT
 	default y
 config BUSYBOX_DEFAULT_TASKSET
 	bool
+<<<<<<< HEAD
 	default y
 config BUSYBOX_DEFAULT_FEATURE_TASKSET_FANCY
 	bool
@@ -1835,6 +1969,15 @@ config BUSYBOX_DEFAULT_FEATURE_TASKSET_FANCY
 config BUSYBOX_DEFAULT_FEATURE_TASKSET_CPULIST
 	bool
 	default y
+=======
+	default n
+config BUSYBOX_DEFAULT_FEATURE_TASKSET_FANCY
+	bool
+	default n
+config BUSYBOX_DEFAULT_FEATURE_TASKSET_CPULIST
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_UEVENT
 	bool
 	default n
@@ -1943,9 +2086,12 @@ config BUSYBOX_DEFAULT_FEATURE_VOLUMEID_XFS
 config BUSYBOX_DEFAULT_ADJTIMEX
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_ASCII
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_BBCONFIG
 	bool
 	default n
@@ -2057,9 +2203,12 @@ config BUSYBOX_DEFAULT_FLASH_UNLOCK
 config BUSYBOX_DEFAULT_FLASHCP
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_GETFATTR
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_HDPARM
 	bool
 	default n
@@ -2192,9 +2341,12 @@ config BUSYBOX_DEFAULT_RUNLEVEL
 config BUSYBOX_DEFAULT_RX
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_SEEDRNG
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_SETFATTR
 	bool
 	default n
@@ -2207,9 +2359,12 @@ config BUSYBOX_DEFAULT_STRINGS
 config BUSYBOX_DEFAULT_TIME
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_TREE
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_TS
 	bool
 	default n
@@ -2243,9 +2398,12 @@ config BUSYBOX_DEFAULT_VOLNAME
 config BUSYBOX_DEFAULT_WATCHDOG
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_WATCHDOG_OPEN_TWICE
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_IPV6
 	bool
 	default y if IPV6
@@ -2259,6 +2417,7 @@ config BUSYBOX_DEFAULT_FEATURE_PREFER_IPV4_ADDRESS
 config BUSYBOX_DEFAULT_VERBOSE_RESOLUTION_ERRORS
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_ETC_NETWORKS
 	bool
 	default n
@@ -2268,6 +2427,8 @@ config BUSYBOX_DEFAULT_FEATURE_ETC_SERVICES
 config BUSYBOX_DEFAULT_FEATURE_HWIB
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_TLS_SHA1
 	bool
 	default n
@@ -2322,9 +2483,12 @@ config BUSYBOX_DEFAULT_DNSDOMAINNAME
 config BUSYBOX_DEFAULT_HTTPD
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_HTTPD_PORT_DEFAULT
 	int
 	default 80
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_HTTPD_RANGES
 	bool
 	default n
@@ -2466,9 +2630,12 @@ config BUSYBOX_DEFAULT_FEATURE_IP_ADDRESS
 config BUSYBOX_DEFAULT_FEATURE_IP_LINK
 	bool
 	default y
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_IP_LINK_CAN
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_IP_ROUTE
 	bool
 	default y
@@ -2537,6 +2704,7 @@ config BUSYBOX_DEFAULT_FEATURE_NETSTAT_PRG
 	default y
 config BUSYBOX_DEFAULT_NSLOOKUP
 	bool
+<<<<<<< HEAD
 	default y
 config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_BIG
 	bool
@@ -2544,6 +2712,21 @@ config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_BIG
 config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_LONG_OPTIONS
 	bool
 	default n
+=======
+	default n
+config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_BIG
+	bool
+	default n
+config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_LONG_OPTIONS
+	bool
+	default n
+config BUSYBOX_DEFAULT_NSLOOKUP_OPENWRT
+	bool
+	default y
+config BUSYBOX_DEFAULT_FEATURE_NSLOOKUP_OPENWRT_LONG_OPTIONS
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_NTPD
 	bool
 	default y
@@ -2607,9 +2790,12 @@ config BUSYBOX_DEFAULT_TELNETD
 config BUSYBOX_DEFAULT_FEATURE_TELNETD_STANDALONE
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_TELNETD_PORT_DEFAULT
 	int
 	default 23
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_TELNETD_INETD_WAIT
 	bool
 	default n
@@ -2670,9 +2856,12 @@ config BUSYBOX_DEFAULT_FEATURE_WGET_LONG_OPTIONS
 config BUSYBOX_DEFAULT_FEATURE_WGET_STATUSBAR
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_WGET_FTP
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_WGET_AUTHENTICATION
 	bool
 	default n
@@ -2694,9 +2883,12 @@ config BUSYBOX_DEFAULT_ZCIP
 config BUSYBOX_DEFAULT_UDHCPD
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_UDHCPD_BOOTP
 	bool
 	default n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_UDHCPD_BASE_IP_ON_MAC
 	bool
 	default n
@@ -2724,9 +2916,12 @@ config BUSYBOX_DEFAULT_FEATURE_UDHCPC_SANITIZEOPT
 config BUSYBOX_DEFAULT_UDHCPC_DEFAULT_SCRIPT
 	string
 	default "/usr/share/udhcpc/default.script"
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_UDHCPC6_DEFAULT_SCRIPT
 	string
 	default ""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_UDHCPC6
 	bool
 	default n
@@ -2742,9 +2937,12 @@ config BUSYBOX_DEFAULT_FEATURE_UDHCPC6_RFC4833
 config BUSYBOX_DEFAULT_FEATURE_UDHCPC6_RFC5970
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_UDHCPC_DEFAULT_INTERFACE
 	string
 	default ""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FEATURE_UDHCP_PORT
 	bool
 	default n
@@ -2772,9 +2970,12 @@ config BUSYBOX_DEFAULT_LPR
 config BUSYBOX_DEFAULT_LPQ
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_MIME_CHARSET
 	string
 	default ""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_MAKEMIME
 	bool
 	default n
@@ -2793,12 +2994,18 @@ config BUSYBOX_DEFAULT_FEATURE_REFORMIME_COMPAT
 config BUSYBOX_DEFAULT_SENDMAIL
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_FEATURE_FAST_TOP
 	bool
 	default y
 config BUSYBOX_DEFAULT_FEATURE_SHOW_THREADS
 	bool
 	default n
+=======
+config BUSYBOX_DEFAULT_FEATURE_MIME_CHARSET
+	string
+	default ""
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_FREE
 	bool
 	default y
@@ -2913,6 +3120,12 @@ config BUSYBOX_DEFAULT_FEATURE_UPTIME_UTMP_SUPPORT
 config BUSYBOX_DEFAULT_WATCH
 	bool
 	default n
+<<<<<<< HEAD
+=======
+config BUSYBOX_DEFAULT_FEATURE_SHOW_THREADS
+	bool
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_CHPST
 	bool
 	default n
@@ -3038,7 +3251,11 @@ config BUSYBOX_DEFAULT_ASH_ALIAS
 	default y
 config BUSYBOX_DEFAULT_ASH_RANDOM_SUPPORT
 	bool
+<<<<<<< HEAD
 	default y
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_DEFAULT_ASH_EXPAND_PRMT
 	bool
 	default y
@@ -3081,10 +3298,17 @@ config BUSYBOX_DEFAULT_HUSH_BASH_COMPAT
 config BUSYBOX_DEFAULT_HUSH_BRACE_EXPANSION
 	bool
 	default n
+<<<<<<< HEAD
 config BUSYBOX_DEFAULT_HUSH_BASH_SOURCE_CURDIR
 	bool
 	default n
 config BUSYBOX_DEFAULT_HUSH_LINENO_VAR
+=======
+config BUSYBOX_DEFAULT_HUSH_LINENO_VAR
+	bool
+	default n
+config BUSYBOX_DEFAULT_HUSH_BASH_SOURCE_CURDIR
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	bool
 	default n
 config BUSYBOX_DEFAULT_HUSH_INTERACTIVE

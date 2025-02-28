@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Package/r8152-firmware = $(call Package/firmware-default,RealTek RTL8152 firmware)
 define Package/r8152-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtl_nic
@@ -8,19 +9,29 @@ define Package/r8152-firmware/install
 endef
 $(eval $(call BuildPackage,r8152-firmware))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 Package/r8169-firmware = $(call Package/firmware-default,RealTek RTL8169 firmware)
 define Package/r8169-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtl_nic
 	$(CP) \
+<<<<<<< HEAD
 		$(PKG_BUILD_DIR)/rtl_nic/rtl810* \
 		$(PKG_BUILD_DIR)/rtl_nic/rtl812* \
 		$(PKG_BUILD_DIR)/rtl_nic/rtl8168* \
 		$(PKG_BUILD_DIR)/rtl_nic/rtl84* \
+=======
+		$(PKG_BUILD_DIR)/rtl_nic/* \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1)/lib/firmware/rtl_nic
 endef
 $(eval $(call BuildPackage,r8169-firmware))
 
+<<<<<<< HEAD
 Package/rtl8188eu-firmware = $(call Package/firmware-default,RealTek RTL8188EU firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8188eu-firmware = $(call Package/firmware-default,RealTek RTL8188EU firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8188eu-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(CP) \
@@ -29,6 +40,7 @@ define Package/rtl8188eu-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8188eu-firmware))
 
+<<<<<<< HEAD
 Package/rtl8188fu-firmware = $(call Package/firmware-default,RealTek RTL8188FU firmware,,LICENCE.rtlwifi_firmware.txt)
 define Package/rtl8188fu-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
@@ -39,6 +51,9 @@ endef
 $(eval $(call BuildPackage,rtl8188fu-firmware))
 
 Package/rtl8192ce-firmware = $(call Package/firmware-default,RealTek RTL8192CE firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192ce-firmware = $(call Package/firmware-default,RealTek RTL8192CE firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8192ce-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192cfw.bin $(1)/lib/firmware/rtlwifi
@@ -47,7 +62,11 @@ define Package/rtl8192ce-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8192ce-firmware))
 
+<<<<<<< HEAD
 Package/rtl8192cu-firmware = $(call Package/firmware-default,RealTek RTL8192CU firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192cu-firmware = $(call Package/firmware-default,RealTek RTL8192CU firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8192cu-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192cufw.bin $(1)/lib/firmware/rtlwifi
@@ -57,13 +76,18 @@ define Package/rtl8192cu-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8192cu-firmware))
 
+<<<<<<< HEAD
 Package/rtl8192de-firmware = $(call Package/firmware-default,RealTek RTL8192DE firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192de-firmware = $(call Package/firmware-default,RealTek RTL8192DE firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8192de-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192defw.bin $(1)/lib/firmware/rtlwifi
 endef
 $(eval $(call BuildPackage,rtl8192de-firmware))
 
+<<<<<<< HEAD
 Package/rtl8192du-firmware = $(call Package/firmware-default,RealTek RTL8192DU firmware,,LICENCE.rtlwifi_firmware.txt)
 define Package/rtl8192du-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
@@ -72,20 +96,38 @@ endef
 $(eval $(call BuildPackage,rtl8192du-firmware))
 
 Package/rtl8192eu-firmware = $(call Package/firmware-default,RealTek RTL8192EU firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192eu-firmware = $(call Package/firmware-default,RealTek RTL8192EU firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8192eu-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192eu_nic.bin $(1)/lib/firmware/rtlwifi
 endef
 $(eval $(call BuildPackage,rtl8192eu-firmware))
 
+<<<<<<< HEAD
 Package/rtl8192se-firmware = $(call Package/firmware-default,RealTek RTL8192SE firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192se-firmware = $(call Package/firmware-default,RealTek RTL8192SE firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8192se-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8192sefw.bin $(1)/lib/firmware/rtlwifi
 endef
 $(eval $(call BuildPackage,rtl8192se-firmware))
 
+<<<<<<< HEAD
 Package/rtl8723au-firmware = $(call Package/firmware-default,RealTek RTL8723AU firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8192su-firmware = $(call Package/firmware-default,RealTek RTL8192SU firmware)
+define Package/rtl8192su-firmware/install
+	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8712u.bin $(1)/lib/firmware/rtlwifi
+endef
+$(eval $(call BuildPackage,rtl8192su-firmware))
+
+Package/rtl8723au-firmware = $(call Package/firmware-default,RealTek RTL8723AU firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8723au-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8723aufw_A.bin $(1)/lib/firmware/rtlwifi
@@ -94,6 +136,7 @@ define Package/rtl8723au-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8723au-firmware))
 
+<<<<<<< HEAD
 Package/rtl8723be-firmware = $(call Package/firmware-default,RealTek RTL8723BE firmware,,LICENCE.rtlwifi_firmware.txt)
 define Package/rtl8723be-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
@@ -103,6 +146,9 @@ endef
 $(eval $(call BuildPackage,rtl8723be-firmware))
 
 Package/rtl8723bu-firmware = $(call Package/firmware-default,RealTek RTL8723BU firmware,,LICENCE.rtlwifi_firmware.txt)
+=======
+Package/rtl8723bu-firmware = $(call Package/firmware-default,RealTek RTL8723BU firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/rtl8723bu-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8723bu_nic.bin $(1)/lib/firmware/rtlwifi
@@ -110,6 +156,7 @@ define Package/rtl8723bu-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8723bu-firmware))
 
+<<<<<<< HEAD
 Package/rtl8723de-firmware = $(call Package/firmware-default,RealTek RTL8723DE firmware)
 define Package/rtl8723de-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtw88
@@ -158,10 +205,17 @@ Package/rtl8821ae-firmware = $(call Package/firmware-default,RealTek RTL8821AE f
 define Package/rtl8821ae-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8821aefw_29.bin $(1)/lib/firmware/rtlwifi
+=======
+Package/rtl8821ae-firmware = $(call Package/firmware-default,RealTek RTL8821AE firmware)
+define Package/rtl8821ae-firmware/install
+	$(INSTALL_DIR) $(1)/lib/firmware/rtlwifi
+	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8821aefw.bin $(1)/lib/firmware/rtlwifi
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtlwifi/rtl8821aefw_wowlan.bin $(1)/lib/firmware/rtlwifi
 endef
 $(eval $(call BuildPackage,rtl8821ae-firmware))
 
+<<<<<<< HEAD
 Package/rtl8821ce-firmware = $(call Package/firmware-default,RealTek RTL8821CE firmware)
 define Package/rtl8821ce-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtw88
@@ -169,6 +223,8 @@ define Package/rtl8821ce-firmware/install
 endef
 $(eval $(call BuildPackage,rtl8821ce-firmware))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 Package/rtl8822be-firmware = $(call Package/firmware-default,RealTek RTL8822BE firmware)
 define Package/rtl8822be-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/rtw88
@@ -183,6 +239,7 @@ define Package/rtl8822ce-firmware/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtw88/rtw8822c_wow_fw.bin $(1)/lib/firmware/rtw88
 endef
 $(eval $(call BuildPackage,rtl8822ce-firmware))
+<<<<<<< HEAD
 
 Package/rtl8851be-firmware = $(call Package/firmware-default,RealTek RTL8851BE firmware)
 define Package/rtl8851be-firmware/install
@@ -218,3 +275,5 @@ define Package/rtl8922ae-firmware/install
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/rtw89/rtw8922a_fw.bin $(1)/lib/firmware/rtw89
 endef
 $(eval $(call BuildPackage,rtl8922ae-firmware))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

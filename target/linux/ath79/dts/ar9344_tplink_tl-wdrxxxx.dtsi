@@ -83,6 +83,7 @@
 				label = "u-boot";
 				reg = <0x000000 0x020000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -95,6 +96,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -103,6 +106,7 @@
 				reg = <0x020000 0x7d0000>;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "art";
 				reg = <0x7f0000 0x010000>;
@@ -121,7 +125,34 @@
 						reg = <0x5000 0x440>;
 					};
 				};
+=======
+			art: partition@7f0000 {
+				label = "art";
+				reg = <0x7f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 };
+<<<<<<< HEAD
+=======
+
+&pcie {
+	status = "okay";
+
+	ath9k: wifi@0,0 {
+		compatible = "pci168c,0033";
+		reg = <0x0000 0 0 0 0>;
+		qca,no-eeprom;
+		#gpio-cells = <2>;
+		gpio-controller;
+	};
+};
+
+&wmac {
+	status = "okay";
+
+	mtd-cal-data = <&art 0x1000>;
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

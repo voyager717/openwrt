@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "tp9343_tplink_tl-wr94x.dtsi"
 
 / {
@@ -19,8 +22,12 @@
 		compatible = "gpio-leds";
 
 		wan_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
@@ -33,6 +40,10 @@
 };
 
 &eth1 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -110,6 +110,7 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	ethernet-switch@1e {
 		compatible = "brcm,bcm53128";
 		reg = <0x1e>;
@@ -118,6 +119,17 @@
 			#address-cells = <1>;
 			#size-cells = <0>;
 
+=======
+	phy-mask = <0x10>;
+
+	ethernet-switch@1e {
+		compatible = "brcm,bcm53128";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0x1e>;
+
+		ports {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			port0@0 {
 				reg = <0>;
 				label = "lan1";
@@ -160,6 +172,10 @@
 
 			phy0: port8@8 {
 				reg = <8>;
+<<<<<<< HEAD
+=======
+				label = "cpu";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				ethernet = <&eth0>;
 
 				fixed-link {
@@ -167,6 +183,10 @@
 					full-duplex;
 				};
 			};
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -174,6 +194,7 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	phy-handle = <&phy0>;
 	phy-mode = "rgmii-rxid";
 	pll-data = <0x16000000 0x00000101 0x00001313>;
@@ -181,6 +202,13 @@
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
 
+=======
+	phy-mode = "rgmii-rxid";
+	pll-data = <0x16000000 0x00000101 0x00001313>;
+	mtd-mac-address = <&art 0x0>;
+
+	phy-handle = <&phy0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fixed-link {
 		speed = <1000>;
 		full-duplex;

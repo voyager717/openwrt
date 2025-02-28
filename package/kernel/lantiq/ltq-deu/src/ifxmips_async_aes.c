@@ -964,7 +964,11 @@ static struct lq_aes_alg aes_drivers_alg[] = {
          .alg = {
            .cra_name 	    = "aes",
            .cra_driver_name = "ifxdeu-aes",
+<<<<<<< HEAD
            .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY | CRYPTO_ALG_ASYNC,
+=======
+           .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
            .cra_blocksize   = AES_BLOCK_SIZE,
            .cra_ctxsize     = sizeof(struct aes_ctx),
            .cra_type        = &crypto_ablkcipher_type,
@@ -984,7 +988,11 @@ static struct lq_aes_alg aes_drivers_alg[] = {
      .alg = {
            .cra_name        = "ecb(aes)",
            .cra_driver_name = "ifxdeu-ecb(aes)",
+<<<<<<< HEAD
            .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY | CRYPTO_ALG_ASYNC,
+=======
+           .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
            .cra_blocksize   = AES_BLOCK_SIZE,
            .cra_ctxsize     = sizeof(struct aes_ctx),
            .cra_type        = &crypto_ablkcipher_type,
@@ -1004,7 +1012,11 @@ static struct lq_aes_alg aes_drivers_alg[] = {
          .alg = {
            .cra_name        = "cbc(aes)",
            .cra_driver_name = "ifxdeu-cbc(aes)",
+<<<<<<< HEAD
            .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY | CRYPTO_ALG_ASYNC,
+=======
+           .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
            .cra_blocksize   = AES_BLOCK_SIZE,
            .cra_ctxsize     = sizeof(struct aes_ctx),
            .cra_type        = &crypto_ablkcipher_type,
@@ -1024,7 +1036,11 @@ static struct lq_aes_alg aes_drivers_alg[] = {
          .alg = {
            .cra_name        = "ctr(aes)",
            .cra_driver_name = "ifxdeu-ctr(aes)",
+<<<<<<< HEAD
            .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY | CRYPTO_ALG_ASYNC,
+=======
+           .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
            .cra_blocksize   = AES_BLOCK_SIZE,
            .cra_ctxsize     = sizeof(struct aes_ctx),
            .cra_type        = &crypto_ablkcipher_type,
@@ -1044,7 +1060,11 @@ static struct lq_aes_alg aes_drivers_alg[] = {
      .alg = {
            .cra_name        = "rfc3686(ctr(aes))",
            .cra_driver_name = "ifxdeu-rfc3686(ctr(aes))",
+<<<<<<< HEAD
            .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY | CRYPTO_ALG_ASYNC,
+=======
+           .cra_flags       = CRYPTO_ALG_TYPE_ABLKCIPHER | CRYPTO_ALG_ASYNC,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
            .cra_blocksize   = AES_BLOCK_SIZE,
            .cra_ctxsize     = sizeof(struct aes_ctx),
            .cra_type        = &crypto_ablkcipher_type,

@@ -88,12 +88,15 @@ define Build/luxul-lxl
 	mv $@.new $@
 endef
 
+<<<<<<< HEAD
 # Outputs a lzma compressed U-Boot that start at 0x00008000
 # just like the D-Link boot loaders expect
 define Build/dlink-uboot-bin
 	$(STAGING_DIR_HOST)/bin/lzma e $(STAGING_DIR_IMAGE)/$(DEVICE_NAME)-u-boot.bin -d16 $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/seama-nand
 	# Seama entity
 	$(STAGING_DIR_HOST)/bin/oseama \
@@ -111,6 +114,7 @@ define Build/seama-nand
 		-i $@.entity
 endef
 
+<<<<<<< HEAD
 define Build/dwl8610ap-image
 	mkdir -p $@.tmptar
 	# The DWL8610AP pretends to be a Broadcom reference design
@@ -129,13 +133,19 @@ endef
 
 DTS_DIR := $(DTS_DIR)/broadcom
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 DEVICE_VARS += ASUS_PRODUCTID
 DEVICE_VARS += BUFFALO_TAG_PLATFORM BUFFALO_TAG_VERSION BUFFALO_TAG_MINOR
 DEVICE_VARS += SIGNATURE
 DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_REGION TPLINK_BOARD
 DEVICE_VARS += LUXUL_BOARD
 
+<<<<<<< HEAD
 IEEE8021X := wpad-basic-mbedtls
+=======
+IEEE8021X := wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 B43 := $(IEEE8021X) kmod-b43
 BRCMFMAC_43602A1 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-43602a1-pcie
 BRCMFMAC_4366B1 := $(IEEE8021X) kmod-brcmfmac brcmfmac-firmware-4366b1-pcie
@@ -145,7 +155,10 @@ USB2_PACKAGES += kmod-usb-ledtrig-usbport
 USB3_PACKAGES := $(USB2_PACKAGES) kmod-usb3 kmod-phy-bcm-ns-usb3
 
 define Device/Default
+<<<<<<< HEAD
   PROFILES = Generic $$(DEVICE_NAME)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   # .dtb files are prefixed by SoC type, e.g. bcm4708- which is not included in device/image names
   # extract the full dtb name based on the device info
   DEVICE_DTS := $(patsubst %.dtb,%,$(notdir $(wildcard $(if $(IB),$(KDIR),$(DTS_DIR))/*-$(subst _,-,$(1)).dtb)))
@@ -155,7 +168,11 @@ define Device/Default
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma-d16 | trx
   FILESYSTEMS := squashfs
   KERNEL_NAME := zImage
+<<<<<<< HEAD
   DEVICE_IMG_NAME = $$(DEVICE_IMG_PREFIX)-$$(1).$$(2)
+=======
+  IMAGE_NAME = $$(IMAGE_PREFIX)-$$(1).$$(2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := trx
   BLOCKSIZE := 128k
   PAGESIZE := 2048
@@ -168,6 +185,7 @@ define Device/asus
   IMAGE/trx := append-ubi | trx-nand | asus-trx
 endef
 
+<<<<<<< HEAD
 define Device/asus_rt-ac3100
   $(call Device/asus)
   DEVICE_MODEL := RT-AC3100
@@ -176,6 +194,8 @@ define Device/asus_rt-ac3100
 endef
 TARGET_DEVICES += asus_rt-ac3100
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/asus_rt-ac56u
   $(call Device/asus)
   DEVICE_MODEL := RT-AC56U
@@ -200,6 +220,7 @@ define Device/asus_rt-ac87u
 endef
 TARGET_DEVICES += asus_rt-ac87u
 
+<<<<<<< HEAD
 define Device/asus_rt-ac88u
   $(call Device/asus)
   DEVICE_MODEL := RT-AC88U
@@ -208,6 +229,8 @@ define Device/asus_rt-ac88u
 endef
 TARGET_DEVICES += asus_rt-ac88u
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/asus_rt-n18u
   $(call Device/asus)
   DEVICE_MODEL := RT-N18U
@@ -283,6 +306,7 @@ define Device/dlink_dir-885l
 endef
 TARGET_DEVICES += dlink_dir-885l
 
+<<<<<<< HEAD
 define Device/dlink_dir-890l
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-890L
@@ -307,6 +331,8 @@ define Device/dlink_dwl-8610ap
 endef
 TARGET_DEVICES += dlink_dwl-8610ap
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/linksys_ea6300-v1
   DEVICE_VENDOR := Linksys
   DEVICE_MODEL := EA6300
@@ -379,6 +405,7 @@ define Device/luxul_xwr-3150
 endef
 TARGET_DEVICES += luxul_xwr-3150
 
+<<<<<<< HEAD
 define Device/meraki_mr26
   DEVICE_VENDOR := Meraki
   DEVICE_MODEL := MR26
@@ -399,18 +426,33 @@ define Device/meraki_mr32
   DEVICE_VENDOR := Meraki
   DEVICE_MODEL := MR32
   DEVICE_PACKAGES := $(B43) kmod-leds-pwm kmod-hwmon-ina2xx kmod-hci-uart
+=======
+define Device/meraki_mr32
+  DEVICE_VENDOR := Meraki
+  DEVICE_MODEL := MR32
+  DEVICE_PACKAGES := $(B43) kmod-i2c-bcm-iproc kmod-i2c-gpio kmod-eeprom-at24 \
+	kmod-leds-pwm kmod-hwmon-ina2xx kmod-bluetooth
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_DTS := bcm53016-meraki-mr32
 # Meraki FW r23 tries to resize the part.safe partition before it will
 # flash the image. This is a bit of a problem, since resizing will fail
 # if the partition is smaller than the old one.
   KERNEL_LOADADDR := 0x00008000
   KERNEL_INITRAMFS_SUFFIX := .bin
+<<<<<<< HEAD
   DEVICE_DTS_DELIMITER := @
   DEVICE_DTS_CONFIG := config@1
   KERNEL_INITRAMFS := kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb | \
 	pad-to 10362880
   KERNEL := kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb
   IMAGES += sysupgrade.bin
+=======
+  KERNEL_INITRAMFS := kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb | \
+	pad-to 10362880
+  KERNEL := kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+  IMAGES := sysupgrade.bin
+# Currently the only device that uses the new image check
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 
 # The loader is specifically looking for fdt@2:
@@ -420,6 +462,7 @@ define Device/meraki_mr32
 endef
 TARGET_DEVICES += meraki_mr32
 
+<<<<<<< HEAD
 define Device/meraki_mx6x
   KERNEL_IN_UBI := 1
   KERNEL_LOADADDR := 0x60008000
@@ -457,6 +500,8 @@ define Device/meraki_mx65
 endef
 TARGET_DEVICES += meraki_mx65
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear
   DEVICE_VENDOR := NETGEAR
   IMAGES := chk
@@ -528,10 +573,13 @@ TARGET_DEVICES += smartrg_sr400ac
 define Device/phicomm_k3
   DEVICE_VENDOR := PHICOMM
   DEVICE_MODEL := K3
+<<<<<<< HEAD
   DEVICE_ALT0_VENDOR := Wavlink
   DEVICE_ALT0_MODEL := QUANTUM DAX
   DEVICE_ALT1_VENDOR := Wavlink
   DEVICE_ALT1_MODEL := WL-WN538A8
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := $(BRCMFMAC_4366C0) $(USB3_PACKAGES)
   IMAGES := trx
 endef
@@ -556,7 +604,11 @@ define Device/tplink_archer-c5-v2
   TPLINK_BOARD := ARCHER-C5-V2
   BROKEN := y
 endef
+<<<<<<< HEAD
 #TARGET_DEVICES += tplink_archer-c5-v2
+=======
+TARGET_DEVICES += tplink_archer-c5-v2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/tplink_archer-c9-v1
   DEVICE_VENDOR := TP-Link
@@ -568,6 +620,10 @@ define Device/tplink_archer-c9-v1
   TPLINK_BOARD := ARCHERC9
   BROKEN := y
 endef
+<<<<<<< HEAD
 #TARGET_DEVICES += tplink_archer-c9-v1
+=======
+TARGET_DEVICES += tplink_archer-c9-v1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call BuildImage))

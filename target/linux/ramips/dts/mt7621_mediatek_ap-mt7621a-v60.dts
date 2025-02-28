@@ -32,7 +32,11 @@
 
 &state_default {
 	gpio {
+<<<<<<< HEAD
 		groups = "uart2";
+=======
+		groups = "uart2", "rgmii2";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };
@@ -93,6 +97,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -109,6 +114,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -125,6 +136,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_5 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -140,6 +152,9 @@
 
 &ethphy4 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&factory 0x5>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -163,6 +178,16 @@
 			status = "okay";
 			label = "lan4";
 		};
+<<<<<<< HEAD
+=======
+
+		port@4 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0x5>;
+			mtd-mac-address-increment = <1>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/uci-defaults.sh
 
 board_config_update
 
 case "$(board_name)" in
+<<<<<<< HEAD
 meraki,mx64|\
 meraki,mx64-a0)
 	ucidef_set_led_netdev "wan" "WAN Port" "green:activity-9" "wan"
@@ -16,6 +21,8 @@ meraki,mx65)
 	ucidef_set_led_netdev "wan1" "WAN Port 1" "green:activity-1" "wan1"
 	ucidef_set_led_netdev "wan2" "WAN Port 2" "green:activity-3" "wan2"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 netgear,r8000)
 	ucidef_set_led_usbport "usb2" "USB 2.0" "bcm53xx:white:usb2" "usb1-port2" "usb2-port2"
 	ucidef_set_led_usbport "usb3" "USB 3.0" "bcm53xx:white:usb3" "usb1-port1" "usb2-port1" "usb4-port1"

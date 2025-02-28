@@ -280,7 +280,11 @@ static int b53_phy_probe(struct phy_device *phydev)
 	if (phydev->mdio.addr != B53_PSEUDO_PHY && phydev->mdio.addr != 0)
 		return -ENODEV;
 
+<<<<<<< HEAD
 	dev = b53_swconfig_switch_alloc(&phydev->mdio.dev, &b53_mdio_ops, phydev->mdio.bus);
+=======
+	dev = b53_switch_alloc(&phydev->mdio.dev, &b53_mdio_ops, phydev->mdio.bus);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!dev)
 		return -ENOMEM;
 
@@ -290,7 +294,11 @@ static int b53_phy_probe(struct phy_device *phydev)
 	dev->pdata = NULL;
 	mutex_init(&dev->reg_mutex);
 
+<<<<<<< HEAD
 	ret = b53_swconfig_switch_detect(dev);
+=======
+	ret = b53_switch_detect(dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (ret)
 		return ret;
 
@@ -302,7 +310,11 @@ static int b53_phy_probe(struct phy_device *phydev)
 
 	linkmode_copy(phydev->advertising, phydev->supported);
 
+<<<<<<< HEAD
 	ret = b53_swconfig_switch_register(dev);
+=======
+	ret = b53_switch_register(dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (ret) {
 		dev_err(dev->dev, "failed to register switch: %i\n", ret);
 		return ret;
@@ -361,6 +373,29 @@ static int b53_phy_read_status(struct phy_device *phydev)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static const struct of_device_id b53_of_match_1[] = {
+	{ .compatible = "brcm,bcm5325" },
+	{ .compatible = "brcm,bcm5395" },
+	{ .compatible = "brcm,bcm5397" },
+	{ .compatible = "brcm,bcm5398" },
+	{ /* sentinel */ },
+};
+
+static const struct of_device_id b53_of_match_2[] = {
+	{ .compatible = "brcm,bcm53115" },
+	{ .compatible = "brcm,bcm53125" },
+	{ .compatible = "brcm,bcm53128" },
+	{ /* sentinel */ },
+};
+
+static const struct of_device_id b53_of_match_3[] = {
+	{ .compatible = "brcm,bcm5365" },
+	{ /* sentinel */ },
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* BCM5325, BCM539x */
 static struct phy_driver b53_phy_driver_id1 = {
 	.phy_id		= 0x0143bc00,
@@ -372,6 +407,13 @@ static struct phy_driver b53_phy_driver_id1 = {
 	.config_aneg	= b53_phy_config_aneg,
 	.config_init	= b53_phy_config_init,
 	.read_status	= b53_phy_read_status,
+<<<<<<< HEAD
+=======
+	.mdiodrv.driver = {
+		.name = "bcm539x",
+		.of_match_table = b53_of_match_1,
+	},
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /* BCM53125, BCM53128 */
@@ -385,6 +427,13 @@ static struct phy_driver b53_phy_driver_id2 = {
 	.config_aneg	= b53_phy_config_aneg,
 	.config_init	= b53_phy_config_init,
 	.read_status	= b53_phy_read_status,
+<<<<<<< HEAD
+=======
+	.mdiodrv.driver = {
+		.name = "bcm531xx",
+		.of_match_table = b53_of_match_2,
+	},
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 /* BCM5365 */
@@ -398,6 +447,13 @@ static struct phy_driver b53_phy_driver_id3 = {
 	.config_aneg	= b53_phy_config_aneg,
 	.config_init	= b53_phy_config_init,
 	.read_status	= b53_phy_read_status,
+<<<<<<< HEAD
+=======
+	.mdiodrv.driver = {
+		.name = "bcm5365",
+		.of_match_table = b53_of_match_3,
+	},
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 int __init b53_phy_driver_register(void)

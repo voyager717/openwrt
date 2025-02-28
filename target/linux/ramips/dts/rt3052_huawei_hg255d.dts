@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "huawei,hg255d", "ralink,rt3052-soc";
@@ -38,6 +41,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@60000 {
 				label = "factory";
 				reg = <0x60000 0x20000>;
@@ -56,6 +60,12 @@
 						reg = <0x28 0x6>;
 					};
 				};
+=======
+			factory: partition@60000 {
+				label = "factory";
+				reg = <0x60000 0x20000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@80000 {
@@ -76,8 +86,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
@@ -87,22 +101,34 @@
 		};
 
 		wifi {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&otg_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
@@ -113,7 +139,12 @@
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <10>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -143,8 +174,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_28>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x28>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -152,8 +187,12 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &otg {

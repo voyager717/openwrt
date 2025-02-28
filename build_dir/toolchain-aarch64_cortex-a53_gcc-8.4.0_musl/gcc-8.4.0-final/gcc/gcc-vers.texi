@@ -1,0 +1,5 @@
+@set version-GCC 8.4.0
+@clear DEVELOPMENT
+@set srcdir /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/gcc
+@set VERSION_PACKAGE (OpenWrt GCC 8.4.0 r0-) 
+@set BUGURL @uref{http://bugs.openwrt.org/}

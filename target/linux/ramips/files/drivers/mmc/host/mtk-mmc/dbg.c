@@ -48,6 +48,11 @@
 #include "mt6575_sd.h"
 #include <linux/seq_file.h>
 
+<<<<<<< HEAD
+=======
+static char cmd_buf[256];
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* for debug zone */
 unsigned int sd_debug_zone[4] = {
 	0,
@@ -57,9 +62,12 @@ unsigned int sd_debug_zone[4] = {
 };
 
 #if defined(MT6575_SD_DEBUG)
+<<<<<<< HEAD
 
 static char cmd_buf[256];
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* for driver profile */
 #define TICKS_ONE_MS  (13000)
 u32 gpt_enable;

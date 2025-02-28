@@ -14,7 +14,11 @@
 		pinctrl-0 = <&nand_pins>, <&nand_cs1_pins>;
 		pinctrl-names = "default";
 
+<<<<<<< HEAD
 		nand-use-soft-ecc-engine;
+=======
+		nand-ecc-mode = "soft";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		nand-ecc-strength = <3>;
 		nand-ecc-step-size = <256>;
 

@@ -13,8 +13,11 @@ PKG_RELEASE:=12
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=GPL-2.0
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=lto
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/kernel.mk
 
@@ -25,6 +28,12 @@ define Package/swconfig
   TITLE:=Switch configuration utility
 endef
 
+<<<<<<< HEAD
+=======
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto=jobserver
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 TARGET_CPPFLAGS := \
 	-D_GNU_SOURCE \
 	-I$(STAGING_DIR)/usr/include/libnl-tiny \

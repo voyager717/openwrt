@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_hiwifi_hc5x61a.dtsi"
 
 / {
@@ -27,6 +30,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &pinctrl {
 	ephy-analog;
 
@@ -46,6 +50,11 @@
 &state_default {
 	gpio {
 		groups = "i2s", "refclk", "wdt", "wled_an";
+=======
+&state_default {
+	gpio {
+		groups = "i2c", "refclk", "wdt", "wled_an";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };

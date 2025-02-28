@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	aliases {
@@ -38,8 +41,12 @@
 		compatible = "gpio-leds";
 
 		wan_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
@@ -64,14 +71,22 @@
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 10 GPIO_ACTIVE_HIGH>;
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -80,11 +95,14 @@
 &nand {
 	status = "okay";
 
+<<<<<<< HEAD
 	mediatek,bbt;
 	mediatek,bmt-remap-range =
 		<0x180000 0x580000>,
 		<0x2980000 0x2d80000>;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	partitions {
 		compatible = "fixed-partitions";
 		#address-cells = <1>;
@@ -99,6 +117,7 @@
 		partition@80000 {
 			label = "u_env";
 			reg = <0x80000 0x40000>;
+<<<<<<< HEAD
 		};
 
 		partition@c0000 {
@@ -119,6 +138,15 @@
 					reg = <0x8000 0x4da8>;
 				};
 			};
+=======
+			read-only;
+		};
+
+		factory: partition@c0000 {
+			label = "factory";
+			reg = <0xc0000 0x40000>;
+			read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@100000 {
@@ -183,8 +211,12 @@
 	mt76@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -192,6 +224,7 @@
 	mt76@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
 	};
@@ -209,6 +242,19 @@
 
 &switch0 {
 	ports {
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+	};
+};
+
+&switch0 {
+	ports {
+		port@0 {
+			status = "okay";
+			label = "wan";
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan1";

@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=b43-tools
+<<<<<<< HEAD
 PKG_DATE:=2022-07-05
 
 PKG_SOURCE_PROTO:=git
@@ -17,13 +18,31 @@ PKG_MIRROR_HASH:=4009d6c1f9ede43102897d6ebf4bd954331f3c4e2a94d4e61c0e5f303f92991
 
 include $(INCLUDE_DIR)/host-build.mk
 
+=======
+PKG_DATE:=2017-09-13
+
+PKG_SOURCE_URL:=https://github.com/mbuesch/b43-tools.git
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)
+PKG_SOURCE_VERSION:=27892ef741e7f1d08cb939744f8b8f5dac7b04ae
+PKG_MIRROR_HASH:=f914c36ac566e9e3b5a3a04de16ddb014fcad6a1cf25cdd8e4825c708d28d3f4
+HOST_BUILD_DIR=$(BUILD_DIR_HOST)/$(PKG_NAME)
+
+include $(INCLUDE_DIR)/host-build.mk
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Host/Compile
 	+$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/fwcutter \
 		CFLAGS="$(HOST_CFLAGS) -include endian.h" \
 		$(HOST_MAKE_FLAGS) \
 		$(1) QUIET_SPARSE=:
 	+$(MAKE) $(HOST_JOBS) -C $(HOST_BUILD_DIR)/assembler \
+<<<<<<< HEAD
 		CFLAGS="$(HOST_CFLAGS) -include endian.h -Wno-error=int-conversion" \
+=======
+		CFLAGS="$(HOST_CFLAGS) -include endian.h" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(HOST_MAKE_FLAGS) \
 		LDFLAGS= \
 		$(1) QUIET_SPARSE=:

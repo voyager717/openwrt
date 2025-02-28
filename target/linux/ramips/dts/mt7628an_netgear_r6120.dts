@@ -12,7 +12,11 @@
 		compatible = "regulator-fixed";
 
 		regulator-name = "USB-power";
+<<<<<<< HEAD
 		gpios = <&gpio 45 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 45 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		enable-active-high;
@@ -44,6 +48,11 @@
 };
 
 &wifi5 {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_4 2>;
 	nvmem-cell-names = "eeprom", "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+	mtd-mac-address-increment = <(2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -1,7 +1,10 @@
 #include "vr9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <dt-bindings/mips/lantiq_rcu_gphy.h>
 
 / {
@@ -14,6 +17,12 @@
 		led-dsl = &led_dsl;
 		led-internet = &led_internet;
 		led-wifi = &led_wlan5g;
+<<<<<<< HEAD
+=======
+
+		led-usb = &led_usb;
+		led-usb2 = &led_usb;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	memory@0 {
@@ -49,8 +58,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 46 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -65,6 +78,7 @@
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 
+<<<<<<< HEAD
 		usb {
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
@@ -76,12 +90,25 @@
 		eth {
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+		led_usb: usb {
+			label = "blue:usb";
+			gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
+		};
+
+		eth {
+			label = "blue:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 40 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 
@@ -99,14 +126,81 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 33 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 33 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_romfile_f100 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	pinctrl-0 = <&mdio_pins>, <&gphy0_led1_pins>, <&gphy1_led1_pins>;
+	pinctrl-names = "default";
+
+	lan: interface@0 {
+		compatible = "lantiq,xrx200-pdi";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0>;
+		mtd-mac-address = <&romfile 0xf100>;
+		lantiq,switch;
+
+		ethernet@0 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <0>;
+			phy-mode = "rgmii";
+			phy-handle = <&phy0>;
+			// gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+		};
+		ethernet@2 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <2>;
+			phy-mode = "gmii";
+			phy-handle = <&phy11>;
+		};
+		ethernet@4 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <4>;
+			phy-mode = "gmii";
+			phy-handle = <&phy13>;
+		};
+		ethernet@5 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <5>;
+			phy-mode = "rgmii";
+			phy-handle = <&phy5>;
+		};
+	};
+
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "lantiq,xrx200-mdio";
+
+		phy0: ethernet-phy@0 {
+			reg = <0x0>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy5: ethernet-phy@5 {
+			reg = <0x5>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy11: ethernet-phy@11 {
+			reg = <0x11>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy13: ethernet-phy@13 {
+			reg = <0x13>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &gphy0 {
@@ -136,6 +230,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &gswip {
 	pinctrl-0 = <&mdio_pins>, <&gphy0_led1_pins>, <&gphy1_led1_pins>;
 	pinctrl-names = "default";
@@ -184,6 +279,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie0 {
 	pcie@0 {
 		reg = <0 0 0 0 0>;
@@ -197,15 +294,24 @@
 			mediatek,mtd-eeprom = <&radio 0x0000>;
 			big-endian;
 			ieee80211-freq-limit = <5000000 6000000>;
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_romfile_f100 2>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&romfile 0xf100>;
+			mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
 
 &pci0 {
 	status = "okay";
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -249,6 +355,7 @@
 				reg = <0xfd0000 0x10000>;
 				label = "romfile";
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -261,6 +368,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@fe0000 {

@@ -2,7 +2,11 @@
 
 / {
 	compatible = "unbranded,wr512-3gn-4m", "unbranded,wr512-3gn", "ralink,rt3052-soc";
+<<<<<<< HEAD
 	model = "Unbranded WR512-3GN (4M)";
+=======
+	model = "WR512-3GN (4M)";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	flash@1f000000 {
 		compatible = "cfi-flash";
@@ -27,6 +31,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -41,6 +46,12 @@
 						reg = <0x0 0x200>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {

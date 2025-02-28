@@ -85,6 +85,7 @@ platform_do_upgrade() {
 	get_image "$@" | dd of="/dev/$diskdev" bs=1 skip=440 count=4 seek=440 conv=fsync
 }
 
+<<<<<<< HEAD
 bcm27xx_set_root_part() {
 	local root_part
 
@@ -97,11 +98,14 @@ bcm27xx_set_root_part() {
 	sed -i "s#\broot=[^ ]*#root=${root_part}#g" "/boot/cmdline.txt"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 platform_copy_config() {
 	local partdev
 
 	if export_partdevice partdev 1; then
 		mkdir -p /boot
+<<<<<<< HEAD
 		[ -f /boot/kernel*.img ] || mount -t vfat -o rw,noatime "/dev/$partdev" /boot
 
 		tar -C / -zxvf "$UPGRADE_BACKUP" boot/cmdline.txt boot/config.txt
@@ -117,10 +121,16 @@ platform_copy_config() {
 		tar -C $backup_tmp -zcvf /boot/$BACKUP_FILE *
 		cd $work_dir
 
+=======
+		[ -f /boot/kernel.img ] || mount -t vfat -o rw,noatime "/dev/$partdev" /boot
+		cp -af "$UPGRADE_BACKUP" "/boot/$BACKUP_FILE"
+		tar -C / -zxvf "$UPGRADE_BACKUP" boot/cmdline.txt boot/config.txt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		sync
 		umount /boot
 	fi
 }
+<<<<<<< HEAD
 
 platform_restore_backup() {
 	local TAR_V=$1
@@ -128,3 +138,5 @@ platform_restore_backup() {
 	tar -C / -x${TAR_V}zf "$CONF_RESTORE"
 	bcm27xx_set_root_part
 }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

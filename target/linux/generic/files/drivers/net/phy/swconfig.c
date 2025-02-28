@@ -24,6 +24,10 @@
 #include <linux/skbuff.h>
 #include <linux/switch.h>
 #include <linux/of.h>
+<<<<<<< HEAD
+=======
+#include <linux/version.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <uapi/linux/mii.h>
 
 #define SWCONFIG_DEVNAME	"switch%d"
@@ -1053,7 +1057,10 @@ static struct genl_family switch_fam = {
 	.module = THIS_MODULE,
 	.ops = swconfig_ops,
 	.n_ops = ARRAY_SIZE(swconfig_ops),
+<<<<<<< HEAD
 	.resv_start_op = SWITCH_CMD_SET_VLAN + 1,
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 #ifdef CONFIG_OF

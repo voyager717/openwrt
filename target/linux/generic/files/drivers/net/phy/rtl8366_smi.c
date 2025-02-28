@@ -256,7 +256,11 @@ static int __rtl8366_smi_read_reg(struct rtl8366_smi *smi, u32 addr, u32 *data)
 
 int __rtl8366_mdio_read_reg(struct rtl8366_smi *smi, u32 addr, u32 *data)
 {
+<<<<<<< HEAD
 	u32 phy_id = smi->phy_id;
+=======
+	u32 phy_id = MDC_REALTEK_PHY_ADDR;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct mii_bus *mbus = smi->ext_mbus;
 
 	BUG_ON(in_interrupt());
@@ -293,7 +297,11 @@ int __rtl8366_mdio_read_reg(struct rtl8366_smi *smi, u32 addr, u32 *data)
 
 static int __rtl8366_mdio_write_reg(struct rtl8366_smi *smi, u32 addr, u32 data)
 {
+<<<<<<< HEAD
 	u32 phy_id = smi->phy_id;
+=======
+	u32 phy_id = MDC_REALTEK_PHY_ADDR;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct mii_bus *mbus = smi->ext_mbus;
 
 	BUG_ON(in_interrupt());
@@ -590,7 +598,11 @@ static int rtl8366_set_pvid(struct rtl8366_smi *smi, unsigned port,
 	return -ENOSPC;
 }
 
+<<<<<<< HEAD
 static int rtl8366_smi_enable_vlan(struct rtl8366_smi *smi, int enable)
+=======
+int rtl8366_enable_vlan(struct rtl8366_smi *smi, int enable)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	int err;
 
@@ -607,8 +619,14 @@ static int rtl8366_smi_enable_vlan(struct rtl8366_smi *smi, int enable)
 
 	return err;
 }
+<<<<<<< HEAD
 
 static int rtl8366_smi_enable_vlan4k(struct rtl8366_smi *smi, int enable)
+=======
+EXPORT_SYMBOL_GPL(rtl8366_enable_vlan);
+
+static int rtl8366_enable_vlan4k(struct rtl8366_smi *smi, int enable)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	int err;
 
@@ -628,7 +646,11 @@ static int rtl8366_smi_enable_vlan4k(struct rtl8366_smi *smi, int enable)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int rtl8366_smi_enable_all_ports(struct rtl8366_smi *smi, int enable)
+=======
+int rtl8366_enable_all_ports(struct rtl8366_smi *smi, int enable)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	int port;
 	int err;
@@ -641,15 +663,26 @@ static int rtl8366_smi_enable_all_ports(struct rtl8366_smi *smi, int enable)
 
 	return 0;
 }
+<<<<<<< HEAD
 
 static int rtl8366_smi_reset_vlan(struct rtl8366_smi *smi)
+=======
+EXPORT_SYMBOL_GPL(rtl8366_enable_all_ports);
+
+int rtl8366_reset_vlan(struct rtl8366_smi *smi)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct rtl8366_vlan_mc vlanmc;
 	int err;
 	int i;
 
+<<<<<<< HEAD
 	rtl8366_smi_enable_vlan(smi, 0);
 	rtl8366_smi_enable_vlan4k(smi, 0);
+=======
+	rtl8366_enable_vlan(smi, 0);
+	rtl8366_enable_vlan4k(smi, 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	/* clear VLAN member configurations */
 	vlanmc.vid = 0;
@@ -665,13 +698,21 @@ static int rtl8366_smi_reset_vlan(struct rtl8366_smi *smi)
 
 	return 0;
 }
+<<<<<<< HEAD
+=======
+EXPORT_SYMBOL_GPL(rtl8366_reset_vlan);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static int rtl8366_init_vlan(struct rtl8366_smi *smi)
 {
 	int port;
 	int err;
 
+<<<<<<< HEAD
 	err = rtl8366_smi_reset_vlan(smi);
+=======
+	err = rtl8366_reset_vlan(smi);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (err)
 		return err;
 
@@ -692,7 +733,11 @@ static int rtl8366_init_vlan(struct rtl8366_smi *smi)
 			return err;
 	}
 
+<<<<<<< HEAD
 	return rtl8366_smi_enable_vlan(smi, 1);
+=======
+	return rtl8366_enable_vlan(smi, 1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 #ifdef CONFIG_RTL8366_SMI_DEBUG_FS
@@ -1070,6 +1115,7 @@ int rtl8366_sw_reset_switch(struct switch_dev *dev)
 	if (err)
 		return err;
 
+<<<<<<< HEAD
 	err = rtl8366_smi_reset_vlan(smi);
 	if (err)
 		return err;
@@ -1079,6 +1125,17 @@ int rtl8366_sw_reset_switch(struct switch_dev *dev)
 		return err;
 
 	return rtl8366_smi_enable_all_ports(smi, 1);
+=======
+	err = rtl8366_reset_vlan(smi);
+	if (err)
+		return err;
+
+	err = rtl8366_enable_vlan(smi, 1);
+	if (err)
+		return err;
+
+	return rtl8366_enable_all_ports(smi, 1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 EXPORT_SYMBOL_GPL(rtl8366_sw_reset_switch);
 
@@ -1340,9 +1397,15 @@ int rtl8366_sw_set_vlan_enable(struct switch_dev *dev,
 		return -EINVAL;
 
 	if (attr->ofs == 1)
+<<<<<<< HEAD
 		err = rtl8366_smi_enable_vlan(smi, val->value.i);
 	else
 		err = rtl8366_smi_enable_vlan4k(smi, val->value.i);
+=======
+		err = rtl8366_enable_vlan(smi, val->value.i);
+	else
+		err = rtl8366_enable_vlan4k(smi, val->value.i);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return err;
 }
@@ -1491,7 +1554,11 @@ int rtl8366_smi_init(struct rtl8366_smi *smi)
 		goto err_free_sck;
 	}
 
+<<<<<<< HEAD
 	err = rtl8366_smi_enable_all_ports(smi, 1);
+=======
+	err = rtl8366_enable_all_ports(smi, 1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (err)
 		goto err_free_sck;
 
@@ -1547,9 +1614,12 @@ int rtl8366_smi_probe_of(struct platform_device *pdev, struct rtl8366_smi *smi)
 		goto try_gpio;
 	}
 
+<<<<<<< HEAD
 	if (of_property_read_u32(np, "phy-id", &smi->phy_id))
 		smi->phy_id = MDC_REALTEK_PHY_ADDR;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 0;
 
 try_gpio:
@@ -1589,7 +1659,10 @@ int rtl8366_smi_probe_plat(struct platform_device *pdev, struct rtl8366_smi *smi
 	smi->gpio_sda = pdata->gpio_sda;
 	smi->gpio_sck = pdata->gpio_sck;
 	smi->hw_reset = pdata->hw_reset;
+<<<<<<< HEAD
 	smi->phy_id = MDC_REALTEK_PHY_ADDR;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return 0;
 }

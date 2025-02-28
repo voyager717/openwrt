@@ -29,13 +29,20 @@
 #include <endian.h>
 #include <string.h>
 #include <errno.h>
+<<<<<<< HEAD
 #include <netinet/in.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <sys/ioctl.h>
 #include <mtd/mtd-user.h>
 #include "mtd.h"
 #include "crc32.h"
 
+<<<<<<< HEAD
+=======
+#define TRX_MAGIC       0x30524448      /* "HDR0" */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define TRX_CRC32_DATA_OFFSET	12	/* First 12 bytes are not covered by CRC32 */
 #define TRX_CRC32_DATA_SIZE	16
 struct trx_header {
@@ -92,7 +99,11 @@ trx_fixup(int fd, const char *name)
 	}
 
 	trx = ptr;
+<<<<<<< HEAD
 	if (ntohl(trx->magic) != opt_trxmagic) {
+=======
+	if (trx->magic != TRX_MAGIC) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		fprintf(stderr, "TRX header not found\n");
 		goto err;
 	}
@@ -127,8 +138,12 @@ trx_check(int imagefd, const char *mtd, char *buf, int *len)
 		}
 	}
 
+<<<<<<< HEAD
 	if (ntohl(trx->magic) != opt_trxmagic ||
 	    trx->len < sizeof(struct trx_header)) {
+=======
+	if (trx->magic != TRX_MAGIC || trx->len < sizeof(struct trx_header)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (quiet < 2) {
 			fprintf(stderr, "Bad trx header\n");
 			fprintf(stderr, "This is not the correct file format; refusing to flash.\n"
@@ -166,7 +181,11 @@ mtd_fixtrx(const char *mtd, size_t offset, size_t data_size)
 	size_t block_offset;
 
 	if (quiet < 2)
+<<<<<<< HEAD
 		fprintf(stderr, "Trying to fix trx header in %s at 0x%zx...\n", mtd, offset);
+=======
+		fprintf(stderr, "Trying to fix trx header in %s at 0x%x...\n", mtd, offset);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	fd = mtd_check_open(mtd);
 	if(fd < 0) {
@@ -201,7 +220,11 @@ mtd_fixtrx(const char *mtd, size_t offset, size_t data_size)
 	}
 
 	trx = (struct trx_header *)(first_block + offset);
+<<<<<<< HEAD
 	if (ntohl(trx->magic) != opt_trxmagic) {
+=======
+	if (trx->magic != STORE32_LE(0x30524448)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		fprintf(stderr, "No trx magic found\n");
 		exit(1);
 	}
@@ -247,7 +270,11 @@ mtd_fixtrx(const char *mtd, size_t offset, size_t data_size)
 
 	trx->crc32 = STORE32_LE(crc32buf(buf, data_size));
 	if (mtd_erase_block(fd, block_offset)) {
+<<<<<<< HEAD
 		fprintf(stderr, "Can't erease block at 0x%zx (%s)\n", block_offset, strerror(errno));
+=======
+		fprintf(stderr, "Can't erease block at 0x%x (%s)\n", block_offset, strerror(errno));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		exit(1);
 	}
 

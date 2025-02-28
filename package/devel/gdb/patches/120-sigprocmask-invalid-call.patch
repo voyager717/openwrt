@@ -27,7 +27,11 @@ gdb/ChangeLog:
 
 --- a/gdbsupport/signals-state-save-restore.cc
 +++ b/gdbsupport/signals-state-save-restore.cc
+<<<<<<< HEAD
 @@ -37,7 +37,7 @@ save_original_signals_state (bool quiet)
+=======
+@@ -38,7 +38,7 @@ save_original_signals_state (bool quiet)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
    int i;
    int res;
  

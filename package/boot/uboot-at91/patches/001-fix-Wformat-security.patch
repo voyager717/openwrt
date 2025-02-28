@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From 3b05406c02070df3e7f19399d81ebd35ed6deae5 Mon Sep 17 00:00:00 2001
 From: Claudiu Beznea <claudiu.beznea@microchip.com>
 Date: Tue, 12 Oct 2021 17:43:28 +0300
@@ -24,17 +25,30 @@ Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
 --- a/cmd/version.c
 +++ b/cmd/version.c
 @@ -24,7 +24,7 @@ static int do_version(struct cmd_tbl *cm
+=======
+--- a/cmd/version.c
++++ b/cmd/version.c
+@@ -18,7 +18,7 @@ static int do_version(cmd_tbl_t *cmdtp,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  {
  	char buf[DISPLAY_OPTIONS_BANNER_LENGTH];
  
 -	printf(display_options_get_banner(false, buf, sizeof(buf)));
+<<<<<<< HEAD
 +	printf("%s", display_options_get_banner(false, buf, sizeof(buf)));
+=======
++	printf("%s",display_options_get_banner(false, buf, sizeof(buf)));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #ifdef CC_VERSION_STRING
  	puts(CC_VERSION_STRING "\n");
  #endif
 --- a/drivers/pinctrl/pinctrl-uclass.c
 +++ b/drivers/pinctrl/pinctrl-uclass.c
+<<<<<<< HEAD
 @@ -375,7 +375,7 @@ int pinctrl_get_pin_name(struct udevice
+=======
+@@ -368,7 +368,7 @@ int pinctrl_get_pin_name(struct udevice
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	if (!ops->get_pin_name)
  		return -ENOSYS;
  
@@ -43,3 +57,17 @@ Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
  
  	return 0;
  }
+<<<<<<< HEAD
+=======
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -522,7 +522,7 @@ efi_status_t EFIAPI efi_set_variable(u16
+ 
+ 	if (old_size)
+ 		/* APPEND_WRITE */
+-		s += sprintf(s, old_val);
++		s += sprintf(s, "%s", old_val);
+ 	else
+ 		s += sprintf(s, "(blob)");
+ 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

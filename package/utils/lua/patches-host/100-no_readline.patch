@@ -10,7 +10,11 @@
  #if defined(LUA_USE_MACOSX)
 --- a/src/Makefile
 +++ b/src/Makefile
+<<<<<<< HEAD
 @@ -17,6 +17,7 @@ LIBS= -lm $(MYLIBS)
+=======
+@@ -17,6 +17,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  MYCFLAGS=
  MYLDFLAGS=
  MYLIBS=
@@ -18,7 +22,11 @@
  
  # == END OF USER SETTINGS. NO NEED TO CHANGE ANYTHING BELOW THIS LINE =========
  
+<<<<<<< HEAD
 @@ -75,7 +76,7 @@ echo:
+=======
+@@ -75,7 +76,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	@echo "MYLIBS = $(MYLIBS)"
  
  # convenience targets for popular platforms
@@ -27,7 +35,11 @@
  none:
  	@echo "Please choose a platform:"
  	@echo "   $(PLATS)"
+<<<<<<< HEAD
 @@ -90,16 +91,16 @@ bsd:
+=======
+@@ -90,16 +91,16 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	$(MAKE) all MYCFLAGS="-DLUA_USE_POSIX -DLUA_USE_DLOPEN" MYLIBS="-Wl,-E"
  
  freebsd:

@@ -6,7 +6,10 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "apm82181.dtsi"
 
 / {
@@ -15,12 +18,20 @@
 
 	aliases {
 		serial0 = &UART0;
+<<<<<<< HEAD
+=======
+		led-boot = &status;
+		led-failsafe = &status;
+		led-running = &status;
+		led-upgrade = &status;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &POB0 {
 	ebc {
 		nor_flash@0,0 {
+<<<<<<< HEAD
 		        status = "okay";
 		        compatible = "jedec-flash"; /* "microchip,sst39vf040 */
 		        bank-width = <1>;
@@ -79,6 +90,29 @@
 					reg = <0x00020000 0x00050000>;
 					read-only;
 				};
+=======
+			status = "okay";
+			compatible = "amd,s29gl512n", "jedec-probe", "cfi-flash", "mtd-rom";
+			bank-width = <1>;
+			reg = <0x00000000 0x00000000 0x00080000>;
+			#address-cells = <1>;
+			#size-cells = <1>;
+
+			partition@0 {
+				/* Part of bootrom - Don't use it without a jump */
+				label = "free";
+				reg = <0x00000000 0x0001e000>;
+			};
+
+			partition@1e000 {
+				label = "env";
+				reg = <0x0001e000 0x00002000>;
+			};
+
+			partition@20000 {
+				label = "uboot";
+				reg = <0x00020000 0x00050000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -120,6 +154,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		/* There's just one tri-color LED with three separate pins.
 		 * One pin for each color (red, green and blue). Each has
 		 * a different meaning.
@@ -140,6 +175,21 @@
 		led-2 {
 			color = <LED_COLOR_ID_BLUE>;
 			function = LED_FUNCTION_DISK;
+=======
+		failsafe: power-red {
+			label = "mbl:red:power";
+			gpios = <&GPIO1 4 GPIO_ACTIVE_HIGH>;
+			linux,default-trigger = "panic";
+		};
+
+		status: power-green {
+			label = "mbl:green:power";
+			gpios = <&GPIO1 5 GPIO_ACTIVE_HIGH>;
+		};
+
+		power-blue {
+			label = "mbl:blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&GPIO1 6 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "disk-activity";
 		};
@@ -150,7 +200,11 @@
 		poll-interval = <60>;	/* 3 * 20 = 60ms */
 		autorepeat;
 
+<<<<<<< HEAD
 		button-restart {
+=======
+		reset-button {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			label = "Reset button";
 			linux,code = <KEY_RESTART>;
 			gpios = <&GPIO2 2 GPIO_ACTIVE_LOW>;
@@ -166,6 +220,7 @@
 		regulator-boot-on; /* uboot sets this */
 		enable-active-high;
 	};
+<<<<<<< HEAD
 
 	sata1pwr: sata1-regulator {
 		compatible = "regulator-fixed";
@@ -188,6 +243,8 @@
 		regulator-always-on; /* needed to read OS from HDD */
 		enable-active-high;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &EMAC0 {
@@ -196,7 +253,10 @@
 	phy-map = <0x2>;
 	phy-address = <0x1>;
 	phy-handle = <&phy>;
+<<<<<<< HEAD
 	phy-mode = "rgmii-id";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	mdio {
 		#address-cells = <1>;

@@ -7,6 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=glibc
+<<<<<<< HEAD
 PKG_VERSION:=2.38
 PKG_RELEASE:=1
 
@@ -17,6 +18,17 @@ PKG_MIRROR_HASH:=fd61eb2caea0d4100638b8aa8285b0f1bc23af921c376516307c9ab8ac30773
 PKG_SOURCE_URL:=https://sourceware.org/git/glibc.git
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.zst
 PKG_CPE_ID:=cpe:/a:gnu:glibc
+=======
+PKG_VERSION:=2.33
+PKG_RELEASE:=2
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+PKG_SOURCE_VERSION:=55446dd8a2d7b84d966fe4248427c02845b036d4
+PKG_MIRROR_HASH:=ef5ae2f63828aa3330e36ee2ec81a2de874c11d4dc24f0229109ab5581f29d76
+PKG_SOURCE_URL:=https://sourceware.org/git/glibc.git
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.xz
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_BUILD_DIR:=$(BUILD_DIR_TOOLCHAIN)/$(PKG_SOURCE_SUBDIR)
 CUR_BUILD_DIR:=$(HOST_BUILD_DIR)-$(VARIANT)
@@ -61,6 +73,7 @@ GLIBC_CONFIGURE:= \
 		--without-gd \
 		--without-cvs \
 		--enable-add-ons \
+<<<<<<< HEAD
 		--enable-crypt \
 		--$(if $(CONFIG_SOFT_FLOAT),without,with)-fp \
 		  $(if $(CONFIG_PKG_CC_STACKPROTECTOR_REGULAR),--enable-stack-protector=yes) \
@@ -70,6 +83,12 @@ GLIBC_CONFIGURE:= \
 		  $(if $(CONFIG_PKG_FORTIFY_SOURCE_1),--enable-fortify-source=1) \
 		  $(if $(CONFIG_PKG_FORTIFY_SOURCE_2),--enable-fortify-source=2) \
 		--enable-kernel=5.15.0
+=======
+		--$(if $(CONFIG_SOFT_FLOAT),without,with)-fp \
+		  $(if $(CONFIG_PKG_CC_STACKPROTECTOR_REGULAR),--enable-stack-protector=yes) \
+		  $(if $(CONFIG_PKG_CC_STACKPROTECTOR_STRONG),--enable-stack-protector=strong) \
+		--enable-kernel=4.14.0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 export libc_cv_ssp=no
 export libc_cv_ssp_strong=no
@@ -84,6 +103,14 @@ define Host/SetToolchainInfo
 endef
 
 define Host/Configure
+<<<<<<< HEAD
+=======
+	[ -f $(HOST_BUILD_DIR)/.autoconf ] || { \
+		cd $(HOST_BUILD_DIR)/; \
+		autoconf --force && \
+		touch $(HOST_BUILD_DIR)/.autoconf; \
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mkdir -p $(CUR_BUILD_DIR)
 	( cd $(CUR_BUILD_DIR); rm -f config.cache; \
 		$(GLIBC_CONFIGURE) \

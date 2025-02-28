@@ -1,7 +1,10 @@
 #include "vr9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <dt-bindings/mips/lantiq_rcu_gphy.h>
 
 / {
@@ -19,6 +22,11 @@
 		led-dsl = &led_dsl;
 		led-internet = &led_internet;
 		led-wifi = &led_wifi;
+<<<<<<< HEAD
+=======
+		led-usb = &led_usb0;
+		led-usb2 = &led_usb2;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	memory@0 {
@@ -66,6 +74,7 @@
 			gpios = <&gpio 5 GPIO_ACTIVE_HIGH>;
 		};
 
+<<<<<<< HEAD
 		usb0 {
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
@@ -84,6 +93,20 @@
 		led_wps: wps {
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+		led_usb0: usb0 {
+			label = "green:usb";
+			gpios = <&gpio 19 GPIO_ACTIVE_HIGH>;
+		};
+
+		led_usb2: usb2 {
+			label = "green:usb2";
+			gpios = <&gpio 20 GPIO_ACTIVE_HIGH>;
+		};
+
+		led_wps: wps {
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 37 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -107,14 +130,81 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 33 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 33 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_ath9k_cal_f100 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	pinctrl-0 = <&mdio_pins>, <&gphy0_led1_pins>, <&gphy1_led1_pins>;
+	pinctrl-names = "default";
+
+	interface@0 {
+		compatible = "lantiq,xrx200-pdi";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0>;
+		mtd-mac-address = <&ath9k_cal 0xf100>;
+		lantiq,switch;
+
+		ethernet@0 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <0>;
+			phy-mode = "rgmii";
+			phy-handle = <&phy0>;
+			// gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
+		};
+		ethernet@2 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <2>;
+			phy-mode = "gmii";
+			phy-handle = <&phy11>;
+		};
+		ethernet@4 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <4>;
+			phy-mode = "gmii";
+			phy-handle = <&phy13>;
+		};
+		ethernet@5 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <5>;
+			phy-mode = "rgmii";
+			phy-handle = <&phy5>;
+		};
+	};
+
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "lantiq,xrx200-mdio";
+
+		phy0: ethernet-phy@0 {
+			reg = <0x0>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy5: ethernet-phy@5 {
+			reg = <0x5>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy11: ethernet-phy@11 {
+			reg = <0x11>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+		phy13: ethernet-phy@13 {
+			reg = <0x13>;
+			compatible = "lantiq,phy11g", "ethernet-phy-ieee802.3-c22";
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &gphy0 {
@@ -144,6 +234,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &gswip {
 	pinctrl-0 = <&mdio_pins>, <&gphy0_led1_pins>, <&gphy1_led1_pins>;
 	pinctrl-names = "default";
@@ -192,6 +283,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie0 {
 	pcie@0 {
 		reg = <0 0 0 0 0>;
@@ -200,11 +293,23 @@
 		#address-cells = <3>;
 		device_type = "pci";
 
+<<<<<<< HEAD
 		ath9k: wifi@0,0 {
 			reg = <0 0 0 0 0>;
 			#gpio-cells = <2>;
 			gpio-controller;
 			ieee80211-freq-limit = <2402000 2482000>;
+=======
+		ath9k: wifi@168c,002e {
+			compatible = "pci168c,002e";
+			reg = <0 0 0 0 0>;
+			#gpio-cells = <2>;
+			gpio-controller;
+			qca,no-eeprom;
+			qca,disable-5ghz;
+			mtd-mac-address = <&ath9k_cal 0xf100>;
+			mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -240,6 +345,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7d0000 {
 				reg = <0x7d0000 0x30000>;
 				label = "boardconfig";
@@ -256,6 +362,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			ath9k_cal: partition@7d0000 {
+				reg = <0x7d0000 0x30000>;
+				label = "boardconfig";
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};

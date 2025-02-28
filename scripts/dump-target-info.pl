@@ -4,7 +4,11 @@ use strict;
 use warnings;
 use Cwd;
 
+<<<<<<< HEAD
 my (%targets, %architectures, %kernels, %devices);
+=======
+my (%targets, %architectures);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $ENV{'TOPDIR'} = Cwd::getcwd();
 
@@ -13,7 +17,11 @@ sub parse_targetinfo {
 	my ($target_dir, $subtarget) = @_;
 
 	if (open M, "make -C '$target_dir' --no-print-directory DUMP=1 TARGET_BUILD=1 SUBTARGET='$subtarget' |") {
+<<<<<<< HEAD
 		my ($target_name, $target_arch, $target_kernel, $target_testing_kernel, @target_features);
+=======
+		my ($target_name, $target_arch, @target_features);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		while (defined(my $line = readline M)) {
 			chomp $line;
 
@@ -23,32 +31,45 @@ sub parse_targetinfo {
 			elsif ($line =~ /^Target-Arch-Packages: (.+)$/) {
 				$target_arch = $1;
 			}
+<<<<<<< HEAD
 			elsif ($line =~ /^Linux-Version: (\d\.\d+)\.\d+$/) {
 				$target_kernel = $1;
 			}
 			elsif ($line =~ /^Linux-Testing-Version: (\d\.\d+)\.\d+$/) {
 				$target_testing_kernel = $1;
 			}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			elsif ($line =~ /^Target-Features: (.+)$/) {
 				@target_features = split /\s+/, $1;
 			}
 			elsif ($line =~ /^@\@$/) {
+<<<<<<< HEAD
 				if ($target_name && $target_arch && $target_kernel &&
+=======
+				if ($target_name && $target_arch &&
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				    !grep { $_ eq 'broken' or $_ eq 'source-only' } @target_features) {
 					$targets{$target_name} = $target_arch;
 					$architectures{$target_arch} ||= [];
 					push @{$architectures{$target_arch}}, $target_name;
+<<<<<<< HEAD
 					$kernels{$target_name} ||= [];
 					push @{$kernels{$target_name}}, $target_kernel;
 					if ($target_testing_kernel) {
 						push @{$kernels{$target_name}}, $target_testing_kernel;
 					}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				}
 
 				undef $target_name;
 				undef $target_arch;
+<<<<<<< HEAD
 				undef $target_kernel;
 				undef $target_testing_kernel;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				@target_features = ();
 			}
 		}
@@ -56,6 +77,7 @@ sub parse_targetinfo {
 	}
 }
 
+<<<<<<< HEAD
 sub parse_devices {
 	my ($target_dir, $subtarget) = @_;
 
@@ -118,6 +140,8 @@ sub parse_devices {
 	}
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 sub get_targetinfo {
 	foreach my $target_makefile (glob "target/linux/*/Makefile") {
 		my ($target_dir) = $target_makefile =~ m!^(.+)/Makefile$!;
@@ -148,6 +172,7 @@ sub get_targetinfo {
 	}
 }
 
+<<<<<<< HEAD
 sub get_devices {
 	my ($target_subtarget) = @_;
 	my ($target, $subtarget) = split /\//, $target_subtarget;
@@ -157,6 +182,8 @@ sub get_devices {
 	parse_devices($target_dir, $subtarget)
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 if (@ARGV == 1 && $ARGV[0] eq 'targets') {
 	get_targetinfo();
 	foreach my $target_name (sort keys %targets) {
@@ -169,6 +196,7 @@ elsif (@ARGV == 1 && $ARGV[0] eq 'architectures') {
 		printf "%s %s\n", $target_arch, join ' ', @{$architectures{$target_arch}};
 	}
 }
+<<<<<<< HEAD
 elsif (@ARGV == 1 && $ARGV[0] eq 'kernels') {
 	get_targetinfo();
 	foreach my $target_name (sort keys %targets) {
@@ -186,4 +214,9 @@ else {
 	print "Usage: $0 architectures\n";
 	print "Usage: $0 kernels\n";
 	print "Usage: $0 devices <target/subtarget>\n";
+=======
+else {
+	print "Usage: $0 targets\n";
+	print "Usage: $0 architectures\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

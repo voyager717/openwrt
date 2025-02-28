@@ -1,6 +1,10 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -368,7 +368,7 @@ check_tirpc()
+=======
+@@ -367,7 +367,7 @@ check_selinux()
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  check_mnl()
  {

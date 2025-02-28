@@ -7,7 +7,11 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ltq-deu
+<<<<<<< HEAD
 PKG_RELEASE:=45
+=======
+PKG_RELEASE:=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 PKG_LICENSE:=GPL-2.0+
@@ -21,14 +25,24 @@ define KernelPackage/ltq-deu-template
   TITLE:=deu driver for $(1)
   URL:=http://www.lantiq.com/
   VARIANT:=$(1)
+<<<<<<< HEAD
   DEPENDS:=@$(2) +kmod-crypto-manager +kmod-crypto-des
+=======
+  DEPENDS:=@TARGET_lantiq_$(2) +kmod-crypto-manager
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(PKG_BUILD_DIR)/ltq_deu_$(1).ko
   AUTOLOAD:=$(call AutoProbe,ltq_deu_$(1))
 endef
 
+<<<<<<< HEAD
 KernelPackage/ltq-deu-danube=$(call KernelPackage/ltq-deu-template,danube,TARGET_lantiq_xway)
 KernelPackage/ltq-deu-ar9=$(call KernelPackage/ltq-deu-template,ar9,TARGET_lantiq_xway)
 KernelPackage/ltq-deu-vr9=$(call KernelPackage/ltq-deu-template,vr9,(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy))
+=======
+KernelPackage/ltq-deu-danube=$(call KernelPackage/ltq-deu-template,danube,xway)
+KernelPackage/ltq-deu-ar9=$(call KernelPackage/ltq-deu-template,ar9,xway)
+KernelPackage/ltq-deu-vr9=$(call KernelPackage/ltq-deu-template,vr9,xrx200)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Configure
 endef

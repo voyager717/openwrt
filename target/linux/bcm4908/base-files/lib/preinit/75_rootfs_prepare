@@ -23,7 +23,11 @@ rootfs_prepare() {
 	ubinfo /dev/ubi0 -N metadata1 > /dev/null 2>&1 || return
 
 	# Find UBI volume device (e.g. ubi0_123)
+<<<<<<< HEAD
 	local ubivol="$(grep rootfs_data /sys/class/ubi/ubi*/name | sed -n 's/.*\(ubi\d*_\d*\).*/\1/p')"
+=======
+	local ubivol="$(grep rootfs_data /sys/devices/virtual/ubi/ubi*/ubi*/name | sed -n 's/.*\(ubi\d*_\d*\).*/\1/p')"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if [ -n "$ubivol" ]; then
 		bcm4908_verify_rootfs_data $ubivol
 	else

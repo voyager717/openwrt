@@ -92,7 +92,11 @@
  SHELL:=		@BASH@ # It does not work if dash is used as a shell, for example
  GREP :=		@GREP@
  TAIL :=		@TAIL@
+<<<<<<< HEAD
 @@ -33,7 +33,7 @@ AWK :=		@AWK@
+=======
+@@ -32,7 +32,7 @@ AWK :=		@AWK@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  FIND :=		@FIND@
  XARGS :=	@XARGS@
  DIFF :=		@DIFF@
@@ -101,7 +105,11 @@
  MKTEMP :=	@MKTEMP@
  MSGMERGE :=	@MSGMERGE@
  MSGFMT :=	@MSGFMT@
+<<<<<<< HEAD
 @@ -50,8 +50,8 @@ USE_NLS :=	@USE_NLS@
+=======
+@@ -49,8 +49,8 @@ USE_NLS :=	@USE_NLS@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  STAT_HARDLINK := @STAT_HARDLINK@
  PATCH_WRAPPER := @PATCH_WRAPPER@
  

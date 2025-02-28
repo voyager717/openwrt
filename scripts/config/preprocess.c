@@ -114,7 +114,11 @@ static char *do_error_if(int argc, char *argv[])
 	if (!strcmp(argv[0], "y"))
 		pperror("%s", argv[1]);
 
+<<<<<<< HEAD
 	return xstrdup("");
+=======
+	return NULL;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static char *do_filename(int argc, char *argv[])
@@ -141,7 +145,11 @@ static char *do_lineno(int argc, char *argv[])
 static char *do_shell(int argc, char *argv[])
 {
 	FILE *p;
+<<<<<<< HEAD
 	char buf[4096];
+=======
+	char buf[256];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	char *cmd;
 	size_t nread;
 	int i;
@@ -396,9 +404,12 @@ static char *eval_clause(const char *str, size_t len, int argc, char *argv[])
 
 		p++;
 	}
+<<<<<<< HEAD
 
 	if (new_argc >= FUNCTION_MAX_ARGS)
 		pperror("too many function arguments");
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	new_argv[new_argc++] = prev;
 
 	/*

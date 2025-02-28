@@ -46,7 +46,10 @@
 #include <linux/modversions.h>
 #endif
 #include <linux/module.h>
+<<<<<<< HEAD
 #include <linux/mod_devicetable.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <linux/init.h>
 #include <linux/types.h>
 #include <linux/errno.h>
@@ -70,8 +73,11 @@
 #endif /* CONFIG_xxxx */
 
 int disable_deudma = 1;
+<<<<<<< HEAD
 spinlock_t ltq_deu_hash_lock;
 EXPORT_SYMBOL_GPL(ltq_deu_hash_lock);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 void chip_version(void);
 
@@ -87,7 +93,10 @@ static int ltq_deu_probe(struct platform_device *pdev)
 
 
     START_DEU_POWER;
+<<<<<<< HEAD
     CRTCL_SECT_HASH_INIT;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     
 #define IFX_DEU_DRV_VERSION         "2.0.0"
          printk(KERN_INFO "Infineon Technologies DEU driver version %s \n", IFX_DEU_DRV_VERSION);
@@ -196,6 +205,10 @@ static struct platform_driver ltq_deu_driver = {
 	.remove = ltq_deu_remove,
 	.driver = {
 		.name = "deu",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		.of_match_table = ltq_deu_match,
 	},
 };

@@ -1,0 +1,20 @@
+#!/bin/sh
+
+br_mac_base=`hexdump -C -s 0x2a /dev/mtd3 | sed -n "1p" | cut -c 11-27`
+br_mac_mao=`echo "${br_mac_base}" | sed 's/\ /\:/g'`
+echo "${br_mac_mao}" > /etc/br_mac_mao
+
+eth0_link=`uci show network | grep eth0 | wc -l`
+if [ "${eth0_link}" != "0" ];then
+    exit 0
+fi
+
+uci add network device 2> /dev/null
+uci set network.@device[6].name='eth0' 2> /dev/null
+uci set network.@device[6].macaddr="${br_mac_mao}"
+uci commit network
+##/etc/init.d/network reload
+
+exit 0
+
+

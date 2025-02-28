@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=iw
+<<<<<<< HEAD
 PKG_VERSION:=6.9
 PKG_RELEASE:=1
  
@@ -20,6 +21,18 @@ PKG_LICENSE:=GPL-2.0
 PKG_CPE_ID:=cpe:/a:kernel:iw
 
 PKG_BUILD_FLAGS:=gc-sections lto
+=======
+PKG_VERSION:=5.9-8fab0c9e
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL:=https://git.kernel.org/pub/scm/linux/kernel/git/jberg/iw.git
+PKG_SOURCE_VERSION:=8fab0c9ee9db217587a58efcc37421c86edcb638
+PKG_MIRROR_HASH:=797b322bc03952f3127ae0a7da476c14ada1bbe9a9ae234a56dd6f864c568e16
+
+PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
+PKG_LICENSE:=GPL-2.0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -49,7 +62,12 @@ TARGET_CPPFLAGS:= \
 	-I$(STAGING_DIR)/usr/include/libnl-tiny \
 	$(TARGET_CPPFLAGS) \
 	-DCONFIG_LIBNL20 \
+<<<<<<< HEAD
 	-D_GNU_SOURCE
+=======
+	-D_GNU_SOURCE \
+	-flto
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifeq ($(BUILD_VARIANT),full)
   TARGET_CPPFLAGS += -DIW_FULL
@@ -57,8 +75,13 @@ ifeq ($(BUILD_VARIANT),full)
 endif
 
 MAKE_FLAGS += \
+<<<<<<< HEAD
 	CFLAGS="$(TARGET_CPPFLAGS) $(TARGET_CFLAGS)" \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
+=======
+	CFLAGS="$(TARGET_CPPFLAGS) $(TARGET_CFLAGS) -ffunction-sections -fdata-sections" \
+	LDFLAGS="$(TARGET_LDFLAGS) -Wl,--gc-sections -flto" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	NL1FOUND="" NL2FOUND=Y \
 	NLLIBNAME="libnl-tiny" \
 	LIBS="-lm -lnl-tiny" \

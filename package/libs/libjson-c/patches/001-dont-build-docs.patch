@@ -1,11 +1,21 @@
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
+<<<<<<< HEAD
 @@ -449,8 +449,6 @@ configure_file(json.h.cmakein ${PROJECT_
+=======
+@@ -401,8 +401,6 @@ set(JSON_C_SOURCES
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  include_directories(${PROJECT_SOURCE_DIR})
  include_directories(${PROJECT_BINARY_DIR})
  
 -add_subdirectory(doc)
 -
+<<<<<<< HEAD
  # "uninstall" custom target for make generators in unix like operating systems
  # and if that target is not present
  if (CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+=======
+ # uninstall
+ add_custom_target(uninstall
+   COMMAND cat ${PROJECT_BINARY_DIR}/install_manifest.txt | xargs rm
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

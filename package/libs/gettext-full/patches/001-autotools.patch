@@ -1,6 +1,10 @@
 --- a/gettext-runtime/man/Makefile.am
 +++ b/gettext-runtime/man/Makefile.am
+<<<<<<< HEAD
 @@ -176,8 +176,7 @@ textdomain.3.html: textdomain.3.in
+=======
+@@ -172,8 +172,7 @@ textdomain.3.html: textdomain.3.in
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  bindtextdomain.3.html: bindtextdomain.3.in
  bind_textdomain_codeset.3.html: bind_textdomain_codeset.3.in
  
@@ -12,7 +16,11 @@
  	  $(INSTALL_DATA) $$dir/$$file $(DESTDIR)$(htmldir)/$$file; \
 --- a/gettext-tools/man/Makefile.am
 +++ b/gettext-tools/man/Makefile.am
+<<<<<<< HEAD
 @@ -158,8 +158,7 @@ recode-sr-latin.1.html: recode-sr-latin.
+=======
+@@ -153,8 +153,7 @@ recode-sr-latin.1.html: recode-sr-latin.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  gettextize.1.html: gettextize.1
  autopoint.1.html: autopoint.1
  

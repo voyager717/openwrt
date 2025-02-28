@@ -1,11 +1,16 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
+<<<<<<< HEAD
 # Copyright (C) 2006-2021 OpenWrt.org
+=======
+# Copyright (C) 2006-2011 OpenWrt.org
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(TOPDIR)/rules.mk
 
 # UML only makes sense on linux
 ifeq ($(HOST_OS),Linux)
+<<<<<<< HEAD
   ifeq ($(HOST_ARCH),x86_64)
 
 ARCH:=x86_64
@@ -21,6 +26,29 @@ include $(INCLUDE_DIR)/target.mk
 DEFAULT_PACKAGES += wpad-basic-mbedtls kmod-mac80211-hwsim mkf2fs e2fsprogs
 
   endif
+=======
+
+ARCH:=$(shell uname -m | sed \
+	-e 's/i[3-9]86/i386/' \
+	-e 's/mipsel/mips/' \
+	-e 's/mipseb/mips/' \
+	-e 's/powerpc/ppc/' \
+	-e 's/sh[234]/sh/' \
+	-e 's/armeb/arm/' \
+)
+BOARD:=uml
+BOARDNAME:=User Mode Linux
+FEATURES:=squashfs ext4 audio source-only
+
+KERNEL_PATCHVER:=5.4
+
+include $(INCLUDE_DIR)/target.mk
+
+LINUX_TARGET_CONFIG:=$(CURDIR)/config/$(ARCH)
+
+DEFAULT_PACKAGES += wpad-basic-wolfssl kmod-mac80211-hwsim mkf2fs e2fsprogs
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 $(eval $(call BuildTarget))

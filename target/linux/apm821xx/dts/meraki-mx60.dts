@@ -9,7 +9,10 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "apm82181.dtsi"
 
 / {
@@ -17,10 +20,18 @@
 	compatible = "meraki,mx60", "meraki,buckminster", "apm,bluestone";
 
 	aliases {
+<<<<<<< HEAD
 		/* U-Boot env has a bad ethaddr MAC address that is sent to
 		 * the kernel. The real MAC is in UBI */
 		/delete-property/ ethernet0;
 		serial0 = &UART1;
+=======
+		serial0 = &UART1;
+		led-boot = &status;
+		led-failsafe = &failsafe;
+		led-running = &status;
+		led-upgrade = &status;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -45,6 +56,7 @@
 	dr_mode = "host";
 };
 
+<<<<<<< HEAD
 &ndfc {
 	/* Buckminster has 1GiB of NAND */
 	status = "okay";
@@ -55,6 +67,13 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
+=======
+&EBC0 {
+	/* Buckminster has 1GiB of NAND */
+	ndfc@1,0 {
+		status = "okay";
+		nand {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			partition@0 {
 				label = "u-boot";
 				reg = <0x00000000 0x00100000>;
@@ -65,10 +84,13 @@
 				label = "u-boot-env";
 				reg = <0x00100000 0x00100000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "u-boot,env";
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@200000 {
@@ -77,6 +99,7 @@
 			};
 
 			partition@240000 {
+<<<<<<< HEAD
 				compatible = "linux,ubi";
 				label = "ubi";
 				reg = <0x00240000 0x3fdc0000>;
@@ -98,6 +121,10 @@
 						};
 					};
 				};
+=======
+				label = "ubi";
+				reg = <0x00240000 0x3fdc0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -117,6 +144,7 @@
 
 &EMAC0 {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&macaddr_board_66 0>;
 	nvmem-cell-names = "mac-address";
@@ -125,10 +153,14 @@
 		speed = <1000>;
 		full-duplex;
 	};
+=======
+	phy-handle = <&phy0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	mdio {
 		#address-cells = <1>;
 		#size-cells = <0>;
+<<<<<<< HEAD
 
 		phy_port1: phy@0 {
 			compatible = "ethernet-phy-id004d.d034";
@@ -357,6 +389,20 @@
 					};
 				};
 			};
+=======
+		phy0: ethernet-phy@0 {
+			compatible = "ethernet-phy-id004d.d034";
+			reg = <0>;
+			qca,mib-poll-interval = <500>;
+
+			qca,ar8327-initvals = <
+				0x0010 0x40000000
+				0x0624 0x007f7f7f
+				0x0004 0x07a00000	/* PAD0_MODE */
+				0x000c 0x01000000	/* PAD6_MODE */
+				0x007c 0x0000007e	/* PORT0_STATUS */
+			>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -365,6 +411,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		led-0 {
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_POWER;
@@ -415,6 +462,45 @@
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_LAN;
 			function-enumerator = <3>;
+=======
+		status: power-green {
+			label = "mx60:green:power";
+			gpios = <&GPIO0 18 GPIO_ACTIVE_LOW>;
+		};
+
+		failsafe: power-orange {
+			label = "mx60:orange:power";
+			gpios = <&GPIO0 19 GPIO_ACTIVE_LOW>;
+		};
+
+		wan-green {
+			label = "mx60:green:wan";
+			gpios = <&GPIO0 17 GPIO_ACTIVE_LOW>;
+		};
+
+		wan-orange {
+			label = "mx60:orange:wan";
+			gpios = <&GPIO0 15 GPIO_ACTIVE_LOW>;
+		};
+
+		lan1 {
+			label = "mx60:green:lan1";
+			gpios = <&GPIO0 20 GPIO_ACTIVE_LOW>;
+		};
+
+		lan2 {
+			label = "mx60:green:lan2";
+			gpios = <&GPIO0 21 GPIO_ACTIVE_LOW>;
+		};
+
+		lan3 {
+			label = "mx60:green:lan3";
+			gpios = <&GPIO0 22 GPIO_ACTIVE_LOW>;
+		};
+
+		lan4 {
+			label = "mx60:green:lan4";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&GPIO0 23 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -422,7 +508,11 @@
 	keys {
 		compatible = "gpio-keys";
 
+<<<<<<< HEAD
 		button-restart {
+=======
+		reset {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			label = "Reset button";
 			linux,code = <KEY_RESTART>;
 			gpios = <&GPIO0 16 GPIO_ACTIVE_LOW>;
@@ -457,3 +547,10 @@
 		};
 	};
 };
+<<<<<<< HEAD
+=======
+
+&MSI {
+	status = "okay";
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

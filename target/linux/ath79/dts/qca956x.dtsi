@@ -61,7 +61,11 @@
 				reg = <0x18040000 0x28>;
 
 				interrupts = <2>;
+<<<<<<< HEAD
 				ngpios = <23>;
+=======
+				ngpios = <24>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 				gpio-controller;
 				#gpio-cells = <2>;
@@ -95,7 +99,10 @@
 				clock-output-names = "cpu", "ddr", "ahb";
 
 				clocks = <&extosc>;
+<<<<<<< HEAD
 				clock-names = "ref";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			wdt: wdt@18060008 {
@@ -157,7 +164,11 @@
 			status = "disabled";
 		};
 
+<<<<<<< HEAD
 		pcie: pcie@18250000 {
+=======
+		pcie: pcie-controller@18250000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			compatible = "qcom,ar7240-pci";
 			#address-cells = <3>;
 			#size-cells = <2>;
@@ -171,8 +182,11 @@
 			interrupt-parent = <&intc3>;
 			interrupts = <0>;
 
+<<<<<<< HEAD
 			device_type = "pci";
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			resets = <&rst 6>, <&rst 7>;
 			reset-names = "hc", "phy";
 
@@ -192,10 +206,15 @@
 			interrupts = <1>;
 
 			resets = <&rst 5>;
+<<<<<<< HEAD
+=======
+			reset-names = "usb-host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			has-transaction-translator;
 			caps-offset = <0x100>;
 
+<<<<<<< HEAD
 			phy-names = "usb";
 			phys = <&usb_phy0>;
 
@@ -208,6 +227,12 @@
 				reg = <1>;
 				#trigger-source-cells = <0>;
 			};
+=======
+			phy-names = "usb-phy0";
+			phys = <&usb_phy0>;
+
+			status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		usb1: usb@1b400000 {
@@ -218,10 +243,15 @@
 			interrupts = <2>;
 
 			resets = <&rst2 5>;
+<<<<<<< HEAD
+=======
+			reset-names = "usb-host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			has-transaction-translator;
 			caps-offset = <0x100>;
 
+<<<<<<< HEAD
 			phy-names = "usb";
 			phys = <&usb_phy1>;
 
@@ -234,6 +264,12 @@
 				reg = <1>;
 				#trigger-source-cells = <0>;
 			};
+=======
+			phy-names = "usb-phy1";
+			phys = <&usb_phy1>;
+
+			status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		spi: spi@1f000000 {
@@ -252,7 +288,11 @@
 	usb_phy0: usb-phy {
 		compatible = "qca,qca9560-usb-phy", "qca,ar7200-usb-phy";
 
+<<<<<<< HEAD
 		reset-names = "phy", "suspend-override";
+=======
+		reset-names = "usb-phy", "usb-suspend-override";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst 4>, <&rst 3>;
 
 		#phy-cells = <0>;
@@ -263,7 +303,11 @@
 	usb_phy1: usb-phy {
 		compatible = "qca,qca9560-usb-phy", "qca,ar7200-usb-phy";
 
+<<<<<<< HEAD
 		reset-names = "phy", "suspend-override";
+=======
+		reset-names = "usb-phy", "usb-suspend-override";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst2 4>, <&rst2 3>;
 
 		#phy-cells = <0>;

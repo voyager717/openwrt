@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 From: Felix Fietkau <nbd@nbd.name>
 Date: Tue, 27 Jul 2021 20:28:58 +0200
 Subject: [PATCH] hostapd: make the snooping interface (for proxyarp)
@@ -20,12 +21,18 @@ untagged DHCP packets
 --- a/src/ap/ap_config.h
 +++ b/src/ap/ap_config.h
 @@ -284,6 +284,7 @@ struct hostapd_bss_config {
+=======
+--- a/src/ap/ap_config.h
++++ b/src/ap/ap_config.h
+@@ -285,6 +285,7 @@ struct hostapd_bss_config {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	char iface[IFNAMSIZ + 1];
  	char bridge[IFNAMSIZ + 1];
  	char ft_iface[IFNAMSIZ + 1];
 +	char snoop_iface[IFNAMSIZ + 1];
  	char vlan_bridge[IFNAMSIZ + 1];
  	char wds_bridge[IFNAMSIZ + 1];
+<<<<<<< HEAD
  	int bridge_hairpin; /* hairpin_mode on bridge members */
 --- a/src/ap/ap_drv_ops.h
 +++ b/src/ap/ap_drv_ops.h
@@ -49,6 +56,14 @@ untagged DHCP packets
 @@ -33,28 +33,31 @@ int x_snoop_init(struct hostapd_data *ha
  
  	hapd->x_snoop_initialized = true;
+=======
+ 
+--- a/src/ap/x_snoop.c
++++ b/src/ap/x_snoop.c
+@@ -31,14 +31,16 @@ int x_snoop_init(struct hostapd_data *ha
+ 		return -1;
+ 	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
 -	if (hostapd_drv_br_port_set_attr(hapd, DRV_BR_PORT_ATTR_HAIRPIN_MODE,
 +	if (!conf->snoop_iface[0] &&
@@ -65,6 +80,7 @@ untagged DHCP packets
  		wpa_printf(MSG_DEBUG,
  			   "x_snoop: Failed to enable proxyarp on the bridge port");
  		return -1;
+<<<<<<< HEAD
  	}
  
  	if (hostapd_drv_br_set_net_param(hapd, DRV_BR_NET_PARAM_GARP_ACCEPT,
@@ -73,29 +89,49 @@ untagged DHCP packets
  		wpa_printf(MSG_DEBUG,
  			   "x_snoop: Failed to enable accepting gratuitous ARP on the bridge");
  		return -1;
+=======
+@@ -52,7 +54,8 @@ int x_snoop_init(struct hostapd_data *ha
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	}
  
  #ifdef CONFIG_IPV6
 -	if (hostapd_drv_br_set_net_param(hapd, DRV_BR_MULTICAST_SNOOPING, 1)) {
 +	if (!conf->snoop_iface[0] &&
+<<<<<<< HEAD
 +	    hostapd_drv_br_set_net_param(hapd, DRV_BR_MULTICAST_SNOOPING, NULL, 1)) {
  		wpa_printf(MSG_DEBUG,
  			   "x_snoop: Failed to enable multicast snooping on the bridge");
  		return -1;
 @@ -73,8 +76,12 @@ x_snoop_get_l2_packet(struct hostapd_dat
+=======
++	    hostapd_drv_br_set_net_param(hapd, DRV_BR_MULTICAST_SNOOPING, 1)) {
+ 		wpa_printf(MSG_DEBUG,
+ 			   "x_snoop: Failed to enable multicast snooping on the bridge");
+ 		return -1;
+@@ -71,8 +74,12 @@ x_snoop_get_l2_packet(struct hostapd_dat
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  {
  	struct hostapd_bss_config *conf = hapd->conf;
  	struct l2_packet_data *l2;
 +	const char *ifname = conf->bridge;
+<<<<<<< HEAD
 +
 +	if (conf->snoop_iface[0])
 +		ifname = conf->snoop_iface;
  
 -	l2 = l2_packet_init(conf->bridge, NULL, ETH_P_ALL, handler, hapd, 1);
+=======
+ 
+-	l2 = l2_packet_init(conf->bridge, NULL, ETH_P_ALL, handler, hapd, 1);
++	if (conf->snoop_iface[0])
++		ifname = conf->snoop_iface;
++
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +	l2 = l2_packet_init(ifname, NULL, ETH_P_ALL, handler, hapd, 1);
  	if (l2 == NULL) {
  		wpa_printf(MSG_DEBUG,
  			   "x_snoop: Failed to initialize L2 packet processing %s",
+<<<<<<< HEAD
 @@ -127,9 +134,12 @@ void x_snoop_mcast_to_ucast_convert_send
  
  void x_snoop_deinit(struct hostapd_data *hapd)
@@ -145,3 +181,16 @@ untagged DHCP packets
  
  set_val:
  	if (linux_write_system_file(path, val))
+=======
+--- a/hostapd/config_file.c
++++ b/hostapd/config_file.c
+@@ -2407,6 +2407,8 @@ static int hostapd_config_fill(struct ho
+ 		os_strlcpy(bss->bridge, pos, sizeof(bss->bridge));
+ 		if (!bss->wds_bridge[0])
+ 			os_strlcpy(bss->wds_bridge, pos, sizeof(bss->wds_bridge));
++	} else if (os_strcmp(buf, "snoop_iface") == 0) {
++		os_strlcpy(bss->snoop_iface, pos, sizeof(bss->snoop_iface));
+ 	} else if (os_strcmp(buf, "vlan_bridge") == 0) {
+ 		os_strlcpy(bss->vlan_bridge, pos, sizeof(bss->vlan_bridge));
+ 	} else if (os_strcmp(buf, "wds_bridge") == 0) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

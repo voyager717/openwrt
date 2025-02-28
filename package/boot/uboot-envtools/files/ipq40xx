@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2016 LEDE
 #
@@ -26,11 +30,15 @@ ubootenv_mtdinfo () {
 	fi
 
 	sectors=$(( $ubootenv_size / $mtd_erase ))
+<<<<<<< HEAD
 	sectors=$(printf "0x%x" $sectors )
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	echo /dev/$mtd_dev 0x0 $ubootenv_size $mtd_erase $sectors
 }
 
 case "$board" in
+<<<<<<< HEAD
 alfa-network,ap120c-ac|\
 devolo,magic-2-wifi-next|\
 edgecore,ecw5211|\
@@ -44,6 +52,17 @@ openmesh,a42|\
 openmesh,a62|\
 pakedge,wr-1|\
 plasmacloud,pa1200|\
+=======
+alfa-network,ap120c-ac |\
+devolo,magic-2-wifi-next |\
+edgecore,ecw5211 |\
+glinet,gl-ap1300 |\
+glinet,gl-b1300 |\
+luma,wrtq-329acn |\
+openmesh,a42 |\
+openmesh,a62 |\
+plasmacloud,pa1200 |\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 plasmacloud,pa2200)
 	ubootenv_add_uci_config "/dev/mtd5" "0x0" "0x10000" "0x10000"
 	;;
@@ -53,13 +72,18 @@ aruba,ap-303)
 aruba,ap-365)
 	ubootenv_add_uci_config "/dev/mtd8" "0x0" "0x10000" "0x10000"
 	;;
+<<<<<<< HEAD
 buffalo,wtr-m2133hp|\
 netgear,lbr20)
+=======
+buffalo,wtr-m2133hp)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ubootenv_add_uci_config "/dev/mtd8" "0x0" "0x40000" "0x20000"
 	;;
 linksys,ea6350v3)
 	ubootenv_add_uci_config "/dev/mtd7" "0x0" "0x20000" "0x20000"
 	;;
+<<<<<<< HEAD
 linksys,ea8300|\
 linksys,mr8300)
 	ubootenv_add_uci_config "/dev/mtd7" "0x0" "0x40000" "0x20000"
@@ -73,6 +97,12 @@ linksys,whw03)
 linksys,whw03v2)
 	ubootenv_add_uci_config "/dev/mtd6" "0x0" "0x80000" "0x20000"
 	;;
+=======
+linksys,ea8300 |\
+linksys,mr8300)
+	ubootenv_add_uci_config "/dev/mtd7" "0x0" "0x40000" "0x20000"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 zyxel,nbg6617)
 	ubootenv_add_uci_config "/dev/mtd6" "0x0" "0x10000" "0x10000"
 	;;

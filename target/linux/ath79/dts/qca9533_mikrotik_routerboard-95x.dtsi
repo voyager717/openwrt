@@ -83,12 +83,15 @@
 	};
 };
 
+<<<<<<< HEAD
 &wmac {
 	status = "okay";
 
 	qca,no-eeprom;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &eth0 {
 	status = "okay";
 

@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include "ar9342_ubnt_xw_rssileds.dtsi"
+=======
+#include "ar9342_ubnt_xw.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "ubnt,bullet-m-xw", "ubnt,xw", "qca,ar9342";
@@ -10,16 +14,27 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	phy4: ethernet-phy@4 {
 		reg = <4>;
 		max-speed = <100>;
+=======
+	phy-mask = <4>;
+	phy4: ethernet-phy@4 {
+		phy-mode = "rgmii";
+		reg = <4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	phy-mode = "rgmii-txid";
+=======
+	phy-mode = "rgmii";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-handle = <&phy4>;
 
 	gmac-config {

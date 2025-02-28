@@ -1,0 +1,12 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host
+exec_prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: com_err
+Description: Common error description library
+Version: 1.45.6
+Requires:
+Cflags: -I${includedir}/et -I${includedir}
+Libs: -L${libdir} -lcom_err
+Libs.private: 

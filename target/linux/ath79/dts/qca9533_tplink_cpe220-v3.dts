@@ -20,8 +20,12 @@
 };
 
 &eth1 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_info_8>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;

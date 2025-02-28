@@ -64,6 +64,7 @@
 				reg = <0x0 0x20000>;
 				label = "u-boot";
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -76,6 +77,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -101,6 +104,7 @@
 		#gpio-cells = <2>;
 		gpio-controller;
 		qca,no-eeprom;
+<<<<<<< HEAD
 		nvmem-cells = <&macaddr_uboot_1fc00 0>;
 		nvmem-cell-names = "mac-address";
 	};
@@ -116,4 +120,20 @@
 &eth1 {		/* LAN interface, initialized first as eth0 */
 	nvmem-cells = <&macaddr_uboot_1fc00 0>;
 	nvmem-cell-names = "mac-address";
+=======
+		mtd-mac-address = <&uboot 0x1fc00>;
+	};
+};
+
+&eth0 {
+	status = "okay";
+
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <(-1)>;
+};
+
+&eth1 {
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

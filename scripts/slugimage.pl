@@ -772,7 +772,11 @@ sub writeOutFirmware {
 				 $_->{'name'}, $filename);
 	    }
 
+<<<<<<< HEAD
 	    # If the next partition is before the end of the current image, then rewind.
+=======
+	    # If the next parition is before the end of the current image, then rewind.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	    elsif ($_->{'offset'} < $end_point) {
 		$debug and printf("Rewound %s before <%s> in \"%s\"\n",
 				  (($end_point - $_->{'offset'}) >= $block_size ?
@@ -971,7 +975,11 @@ if (!GetOptions("d|debug"       => \$debug,
     print "  [-b|--redboot]   <file>		Input/Output RedBoot filename\n";
     print "  [-s|--sysconf]   <file>		Input/Output SysConf filename\n";
     print "  [-L|--loader]    <file>		Second stage boot loader filename\n";
+<<<<<<< HEAD
     print "  [-k|--kernel]    <file>		Input/Output Kernel filename\n";
+=======
+    print "  [-k|--kernel]    <file>		Input/Ouptut Kernel filename\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     print "  [-r|--ramdisk]   <file>		Input/Output Ramdisk filename(s)\n";
     print "  [-f|--fisdir]    <file>		Input/Output FIS directory filename\n";
     print "  [-m|--microcode] <file>		Input/Output Microcode filename\n";

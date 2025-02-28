@@ -1,0 +1,10 @@
+Package: kmod-mapfilter
+Version: 5.4.213-1
+Depends: kernel (=5.4.213-1-1d5b056244d1e1c5d30f87d5efd42168)
+Source: package/mtk/drivers/mapfilter
+SourceName: kmod-mapfilter
+Section: kernel
+SourceDateEpoch: 1686910314
+Architecture: aarch64_cortex-a53
+Installed-Size: 32613
+Description:  MTK map filter

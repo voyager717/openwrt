@@ -195,6 +195,14 @@
 #define PDMA_ALIGNMENT                  32              //  same as Central DMA because of descriptor swap
 #define EMA_ALIGNMENT                   PDMA_ALIGNMENT
 
+<<<<<<< HEAD
+=======
+/*
+ *  Mailbox IGU1 Interrupt
+ */
+#define PPE_MAILBOX_IGU1_INT            INT_NUM_IM2_IRL24
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 #endif  //  IFXMIPS_PTM_PPE_VR9_H

@@ -15,6 +15,10 @@
 		led-running = &led_sys;
 		led-upgrade = &led_sys;
 		label-mac-device = &gmac0;
+<<<<<<< HEAD
+=======
+		serial0 = &uartlite;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -69,6 +73,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -91,6 +96,12 @@
 						reg = <0xe006 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -110,13 +121,18 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
 		mediatek,disable-radar-background;
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
 };
@@ -132,6 +148,9 @@
 
 &ethphy4 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -155,6 +174,15 @@
 			status = "okay";
 			label = "lan4";
 		};
+<<<<<<< HEAD
+=======
+
+		port@4 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0xe006>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

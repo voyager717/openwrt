@@ -21,6 +21,10 @@
 #include <linux/dma-mapping.h>
 #include <linux/phy.h>
 #include <linux/ethtool.h>
+<<<<<<< HEAD
+=======
+#include <linux/version.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 enum fe_reg {
 	FE_REG_PDMA_GLO_CFG = 0,
@@ -156,6 +160,13 @@ enum fe_work_flag {
 #define MT7620A_FE_GDMA1_MAC_ADRL	(MT7620A_GDMA_OFFSET + 0x0C)
 #define MT7620A_FE_GDMA1_MAC_ADRH	(MT7620A_GDMA_OFFSET + 0x10)
 
+<<<<<<< HEAD
+=======
+#define MT7620A_RESET_FE	BIT(21)
+#define MT7620A_RESET_ESW	BIT(23)
+#define MT7620A_RESET_EPHY	BIT(24)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define RT5350_TX_BASE_PTR0	(RT5350_PDMA_OFFSET + 0x00)
 #define RT5350_TX_MAX_CNT0	(RT5350_PDMA_OFFSET + 0x04)
 #define RT5350_TX_CTX_IDX0	(RT5350_PDMA_OFFSET + 0x08)
@@ -377,7 +388,12 @@ struct fe_soc_data {
 	const u16 *reg_table;
 
 	void (*init_data)(struct fe_soc_data *data, struct net_device *netdev);
+<<<<<<< HEAD
 	void (*set_mac)(struct fe_priv *priv, const unsigned char *mac);
+=======
+	void (*reset_fe)(void);
+	void (*set_mac)(struct fe_priv *priv, unsigned char *mac);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	int (*fwd_config)(struct fe_priv *priv);
 	void (*tx_dma)(struct fe_tx_dma *txd);
 	int (*switch_init)(struct fe_priv *priv);
@@ -491,7 +507,11 @@ struct fe_priv {
 	struct work_struct		pending_work;
 	DECLARE_BITMAP(pending_flags, FE_FLAG_MAX);
 
+<<<<<<< HEAD
 	struct reset_control		*resets;
+=======
+	struct reset_control		*rst_ppe;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct mtk_foe_entry		*foe_table;
 	dma_addr_t			foe_table_phys;
 	struct flow_offload __rcu	**foe_flow_table;
@@ -510,6 +530,11 @@ void fe_fwd_config(struct fe_priv *priv);
 void fe_reg_w32(u32 val, enum fe_reg reg);
 u32 fe_reg_r32(enum fe_reg reg);
 
+<<<<<<< HEAD
+=======
+void fe_reset(u32 reset_bits);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline void *priv_netdev(struct fe_priv *priv)
 {
 	return (char *)priv - ALIGN(sizeof(struct net_device), NETDEV_ALIGN);

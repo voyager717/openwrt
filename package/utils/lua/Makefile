@@ -9,19 +9,30 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua
 PKG_VERSION:=5.1.5
+<<<<<<< HEAD
 PKG_RELEASE:=11
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.lua.org/ftp/ \
 	https://www.tecgraf.puc-rio.br/lua/ftp/
+=======
+PKG_RELEASE:=9
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=http://www.lua.org/ftp/ \
+	http://www.tecgraf.puc-rio.br/lua/ftp/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_HASH:=2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333
 PKG_BUILD_PARALLEL:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYRIGHT
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:lua:lua
 
 PKG_BUILD_FLAGS:=no-lto
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_PATCH_DIR := ./patches-host
 
@@ -33,7 +44,11 @@ define Package/lua/Default
   SECTION:=lang
   CATEGORY:=Languages
   TITLE:=Lua programming language
+<<<<<<< HEAD
   URL:=https://www.lua.org/
+=======
+  URL:=http://www.lua.org/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 endef
 
@@ -102,7 +117,11 @@ define Build/Compile
 		RANLIB="$(TARGET_CROSS)ranlib" \
 		INSTALL_ROOT=/usr \
 		CFLAGS="$(TARGET_CPPFLAGS) $(TARGET_CFLAGS)" \
+<<<<<<< HEAD
 		MYLDFLAGS="$(TARGET_LDFLAGS)" \
+=======
+		MYLDFLAGS="$(TARGET_LDFLAGS) $(if $(CONFIG_USE_GLIBC),-lm -ldl)" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		PKG_VERSION=$(PKG_VERSION) \
 		linux
 	rm -rf $(PKG_INSTALL_DIR)
@@ -128,7 +147,11 @@ endif
 
 define Host/Compile
 	$(MAKE) -C $(HOST_BUILD_DIR) \
+<<<<<<< HEAD
 		CC="$(HOSTCC) $(HOST_FPIC) -std=gnu99" \
+=======
+		CC="$(HOSTCC) -std=gnu99" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(LUA_OS)
 endef
 
@@ -137,12 +160,17 @@ define Host/Install
 		INSTALL_TOP="$(STAGING_DIR_HOSTPKG)" \
 		install
 
+<<<<<<< HEAD
 	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/lib/pkgconfig
 	$(CP) $(HOST_BUILD_DIR)/etc/lua.pc $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/lua5.1.pc
 
 	$(LN) lua5.1 $(STAGING_DIR_HOSTPKG)/bin/lua
 	$(LN) luac5.1 $(STAGING_DIR_HOSTPKG)/bin/luac
 	$(LN) lua5.1.pc $(STAGING_DIR_HOSTPKG)/lib/pkgconfig/lua.pc
+=======
+	$(LN) $(STAGING_DIR_HOSTPKG)/bin/lua5.1 $(STAGING_DIR_HOSTPKG)/bin/lua
+	$(LN) $(STAGING_DIR_HOSTPKG)/bin/luac5.1 $(STAGING_DIR_HOSTPKG)/bin/luac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/InstallDev

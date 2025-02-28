@@ -59,6 +59,7 @@
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 		};
 	};
+<<<<<<< HEAD
 	
 	watchdog {
 		compatible = "linux,wdt-gpio";
@@ -67,6 +68,8 @@
 		hw_margin_ms = <30000>;
 		always-running;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wdt {
@@ -92,14 +95,22 @@
 &eth0 {
 	status = "okay";
 	phy-handle = <&swphy4>;
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	status = "okay";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_6>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -130,6 +141,7 @@
 				reg = <0x50000 0xfa0000>;
 			};
 
+<<<<<<< HEAD
 			art@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x10000>;
@@ -152,6 +164,11 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: art@ff0000 {
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -159,9 +176,13 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pinmux {

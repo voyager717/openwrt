@@ -12,6 +12,7 @@ def create_output(args):
 	in_bytes = in_f.read(in_size)
 	in_f.close()
 
+<<<<<<< HEAD
 	if (args.pid_file):
 		pid_st = os.stat(args.pid_file)
 		pid_size = pid_st.st_size
@@ -22,11 +23,17 @@ def create_output(args):
 	else:
 		pid_bytes = bytes.fromhex(args.pid)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	sha256 = hashlib.sha256()
 	sha256.update(in_bytes)
 
 	out_f = open(args.output_file, 'w+b')
+<<<<<<< HEAD
 	out_f.write(pid_bytes)
+=======
+	out_f.write(bytes.fromhex(args.pid))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	out_f.write(sha256.digest())
 	out_f.write(in_bytes)
 	out_f.close()
@@ -48,12 +55,15 @@ def main():
 		type=str,
 		help='Output file')
 
+<<<<<<< HEAD
 	parser.add_argument('--pid-file',
 		dest='pid_file',
 		action='store',
 		type=str,
 		help='Sercomm PID file')
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	parser.add_argument('--pid',
 		dest='pid',
 		action='store',
@@ -64,7 +74,11 @@ def main():
 
 	if ((not args.input_file) or
 	    (not args.output_file) or
+<<<<<<< HEAD
 	    (not args.pid_file and not args.pid)):
+=======
+	    (not args.pid)):
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		parser.print_help()
 
 	create_output(args)

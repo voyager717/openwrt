@@ -1,0 +1,11 @@
+Package: luci-i18n-firewall-en
+Version: git-22.240.58472-bdaec14
+Depends: libc, luci-app-firewall
+Source: feeds/luci/applications/luci-app-firewall
+SourceName: luci-i18n-firewall-en
+License: Apache-2.0
+Section: luci
+SourceDateEpoch: 1661703272
+Architecture: all
+Installed-Size: 359
+Description:  Translation for luci-app-firewall - English

@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gre
+<<<<<<< HEAD
 PKG_RELEASE:=13
+=======
+PKG_RELEASE:=12
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk

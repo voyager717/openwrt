@@ -3,6 +3,7 @@ do_sysinfo_octeon() {
 	local name
 
 	machine=$(grep "^system type" /proc/cpuinfo | sed "s/system type.*: \(.*\)/\1/g")
+<<<<<<< HEAD
 	of_machine=$(head -n1 /sys/firmware/devicetree/base/compatible)
 
 	# Sadly for whatever reason the N821 (Cisco Viptela vEdge 1000) uses the
@@ -19,6 +20,12 @@ do_sysinfo_octeon() {
 	"UBNT_USG"*)
 		# let generic 02_sysinfo handle it since device has its own device tree
 		return 0
+=======
+
+	case "$machine" in
+	"UBNT_E100"*)
+		name="erlite"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 
 	"UBNT_E200"*)
@@ -29,6 +36,14 @@ do_sysinfo_octeon() {
 		name="erpro"
 		;;
 
+<<<<<<< HEAD
+=======
+	"UBNT_E300"*)
+		# let generic 02_sysinfo handle it since device has its own device tree
+		return 0
+		;;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	"ITUS_SHIELD"*)
 		name="itus,shield-router"
 		;;

@@ -7,11 +7,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dsl_vr9_firmware_xdsl
+<<<<<<< HEAD
 PKG_VERSION:=05.08.01.08.01.06.05.08.00.11.01.01
 PKG_SOURCE_VERSION:=05.08.01.08.01.06_05.08.00.0B.01.01_osc
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_SOURCE_VERSION).tar.gz
+=======
+PKG_VERSION:=05.08.01.08.01.06_05.08.00.0B.01.01_osc
+PKG_RELEASE:=1
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_SOURCE_URL:=@OPENWRT
 PKG_HASH:=44cd94130571fe42dfa8f0f9d44597d104e9e77962617fe38646b7a0b4184a2b
 PKG_BUILD_DEPENDS:=bsdiff/host
@@ -20,9 +26,15 @@ PKG_FLAGS:=nonshared
 
 include $(INCLUDE_DIR)/package.mk
 
+<<<<<<< HEAD
 PKG_B_VERSION:=05.07.09.09.00.06.05.07.04.04.00.02
 PKG_B_SOURCE_VERSION:=05.07.09.09.00.06_05.07.04.04.00.02_osc
 PKG_B_SOURCE:=$(PKG_NAME)-$(PKG_B_SOURCE_VERSION).tar.gz
+=======
+PKG_B_NAME:=dsl_vr9_firmware_xdsl
+PKG_B_VERSION:=05.07.09.09.00.06_05.07.04.04.00.02_osc
+PKG_B_SOURCE:=$(PKG_B_NAME)-$(PKG_B_VERSION).tar.gz
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ANNEX_A_VER:=581816_580B11
 ANNEX_B_VER:=579906_574402
@@ -40,7 +52,11 @@ define Package/dsl-vrx200-firmware-xdsl-a
   CATEGORY:=Firmware
   TITLE:=VRX200 / VR9 CPE xDSL Annex A firmware
   URL:=http://www.lantiq.com/
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy)
+=======
+  DEPENDS:=@TARGET_lantiq_xrx200
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/dsl-vrx200-firmware-xdsl-a/description
@@ -52,7 +68,11 @@ define Package/dsl-vrx200-firmware-xdsl-b
   CATEGORY:=Firmware
   TITLE:=VRX200 / VR9 CPE xDSL Annex B firmware
   URL:=http://www.lantiq.com/
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy)
+=======
+  DEPENDS:=@TARGET_lantiq_xrx200
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/dsl-vrx200-firmware-xdsl-b/description
@@ -64,7 +84,11 @@ define Package/dsl-vrx200-firmware-xdsl-a-patch
   CATEGORY:=Firmware
   TITLE:=VRX200 / VR9 CPE xDSL Annex B to Annex A firmware patch
   URL:=http://www.lantiq.com/
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy) +dsl-vrx200-firmware-xdsl-b +bspatch
+=======
+  DEPENDS:=@TARGET_lantiq_xrx200 +dsl-vrx200-firmware-xdsl-b +bspatch
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/dsl-vrx200-firmware-xdsl-a-patch/description
@@ -76,7 +100,11 @@ define Package/dsl-vrx200-firmware-xdsl-b-patch
   CATEGORY:=Firmware
   TITLE:=VRX200 / VR9 CPE xDSL Annex A to Annex B firmware patch
   URL:=http://www.lantiq.com/
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy) +dsl-vrx200-firmware-xdsl-a +bspatch
+=======
+  DEPENDS:=@TARGET_lantiq_xrx200 +dsl-vrx200-firmware-xdsl-a +bspatch
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/dsl-vrx200-firmware-xdsl-b-patch/description

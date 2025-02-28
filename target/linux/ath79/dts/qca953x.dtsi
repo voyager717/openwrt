@@ -60,8 +60,13 @@
 				reg = <0x18030000 0x100>;
 				#phy-cells = <0>;
 
+<<<<<<< HEAD
 				reset-names = "phy-analog", "phy", "suspend-override";
 				resets = <&rst 11>, <&rst 4>, <&rst 3>;
+=======
+				reset-names = "usb-phy", "usb-suspend-override";
+				resets = <&rst 4>, <&rst 3>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 				status = "disabled";
 			};
@@ -72,7 +77,11 @@
 				reg = <0x18040000 0x28>;
 
 				interrupts = <2>;
+<<<<<<< HEAD
 				ngpios = <18>;
+=======
+				ngpios = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 				gpio-controller;
 				#gpio-cells = <2>;
@@ -104,9 +113,13 @@
 
 				#clock-cells = <1>;
 				clock-output-names = "cpu", "ddr", "ahb";
+<<<<<<< HEAD
 
 				clocks = <&extosc>;
 				clock-names = "ref";
+=======
+				clocks = <&extosc>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			wdt: wdt@18060008 {
@@ -150,7 +163,11 @@
 			reg = <0x18070000 0x4>;
 		};
 
+<<<<<<< HEAD
 		pcie0: pcie@180c0000 {
+=======
+		pcie0: pcie-controller@180c0000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			compatible = "qcom,ar7240-pci";
 			#address-cells = <3>;
 			#size-cells = <2>;
@@ -164,8 +181,11 @@
 			interrupt-parent = <&intc2>;
 			interrupts = <1>;
 
+<<<<<<< HEAD
 			device_type = "pci";
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			resets = <&rst 6>, <&rst 7>;
 			reset-names = "hc", "phy";
 
@@ -193,10 +213,16 @@
 
 			interrupts = <3>;
 			resets = <&rst 5>;
+<<<<<<< HEAD
+=======
+			reset-names = "usb-host";
+			dr_mode = "host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			has-transaction-translator;
 			caps-offset = <0x100>;
 
+<<<<<<< HEAD
 			phy-names = "usb";
 			phys = <&usb_phy>;
 
@@ -209,6 +235,12 @@
 				reg = <1>;
 				#trigger-source-cells = <0>;
 			};
+=======
+			phy-names = "usb-phy";
+			phys = <&usb_phy>;
+
+			status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		spi: spi@1f000000 {

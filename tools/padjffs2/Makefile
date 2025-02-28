@@ -13,7 +13,12 @@ PKG_RELEASE:=1
 include $(INCLUDE_DIR)/host-build.mk
 
 define Host/Prepare
+<<<<<<< HEAD
 	$(call Host/Prepare/Default)
+=======
+	mkdir -p $(HOST_BUILD_DIR)
+	$(CP) ./src/* $(HOST_BUILD_DIR)/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	find $(HOST_BUILD_DIR) -name .svn | $(XARGS) rm -rf
 endef
 

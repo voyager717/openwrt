@@ -1,4 +1,5 @@
 set_preinit_iface() {
+<<<<<<< HEAD
 	case $(board_name) in
 	cudy,m3000-v1|\
 	cudy,tr3000-v1|\
@@ -32,6 +33,15 @@ set_preinit_iface() {
 		;;
 	*)
 		ip link set eth0 up
+=======
+	ip link set eth0 up
+
+	case $(board_name) in
+	ubnt,unifi-6-lr)
+		ifname=eth0
+		;;
+	*)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ifname=lan1
 		;;
 	esac

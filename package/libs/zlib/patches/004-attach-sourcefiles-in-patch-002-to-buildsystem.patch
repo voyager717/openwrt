@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -93,34 +93,67 @@ set(ZLIB_PUBLIC_HDRS
+=======
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8e75f66..24d7329 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -95,34 +95,67 @@ set(ZLIB_PUBLIC_HDRS
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      ${CMAKE_CURRENT_BINARY_DIR}/zconf.h
      zlib.h
  )

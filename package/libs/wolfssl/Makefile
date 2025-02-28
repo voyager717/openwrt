@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wolfssl
+<<<<<<< HEAD
 PKG_VERSION:=5.7.6
 PKG_REAL_VERSION:=$(PKG_VERSION)-stable
 PKG_RELEASE:=1
@@ -21,6 +22,18 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_REAL_
 PKG_FIXUP:=libtool libtool-abiver
 PKG_INSTALL:=1
 PKG_BUILD_FLAGS:=no-mips16 lto
+=======
+PKG_VERSION:=5.2.0-stable
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/wolfSSL/wolfssl/archive/v$(PKG_VERSION)
+PKG_HASH:=409b4646c5f54f642de0e9f3544c3b83de7238134f5b1ff93fb44527bf119d05
+
+PKG_FIXUP:=libtool libtool-abiver
+PKG_INSTALL:=1
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPL-2.0-or-later
 PKG_LICENSE_FILES:=LICENSING COPYING
@@ -28,6 +41,7 @@ PKG_MAINTAINER:=Eneas U de Queiroz <cotequeiroz@gmail.com>
 PKG_CPE_ID:=cpe:/a:wolfssl:wolfssl
 
 PKG_CONFIG_DEPENDS:=\
+<<<<<<< HEAD
 	CONFIG_WOLFSSL_HAS_AES_CCM \
 	CONFIG_WOLFSSL_HAS_ARC4 \
 	CONFIG_WOLFSSL_HAS_CERTGEN \
@@ -66,13 +80,37 @@ endef
 define Package/libwolfssl
 $(call Package/libwolfssl/Default)
   TITLE:=wolfSSL library
+=======
+	CONFIG_WOLFSSL_HAS_AES_CCM CONFIG_WOLFSSL_HAS_AFALG \
+	CONFIG_WOLFSSL_HAS_ARC4 CONFIG_WOLFSSL_HAS_CHACHA_POLY \
+	CONFIG_WOLFSSL_HAS_DEVCRYPTO_AES CONFIG_WOLFSSL_HAS_DEVCRYPTO_FULL \
+	CONFIG_WOLFSSL_HAS_DH CONFIG_WOLFSSL_HAS_DTLS \
+	CONFIG_WOLFSSL_HAS_ECC25519 CONFIG_WOLFSSL_HAS_OCSP \
+	CONFIG_WOLFSSL_HAS_SESSION_TICKET CONFIG_WOLFSSL_HAS_TLSV10 \
+	CONFIG_WOLFSSL_HAS_TLSV13 CONFIG_WOLFSSL_HAS_WPAS CONFIG_WOLFSSL_HAS_CERTGEN \
+	CONFIG_WOLFSSL_ALT_NAMES
+
+PKG_ABI_VERSION=$(patsubst %-stable,%,$(PKG_VERSION)).$(call version_abbrev,$(call confvar,$(PKG_CONFIG_DEPENDS)))
+
+include $(INCLUDE_DIR)/package.mk
+
+define Package/libwolfssl
+  SECTION:=libs
+  SUBMENU:=SSL
+  CATEGORY:=Libraries
+  TITLE:=wolfSSL library
+  URL:=http://www.wolfssl.com/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   MENU:=1
   PROVIDES:=libcyassl
   DEPENDS:=+WOLFSSL_HAS_DEVCRYPTO:kmod-cryptodev +WOLFSSL_HAS_AFALG:kmod-crypto-user
   ABI_VERSION:=$(PKG_ABI_VERSION)
+<<<<<<< HEAD
   VARIANT:=regular
   DEFAULT_VARIANT:=1
   CONFLICTS:=libwolfsslcpu-crypto
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libwolfssl/description
@@ -84,6 +122,7 @@ define Package/libwolfssl/config
 	source "$(SOURCE)/Config.in"
 endef
 
+<<<<<<< HEAD
 define Package/libwolfsslcpu-crypto
 $(call Package/libwolfssl/Default)
   TITLE:=wolfSSL library with AES CPU instructions
@@ -126,6 +165,17 @@ TARGET_CFLAGS += \
 	-DFP_MAX_BITS=8192 \
 	$(if $(CONFIG_WOLFSSL_ALT_NAMES),-DWOLFSSL_ALT_NAMES)
 
+=======
+TARGET_CFLAGS += \
+	$(FPIC) \
+	-fomit-frame-pointer \
+	-flto \
+	-DFP_MAX_BITS=8192 \
+	$(if $(CONFIG_WOLFSSL_ALT_NAMES),-DWOLFSSL_ALT_NAMES)
+
+TARGET_LDFLAGS += -flto
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # --enable-stunnel needed for OpenSSL API compatibility bits
 CONFIGURE_ARGS += \
 	--enable-reproducible-build \
@@ -135,7 +185,11 @@ CONFIGURE_ARGS += \
 	--enable-sni \
 	--enable-stunnel \
 	--enable-altcertchains \
+<<<<<<< HEAD
 	--$(if $(CONFIG_PACKAGE_libwolfssl-benchmark),enable,disable)-crypttests \
+=======
+	--disable-crypttests \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	--disable-examples \
 	--disable-jobserver \
 	--$(if $(CONFIG_IPV6),enable,disable)-ipv6 \
@@ -150,6 +204,7 @@ CONFIGURE_ARGS += \
 	--$(if $(CONFIG_WOLFSSL_HAS_SESSION_TICKET),enable,disable)-session-ticket \
 	--$(if $(CONFIG_WOLFSSL_HAS_DTLS),enable,disable)-dtls \
 	--$(if $(CONFIG_WOLFSSL_HAS_ECC25519),enable,disable)-curve25519 \
+<<<<<<< HEAD
 	--$(if $(CONFIG_WOLFSSL_HAS_ECC448),enable,disable)-curve448 \
 	--$(if $(CONFIG_WOLFSSL_HAS_OPENVPN),enable,disable)-openvpn
 
@@ -182,10 +237,13 @@ endef
 
 ifeq ($(BUILD_VARIANT),regular)
 CONFIGURE_ARGS += \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	--$(if $(CONFIG_WOLFSSL_HAS_AFALG),enable,disable)-afalg \
 	--enable-devcrypto=$(if $(CONFIG_WOLFSSL_HAS_DEVCRYPTO_CBC),cbc\
 			  ,$(if $(CONFIG_WOLFSSL_HAS_DEVCRYPTO_AES),aes\
 			  ,$(if $(CONFIG_WOLFSSL_HAS_DEVCRYPTO_FULL),yes,no)))
+<<<<<<< HEAD
 else ifdef CONFIG_aarch64
     CONFIGURE_ARGS += --enable-armasm
     TARGET_CFLAGS:=$(TARGET_CFLAGS:-mcpu%=-mcpu%+crypto)
@@ -193,6 +251,8 @@ else ifdef CONFIG_aarch64
 else ifdef CONFIG_TARGET_x86_64
 	CONFIGURE_ARGS += --enable-intelasm
 endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifeq ($(CONFIG_WOLFSSL_HAS_OCSP),y)
 CONFIGURE_ARGS += \
@@ -221,6 +281,7 @@ define Package/libwolfssl/install
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwolfssl.so.* $(1)/usr/lib/
 endef
 
+<<<<<<< HEAD
 Package/libwolfsslcpu-crypto/install=$(Package/libwolfssl/install)
 
 define Package/libwolfssl-benchmark/install
@@ -231,3 +292,6 @@ endef
 $(eval $(call BuildPackage,libwolfssl))
 $(eval $(call BuildPackage,libwolfsslcpu-crypto))
 $(eval $(call BuildPackage,libwolfssl-benchmark))
+=======
+$(eval $(call BuildPackage,libwolfssl))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

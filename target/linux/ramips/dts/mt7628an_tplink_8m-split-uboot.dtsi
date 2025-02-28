@@ -52,6 +52,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7d0000 {
 				label = "rom";
 				reg = <0x7d0000 0x10000>;
@@ -68,6 +69,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			rom: partition@7d0000 {
+				label = "rom";
+				reg = <0x7d0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@7e0000 {
@@ -75,6 +82,7 @@
 				reg = <0x7e0000 0x10000>;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "radio";
 				reg = <0x7f0000 0x10000>;
@@ -93,6 +101,12 @@
 						reg = <0x8000 0x200>;
 					};
 				};
+=======
+			radio: partition@7f0000 {
+				label = "radio";
+				reg = <0x7f0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -100,6 +114,7 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_radio_0>, <&macaddr_rom_f100 0>;
 	nvmem-cell-names = "eeprom", "mac-address";
@@ -108,6 +123,14 @@
 &ethernet {
 	nvmem-cells = <&macaddr_rom_f100 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&rom 0xf100>;
+	mediatek,mtd-eeprom = <&radio 0x0>;
+};
+
+&ethernet {
+	mtd-mac-address = <&rom 0xf100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {

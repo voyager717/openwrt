@@ -49,6 +49,7 @@ define Build/fullimage
 	rm $@.tmp
 endef
 
+<<<<<<< HEAD
 define Build/loader-common
 	rm -rf $@.src
 	$(MAKE) -C lzma-loader \
@@ -81,12 +82,18 @@ endef
 
 DEVICE_VARS += SIGNATURE MAGIC CRC32_POLY LOADER_FLASH_OFFS
 
+=======
+DEVICE_VARS += SIGNATURE MAGIC CRC32_POLY
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 DTS_DIR := $(DTS_DIR)/lantiq
 
 # Shared device definition: applies to every defined device
 define Device/Default
   PROFILES = Default
+<<<<<<< HEAD
   COMPILE :=
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_DEPENDS = $$(wildcard $(DTS_DIR)/$$(DEVICE_DTS).dts)
   KERNEL_INITRAMFS_NAME = $$(KERNEL_NAME)-initramfs
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma
@@ -95,7 +102,11 @@ define Device/Default
   SOC := $(DEFAULT_SOC)
   DEVICE_DTS = $$(SOC)_$(1)
   IMAGES := sysupgrade.bin
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/NAND/xway
@@ -134,6 +145,7 @@ define Device/AVM
   KERNEL := kernel-bin | append-dtb | lzma | eva-image
   KERNEL_INITRAMFS := $$(KERNEL)
   IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | append-avm-fakeroot | \
+<<<<<<< HEAD
 	append-rootfs | pad-rootfs | check-size | append-metadata
 endef
 
@@ -145,6 +157,9 @@ define Device/AVM_preloader
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49 | \
 	prepend-loader-okli $(1)
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | eva-image
+=======
+	append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 ifeq ($(SUBTARGET),ase)
@@ -162,12 +177,15 @@ include danube.mk
 include ar9.mk
 endif
 
+<<<<<<< HEAD
 ifeq ($(SUBTARGET),xrx200_legacy)
 DEFAULT_SOC := vr9
 include tp-link_legacy.mk
 include vr9_legacy.mk
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifeq ($(SUBTARGET),xrx200)
 DEFAULT_SOC := vr9
 include tp-link.mk

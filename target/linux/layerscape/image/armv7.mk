@@ -6,11 +6,19 @@ define Device/Default
   PROFILES := Default
   FILESYSTEMS := squashfs
   IMAGES := firmware.bin sysupgrade.bin
+<<<<<<< HEAD
   DEVICE_DTS_DIR := $(DTS_DIR)/nxp/ls
   KERNEL := kernel-bin | uImage none
   KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(DEVICE_DTS_DIR)/$$(DEVICE_DTS).dtb
   KERNEL_NAME := zImage
   KERNEL_LOADADDR := 0x80008000
+=======
+  KERNEL := kernel-bin | uImage none
+  KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+  KERNEL_NAME := zImage
+  KERNEL_LOADADDR := 0x80008000
+  KERNEL_ENTRY_POINT := 0x80008000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_DTS = $(lastword $(subst _, ,$(1)))
   IMAGE_SIZE := 64m
   IMAGE/sysupgrade.bin = \
@@ -21,7 +29,11 @@ define Device/Default
 endef
 
 define Device/fsl-sdboot
+<<<<<<< HEAD
   KERNEL = kernel-bin | gzip | fit gzip $$(DEVICE_DTS_DIR)/$$(DEVICE_DTS).dtb
+=======
+  KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := sdcard.img.gz sysupgrade.bin
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
@@ -31,7 +43,11 @@ define Device/fsl_ls1021a-twr
   DEVICE_VENDOR := NXP
   DEVICE_MODEL := TWR-LS1021A
   DEVICE_VARIANT := Default
+<<<<<<< HEAD
   DEVICE_PACKAGES += ~layerscape-rcw
+=======
+  DEVICE_PACKAGES += layerscape-rcw
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/firmware.bin := \
     ls-clean | \
     ls-append $(1)-rcw.bin | pad-to 1M | \

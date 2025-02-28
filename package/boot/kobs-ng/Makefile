@@ -18,7 +18,10 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/imx-kobs-$(PKG_VERSION)
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=COPYING
+<<<<<<< HEAD
 PKG_FLAGS:=nonshared
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -26,7 +29,11 @@ define Package/kobs-ng
   SECTION:=utils
   CATEGORY:=Utilities
   TITLE:=Application for writing bootstreams to NAND flash
+<<<<<<< HEAD
   DEPENDS:=@TARGET_imx
+=======
+  DEPENDS:=@TARGET_imx6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/kobs-ng/description

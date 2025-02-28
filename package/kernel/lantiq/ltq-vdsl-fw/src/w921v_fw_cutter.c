@@ -26,7 +26,11 @@
 
 #include "LzmaWrapper.h"
 
+<<<<<<< HEAD
 #define FW_NAME		"/tmp/firmware-speedport-w921v-1.48.000.bin"
+=======
+#define FW_NAME		"/tmp/firmware-speedport-w921v-1.46.000.bin"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #define MAGIC		0x50
 #define MAGIC_SZ	0x3FFC00
@@ -78,7 +82,11 @@ int main(int argc, char **argv)
 
 	if (stat(FW_NAME, &s) != 0) {
 		printf("Failed to find %s\n", FW_NAME);
+<<<<<<< HEAD
 		printf("Ask Google or try https://www.telekom.de/hilfe/downloads/firmware-speedport-w-921v-1.48.000.bin\n");
+=======
+		printf("Ask Google or try https://www.telekom.de/hilfe/downloads/firmware-speedport-w921v-1.45.000.bin\n");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		return -1;
 	}
 

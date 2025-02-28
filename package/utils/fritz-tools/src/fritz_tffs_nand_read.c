@@ -73,6 +73,7 @@ static uint8_t readbuf[TFFS_SECTOR_SIZE];
 static uint8_t oobbuf[TFFS_SECTOR_OOB_SIZE];
 static uint32_t blocksize;
 static int mtdfd;
+<<<<<<< HEAD
 static uint32_t num_sectors;
 static uint8_t *sectors;
 static uint32_t *sector_ids;
@@ -80,11 +81,27 @@ static uint32_t *sector_ids;
 static inline void sector_mark_bad(int num)
 {
 	sectors[num / 8] &= ~(0x80 >> (num % 8));
+=======
+struct tffs_sectors *sectors;
+
+struct tffs_sectors {
+	uint32_t num_sectors;
+	uint8_t sectors[0];
+};
+
+static inline void sector_mark_bad(int num)
+{
+	sectors->sectors[num / 8] &= ~(0x80 >> (num % 8));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 static inline uint8_t sector_get_good(int num)
 {
+<<<<<<< HEAD
 	return sectors[num / 8] & 0x80 >> (num % 8);
+=======
+	return sectors->sectors[num / 8] & 0x80 >> (num % 8);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 struct tffs_entry_segment {
@@ -136,8 +153,11 @@ static int read_sector(off_t pos)
 		return -1;
 	}
 
+<<<<<<< HEAD
 	sector_ids[pos / TFFS_SECTOR_SIZE] = read_uint32(readbuf, 0x00);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 0;
 }
 
@@ -175,12 +195,17 @@ static int find_entry(uint32_t id, struct tffs_entry *entry)
 
 	off_t pos = 0;
 	uint8_t block_end = 0;
+<<<<<<< HEAD
 	for (uint32_t sector = 0; sector < num_sectors; sector++, pos += TFFS_SECTOR_SIZE) {
+=======
+	for (uint32_t sector = 0; sector < sectors->num_sectors; sector++, pos += TFFS_SECTOR_SIZE) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (block_end) {
 			if (pos % blocksize == 0) {
 				block_end = 0;
 			}
 		} else if (sector_get_good(sector)) {
+<<<<<<< HEAD
 			if (sector_ids[sector]) {
 				if (sector_ids[sector] == TFFS_ID_END) {
 					/* no more entries in this block */
@@ -192,10 +217,13 @@ static int find_entry(uint32_t id, struct tffs_entry *entry)
 					continue;
 			}
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			if (read_sectoroob(pos) || read_sector(pos)) {
 				fprintf(stderr, "ERROR: sector isn't readable, but has been previously!\n");
 				exit(EXIT_FAILURE);
 			}
+<<<<<<< HEAD
 			uint32_t read_id = read_uint32(readbuf, 0x00);
 			uint32_t read_len = read_uint32(readbuf, 0x04);
 			uint32_t read_rev = read_uint32(readbuf, 0x0c);
@@ -208,6 +236,17 @@ static int find_entry(uint32_t id, struct tffs_entry *entry)
 					fprintf(stderr, "Warning: sector has inconsistent metadata\n");
 					continue;
 				}
+=======
+			uint32_t oob_id = read_uint32(oobbuf, 0x02);
+			uint32_t oob_len = read_uint32(oobbuf, 0x06);
+			uint32_t oob_rev = read_uint32(oobbuf, 0x0a);
+			uint32_t read_id = read_uint32(readbuf, 0x00);
+			uint32_t read_len = read_uint32(readbuf, 0x04);
+			uint32_t read_rev = read_uint32(readbuf, 0x0c);
+			if (read_oob_sector_health && (oob_id != read_id || oob_len != read_len || oob_rev != read_rev)) {
+				fprintf(stderr, "Warning: sector has inconsistent metadata\n");
+				continue;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			}
 			if (read_id == TFFS_ID_END) {
 				/* no more entries in this block */
@@ -427,6 +466,7 @@ static int scan_mtd(void)
 
 	blocksize = info.erasesize;
 
+<<<<<<< HEAD
 	num_sectors = info.size / TFFS_SECTOR_SIZE;
 	sectors = malloc((num_sectors + 7) / 8);
 	sector_ids = calloc(num_sectors, sizeof(uint32_t));
@@ -435,6 +475,15 @@ static int scan_mtd(void)
 		exit(EXIT_FAILURE);
 	}
 	memset(sectors, 0xff, (num_sectors + 7) / 8);
+=======
+	sectors = malloc(sizeof(*sectors) + (info.size / TFFS_SECTOR_SIZE + 7) / 8);
+	if (sectors == NULL) {
+		fprintf(stderr, "ERROR: memory allocation failed!\n");
+		exit(EXIT_FAILURE);
+	}
+	sectors->num_sectors = info.size / TFFS_SECTOR_SIZE;
+	memset(sectors->sectors, 0xff, (info.size / TFFS_SECTOR_SIZE + 7) / 8);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	uint32_t sector = 0, valid_blocks = 0;
 	uint8_t block_ok = 0;
@@ -578,7 +627,10 @@ int main(int argc, char *argv[])
 out_free_entry:
 	free(name_table.val);
 out_free_sectors:
+<<<<<<< HEAD
 	free(sector_ids);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	free(sectors);
 out_close:
 	close(mtdfd);

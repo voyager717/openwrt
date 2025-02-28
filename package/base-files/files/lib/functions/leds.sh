@@ -11,6 +11,7 @@ get_dt_led_path() {
 	echo "$ledpath"
 }
 
+<<<<<<< HEAD
 get_dt_led_color_func() {
 	local enum
 	local func
@@ -41,6 +42,8 @@ get_dt_led_color_func() {
 	return 0
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 get_dt_led() {
 	local label
 	local ledpath=$(get_dt_led_path $1)
@@ -48,7 +51,10 @@ get_dt_led() {
 	[ -n "$ledpath" ] && \
 		label=$(cat "$ledpath/label" 2>/dev/null) || \
 		label=$(cat "$ledpath/chan-name" 2>/dev/null) || \
+<<<<<<< HEAD
 		label=$(get_dt_led_color_func "$ledpath") || \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		label=$(basename "$ledpath")
 
 	echo "$label"

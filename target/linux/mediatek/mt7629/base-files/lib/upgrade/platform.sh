@@ -9,6 +9,7 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+<<<<<<< HEAD
 	iptime,a6004mx)
 		nand_do_upgrade "$1"
 		;;
@@ -17,6 +18,8 @@ platform_do_upgrade() {
 		fw_setenv bootimage 1
 		nand_do_upgrade "$1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*)
 		default_do_upgrade "$1"
 		;;

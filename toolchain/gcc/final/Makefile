@@ -8,9 +8,14 @@ GCC_CONFIGURE += \
 	--enable-shared \
 	--enable-threads \
 	--with-slibdir=$(TOOLCHAIN_DIR)/lib \
+<<<<<<< HEAD
 	--enable-plugins \
 	--enable-lto \
 	--with-libelf=$(STAGING_DIR_HOST)
+=======
+	--enable-lto \
+	--with-libelf=$(TOPDIR)/staging_dir/host
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifndef CONFIG_USE_GLIBC
   GCC_CONFIGURE += --disable-libsanitizer

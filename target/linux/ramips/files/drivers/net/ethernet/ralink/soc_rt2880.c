@@ -19,6 +19,11 @@
 #include "mtk_eth_soc.h"
 #include "mdio_rt2880.h"
 
+<<<<<<< HEAD
+=======
+#define RT2880_RESET_FE			BIT(18)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void rt2880_init_data(struct fe_soc_data *data,
 			     struct net_device *netdev)
 {
@@ -31,6 +36,14 @@ static void rt2880_init_data(struct fe_soc_data *data,
 	/* netdev->hw_features |= NETIF_F_IP_CSUM | NETIF_F_RXCSUM; */
 }
 
+<<<<<<< HEAD
+=======
+void rt2880_fe_reset(void)
+{
+	fe_reset(RT2880_RESET_FE);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int rt2880_fwd_config(struct fe_priv *priv)
 {
 	int ret;
@@ -48,6 +61,10 @@ static int rt2880_fwd_config(struct fe_priv *priv)
 
 struct fe_soc_data rt2880_data = {
 	.init_data = rt2880_init_data,
+<<<<<<< HEAD
+=======
+	.reset_fe = rt2880_fe_reset,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.fwd_config = rt2880_fwd_config,
 	.pdma_glo_cfg = FE_PDMA_SIZE_8DWORDS,
 	.checksum_bit = RX_DMA_L4VALID,

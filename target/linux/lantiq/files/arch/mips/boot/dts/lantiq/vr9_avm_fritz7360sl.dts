@@ -7,6 +7,7 @@
 	model = "AVM FRITZ!Box 7360 SL";
 };
 
+<<<<<<< HEAD
 &gpio {
 	pinctrl-names = "default";
 	pinctrl-0 = <&state_default>;
@@ -26,6 +27,14 @@
 		};
 	};
 
+=======
+&state_default {
+	pcie-rst {
+		lantiq,pins = "io38";
+		lantiq,pull = <0>;
+		lantiq,output = <1>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &localbus {
@@ -43,6 +52,7 @@
 				label = "urlader";
 				reg = <0x00000 0x20000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -59,6 +69,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -80,6 +92,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_urlader_a91 (-2)>;
@@ -99,3 +112,5 @@
 	nvmem-cells = <&cal_urlader_985>;
 	nvmem-cell-names = "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

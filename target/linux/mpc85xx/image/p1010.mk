@@ -1,5 +1,6 @@
 DEVICE_VARS += TPLINK_HWID TPLINK_HWREV TPLINK_FLASHLAYOUT TPLINK_HEADER_VERSION
 
+<<<<<<< HEAD
 define Build/spi-loader-okli-compile
 	rm -rf $@.spi-loader-okli
 	$(CP) spi-loader $@.spi-loader-okli
@@ -47,17 +48,23 @@ define Device/enterasys_ws-ap3715i
 endef
 TARGET_DEVICES += enterasys_ws-ap3715i
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-wdr4900-v1
   DEVICE_VENDOR := TP-Link
   DEVICE_MODEL := TL-WDR4900
   DEVICE_VARIANT := v1
+<<<<<<< HEAD
   DEVICE_COMPAT_VERSION := 1.1
   DEVICE_COMPAT_MESSAGE := Config cannot be migrated from swconfig to DSA
   DEVICE_PACKAGES := kmod-usb-ledtrig-usbport
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TPLINK_HEADER_VERSION := 1
   TPLINK_HWID := 0x49000001
   TPLINK_HWREV := 1
   TPLINK_FLASHLAYOUT := 16Mppc
+<<<<<<< HEAD
   KERNEL_NAME := simpleImage.tl-wdr4900-v1
   KERNEL_INITRAMFS :=
   KERNEL := kernel-bin | uImage none -M 0x4f4b4c49 | spi-loader-okli $(1)
@@ -69,11 +76,24 @@ define Device/tplink_tl-wdr4900-v1
   ARTIFACTS := fdt.bin
   ARTIFACT/fdt.bin := append-dtb
   IMAGES := factory.bin sysupgrade.bin
+=======
+  KERNEL_SIZE := 2684k
+  KERNEL_NAME := simpleImage.tl-wdr4900-v1
+  KERNEL_INITRAMFS :=
+  KERNEL := kernel-bin | uImage none
+  KERNEL_ENTRY := 0x1000000
+  KERNEL_LOADADDR := 0x1000000
+  SUPPORTED_DEVICES += tl-wdr4900-v1
+  ARTIFACTS := fdt.bin
+  ARTIFACT/fdt.bin := append-dtb
+  IMAGES := fdt.bin factory.bin sysupgrade.bin
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.bin := tplink-v1-image sysupgrade | append-metadata
   IMAGE/factory.bin := tplink-v1-image factory
 endef
 TARGET_DEVICES += tplink_tl-wdr4900-v1
 
+<<<<<<< HEAD
 define Device/watchguard_firebox-t10
   DEVICE_VENDOR := Watchguard
   DEVICE_MODEL := Firebox T10
@@ -84,6 +104,8 @@ define Device/watchguard_firebox-t10
 endef
 TARGET_DEVICES += watchguard_firebox-t10
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/sophos_red-15w-rev1
   DEVICE_VENDOR := Sophos
   DEVICE_MODEL := RED 15w

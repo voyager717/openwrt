@@ -1,0 +1,10 @@
+Package: libmapd
+Version: 1
+Depends: libc
+Source: package/mtk/applications/libmapd
+SourceName: libmapd
+Section: MTK Properties
+SourceDateEpoch: 1686910314
+Architecture: aarch64_cortex-a53
+Installed-Size: 12357
+Description:  mtk mapd library

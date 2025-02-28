@@ -7,17 +7,24 @@
 menu "Miscellaneous Utilities"
 
 config BUSYBOX_CONFIG_ADJTIMEX
+<<<<<<< HEAD
 	bool "adjtimex (4.9 kb)"
+=======
+	bool "adjtimex (4.7 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_ADJTIMEX
 	help
 	Adjtimex reads and optionally sets adjustment parameters for
 	the Linux clock adjustment algorithm.
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_ASCII
 	bool "ascii (784 bytes)"
 	default BUSYBOX_DEFAULT_ASCII
 	help
 	Print ascii table.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_BBCONFIG
 	bool "bbconfig (9.7 kb)"
 	default BUSYBOX_DEFAULT_BBCONFIG
@@ -39,7 +46,11 @@ config BUSYBOX_CONFIG_FEATURE_COMPRESS_BBCONFIG
 	and have very little memory, this might not be a win. Otherwise,
 	you probably want this.
 config BUSYBOX_CONFIG_BC
+<<<<<<< HEAD
 	bool "bc (38 kb)"
+=======
+	bool "bc (45 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_BC
 	select BUSYBOX_CONFIG_FEATURE_DC_BIG
 	help
@@ -63,7 +74,11 @@ config BUSYBOX_CONFIG_BC
 	  5) "read()" accepts expressions, not only numeric literals.
 
 config BUSYBOX_CONFIG_DC
+<<<<<<< HEAD
 	bool "dc (29 kb)"
+=======
+	bool "dc (36 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_DC
 	help
 	dc is a reverse-polish notation command-line calculator which
@@ -125,7 +140,11 @@ config BUSYBOX_CONFIG_FEATURE_BC_LONG_OPTIONS
 
 endif
 config BUSYBOX_CONFIG_BEEP
+<<<<<<< HEAD
 	bool "beep (2.7 kb)"
+=======
+	bool "beep (2.4 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_BEEP
 	help
 	The beep applets beeps in a given freq/Hz.
@@ -146,7 +165,11 @@ config BUSYBOX_CONFIG_FEATURE_BEEP_LENGTH_MS
 	help
 	Length in ms for default beep.
 config BUSYBOX_CONFIG_CHAT
+<<<<<<< HEAD
 	bool "chat (6.7 kb)"
+=======
+	bool "chat (6.3 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_CHAT
 	help
 	Simple chat utility.
@@ -220,7 +243,11 @@ config BUSYBOX_CONFIG_CONSPY
 	or        conspy -nd NUM  screenshot of console num
 	or        conspy -cs NUM  poor man's GNU screen like
 config BUSYBOX_CONFIG_CROND
+<<<<<<< HEAD
 	bool "crond (15 kb)"
+=======
+	bool "crond (14 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_CROND
 	select BUSYBOX_CONFIG_FEATURE_SYSLOG
 	help
@@ -330,7 +357,11 @@ config BUSYBOX_CONFIG_FEATURE_DEVFS
 	/dev/loop0. If your /dev directory has normal names instead of
 	devfs names, you don't want this.
 config BUSYBOX_CONFIG_DEVMEM
+<<<<<<< HEAD
 	bool "devmem (2.7 kb)"
+=======
+	bool "devmem (2.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_DEVMEM
 	help
 	devmem is a small program that reads and writes from physical
@@ -380,11 +411,14 @@ config BUSYBOX_CONFIG_FLASHCP
 	help
 	The flashcp binary, inspired by mtd-utils as of git head 5eceb74f7.
 	This utility is used to copy images into a MTD device.
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_GETFATTR
 	bool "getfattr (12.3 kb)"
 	default BUSYBOX_DEFAULT_GETFATTR
 	help
 	Get extended attributes on files
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_HDPARM
 	bool "hdparm (25 kb)"
 	default BUSYBOX_DEFAULT_HDPARM
@@ -442,36 +476,60 @@ config BUSYBOX_CONFIG_FEATURE_HDPARM_HDIO_GETSET_DMA
 	help
 	Enable the 'hdparm -d' option to get/set using_dma flag.
 config BUSYBOX_CONFIG_HEXEDIT
+<<<<<<< HEAD
 	bool "hexedit (15 kb)"
+=======
+	bool "hexedit (21 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_HEXEDIT
 	help
 	Edit file in hexadecimal.
 config BUSYBOX_CONFIG_I2CGET
+<<<<<<< HEAD
 	bool "i2cget (5.7 kb)"
+=======
+	bool "i2cget (5.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_I2CGET
 	help
 	Read from I2C/SMBus chip registers.
 
 config BUSYBOX_CONFIG_I2CSET
+<<<<<<< HEAD
 	bool "i2cset (6.9 kb)"
+=======
+	bool "i2cset (6.7 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_I2CSET
 	help
 	Set I2C registers.
 
 config BUSYBOX_CONFIG_I2CDUMP
+<<<<<<< HEAD
 	bool "i2cdump (7.2 kb)"
+=======
+	bool "i2cdump (7.1 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_I2CDUMP
 	help
 	Examine I2C registers.
 
 config BUSYBOX_CONFIG_I2CDETECT
+<<<<<<< HEAD
 	bool "i2cdetect (7.3 kb)"
+=======
+	bool "i2cdetect (7.1 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_I2CDETECT
 	help
 	Detect I2C chips.
 
 config BUSYBOX_CONFIG_I2CTRANSFER
+<<<<<<< HEAD
 	bool "i2ctransfer (5.5 kb)"
+=======
+	bool "i2ctransfer (4.0 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_I2CTRANSFER
 	help
 	Send user-defined I2C messages in one transfer.
@@ -584,7 +642,11 @@ config BUSYBOX_CONFIG_LOCK
 	help
 	  Small utility for using locks in scripts
 config BUSYBOX_CONFIG_LSSCSI
+<<<<<<< HEAD
 	bool "lsscsi (2.9 kb)"
+=======
+	bool "lsscsi (2.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_LSSCSI
 	help
 	lsscsi is a utility for displaying information about SCSI buses in the
@@ -592,7 +654,11 @@ config BUSYBOX_CONFIG_LSSCSI
 
 	This version uses sysfs (/sys/bus/scsi/devices) only.
 config BUSYBOX_CONFIG_MAKEDEVS
+<<<<<<< HEAD
 	bool "makedevs (9.4 kb)"
+=======
+	bool "makedevs (9.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_MAKEDEVS
 	help
 	'makedevs' is a utility used to create a batch of devices with
@@ -628,7 +694,11 @@ config BUSYBOX_CONFIG_MAN
 	help
 	Format and display manual pages.
 config BUSYBOX_CONFIG_MICROCOM
+<<<<<<< HEAD
 	bool "microcom (5.9 kb)"
+=======
+	bool "microcom (5.7 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_MICROCOM
 	help
 	The poor man's minicom utility for chatting with serial port devices.
@@ -640,36 +710,60 @@ config BUSYBOX_CONFIG_MIM
 	Run a script from a Makefile-like specification file.
 	Unlike 'make' dependencies aren't supported.
 config BUSYBOX_CONFIG_MT
+<<<<<<< HEAD
 	bool "mt (2.7 kb)"
+=======
+	bool "mt (2.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_MT
 	help
 	mt is used to control tape devices. You can use the mt utility
 	to advance or rewind a tape past a specified number of archive
 	files on the tape.
 config BUSYBOX_CONFIG_NANDWRITE
+<<<<<<< HEAD
 	bool "nandwrite (5 kb)"
+=======
+	bool "nandwrite (4.8 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_NANDWRITE
 	help
 	Write to the specified MTD device, with bad blocks awareness
 
 config BUSYBOX_CONFIG_NANDDUMP
+<<<<<<< HEAD
 	bool "nanddump (5.4 kb)"
+=======
+	bool "nanddump (5.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_NANDDUMP
 	help
 	Dump the content of raw NAND chip
 config BUSYBOX_CONFIG_PARTPROBE
+<<<<<<< HEAD
 	bool "partprobe (3.7 kb)"
+=======
+	bool "partprobe (3.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_PARTPROBE
 	help
 	Ask kernel to rescan partition table.
 config BUSYBOX_CONFIG_RAIDAUTORUN
+<<<<<<< HEAD
 	bool "raidautorun (1.6 kb)"
+=======
+	bool "raidautorun (1.3 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_RAIDAUTORUN
 	help
 	raidautorun tells the kernel md driver to
 	search and start RAID arrays.
 config BUSYBOX_CONFIG_READAHEAD
+<<<<<<< HEAD
 	bool "readahead (1.7 kb)"
+=======
+	bool "readahead (1.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_READAHEAD
 	depends on BUSYBOX_CONFIG_LFS
 	help
@@ -696,7 +790,11 @@ config BUSYBOX_CONFIG_RFKILL
 	rfkill block|unblock wlan : block/unblock all wlan(wifi) devices
 
 config BUSYBOX_CONFIG_RUNLEVEL
+<<<<<<< HEAD
 	bool "runlevel (837 bytes)"
+=======
+	bool "runlevel (559 bytes)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_RUNLEVEL
 	depends on BUSYBOX_CONFIG_FEATURE_UTMP
 	help
@@ -705,6 +803,7 @@ config BUSYBOX_CONFIG_RUNLEVEL
 	This applet uses utmp but does not rely on busybox supporing
 	utmp on purpose. It is used by e.g. emdebian via /etc/init.d/rc.
 config BUSYBOX_CONFIG_RX
+<<<<<<< HEAD
 	bool "rx (3.2 kb)"
 	default BUSYBOX_DEFAULT_RX
 	help
@@ -718,27 +817,48 @@ config BUSYBOX_CONFIG_SEEDRNG
 	at some periodic interval in between.
 config BUSYBOX_CONFIG_SETFATTR
 	bool "setfattr (3.9 kb)"
+=======
+	bool "rx (2.9 kb)"
+	default BUSYBOX_DEFAULT_RX
+	help
+	Receive files using the Xmodem protocol.
+config BUSYBOX_CONFIG_SETFATTR
+	bool "setfattr (3.7 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_SETFATTR
 	help
 	Set/delete extended attributes on files
 config BUSYBOX_CONFIG_SETSERIAL
+<<<<<<< HEAD
 	bool "setserial (7.1 kb)"
+=======
+	bool "setserial (6.9 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_SETSERIAL
 	help
 	Retrieve or set Linux serial port.
 config BUSYBOX_CONFIG_STRINGS
+<<<<<<< HEAD
 	bool "strings (4.8 kb)"
+=======
+	bool "strings (4.6 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_STRINGS
 	help
 	strings prints the printable character sequences for each file
 	specified.
 config BUSYBOX_CONFIG_TIME
+<<<<<<< HEAD
 	bool "time (8.1 kb)"
+=======
+	bool "time (6.8 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_TIME
 	help
 	The time command runs the specified program with the given arguments.
 	When the command finishes, time writes a message to standard output
 	giving timing statistics about this program run.
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_TREE
 	bool "tree (2.5 kb)"
 	default BUSYBOX_DEFAULT_TREE
@@ -749,6 +869,13 @@ config BUSYBOX_CONFIG_TS
 	default BUSYBOX_DEFAULT_TS
 config BUSYBOX_CONFIG_TTYSIZE
 	bool "ttysize (718 bytes)"
+=======
+config BUSYBOX_CONFIG_TS
+	bool "ts (450 bytes)"
+	default BUSYBOX_DEFAULT_TS
+config BUSYBOX_CONFIG_TTYSIZE
+	bool "ttysize (432 bytes)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_TTYSIZE
 	help
 	A replacement for "stty size". Unlike stty, can report only width,
@@ -756,52 +883,88 @@ config BUSYBOX_CONFIG_TTYSIZE
 	error, but returns default 80x24.
 	Usage in shell scripts: width=`ttysize w`.
 config BUSYBOX_CONFIG_UBIATTACH
+<<<<<<< HEAD
 	bool "ubiattach (4.5 kb)"
+=======
+	bool "ubiattach (4.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIATTACH
 	help
 	Attach MTD device to an UBI device.
 
 config BUSYBOX_CONFIG_UBIDETACH
+<<<<<<< HEAD
 	bool "ubidetach (4.3 kb)"
+=======
+	bool "ubidetach (4.1 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIDETACH
 	help
 	Detach MTD device from an UBI device.
 
 config BUSYBOX_CONFIG_UBIMKVOL
+<<<<<<< HEAD
 	bool "ubimkvol (5.5 kb)"
+=======
+	bool "ubimkvol (5.3 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIMKVOL
 	help
 	Create a UBI volume.
 
 config BUSYBOX_CONFIG_UBIRMVOL
+<<<<<<< HEAD
 	bool "ubirmvol (5.1 kb)"
+=======
+	bool "ubirmvol (4.9 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIRMVOL
 	help
 	Delete a UBI volume.
 
 config BUSYBOX_CONFIG_UBIRSVOL
+<<<<<<< HEAD
 	bool "ubirsvol (4.4 kb)"
+=======
+	bool "ubirsvol (4.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIRSVOL
 	help
 	Resize a UBI volume.
 
 config BUSYBOX_CONFIG_UBIUPDATEVOL
+<<<<<<< HEAD
 	bool "ubiupdatevol (5.6 kb)"
+=======
+	bool "ubiupdatevol (5.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIUPDATEVOL
 	help
 	Update a UBI volume.
 config BUSYBOX_CONFIG_UBIRENAME
+<<<<<<< HEAD
 	bool "ubirename (2.7 kb)"
+=======
+	bool "ubirename (2.4 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_UBIRENAME
 	help
 	Utility to rename UBI volumes
 config BUSYBOX_CONFIG_VOLNAME
+<<<<<<< HEAD
 	bool "volname (1.9 kb)"
+=======
+	bool "volname (1.6 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_VOLNAME
 	help
 	Prints a CD-ROM volume name.
 config BUSYBOX_CONFIG_WATCHDOG
+<<<<<<< HEAD
 	bool "watchdog (5.7 kb)"
+=======
+	bool "watchdog (5.3 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_WATCHDOG
 	help
 	The watchdog utility is used with hardware or software watchdog
@@ -811,6 +974,7 @@ config BUSYBOX_CONFIG_WATCHDOG
 	certain amount of time, the watchdog device assumes the system has
 	hung, and will cause the hardware to reboot.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_WATCHDOG_OPEN_TWICE
 	bool "Open watchdog device twice, closing it gracefully in between"
 	depends on BUSYBOX_CONFIG_WATCHDOG
@@ -826,4 +990,6 @@ config BUSYBOX_CONFIG_FEATURE_WATCHDOG_OPEN_TWICE
 	immediately before starting the busybox watchdog daemon. Say n unless
 	you know that you absolutely need this.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endmenu

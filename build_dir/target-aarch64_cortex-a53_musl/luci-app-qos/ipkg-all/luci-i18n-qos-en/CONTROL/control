@@ -1,0 +1,11 @@
+Package: luci-i18n-qos-en
+Version: git-22.240.58472-bdaec14
+Depends: libc, luci-app-qos
+Source: feeds/luci/applications/luci-app-qos
+SourceName: luci-i18n-qos-en
+License: Apache-2.0
+Section: luci
+SourceDateEpoch: 1661703272
+Architecture: all
+Installed-Size: 354
+Description:  Translation for luci-app-qos - English

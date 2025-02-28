@@ -1,0 +1,10 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host
+datarootdir=${prefix}/share
+datadir=${datarootdir}
+pkgdatadir=${datadir}/mm-common
+doctooldir=${pkgdatadir}/doctool
+
+Name: mm-common-util
+Description: mm-common's doctool build utilities for the GNOME C++ bindings
+Version: 1.0.0
+URL: http://www.gtkmm.org/

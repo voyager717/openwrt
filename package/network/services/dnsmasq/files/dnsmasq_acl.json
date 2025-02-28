@@ -7,9 +7,12 @@
 		},
 		"hotplug.neigh": {
 			"methods": [ "call" ]
+<<<<<<< HEAD
 		},
 		"hotplug.tftp": {
 			"methods": [ "call" ]
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 	}
 }

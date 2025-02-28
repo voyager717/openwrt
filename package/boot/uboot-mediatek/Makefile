@@ -1,16 +1,22 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
+<<<<<<< HEAD
 PKG_VERSION:=2025.01
 PKG_HASH:=cdef7d507c93f1bbd9f015ea9bc21fa074268481405501945abc6f854d5b686f
 PKG_BUILD_DEPENDS:=!(TARGET_ramips||TARGET_mediatek_mt7623):arm-trusted-firmware-tools/host
 
 UBOOT_USE_INTREE_DTC:=1
+=======
+PKG_VERSION:=2020.10
+PKG_HASH:=0d481bbdc05c0ee74908ec2f56a6daa53166cc6a78a0e4fac2ac5d025770a622
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk
 
+<<<<<<< HEAD
 MT7621_LOWLEVEL_PRELOADER_URL:=https://raw.githubusercontent.com/mtk-openwrt/mt7621-lowlevel-preloader/a03b07c60bf1ba4add9b671d32caa102fe948180/
 
 define Download/mt7621-stage-sram
@@ -177,23 +183,42 @@ define U-Boot/mt7622_xiaomi_redmi-router-ax6s-ubi-loader
   BUILD_DEVICES:=xiaomi_redmi-router-ax6s
   BUILD_SUBTARGET:=mt7622
   UBOOT_IMAGE:=u-boot.bin
+=======
+define U-Boot/Default
+  BUILD_TARGET:=mediatek
+  UBOOT_IMAGE:=u-boot-mtk.bin
+  DEFAULT:=y
+endef
+
+define U-Boot/mt7622
+  NAME:=MT7622
+  BUILD_SUBTARGET:=mt7622
+  UBOOT_CONFIG:=mt7622_rfb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define U-Boot/mt7623a_unielec_u7623
   NAME:=UniElec U7623 (mt7623)
+<<<<<<< HEAD
   BUILD_DEVICES:=unielec_u7623-02
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BUILD_SUBTARGET:=mt7623
   UBOOT_CONFIG:=mt7623a_unielec_u7623_02
 endef
 
 define U-Boot/mt7623n_bpir2
   NAME:=Banana Pi R2 (mt7623)
+<<<<<<< HEAD
   BUILD_DEVICES:=bananapi_bpi-r2
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BUILD_SUBTARGET:=mt7623
   UBOOT_IMAGE:=u-boot.bin
   UBOOT_CONFIG:=mt7623n_bpir2
 endef
 
+<<<<<<< HEAD
 define U-Boot/mt7628_rfb
   NAME:=MT7628 Reference Board
   BUILD_DEVICES:=mediatek_mt7628an-eval-board
@@ -934,6 +959,23 @@ endif
 define Build/InstallDev
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
 	$(INSTALL_DATA) $(PKG_BUILD_DIR)/$(UBOOT_IMAGE) $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-$(UBOOT_IMAGE)
+=======
+define U-Boot/mt7629
+  NAME:=MT7629
+  BUILD_SUBTARGET:=mt7629
+  UBOOT_CONFIG:=mt7629_rfb
+endef
+
+UBOOT_TARGETS := mt7629 mt7622 mt7623n_bpir2 mt7623a_unielec_u7623
+
+UBOOT_MAKE_FLAGS += $(UBOOT_IMAGE)
+
+Build/Exports:=$(Host/Exports)
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/$(UBOOT_IMAGE) $(STAGING_DIR_IMAGE)/$(BUILD_VARIANT)-$(UBOOT_IMAGE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call BuildPackage/U-Boot))

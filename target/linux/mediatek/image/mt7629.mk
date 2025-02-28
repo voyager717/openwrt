@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 ifneq ($(KERNEL),6.1)
 DTS_DIR := $(DTS_DIR)/mediatek
 endif
+=======
+KERNEL_LOADADDR := 0x40008000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/mediatek_mt7629-rfb
   DEVICE_VENDOR := MediaTek
@@ -9,6 +13,7 @@ define Device/mediatek_mt7629-rfb
   DEVICE_PACKAGES := swconfig
 endef
 TARGET_DEVICES += mediatek_mt7629-rfb
+<<<<<<< HEAD
 
 define Device/iptime_a6004mx
   DEVICE_VENDOR := ipTIME
@@ -77,3 +82,5 @@ define Device/tplink_eap225-v5
   DEVICE_DTS_DIR := ../dts
 endef
 TARGET_DEVICES += tplink_eap225-v5
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

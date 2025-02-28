@@ -22,7 +22,12 @@ define KernelPackage/rtc-rv5c386a
 endef
 
 define Build/Compile
+<<<<<<< HEAD
 	$(KERNEL_MAKE) \
+=======
+	$(MAKE) -C "$(LINUX_DIR)" \
+		$(KERNEL_MAKE_FLAGS) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		M="$(PKG_BUILD_DIR)" \
 		EXTRA_CFLAGS="$(BUILDFLAGS)" \
 		modules

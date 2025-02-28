@@ -2,6 +2,7 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
@@ -13,6 +14,18 @@
 		led-failsafe = &led_system;
 		led-running = &led_system;
 		led-upgrade = &led_system;
+=======
+
+/ {
+	compatible = "gnubee,gb-pc2", "mediatek,mt7621-soc";
+	model = "GB-PC2";
+
+	aliases {
+		led-boot = &led_status;
+		led-failsafe = &led_status;
+		led-running = &led_status;
+		led-upgrade = &led_status;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	keys {
@@ -28,6 +41,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		ethblack-green {
 			label = "green:ethblack";
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
@@ -59,6 +73,36 @@
 			label = "green:system";
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "disk-activity";
+=======
+		system {
+			label = "green:system";
+			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
+		};
+
+		led_status: status {
+			label = "green:status";
+			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
+		};
+
+		lan1 {
+			label = "green:lan1";
+			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
+		};
+
+		lan2 {
+			label = "green:lan2";
+			gpios = <&gpio 25 GPIO_ACTIVE_LOW>;
+		};
+
+		lan3-yellow {
+			label = "yellow:lan3";
+			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
+		};
+
+		lan3-green {
+			label = "green:lan3";
+			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -73,8 +117,14 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
 		broken-flash-reset;
+=======
+		spi-max-frequency = <80000000>;
+		broken-flash-reset;
+		m25p,fast-read;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -93,6 +143,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -107,6 +158,12 @@
 						reg = <0xe000 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -123,6 +180,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
 };
@@ -141,25 +199,40 @@
 	ethphy5: ethernet-phy@5 {
 		reg = <5>;
 	};
+=======
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
 		port@0 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "ethblack";
+=======
+			label = "lan1";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@4 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "ethblue";
+=======
+			label = "lan2";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
 
 &state_default {
 	gpio {
+<<<<<<< HEAD
 		groups = "jtag", "uart3", "wdt";
+=======
+		groups = "jtag", "rgmii2", "uart3", "wdt";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };

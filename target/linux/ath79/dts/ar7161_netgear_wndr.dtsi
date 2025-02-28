@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <dt-bindings/mtd/partitions/uimage.h>
 
 / {
@@ -13,6 +16,17 @@
 		led-failsafe = &led_power_orange;
 		led-running = &led_power_green;
 		led-upgrade = &led_power_orange;
+<<<<<<< HEAD
+=======
+		label-mac-device = &eth0;
+	};
+
+	extosc: ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-output-names = "ref";
+		clock-frequency = <40000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	reset-leds {
@@ -30,33 +44,53 @@
 		compatible = "gpio-leds";
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_orange: power_orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wps_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -109,6 +143,11 @@
 			#size-cells = <0>;
 			status = "okay";
 
+<<<<<<< HEAD
+=======
+			phy-mask = <0x10>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			phy4: ethernet-phy@4 {
 				reg = <4>;
 				phy-mode = "rgmii";
@@ -122,20 +161,50 @@
 };
 
 &usb1 {
+<<<<<<< HEAD
 	status = "okay";
 };
 
 &usb2 {
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ohci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+};
+
+&usb2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ehci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	ath9k0: wifi@11,0 {
 		compatible = "pci168c,0029";
 		reg = <0x8800 0 0 0 0>;
 
+=======
+	ath9k0: wifi@0,11 {
+		compatible = "pci168c,0029";
+		reg = <0x8800 0 0 0 0>;
+		mtd-mac-address = <&art 0x0>;
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 
@@ -159,10 +228,18 @@
 		};
 	};
 
+<<<<<<< HEAD
 	ath9k1: wifi@12,0 {
 		compatible = "pci168c,0029";
 		reg = <0x9000 0 0 0 0>;
 
+=======
+	ath9k1: wifi@0,12 {
+		compatible = "pci168c,0029";
+		reg = <0x9000 0 0 0 0>;
+		mtd-mac-address = <&art 0xc>;
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 	};
@@ -189,6 +266,11 @@
 
 	pll-data = <0x11110000 0x00001099 0x00991099>;
 
+<<<<<<< HEAD
+=======
+	mtd-mac-address = <&art 0x00>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
@@ -200,5 +282,10 @@
 
 	pll-data = <0x11110000 0x00001099 0x00991099>;
 
+<<<<<<< HEAD
+=======
+	mtd-mac-address = <&art 0x06>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-handle = <&phy4>;
 };

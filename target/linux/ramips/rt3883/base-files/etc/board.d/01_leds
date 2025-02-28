@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/leds.sh
 . /lib/functions/uci-defaults.sh

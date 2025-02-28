@@ -39,6 +39,7 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &gmac1 {
 	status = "okay";
 	label = "wan";
@@ -49,6 +50,8 @@
 	/delete-property/ interrupts;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &switch0 {
 	ports {
 		port@0 {
@@ -70,12 +73,24 @@
 			status = "okay";
 			label = "lan4";
 		};
+<<<<<<< HEAD
+=======
+
+		port@4 {
+			status = "okay";
+			label = "wan";
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &state_default {
 	gpio {
+<<<<<<< HEAD
 		groups = "i2c", "uart2", "uart3", "sdhci";
+=======
+		groups = "i2c", "uart2", "uart3", "rgmii2", "sdhci";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };

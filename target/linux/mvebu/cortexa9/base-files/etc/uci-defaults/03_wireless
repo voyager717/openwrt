@@ -17,8 +17,13 @@ linksys,wrt1900acs|\
 linksys,wrt3200acm|\
 linksys,wrt32x)
 	SKU=$(strings /dev/mtd3|sed -ne 's/^cert_region=//p')
+<<<<<<< HEAD
 	WIFIMAC2G=$(macaddr_add $(mtd_get_mac_ascii devinfo hw_mac_addr) 1)
 	WIFIMAC5G=$(macaddr_add $WIFIMAC2G 1)
+=======
+	WIFIMAC2G=$(macaddr_add $(mtd_get_mac_ascii devinfo hw_mac_addr) +1)
+	WIFIMAC5G=$(macaddr_add $WIFIMAC2G +1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	case "$SKU" in
 		AP)
 			REGD=CN

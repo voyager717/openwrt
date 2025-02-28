@@ -1,0 +1,799 @@
+From ad7bc390e9ba4a09707dfbeb01c87ce7146a880f Mon Sep 17 00:00:00 2001
+From: Sujuan Chen <sujuan.chen@mediatek.com>
+Date: Fri, 15 Apr 2022 18:43:56 +0800
+Subject: [PATCH] mt76-add-wed-rx-support
+
+Signed-off-by: Sujuan Chen <sujuan.chen@mediatek.com>
+---
+ agg-rx.c          |   3 +
+ dma.c             | 189 ++++++++++++++++++++++++++++++++++++++--------
+ dma.h             |   8 ++
+ mac80211.c        |   8 +-
+ mt76.h            |  22 +++++-
+ mt76_connac_mcu.c |   7 ++
+ mt7915/dma.c      |  10 ++-
+ mt7915/mac.c      |  65 ++++++++++++++++
+ mt7915/mcu.c      |   2 +
+ mt7915/mmio.c     |  15 +++-
+ mt7915/mt7915.h   |   5 +-
+ mt7915/regs.h     |   4 +
+ tx.c              |  34 +++++++++
+ 13 files changed, 336 insertions(+), 36 deletions(-)
+
+diff --git a/agg-rx.c b/agg-rx.c
+index 72622220..efd1a857 100644
+--- a/agg-rx.c
++++ b/agg-rx.c
+@@ -167,6 +167,9 @@ void mt76_rx_aggr_reorder(struct sk_buff *skb, struct sk_buff_head *frames)
+ 		return;
+ 	}
+ 
++	if (!status->aggr)
++		return;
++
+ 	/* not part of a BA session */
+ 	ackp = status->qos_ctl & IEEE80211_QOS_CTL_ACK_POLICY_MASK;
+ 	if (ackp != IEEE80211_QOS_CTL_ACK_POLICY_BLOCKACK &&
+diff --git a/dma.c b/dma.c
+index 30de8be4..6067d9f0 100644
+--- a/dma.c
++++ b/dma.c
+@@ -98,6 +98,61 @@ mt76_put_txwi(struct mt76_dev *dev, struct mt76_txwi_cache *t)
+ }
+ EXPORT_SYMBOL_GPL(mt76_put_txwi);
+ 
++static struct mt76_txwi_cache *
++mt76_alloc_rxwi(struct mt76_dev *dev)
++{
++	struct mt76_txwi_cache *r;
++	int size;
++
++	size = L1_CACHE_ALIGN(sizeof(*r));
++	r = kzalloc(size, GFP_ATOMIC);
++	if (!r)
++		return NULL;
++
++	return r;
++}
++
++static struct mt76_txwi_cache *
++__mt76_get_rxwi(struct mt76_dev *dev)
++{
++	struct mt76_txwi_cache *r = NULL;
++
++	spin_lock(&dev->wed_lock);
++	if (!list_empty(&dev->rxwi_cache)) {
++		r = list_first_entry(&dev->rxwi_cache, struct mt76_txwi_cache,
++				     list);
++		if(r)
++			list_del(&r->list);
++	}
++	spin_unlock(&dev->wed_lock);
++
++	return r;
++}
++
++struct mt76_txwi_cache *
++mt76_get_rxwi(struct mt76_dev *dev)
++{
++	struct mt76_txwi_cache *r = __mt76_get_rxwi(dev);
++
++	if (r)
++		return r;
++
++	return mt76_alloc_rxwi(dev);
++}
++EXPORT_SYMBOL_GPL(mt76_get_rxwi);
++
++void
++mt76_put_rxwi(struct mt76_dev *dev, struct mt76_txwi_cache *r)
++{
++	if (!r)
++		return;
++
++	spin_lock(&dev->wed_lock);
++	list_add(&r->list, &dev->rxwi_cache);
++	spin_unlock(&dev->wed_lock);
++}
++EXPORT_SYMBOL_GPL(mt76_put_rxwi);
++
+ static void
+ mt76_free_pending_txwi(struct mt76_dev *dev)
+ {
+@@ -143,10 +198,13 @@ mt76_dma_add_buf(struct mt76_dev *dev, struct mt76_queue *q,
+ 		 struct mt76_queue_buf *buf, int nbufs, u32 info,
+ 		 struct sk_buff *skb, void *txwi)
+ {
++	struct mtk_wed_device *wed = &dev->mmio.wed;
++
+ 	struct mt76_queue_entry *entry;
+ 	struct mt76_desc *desc;
+ 	u32 ctrl;
+ 	int i, idx = -1;
++	int type;
+ 
+ 	if (txwi) {
+ 		q->entry[q->head].txwi = DMA_DUMMY_DATA;
+@@ -162,33 +220,54 @@ mt76_dma_add_buf(struct mt76_dev *dev, struct mt76_queue *q,
+ 		desc = &q->desc[idx];
+ 		entry = &q->entry[idx];
+ 
+-		if (buf[0].skip_unmap)
+-			entry->skip_buf0 = true;
+-		entry->skip_buf1 = i == nbufs - 1;
+-
+-		entry->dma_addr[0] = buf[0].addr;
+-		entry->dma_len[0] = buf[0].len;
+-
+-		ctrl = FIELD_PREP(MT_DMA_CTL_SD_LEN0, buf[0].len);
+-		if (i < nbufs - 1) {
+-			entry->dma_addr[1] = buf[1].addr;
+-			entry->dma_len[1] = buf[1].len;
+-			buf1 = buf[1].addr;
+-			ctrl |= FIELD_PREP(MT_DMA_CTL_SD_LEN1, buf[1].len);
+-			if (buf[1].skip_unmap)
+-				entry->skip_buf1 = true;
++		type = FIELD_GET(MT_QFLAG_WED_TYPE, q->flags);
++		if (mtk_wed_device_active(wed) && type == MT76_WED_Q_RX) {
++			struct mt76_txwi_cache * rxwi;
++			int rx_token;
++
++			rxwi = mt76_get_rxwi(dev);
++			if (!rxwi)
++				return -ENOMEM;
++
++			rx_token = mt76_rx_token_consume(dev, (void *)skb, rxwi,
++							 buf[0].addr);
++
++			buf1 |= FIELD_PREP(MT_DMA_CTL_TOKEN, rx_token);
++			ctrl |= MT_DMA_CTL_TO_HOST;
++			ctrl |= FIELD_PREP(MT_DMA_CTL_SD_LEN0, MTK_WED_RX_PKT_SIZE);
++		} else {
++			if (buf[0].skip_unmap)
++				entry->skip_buf0 = true;
++			entry->skip_buf1 = i == nbufs - 1;
++
++			entry->dma_addr[0] = buf[0].addr;
++			entry->dma_len[0] = buf[0].len;
++
++			ctrl = FIELD_PREP(MT_DMA_CTL_SD_LEN0, buf[0].len);
++			if (i < nbufs - 1) {
++				entry->dma_addr[1] = buf[1].addr;
++				entry->dma_len[1] = buf[1].len;
++				buf1 = buf[1].addr;
++				ctrl |= FIELD_PREP(MT_DMA_CTL_SD_LEN1, buf[1].len);
++				if (buf[1].skip_unmap)
++					entry->skip_buf1 = true;
++			}
++			if (i == nbufs - 1)
++				ctrl |= MT_DMA_CTL_LAST_SEC0;
++			else if (i == nbufs - 2)
++				ctrl |= MT_DMA_CTL_LAST_SEC1;
+ 		}
+ 
+-		if (i == nbufs - 1)
+-			ctrl |= MT_DMA_CTL_LAST_SEC0;
+-		else if (i == nbufs - 2)
+-			ctrl |= MT_DMA_CTL_LAST_SEC1;
+-
+ 		WRITE_ONCE(desc->buf0, cpu_to_le32(buf0));
+ 		WRITE_ONCE(desc->buf1, cpu_to_le32(buf1));
+ 		WRITE_ONCE(desc->info, cpu_to_le32(info));
+ 		WRITE_ONCE(desc->ctrl, cpu_to_le32(ctrl));
+ 
++		if (mtk_wed_device_active(wed) && type == MT76_WED_Q_RX) {
++			dma_sync_single_for_device(dev->dma_dev,  buf[0].addr, MTK_WED_RX_PKT_SIZE,
++						   DMA_TO_DEVICE);
++		}
++
+ 		q->queued++;
+ 	}
+ 
+@@ -272,33 +351,62 @@ mt76_dma_tx_cleanup(struct mt76_dev *dev, struct mt76_queue *q, bool flush)
+ 
+ static void *
+ mt76_dma_get_buf(struct mt76_dev *dev, struct mt76_queue *q, int idx,
+-		 int *len, u32 *info, bool *more)
++		 int *len, u32 *info, bool *more, bool *drop)
+ {
+ 	struct mt76_queue_entry *e = &q->entry[idx];
+ 	struct mt76_desc *desc = &q->desc[idx];
+ 	dma_addr_t buf_addr;
+ 	void *buf = e->buf;
+ 	int buf_len = SKB_WITH_OVERHEAD(q->buf_size);
++	struct mtk_wed_device *wed = &dev->mmio.wed;
++	int type;
+ 
+-	buf_addr = e->dma_addr[0];
+ 	if (len) {
+ 		u32 ctl = le32_to_cpu(READ_ONCE(desc->ctrl));
+ 		*len = FIELD_GET(MT_DMA_CTL_SD_LEN0, ctl);
+ 		*more = !(ctl & MT_DMA_CTL_LAST_SEC0);
+ 	}
+ 
+-	if (info)
+-		*info = le32_to_cpu(desc->info);
++	type = FIELD_GET(MT_QFLAG_WED_TYPE, q->flags);
++	if (mtk_wed_device_active(wed) && type == MT76_WED_Q_RX) {
++		u32 token;
++		struct mt76_txwi_cache *r;
++
++		token = FIELD_GET(MT_DMA_CTL_TOKEN, desc->buf1);
++
++		r = mt76_rx_token_release(dev, token);
++		if (!r)
++			return NULL;
++
++		buf = r->buf;
++		buf_addr = r->dma_addr;
++		buf_len = MTK_WED_RX_PKT_SIZE;
++		r->buf = NULL;
++		r->dma_addr = 0;
++
++		mt76_put_rxwi(dev, r);
++
++		dma_sync_single_for_cpu(dev->dma_dev, buf_addr, buf_len,
++					DMA_TO_DEVICE);
++
++		if (desc->ctrl & (MT_DMA_CTL_TO_HOST_A | MT_DMA_CTL_DROP))
++			*drop = true;
++	} else {
++		buf_addr = e->dma_addr[0];
++		e->buf = NULL;
++	}
+ 
+ 	dma_unmap_single(dev->dma_dev, buf_addr, buf_len, DMA_FROM_DEVICE);
+-	e->buf = NULL;
++
++	if (info)
++		*info = le32_to_cpu(desc->info);
+ 
+ 	return buf;
+ }
+ 
+ static void *
+ mt76_dma_dequeue(struct mt76_dev *dev, struct mt76_queue *q, bool flush,
+-		 int *len, u32 *info, bool *more)
++		 int *len, u32 *info, bool *more, bool *drop)
+ {
+ 	int idx = q->tail;
+ 
+@@ -314,7 +422,7 @@ mt76_dma_dequeue(struct mt76_dev *dev, struct mt76_queue *q, bool flush,
+ 	q->tail = (q->tail + 1) % q->ndesc;
+ 	q->queued--;
+ 
+-	return mt76_dma_get_buf(dev, q, idx, len, info, more);
++	return mt76_dma_get_buf(dev, q, idx, len, info, more, drop);
+ }
+ 
+ static int
+@@ -449,10 +557,16 @@ mt76_dma_rx_fill(struct mt76_dev *dev, struct mt76_queue *q)
+ 	int frames = 0;
+ 	int len = SKB_WITH_OVERHEAD(q->buf_size);
+ 	int offset = q->buf_offset;
++	int type;
++	struct mtk_wed_device *wed = &dev->mmio.wed;
+ 
+ 	if (!q->ndesc)
+ 		return 0;
+ 
++	type = FIELD_GET(MT_QFLAG_WED_TYPE, q->flags);
++	if (mtk_wed_device_active(wed) && type == MT76_WED_Q_RX)
++		len = MTK_WED_RX_PKT_SIZE;
++
+ 	spin_lock_bh(&q->lock);
+ 
+ 	while (q->queued < q->ndesc - 1) {
+@@ -517,6 +631,11 @@ mt76_dma_wed_setup(struct mt76_dev *dev, struct mt76_queue *q)
+ 		if (!ret)
+ 			q->wed_regs = wed->txfree_ring.reg_base;
+ 		break;
++	case MT76_WED_Q_RX:
++		ret = mtk_wed_device_rx_ring_setup(wed, ring, q->regs);
++		if (!ret)
++			q->wed_regs = wed->rx_ring[ring].reg_base;
++		break;
+ 	default:
+ 		ret = -EINVAL;
+ 	}
+@@ -532,7 +651,8 @@ mt76_dma_alloc_queue(struct mt76_dev *dev, struct mt76_queue *q,
+ 		     int idx, int n_desc, int bufsize,
+ 		     u32 ring_base)
+ {
+-	int ret, size;
++	int ret, size, type;
++	struct mtk_wed_device *wed = &dev->mmio.wed;
+ 
+ 	spin_lock_init(&q->lock);
+ 	spin_lock_init(&q->cleanup_lock);
+@@ -542,6 +662,11 @@ mt76_dma_alloc_queue(struct mt76_dev *dev, struct mt76_queue *q,
+ 	q->buf_size = bufsize;
+ 	q->hw_idx = idx;
+ 
++	type = FIELD_GET(MT_QFLAG_WED_TYPE, q->flags);
++	if (mtk_wed_device_active(wed) && type == MT76_WED_Q_RX)
++		q->buf_size = SKB_DATA_ALIGN(NET_SKB_PAD + MTK_WED_RX_PKT_SIZE) +
++					     SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
++
+ 	size = q->ndesc * sizeof(struct mt76_desc);
+ 	q->desc = dmam_alloc_coherent(dev->dma_dev, size, &q->desc_dma, GFP_KERNEL);
+ 	if (!q->desc)
+@@ -574,7 +699,7 @@ mt76_dma_rx_cleanup(struct mt76_dev *dev, struct mt76_queue *q)
+ 
+ 	spin_lock_bh(&q->lock);
+ 	do {
+-		buf = mt76_dma_dequeue(dev, q, true, NULL, NULL, &more);
++		buf = mt76_dma_dequeue(dev, q, true, NULL, NULL, &more, NULL);
+ 		if (!buf)
+ 			break;
+ 
+@@ -656,6 +781,7 @@ mt76_dma_rx_process(struct mt76_dev *dev, struct mt76_queue *q, int budget)
+ 	}
+ 
+ 	while (done < budget) {
++		bool drop = false;
+ 		u32 info;
+ 
+ 		if (check_ddone) {
+@@ -666,10 +792,13 @@ mt76_dma_rx_process(struct mt76_dev *dev, struct mt76_queue *q, int budget)
+ 				break;
+ 		}
+ 
+-		data = mt76_dma_dequeue(dev, q, false, &len, &info, &more);
++		data = mt76_dma_dequeue(dev, q, false, &len, &info, &more, &drop);
+ 		if (!data)
+ 			break;
+ 
++		if (drop)
++			goto free_frag;
++
+ 		if (q->rx_head)
+ 			data_len = q->buf_size;
+ 		else
+diff --git a/dma.h b/dma.h
+index fdf786f9..2e2dde6b 100644
+--- a/dma.h
++++ b/dma.h
+@@ -16,6 +16,14 @@
+ #define MT_DMA_CTL_LAST_SEC0		BIT(30)
+ #define MT_DMA_CTL_DMA_DONE		BIT(31)
+ 
++#define MT_DMA_CTL_TO_HOST		BIT(8)
++#define MT_DMA_CTL_TO_HOST_A		BIT(12)
++#define MT_DMA_CTL_DROP			BIT(14)
++
++#define MT_DMA_CTL_TOKEN		GENMASK(31, 16)
++
++#define MT_DMA_INFO_PPE_VLD 		BIT(31)
++
+ #define MT_DMA_HDR_LEN			4
+ #define MT_RX_INFO_LEN			4
+ #define MT_FCE_INFO_LEN			4
+diff --git a/mac80211.c b/mac80211.c
+index 21eaf994..230e84b7 100644
+--- a/mac80211.c
++++ b/mac80211.c
+@@ -590,11 +590,14 @@ mt76_alloc_device(struct device *pdev, unsigned int size,
+ 		BIT(NL80211_IFTYPE_ADHOC);
+ 
+ 	spin_lock_init(&dev->token_lock);
++	spin_lock_init(&dev->rx_token_lock);
+ 	idr_init(&dev->token);
++	idr_init(&dev->rx_token);
+ 
+ 	INIT_LIST_HEAD(&dev->wcid_list);
+ 
+ 	INIT_LIST_HEAD(&dev->txwi_cache);
++	INIT_LIST_HEAD(&dev->rxwi_cache);
+ 	dev->token_size = dev->drv->token_size;
+ 
+ 	for (i = 0; i < ARRAY_SIZE(dev->q_rx); i++)
+@@ -1293,7 +1296,10 @@ void mt76_rx_poll_complete(struct mt76_dev *dev, enum mt76_rxq_id q,
+ 
+ 	while ((skb = __skb_dequeue(&dev->rx_skb[q])) != NULL) {
+ 		mt76_check_sta(dev, skb);
+-		mt76_rx_aggr_reorder(skb, &frames);
++		if (mtk_wed_device_active(&dev->mmio.wed))
++			__skb_queue_tail(&frames, skb);
++		else
++			mt76_rx_aggr_reorder(skb, &frames);
+ 	}
+ 
+ 	mt76_rx_complete(dev, &frames, napi);
+diff --git a/mt76.h b/mt76.h
+index 768880f0..6bc7cc50 100644
+--- a/mt76.h
++++ b/mt76.h
+@@ -20,6 +20,8 @@
+ 
+ #define MT_MCU_RING_SIZE	32
+ #define MT_RX_BUF_SIZE		2048
++#define MTK_WED_RX_PKT_SIZE	1700
++
+ #define MT_SKB_HEAD_LEN		256
+ 
+ #define MT_MAX_NON_AQL_PKT	16
+@@ -35,6 +37,7 @@
+ 				 FIELD_PREP(MT_QFLAG_WED_TYPE, _type) | \
+ 				 FIELD_PREP(MT_QFLAG_WED_RING, _n))
+ #define MT_WED_Q_TX(_n)		__MT_WED_Q(MT76_WED_Q_TX, _n)
++#define MT_WED_Q_RX(_n)		__MT_WED_Q(MT76_WED_Q_RX, _n)
+ #define MT_WED_Q_TXFREE		__MT_WED_Q(MT76_WED_Q_TXFREE, 0)
+ 
+ struct mt76_dev;
+@@ -56,6 +59,7 @@ enum mt76_bus_type {
+ enum mt76_wed_type {
+ 	MT76_WED_Q_TX,
+ 	MT76_WED_Q_TXFREE,
++	MT76_WED_Q_RX,
+ };
+ 
+ struct mt76_bus_ops {
+@@ -305,7 +309,10 @@ struct mt76_txwi_cache {
+ 	struct list_head list;
+ 	dma_addr_t dma_addr;
+ 
+-	struct sk_buff *skb;
++	union {
++		void *buf;
++		struct sk_buff *skb;
++	};
+ };
+ 
+ struct mt76_rx_tid {
+@@ -750,6 +757,7 @@ struct mt76_dev {
+ 	struct ieee80211_hw *hw;
+ 
+ 	spinlock_t lock;
++	spinlock_t wed_lock;
+ 	spinlock_t cc_lock;
+ 
+ 	u32 cur_cc_bss_rx;
+@@ -775,6 +783,7 @@ struct mt76_dev {
+ 	struct sk_buff_head rx_skb[__MT_RXQ_MAX];
+ 
+ 	struct list_head txwi_cache;
++	struct list_head rxwi_cache;
+ 	struct mt76_queue *q_mcu[__MT_MCUQ_MAX];
+ 	struct mt76_queue q_rx[__MT_RXQ_MAX];
+ 	const struct mt76_queue_ops *queue_ops;
+@@ -788,6 +797,9 @@ struct mt76_dev {
+ 	u16 wed_token_count;
+ 	u16 token_count;
+ 	u16 token_size;
++	u16 rx_token_size;
++	spinlock_t rx_token_lock;
++	struct idr rx_token;
+ 
+ 	wait_queue_head_t tx_wait;
+ 	/* spinclock used to protect wcid pktid linked list */
+@@ -1344,6 +1356,8 @@ mt76_tx_status_get_hw(struct mt76_dev *dev, struct sk_buff *skb)
+ }
+ 
+ void mt76_put_txwi(struct mt76_dev *dev, struct mt76_txwi_cache *t);
++void mt76_put_rxwi(struct mt76_dev *dev, struct mt76_txwi_cache *t);
++struct mt76_txwi_cache *mt76_get_rxwi(struct mt76_dev *dev);
+ void mt76_rx_complete(struct mt76_dev *dev, struct sk_buff_head *frames,
+ 		      struct napi_struct *napi);
+ void mt76_rx_poll_complete(struct mt76_dev *dev, enum mt76_rxq_id q,
+@@ -1481,6 +1495,12 @@ struct mt76_txwi_cache *
+ mt76_token_release(struct mt76_dev *dev, int token, bool *wake);
+ int mt76_token_consume(struct mt76_dev *dev, struct mt76_txwi_cache **ptxwi);
+ void __mt76_set_tx_blocked(struct mt76_dev *dev, bool blocked);
++int mt76_rx_token_consume(struct mt76_dev *dev, void *ptr,
++			struct mt76_txwi_cache *r, dma_addr_t phys);
++void skb_trace(const struct sk_buff *skb, bool full_pkt);
++
++struct mt76_txwi_cache *
++mt76_rx_token_release(struct mt76_dev *dev, int token);
+ 
+ static inline void mt76_set_tx_blocked(struct mt76_dev *dev, bool blocked)
+ {
+diff --git a/mt76_connac_mcu.c b/mt76_connac_mcu.c
+index bce98bc0..ec12bae3 100644
+--- a/mt76_connac_mcu.c
++++ b/mt76_connac_mcu.c
+@@ -1189,6 +1189,7 @@ int mt76_connac_mcu_sta_ba(struct mt76_dev *dev, struct mt76_vif *mvif,
+ 			   int cmd, bool enable, bool tx)
+ {
+ 	struct mt76_wcid *wcid = (struct mt76_wcid *)params->sta->drv_priv;
++	struct mtk_wed_device *wed = &dev->mmio.wed;
+ 	struct wtbl_req_hdr *wtbl_hdr;
+ 	struct tlv *sta_wtbl;
+ 	struct sk_buff *skb;
+@@ -1209,6 +1210,7 @@ int mt76_connac_mcu_sta_ba(struct mt76_dev *dev, struct mt76_vif *mvif,
+ 	mt76_connac_mcu_wtbl_ba_tlv(dev, skb, params, enable, tx, sta_wtbl,
+ 				    wtbl_hdr);
+ 
++	mtk_wed_device_update_msg(wed, WO_CMD_STA_REC, skb->data, skb->len);
+ 	ret = mt76_mcu_skb_send_msg(dev, skb, cmd, true);
+ 	if (ret)
+ 		return ret;
+@@ -1219,6 +1221,7 @@ int mt76_connac_mcu_sta_ba(struct mt76_dev *dev, struct mt76_vif *mvif,
+ 
+ 	mt76_connac_mcu_sta_ba_tlv(skb, params, enable, tx);
+ 
++	mtk_wed_device_update_msg(wed, WO_CMD_STA_REC, skb->data, skb->len);
+ 	return mt76_mcu_skb_send_msg(dev, skb, cmd, true);
+ }
+ EXPORT_SYMBOL_GPL(mt76_connac_mcu_sta_ba);
+@@ -2634,6 +2637,7 @@ int mt76_connac_mcu_add_key(struct mt76_dev *dev, struct ieee80211_vif *vif,
+ 			    struct mt76_wcid *wcid, enum set_key_cmd cmd)
+ {
+ 	struct mt76_vif *mvif = (struct mt76_vif *)vif->drv_priv;
++	struct mtk_wed_device *wed = &dev->mmio.wed;
+ 	struct sk_buff *skb;
+ 	int ret;
+ 
+@@ -2645,6 +2649,9 @@ int mt76_connac_mcu_add_key(struct mt76_dev *dev, struct ieee80211_vif *vif,
+ 	if (ret)
+ 		return ret;
+ 
++	if (mtk_wed_device_active(wed))
++		mtk_wed_device_update_msg(wed, WO_CMD_STA_REC, skb->data, skb->len);
++
+ 	return mt76_mcu_skb_send_msg(dev, skb, mcu_cmd, true);
+ }
+ EXPORT_SYMBOL_GPL(mt76_connac_mcu_add_key);
+diff --git a/mt7915/dma.c b/mt7915/dma.c
+index 2f46e107..29207b5e 100644
+--- a/mt7915/dma.c
++++ b/mt7915/dma.c
+@@ -332,7 +332,9 @@ static int mt7915_dma_enable(struct mt7915_dev *dev)
+ 	if (mtk_wed_device_active(&dev->mt76.mmio.wed)) {
+ 		u32 wed_irq_mask = irq_mask;
+ 
+-		wed_irq_mask |= MT_INT_TX_DONE_BAND0 | MT_INT_TX_DONE_BAND1;
++		wed_irq_mask |= MT_INT_RX_COHERENT |
++				MT_INT_TX_COHERENT |
++				MT_INT_TX_DONE_BAND1;
+ 		if (is_mt7915(&dev->mt76))
+ 			mt76_wr(dev, MT_INT_WED_MASK_CSR, wed_irq_mask);
+ 		else
+@@ -439,6 +441,9 @@ int mt7915_dma_init(struct mt7915_dev *dev, struct mt7915_phy *phy2)
+ 
+ 	/* rx data queue for band0 */
+ 	if (!dev->phy.band_idx) {
++		if (mtk_wed_device_active(&dev->mt76.mmio.wed))
++			dev->mt76.q_rx[MT_RXQ_MAIN].flags = MT_WED_Q_RX(MT7915_RXQ_BAND0);
++
+ 		ret = mt76_queue_alloc(dev, &dev->mt76.q_rx[MT_RXQ_MAIN],
+ 				       MT_RXQ_ID(MT_RXQ_MAIN),
+ 				       MT7915_RX_RING_SIZE,
+@@ -464,6 +469,9 @@ int mt7915_dma_init(struct mt7915_dev *dev, struct mt7915_phy *phy2)
+ 
+ 	if (dev->dbdc_support || dev->phy.band_idx) {
+ 		/* rx data queue for band1 */
++		if (mtk_wed_device_active(&dev->mt76.mmio.wed))
++			dev->mt76.q_rx[MT_RXQ_EXT].flags = MT_WED_Q_RX(MT7915_RXQ_BAND1);
++
+ 		ret = mt76_queue_alloc(dev, &dev->mt76.q_rx[MT_RXQ_EXT],
+ 				       MT_RXQ_ID(MT_RXQ_EXT),
+ 				       MT7915_RX_RING_SIZE,
+diff --git a/mt7915/mac.c b/mt7915/mac.c
+index 94c45b47..5dd33b27 100644
+--- a/mt7915/mac.c
++++ b/mt7915/mac.c
+@@ -1407,6 +1407,71 @@ u32 mt7915_wed_init_buf(void *ptr, dma_addr_t phys, int token_id)
+ 	return MT_TXD_TXP_BUF_SIZE;
+ }
+ 
++u32
++mt7915_wed_init_rx_buf(struct mtk_wed_device *wed, int pkt_num)
++{
++	struct mtk_rxbm_desc *desc = wed->rx_buf_ring.desc;
++	struct mt7915_dev *dev;
++	dma_addr_t buf_phys;
++	void *buf;
++	int i, token, buf_size;
++
++	buf_size = SKB_DATA_ALIGN(NET_SKB_PAD + wed->wlan.rx_pkt_size) +
++				  SKB_DATA_ALIGN(sizeof(struct skb_shared_info));
++
++	dev = container_of(wed, struct mt7915_dev, mt76.mmio.wed);
++	for (i = 0; i < pkt_num; i++) {
++		struct mt76_txwi_cache *r = mt76_get_rxwi(&dev->mt76);
++
++		buf = page_frag_alloc(&wed->rx_page, buf_size, GFP_ATOMIC);
++		if (!buf)
++			return -ENOMEM;
++
++		buf_phys = dma_map_single(dev->mt76.dma_dev, buf, wed->wlan.rx_pkt_size,
++					  DMA_TO_DEVICE);
++
++		if (unlikely(dma_mapping_error(dev->mt76.dev, buf_phys))) {
++			skb_free_frag(buf);
++			break;
++		}
++
++		desc->buf0 = buf_phys;
++
++		token = mt76_rx_token_consume(&dev->mt76, buf, r, buf_phys);
++
++		desc->token |= FIELD_PREP(MT_DMA_CTL_TOKEN, token);
++		desc++;
++
++		dma_sync_single_for_device(dev->mt76.dma_dev, buf_phys, wed->wlan.rx_pkt_size,
++					   DMA_TO_DEVICE);
++	}
++
++	return 0;
++}
++
++void mt7915_wed_release_rx_buf(struct mtk_wed_device *wed)
++{
++	struct mt76_txwi_cache *rxwi;
++	struct mt7915_dev *dev;
++	int token;
++
++	dev = container_of(wed, struct mt7915_dev, mt76.mmio.wed);
++
++	for(token = 0; token < dev->mt76.rx_token_size; token++) {
++		rxwi = mt76_rx_token_release(&dev->mt76, token);
++		if(!rxwi)
++			continue;
++
++		dma_unmap_single(dev->mt76.dma_dev, rxwi->dma_addr,
++			 wed->wlan.rx_pkt_size, DMA_FROM_DEVICE);
++		skb_free_frag(rxwi->buf);
++		rxwi->buf = NULL;
++
++		mt76_put_rxwi(&dev->mt76, rxwi);
++	}
++	return;
++}
++
+ static void
+ mt7915_tx_check_aggr(struct ieee80211_sta *sta, __le32 *txwi)
+ {
+diff --git a/mt7915/mcu.c b/mt7915/mcu.c
+index 2aaa5bbd..29264b82 100644
+--- a/mt7915/mcu.c
++++ b/mt7915/mcu.c
+@@ -1747,6 +1747,7 @@ int mt7915_mcu_add_sta(struct mt7915_dev *dev, struct ieee80211_vif *vif,
+ 		       struct ieee80211_sta *sta, bool enable)
+ {
+ 	struct mt7915_vif *mvif = (struct mt7915_vif *)vif->drv_priv;
++	struct mtk_wed_device *wed = &dev->mt76.mmio.wed;
+ 	struct mt7915_sta *msta;
+ 	struct sk_buff *skb;
+ 	int ret;
+@@ -1798,6 +1799,7 @@ int mt7915_mcu_add_sta(struct mt7915_dev *dev, struct ieee80211_vif *vif,
+ 		return ret;
+ 	}
+ out:
++	mtk_wed_device_update_msg(wed, WO_CMD_STA_REC, skb->data, skb->len);
+ 	return mt76_mcu_skb_send_msg(&dev->mt76, skb,
+ 				     MCU_EXT_CMD(STA_REC_UPDATE), true);
+ }
+diff --git a/mt7915/mmio.c b/mt7915/mmio.c
+index 70a3f9f3..d57d1afe 100644
+--- a/mt7915/mmio.c
++++ b/mt7915/mmio.c
+@@ -678,16 +678,27 @@ mt7915_pci_wed_init(struct mt7915_dev *dev, struct device *pdev, int *irq)
+ 		plat_dev = to_platform_device(pdev);
+ 		res = platform_get_resource(plat_dev, IORESOURCE_MEM, 0);
+ 		base = res->start;
+-
+-		wed->wlan.wpdma_phys = base + MT_INT_SOURCE_CSR;
++		wed->wlan.base = (void __iomem *)ioremap(base, resource_size(res));
++		wed->wlan.wpdma_int = base + MT_INT_SOURCE_CSR;
+ 		wed->wlan.wpdma_tx = res->start + MT_TXQ_WED_RING_BASE;
+ 		wed->wlan.wpdma_txfree = res->start + MT_RXQ_WED_RING_BASE;
++		wed->wlan.wpdma_rx_glo = res->start + MT_WPDMA_GLO_CFG;
++		wed->wlan.wpdma_rx = res->start + MT_RXQ_WED_DATA_RING_BASE;
+ 	}
+ 
+ 	wed->wlan.nbuf = 7168;
+ 	wed->wlan.token_start = MT7915_TOKEN_SIZE - wed->wlan.nbuf;
+ 	wed->wlan.init_buf = mt7915_wed_init_buf;
+ 
++
++	wed->wlan.rx_nbuf = 65536;
++	wed->wlan.rx_pkt = MT7915_WED_RX_TOKEN_SIZE;
++	dev->mt76.rx_token_size = MT7915_WED_RX_TOKEN_SIZE + MT7915_RX_RING_SIZE * 2;
++	wed->wlan.rx_pkt_size = MTK_WED_RX_PKT_SIZE;
++	wed->wlan.init_buf = mt7915_wed_init_buf;
++	wed->wlan.init_rx_buf = mt7915_wed_init_rx_buf;
++	wed->wlan.release_rx_buf = mt7915_wed_release_rx_buf;
++
+ 	if (mtk_wed_device_attach(wed) != 0)
+ 		return 0;
+ 
+diff --git a/mt7915/mt7915.h b/mt7915/mt7915.h
+index de40e417..43507d2d 100644
+--- a/mt7915/mt7915.h
++++ b/mt7915/mt7915.h
+@@ -68,6 +68,7 @@
+ #define MT7915_MAX_TWT_AGRT		16
+ #define MT7915_MAX_STA_TWT_AGRT		8
+ #define MT7915_MAX_QUEUE		(__MT_RXQ_MAX + __MT_MCUQ_MAX + 2)
++#define MT7915_WED_RX_TOKEN_SIZE	12288
+ 
+ struct mt7915_vif;
+ struct mt7915_sta;
+@@ -519,7 +520,9 @@ void mt7915_wfsys_reset(struct mt7915_dev *dev);
+ irqreturn_t mt7915_irq_handler(int irq, void *dev_instance);
+ u64 __mt7915_get_tsf(struct ieee80211_hw *hw, struct mt7915_vif *mvif);
+ u32 mt7915_wed_init_buf(void *ptr, dma_addr_t phys, int token_id);
+-
++u32 mt7915_wed_init_rx_buf(struct mtk_wed_device *wed,
++				int pkt_num);
++void mt7915_wed_release_rx_buf(struct mtk_wed_device *wed);
+ int mt7915_register_device(struct mt7915_dev *dev);
+ void mt7915_unregister_device(struct mt7915_dev *dev);
+ int mt7915_eeprom_init(struct mt7915_dev *dev);
+diff --git a/mt7915/regs.h b/mt7915/regs.h
+index 0b0fe611..ffa7ef01 100644
+--- a/mt7915/regs.h
++++ b/mt7915/regs.h
+@@ -561,6 +561,7 @@ enum offs_rev {
+ #define MT_WFDMA0_PRI_DLY_INT_CFG0	MT_WFDMA0(0x2f0)
+ #define MT_WFDMA0_PRI_DLY_INT_CFG1	MT_WFDMA0(0x2f4)
+ #define MT_WFDMA0_PRI_DLY_INT_CFG2	MT_WFDMA0(0x2f8)
++#define MT_WPDMA_GLO_CFG		MT_WFDMA0(0x208)
+ 
+ #define MT_WFDMA0_MCU_HOST_INT_ENA	MT_WFDMA0(0x1f4)
+ #define MT_WFDMA0_MT_WA_WDT_INT		BIT(31)
+@@ -659,6 +660,7 @@ enum offs_rev {
+ 
+ #define MT_TXQ_WED_RING_BASE		(is_mt7915(mdev)? 0xd7420 : 0x24420)
+ #define MT_RXQ_WED_RING_BASE		(is_mt7915(mdev)? 0xd7520 : 0x24520)
++#define MT_RXQ_WED_DATA_RING_BASE	(is_mt7915(mdev)? 0xd7540 : 0x24540)
+ 
+ #define MT_INT_SOURCE_CSR		__REG(INT_SOURCE_CSR)
+ #define MT_INT_MASK_CSR			__REG(INT_MASK_CSR)
+@@ -701,6 +703,8 @@ enum offs_rev {
+ #define MT_INT_TX_DONE_BAND0		BIT(30)
+ #define MT_INT_TX_DONE_BAND1		BIT(31)
+ #define MT_INT_TX_DONE_MCU_WA_MT7916	BIT(25)
++#define MT_INT_RX_COHERENT		BIT(20)
++#define MT_INT_TX_COHERENT		BIT(21)
+ 
+ #define MT_INT_TX_DONE_MCU		(MT_INT_TX_MCU(MT_MCUQ_WA) |	\
+ 					 MT_INT_TX_MCU(MT_MCUQ_WM) |	\
+diff --git a/tx.c b/tx.c
+index 892f3618..8e8a4184 100644
+--- a/tx.c
++++ b/tx.c
+@@ -768,3 +768,37 @@ mt76_token_release(struct mt76_dev *dev, int token, bool *wake)
+ 	return txwi;
+ }
+ EXPORT_SYMBOL_GPL(mt76_token_release);
++
++int mt76_rx_token_consume(struct mt76_dev *dev, void *ptr,
++			struct mt76_txwi_cache *r, dma_addr_t phys)
++{
++	int token;
++
++	spin_lock_bh(&dev->rx_token_lock);
++
++	token = idr_alloc(&dev->rx_token, r, 0, dev->rx_token_size, GFP_ATOMIC);
++
++	spin_unlock_bh(&dev->rx_token_lock);
++
++	r->buf = ptr;
++	r->dma_addr = phys;
++
++	return token;
++}
++EXPORT_SYMBOL_GPL(mt76_rx_token_consume);
++
++struct mt76_txwi_cache *
++mt76_rx_token_release(struct mt76_dev *dev, int token)
++{
++
++	struct mt76_txwi_cache *rxwi;
++
++	spin_lock_bh(&dev->rx_token_lock);
++
++	rxwi = idr_remove(&dev->rx_token, token);
++
++	spin_unlock_bh(&dev->rx_token_lock);
++
++	return rxwi;
++}
++EXPORT_SYMBOL_GPL(mt76_rx_token_release);
+-- 
+2.18.0
+

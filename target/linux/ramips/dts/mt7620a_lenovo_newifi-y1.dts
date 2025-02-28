@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7620a_lenovo_newifi-y1.dtsi"
 
 / {
@@ -18,8 +21,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
@@ -34,16 +41,24 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio2 15 GPIO_ACTIVE_LOW>;
 		};
 
@@ -58,8 +73,12 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&ephy_pins>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_28>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x28>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	mediatek,portmap = "llllw";
 };

@@ -1,0 +1,2 @@
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc-ar qc libcgi-lib.a CMakeFiles/cgi-lib.dir/multipart_parser.c.o CMakeFiles/cgi-lib.dir/util.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc-ranlib libcgi-lib.a

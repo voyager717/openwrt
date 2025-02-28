@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_iptime.dtsi"
 
 / {
@@ -25,8 +28,12 @@
 		};
 
 		led_cpu: cpu {
+<<<<<<< HEAD
 			function = LED_FUNCTION_CPU;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:cpu";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 

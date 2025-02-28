@@ -1,0 +1,64 @@
+Source-Makefile: package/feeds/luci/luci-app-wifidog/Makefile
+Build-Depends: lua/host luci-base/host LUCI_CSSTIDY:csstidy/host LUCI_SRCDIET:luasrcdiet/host 
+
+Package: luci-app-wifidog
+Submenu: 3. Applications
+Version: x
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread +wifidog
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: luci
+Category: LuCI
+Repository: luci
+Title: Network Captival - wifidog client deamon module
+Maintainer: OpenWrt LuCI community
+Source: 
+License: GPLv2
+Type: ipkg
+Description: Network Captival - wifidog client deamon module
+https://github.com/openwrt/luci
+OpenWrt LuCI community
+@@
+
+Package: luci-i18n-wifidog-ru
+Default: LUCI_LANG_ru||(ALL&&m)
+Version: x
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread luci-app-wifidog
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: luci
+Category: LuCI
+Repository: luci
+Title: luci-app-wifidog - ru translation
+Maintainer: 
+Source: 
+License: GPLv2
+Type: ipkg
+Hidden: 1
+Description:     Translation for luci-app-wifidog - Русский (Russian)
+
+@@
+
+Package: luci-i18n-wifidog-zh-cn
+Default: LUCI_LANG_zh-cn||(ALL&&m)
+Version: x
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread luci-app-wifidog
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: luci
+Category: LuCI
+Repository: luci
+Title: luci-app-wifidog - zh-cn translation
+Maintainer: 
+Source: 
+License: GPLv2
+Type: ipkg
+Hidden: 1
+Description:     Translation for luci-app-wifidog - 
+
+@@
+
+

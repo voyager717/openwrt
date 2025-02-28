@@ -8,9 +8,12 @@ boot() {
 	adtran,bsap1840)
 		fconfig -s -w -d $(find_mtd_part "RedBoot config") -n boot_cntb -x 0
 		;;
+<<<<<<< HEAD
 	moxa,awk-1137c)
 		fw_setenv fwr_verify 0
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	qihoo,c301)
 		local n=$(fw_printenv activeregion | cut -d = -f 2)
 		fw_setenv "image${n}trynum" 0

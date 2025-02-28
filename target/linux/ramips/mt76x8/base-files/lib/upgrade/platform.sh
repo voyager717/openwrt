@@ -29,8 +29,12 @@ platform_do_upgrade() {
 		default_do_upgrade "$1"
 		;;
 	tplink,archer-c20-v5|\
+<<<<<<< HEAD
 	tplink,archer-c50-v4|\
 	tplink,archer-c50-v6)
+=======
+	tplink,archer-c50-v4)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		MTD_ARGS="-t romfile"
 		default_do_upgrade "$1"
 		;;

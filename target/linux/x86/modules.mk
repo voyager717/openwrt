@@ -2,6 +2,7 @@
 #
 # Copyright (C) 2017 Cezary Jackiewicz <cezary@eko.one.pll>
 
+<<<<<<< HEAD
 define KernelPackage/amd-xgbe
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=AMD Ethernet on SoC support
@@ -48,6 +49,8 @@ endef
 $(eval $(call KernelPackage,f71808e-wdt))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sound-cs5535audio
   TITLE:=CS5535/CS5536 Audio Controller
   DEPENDS:=@TARGET_x86_geode +kmod-ac97
@@ -80,6 +83,7 @@ endef
 $(eval $(call KernelPackage,sp5100-tco))
 
 
+<<<<<<< HEAD
 define KernelPackage/ib700-wdt
   SUBMENU:=$(OTHER_MENU)
   TITLE:=IB700 SBC Watchdog Timer
@@ -136,6 +140,8 @@ endef
 $(eval $(call KernelPackage,itco-wdt))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/pcengines-apuv2
   SUBMENU:=$(OTHER_MENU)
   TITLE:=PC Engines APUv2/3 front button and LEDs driver
@@ -151,6 +157,7 @@ define KernelPackage/pcengines-apuv2/description
 endef
 
 $(eval $(call KernelPackage,pcengines-apuv2))
+<<<<<<< HEAD
 
 
 define KernelPackage/meraki-mx100
@@ -189,3 +196,5 @@ define KernelPackage/w83627hf-wdt/description
 endef
 
 $(eval $(call KernelPackage,w83627hf-wdt))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

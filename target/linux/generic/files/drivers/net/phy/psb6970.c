@@ -60,6 +60,7 @@ struct psb6970_priv {
 	struct mutex reg_mutex;
 
 	/* all fields below are cleared on reset */
+<<<<<<< HEAD
 	struct_group(psb6970_priv_volatile,
 		bool vlan;
 		u16 vlan_id[PSB6970_MAX_VLANS];
@@ -67,6 +68,13 @@ struct psb6970_priv {
 		u8 vlan_tagged;
 		u16 pvid[PSB6970_NUM_PORTS];
 	);
+=======
+	bool vlan;
+	u16 vlan_id[PSB6970_MAX_VLANS];
+	u8 vlan_table[PSB6970_MAX_VLANS];
+	u8 vlan_tagged;
+	u16 pvid[PSB6970_NUM_PORTS];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 #define to_psb6970(_dev) container_of(_dev, struct psb6970_priv, dev)
@@ -274,8 +282,13 @@ static int psb6970_reset_switch(struct switch_dev *dev)
 
 	mutex_lock(&priv->reg_mutex);
 
+<<<<<<< HEAD
 	memset(&priv->psb6970_priv_volatile, 0,
 		sizeof(priv->psb6970_priv_volatile));
+=======
+	memset(&priv->vlan, 0, sizeof(struct psb6970_priv) -
+	       offsetof(struct psb6970_priv, vlan));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	for (i = 0; i < PSB6970_MAX_VLANS; i++)
 		priv->vlan_id[i] = i;
@@ -309,6 +322,10 @@ static const struct switch_dev_ops psb6970_ops = {
 static int psb6970_config_init(struct phy_device *pdev)
 {
 	struct psb6970_priv *priv;
+<<<<<<< HEAD
+=======
+	struct net_device *dev = pdev->attached_dev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct switch_dev *swdev;
 	int ret;
 
@@ -356,6 +373,11 @@ static int psb6970_config_init(struct phy_device *pdev)
 		goto done;
 	}
 
+<<<<<<< HEAD
+=======
+	dev->phy_ptr = priv;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 done:
 	return ret;
 }

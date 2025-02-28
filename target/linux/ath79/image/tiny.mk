@@ -1,5 +1,8 @@
 include ./common-buffalo.mk
+<<<<<<< HEAD
 include ./common-nec.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include ./common-senao.mk
 
 define Device/buffalo_whr-g301n
@@ -13,6 +16,7 @@ define Device/buffalo_whr-g301n
 endef
 TARGET_DEVICES += buffalo_whr-g301n
 
+<<<<<<< HEAD
 define Device/dlink_dap-1720-a1
   $(Device/seama)
   SOC := qca9563
@@ -26,6 +30,8 @@ define Device/dlink_dap-1720-a1
 endef
 TARGET_DEVICES += dlink_dap-1720-a1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dlink_dir-615-e4
   SOC := ar7240
   DEVICE_VENDOR := D-Link
@@ -35,7 +41,12 @@ define Device/dlink_dir-615-e4
   FACTORY_IMAGE_SIZE := 3456k
   IMAGES += factory.bin
   IMAGE/default := append-kernel | append-rootfs | pad-rootfs
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.bin := $$(IMAGE/default) | \
 	check-size $$$$(FACTORY_IMAGE_SIZE) | pad-to $$$$(FACTORY_IMAGE_SIZE) | \
 	append-string "AP99-AR7240-RT-091105-05"
@@ -44,6 +55,7 @@ define Device/dlink_dir-615-e4
 endef
 TARGET_DEVICES += dlink_dir-615-e4
 
+<<<<<<< HEAD
 define Device/dlink_dir-859-a
   $(Device/seama)
   SOC := qca9563
@@ -79,6 +91,8 @@ define Device/dlink_dir-869-a1
 endef
 TARGET_DEVICES += dlink_dir-869-a1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/engenius_eap350-v1
   $(Device/senao_loader_okli)
   BLOCKSIZE := 4k
@@ -89,7 +103,10 @@ define Device/engenius_eap350-v1
   IMAGE_SIZE := 4928k
   LOADER_FLASH_OFFS := 0x1a0000
   SENAO_IMGNAME := senao-eap350
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += engenius_eap350-v1
 
@@ -103,7 +120,10 @@ define Device/engenius_ecb350-v1
   IMAGE_SIZE := 4928k
   LOADER_FLASH_OFFS := 0x1a0000
   SENAO_IMGNAME := senao-ecb350
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += engenius_ecb350-v1
 
@@ -117,6 +137,7 @@ define Device/engenius_enh202-v1
   IMAGE_SIZE := 4928k
   LOADER_FLASH_OFFS := 0x1a0000
   SENAO_IMGNAME := senao-enh202
+<<<<<<< HEAD
   DEFAULT := n
 endef
 TARGET_DEVICES += engenius_enh202-v1
@@ -151,13 +172,24 @@ define Device/nec_wr9500n
 endef
 TARGET_DEVICES += nec_wr9500n
 
+=======
+endef
+TARGET_DEVICES += engenius_enh202-v1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/pqi_air-pen
   SOC := ar9330
   DEVICE_VENDOR := PQI
   DEVICE_MODEL := Air-Pen
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb-chipidea2
   IMAGE_SIZE := 7680k
   SUPPORTED_DEVICES += pqi-air-pen
   DEFAULT := n
+=======
+  DEVICE_PACKAGES := kmod-usb2
+  IMAGE_SIZE := 7680k
+  SUPPORTED_DEVICES += pqi-air-pen
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += pqi_air-pen

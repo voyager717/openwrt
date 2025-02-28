@@ -1,16 +1,26 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mt76
+<<<<<<< HEAD
 PKG_RELEASE=1
+=======
+PKG_RELEASE=4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=
 
 PKG_SOURCE_URL:=https://github.com/openwrt/mt76
 PKG_SOURCE_PROTO:=git
+<<<<<<< HEAD
 PKG_SOURCE_DATE:=2025-02-14
 PKG_SOURCE_VERSION:=e5fef138524e63314cb96ff8314048d175294e95
 PKG_MIRROR_HASH:=4d6ea8669b3034c97f5b341a5473facf4fe21262a2fde71257b57c4d1c86be5e
+=======
+PKG_SOURCE_DATE:=2021-12-03
+PKG_SOURCE_VERSION:=678071ef70297b7264661c356ddb3c8cf7f3c87b
+PKG_MIRROR_HASH:=b1f8613f7c65ca6a893f83ed9efc3f7ce72b9b4904fd11b89264f57f4f2a3b5e
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_USE_NINJA:=0
@@ -40,8 +50,12 @@ define KernelPackage/mt76-default
   SUBMENU:=Wireless Drivers
   DEPENDS:= \
 	+kmod-mac80211 \
+<<<<<<< HEAD
 	+@DRIVER_11AC_SUPPORT \
 	+@KERNEL_PAGE_POOL
+=======
+	+@DRIVER_11AC_SUPPORT +@DRIVER_11N_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/mt76
@@ -172,7 +186,11 @@ endef
 define KernelPackage/mt7615-firmware
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7615e firmware
+<<<<<<< HEAD
   DEPENDS+=+kmod-mt7615e
+=======
+  DEFAULT:=PACKAGE_kmod-mt7615e
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/mt7615e
@@ -183,12 +201,15 @@ define KernelPackage/mt7615e
   AUTOLOAD:=$(call AutoProbe,mt7615e)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7622-firmware
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7622 firmware
   DEPENDS+=+kmod-mt7615e
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/mt7663-firmware-ap
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7663e firmware (optimized for AP)
@@ -225,6 +246,7 @@ define KernelPackage/mt7663u
   AUTOLOAD:=$(call AutoProbe,mt7663u)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7915-firmware
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7915 firmware
@@ -235,10 +257,17 @@ define KernelPackage/mt7915e
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7915e wireless driver
   DEPENDS+=@PCI_SUPPORT +kmod-mt76-connac +kmod-hwmon-core +kmod-thermal +@DRIVER_11AX_SUPPORT +@KERNEL_RELAY
+=======
+define KernelPackage/mt7915e
+  $(KernelPackage/mt76-default)
+  TITLE:=MediaTek MT7915e wireless driver
+  DEPENDS+=@PCI_SUPPORT +kmod-mt7615-common +kmod-hwmon-core +kmod-thermal +@DRIVER_11AX_SUPPORT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= $(PKG_BUILD_DIR)/mt7915/mt7915e.ko
   AUTOLOAD:=$(call AutoProbe,mt7915e)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7916-firmware
   $(KernelPackage/mt76-default)
   DEPENDS+=+kmod-mt7915e
@@ -303,6 +332,19 @@ define KernelPackage/mt7921s
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7921S wireless driver
   DEPENDS+=+kmod-mt76-sdio +kmod-mt7921-common
+=======
+define KernelPackage/mt7921-common
+  TITLE:=MediaTek MT7615 wireless driver common code
+  HIDDEN:=1
+  DEPENDS+=@PCI_SUPPORT +kmod-mt76-core +kmod-mt76-connac
+  FILES:= $(PKG_BUILD_DIR)/mt7921/mt7921-common.ko
+endef
+
+define KernelPackage/mt7921s
+  $(KernelPackage/mt76-default)
+  TITLE:=MediaTek MT7921s wireless driver
+  DEPENDS+=@PCI_SUPPORT +kmod-mt76-connac +kmod-mt76-sdio +kmod-mt7921-common
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= $(PKG_BUILD_DIR)/mt7921/mt7921s.ko
   AUTOLOAD:=$(call AutoProbe,mt7921s)
 endef
@@ -310,11 +352,16 @@ endef
 define KernelPackage/mt7921e
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7921e wireless driver
+<<<<<<< HEAD
   DEPENDS+=@PCI_SUPPORT +kmod-mt7921-common
+=======
+  DEPENDS+=@PCI_SUPPORT +kmod-mt76-connac +kmod-mt7921-common
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= $(PKG_BUILD_DIR)/mt7921/mt7921e.ko
   AUTOLOAD:=$(call AutoProbe,mt7921e)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7996e
   $(KernelPackage/mt76-default)
   TITLE:=MediaTek MT7996E wireless driver
@@ -384,6 +431,8 @@ define KernelPackage/mt7925e
   AUTOLOAD:=$(call AutoProbe,mt7925e)
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/mt76-test
   SECTION:=devel
   CATEGORY:=Development
@@ -469,6 +518,7 @@ ifdef CONFIG_PACKAGE_kmod-mt7663u
 endif
 ifdef CONFIG_PACKAGE_kmod-mt7915e
   PKG_MAKE_FLAGS += CONFIG_MT7915E=m
+<<<<<<< HEAD
   ifdef CONFIG_TARGET_mediatek_filogic
     PKG_MAKE_FLAGS += CONFIG_MT798X_WMAC=y
     NOSTDINC_FLAGS += -DCONFIG_MT798X_WMAC
@@ -479,19 +529,25 @@ ifdef CONFIG_PACKAGE_kmod-mt792x-common
 endif
 ifdef CONFIG_PACKAGE_kmod-mt792x-usb
   PKG_MAKE_FLAGS += CONFIG_MT792x_USB=m
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 ifdef CONFIG_PACKAGE_kmod-mt7921-common
   PKG_MAKE_FLAGS += CONFIG_MT7921_COMMON=m
 endif
+<<<<<<< HEAD
 ifdef CONFIG_PACKAGE_kmod-mt7921u
   PKG_MAKE_FLAGS += CONFIG_MT7921U=m
 endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifdef CONFIG_PACKAGE_kmod-mt7921s
   PKG_MAKE_FLAGS += CONFIG_MT7921S=m
 endif
 ifdef CONFIG_PACKAGE_kmod-mt7921e
   PKG_MAKE_FLAGS += CONFIG_MT7921E=m
 endif
+<<<<<<< HEAD
 ifdef CONFIG_PACKAGE_kmod-mt7996e
   PKG_MAKE_FLAGS += CONFIG_MT7996E=m
 endif
@@ -507,6 +563,12 @@ endif
 
 define Build/Compile
 	+$(KERNEL_MAKE) $(PKG_JOBS) \
+=======
+
+define Build/Compile
+	+$(MAKE) $(PKG_JOBS) -C "$(LINUX_DIR)" \
+		$(KERNEL_MAKE_FLAGS) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(PKG_MAKE_FLAGS) \
 		M="$(PKG_BUILD_DIR)" \
 		NOSTDINC_FLAGS="$(NOSTDINC_FLAGS)" \
@@ -566,6 +628,7 @@ define KernelPackage/mt7615-firmware/install
 		$(PKG_BUILD_DIR)/firmware/mt7615_cr4.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7615_n9.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7615_rom_patch.bin \
+<<<<<<< HEAD
 		$(1)/lib/firmware/mediatek
 endef
 
@@ -574,6 +637,11 @@ define KernelPackage/mt7622-firmware/install
 	cp \
 		$(PKG_BUILD_DIR)/firmware/mt7622_n9.bin \
 		$(PKG_BUILD_DIR)/firmware/mt7622_rom_patch.bin \
+=======
+		$(if $(CONFIG_TARGET_mediatek_mt7622), \
+			$(PKG_BUILD_DIR)/firmware/mt7622_n9.bin \
+			$(PKG_BUILD_DIR)/firmware/mt7622_rom_patch.bin) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(1)/lib/firmware/mediatek
 endef
 
@@ -593,7 +661,11 @@ define KernelPackage/mt7663-firmware-sta/install
 		$(1)/lib/firmware/mediatek
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7915-firmware/install
+=======
+define KernelPackage/mt7915e/install
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	cp \
 		$(PKG_BUILD_DIR)/firmware/mt7915_wa.bin \
@@ -602,6 +674,7 @@ define KernelPackage/mt7915-firmware/install
 		$(1)/lib/firmware/mediatek
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7916-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	cp \
@@ -632,6 +705,9 @@ define KernelPackage/mt7986-firmware/install
 endef
 
 define KernelPackage/mt7921-firmware/install
+=======
+define KernelPackage/mt7921e/install
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	cp \
 		$(PKG_BUILD_DIR)/firmware/WIFI_MT7961_patch_mcu_1_2_hdr.bin \
@@ -639,6 +715,7 @@ define KernelPackage/mt7921-firmware/install
 		$(1)/lib/firmware/mediatek
 endef
 
+<<<<<<< HEAD
 define KernelPackage/mt7922-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/mediatek
 	cp \
@@ -709,16 +786,21 @@ define KernelPackage/mt7996-233-firmware/install
 		$(1)/lib/firmware/mediatek/mt7996
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/mt76-test/install
 	mkdir -p $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/tools/mt76-test $(1)/usr/sbin
 endef
 
+<<<<<<< HEAD
 define Build/InstallDev
 	mkdir -p $(STAGING_DIR_IMAGE)
 	$(CP) $(PKG_BUILD_DIR)/firmware/mt7981_eeprom_mt7976_dbdc.bin $(STAGING_DIR_IMAGE)/
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,mt76-core))
 $(eval $(call KernelPackage,mt76-usb))
 $(eval $(call KernelPackage,mt76x02-usb))
@@ -734,13 +816,17 @@ $(eval $(call KernelPackage,mt76-connac))
 $(eval $(call KernelPackage,mt76-sdio))
 $(eval $(call KernelPackage,mt7615-common))
 $(eval $(call KernelPackage,mt7615-firmware))
+<<<<<<< HEAD
 $(eval $(call KernelPackage,mt7622-firmware))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,mt7615e))
 $(eval $(call KernelPackage,mt7663-firmware-ap))
 $(eval $(call KernelPackage,mt7663-firmware-sta))
 $(eval $(call KernelPackage,mt7663-usb-sdio))
 $(eval $(call KernelPackage,mt7663u))
 $(eval $(call KernelPackage,mt7663s))
+<<<<<<< HEAD
 $(eval $(call KernelPackage,mt7915-firmware))
 $(eval $(call KernelPackage,mt7915e))
 $(eval $(call KernelPackage,mt7916-firmware))
@@ -764,5 +850,11 @@ $(eval $(call KernelPackage,mt7992-23-firmware))
 $(eval $(call KernelPackage,mt7996-firmware-common))
 $(eval $(call KernelPackage,mt7996-firmware))
 $(eval $(call KernelPackage,mt7996-233-firmware))
+=======
+$(eval $(call KernelPackage,mt7915e))
+$(eval $(call KernelPackage,mt7921-common))
+$(eval $(call KernelPackage,mt7921s))
+$(eval $(call KernelPackage,mt7921e))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,mt76))
 $(eval $(call BuildPackage,mt76-test))

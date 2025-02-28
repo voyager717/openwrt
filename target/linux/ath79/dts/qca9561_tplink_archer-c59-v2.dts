@@ -5,10 +5,13 @@
 / {
 	compatible = "tplink,archer-c59-v2", "qca,qca9560";
 	model = "TP-Link Archer C59 v2";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &eth1;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &leds {
@@ -16,18 +19,34 @@
 		label =	"green:usb";
 		gpios =	<&led_gpio 7 GPIO_ACTIVE_LOW>;
 		linux,default-trigger =	"usbport";
+<<<<<<< HEAD
 		trigger-sources	= <&hub_port0>;
+=======
+		trigger-sources	= <&hub_port>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &usb0 {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy0 {
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &pcie {
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -37,6 +56,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &spi {
 	status = "okay";
 
@@ -62,6 +83,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@30000 {
 				label = "info";
 				reg = <0x030000 0x010000>;
@@ -78,6 +100,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			info: partition@30000 {
+				label = "info";
+				reg = <0x030000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@40000 {
@@ -92,6 +120,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x010000>;
@@ -110,10 +139,17 @@
 						reg = <0x5000 0x2f20>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_info_8 1>;
@@ -129,3 +165,5 @@
 	nvmem-cells = <&macaddr_info_8 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

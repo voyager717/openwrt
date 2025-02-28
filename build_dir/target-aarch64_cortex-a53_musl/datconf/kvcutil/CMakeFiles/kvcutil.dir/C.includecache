@@ -1,0 +1,46 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/datconf/kvcutil/kvcutil-internal.h
+stdio.h
+-
+libkvcutil.h
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/datconf/kvcutil/libkvcutil.h
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/datconf/kvcutil/libkvcutil.c
+sys/file.h
+-
+sys/stat.h
+-
+unistd.h
+-
+malloc.h
+-
+string.h
+-
+strings.h
+-
+stdint.h
+-
+stdbool.h
+-
+errno.h
+-
+fcntl.h
+-
+limits.h
+-
+kvcutil-internal.h
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/datconf/kvcutil/kvcutil-internal.h
+
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/datconf/kvcutil/libkvcutil.h
+stdint.h
+-
+sys/types.h
+-
+

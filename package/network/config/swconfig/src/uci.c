@@ -164,7 +164,36 @@ found:
 		struct uci_element *os;
 		s = uci_to_section(e);
 
+<<<<<<< HEAD
 		if (!strcmp(s->type, "switch_vlan")) {
+=======
+		if (!strcmp(s->type, "switch_port")) {
+			char *devn = NULL, *port = NULL, *port_err = NULL;
+			int port_n;
+
+			uci_foreach_element(&s->options, os) {
+				o = uci_to_option(os);
+				if (o->type != UCI_TYPE_STRING)
+					continue;
+
+				if (!strcmp(os->name, "device")) {
+					devn = o->v.string;
+					if (!swlib_match_name(dev, devn))
+						devn = NULL;
+				} else if (!strcmp(os->name, "port")) {
+					port = o->v.string;
+				}
+			}
+			if (!devn || !port || !port[0])
+				continue;
+
+			port_n = strtoul(port, &port_err, 0);
+			if (port_err && port_err[0])
+				continue;
+
+			swlib_map_settings(dev, SWLIB_ATTR_GROUP_PORT, port_n, s);
+		} else if (!strcmp(s->type, "switch_vlan")) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			char *devn = NULL, *vlan = NULL, *vlan_err = NULL;
 			int vlan_n;
 
@@ -191,6 +220,7 @@ found:
 			swlib_map_settings(dev, SWLIB_ATTR_GROUP_VLAN, vlan_n, s);
 		}
 	}
+<<<<<<< HEAD
 	uci_foreach_element(&p->sections, e) {
 		struct uci_element *os;
 		char *devn = NULL, *port = NULL, *port_err = NULL;
@@ -223,6 +253,8 @@ found:
 
 		swlib_map_settings(dev, SWLIB_ATTR_GROUP_PORT, port_n, s);
 	}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	for (i = 0; i < ARRAY_SIZE(early_settings); i++) {
 		struct swlib_setting *st = &early_settings[i];

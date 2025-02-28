@@ -37,6 +37,10 @@
 			partition@0 {
 				label = "RouterBoot";
 				reg = <0x0 0x40000>;
+<<<<<<< HEAD
+=======
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				compatible = "mikrotik,routerboot-partitions";
 				#address-cells = <1>;
 				#size-cells = <1>;
@@ -49,6 +53,7 @@
 
 				hard_config {
 					read-only;
+<<<<<<< HEAD
 
 					nvmem-layout {
 						compatible = "mikrotik,routerboot-nvmem";
@@ -57,6 +62,8 @@
 							#nvmem-cell-cells = <1>;
 						};
 					};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				};
 
 				partition@10000 {

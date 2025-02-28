@@ -1,0 +1,1430 @@
+Index: hostapd-2022-01-16-cff80b4f/hostapd/Makefile
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/hostapd/Makefile
++++ hostapd-2022-01-16-cff80b4f/hostapd/Makefile
+@@ -326,6 +326,9 @@ endif
+ 
+ CFLAGS += -DCONFIG_MTK_IEEE80211BE
+ OBJS += ../src/ml/ml.o
++CFLAGS += -I../wpa_supplicant
++OBJS += ../src/drivers/mediatek_driver_cmd_nl80211.o
++OBJS += ../src/ml/ml.o
+ 
+ ifdef CONFIG_AIRTIME_POLICY
+ CFLAGS += -DCONFIG_AIRTIME_POLICY
+Index: hostapd-2022-01-16-cff80b4f/src/ap/hostapd.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/ap/hostapd.c
++++ hostapd-2022-01-16-cff80b4f/src/ap/hostapd.c
+@@ -2921,7 +2921,7 @@ int hostapd_disable_iface(struct hostapd
+ }
+ 
+ 
+-static struct hostapd_iface *
++struct hostapd_iface *
+ hostapd_iface_alloc(struct hapd_interfaces *interfaces)
+ {
+ 	struct hostapd_iface **iface, *hapd_iface;
+Index: hostapd-2022-01-16-cff80b4f/src/ap/hostapd.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/ap/hostapd.h
++++ hostapd-2022-01-16-cff80b4f/src/ap/hostapd.h
+@@ -655,6 +655,7 @@ int hostapd_disable_iface(struct hostapd
+ void hostapd_bss_deinit_no_free(struct hostapd_data *hapd);
+ void hostapd_free_hapd_data(struct hostapd_data *hapd);
+ void hostapd_cleanup_iface_partial(struct hostapd_iface *iface);
++struct hostapd_iface *hostapd_iface_alloc(struct hapd_interfaces *interfaces);
+ int hostapd_add_iface(struct hapd_interfaces *ifaces, char *buf);
+ int hostapd_remove_iface(struct hapd_interfaces *ifaces, char *buf);
+ void hostapd_channel_list_updated(struct hostapd_iface *iface, int initiator);
+Index: hostapd-2022-01-16-cff80b4f/src/common/ieee802_11_common.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/common/ieee802_11_common.c
++++ hostapd-2022-01-16-cff80b4f/src/common/ieee802_11_common.c
+@@ -309,6 +309,7 @@ static int ieee802_11_parse_extension(co
+ 		break;
+ #ifdef CONFIG_MTK_IEEE80211BE
+ 	case WLAN_EID_EXT_MLD:
++		wpa_printf(MSG_DEBUG,"EXISTS: elems-->ml.");
+ 		elems->ml = pos;
+ 		elems->ml_len = elen;
+ 	case WLAN_EID_EXT_EHT_OP:
+Index: hostapd-2022-01-16-cff80b4f/src/common/sae.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/common/sae.h
++++ hostapd-2022-01-16-cff80b4f/src/common/sae.h
+@@ -116,6 +116,7 @@ struct sae_data {
+ 	struct sae_temporary_data *tmp;
+ #ifdef CONFIG_MTK_IEEE80211BE
+ 	u8 own_ml_addr[ETH_ALEN];
++	u8 peer_ml_addr[ETH_ALEN];/*sta the peer mld mac addr*/
+ 	/* ml ie from peer */
+ 	struct wpa_ml_ie_parse *peer_ml_ie;
+ 	unsigned int dot11MultiLinkActivated:1;
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/driver.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/drivers/driver.h
++++ hostapd-2022-01-16-cff80b4f/src/drivers/driver.h
+@@ -27,7 +27,7 @@
+ #include "pae/ieee802_1x_kay.h"
+ #endif /* CONFIG_MACSEC */
+ #include "utils/list.h"
+-#ifdef HOSTAPD_11R_SUPPORT
++#if defined(HOSTAPD_11R_SUPPORT) || defined(CONFIG_MTK_IEEE80211BE)
+ #include "mtk_vendor_nl80211.h"
+ #endif
+ 
+@@ -2540,6 +2540,10 @@ struct external_auth {
+ 	unsigned int key_mgmt_suite;
+ 	u16 status;
+ 	const u8 *pmkid;
++#ifdef CONFIG_MTK_IEEE80211BE
++	const u8 *ext_ie;
++	size_t ext_ie_len;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ };
+ 
+ /* enum nested_attr - Used to specify if subcommand uses nested attributes */
+@@ -3817,7 +3821,7 @@ struct wpa_driver_ops {
+ 	 */
+ 	int (*set_authmode)(void *priv, int authmode);
+ 
+-#ifdef ANDROID
++#if defined ANDROID || defined(CONFIG_MTK_IEEE80211BE)
+ 	/**
+ 	 * driver_cmd - Execute driver-specific command
+ 	 * @priv: Private driver interface data
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/drivers/driver_nl80211.c
++++ hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211.c
+@@ -12282,7 +12282,7 @@ const struct wpa_driver_ops wpa_driver_n
+ 	.get_noa = wpa_driver_get_p2p_noa,
+ 	.set_ap_wps_ie = wpa_driver_set_ap_wps_p2p_ie,
+ #endif /* ANDROID_P2P */
+-#ifdef ANDROID
++#if defined ANDROID || defined (CONFIG_MTK_IEEE80211BE)
+ #ifndef ANDROID_LIB_STUB
+ 	.driver_cmd = wpa_driver_nl80211_driver_cmd,
+ #endif /* !ANDROID_LIB_STUB */
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/drivers/driver_nl80211.h
++++ hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211.h
+@@ -295,7 +295,7 @@ const char * nl80211_iftype_str(enum nl8
+ 
+ void nl80211_restore_ap_mode(struct i802_bss *bss);
+ 
+-#ifdef ANDROID
++#if defined ANDROID || defined(CONFIG_MTK_IEEE80211BE)
+ int android_nl_socket_set_nonblocking(struct nl_sock *handle);
+ int android_pno_start(struct i802_bss *bss,
+ 		      struct wpa_driver_scan_params *params);
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211_event.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/drivers/driver_nl80211_event.c
++++ hostapd-2022-01-16-cff80b4f/src/drivers/driver_nl80211_event.c
+@@ -19,9 +19,7 @@
+ #include "common/ieee802_11_defs.h"
+ #include "common/ieee802_11_common.h"
+ #include "driver_nl80211.h"
+-
+-#define OUI_MTK 0x000ce7
+-#define MTK_NL80211_VENDOR_EVENT_SEND_MLO_INFO 4
++#include "mediatek_driver_nl80211.h"
+ 
+ static void
+ nl80211_control_port_frame_tx_status(struct wpa_driver_nl80211_data *drv,
+@@ -2372,28 +2370,7 @@ static void qca_nl80211_p2p_lo_stop_even
+ 
+ #endif /* CONFIG_DRIVER_NL80211_QCA */
+ 
+-static void mtk_ml80211_bss_ml_info_event(struct wpa_driver_nl80211_data *drv,
+-					u8 *data, size_t len)
+-{
+-	char *event = nla_data(data);	
+ 
+-	if (event)
+-		wpa_supplicant_event(drv->ctx, EVENT_UPDATE_BSS_ML_INFO, event);
+-}
+-static void nl80211_vendor_event_mtk(struct wpa_driver_nl80211_data *drv,
+-				     u32 subcmd, u8 *data, size_t len)
+-{
+-	switch (subcmd) {
+-	case MTK_NL80211_VENDOR_EVENT_SEND_MLO_INFO:
+-		mtk_ml80211_bss_ml_info_event(drv, data, len);
+-		break;
+-	default:
+-		wpa_printf(MSG_DEBUG,
+-			   "nl80211: Ignore unsupported mtk vendor event %u",
+-			   subcmd);	
+-		break;
+-	}
+-}
+ 
+ static void nl80211_vendor_event_qca(struct wpa_driver_nl80211_data *drv,
+ 				     u32 subcmd, u8 *data, size_t len)
+@@ -2563,14 +2540,17 @@ static void nl80211_vendor_event(struct
+ 	case OUI_QCA:
+ 		nl80211_vendor_event_qca(drv, subcmd, data, len);
+ 		break;
+-	case OUI_MTK:
+ 		/* handle mediatek vendor event */
+-		nl80211_vendor_event_mtk(drv, subcmd, data, len);
+ #ifdef CONFIG_DRIVER_NL80211_BRCM
+ 	case OUI_BRCM:
+ 		nl80211_vendor_event_brcm(drv, subcmd, data, len);
+ 		break;
+ #endif /* CONFIG_DRIVER_NL80211_BRCM */
++#ifdef CONFIG_MTK_IEEE80211BE
++	case OUI_MTK:
++	    nl80211_vendor_event_mtk(drv, subcmd, data, len);
++		break;
++#endif /* CONFIG_DRIVER_NL80211_BRCM */
+ 	default:
+ 		wpa_printf(MSG_DEBUG, "nl80211: Ignore unsupported vendor event");
+ 		break;
+@@ -2723,6 +2703,10 @@ static void nl80211_external_auth(struct
+ 	event.external_auth.ssid = nla_data(tb[NL80211_ATTR_SSID]);
+ 
+ 	event.external_auth.bssid = nla_data(tb[NL80211_ATTR_BSSID]);
++#ifdef CONFIG_MTK_IEEE80211BE
++	event.external_auth.ext_ie = NULL;
++	event.external_auth.ext_ie_len = 0;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	wpa_printf(MSG_DEBUG,
+ 		   "nl80211: External auth action: %u, AKM: 0x%x",
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/mediatek_driver_cmd_nl80211.c
+===================================================================
+--- /dev/null
++++ hostapd-2022-01-16-cff80b4f/src/drivers/mediatek_driver_cmd_nl80211.c
+@@ -0,0 +1,239 @@
++/*
++ * Driver interaction with extended Linux CFG8021
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * Alternatively, this software may be distributed under the terms of BSD
++ * license.
++ *
++ */
++#include "includes.h"
++#include "netlink/genl/genl.h"
++#include <sys/ioctl.h>
++
++#include "common.h"
++#include "driver_nl80211.h"
++#include "linux_ioctl.h"
++#include "../../wpa_supplicant/wpa_supplicant_i.h"
++#include "config.h"
++#include "android_drv.h"
++
++#include "mediatek_driver_nl80211.h"
++#include "../../wpa_supplicant/driver_i.h"
++
++
++#include "eloop.h"
++
++/**********************************************************************
++* OVERLAPPED functins, previous defination is in driver_nl80211.c,
++* it will be modified
++***********************************************************************/
++
++/**********************************************************************/
++
++static int mtk_set_mlo_preset_link_id(void *priv, const char *cmd)
++{
++    struct i802_bss *bss = priv;
++    struct wpa_driver_nl80211_data *drv = bss->drv;
++    struct nl_msg *msg;
++    struct nlattr *params;
++    int ret;
++	int link_id = 0;
++
++    wpa_printf(MSG_DEBUG, "mtk string command: %s", cmd);
++
++	if (os_strncasecmp(cmd, "PRESET_LINKID=", os_strlen("PRESET_LINKID=")) != 0) {
++		wpa_printf(MSG_ERROR, "command: %s, not supported.", cmd);
++		return -1; 
++	}
++	ret = sscanf(cmd, "PRESET_LINKID=%d", &link_id);
++	if (ret != 1 || link_id >= ML_MAX_LINK_NUM) {
++		wpa_printf(MSG_ERROR, "command: %s, invalid format or value.", cmd);
++		return -1;
++	}
++	wpa_printf(MSG_DEBUG, "mtk string command: %s, link_id=%d", cmd, link_id);
++    if (!(msg = nl80211_drv_msg(drv, 0, NL80211_CMD_VENDOR)) ||
++        nla_put_u32(msg, NL80211_ATTR_VENDOR_ID, OUI_MTK) ||
++        nla_put_u32(msg, NL80211_ATTR_VENDOR_SUBCMD,
++                    MTK_NL80211_VENDOR_SUBCMD_SET_MLO_PRESET_LINK)) {
++        wpa_printf(MSG_ERROR, "nl operation error");
++        goto fail;
++    }
++
++    params = nla_nest_start(msg, NL80211_ATTR_VENDOR_DATA);
++    if (!params) {
++        wpa_printf(MSG_ERROR, "nl start failed");
++        goto fail;
++    }
++
++	if (nla_put_u8(msg, MTK_NL80211_VENDOR_ATTR_MLO_PRESET_LINKID_INFO, (u8)link_id)) {
++        wpa_printf(MSG_ERROR, "nl put attribute failed");
++        goto fail;
++    }
++
++    nla_nest_end(msg, params);
++
++    ret = send_and_recv_msgs(drv, msg, NULL, NULL, NULL, NULL);
++    msg = NULL;
++    if (ret) {
++        wpa_printf(MSG_ERROR, "str_vendor_cmd ret=%d", ret);
++        return ret;
++    }
++    return 0;
++fail:
++    nlmsg_free(msg);
++    return -1;
++}
++
++
++int wpa_driver_nl80211_driver_cmd(void *priv, char *cmd, char *buf,
++                  size_t buf_len)
++{
++    struct i802_bss *bss = priv;
++    struct wpa_driver_nl80211_data *drv = bss->drv;
++    struct ifreq ifr;
++    struct wpa_supplicant *wpa_s = NULL;
++    struct hostapd_data *hapd;
++    int handled = 0;
++    int cmd_len = 0;
++    union wpa_event_data event;
++    static int user_force_band = 0;
++    int ret = -1;
++
++    if (drv == NULL) {
++        wpa_printf(MSG_ERROR, "%s: drv is NULL, exit", __func__);
++        return -1;
++    }
++    if (drv->ctx == NULL) {
++        wpa_printf(MSG_ERROR, "%s: drv->ctx is NULL, exit", __func__);
++        return -1;
++    }
++
++    if (bss->drv->nlmode == NL80211_IFTYPE_AP) {
++        hapd = (struct hostapd_data *)(drv->ctx);
++    }
++    else {
++        wpa_s = (struct wpa_supplicant *)(drv->ctx);
++        if (wpa_s->conf == NULL) {
++            wpa_printf(MSG_ERROR, "%s: wpa_s->conf is NULL, exit", __func__);
++            return -1;
++        }
++    }
++
++    wpa_printf(MSG_INFO, "%s: %s recv cmd %s", __func__, bss->ifname, cmd);
++    handled = 0;
++
++    if (os_strncasecmp(cmd, "PRESET_LINKID=", os_strlen("PRESET_LINKID=")) == 0) {
++        wpa_printf(MSG_DEBUG, "%s", cmd);
++		if (mtk_set_mlo_preset_link_id(priv, cmd) != 0) {
++			wpa_printf(MSG_ERROR, "%s: mtk_set_mlo_preset_link_id fail.", __func__);
++            return -1;
++		}
++	}else {
++		wpa_printf(MSG_ERROR, "%s command not supported.", cmd);
++	}
++    return ret;
++}
++
++
++
++void mtk_nl80211_mlo_response_event(struct wpa_driver_nl80211_data *drv,
++                u8 *data, size_t data_len)
++{
++    const u8 *end, *pos;
++
++    wpa_hexdump(MSG_INFO, "nl80211: mtk generic_response_event", data, data_len);
++
++    pos = data;
++    end = data + data_len;
++    while (end - pos >= 2) {
++        u8 id, len;
++
++        id = *pos++;
++        len = *pos++;
++        if (len > end - pos)
++            break;
++
++        switch (id) {
++        /* add cases for different event id here */
++        case MTK_GRID_MLO_EXTERNAL_AUTH:
++        {
++             struct mtk_externa_auth_info *info =
++                 (struct mtk_externa_auth_info *) pos;
++             union wpa_event_data event;
++             enum nl80211_external_auth_action act;
++
++             os_memset(&event, 0, sizeof(event));
++             act = info->action;
++             switch (act) {
++             case NL80211_EXTERNAL_AUTH_START:
++                     event.external_auth.action = EXT_AUTH_START;
++                     break;
++             case NL80211_EXTERNAL_AUTH_ABORT:
++                     event.external_auth.action = EXT_AUTH_ABORT;
++                     break;
++             default:
++                     return;
++             }
++
++             event.external_auth.key_mgmt_suite = info->key_mgmt_suite;
++             event.external_auth.ssid_len = info->ssid_len;
++             if (event.external_auth.ssid_len > SSID_MAX_LEN)
++                     return;
++             event.external_auth.ssid = info->ssid;
++             event.external_auth.bssid = info->bssid;
++#ifdef CONFIG_MTK_IEEE80211BE
++             event.external_auth.ext_ie = info->ext_ie;
++             event.external_auth.ext_ie_len = len - sizeof(*info);
++#endif /* CONFIG_MTK_IEEE80211BE */
++             wpa_printf(MSG_DEBUG,
++                        "nl80211: mtk external auth action: %u, AKM: 0x%x, bssid["MACSTR"], da["MACSTR"]",
++                        event.external_auth.action,
++                        event.external_auth.key_mgmt_suite,
++                        MAC2STR(info->bssid),
++                        MAC2STR(info->da));
++             wpa_supplicant_event(drv->ctx, EVENT_EXTERNAL_AUTH, &event);
++        }
++             break;
++        default:
++            wpa_printf(MSG_DEBUG, "unknown generic response: %d", id);
++            break;
++        }
++        pos += len;
++    }
++}
++
++static void mtk_ml80211_bss_ml_info_event(struct wpa_driver_nl80211_data *drv,
++					u8 *data, size_t len)
++{
++	char *event = nla_data(data);	
++
++	if (event)
++		wpa_supplicant_event(drv->ctx, EVENT_UPDATE_BSS_ML_INFO, event);
++}
++
++
++void nl80211_vendor_event_mtk(struct wpa_driver_nl80211_data *drv,
++                  u32 subcmd, u8 *data, size_t len)
++{
++    switch (subcmd) {
++		case MTK_NL80211_VENDOR_EVENT_SEND_ML_INFO:
++			mtk_ml80211_bss_ml_info_event(drv, data, len);
++			break;
++	    case MTK_NL80211_VENDOR_EVENT_MLO_EVENT:
++			wpa_printf(MSG_INFO,
++	            "nl80211: MTK_NL80211_VENDOR_EVENT_MLO_EVENT event %u", subcmd);
++	        mtk_nl80211_mlo_response_event(drv, data, len);
++	        break;
++	    default:
++	        wpa_printf(MSG_ERROR,
++	            "nl80211:Ignore unsupported mtk vendor event %u, MTK_NL80211_VENDOR_EVENT_MLO_EVENT(%u)",
++	            subcmd, MTK_NL80211_VENDOR_EVENT_MLO_EVENT);
++	        break;
++    }
++}
++
++
++
+Index: hostapd-2022-01-16-cff80b4f/src/drivers/mediatek_driver_nl80211.h
+===================================================================
+--- /dev/null
++++ hostapd-2022-01-16-cff80b4f/src/drivers/mediatek_driver_nl80211.h
+@@ -0,0 +1,50 @@
++/*
++ * Driver interaction with Linux nl80211/cfg80211
++ * Copyright (c) 2002-2010, Jouni Malinen <j@w1.fi>
++ * Copyright (c) 2003-2004, Instant802 Networks, Inc.
++ * Copyright (c) 2005-2006, Devicescape Software, Inc.
++ * Copyright (c) 2007, Johannes Berg <johannes@sipsolutions.net>
++ * Copyright (c) 2009-2010, Atheros Communications
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ *
++ * Alternatively, this software may be distributed under the terms of BSD
++ * license.
++ *
++ * See README and COPYING for more details.
++ */
++
++#ifndef _MTK_DRIVER_NL80211_H_
++#define _MTK_DRIVER_NL80211_H_
++
++#include <linux/wireless.h>
++
++#ifndef BITS
++/* Eddie */
++/* bits range: for example BITS(16,23) = 0xFF0000
++ *   ==>  (BIT(m)-1)   = 0x0000FFFF     ~(BIT(m)-1)   => 0xFFFF0000
++ *   ==>  (BIT(n+1)-1) = 0x00FFFFFF
++ */
++#define BITS(m,n)                       (~(BIT(m)-1) & ((BIT(n) - 1) | BIT(n)))
++#endif /* BIT */
++
++#define OUI_MTK 0x000CE7
++
++extern void nl80211_vendor_event_mtk(struct wpa_driver_nl80211_data *, u32, u8 *, size_t);
++enum mtk_generic_response_element {
++    MTK_GRID_MLO_EXTERNAL_AUTH = 1,                         /* 1 */
++};
++
++struct mtk_externa_auth_info {
++    uint8_t ssid[SSID_MAX_LEN + 1];
++    uint8_t ssid_len;
++    uint8_t bssid[ETH_ALEN];
++    uint32_t key_mgmt_suite;
++    uint32_t action;
++    uint8_t da[ETH_ALEN];
++    uint8_t ext_ie[0];
++} STRUCT_PACKED;
++#endif
++
+Index: hostapd-2022-01-16-cff80b4f/src/ml/ml.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/ml/ml.c
++++ hostapd-2022-01-16-cff80b4f/src/ml/ml.c
+@@ -68,9 +68,10 @@
+ #include "utils/eloop.h"
+ #include "ml/ml.h"
+ 
+-#ifndef BITS
+-#define BITS(m, n) (~(BIT(m)-1) & ((BIT(n) - 1) | BIT(n)))
+-#endif
++
++#include "wpa_supplicant_i.h"
++#include "bss.h"
++#include "driver_i.h" /* for drv cmd*/
+ 
+ #define CMD_PRESET_LINKID	"PRESET_LINKID"
+ static const u8 null_rsc[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+@@ -852,7 +853,6 @@ int ml_sae_write_auth(struct hostapd_dat
+ 
+ 
+ /* STA */
+-#ifndef HOSTAPD
+ int ml_set_assoc_req_ml_ie(struct wpa_sm *sm, const u8 *ies, size_t ies_len)
+ {
+ 	struct ieee802_11_elems elems;
+@@ -868,7 +868,7 @@ int ml_set_assoc_req_ml_ie(struct wpa_sm
+ 
+ 	os_free(sm->sta_ml_ie);
+ 	if (!elems.ml) {
+-		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG, "ML: clearing STA ML IE");
++		wpa_printf(MSG_DEBUG, "ML: clearing STA ML IE");
+ 		sm->sta_ml_ie = NULL;
+ 		sm->ml_link_num = 0;
+ 		sm->dot11MultiLinkActivated = 0;
+@@ -931,7 +931,8 @@ int ml_set_assoc_resp_ml_ie(struct wpa_s
+ 			os_memcpy(sm->ml_bssid, ml.ml_addr, ETH_ALEN);
+ 		}
+ 	}
+-
++	wpa_printf(MSG_DEBUG, "(%s)[%d]:sm->dot11MultiLinkActivated: %d.\n",
++		__func__, __LINE__, sm->dot11MultiLinkActivated);
+ 	return 0;
+ }
+ 
+@@ -945,12 +946,13 @@ size_t ml_add_m2_kde(struct wpa_sm *sm,
+ 		return 0;
+ 
+ 	wpa_printf(MSG_DEBUG, "ML: Add Mac/Link into EAPOL-Key 2/4");
+-
++	wpa_printf(MSG_DEBUG, "(%s)[%d] ML: Add Mac: "MACSTR"", __func__, __LINE__, MAC2STR(sm->own_ml_addr));
+ 	pos = ml_set_mac_kde(pos, sm->own_ml_addr);
+ 
+ 	for (i = 0; i < sm->ml_link_num; i++) {
+ 		struct per_sta_profile *sta = &ml->profiles[i];
+-
++		wpa_printf(MSG_DEBUG, "(%s)[%d] link id:%d, Add Mac: "MACSTR"",
++			__func__, __LINE__, sta->link_id, MAC2STR(sta->addr));
+ 		pos = ml_set_ml_link_kde(pos, sta->link_id, sta->addr,
+ 			NULL, 0, NULL, 0);
+ 	}
+@@ -966,14 +968,18 @@ static int ml_get_wpa_ie(struct wpa_supp
+ 	const u8 *ie;
+ 
+ 	dl_list_for_each(bss, &wpa_s->bss, struct wpa_bss, list) {
++		wpa_printf(MSG_DEBUG, "scan table bss bssid: "MACSTR"", MAC2STR(bss->bssid));
+ 		if (os_memcmp(bss->bssid, bssid, ETH_ALEN) != 0)
+ 			continue;
+ 		curr = bss;
++		wpa_printf(MSG_DEBUG, "target bssid: "MACSTR"", MAC2STR(bssid));
+ 		break;
+ 	}
+ 
+-	if (!curr)
++	if (!curr) {
++		wpa_printf(MSG_DEBUG, "can't find the curr BSSID Add Mac: "MACSTR"", MAC2STR(bssid));
+ 		return -1;
++	}
+ 
+ 	os_memset(wpa, 0, sizeof(*wpa));
+ 
+@@ -998,6 +1004,8 @@ int ml_validate_m3_kde(struct wpa_sm *sm
+ 	u16 key_info;
+ 	size_t i, j;
+ 	u8 found = 0;
++	struct wpa_ie_parse wpa, *target_wpa = NULL;
++	struct wpa_mlo_link_kde *mlo_link = NULL;
+ 
+ 	key_info = WPA_GET_BE16(key->key_info);
+ 
+@@ -1039,6 +1047,20 @@ int ml_validate_m3_kde(struct wpa_sm *sm
+ 			"ML: EAPOL-Key 3/4 should not have Basic RSNXE IE");
+ 		return -1;
+ 	}
++	for (i = 0; i < ie->mlo_link.num; i++) {
++		mlo_link = (struct wpa_mlo_link_kde *) ie->mlo_link.kdes[i].data;
++		if (ml_get_wpa_ie(sm->ctx->ctx, mlo_link->addr, &wpa) < 0) {
++			wpa_printf(MSG_ERROR, "ML: Could not find mlo_link("MACSTR") from the scan results", MAC2STR(mlo_link->addr));
++		} else {
++			target_wpa = &wpa;
++			break;
++		}
++	}
++	if (target_wpa == NULL) {
++		wpa_printf(MSG_ERROR,
++			"ML: can't find one of the mlo link ssid in the scan table.");
++		return -1;
++	} 
+ 
+ 	/* mlo link id & rsne & rsnxe */
+ 	for (i = 0; i < ie->mlo_link.num; i++) {
+@@ -1047,14 +1069,7 @@ int ml_validate_m3_kde(struct wpa_sm *sm
+ 		size_t len = ie->mlo_link.kdes[i].len;
+ 		u8 *rsne = NULL, *rsnxe = NULL;
+ 		u8 rsne_len = 0, rsnxe_len = 0; /* including hdr */
+-		struct wpa_ie_parse wpa;
+ 
+-		if (ml_get_wpa_ie(sm->ctx->ctx, mlo_link->addr, &wpa) < 0) {
+-			wpa_printf(MSG_INFO,
+-				"ML: Could not find AP from "
+-				"the scan results");
+-			return -1;
+-		}
+ 
+ 		if (len < sizeof(struct wpa_mlo_link_kde)) {
+ 			wpa_printf(MSG_INFO, "ML: EAPOL-Key 3/4 error mlo link");
+@@ -1108,24 +1123,46 @@ int ml_validate_m3_kde(struct wpa_sm *sm
+ 		}
+ 
+ 		/* mlo without rsn/rsx but beacon does or length not matched */
+-		if ((!(mlo_link->info & 0xf0) && (wpa.ap_rsn_ie || wpa.ap_rsnxe))) {
++		if ((!(mlo_link->info & 0xf0) && (target_wpa->ap_rsn_ie || target_wpa->ap_rsnxe))) {
+ 			wpa_printf(MSG_INFO, "ML: IE in 3/4 msg does not match "
+ 					     "with IE in Beacon/ProbeResp (no IE?)");
+ 			return -1;
+ 		}
+ 
+ 		/* rsne */
+-		if (rsne && wpa.ap_rsn_ie &&
++		if (rsne && target_wpa->ap_rsn_ie &&
+ 		    wpa_compare_rsn_ie(wpa_key_mgmt_ft(sm->key_mgmt),
+-					wpa.ap_rsn_ie, wpa.ap_rsn_ie_len,
++					target_wpa->ap_rsn_ie, target_wpa->ap_rsn_ie_len,
+ 					rsne, rsne_len)) {
+ 			wpa_printf(MSG_INFO, "ML: IE in 3/4 msg does not match "
+ 					     "with IE in Beacon/ProbeResp (rsne)");
+-			return -1;
++			wpa_hexdump(MSG_INFO, "RSNE in Beacon/ProbeResp",
++				    target_wpa->ap_rsn_ie, target_wpa->ap_rsn_ie_len);
++			wpa_hexdump(MSG_INFO, "RSNE in EAPOL-Key msg 3/4",
++				    rsne, rsne_len);
++			{
++				size_t ie1len=  target_wpa->ap_rsn_ie_len, ie2len = rsne_len;
++				struct wpa_ie_data ie1d, ie2d;
++				if (wpa_parse_wpa_ie_rsn(target_wpa->ap_rsn_ie, ie1len, &ie1d) < 0 ||
++				    wpa_parse_wpa_ie_rsn(rsne, ie2len, &ie2d) < 0)
++			return -1;
++				wpa_printf(MSG_INFO, "ML: IE in 3/4 msg GTK/PTK COUNTER: 0x%04x- 0x%04x",
++					     ie1d.capabilities, ie2d.capabilities);
++				if (ie1d.proto == ie2d.proto &&
++				    ie1d.pairwise_cipher == ie2d.pairwise_cipher &&
++				    ie1d.group_cipher == ie2d.group_cipher &&
++				    ie1d.key_mgmt == ie2d.key_mgmt &&
++				    ((ie1d.capabilities & 0xff33) == (ie2d.capabilities & 0xff33))&&
++				    ie1d.mgmt_group_cipher == ie2d.mgmt_group_cipher)
++					wpa_printf(MSG_INFO, "ML: IE in 3/4 msg not match GTK/PTK COUNTER"
++					     "with IE in Beacon/ProbeResp (rsne)");
++				else
++					return -1;
++			}
+ 		}
+ 
+ 		if (sm->proto == WPA_PROTO_WPA &&
+-		    rsne && wpa.ap_rsn_ie == NULL && sm->rsn_enabled) {
++		    rsne && target_wpa->ap_rsn_ie == NULL && sm->rsn_enabled) {
+ 			wpa_printf(MSG_INFO, "ML: Possible downgrade attack "
+ 					       "detected - RSN was enabled and RSN IE "
+ 					       "was in msg 3/4, but not in "
+@@ -1134,14 +1171,14 @@ int ml_validate_m3_kde(struct wpa_sm *sm
+ 		}
+ 
+ 		if (sm->proto == WPA_PROTO_RSN &&
+-		    ((wpa.ap_rsnxe && !rsnxe) ||
+-		     (!wpa.ap_rsnxe && rsnxe) ||
+-		     (wpa.ap_rsnxe && rsnxe &&
+-		      (wpa.ap_rsnxe_len != rsnxe_len ||
+-		       os_memcmp(wpa.ap_rsnxe, rsnxe, wpa.ap_rsnxe_len) != 0)))) {
++		    ((target_wpa->ap_rsnxe && !rsnxe) ||
++		     (!target_wpa->ap_rsnxe && rsnxe) ||
++		     (target_wpa->ap_rsnxe && rsnxe &&
++		      (target_wpa->ap_rsnxe_len != rsnxe_len ||
++		       os_memcmp(target_wpa->ap_rsnxe, rsnxe, target_wpa->ap_rsnxe_len) != 0)))) {
+ 			wpa_printf(MSG_INFO, "ML: RSNXE mismatch between Beacon/ProbeResp and EAPOL-Key msg 3/4");
+ 			wpa_hexdump(MSG_INFO, "RSNXE in Beacon/ProbeResp",
+-				    wpa.ap_rsnxe, wpa.ap_rsnxe_len);
++				    target_wpa->ap_rsnxe, target_wpa->ap_rsnxe_len);
+ 			wpa_hexdump(MSG_INFO, "RSNXE in EAPOL-Key msg 3/4",
+ 				    rsnxe, rsnxe_len);
+ 			return -1;
+@@ -1404,11 +1441,11 @@ static int ml_install_gtk(struct wpa_sm
+ 			continue;
+ 		}
+ 
+-		wpa_hexdump_key(MSG_DEBUG, "ML: Group Key", gd->gtk, gd->gtk_len);
+-		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
++		wpa_hexdump_key(MSG_INFO, "ML: Group Key", gd->gtk, gd->gtk_len);
++		wpa_dbg(sm->ctx->msg_ctx, MSG_INFO,
+ 			"ML: Installing GTK to the driver (keyidx=%d tx=%d len=%d)",
+ 			gd->keyidx, gd->tx, gd->gtk_len);
+-		wpa_hexdump(MSG_DEBUG, "WPA: RSC", key_rsc, gd->key_rsc_len);
++		wpa_hexdump(MSG_INFO, "WPA: RSC", key_rsc, gd->key_rsc_len);
+ 		if (sm->group_cipher == WPA_CIPHER_TKIP) {
+ 			/* Swap Tx/Rx keys for Michael MIC */
+ 			os_memcpy(gtk_buf, gd->gtk, 16);
+@@ -1418,7 +1455,7 @@ static int ml_install_gtk(struct wpa_sm
+ 		}
+ 
+ 		// TODO: remove this when kernel is ready
+-		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID " %d", gd->link_id);
++		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID "=%d", gd->link_id);
+ 		wpa_drv_driver_cmd(wpa_s, cmd, buf, sizeof(buf));
+ 
+ 		if (sm->pairwise_cipher == WPA_CIPHER_NONE) {
+@@ -1494,7 +1531,7 @@ static int ml_install_igtk(struct wpa_sm
+ 			continue;
+ 		}
+ 
+-		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
++		wpa_dbg(sm->ctx->msg_ctx, MSG_INFO,
+ 			"ML: IGTK keyid %d pn " COMPACT_MACSTR,
+ 			keyidx, MAC2STR(igtk->pn));
+ 		wpa_hexdump_key(MSG_DEBUG, "ML: IGTK", igtk->igtk, len);
+@@ -1506,7 +1543,7 @@ static int ml_install_igtk(struct wpa_sm
+ 
+ 
+ 		// TODO: remove this when kernel is ready
+-		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID " %d", link_id);
++		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID "=%d", link_id);
+ 		wpa_drv_driver_cmd(wpa_s, cmd, buf, sizeof(buf));
+ 
+ 		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+@@ -1593,7 +1630,7 @@ static int ml_install_bigtk(struct wpa_s
+ 		}
+ 
+ 		// TODO: remove this when kernel is ready
+-		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID " %d", link_id);
++		os_snprintf(cmd, sizeof(cmd), CMD_PRESET_LINKID "=%d", link_id);
+ 		wpa_drv_driver_cmd(wpa_s, cmd, buf, sizeof(buf));
+ 
+ 		if (wpa_sm_set_key(sm, wpa_cipher_to_alg(sm->mgmt_group_cipher),
+@@ -1621,6 +1658,8 @@ static int ml_install_bigtk(struct wpa_s
+ 
+ int ml_process_m1_kde(struct wpa_sm *sm, struct wpa_eapol_ie_parse *ie)
+ {
++	wpa_dbg(sm->ctx->msg_ctx, MSG_INFO, "(%s)[%d]:sm->dot11MultiLinkActivated: %d. MSG1\n",
++				__func__, __LINE__, sm->dot11MultiLinkActivated);
+ 	if (sm->dot11MultiLinkActivated) {
+ 		if (ie->mac_addr) {
+ 			wpa_hexdump(MSG_DEBUG, "ML: MAC from "
+@@ -1692,7 +1731,7 @@ int ml_process_1_of_2(struct wpa_sm *sm,
+ 	if(!sm->dot11MultiLinkActivated)
+ 		return 0;
+ 
+-	wpa_hexdump(MSG_DEBUG, "ML: Group 1/2 IE KeyData", key_data, key_data_len);
++	wpa_hexdump(MSG_INFO, "ML: Group 1/2 IE KeyData", key_data, key_data_len);
+ 	if (wpa_supplicant_parse_ies(key_data, key_data_len, ie) < 0)
+ 		return -1;
+ 
+@@ -1765,46 +1804,15 @@ size_t ml_add_2_of_2_kde(struct wpa_sm *
+ }
+ 
+ 
+-#if 0
+-void p2p_buf_add_ml_channel_list(struct wpabuf *buf,
+-				   const u32 *preferred_freq_list,
+-				   unsigned int size)
+-{
+-	unsigned int i, count = 0;
+-	u8 op_class, op_channel;
+ 
+-	if (!size)
+-		return;
+ 
+ 	/*
+ 	 * First, determine the number of P2P supported channels in the
+ 	 * pref_freq_list returned from driver. This is needed for calculations
+ 	 * of the vendor IE size.
+ 	 */
+-	for (i = 0; i < size; i++) {
+-		if (p2p_freq_to_channel(preferred_freq_list[i], &op_class,
+-					&op_channel) == 0)
+-			count++;
+-	}
+ 
+-	wpabuf_put_u8(buf, P2P_ATTR_VENDOR_SPECIFIC);
+-	wpabuf_put_u8(buf, 4 + count * sizeof(u16));
+-	wpabuf_put_be24(buf, OUI_MTK);
+-	wpabuf_put_u8(buf, MTK_VENDOR_ATTR_P2P_ML_CHAN_LIST);
+-	for (i = 0; i < size; i++) {
+-		if (p2p_freq_to_channel(preferred_freq_list[i], &op_class,
+-					&op_channel) < 0) {
+-			wpa_printf(MSG_DEBUG, "Unsupported frequency %u MHz",
+-				   preferred_freq_list[i]);
+-			continue;
+-		}
+-		wpabuf_put_u8(buf, op_class);
+-		wpabuf_put_u8(buf, op_channel);
+-	}
+-}
+-#endif
+ 
+ 
+-#endif /* HOSTAPD */
+ 
+ 
+Index: hostapd-2022-01-16-cff80b4f/src/ml/ml.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/ml/ml.h
++++ hostapd-2022-01-16-cff80b4f/src/ml/ml.h
+@@ -210,6 +210,19 @@ int ml_sae_write_auth(struct hostapd_dat
+ 	struct sae_data *sae, struct wpabuf *buf);
+ #endif
+ 
++int ml_set_assoc_req_ml_ie(struct wpa_sm *sm, const u8 *ies, size_t ies_len);
++int ml_set_assoc_resp_ml_ie(struct wpa_sm *sm, const u8 *ies, size_t ies_len);
++size_t ml_add_m2_kde(struct wpa_sm *sm, u8 *pos);
++int ml_validate_m3_kde(struct wpa_sm *sm, const struct wpa_eapol_key *key,
++	struct wpa_eapol_ie_parse *ie);
++int ml_process_m1_kde(struct wpa_sm *sm, struct wpa_eapol_ie_parse *ie);
++int ml_process_m3_kde(struct wpa_sm *sm, const struct wpa_eapol_key *key,
++	struct wpa_eapol_ie_parse *ie);
++size_t ml_add_m4_kde(struct wpa_sm *sm, u8 *pos);
++size_t ml_add_key_request_kde(struct wpa_sm *sm, u8 *pos);
++size_t ml_add_2_of_2_kde(struct wpa_sm *sm, u8 *pos);
++int ml_process_1_of_2(struct wpa_sm *sm, const struct wpa_eapol_key *key,
++		const u8 *key_data, size_t key_data_len, u16 key_info);
+ 
+ 
+ #endif /* WPA_ML_H */
+Index: hostapd-2022-01-16-cff80b4f/src/p2p/p2p_i.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/p2p/p2p_i.h
++++ hostapd-2022-01-16-cff80b4f/src/p2p/p2p_i.h
+@@ -656,6 +656,10 @@ struct p2p_message {
+ 
+ 	const u8 *pref_freq_list;
+ 	size_t pref_freq_list_len;
++#ifdef CONFIG_MTK_IEEE80211BE
++	const u8 *ml_channel_list;
++	size_t ml_channel_list_len;
++#endif
+ };
+ 
+ 
+Index: hostapd-2022-01-16-cff80b4f/src/rsn_supp/wpa.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/rsn_supp/wpa.c
++++ hostapd-2022-01-16-cff80b4f/src/rsn_supp/wpa.c
+@@ -32,6 +32,9 @@
+ #include "pmksa_cache.h"
+ #include "wpa_i.h"
+ #include "wpa_ie.h"
++#ifdef CONFIG_MTK_IEEE80211BE
++#include "../ml/ml.h"
++#endif
+ 
+ 
+ static const u8 null_rsc[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+@@ -211,6 +214,10 @@ void wpa_sm_key_request(struct wpa_sm *s
+ 
+ 	mic_len = wpa_mic_len(sm->key_mgmt, sm->pmk_len);
+ 	hdrlen = sizeof(*reply) + mic_len + 2;
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (sm->dot11MultiLinkActivated)
++		hdrlen += (2 + RSN_SELECTOR_LEN + ETH_ALEN); /* MAC addr KDE */
++#endif	
+ 	rbuf = wpa_sm_alloc_eapol(sm, IEEE802_1X_TYPE_EAPOL_KEY, NULL,
+ 				  hdrlen, &rlen, (void *) &reply);
+ 	if (rbuf == NULL)
+@@ -235,7 +242,12 @@ void wpa_sm_key_request(struct wpa_sm *s
+ 	inc_byte_array(sm->request_counter, WPA_REPLAY_COUNTER_LEN);
+ 
+ 	mic = (u8 *) (reply + 1);
++#ifdef CONFIG_MTK_IEEE80211BE
++	WPA_PUT_BE16(mic + mic_len, ml_add_key_request_kde(sm, mic +
++		mic_len + 2 /* offset for key data len */));
++#else
+ 	WPA_PUT_BE16(mic + mic_len, 0);
++#endif
+ 	if (!(key_info & WPA_KEY_INFO_MIC))
+ 		key_mic = NULL;
+ 	else
+@@ -489,7 +501,7 @@ int wpa_supplicant_send_2_of_4(struct wp
+ 	size_t mic_len, hdrlen, rlen;
+ 	struct wpa_eapol_key *reply;
+ 	u8 *rbuf, *key_mic;
+-	u8 *rsn_ie_buf = NULL;
++	u8 *rsn_ie_buf = NULL, *ml_ie_buf = NULL;;
+ 	u16 key_info;
+ 
+ 	if (wpa_ie == NULL) {
+@@ -535,6 +547,22 @@ int wpa_supplicant_send_2_of_4(struct wp
+ 		wpa_ie = rsn_ie_buf;
+ 	}
+ #endif /* CONFIG_IEEE80211R */
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (sm->dot11MultiLinkActivated) {
++		wpa_hexdump(MSG_DEBUG, "ML: WPA IE before ML processing",
++				wpa_ie, wpa_ie_len);
++		ml_ie_buf = os_malloc(wpa_ie_len + 100);
++		if (ml_ie_buf == NULL) {
++			os_free(rsn_ie_buf);
++			return -1;
++		}
++		os_memcpy(ml_ie_buf, wpa_ie, wpa_ie_len);
++		wpa_ie_len += ml_add_m2_kde(sm, ml_ie_buf + wpa_ie_len);
++		wpa_ie = ml_ie_buf;
++		wpa_hexdump(MSG_DEBUG, "ML: WPA IE after ml kde added",
++			ml_ie_buf, wpa_ie_len);
++	}
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	wpa_hexdump(MSG_DEBUG, "WPA: WPA IE for msg 2/4", wpa_ie, wpa_ie_len);
+ 
+@@ -545,6 +573,7 @@ int wpa_supplicant_send_2_of_4(struct wp
+ 				  &rlen, (void *) &reply);
+ 	if (rbuf == NULL) {
+ 		os_free(rsn_ie_buf);
++		os_free(ml_ie_buf);
+ 		return -1;
+ 	}
+ 
+@@ -570,6 +599,7 @@ int wpa_supplicant_send_2_of_4(struct wp
+ 	WPA_PUT_BE16(key_mic + mic_len, wpa_ie_len); /* Key Data Length */
+ 	os_memcpy(key_mic + mic_len + 2, wpa_ie, wpa_ie_len); /* Key Data */
+ 	os_free(rsn_ie_buf);
++	os_free(ml_ie_buf);
+ 
+ 	os_memcpy(reply->key_nonce, nonce, WPA_NONCE_LEN);
+ 
+@@ -711,6 +741,10 @@ static void wpa_supplicant_process_1_of_
+ 				    "Authenticator", ie.pmkid, PMKID_LEN);
+ 		}
+ 	}
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (ml_process_m1_kde(sm, &ie) < 0)
++		goto failed;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	res = wpa_supplicant_get_pmk(sm, src_addr, ie.pmkid);
+ 	if (res == -2) {
+@@ -1528,6 +1562,10 @@ static int wpa_supplicant_validate_ie(st
+ 				      const unsigned char *src_addr,
+ 				      struct wpa_eapol_ie_parse *ie)
+ {
++#ifdef CONFIG_MTK_IEEE80211BE
++		if(sm->dot11MultiLinkActivated)
++			goto skip;
++#endif
+ 	if (sm->ap_wpa_ie == NULL && sm->ap_rsn_ie == NULL) {
+ 		wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG,
+ 			"WPA: No WPA/RSN IE for this AP known. "
+@@ -1591,7 +1629,9 @@ static int wpa_supplicant_validate_ie(st
+ 		wpa_sm_deauthenticate(sm, WLAN_REASON_IE_IN_4WAY_DIFFERS);
+ 		return -1;
+ 	}
+-
++#ifdef CONFIG_MTK_IEEE80211BE
++	skip:
++#endif
+ #ifdef CONFIG_IEEE80211R
+ 	if (wpa_key_mgmt_ft(sm->key_mgmt) &&
+ 	    wpa_supplicant_validate_ie_ft(sm, src_addr, ie) < 0)
+@@ -1623,6 +1663,10 @@ int wpa_supplicant_send_4_of_4(struct wp
+ 
+ 	mic_len = wpa_mic_len(sm->key_mgmt, sm->pmk_len);
+ 	hdrlen = sizeof(*reply) + mic_len + 2;
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (sm->dot11MultiLinkActivated)
++		hdrlen += (2 + RSN_SELECTOR_LEN + ETH_ALEN); /* MAC addr KDE */
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 	rbuf = wpa_sm_alloc_eapol(sm, IEEE802_1X_TYPE_EAPOL_KEY, NULL,
+ 				  hdrlen, &rlen, (void *) &reply);
+ 	if (rbuf == NULL)
+@@ -1646,7 +1690,12 @@ int wpa_supplicant_send_4_of_4(struct wp
+ 		  WPA_REPLAY_COUNTER_LEN);
+ 
+ 	key_mic = (u8 *) (reply + 1);
++#ifdef CONFIG_MTK_IEEE80211BE
++	WPA_PUT_BE16(key_mic + mic_len, ml_add_m4_kde(sm, key_mic +
++		mic_len + 2 /* offset for key data len */));
++#else
+ 	WPA_PUT_BE16(key_mic + mic_len, 0);
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	wpa_dbg(sm->ctx->msg_ctx, MSG_DEBUG, "WPA: Sending EAPOL-Key 4/4");
+ 	return wpa_eapol_key_send(sm, ptk, ver, dst, ETH_P_EAPOL, rbuf, rlen,
+@@ -1695,6 +1744,10 @@ static void wpa_supplicant_process_3_of_
+ 
+ 	if (wpa_supplicant_validate_ie(sm, sm->bssid, &ie) < 0)
+ 		goto failed;
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (ml_validate_m3_kde(sm, key, &ie) < 0)
++		goto failed;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	if (wpa_handle_ext_key_id(sm, &ie))
+ 		goto failed;
+@@ -1792,10 +1845,18 @@ static void wpa_supplicant_process_3_of_
+ 		eapol_sm_notify_portValid(sm->eapol, true);
+ 	}
+ 	wpa_sm_set_state(sm, WPA_GROUP_HANDSHAKE);
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (ml_process_m3_kde(sm, key, &ie) < 0)
++		goto failed;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	if (sm->group_cipher == WPA_CIPHER_GTK_NOT_USED) {
+ 		/* No GTK to be set to the driver */
+-	} else if (!ie.gtk && sm->proto == WPA_PROTO_RSN) {
++	} else if (!ie.gtk &&
++#ifdef CONFIG_MTK_IEEE80211BE
++		!sm->dot11MultiLinkActivated &&
++#endif /* CONFIG_MTK_IEEE80211BE */
++		sm->proto == WPA_PROTO_RSN) {
+ 		wpa_msg(sm->ctx->msg_ctx, MSG_INFO,
+ 			"RSN: No GTK KDE included in EAPOL-Key msg 3/4");
+ 		goto failed;
+@@ -1813,11 +1874,19 @@ static void wpa_supplicant_process_3_of_
+ 		goto failed;
+ 	}
+ 
+-	if (sm->group_cipher == WPA_CIPHER_GTK_NOT_USED || ie.gtk)
++	if (sm->group_cipher == WPA_CIPHER_GTK_NOT_USED || ie.gtk
++#ifdef CONFIG_MTK_IEEE80211BE
++		|| ie.mlo_gtk.num > 0
++#endif /* CONFIG_MTK_IEEE80211BE */
++		)
+ 		wpa_supplicant_key_neg_complete(sm, sm->bssid,
+ 						key_info & WPA_KEY_INFO_SECURE);
+ 
+-	if (ie.gtk)
++	if (ie.gtk
++#ifdef CONFIG_MTK_IEEE80211BE
++		|| ie.mlo_gtk.num > 0
++#endif /* CONFIG_MTK_IEEE80211BE */
++		)
+ 		wpa_sm_set_rekey_offload(sm);
+ 
+ 	/* Add PMKSA cache entry for Suite B AKMs here since PMKID can be
+@@ -2027,6 +2096,10 @@ static int wpa_supplicant_send_2_of_2(st
+ 	if (wpa_sm_ocv_enabled(sm))
+ 		kde_len = OCV_OCI_KDE_LEN;
+ #endif /* CONFIG_OCV */
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (sm->dot11MultiLinkActivated)
++		hdrlen += (2 + RSN_SELECTOR_LEN + ETH_ALEN); /* MAC addr KDE */
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	mic_len = wpa_mic_len(sm->key_mgmt, sm->pmk_len);
+ 	hdrlen = sizeof(*reply) + mic_len + 2;
+@@ -2053,7 +2126,12 @@ static int wpa_supplicant_send_2_of_2(st
+ 		  WPA_REPLAY_COUNTER_LEN);
+ 
+ 	key_mic = (u8 *) (reply + 1);
++#ifdef CONFIG_MTK_IEEE80211BE
++	WPA_PUT_BE16(key_mic + mic_len,
++		ml_add_2_of_2_kde(sm, key_mic + mic_len) + kde_len);
++#else
+ 	WPA_PUT_BE16(key_mic + mic_len, kde_len); /* Key Data Length */
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ #ifdef CONFIG_OCV
+ 	if (wpa_sm_ocv_enabled(sm)) {
+@@ -2100,6 +2178,7 @@ static void wpa_supplicant_process_1_of_
+ 	int rekey, ret;
+ 	struct wpa_gtk_data gd;
+ 	const u8 *key_rsc;
++	u8 need_install = true;
+ 
+ 	if (!sm->msg_3_of_4_ok && !wpa_fils_is_completed(sm)) {
+ 		wpa_msg(sm->ctx->msg_ctx, MSG_INFO,
+@@ -2119,6 +2198,22 @@ static void wpa_supplicant_process_1_of_
+ 		ret = wpa_supplicant_process_1_of_2_rsn(sm, key_data,
+ 							key_data_len, key_info,
+ 							&gd);
++#ifdef CONFIG_MTK_IEEE80211BE
++		if (sm->dot11MultiLinkActivated) {
++			wpa_sm_set_state(sm, WPA_GROUP_HANDSHAKE);
++			need_install = false;
++			if (ret != -1) {
++				goto failed;
++			} else {
++				ret = ml_process_1_of_2(sm, key, key_data,
++					key_data_len, key_info);
++				if (ret)
++					goto failed;
++				else
++					goto skip;
++			}
++		}
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 	} else {
+ 		ret = wpa_supplicant_process_1_of_2_wpa(sm, key, key_data,
+ 							key_data_len,
+@@ -2133,6 +2228,9 @@ static void wpa_supplicant_process_1_of_
+ 	key_rsc = key->key_rsc;
+ 	if (wpa_supplicant_rsc_relaxation(sm, key->key_rsc))
+ 		key_rsc = null_rsc;
++#ifdef CONFIG_MTK_IEEE80211BE
++skip:
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 	if (wpa_supplicant_install_gtk(sm, &gd, key_rsc, 0) ||
+ 	    wpa_supplicant_send_2_of_2(sm, key, ver, key_info) < 0)
+@@ -2987,6 +3085,10 @@ void wpa_sm_deinit(struct wpa_sm *sm)
+ #ifdef CONFIG_DPP2
+ 	wpabuf_clear_free(sm->dpp_z);
+ #endif /* CONFIG_DPP2 */
++#ifdef CONFIG_MTK_IEEE80211BE
++	os_free(sm->sta_ml_ie);
++	os_free(sm->ap_ml_ie);
++#endif
+ 	os_free(sm);
+ }
+ 
+@@ -3850,6 +3952,11 @@ void wpa_sm_drop_sa(struct wpa_sm *sm)
+ 	os_memset(&sm->gtk_wnm_sleep, 0, sizeof(sm->gtk_wnm_sleep));
+ 	os_memset(&sm->igtk, 0, sizeof(sm->igtk));
+ 	os_memset(&sm->igtk_wnm_sleep, 0, sizeof(sm->igtk_wnm_sleep));
++#ifdef CONFIG_MTK_IEEE80211BE
++	os_memset(&sm->ml_gtk, 0, sizeof(sm->ml_gtk));
++	os_memset(&sm->ml_igtk, 0, sizeof(sm->ml_igtk));
++	os_memset(&sm->ml_bigtk, 0, sizeof(sm->ml_bigtk));
++#endif /* CONFIG_MTK_IEEE80211BE */
+ #ifdef CONFIG_IEEE80211R
+ 	os_memset(sm->xxkey, 0, sizeof(sm->xxkey));
+ 	sm->xxkey_len = 0;
+Index: hostapd-2022-01-16-cff80b4f/src/rsn_supp/wpa_i.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/rsn_supp/wpa_i.h
++++ hostapd-2022-01-16-cff80b4f/src/rsn_supp/wpa_i.h
+@@ -13,6 +13,9 @@
+ 
+ struct wpa_tdls_peer;
+ struct wpa_eapol_key;
++#ifdef CONFIG_MTK_IEEE80211BE
++struct wpa_ml_ie_parse;
++#endif
+ 
+ struct pasn_ft_r1kh {
+ 	u8 bssid[ETH_ALEN];
+@@ -118,6 +121,20 @@ struct wpa_sm {
+ 	size_t assoc_rsnxe_len;
+ 	u8 *ap_wpa_ie, *ap_rsn_ie, *ap_rsnxe;
+ 	size_t ap_wpa_ie_len, ap_rsn_ie_len, ap_rsnxe_len;
++#ifdef CONFIG_MTK_IEEE80211BE
++	u8 dot11MultiLinkActivated;
++	struct wpa_ml_ie_parse *sta_ml_ie; /* Own ML IE from (Re)AssocReq */
++	struct wpa_ml_ie_parse *ap_ml_ie; /* AP ML IE from (Re)AssocResp */
++	struct ml_gtk_holder ml_gtk;
++	struct ml_gtk_holder ml_gtk_wnm_sleep;
++	struct ml_igtk_holder ml_igtk;
++	struct ml_igtk_holder ml_igtk_wnm_sleep;
++	struct ml_bigtk_holder ml_bigtk;
++	struct ml_bigtk_holder ml_bigtk_wnm_sleep;
++	u8 ml_bssid[ETH_ALEN]; /* ap mld addr */
++	u8 own_ml_addr[ETH_ALEN];
++	u8 ml_link_num;
++#endif
+ 
+ #ifdef CONFIG_TDLS
+ 	struct wpa_tdls_peer *tdls;
+Index: hostapd-2022-01-16-cff80b4f/src/utils/common.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/src/utils/common.h
++++ hostapd-2022-01-16-cff80b4f/src/utils/common.h
+@@ -429,6 +429,9 @@ void perror(const char *s);
+ #define BIT(x) (1U << (x))
+ #endif
+ 
++#ifndef BITS
++#define BITS(m, n) (~(BIT(m)-1) & ((BIT(n) - 1) | BIT(n)))
++#endif
+ /*
+  * Definitions for sparse validation
+  * (http://kernel.org/pub/linux/kernel/people/josh/sparse/)
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/Makefile
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/Makefile
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/Makefile
+@@ -56,6 +56,12 @@ CONFIG_WPS_TESTING=y
+ CONFIG_TDLS_TESTING=y
+ endif
+ 
++#ifdef CONFIG_MTK_IEEE80211BE
++CFLAGS += -I../wpa_supplicant
++CFLAGS += -DCONFIG_MTK_IEEE80211BE
++OBJS += ../src/drivers/mediatek_driver_cmd_nl80211.o
++OBJS += ../src/ml/ml.o
++#endif
+ mkconfig:
+ 	@if [ -f .config ]; then \
+ 		echo '.config exists - did not replace it'; \
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/ap.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/ap.c
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/ap.c
+@@ -1013,7 +1013,11 @@ int wpa_supplicant_create_ap(struct wpa_
+ 		return -1;
+ 	}
+ 
++#ifdef CONFIG_MTK_IEEE80211BE
++	wpa_s->ap_iface = hapd_iface = hostapd_iface_alloc(&wpa_s->global->hapd_ifaces);
++#else
+ 	wpa_s->ap_iface = hapd_iface = hostapd_alloc_iface();
++#endif
+ 	if (hapd_iface == NULL)
+ 		return -1;
+ 	hapd_iface->owner = wpa_s;
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/bss.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/bss.c
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/bss.c
+@@ -19,6 +19,9 @@
+ #include "notify.h"
+ #include "scan.h"
+ #include "bss.h"
++#ifdef CONFIG_MTK_IEEE80211BE
++#include "ml/ml.h"
++#endif
+ 
+ static void wpa_bss_set_hessid(struct wpa_bss *bss)
+ {
+@@ -836,6 +839,9 @@ void wpa_bss_update_scan_res(struct wpa_
+ 
+ 	if (bss == NULL)
+ 		return;
++#ifdef CONFIG_MTK_IEEE80211BE
++		bss->is_mld = wpa_scan_get_vendor_ie(res, MTK_MLD_IE_VENDOR_TYPE) != NULL;
++#endif
+ 	if (wpa_s->last_scan_res_used >= wpa_s->last_scan_res_size) {
+ 		struct wpa_bss **n;
+ 		unsigned int siz;
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/bss.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/bss.h
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/bss.h
+@@ -120,6 +120,9 @@ struct wpa_bss {
+ 	int snr;
+ 	/** ANQP data */
+ 	struct wpa_bss_anqp *anqp;
++#ifdef CONFIG_MTK_IEEE80211BE
++	u8 is_mld;
++#endif
+ 	/** Length of the following IE field in octets (from Probe Response) */
+ 	size_t ie_len;
+ 	/** Length of the following Beacon IE field in octets */
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/driver_i.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/driver_i.h
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/driver_i.h
+@@ -599,7 +599,7 @@ static inline int wpa_drv_tdls_oper(stru
+ 	return wpa_s->driver->tdls_oper(wpa_s->drv_priv, oper, peer);
+ }
+ 
+-#ifdef ANDROID
++#if defined ANDROID || defined(CONFIG_MTK_IEEE80211BE)
+ static inline int wpa_drv_driver_cmd(struct wpa_supplicant *wpa_s,
+ 				     char *cmd, char *buf, size_t buf_len)
+ {
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/events.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/events.c
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/events.c
+@@ -50,6 +50,9 @@
+ #include "mesh_mpm.h"
+ #include "wmm_ac.h"
+ #include "dpp_supplicant.h"
++#ifdef CONFIG_MTK_IEEE80211BE
++#include "ml/ml.h"
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 
+ 
+ #define MAX_OWE_TRANSITION_BSS_SELECT_COUNT 5
+@@ -1557,7 +1560,13 @@ struct wpa_ssid * wpa_scan_res_match(str
+ 			wpa_dbg(wpa_s, MSG_DEBUG, "   skip - channel disabled");
+ 		return NULL;
+ 	}
+-
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (bss->is_mld) {
++		if (debug_print)
++			wpa_dbg(wpa_s, MSG_DEBUG, "   skip - mld duplicated");
++		return NULL;
++	}
++#endif
+ 	for (ssid = group; ssid; ssid = only_first_ssid ? NULL : ssid->pnext) {
+ 		if (wpa_scan_res_ok(wpa_s, ssid, match_ssid, match_ssid_len,
+ 				    bss, bssid_ignore_count, debug_print))
+@@ -3177,6 +3186,21 @@ no_pfs:
+ 
+ 	wpas_handle_assoc_resp_qos_mgmt(wpa_s, data->assoc_info.resp_ies,
+ 					data->assoc_info.resp_ies_len);
++#ifdef CONFIG_MTK_IEEE80211BE
++	wpa_printf(MSG_DEBUG, "(%s)[%d]: ml_set_assoc_req_ml_ie.\n",
++		__func__, __LINE__);
++	if (!ml_set_assoc_req_ml_ie(wpa_s->wpa, data->assoc_info.req_ies, data->assoc_info.req_ies_len)) {
++		wpa_printf(MSG_DEBUG, "(%s)[%d]: ml_set_assoc_req_ml_ie success.\n",
++		__func__, __LINE__);
++	}
++	wpa_printf(MSG_DEBUG, "(%s)[%d]: ml_set_assoc_resp_ml_ie .\n",
++		__func__, __LINE__);
++	if (!ml_set_assoc_resp_ml_ie(wpa_s->wpa,
++		data->assoc_info.resp_ies, data->assoc_info.resp_ies_len)) {
++		wpa_printf(MSG_DEBUG, "(%s)[%d]: ml_set_assoc_resp_ml_ie success.\n",
++		__func__, __LINE__);
++	}
++#endif
+ 
+ 	return 0;
+ }
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/sme.c
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/sme.c
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/sme.c
+@@ -38,6 +38,7 @@ static void sme_auth_timer(void *eloop_c
+ static void sme_assoc_timer(void *eloop_ctx, void *timeout_ctx);
+ static void sme_obss_scan_timeout(void *eloop_ctx, void *timeout_ctx);
+ static void sme_stop_sa_query(struct wpa_supplicant *wpa_s);
++static int sme_sae_set_pmk(struct wpa_supplicant *wpa_s, const u8 *bssid);
+ 
+ 
+ #ifdef CONFIG_SAE
+@@ -1095,6 +1096,13 @@ static int sme_external_auth_send_sae_co
+ 		status = WLAN_STATUS_SUCCESS;
+ 	sme_external_auth_build_buf(buf, resp, wpa_s->own_addr,
+ 				    bssid, 1, wpa_s->sme.seq_num, status);
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (wpabuf_resize(&buf, wpa_s->sme.ext_ie_len) == 0) {
++		wpa_hexdump(MSG_DEBUG, "ML: SAE VENDOR IE",
++			wpa_s->sme.ext_ie, wpa_s->sme.ext_ie_len);
++		wpabuf_put_data(buf, wpa_s->sme.ext_ie, wpa_s->sme.ext_ie_len);
++	}
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 	wpa_drv_send_mlme(wpa_s, wpabuf_head(buf), wpabuf_len(buf), 1, 0, 0);
+ 	wpabuf_free(resp);
+ 	wpabuf_free(buf);
+@@ -1165,6 +1173,13 @@ static void sme_external_auth_send_sae_c
+ 	sme_external_auth_build_buf(buf, resp, wpa_s->own_addr,
+ 				    da, 2, wpa_s->sme.seq_num,
+ 				    WLAN_STATUS_SUCCESS);
++#ifdef CONFIG_MTK_IEEE80211BE
++	if (wpabuf_resize(&buf, wpa_s->sme.ext_ie_len) == 0) {
++		wpa_hexdump(MSG_DEBUG, "ML: SAE VENDOR IE",
++			wpa_s->sme.ext_ie, wpa_s->sme.ext_ie_len);
++		wpabuf_put_data(buf, wpa_s->sme.ext_ie, wpa_s->sme.ext_ie_len);
++	}
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 	wpa_drv_send_mlme(wpa_s, wpabuf_head(buf), wpabuf_len(buf), 1, 0, 0);
+ 	wpabuf_free(resp);
+ 	wpabuf_free(buf);
+@@ -1190,6 +1205,12 @@ void sme_external_auth_trigger(struct wp
+ 		wpa_s->sme.sae.state = SAE_NOTHING;
+ 		wpa_s->sme.sae.send_confirm = 0;
+ 		wpa_s->sme.sae_group_index = 0;
++#ifdef CONFIG_MTK_IEEE80211BE
++		os_memcpy(wpa_s->sme.sae.own_ml_addr, wpa_s->own_addr, ETH_ALEN);
++		wpa_s->sme.ext_ie_len = data->external_auth.ext_ie_len;
++		os_memcpy(wpa_s->sme.ext_ie, data->external_auth.ext_ie,
++			wpa_s->sme.ext_ie_len);
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 		if (sme_handle_external_auth_start(wpa_s, data) < 0)
+ 			sme_send_external_auth_status(wpa_s,
+ 					      WLAN_STATUS_UNSPECIFIED_FAILURE);
+@@ -1441,7 +1462,10 @@ static int sme_sae_auth(struct wpa_suppl
+ 			return -1;
+ 		wpa_s->sme.sae.state = SAE_ACCEPTED;
+ 		sae_clear_temp_data(&wpa_s->sme.sae);
+-
++#ifdef CONFIG_MTK_IEEE80211BE
++		if (sme_sae_set_pmk(wpa_s, wpa_s->sme.ext_auth_bssid) < 0)
++			return -1;
++#endif
+ 		if (external) {
+ 			/* Report success to driver */
+ 			sme_send_external_auth_status(wpa_s,
+@@ -1518,9 +1542,10 @@ void sme_external_auth_mgmt_rx(struct wp
+ 		}
+ 		if (res != 1)
+ 			return;
+-
++#ifndef CONFIG_MTK_IEEE80211BE
+ 		if (sme_sae_set_pmk(wpa_s, wpa_s->sme.ext_auth_bssid) < 0)
+ 			return;
++#endif
+ 	}
+ }
+ 
+Index: hostapd-2022-01-16-cff80b4f/wpa_supplicant/wpa_supplicant_i.h
+===================================================================
+--- hostapd-2022-01-16-cff80b4f.orig/wpa_supplicant/wpa_supplicant_i.h
++++ hostapd-2022-01-16-cff80b4f/wpa_supplicant/wpa_supplicant_i.h
+@@ -20,6 +20,9 @@
+ #include "config_ssid.h"
+ #include "wmm_ac.h"
+ #include "ubus.h"
++#ifdef CONFIG_MTK_IEEE80211BE
++#include "ap/hostapd.h"
++#endif
+ 
+ extern const char *const wpa_supplicant_version;
+ extern const char *const wpa_supplicant_license;
+@@ -315,6 +318,9 @@ struct wpa_global {
+ 	unsigned int pending_p2ps_group:1;
+ 	unsigned int pending_group_iface_for_p2ps:1;
+ 	unsigned int pending_p2ps_group_freq;
++#ifdef CONFIG_MTK_IEEE80211BE
++	struct hapd_interfaces hapd_ifaces;
++#endif
+ 
+ #ifdef CONFIG_WIFI_DISPLAY
+ 	int wifi_display;
+@@ -1023,6 +1029,10 @@ struct wpa_supplicant {
+ 		u8 ext_auth_bssid[ETH_ALEN];
+ 		u8 ext_auth_ssid[SSID_MAX_LEN];
+ 		size_t ext_auth_ssid_len;
++#ifdef CONFIG_MTK_IEEE80211BE
++		u8 ext_ie[500];
++		size_t ext_ie_len;
++#endif /* CONFIG_MTK_IEEE80211BE */
+ 		int *sae_rejected_groups;
+ #endif /* CONFIG_SAE */
+ 	} sme;

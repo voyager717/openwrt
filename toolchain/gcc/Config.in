@@ -2,6 +2,7 @@
 
 choice
 	prompt "GCC compiler Version" if TOOLCHAINOPTS
+<<<<<<< HEAD
 	default GCC_USE_VERSION_13
 	help
 	  Select the version of gcc you wish to use.
@@ -17,6 +18,24 @@ choice
 
 	config GCC_USE_VERSION_14
 		bool "gcc 14.x"
+=======
+	default GCC_USE_VERSION_8
+	help
+	  Select the version of gcc you wish to use.
+
+	config GCC_USE_VERSION_7
+		bool "gcc 7.x"
+		depends on !arc
+
+	config GCC_USE_VERSION_8
+		bool "gcc 8.x"
+
+	config GCC_USE_VERSION_9
+		bool "gcc 9.x"
+
+	config GCC_USE_VERSION_10
+		bool "gcc 10.x"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endchoice
 
 config GCC_USE_GRAPHITE
@@ -33,18 +52,30 @@ config EXTRA_GCC_CONFIG_OPTIONS
 config GCC_DEFAULT_PIE
 	bool
 	prompt "Build executable with PIE enabled by default" if TOOLCHAINOPTS
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	    Use gcc configure option --enable-default-pie to turn on -fPIE and -pie by default.
 
 config GCC_DEFAULT_SSP
 	bool
 	prompt "Build executable with Stack-Smashing Protection enabled by default" if TOOLCHAINOPTS
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	    Use gcc configure option --enable-default-ssp to turn on -fstack-protector-strong by default.
 
 config SJLJ_EXCEPTIONS
 	bool
 	prompt "Use setjump()/longjump() exceptions" if TOOLCHAINOPTS
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	    Use old setjump()/longjump() exceptions instead of the newer
 	    frame unwinding exceptions handling routines.  Warning: increases
@@ -53,6 +84,10 @@ config SJLJ_EXCEPTIONS
 config INSTALL_GFORTRAN
 	bool
 	prompt "Build/install fortran compiler?" if TOOLCHAINOPTS
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	    Build/install GNU fortran compiler ?
 
@@ -60,5 +95,9 @@ config INSTALL_GCCGO
 	bool
 	prompt "Build/install Go compiler?" if TOOLCHAINOPTS
 	depends on USE_GLIBC || BROKEN
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	    Build/install GNU gccgo compiler ?

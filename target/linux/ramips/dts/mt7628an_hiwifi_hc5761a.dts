@@ -44,6 +44,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &pinctrl {
 	ephy-analog;
 
@@ -63,6 +64,11 @@
 &state_default {
 	gpio {
 		groups = "i2s", "refclk", "wdt", "p2led_an", "p3led_an", "wled_an";
+=======
+&state_default {
+	gpio {
+		groups = "i2c", "refclk", "wdt", "p2led_an", "p3led_an", "wled_an";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };
@@ -74,8 +80,12 @@
 &pcie0 {
 	wifi@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };

@@ -1,9 +1,17 @@
 
+<<<<<<< HEAD
 arm: kirkwood: add Zyxel NSA310 device
 
 This patch add Zyxel NSA310 1-Bay Media Server
 
 The Zyxel NSA310 device is a Kirkwood based NAS:
+=======
+arm: kirkwood: add ZyXEL NSA310 device
+
+This patch add ZyXEL NSA310 1-Bay Media Server
+
+The ZyXEL NSA310 device is a Kirkwood based NAS:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 - SoC: Marvell 88F6702 1200Mhz
 - SDRAM memory: 256MB DDR2 400Mhz
@@ -28,13 +36,21 @@ NOTE: this patch is ready for upstream, LEDE-specific parts are in
 @@ -53,6 +53,9 @@ config TARGET_GOFLEXHOME
  config TARGET_NAS220
  	bool "BlackArmor NAS220"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +config TARGET_NSA310
 +	bool "Zyxel NSA310 Board"
 +
  config TARGET_NSA310S
  	bool "Zyxel NSA310S"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 @@ -86,6 +89,7 @@ source "board/raidsonic/ib62x0/Kconfig"
  source "board/Seagate/dockstar/Kconfig"
  source "board/Seagate/goflexhome/Kconfig"
@@ -512,7 +528,11 @@ NOTE: this patch is ready for upstream, LEDE-specific parts are in
 +CONFIG_KIRKWOOD=y
 +CONFIG_SYS_TEXT_BASE=0x600000
 +CONFIG_TARGET_NSA310=y
+<<<<<<< HEAD
 +CONFIG_IDENT_STRING="\nZyxel NSA310 1-Bay Power Media Server"
+=======
++CONFIG_IDENT_STRING="\nZyXEL NSA310 1-Bay Power Media Server"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +CONFIG_NR_DRAM_BANKS=2
 +CONFIG_BOOTDELAY=3
 +CONFIG_SYS_PROMPT="NSA310> "

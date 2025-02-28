@@ -12,6 +12,7 @@ Signed-off-by: Jo-Philipp Wich <jo@mein.io>
 
 --- a/pppd/main.c
 +++ b/pppd/main.c
+<<<<<<< HEAD
 @@ -1150,7 +1150,8 @@ get_input(void)
  	}
  	notice("Modem hangup");
@@ -22,3 +23,15 @@ Signed-off-by: Jo-Philipp Wich <jo@mein.io>
  	need_holdoff = 0;
  	lcp_lowerdown(0);	/* serial link is no longer available */
  	link_terminated(0);
+=======
+@@ -1052,7 +1052,8 @@ get_input()
+ 	}
+ 	notice("Modem hangup");
+ 	hungup = 1;
+-	status = EXIT_HANGUP;
++	if (status == EXIT_OK)
++		status = EXIT_HANGUP;
+ 	lcp_lowerdown(0);	/* serial link is no longer available */
+ 	link_terminated(0);
+ 	return;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

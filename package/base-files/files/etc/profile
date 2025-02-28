@@ -3,7 +3,11 @@
 [ -f /etc/banner ] && cat /etc/banner
 [ -n "$FAILSAFE" ] && cat /etc/banner.failsafe
 
+<<<<<<< HEAD
 grep -Fsq '/ overlay ro,' /proc/mounts && {
+=======
+fgrep -sq '/ overlay ro,' /proc/mounts && {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	echo 'Your JFFS2-partition seems full and overlayfs is mounted read-only.'
 	echo 'Please try to remove files from /overlay/upper/... and reboot!'
 }
@@ -38,6 +42,7 @@ in order to prevent unauthorized SSH logins.
 --------------------------------------------------
 EOF
 fi
+<<<<<<< HEAD
 
 if [ -x /usr/bin/apk ]; then
 cat << EOF
@@ -59,3 +64,5 @@ For more https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-che
 
 EOF
 fi
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

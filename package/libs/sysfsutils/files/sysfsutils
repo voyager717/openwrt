@@ -4,8 +4,11 @@
 # Based on Debian's script /etc/init.d/sysfsutils by
 # Martin Pitt <mpitt@debian.org>
 
+<<<<<<< HEAD
 START=11
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 load_conffile() {
 	FILE="$1"
 	sed  's/#.*$//; /^[[:space:]]*$/d;
@@ -41,6 +44,10 @@ load_conffile() {
 	}
 }
 
+<<<<<<< HEAD
+=======
+START=11
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 start() {
 	for file in /etc/sysfs.conf /etc/sysfs.d/*.conf; do
 		[ -r "$file" ] || continue

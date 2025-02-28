@@ -3,6 +3,7 @@ define Build/create-uImage-dtb
 	-$(STAGING_DIR_HOST)/bin/mkimage -A $(LINUX_KARCH) \
 		-O linux -T kernel -C none \
 		-n '$(call toupper,$(LINUX_KARCH)) $(VERSION_DIST) Linux-$(LINUX_VERSION)' \
+<<<<<<< HEAD
 		-d "$(KDIR)/image-$(firstword $(DEVICE_DTS)).dtb" "$@.dtb.uimage"
 endef
 
@@ -12,6 +13,21 @@ define Build/prepend-dtb-uImage
 endef
 
 define Build/meraki-header
+=======
+		-d "$@.dtb" "$@.dtb.uimage"
+endef
+
+define Build/MerakiAdd-dtb
+	$(call Image/BuildDTB,../dts/$(DEVICE_DTS).dts,$@.dtb)
+	( \
+		dd if=$@.dtb bs=$(DTB_SIZE) conv=sync; \
+		cat $@ ; \
+	) > $@.new
+	@mv $@.new $@
+endef
+
+define Build/MerakiNAND
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	-$(STAGING_DIR_HOST)/bin/mkmerakifw \
 		-B $(BOARD_NAME) -s \
 		-i $@ \
@@ -26,10 +42,17 @@ define Device/meraki_mr24
   DEVICE_PACKAGES := kmod-spi-gpio -swconfig
   BOARD_NAME := mr24
   IMAGES := sysupgrade.bin
+<<<<<<< HEAD
   DEVICE_DTC_FLAGS := --space 64512
   IMAGE_SIZE := 8191k
   KERNEL := kernel-bin | lzma | uImage lzma | prepend-dtb | meraki-header
   KERNEL_INITRAMFS := kernel-bin | lzma | MuImage-initramfs lzma
+=======
+  DTB_SIZE := 64512
+  IMAGE_SIZE := 8191k
+  KERNEL := kernel-bin | lzma | uImage lzma | MerakiAdd-dtb | MerakiNAND
+  KERNEL_INITRAMFS := kernel-bin | lzma | dtb | MuImage-initramfs lzma
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
   UBINIZE_OPTS := -E 5
   SUPPORTED_DEVICES += mr24
@@ -38,6 +61,7 @@ TARGET_DEVICES += meraki_mr24
 
 define Device/meraki_mx60
   DEVICE_VENDOR := Cisco Meraki
+<<<<<<< HEAD
   DEVICE_MODEL := MX60
   DEVICE_ALT0_VENDOR := Cisco Meraki
   DEVICE_ALT0_MODEL := MX60W
@@ -54,6 +78,22 @@ define Device/meraki_mx60
   DEVICE_COMPAT_MESSAGE := uboot's bootcmd has to be updated to support standard multi-image uImages. \
        Network swconfig configuration cannot be upgraded to DSA. \
        Upgrade via sysupgrade mechanism is not possible.
+=======
+  DEVICE_MODEL := MX60/MX60W
+  DEVICE_PACKAGES := kmod-spi-gpio kmod-usb-ledtrig-usbport kmod-usb-dwc2 \
+		     kmod-usb-storage block-mount
+  BOARD_NAME := mx60
+  BLOCKSIZE := 63k
+  IMAGES := sysupgrade.bin
+  DTB_SIZE := 64512
+  IMAGE_SIZE := 1021m
+  KERNEL_SIZE := 4031k
+  KERNEL := kernel-bin | gzip | uImage gzip | MerakiAdd-dtb | MerakiNAND
+  KERNEL_INITRAMFS := kernel-bin | gzip | dtb | MuImage-initramfs gzip
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  UBINIZE_OPTS := -E 5
+  SUPPORTED_DEVICES += mx60
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += meraki_mx60
 
@@ -63,6 +103,7 @@ define Device/netgear_wndap6x0
   SUBPAGESIZE := 256
   PAGESIZE := 512
   BLOCKSIZE := 16k
+<<<<<<< HEAD
   DEVICE_DTC_FLAGS := --space 32768
   IMAGE_SIZE := 27392k
   IMAGES := sysupgrade.bin factory.img
@@ -74,6 +115,16 @@ define Device/netgear_wndap6x0
   DEVICE_COMPAT_VERSION := 2.0
   DEVICE_COMPAT_MESSAGE := kernel and ubi partitions had to be resized. \
        Upgrade via sysupgrade mechanism is not possible.
+=======
+  DTB_SIZE := 32768
+  IMAGE_SIZE := 27392k
+  IMAGES := sysupgrade.bin factory.img
+  KERNEL_SIZE := 4032k
+  KERNEL := dtb | kernel-bin | gzip | MuImage-initramfs gzip
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi
+  UBINIZE_OPTS := -E 5
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/netgear_wndap620
@@ -90,18 +141,27 @@ TARGET_DEVICES += netgear_wndap660
 
 define Device/netgear_wndr4700
   DEVICE_VENDOR := NETGEAR
+<<<<<<< HEAD
   DEVICE_MODEL := Centria N900 WNDR4700
   DEVICE_ALT0_VENDOR := NETGEAR
   DEVICE_ALT0_MODEL := Centria N900 WNDR4720
+=======
+  DEVICE_MODEL := Centria N900 WNDR4700/WNDR4720
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := badblocks block-mount e2fsprogs kmod-hwmon-drivetemp \
 	kmod-dm kmod-fs-ext4 kmod-fs-vfat kmod-usb-ledtrig-usbport \
 	kmod-md-mod kmod-nls-cp437 kmod-nls-iso8859-1 kmod-nls-iso8859-15 \
 	kmod-nls-utf8 kmod-usb3 kmod-usb-dwc2 kmod-usb-storage \
+<<<<<<< HEAD
 	partx-utils kmod-ata-dwc
+=======
+	partx-utils
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BOARD_NAME := wndr4700
   PAGESIZE := 2048
   SUBPAGESIZE := 512
   BLOCKSIZE := 128k
+<<<<<<< HEAD
   DEVICE_DTC_FLAGS := --space 131008
   IMAGE_SIZE := 24960k
   IMAGES := factory.img sysupgrade.bin
@@ -112,6 +172,18 @@ define Device/netgear_wndr4700
   KERNEL := kernel-bin | lzma -d16 | uImage lzma | pad-offset $$(BLOCKSIZE) 64 | \
 	    append-uImage-fakehdr filesystem | create-uImage-dtb | prepend-dtb-uImage
   KERNEL_INITRAMFS := kernel-bin | libdeflate-gzip | MuImage-initramfs gzip
+=======
+  DTB_SIZE := 131008
+  IMAGE_SIZE := 24960k
+  IMAGES := factory.img sysupgrade.bin
+  ARTIFACTS := device-tree.dtb
+  KERNEL_SIZE := 3584k
+  # append a fake/empty rootfs to fool netgear's uboot
+  # CHECK_DNI_FIRMWARE_ROOTFS_INTEGRITY in do_chk_dniimg()
+  KERNEL := kernel-bin | lzma -d16 | uImage lzma | pad-offset $$(BLOCKSIZE) 64 | \
+	    append-uImage-fakehdr filesystem | dtb | create-uImage-dtb | prepend-dtb
+  KERNEL_INITRAMFS := kernel-bin | gzip | dtb | MuImage-initramfs gzip
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.img := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | \
 		       netgear-dni | check-size
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
@@ -120,9 +192,12 @@ define Device/netgear_wndr4700
   NETGEAR_HW_ID := 29763875+128+256
   UBINIZE_OPTS := -E 5
   SUPPORTED_DEVICES += wndr4700
+<<<<<<< HEAD
   DEVICE_COMPAT_VERSION := 3.0
   DEVICE_COMPAT_MESSAGE := kernel and ubi partitions had to be resized. \
        Network swconfig configuration cannot be upgraded to DSA. \
        Upgrade via sysupgrade mechanism is not possible.
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += netgear_wndr4700

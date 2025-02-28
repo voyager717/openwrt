@@ -19,8 +19,11 @@
 		pinctrl-0 = <&nand_pins>;
 		pinctrl-names = "default";
 
+<<<<<<< HEAD
 		nand-use-soft-ecc-engine;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		partitions {
 			compatible = "fixed-partitions";
 			#address-cells = <1>;

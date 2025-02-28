@@ -12,7 +12,11 @@
 +	"ubifsmount ubi:rootfs; "					\
 +	"ubi read 0x800000 kernel; "					\
 +	"bootm 0x800000"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #define CONFIG_EXTRA_ENV_SETTINGS \
 -	"mtdparts=mtdparts=orion_nand:1M(u-boot),4M(uImage)," \
 -	"32M(rootfs),-(data)\0"\
@@ -24,7 +28,11 @@
 +	"mtdids=nand0=orion_nand\0"		\
 +	"mtdparts="CONFIG_MTDPARTS_DEFAULT "\0"	\
 +	"bootargs_root=\0"
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  /*
   * Ethernet Driver configuration
 --- a/configs/pogo_e02_defconfig

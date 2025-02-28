@@ -24,6 +24,12 @@ struct wpas_ubus_bss {
 void wpas_ubus_add_bss(struct wpa_supplicant *wpa_s);
 void wpas_ubus_free_bss(struct wpa_supplicant *wpa_s);
 
+<<<<<<< HEAD
+=======
+void wpas_ubus_add(struct wpa_global *global);
+void wpas_ubus_free(struct wpa_global *global);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CONFIG_WPS
 void wpas_ubus_notify(struct wpa_supplicant *wpa_s, const struct wps_credential *cred);
 #endif
@@ -31,6 +37,17 @@ void wpas_ubus_notify(struct wpa_supplicant *wpa_s, const struct wps_credential 
 #else
 struct wpas_ubus_bss {};
 
+<<<<<<< HEAD
+=======
+static inline void wpas_ubus_add_iface(struct wpa_supplicant *wpa_s)
+{
+}
+
+static inline void wpas_ubus_free_iface(struct wpa_supplicant *wpa_s)
+{
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline void wpas_ubus_add_bss(struct wpa_supplicant *wpa_s)
 {
 }

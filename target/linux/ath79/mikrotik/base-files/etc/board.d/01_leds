@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/uci-defaults.sh
 
@@ -6,6 +10,7 @@ board_config_update
 board=$(board_name)
 
 case "$board" in
+<<<<<<< HEAD
 mikrotik,routerboard-911-lite|\
 mikrotik,routerboard-lhg-5nd)
 	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0"
@@ -28,6 +33,8 @@ mikrotik,routerboard-912uag-2hpnd)
 mikrotik,routerboard-750-r2|\
 mikrotik,routerboard-951ui-2hnd|\
 mikrotik,routerboard-951ui-2nd|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 mikrotik,routerboard-952ui-5ac2nd)
 	ucidef_set_led_netdev "port1" "port1" "green:port1" "eth1"
 	ucidef_set_led_switch "port2" "port2" "green:port2" "switch0" "0x10"
@@ -36,8 +43,12 @@ mikrotik,routerboard-952ui-5ac2nd)
 	ucidef_set_led_switch "port5" "port5" "green:port5" "switch0" "0x02"
 	;;
 mikrotik,routerboard-lhg-2nd|\
+<<<<<<< HEAD
 mikrotik,routerboard-mapl-2nd|\
 mikrotik,routerboard-wap-2nd)
+=======
+mikrotik,routerboard-mapl-2nd)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0"
 	;;
 mikrotik,routerboard-map-2nd)

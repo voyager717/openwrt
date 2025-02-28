@@ -1,0 +1,10 @@
+./
+./usr
+./usr/include
+./usr/include/libnetlink.h
+./usr/include/libgenl.h
+./usr/include/iproute2
+./usr/include/iproute2/bpf_elf.h
+./usr/lib
+./usr/lib/libnetlink.a
+./host

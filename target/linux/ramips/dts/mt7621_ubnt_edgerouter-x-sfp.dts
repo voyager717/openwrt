@@ -59,22 +59,33 @@
 	};
 };
 
+<<<<<<< HEAD
 &rgmii2_pins {
 	rgmii2 {
 		function = "gpio";
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &switch0 {
 	ports {
 		port@5 {
 			reg = <5>;
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth5";
 			phy-handle = <&ephy7>;
 			phy-mode = "rgmii-rxid";
 			nvmem-cells = <&macaddr_factory_22 5>;
 			nvmem-cell-names = "mac-address";
 			/delete-property/ label;
+=======
+			label = "eth5";
+			phy-handle = <&ephy7>;
+			phy-mode = "rgmii-rxid";
+			mtd-mac-address = <&factory 0x22>;
+			mtd-mac-address-increment = <5>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

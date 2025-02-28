@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9563_tplink_archer-x6-v2.dtsi"
 
 / {
@@ -9,8 +12,11 @@
 	model = "TP-Link Archer C6 v2 (EU/RU/JP)";
 
 	aliases {
+<<<<<<< HEAD
 		label-mac-device = &eth0;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		led-boot = &led_power;
 		led-failsafe = &led_power;
 		led-running = &led_power;
@@ -21,8 +27,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -40,26 +50,42 @@
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 20 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_fail {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -83,6 +109,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &pcie {
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -92,6 +119,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &spi {
 	status = "okay";
 
@@ -111,6 +140,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@20000 {
 				label = "info";
 				reg = <0x020000 0x010000>;
@@ -127,6 +157,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			info: partition@20000 {
+				label = "info";
+				reg = <0x020000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@30000 {
@@ -141,6 +177,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "art";
 				reg = <0x7f0000 0x010000>;
@@ -159,10 +196,17 @@
 						reg = <0x5000 0x2f20>;
 					};
 				};
+=======
+			art: partition@7f0000 {
+				label = "art";
+				reg = <0x7f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_info_8 0>;
@@ -173,3 +217,5 @@
 	nvmem-cells = <&macaddr_info_8 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

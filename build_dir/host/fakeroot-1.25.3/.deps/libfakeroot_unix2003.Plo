@@ -1,0 +1,3 @@
+libfakeroot_unix2003.lo: libfakeroot_unix2003.c \
+ /usr/include/stdc-predef.h
+/usr/include/stdc-predef.h:

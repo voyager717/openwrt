@@ -12,15 +12,25 @@ PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/fstools.git
+<<<<<<< HEAD
 PKG_MIRROR_HASH:=b0de38a758cccdb234d909eda3bf4de40d260f75000f27d30e7d1bc4158b1094
 PKG_SOURCE_DATE:=2024-12-02
 PKG_SOURCE_VERSION:=49d36ba2d1ada4ca177612cfbe904beb286dcab7
+=======
+PKG_MIRROR_HASH:=a485792d90c71cd4fb396ce97f42a57ee4d2a3d78e5f3fd0748270ffb14209e6
+PKG_SOURCE_DATE:=2021-01-04
+PKG_SOURCE_VERSION:=c53b18820756f6f32ad0782d3bf489422b7c4ad3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=no-mips16
+=======
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_FLAGS:=nonshared
 
 PKG_BUILD_DEPENDS := util-linux
@@ -31,14 +41,32 @@ PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
+<<<<<<< HEAD
+=======
+TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lrt)
+TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-ldl)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_UBIFS_EXTROOT),-DCMAKE_UBIFS_EXTROOT=y)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_OVL_MOUNT_FULL_ACCESS_TIME),-DCMAKE_OVL_MOUNT_FULL_ACCESS_TIME=y)
 CMAKE_OPTIONS += $(if $(CONFIG_FSTOOLS_OVL_MOUNT_COMPRESS_ZLIB),-DCMAKE_OVL_MOUNT_COMPRESS_ZLIB=y)
 
+<<<<<<< HEAD
 define Package/fstools
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=+ubox +NAND_SUPPORT:ubi-utils
+=======
+define Package/libfstools-bootparam
+  SECTION:=libs
+  CATEGORY:=Libraries
+  TITLE:=Boot parameter library for OpenWrt filesystem tools
+endef
+
+define Package/fstools
+  SECTION:=base
+  CATEGORY:=Base system
+  DEPENDS:=+ubox +USE_GLIBC:librt +NAND_SUPPORT:ubi-utils +libfstools-bootparam
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=OpenWrt filesystem tools
   MENU:=1
 endef
@@ -74,15 +102,22 @@ define Package/snapshot-tool
   DEPENDS:=+libubox +fstools
 endef
 
+<<<<<<< HEAD
 define Package/block-mount/conffiles
 /etc/config/fstab
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/block-mount
   SECTION:=base
   CATEGORY:=Base system
   TITLE:=Block device mounting and checking
+<<<<<<< HEAD
   DEPENDS:=+ubox +libubox +libuci +libblobmsg-json +libjson-c
+=======
+  DEPENDS:=+ubox +libubox +libuci +libblobmsg-json +libjson-c +libfstools-bootparam
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/blockd
@@ -92,6 +127,7 @@ define Package/blockd
   DEPENDS:=+block-mount +fstools +libubus +kmod-fs-autofs4 +libblobmsg-json +libjson-c
 endef
 
+<<<<<<< HEAD
 define Package/fstools/install
 	$(INSTALL_DIR) $(1)/sbin $(1)/lib
 
@@ -99,6 +135,20 @@ define Package/fstools/install
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libfstools.so $(1)/lib/
 	$(LN) factoryreset $(1)/sbin/jffs2mark
 	$(LN) factoryreset $(1)/sbin/jffs2reset
+=======
+define Package/libfstools-bootparam/install
+	$(INSTALL_DIR) $(1)/lib
+
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libfstools-bootparam.so $(1)/lib/
+endef
+
+define Package/fstools/install
+	$(INSTALL_DIR) $(1)/sbin $(1)/lib
+
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/{mount_root,jffs2reset} $(1)/sbin/
+	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libfstools.so $(1)/lib/
+	$(LN) jffs2reset $(1)/sbin/jffs2mark
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/snapshot-tool/install
@@ -136,6 +186,10 @@ define Build/InstallDev
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libubi-utils.a $(1)/usr/lib/
 endef
 
+<<<<<<< HEAD
+=======
+$(eval $(call BuildPackage,libfstools-bootparam))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,fstools))
 $(eval $(call BuildPackage,snapshot-tool))
 $(eval $(call BuildPackage,block-mount))

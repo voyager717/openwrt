@@ -55,9 +55,14 @@ define Build/dns313-images
 		--root $@.tmp $@.tmp-boot
 
 	# The device firmware needs revision 1 of EXT2
+<<<<<<< HEAD
 	$(STAGING_DIR_HOST)/bin/tune2fs -O filetype $@.tmp-boot
 	# Ignore errors because file system was intentionally broken with tune2fs
 	-$(STAGING_DIR_HOST)/bin/e2fsck -pDf $@.tmp-boot > /dev/null
+=======
+	tune2fs -O filetype $@.tmp-boot
+	e2fsck -pDf $@.tmp-boot > /dev/null
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	./dns313_gen_hdd_img.sh $@ $@.tmp-boot $(IMAGE_ROOTFS) \
 		$(CONFIG_TARGET_KERNEL_PARTSIZE) \
@@ -125,7 +130,10 @@ endef
 # All DTB files are prefixed with "gemini-"
 define Device/Default
 	PROFILES := Default
+<<<<<<< HEAD
 	DEVICE_DTS_DIR = $$(DTS_DIR)/gemini
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	KERNEL_DEPENDS = $$(wildcard $(DTS_DIR)/$$(DEVICE_DTS).dts)
 	KERNEL_NAME := zImage
 	KERNEL := kernel-bin | append-dtb
@@ -158,7 +166,11 @@ define Device/dlink_dir-685
 	DEVICE_MODEL := DIR-685 Xtreme N Storage Router
 	DEVICE_DTS := gemini-dlink-dir-685
 	DEVICE_PACKAGES := $(GEMINI_NAS_PACKAGES) \
+<<<<<<< HEAD
 			kmod-dsa-rtl8366rb
+=======
+			kmod-rt2800-pci
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGES := factory.bin sysupgrade.bin
 	# Pad to 128k erase blocks with 160 bytes WRGG header
 	IMAGE/factory.bin := append-kernel | pad-offset 128k 160 | append-rootfs | dir685-pad-rootfs | dir685-image
@@ -183,7 +195,10 @@ define Device/storlink-reference
 	COMPILE := copy-kernel-$(1).bin
 	COMPILE/copy-kernel-$(1).bin := copy-kernel.bin
 	IMAGES := factory.bin
+<<<<<<< HEAD
 	FILESYSTEMS := squashfs
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | pad-to 6144k | \
 		storlink-default-images $(1)
 	DEVICE_PACKAGES := $(GEMINI_NAS_PACKAGES)
@@ -217,8 +232,13 @@ TARGET_DEVICES += storlink_sl93512r
 
 # The wiliboard images need some changes to be functional and buildable.
 #
+<<<<<<< HEAD
 # The dts would need to use the redboot-fis partition parser to get
 # the correct partition offsets and size.
+=======
+# The dts would need to use the ecoscentric,redboot-fis-partitions partition
+# parser to get the correct partition offsets and size.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # The mkfwimage2 call need to be adjusted to reflect the real size of kernel
 # and rootfs. It is expected that the OEM firmware adjusts the on flash

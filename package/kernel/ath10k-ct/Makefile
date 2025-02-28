@@ -1,13 +1,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath10k-ct
+<<<<<<< HEAD
 PKG_RELEASE:=2
+=======
+PKG_RELEASE:=$(AUTORELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=GPLv2
 PKG_LICENSE_FILES:=
 
 PKG_SOURCE_URL:=https://github.com/greearb/ath10k-ct.git
 PKG_SOURCE_PROTO:=git
+<<<<<<< HEAD
 PKG_SOURCE_DATE:=2024-07-30
 PKG_SOURCE_VERSION:=ac71b14dc93aef0af6f0f24808b0afb673eaa5f5
 PKG_MIRROR_HASH:=f7774fc7002bbea450f543927acd528fb1bb6742f0e9ef28a402df3796893d93
@@ -16,6 +21,16 @@ PKG_MIRROR_HASH:=f7774fc7002bbea450f543927acd528fb1bb6742f0e9ef28a402df3796893d9
 # Probably this should match as closely as
 # possible to whatever mac80211 backports version is being used.
 CT_KVER="-6.10"
+=======
+PKG_SOURCE_DATE:=2021-09-22
+PKG_SOURCE_VERSION:=e6a7d5b5b834737cd12e357b5efdc2e42d923bf6
+PKG_MIRROR_HASH:=62a1b97089d3561730656ef73beb3cd77231ec636645115cc1bbb3c6c84a6fe3
+
+# Build the 5.10 ath10k-ct driver version.
+# Probably this should match as closely as
+# possible to whatever mac80211 backports version is being used.
+CT_KVER="-5.10"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Ben Greear <greearb@candelatech.com>
 PKG_BUILD_PARALLEL:=1
@@ -29,7 +44,11 @@ include $(INCLUDE_DIR)/package.mk
 define KernelPackage/ath10k-ct
   SUBMENU:=Wireless Drivers
   TITLE:=ath10k-ct driver optimized for CT ath10k firmware
+<<<<<<< HEAD
   DEPENDS:=+kmod-mac80211 +kmod-ath +@DRIVER_11AC_SUPPORT @PCI_SUPPORT +kmod-hwmon-core +@PACKAGE_MAC80211_DEBUGFS
+=======
+  DEPENDS:=+kmod-mac80211 +kmod-ath +@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT @PCI_SUPPORT +kmod-hwmon-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=\
 	$(PKG_BUILD_DIR)/ath10k$(CT_KVER)/ath10k_pci.ko \
 	$(PKG_BUILD_DIR)/ath10k$(CT_KVER)/ath10k_core.ko
@@ -111,7 +130,12 @@ ifneq ($(findstring c,$(OPENWRT_VERBOSE)),)
 endif
 
 define Build/Compile
+<<<<<<< HEAD
 	+$(KERNEL_MAKE) $(CT_MAKEDEFS) $(PKG_JOBS) \
+=======
+	+$(MAKE) $(CT_MAKEDEFS) $(PKG_JOBS) -C "$(LINUX_DIR)" \
+		$(KERNEL_MAKE_FLAGS) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		M="$(PKG_BUILD_DIR)/ath10k$(CT_KVER)" \
 		NOSTDINC_FLAGS="$(NOSTDINC_FLAGS)" \
 		modules

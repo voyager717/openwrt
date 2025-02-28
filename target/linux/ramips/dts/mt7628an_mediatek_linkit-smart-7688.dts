@@ -22,6 +22,15 @@
 		serial0 = &uart2;
 	};
 
+<<<<<<< HEAD
+=======
+	bootstrap {
+		compatible = "mediatek,linkit";
+
+		status = "okay";
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	leds {
 		compatible = "gpio-leds";
 
@@ -101,6 +110,7 @@
 				reg = <0x30000 0x10000>;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -119,6 +129,12 @@
 						reg = <0x2e 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -138,6 +154,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &gpio {
 	bootstrap {
 		gpio-hog;
@@ -147,6 +164,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &i2c {
 	status = "okay";
 };
@@ -164,6 +183,7 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_2e>;
 	nvmem-cell-names = "mac-address";
 };
@@ -182,19 +202,29 @@
 			function = "sdxc";
 		};
 	};
+=======
+	mtd-mac-address = <&factory 0x2e>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &sdhci {
 	status = "okay";
+<<<<<<< HEAD
 
 	pinctrl-0 = <&sdxc_iot_mode>;
 	pinctrl-1 = <&sdxc_iot_mode>;
 	cd-inverted;
+=======
+	mediatek,cd-high;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

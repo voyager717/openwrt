@@ -7,6 +7,7 @@
 #include "nconf.h"
 #include "lkc.h"
 
+<<<<<<< HEAD
 int attr_normal;
 int attr_main_heading;
 int attr_main_menu_box;
@@ -121,6 +122,171 @@ void print_in_middle(WINDOW *win, int y, int width, const char *str, int attrs)
 {
 	wattrset(win, attrs);
 	mvwprintw(win, y, (width - strlen(str)) / 2, "%s", str);
+=======
+/* a list of all the different widgets we use */
+attributes_t attributes[ATTR_MAX+1] = {0};
+
+/* available colors:
+   COLOR_BLACK   0
+   COLOR_RED     1
+   COLOR_GREEN   2
+   COLOR_YELLOW  3
+   COLOR_BLUE    4
+   COLOR_MAGENTA 5
+   COLOR_CYAN    6
+   COLOR_WHITE   7
+   */
+static void set_normal_colors(void)
+{
+	init_pair(NORMAL, -1, -1);
+	init_pair(MAIN_HEADING, COLOR_MAGENTA, -1);
+
+	/* FORE is for the selected item */
+	init_pair(MAIN_MENU_FORE, -1, -1);
+	/* BACK for all the rest */
+	init_pair(MAIN_MENU_BACK, -1, -1);
+	init_pair(MAIN_MENU_GREY, -1, -1);
+	init_pair(MAIN_MENU_HEADING, COLOR_GREEN, -1);
+	init_pair(MAIN_MENU_BOX, COLOR_YELLOW, -1);
+
+	init_pair(SCROLLWIN_TEXT, -1, -1);
+	init_pair(SCROLLWIN_HEADING, COLOR_GREEN, -1);
+	init_pair(SCROLLWIN_BOX, COLOR_YELLOW, -1);
+
+	init_pair(DIALOG_TEXT, -1, -1);
+	init_pair(DIALOG_BOX, COLOR_YELLOW, -1);
+	init_pair(DIALOG_MENU_BACK, COLOR_YELLOW, -1);
+	init_pair(DIALOG_MENU_FORE, COLOR_RED, -1);
+
+	init_pair(INPUT_BOX, COLOR_YELLOW, -1);
+	init_pair(INPUT_HEADING, COLOR_GREEN, -1);
+	init_pair(INPUT_TEXT, -1, -1);
+	init_pair(INPUT_FIELD, -1, -1);
+
+	init_pair(FUNCTION_HIGHLIGHT, -1, -1);
+	init_pair(FUNCTION_TEXT, COLOR_YELLOW, -1);
+}
+
+/* available attributes:
+   A_NORMAL        Normal display (no highlight)
+   A_STANDOUT      Best highlighting mode of the terminal.
+   A_UNDERLINE     Underlining
+   A_REVERSE       Reverse video
+   A_BLINK         Blinking
+   A_DIM           Half bright
+   A_BOLD          Extra bright or bold
+   A_PROTECT       Protected mode
+   A_INVIS         Invisible or blank mode
+   A_ALTCHARSET    Alternate character set
+   A_CHARTEXT      Bit-mask to extract a character
+   COLOR_PAIR(n)   Color-pair number n
+   */
+static void normal_color_theme(void)
+{
+	/* automatically add color... */
+#define mkattr(name, attr) do { \
+attributes[name] = attr | COLOR_PAIR(name); } while (0)
+	mkattr(NORMAL, NORMAL);
+	mkattr(MAIN_HEADING, A_BOLD | A_UNDERLINE);
+
+	mkattr(MAIN_MENU_FORE, A_REVERSE);
+	mkattr(MAIN_MENU_BACK, A_NORMAL);
+	mkattr(MAIN_MENU_GREY, A_NORMAL);
+	mkattr(MAIN_MENU_HEADING, A_BOLD);
+	mkattr(MAIN_MENU_BOX, A_NORMAL);
+
+	mkattr(SCROLLWIN_TEXT, A_NORMAL);
+	mkattr(SCROLLWIN_HEADING, A_BOLD);
+	mkattr(SCROLLWIN_BOX, A_BOLD);
+
+	mkattr(DIALOG_TEXT, A_BOLD);
+	mkattr(DIALOG_BOX, A_BOLD);
+	mkattr(DIALOG_MENU_FORE, A_STANDOUT);
+	mkattr(DIALOG_MENU_BACK, A_NORMAL);
+
+	mkattr(INPUT_BOX, A_NORMAL);
+	mkattr(INPUT_HEADING, A_BOLD);
+	mkattr(INPUT_TEXT, A_NORMAL);
+	mkattr(INPUT_FIELD, A_UNDERLINE);
+
+	mkattr(FUNCTION_HIGHLIGHT, A_BOLD);
+	mkattr(FUNCTION_TEXT, A_REVERSE);
+}
+
+static void no_colors_theme(void)
+{
+	/* automatically add highlight, no color */
+#define mkattrn(name, attr) { attributes[name] = attr; }
+
+	mkattrn(NORMAL, NORMAL);
+	mkattrn(MAIN_HEADING, A_BOLD | A_UNDERLINE);
+
+	mkattrn(MAIN_MENU_FORE, A_STANDOUT);
+	mkattrn(MAIN_MENU_BACK, A_NORMAL);
+	mkattrn(MAIN_MENU_GREY, A_NORMAL);
+	mkattrn(MAIN_MENU_HEADING, A_BOLD);
+	mkattrn(MAIN_MENU_BOX, A_NORMAL);
+
+	mkattrn(SCROLLWIN_TEXT, A_NORMAL);
+	mkattrn(SCROLLWIN_HEADING, A_BOLD);
+	mkattrn(SCROLLWIN_BOX, A_BOLD);
+
+	mkattrn(DIALOG_TEXT, A_NORMAL);
+	mkattrn(DIALOG_BOX, A_BOLD);
+	mkattrn(DIALOG_MENU_FORE, A_STANDOUT);
+	mkattrn(DIALOG_MENU_BACK, A_NORMAL);
+
+	mkattrn(INPUT_BOX, A_BOLD);
+	mkattrn(INPUT_HEADING, A_BOLD);
+	mkattrn(INPUT_TEXT, A_NORMAL);
+	mkattrn(INPUT_FIELD, A_UNDERLINE);
+
+	mkattrn(FUNCTION_HIGHLIGHT, A_BOLD);
+	mkattrn(FUNCTION_TEXT, A_REVERSE);
+}
+
+void set_colors(void)
+{
+	start_color();
+	use_default_colors();
+	set_normal_colors();
+	if (has_colors()) {
+		normal_color_theme();
+	} else {
+		/* give defaults */
+		no_colors_theme();
+	}
+}
+
+
+/* this changes the windows attributes !!! */
+void print_in_middle(WINDOW *win,
+		int starty,
+		int startx,
+		int width,
+		const char *string,
+		chtype color)
+{      int length, x, y;
+	float temp;
+
+
+	if (win == NULL)
+		win = stdscr;
+	getyx(win, y, x);
+	if (startx != 0)
+		x = startx;
+	if (starty != 0)
+		y = starty;
+	if (width == 0)
+		width = 80;
+
+	length = strlen(string);
+	temp = (width - length) / 2;
+	x = startx + (int)temp;
+	(void) wattrset(win, color);
+	mvwprintw(win, y, x, "%s", string);
+	refresh();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 int get_line_no(const char *text)
@@ -245,6 +411,7 @@ int btn_dialog(WINDOW *main_window, const char *msg, int btn_num, ...)
 	msg_win = derwin(win, win_rows-2, msg_width, 1,
 			1+(total_width+2-msg_width)/2);
 
+<<<<<<< HEAD
 	set_menu_fore(menu, attr_dialog_menu_fore);
 	set_menu_back(menu, attr_dialog_menu_back);
 
@@ -253,6 +420,16 @@ int btn_dialog(WINDOW *main_window, const char *msg, int btn_num, ...)
 
 	/* print message */
 	wattrset(msg_win, attr_dialog_text);
+=======
+	set_menu_fore(menu, attributes[DIALOG_MENU_FORE]);
+	set_menu_back(menu, attributes[DIALOG_MENU_BACK]);
+
+	(void) wattrset(win, attributes[DIALOG_BOX]);
+	box(win, 0, 0);
+
+	/* print message */
+	(void) wattrset(msg_win, attributes[DIALOG_TEXT]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fill_window(msg_win, msg);
 
 	set_menu_win(menu, win);
@@ -356,16 +533,28 @@ int dialog_inputbox(WINDOW *main_window,
 	form_win = derwin(win, 1, prompt_width, prompt_lines+3, 2);
 	keypad(form_win, TRUE);
 
+<<<<<<< HEAD
 	wattrset(form_win, attr_input_field);
 
 	wattrset(win, attr_input_box);
 	box(win, 0, 0);
 	wattrset(win, attr_input_heading);
+=======
+	(void) wattrset(form_win, attributes[INPUT_FIELD]);
+
+	(void) wattrset(win, attributes[INPUT_BOX]);
+	box(win, 0, 0);
+	(void) wattrset(win, attributes[INPUT_HEADING]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (title)
 		mvwprintw(win, 0, 3, "%s", title);
 
 	/* print message */
+<<<<<<< HEAD
 	wattrset(prompt_win, attr_input_text);
+=======
+	(void) wattrset(prompt_win, attributes[INPUT_TEXT]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fill_window(prompt_win, prompt);
 
 	mvwprintw(form_win, 0, 0, "%*s", prompt_width, " ");
@@ -497,10 +686,15 @@ void refresh_all_windows(WINDOW *main_window)
 	refresh();
 }
 
+<<<<<<< HEAD
+=======
+/* layman's scrollable window... */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void show_scroll_win(WINDOW *main_window,
 		const char *title,
 		const char *text)
 {
+<<<<<<< HEAD
 	(void)show_scroll_win_ext(main_window, title, (char *)text, NULL, NULL, NULL, NULL);
 }
 
@@ -509,6 +703,8 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 			int *vscroll, int *hscroll,
 			extra_key_cb_fn extra_key_cb, void *data)
 {
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	int res;
 	int total_lines = get_line_no(text);
 	int x, y, lines, columns;
@@ -521,12 +717,15 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 	WINDOW *win;
 	WINDOW *pad;
 	PANEL *panel;
+<<<<<<< HEAD
 	bool done = false;
 
 	if (hscroll)
 		start_x = *hscroll;
 	if (vscroll)
 		start_y = *vscroll;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	getmaxyx(stdscr, lines, columns);
 
@@ -540,7 +739,11 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 
 	/* create the pad */
 	pad = newpad(total_lines+10, total_cols+10);
+<<<<<<< HEAD
 	wattrset(pad, attr_scrollwin_text);
+=======
+	(void) wattrset(pad, attributes[SCROLLWIN_TEXT]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fill_window(pad, text);
 
 	win_lines = min(total_lines+4, lines-2);
@@ -555,21 +758,39 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 	win = newwin(win_lines, win_cols, y, x);
 	keypad(win, TRUE);
 	/* show the help in the help window, and show the help panel */
+<<<<<<< HEAD
 	wattrset(win, attr_scrollwin_box);
 	box(win, 0, 0);
 	wattrset(win, attr_scrollwin_heading);
+=======
+	(void) wattrset(win, attributes[SCROLLWIN_BOX]);
+	box(win, 0, 0);
+	(void) wattrset(win, attributes[SCROLLWIN_HEADING]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mvwprintw(win, 0, 3, " %s ", title);
 	panel = new_panel(win);
 
 	/* handle scrolling */
+<<<<<<< HEAD
 	while (!done) {
+=======
+	do {
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		copywin(pad, win, start_y, start_x, 2, 2, text_lines,
 				text_cols, 0);
 		print_in_middle(win,
 				text_lines+2,
+<<<<<<< HEAD
 				text_cols,
 				"<OK>",
 				attr_dialog_menu_fore);
+=======
+				0,
+				text_cols,
+				"<OK>",
+				attributes[DIALOG_MENU_FORE]);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		wrefresh(win);
 
 		res = wgetch(win);
@@ -605,6 +826,7 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 		case 'l':
 			start_x++;
 			break;
+<<<<<<< HEAD
 		default:
 			if (extra_key_cb) {
 				size_t start = (get_line(text, start_y) - text);
@@ -617,6 +839,10 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 			}
 		}
 		if (res == 0 || res == 10 || res == 27 || res == 'q' ||
+=======
+		}
+		if (res == 10 || res == 27 || res == 'q' ||
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			res == KEY_F(F_HELP) || res == KEY_F(F_BACK) ||
 			res == KEY_F(F_EXIT))
 			break;
@@ -628,6 +854,7 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 			start_x = 0;
 		if (start_x >= total_cols-text_cols)
 			start_x = total_cols-text_cols;
+<<<<<<< HEAD
 	}
 
 	if (hscroll)
@@ -638,4 +865,11 @@ int show_scroll_win_ext(WINDOW *main_window, const char *title, char *text,
 	delwin(win);
 	refresh_all_windows(main_window);
 	return res;
+=======
+	} while (res);
+
+	del_panel(panel);
+	delwin(win);
+	refresh_all_windows(main_window);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

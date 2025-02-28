@@ -43,11 +43,18 @@ TOOLCHAIN_BIN_DIR="$REALNAME_DIR/"
 
 # Set the PATH so that our run-time location is first
 # (get_feature is run from the path, so this has to be set)
+<<<<<<< HEAD
 export ORIG_PATH=${ORIG_PATH:-$PATH}
 export PATH="$TOOLCHAIN_BIN_DIR":$PATH
 export GCC_HONOUR_COPTS
 
 TOOLCHAIN_SYSROOT="$TOOLCHAIN_BIN_DIR/.."
+=======
+export PATH="$TOOLCHAIN_BIN_DIR":$PATH
+export GCC_HONOUR_COPTS
+
+TOOLCHAIN_SYSROOT="$TOOLCHAIN_BIN_DIR/../.."
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 if [ ! -d "$TOOLCHAIN_SYSROOT" ]; then
 	echo "Error: Unable to determine sysroot (looking for $TOOLCHAIN_SYSROOT)!" >&2
 	exit 1
@@ -58,8 +65,13 @@ fi
 
 case $TOOLCHAIN_PLATFORM in
 	gnu|glibc|uclibc|musl)
+<<<<<<< HEAD
 		GCC_SYSROOT_FLAGS="--sysroot=$TOOLCHAIN_SYSROOT -Wl,-rpath-link=$TOOLCHAIN_SYSROOT/lib:$TOOLCHAIN_SYSROOT/usr/lib"
 		LD_SYSROOT_FLAGS="-rpath-link=$TOOLCHAIN_SYSROOT/lib:$TOOLCHAIN_SYSROOT/usr/lib"
+=======
+		GCC_SYSROOT_FLAGS="--sysroot=$TOOLCHAIN_SYSROOT -Wl,-rpath=$TOOLCHAIN_SYSROOT/lib:$TOOLCHAIN_SYSROOT/usr/lib"
+		LD_SYSROOT_FLAGS="-rpath=$TOOLCHAIN_SYSROOT/lib:$TOOLCHAIN_SYSROOT/usr/lib"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	*)
 		GCC_SYSROOT_FLAGS=""

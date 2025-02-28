@@ -8,7 +8,12 @@
 	model = "Asus RT-G32 B1";
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -49,6 +54,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "devconf";
 				reg = <0x40000 0x10000>;
@@ -67,6 +73,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			devconf: partition@40000 {
+				label = "devconf";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -86,8 +98,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_devconf_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&devconf 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -95,6 +111,10 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_devconf_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&devconf 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

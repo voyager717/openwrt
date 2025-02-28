@@ -5,10 +5,18 @@
 define KernelPackage/camera-bcm2835
   TITLE:=BCM2835 Camera
   KCONFIG:= \
+<<<<<<< HEAD
     CONFIG_VIDEO_BCM2835
   FILES:= \
     $(LINUX_DIR)/drivers/staging/vc04_services/bcm2835-camera/bcm2835-v4l2.ko
   AUTOLOAD:=$(call AutoLoad,66,bcm2835-v4l2)
+=======
+    CONFIG_VIDEO_BCM2835 \
+    CONFIG_VIDEO_BCM2835_MMAL
+  FILES:= \
+    $(LINUX_DIR)/drivers/staging/vc04_services/bcm2835-camera/bcm2835-v4l2.ko
+  AUTOLOAD:=$(call AutoLoad,65,bcm2835-v4l2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/video,@TARGET_bcm27xx +kmod-vchiq-mmal-bcm2835 +kmod-video-videobuf2)
 endef
 
@@ -20,6 +28,7 @@ endef
 $(eval $(call KernelPackage,camera-bcm2835))
 
 
+<<<<<<< HEAD
 define KernelPackage/rp1-cfe
   TITLE:=RP1 Camera Front-End
   SUBMENU:=$(VIDEO_MENU)
@@ -57,6 +66,8 @@ endef
 $(eval $(call KernelPackage,codec-bcm2835))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/drm-vc4
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Broadcom VC4 Graphics
@@ -66,6 +77,7 @@ define KernelPackage/drm-vc4
     +kmod-sound-soc-core
   KCONFIG:= \
     CONFIG_DRM_VC4 \
+<<<<<<< HEAD
     CONFIG_DRM_VC4_HDMI_CEC=y
   FILES:= \
     $(LINUX_DIR)/drivers/gpu/drm/display/drm_display_helper.ko \
@@ -73,6 +85,15 @@ define KernelPackage/drm-vc4
     $(LINUX_DIR)/drivers/gpu/drm/vc4/vc4.ko \
     $(LINUX_DIR)/drivers/gpu/drm/drm_kms_helper.ko \
     $(LINUX_DIR)/drivers/media/cec/core/cec.ko
+=======
+    CONFIG_DRM_VC4_HDMI_CEC=y \
+    CONFIG_DRM_V3D=n \
+    CONFIG_DRM_TVE200=n
+  FILES:= \
+    $(LINUX_DIR)/drivers/gpu/drm/vc4/vc4.ko \
+    $(LINUX_DIR)/drivers/gpu/drm/drm_kms_helper.ko \
+    $(LINUX_DIR)/drivers/media/cec/cec.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,vc4)
 endef
 
@@ -84,6 +105,7 @@ endef
 $(eval $(call KernelPackage,drm-vc4))
 
 
+<<<<<<< HEAD
 define KernelPackage/isp-bcm2835
   TITLE:=BCM2835 ISP
   KCONFIG:= \
@@ -102,6 +124,8 @@ endef
 $(eval $(call KernelPackage,isp-bcm2835))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/vc-sm-cma
   TITLE:=VideoCore Shared Memory (CMA) driver
   KCONFIG:= \
@@ -122,7 +146,12 @@ $(eval $(call KernelPackage,vc-sm-cma))
 define KernelPackage/vchiq-mmal-bcm2835
   TITLE:=BCM2835 MMAL VCHIQ service
   KCONFIG:= \
+<<<<<<< HEAD
     CONFIG_BCM2835_VCHIQ_MMAL
+=======
+    CONFIG_BCM2835_VCHIQ_MMAL \
+    CONFIG_VIDEO_CODEC_BCM2835=n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
     $(LINUX_DIR)/drivers/staging/vc04_services/vchiq-mmal/bcm2835-mmal-vchiq.ko
   $(call AddDepends/video,@TARGET_bcm27xx +kmod-vc-sm-cma)
@@ -134,6 +163,7 @@ define KernelPackage/vchiq-mmal-bcm2835/description
 endef
 
 $(eval $(call KernelPackage,vchiq-mmal-bcm2835))
+<<<<<<< HEAD
 
 
 define KernelPackage/drm-rp1-dsi
@@ -212,3 +242,5 @@ define KernelPackage/drm-rp1-vec/description
 endef
 
 $(eval $(call KernelPackage,drm-rp1-vec))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

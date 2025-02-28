@@ -68,16 +68,26 @@ define Device/Default
   KERNEL_INITRAMFS := kernel-bin | bcm4908lzma | bcm4908kernel
   FILESYSTEMS := squashfs
   KERNEL_NAME := Image
+<<<<<<< HEAD
   DEVICE_IMG_NAME = $$(DEVICE_IMG_PREFIX)-$$(1).$$(2)
+=======
+  IMAGE_NAME = $$(IMAGE_PREFIX)-$$(1).$$(2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   IMAGE/bin := append-ubi | bcm4908img
 endef
 
 define Device/asus_gt-ac5300
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
   DEVICE_MODEL := GT-AC5300
   DEVICE_DTS := broadcom/bcmbca/bcm4908-asus-gt-ac5300
+=======
+  DEVICE_VENDOR := Asus
+  DEVICE_MODEL := GT-AC5300
+  DEVICE_DTS := broadcom/bcm4908/bcm4908-asus-gt-ac5300
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := bin
   IMAGE/bin := append-ubi | bcm4908img | bcm4908asus
   ASUS_PRODUCTID := GT-AC5300
@@ -88,7 +98,11 @@ endef
 TARGET_DEVICES += asus_gt-ac5300
 
 define Device/asus_gt-ax6000
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
+=======
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := GT-AX6000
   DEVICE_DTS := broadcom/bcmbca/bcm4912-asus-gt-ax6000
   IMAGES := pkgtb
@@ -100,7 +114,11 @@ endef
 define Device/netgear_r8000p
   DEVICE_VENDOR := Netgear
   DEVICE_MODEL := R8000P
+<<<<<<< HEAD
   DEVICE_DTS := broadcom/bcmbca/bcm4906-netgear-r8000p
+=======
+  DEVICE_DTS := broadcom/bcm4908/bcm4906-netgear-r8000p
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := bin
   IMAGE/chk := append-ubi | bcm4908img | netgear-chk
   NETGEAR_BOARD_ID := U12H359T00_NETGEAR
@@ -112,7 +130,11 @@ define Device/tplink_archer-c2300-v1
   DEVICE_VENDOR := TP-Link
   DEVICE_MODEL := Archer C2300
   DEVICE_VARIANT := v1
+<<<<<<< HEAD
   DEVICE_DTS := broadcom/bcmbca/bcm4906-tplink-archer-c2300-v1
+=======
+  DEVICE_DTS := broadcom/bcm4908/bcm4906-tplink-archer-c2300-v1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := bin
   IMAGE/bin := append-ubi | bcm4908img
   BROKEN := y

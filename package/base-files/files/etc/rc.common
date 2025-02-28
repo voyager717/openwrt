@@ -55,12 +55,16 @@ enable() {
 
 enabled() {
 	name="$(basename "${initscript}")"
+<<<<<<< HEAD
 	name="${name##[SK][0-9][0-9]}"
 	{
 		[ -z "${START:-}" ] || [ -L "$IPKG_INSTROOT/etc/rc.d/S${START}$name" ]
 	} && {
 		[ -z "${STOP:-}" ] || [ -L "$IPKG_INSTROOT/etc/rc.d/K${STOP}$name" ]
 	}
+=======
+	[ -x "$IPKG_INSTROOT/etc/rc.d/S${START}${name##S[0-9][0-9]}" ]
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 depends() {
@@ -100,6 +104,13 @@ service_triggers() {
 	return 0
 }
 
+<<<<<<< HEAD
+=======
+service_data() {
+	return 0
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 service_running() {
 	local instance="${1:-*}"
 
@@ -122,7 +133,10 @@ extra_command "enabled" "Check if service is started on boot"
 	extra_command "running" "Check if service is running"
 	extra_command "status" "Service status"
 	extra_command "trace" "Start with syscall trace"
+<<<<<<< HEAD
 	extra_command "info" "Dump procd service info"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	. $IPKG_INSTROOT/lib/functions/procd.sh
 	basescript=$(readlink "$initscript")
@@ -146,6 +160,7 @@ extra_command "enabled" "Check if service is started on boot"
 		start "$@"
 	}
 
+<<<<<<< HEAD
 	info() {
 		json_init
 		json_add_string name "$(basename ${basescript:-$initscript})"
@@ -153,6 +168,8 @@ extra_command "enabled" "Check if service is started on boot"
 		_procd_ubus_call list
 	}
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	stop() {
 		procd_lock
 		stop_service "$@"

@@ -7,6 +7,7 @@
 	model = "Comfast CF-WR650AC v1";
 };
 
+<<<<<<< HEAD
 &pcie0 {
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -16,6 +17,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &spi {
 	status = "okay";
 
@@ -35,6 +38,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@20000 {
 				label = "art";
 				reg = <0x020000 0x010000>;
@@ -65,6 +69,12 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+			art: partition@20000 {
+				label = "art";
+				reg = <0x020000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@30000 {
@@ -81,6 +91,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_art_0>;
@@ -96,3 +107,5 @@
 	nvmem-cells = <&macaddr_art_18>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

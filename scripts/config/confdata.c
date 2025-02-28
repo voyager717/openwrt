@@ -5,13 +5,19 @@
 
 #include <sys/mman.h>
 #include <sys/stat.h>
+<<<<<<< HEAD
 #include <sys/types.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
 #include <limits.h>
 #include <stdarg.h>
+<<<<<<< HEAD
 #include <stdbool.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,7 +40,11 @@ static bool is_dir(const char *path)
 	struct stat st;
 
 	if (stat(path, &st))
+<<<<<<< HEAD
 		return false;
+=======
+		return 0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return S_ISDIR(st.st_mode);
 }
@@ -130,6 +140,7 @@ static size_t depfile_prefix_len;
 /* touch depfile for symbol 'name' */
 static int conf_touch_dep(const char *name)
 {
+<<<<<<< HEAD
 	int fd;
 
 	/* check overflow: prefix + name + '\0' must fit in buffer. */
@@ -141,11 +152,51 @@ static int conf_touch_dep(const char *name)
 	fd = open(depfile_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 		return -1;
+=======
+	int fd, ret;
+	const char *s;
+	char *d, c;
+
+	/* check overflow: prefix + name + ".h" + '\0' must fit in buffer. */
+	if (depfile_prefix_len + strlen(name) + 3 > sizeof(depfile_path))
+		return -1;
+
+	d = depfile_path + depfile_prefix_len;
+	s = name;
+
+	while ((c = *s++))
+		*d++ = (c == '_') ? '/' : tolower(c);
+	strcpy(d, ".h");
+
+	/* Assume directory path already exists. */
+	fd = open(depfile_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1) {
+		if (errno != ENOENT)
+			return -1;
+
+		ret = make_parent_dir(depfile_path);
+		if (ret)
+			return ret;
+
+		/* Try it again. */
+		fd = open(depfile_path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (fd == -1)
+			return -1;
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	close(fd);
 
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+struct conf_printer {
+	void (*print_symbol)(FILE *, struct symbol *, const char *, void *);
+	void (*print_comment)(FILE *, const char *, void *);
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void conf_warning(const char *fmt, ...)
 	__attribute__ ((format (printf, 1, 2)));
 
@@ -209,6 +260,7 @@ static const char *conf_get_autoconfig_name(void)
 	return name ? name : "include/config/auto.conf";
 }
 
+<<<<<<< HEAD
 static const char *conf_get_autoheader_name(void)
 {
 	char *name = getenv("KCONFIG_AUTOHEADER");
@@ -223,6 +275,8 @@ static const char *conf_get_rustccfg_name(void)
 	return name ? name : "include/generated/rustc_cfg";
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 {
 	char *p2;
@@ -251,6 +305,7 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 				     p, sym->name);
 		return 1;
 	case S_STRING:
+<<<<<<< HEAD
 		/* No escaping for S_DEF_AUTO (include/config/auto.conf) */
 		if (def != S_DEF_AUTO) {
 			if (*p++ != '"')
@@ -266,6 +321,21 @@ static int conf_set_sym_val(struct symbol *sym, int def, int def_flags, char *p)
 				conf_warning("invalid string found");
 				return 1;
 			}
+=======
+		if (*p++ != '"')
+			break;
+		for (p2 = p; (p2 = strpbrk(p2, "\"\\")); p2++) {
+			if (*p2 == '"') {
+				*p2 = 0;
+				break;
+			}
+			memmove(p2, p2 + 1, strlen(p2));
+		}
+		if (!p2) {
+			if (def != S_DEF_AUTO)
+				conf_warning("invalid string found");
+			return 1;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 		/* fall through */
 	case S_INT:
@@ -374,6 +444,7 @@ int conf_read_simple(const char *name, int def)
 	char *p, *p2;
 	struct symbol *sym;
 	int def_flags;
+<<<<<<< HEAD
 	const char *warn_unknown;
 	const char *werror;
 
@@ -383,11 +454,19 @@ int conf_read_simple(const char *name, int def)
 		in = zconf_fopen(name);
 	} else {
 		char *env;
+=======
+
+	if (name) {
+		in = zconf_fopen(name);
+	} else {
+		struct property *prop;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		name = conf_get_configname();
 		in = zconf_fopen(name);
 		if (in)
 			goto load;
+<<<<<<< HEAD
 		conf_set_changed(true);
 
 		env = getenv("KCONFIG_DEFCONFIG_LIST");
@@ -422,6 +501,24 @@ int conf_read_simple(const char *name, int def)
 				break;
 
 			env = p + 1;
+=======
+		sym_add_change_count(1);
+		if (!sym_defconfig_list)
+			return 1;
+
+		for_all_defaults(sym_defconfig_list, prop) {
+			if (expr_calc_value(prop->visible.expr) == no ||
+			    prop->expr->type != E_SYMBOL)
+				continue;
+			sym_calc_value(prop->expr->left.sym);
+			name = sym_get_string_value(prop->expr->left.sym);
+			in = zconf_fopen(name);
+			if (in) {
+				conf_message("using defaults found in %s",
+					 name);
+				goto load;
+			}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 	}
 	if (!in)
@@ -450,11 +547,15 @@ load:
 			if (def == S_DEF_USER) {
 				sym = sym_find(line + 2 + strlen(CONFIG_));
 				if (!sym) {
+<<<<<<< HEAD
 					if (warn_unknown)
 						conf_warning("unknown symbol: %s",
 							     line + 2 + strlen(CONFIG_));
 
 					conf_set_changed(true);
+=======
+					sym_add_change_count(1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					continue;
 				}
 			} else {
@@ -485,11 +586,16 @@ load:
 
 			sym = sym_find(line + strlen(CONFIG_));
 			if (!sym) {
+<<<<<<< HEAD
 				if (def == S_DEF_AUTO) {
+=======
+				if (def == S_DEF_AUTO)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					/*
 					 * Reading from include/config/auto.conf
 					 * If CONFIG_FOO previously existed in
 					 * auto.conf but it is missing now,
+<<<<<<< HEAD
 					 * include/config/FOO must be touched.
 					 */
 					conf_touch_dep(line + strlen(CONFIG_));
@@ -500,6 +606,13 @@ load:
 
 					conf_set_changed(true);
 				}
+=======
+					 * include/config/foo.h must be touched.
+					 */
+					conf_touch_dep(line + strlen(CONFIG_));
+				else
+					sym_add_change_count(1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				continue;
 			}
 
@@ -535,10 +648,13 @@ load:
 	}
 	free(line);
 	fclose(in);
+<<<<<<< HEAD
 
 	if (conf_warnings && werror)
 		exit(1);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 0;
 }
 
@@ -548,7 +664,11 @@ int conf_read(const char *name)
 	int conf_unsaved = 0;
 	int i;
 
+<<<<<<< HEAD
 	conf_set_changed(false);
+=======
+	sym_set_change_count(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (conf_read_simple(name, S_DEF_USER)) {
 		sym_calc_value(modules_sym);
@@ -606,12 +726,17 @@ int conf_read(const char *name)
 		}
 	}
 
+<<<<<<< HEAD
 	if (conf_warnings || conf_unsaved)
 		conf_set_changed(true);
+=======
+	sym_add_change_count(conf_warnings || conf_unsaved);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return 0;
 }
 
+<<<<<<< HEAD
 struct comment_style {
 	const char *decoration;
 	const char *prefix;
@@ -744,10 +869,24 @@ static void print_symbol_for_c(FILE *fp, struct symbol *sym)
 		return;
 
 	val = sym_get_string_value(sym);
+=======
+/*
+ * Kconfig configuration printer
+ *
+ * This printer is used when generating the resulting configuration after
+ * kconfig invocation and `defconfig' files. Unset symbol might be omitted by
+ * passing a non-NULL argument to the printer.
+ *
+ */
+static void
+kconfig_print_symbol(FILE *fp, struct symbol *sym, const char *value, void *arg)
+{
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	switch (sym->type) {
 	case S_BOOLEAN:
 	case S_TRISTATE:
+<<<<<<< HEAD
 		switch (*val) {
 		case 'n':
 			return;
@@ -765,10 +904,22 @@ static void print_symbol_for_c(FILE *fp, struct symbol *sym)
 	case S_STRING:
 		escaped = escape_string_value(val);
 		val = escaped;
+=======
+		if (*value == 'n') {
+			bool skip_unset = (arg != NULL);
+
+			if (!skip_unset)
+				fprintf(fp, "# %s%s is not set\n",
+				    CONFIG_, sym->name);
+			return;
+		}
+		break;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default:
 		break;
 	}
 
+<<<<<<< HEAD
 	fprintf(fp, "#define %s%s%s %s%s\n", CONFIG_, sym->name, sym_suffix,
 		val_prefix, val);
 
@@ -812,11 +963,82 @@ static void print_symbol_for_rustccfg(FILE *fp, struct symbol *sym)
 	case S_HEX:
 		if (val[0] != '0' || (val[1] != 'x' && val[1] != 'X'))
 			val_prefix = "0x";
+=======
+	fprintf(fp, "%s%s=%s\n", CONFIG_, sym->name, value);
+}
+
+static void
+kconfig_print_comment(FILE *fp, const char *value, void *arg)
+{
+	const char *p = value;
+	size_t l;
+
+	for (;;) {
+		l = strcspn(p, "\n");
+		fprintf(fp, "#");
+		if (l) {
+			fprintf(fp, " ");
+			xfwrite(p, l, 1, fp);
+			p += l;
+		}
+		fprintf(fp, "\n");
+		if (*p++ == '\0')
+			break;
+	}
+}
+
+static struct conf_printer kconfig_printer_cb =
+{
+	.print_symbol = kconfig_print_symbol,
+	.print_comment = kconfig_print_comment,
+};
+
+/*
+ * Header printer
+ *
+ * This printer is used when generating the `include/generated/autoconf.h' file.
+ */
+static void
+header_print_symbol(FILE *fp, struct symbol *sym, const char *value, void *arg)
+{
+
+	switch (sym->type) {
+	case S_BOOLEAN:
+	case S_TRISTATE: {
+		const char *suffix = "";
+
+		switch (*value) {
+		case 'n':
+			break;
+		case 'm':
+			suffix = "_MODULE";
+			/* fall through */
+		default:
+			fprintf(fp, "#define %s%s%s 1\n",
+			    CONFIG_, sym->name, suffix);
+		}
+		break;
+	}
+	case S_HEX: {
+		const char *prefix = "";
+
+		if (value[0] != '0' || (value[1] != 'x' && value[1] != 'X'))
+			prefix = "0x";
+		fprintf(fp, "#define %s%s %s%s\n",
+		    CONFIG_, sym->name, prefix, value);
+		break;
+	}
+	case S_STRING:
+	case S_INT:
+		fprintf(fp, "#define %s%s %s\n",
+		    CONFIG_, sym->name, value);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	default:
 		break;
 	}
 
+<<<<<<< HEAD
 	if (strlen(val_prefix) > 0) {
 		val_prefixed_len = strlen(val) + strlen(val_prefix) + 1;
 		val_prefixed = xmalloc(val_prefixed_len);
@@ -832,6 +1054,70 @@ static void print_symbol_for_rustccfg(FILE *fp, struct symbol *sym)
 
 	free(escaped);
 	free(val_prefixed);
+=======
+}
+
+static void
+header_print_comment(FILE *fp, const char *value, void *arg)
+{
+	const char *p = value;
+	size_t l;
+
+	fprintf(fp, "/*\n");
+	for (;;) {
+		l = strcspn(p, "\n");
+		fprintf(fp, " *");
+		if (l) {
+			fprintf(fp, " ");
+			xfwrite(p, l, 1, fp);
+			p += l;
+		}
+		fprintf(fp, "\n");
+		if (*p++ == '\0')
+			break;
+	}
+	fprintf(fp, " */\n");
+}
+
+static struct conf_printer header_printer_cb =
+{
+	.print_symbol = header_print_symbol,
+	.print_comment = header_print_comment,
+};
+
+static void conf_write_symbol(FILE *fp, struct symbol *sym,
+			      struct conf_printer *printer, void *printer_arg)
+{
+	const char *str;
+
+	switch (sym->type) {
+	case S_UNKNOWN:
+		break;
+	case S_STRING:
+		str = sym_get_string_value(sym);
+		str = sym_escape_string_value(str);
+		printer->print_symbol(fp, sym, str, printer_arg);
+		free((void *)str);
+		break;
+	default:
+		str = sym_get_string_value(sym);
+		printer->print_symbol(fp, sym, str, printer_arg);
+	}
+}
+
+static void
+conf_write_heading(FILE *fp, struct conf_printer *printer, void *printer_arg)
+{
+	char buf[256];
+
+	snprintf(buf, sizeof(buf),
+	    "\n"
+	    "Automatically generated file; DO NOT EDIT.\n"
+	    "%s\n",
+	    rootmenu.prompt->text);
+
+	printer->print_comment(fp, buf, printer_arg);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 /*
@@ -890,7 +1176,11 @@ int conf_write_defconfig(const char *filename)
 						goto next_menu;
 				}
 			}
+<<<<<<< HEAD
 			print_symbol_for_dotconfig(out, sym);
+=======
+			conf_write_symbol(out, sym, &kconfig_printer_cb, NULL);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 next_menu:
 		if (menu->list != NULL) {
@@ -950,7 +1240,11 @@ int conf_write(const char *name)
 	if (!out)
 		return 1;
 
+<<<<<<< HEAD
 	conf_write_heading(out, &comment_style_pound);
+=======
+	conf_write_heading(out, &kconfig_printer_cb, NULL);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!conf_get_changed())
 		sym_clear_all_valid();
@@ -977,7 +1271,11 @@ int conf_write(const char *name)
 				need_newline = false;
 			}
 			sym->flags |= SYMBOL_WRITTEN;
+<<<<<<< HEAD
 			print_symbol_for_dotconfig(out, sym);
+=======
+			conf_write_symbol(out, sym, &kconfig_printer_cb, NULL);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 
 next:
@@ -985,6 +1283,7 @@ next:
 			menu = menu->list;
 			continue;
 		}
+<<<<<<< HEAD
 
 end_check:
 		if (!menu->sym && menu_is_visible(menu) && menu != &rootmenu &&
@@ -999,6 +1298,21 @@ end_check:
 			menu = menu->parent;
 			if (menu)
 				goto end_check;
+=======
+		if (menu->next)
+			menu = menu->next;
+		else while ((menu = menu->parent)) {
+			if (!menu->sym && menu_is_visible(menu) &&
+			    menu != &rootmenu) {
+				str = menu_get_prompt(menu);
+				fprintf(out, "# end of %s\n", str);
+				need_newline = true;
+			}
+			if (menu->next) {
+				menu = menu->next;
+				break;
+			}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 	}
 	fclose(out);
@@ -1010,7 +1324,11 @@ end_check:
 		if (is_same(name, tmpname)) {
 			conf_message("No change to %s", name);
 			unlink(tmpname);
+<<<<<<< HEAD
 			conf_set_changed(false);
+=======
+			sym_set_change_count(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			return 0;
 		}
 
@@ -1022,12 +1340,17 @@ end_check:
 
 	conf_message("configuration written to %s", name);
 
+<<<<<<< HEAD
 	conf_set_changed(false);
+=======
+	sym_set_change_count(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return 0;
 }
 
 /* write a dependency file as used by kbuild to track dependencies */
+<<<<<<< HEAD
 static int conf_write_autoconf_cmd(const char *autoconf_name)
 {
 	char name[PATH_MAX], tmp[PATH_MAX];
@@ -1073,11 +1396,40 @@ static int conf_write_autoconf_cmd(const char *autoconf_name)
 		return -1;
 	}
 
+=======
+static int conf_write_dep(const char *name)
+{
+	struct file *file;
+	FILE *out;
+
+	out = fopen("..config.tmp", "w");
+	if (!out)
+		return 1;
+	fprintf(out, "deps_config := \\\n");
+	for (file = file_list; file; file = file->next) {
+		if (file->next)
+			fprintf(out, "\t%s \\\n", file->name);
+		else
+			fprintf(out, "\t%s\n", file->name);
+	}
+	fprintf(out, "\n%s: \\\n"
+		     "\t$(deps_config)\n\n", conf_get_autoconfig_name());
+
+	env_write_dep(out, conf_get_autoconfig_name());
+
+	fprintf(out, "\n$(deps_config): ;\n");
+	fclose(out);
+
+	if (make_parent_dir(name))
+		return 1;
+	rename("..config.tmp", name);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 0;
 }
 
 static int conf_touch_deps(void)
 {
+<<<<<<< HEAD
 	const char *name, *tmp;
 	struct symbol *sym;
 	int res, i;
@@ -1091,6 +1443,16 @@ static int conf_touch_deps(void)
 	strncpy(depfile_path, name, depfile_prefix_len);
 	depfile_path[depfile_prefix_len] = 0;
 
+=======
+	const char *name;
+	struct symbol *sym;
+	int res, i;
+
+	strcpy(depfile_path, "include/config/");
+	depfile_prefix_len = strlen(depfile_path);
+
+	name = conf_get_autoconfig_name();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	conf_read_simple(name, S_DEF_AUTO);
 	sym_calc_value(modules_sym);
 
@@ -1153,6 +1515,7 @@ static int conf_touch_deps(void)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int __conf_write_autoconf(const char *filename,
 				 void (*print_symbol)(FILE *, struct symbol *),
 				 const struct comment_style *comment_style)
@@ -1201,6 +1564,15 @@ int conf_write_autoconf(int overwrite)
 	struct symbol *sym;
 	const char *autoconf_name = conf_get_autoconfig_name();
 	int ret, i;
+=======
+int conf_write_autoconf(int overwrite)
+{
+	struct symbol *sym;
+	const char *name;
+	const char *autoconf_name = conf_get_autoconfig_name();
+	FILE *out, *out_h;
+	int i;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #ifndef OPENWRT_DOES_NOT_WANT_THIS
 	return 0;
@@ -1208,13 +1580,18 @@ int conf_write_autoconf(int overwrite)
 	if (!overwrite && is_present(autoconf_name))
 		return 0;
 
+<<<<<<< HEAD
 	ret = conf_write_autoconf_cmd(autoconf_name);
 	if (ret)
 		return -1;
+=======
+	conf_write_dep("include/config/auto.conf.cmd");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (conf_touch_deps())
 		return 1;
 
+<<<<<<< HEAD
 	for_all_symbols(i, sym)
 		sym_calc_value(sym);
 
@@ -1240,10 +1617,54 @@ int conf_write_autoconf(int overwrite)
 				    &comment_style_pound);
 	if (ret)
 		return ret;
+=======
+	out = fopen(".tmpconfig", "w");
+	if (!out)
+		return 1;
+
+	out_h = fopen(".tmpconfig.h", "w");
+	if (!out_h) {
+		fclose(out);
+		return 1;
+	}
+
+	conf_write_heading(out, &kconfig_printer_cb, NULL);
+	conf_write_heading(out_h, &header_printer_cb, NULL);
+
+	for_all_symbols(i, sym) {
+		sym_calc_value(sym);
+		if (!(sym->flags & SYMBOL_WRITE) || !sym->name)
+			continue;
+
+		/* write symbols to auto.conf and autoconf.h */
+		conf_write_symbol(out, sym, &kconfig_printer_cb, (void *)1);
+		conf_write_symbol(out_h, sym, &header_printer_cb, NULL);
+	}
+	fclose(out);
+	fclose(out_h);
+
+	name = getenv("KCONFIG_AUTOHEADER");
+	if (!name)
+		name = "include/generated/autoconf.h";
+	if (make_parent_dir(name))
+		return 1;
+	if (rename(".tmpconfig.h", name))
+		return 1;
+
+	if (make_parent_dir(autoconf_name))
+		return 1;
+	/*
+	 * This must be the last step, kbuild has a dependency on auto.conf
+	 * and this marks the successful completion of the previous steps.
+	 */
+	if (rename(".tmpconfig", autoconf_name))
+		return 1;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return 0;
 }
 
+<<<<<<< HEAD
 static bool conf_changed;
 static void (*conf_changed_callback)(void);
 
@@ -1260,6 +1681,28 @@ void conf_set_changed(bool val)
 bool conf_get_changed(void)
 {
 	return conf_changed;
+=======
+static int sym_change_count;
+static void (*conf_changed_callback)(void);
+
+void sym_set_change_count(int count)
+{
+	int _sym_change_count = sym_change_count;
+	sym_change_count = count;
+	if (conf_changed_callback &&
+	    (bool)_sym_change_count != (bool)count)
+		conf_changed_callback();
+}
+
+void sym_add_change_count(int count)
+{
+	sym_set_change_count(count + sym_change_count);
+}
+
+bool conf_get_changed(void)
+{
+	return sym_change_count;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void conf_set_changed_callback(void (*fn)(void))
@@ -1267,6 +1710,57 @@ void conf_set_changed_callback(void (*fn)(void))
 	conf_changed_callback = fn;
 }
 
+<<<<<<< HEAD
+=======
+static bool randomize_choice_values(struct symbol *csym)
+{
+	struct property *prop;
+	struct symbol *sym;
+	struct expr *e;
+	int cnt, def;
+
+	/*
+	 * If choice is mod then we may have more items selected
+	 * and if no then no-one.
+	 * In both cases stop.
+	 */
+	if (csym->curr.tri != yes)
+		return false;
+
+	prop = sym_get_choice_prop(csym);
+
+	/* count entries in choice block */
+	cnt = 0;
+	expr_list_for_each_sym(prop->expr, e, sym)
+		cnt++;
+
+	/*
+	 * find a random value and set it to yes,
+	 * set the rest to no so we have only one set
+	 */
+	def = (rand() % cnt);
+
+	cnt = 0;
+	expr_list_for_each_sym(prop->expr, e, sym) {
+		if (def == cnt++) {
+			sym->def[S_DEF_USER].tri = yes;
+			csym->def[S_DEF_USER].val = sym;
+		}
+		else {
+			sym->def[S_DEF_USER].tri = no;
+		}
+		sym->flags |= SYMBOL_DEF_USER;
+		/* clear VALID to get value calculated */
+		sym->flags &= ~SYMBOL_VALID;
+	}
+	csym->flags |= SYMBOL_DEF_USER;
+	/* clear VALID to get value calculated */
+	csym->flags &= ~(SYMBOL_VALID);
+
+	return true;
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void set_all_choice_values(struct symbol *csym)
 {
 	struct property *prop;
@@ -1286,3 +1780,150 @@ void set_all_choice_values(struct symbol *csym)
 	/* clear VALID to get value calculated */
 	csym->flags &= ~(SYMBOL_VALID | SYMBOL_NEED_SET_CHOICE_VALUES);
 }
+<<<<<<< HEAD
+=======
+
+bool conf_set_all_new_symbols(enum conf_def_mode mode)
+{
+	struct symbol *sym, *csym;
+	int i, cnt, pby, pty, ptm;	/* pby: probability of bool     = y
+					 * pty: probability of tristate = y
+					 * ptm: probability of tristate = m
+					 */
+
+	pby = 50; pty = ptm = 33; /* can't go as the default in switch-case
+				   * below, otherwise gcc whines about
+				   * -Wmaybe-uninitialized */
+	if (mode == def_random) {
+		int n, p[3];
+		char *env = getenv("KCONFIG_PROBABILITY");
+		n = 0;
+		while( env && *env ) {
+			char *endp;
+			int tmp = strtol( env, &endp, 10 );
+			if( tmp >= 0 && tmp <= 100 ) {
+				p[n++] = tmp;
+			} else {
+				errno = ERANGE;
+				perror( "KCONFIG_PROBABILITY" );
+				exit( 1 );
+			}
+			env = (*endp == ':') ? endp+1 : endp;
+			if( n >=3 ) {
+				break;
+			}
+		}
+		switch( n ) {
+		case 1:
+			pby = p[0]; ptm = pby/2; pty = pby-ptm;
+			break;
+		case 2:
+			pty = p[0]; ptm = p[1]; pby = pty + ptm;
+			break;
+		case 3:
+			pby = p[0]; pty = p[1]; ptm = p[2];
+			break;
+		}
+
+		if( pty+ptm > 100 ) {
+			errno = ERANGE;
+			perror( "KCONFIG_PROBABILITY" );
+			exit( 1 );
+		}
+	}
+	bool has_changed = false;
+
+	sym_clear_all_valid();
+
+	for_all_symbols(i, sym) {
+		if (sym_has_value(sym) || (sym->flags & SYMBOL_VALID))
+			continue;
+		switch (sym_get_type(sym)) {
+		case S_BOOLEAN:
+		case S_TRISTATE:
+			has_changed = true;
+			switch (mode) {
+			case def_yes:
+				sym->def[S_DEF_USER].tri = yes;
+				break;
+			case def_mod:
+				sym->def[S_DEF_USER].tri = mod;
+				break;
+			case def_no:
+				if (sym->flags & SYMBOL_ALLNOCONFIG_Y)
+					sym->def[S_DEF_USER].tri = yes;
+				else
+					sym->def[S_DEF_USER].tri = no;
+				break;
+			case def_random:
+				sym->def[S_DEF_USER].tri = no;
+				cnt = rand() % 100;
+				if (sym->type == S_TRISTATE) {
+					if (cnt < pty)
+						sym->def[S_DEF_USER].tri = yes;
+					else if (cnt < (pty+ptm))
+						sym->def[S_DEF_USER].tri = mod;
+				} else if (cnt < pby)
+					sym->def[S_DEF_USER].tri = yes;
+				break;
+			default:
+				continue;
+			}
+			if (!(sym_is_choice(sym) && mode == def_random))
+				sym->flags |= SYMBOL_DEF_USER;
+			break;
+		default:
+			break;
+		}
+
+	}
+
+	/*
+	 * We have different type of choice blocks.
+	 * If curr.tri equals to mod then we can select several
+	 * choice symbols in one block.
+	 * In this case we do nothing.
+	 * If curr.tri equals yes then only one symbol can be
+	 * selected in a choice block and we set it to yes,
+	 * and the rest to no.
+	 */
+	if (mode != def_random) {
+		for_all_symbols(i, csym) {
+			if ((sym_is_choice(csym) && !sym_has_value(csym)) ||
+			    sym_is_choice_value(csym))
+				csym->flags |= SYMBOL_NEED_SET_CHOICE_VALUES;
+		}
+	}
+
+	for_all_symbols(i, csym) {
+		if (sym_has_value(csym) || !sym_is_choice(csym))
+			continue;
+
+		sym_calc_value(csym);
+		if (mode == def_random)
+			has_changed = randomize_choice_values(csym);
+		else {
+			set_all_choice_values(csym);
+			has_changed = true;
+		}
+	}
+
+	return has_changed;
+}
+
+void conf_rewrite_mod_or_yes(enum conf_def_mode mode)
+{
+	struct symbol *sym;
+	int i;
+	tristate old_val = (mode == def_y2m) ? yes : mod;
+	tristate new_val = (mode == def_y2m) ? mod : yes;
+
+	for_all_symbols(i, sym) {
+		if (sym_get_type(sym) == S_TRISTATE &&
+		    sym->def[S_DEF_USER].tri == old_val) {
+			sym->def[S_DEF_USER].tri = new_val;
+			sym_add_change_count(1);
+		}
+	}
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

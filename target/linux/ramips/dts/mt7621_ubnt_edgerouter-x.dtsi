@@ -20,49 +20,82 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_22 0>;
 	nvmem-cell-names = "mac-address";
 	openwrt,netdev-name = "dsa";
+=======
+	mtd-mac-address = <&factory 0x22>;
+	label = "dsa";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
 		port@0 {
 			status = "okay";
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth0";
 			/delete-property/ label;
+=======
+			label = "eth0";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@1 {
 			status = "okay";
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth1";
 			nvmem-cells = <&macaddr_factory_22 1>;
 			nvmem-cell-names = "mac-address";
 			/delete-property/ label;
+=======
+			label = "eth1";
+			mtd-mac-address = <&factory 0x22>;
+			mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@2 {
 			status = "okay";
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth2";
 			nvmem-cells = <&macaddr_factory_22 2>;
 			nvmem-cell-names = "mac-address";
 			/delete-property/ label;
+=======
+			label = "eth2";
+			mtd-mac-address = <&factory 0x22>;
+			mtd-mac-address-increment = <2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@3 {
 			status = "okay";
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth3";
 			nvmem-cells = <&macaddr_factory_22 3>;
 			nvmem-cell-names = "mac-address";
 			/delete-property/ label;
+=======
+			label = "eth3";
+			mtd-mac-address = <&factory 0x22>;
+			mtd-mac-address-increment = <3>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@4 {
 			status = "okay";
+<<<<<<< HEAD
 			openwrt,netdev-name = "eth4";
 			nvmem-cells = <&macaddr_factory_22 4>;
 			nvmem-cell-names = "mac-address";
 			/delete-property/ label;
+=======
+			label = "eth4";
+			mtd-mac-address = <&factory 0x22>;
+			mtd-mac-address-increment = <4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -87,6 +120,7 @@
 			read-only;
 		};
 
+<<<<<<< HEAD
 		partition@e0000 {
 			label = "factory";
 			reg = <0xe0000 0x60000>;
@@ -107,6 +141,21 @@
 		partition@140000 {
 			label = "kernel";
 			reg = <0x140000 0x600000>;
+=======
+		factory: partition@e0000 {
+			label = "factory";
+			reg = <0xe0000 0x60000>;
+		};
+
+		partition@140000 {
+			label = "kernel1";
+			reg = <0x140000 0x300000>;
+		};
+
+		partition@440000 {
+			label = "kernel2";
+			reg = <0x440000 0x300000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@740000 {
@@ -118,7 +167,11 @@
 
 &state_default {
 	gpio {
+<<<<<<< HEAD
 		groups = "uart2", "uart3", "pcie", "jtag";
+=======
+		groups = "uart2", "uart3", "pcie", "rgmii2", "jtag";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };

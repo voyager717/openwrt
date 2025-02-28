@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "Winchannel WB2000";
@@ -45,10 +48,16 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
 			gpios = <&gpio 21 GPIO_ACTIVE_HIGH>;
 			trigger-sources = <&hub_port>;
+=======
+			label = "green:usb";
+			gpios = <&gpio 21 GPIO_ACTIVE_HIGH>;
+			trigger-sources = <&hub_port1>, <&hub_port2>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,default-trigger = "usbport";
 		};
 
@@ -121,6 +130,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@fe0000 {
 				label = "art";
 				reg = <0xfe0000 0x10000>;
@@ -157,6 +167,18 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			art: partition@fe0000 {
+				label = "art";
+				reg = <0xfe0000 0x10000>;
+				read-only;
+			};
+
+			addr: partition@ff0000 {
+				label = "addr";
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -168,15 +190,44 @@
 	ath9k: wifi@0,0 {
 		compatible = "pci168c,0030";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&macaddr_addr_0 0x10>, <&calibration_art_5000>;
 		nvmem-cell-names = "mac-address", "calibration";
+=======
+		qca,no-eeprom;
+		mtd-mac-address = <&addr 0x0>;
+		mtd-mac-address-increment = <0x10>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 	};
 };
 
 &usb {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	port@1 {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <1>;
+		#trigger-source-cells = <0>;
+
+		hub_port1: port@1 {
+			reg = <1>;
+			#trigger-source-cells = <0>;
+		};
+
+		hub_port2: port@2 {
+			reg = <2>;
+			#trigger-source-cells = <0>;
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
@@ -186,13 +237,23 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_addr_0 0>, <&calibration_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&addr 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0x10>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy4: ethernet-phy@4 {
 		reg = <4>;
 	};
@@ -203,8 +264,13 @@
 
 	pll-data = <0xe000000 0x04000101 0x04001313>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_addr_0 0x21>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&addr 0x0>;
+	mtd-mac-address-increment = <0x21>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-mode = "rgmii-rxid";
 	phy-handle = <&phy4>;
@@ -216,4 +282,7 @@
 		rxdv-delay = <1>;
 	};
 };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

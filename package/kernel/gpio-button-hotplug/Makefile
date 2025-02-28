@@ -9,13 +9,21 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=gpio-button-hotplug
+<<<<<<< HEAD
 PKG_RELEASE:=5
+=======
+PKG_RELEASE:=3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk
 
 define KernelPackage/gpio-button-hotplug
+<<<<<<< HEAD
   SUBMENU:=GPIO support
+=======
+  SUBMENU:=Other modules
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Simple GPIO Button Hotplug driver
   FILES:=$(PKG_BUILD_DIR)/gpio-button-hotplug.ko
   AUTOLOAD:=$(call AutoLoad,30,gpio-button-hotplug,1)
@@ -32,8 +40,19 @@ define KernelPackage/gpio-button-hotplug/description
  an overkill for OpenWrt simple needs.
 endef
 
+<<<<<<< HEAD
 define Build/Compile
 	$(KERNEL_MAKE) M="$(PKG_BUILD_DIR)" modules
+=======
+MAKE_OPTS:= \
+	$(KERNEL_MAKE_FLAGS) \
+	M="$(PKG_BUILD_DIR)"
+
+define Build/Compile
+	$(MAKE) -C "$(LINUX_DIR)" \
+		$(MAKE_OPTS) \
+		modules
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,gpio-button-hotplug))

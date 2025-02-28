@@ -9,6 +9,7 @@ Note: DFS is assumed to be usable if a country code has been set
 Signed-off-by: Benjamin Berg <benjamin@sipsolutions.net>
 Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
 ---
+<<<<<<< HEAD
  wpa_supplicant/wpa_supplicant.c | 38 ++++++++++++++++++++++-----------
  1 file changed, 25 insertions(+), 13 deletions(-)
 
@@ -45,6 +46,23 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
  	struct hostapd_channel_data *pri_chan = NULL, *sec_chan = NULL;
  	int i, res;
 @@ -3132,8 +3135,11 @@ static void ibss_mesh_select_40mhz(struc
+=======
+ wpa_supplicant/wpa_supplicant.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
+
+--- a/wpa_supplicant/wpa_supplicant.c
++++ b/wpa_supplicant/wpa_supplicant.c
+@@ -2349,6 +2349,8 @@ void ibss_mesh_setup_freq(struct wpa_sup
+ 	int chwidth, seg0, seg1;
+ 	u32 vht_caps = 0;
+ 	int is_24ghz;
++	int dfs_enabled = wpa_s->conf->country[0] &&
++			 (wpa_s->drv_flags & WPA_DRIVER_FLAGS_RADAR);
+ 
+ 	freq->freq = ssid->frequency;
+ 
+@@ -2436,8 +2438,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		return;
  
  	/* Check primary channel flags */
@@ -55,9 +73,15 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
 +		if (!dfs_enabled)
 +			return;
  
+<<<<<<< HEAD
  #ifdef CONFIG_HT_OVERRIDES
  	if (ssid->disable_ht40)
 @@ -3159,8 +3165,11 @@ static void ibss_mesh_select_40mhz(struc
+=======
+ 	freq->channel = pri_chan->chan;
+ 
+@@ -2470,8 +2475,11 @@ void ibss_mesh_setup_freq(struct wpa_sup
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		return;
  
  	/* Check secondary channel flags */
@@ -70,6 +94,7 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
  
  	if (ht40 == -1) {
  		if (!(pri_chan->flag & HOSTAPD_CHAN_HT40MINUS))
+<<<<<<< HEAD
 @@ -3236,7 +3245,7 @@ static bool ibss_mesh_select_80_160mhz(s
  				       const struct wpa_ssid *ssid,
  				       struct hostapd_hw_modes *mode,
@@ -111,6 +136,22 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
  			if (freq->freq >= bw320[j] &&
  			    freq->freq <= bw320[j + 1]) {
 @@ -3348,10 +3357,12 @@ static bool ibss_mesh_select_80_160mhz(s
+=======
+@@ -2564,8 +2572,11 @@ skip_ht40:
+ 			return;
+ 
+ 		/* Back to HT configuration if channel not usable */
+-		if (chan->flag & (HOSTAPD_CHAN_DISABLED | HOSTAPD_CHAN_NO_IR))
++		if (chan->flag & HOSTAPD_CHAN_DISABLED)
+ 			return;
++		if (chan->flag & (HOSTAPD_CHAN_RADAR | HOSTAPD_CHAN_NO_IR))
++			if (!dfs_enabled)
++				return;
+ 	}
+ 
+ 	chwidth = CHANWIDTH_80MHZ;
+@@ -2585,10 +2596,12 @@ skip_ht40:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  				if (!chan)
  					continue;
  
@@ -125,6 +166,7 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
 +						continue;
  
  				/* Found a suitable second segment for 80+80 */
+<<<<<<< HEAD
  				chwidth = CONF_OPER_CHWIDTH_80P80MHZ;
 @@ -3406,6 +3417,7 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	int obss_scan = 1;
@@ -146,3 +188,6 @@ Signed-off-by: Peter Oh <peter.oh@bowerswilkins.com>
  			freq->he_enabled = freq->vht_enabled = false;
  	}
  
+=======
+ 				chwidth = CHANWIDTH_80P80MHZ;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

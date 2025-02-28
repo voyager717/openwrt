@@ -1,6 +1,10 @@
 --- a/Makefile.am
 +++ b/Makefile.am
+<<<<<<< HEAD
 @@ -38,7 +38,7 @@ AUTOMAKE_OPTIONS = gnu
+=======
+@@ -24,7 +24,7 @@ AUTOMAKE_OPTIONS = gnu
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # old Automake version.
  ACLOCAL_AMFLAGS = -I m4
  
@@ -11,7 +15,11 @@
  pkgconfig_DATA = mpfr.pc
 --- a/Makefile.in
 +++ b/Makefile.in
+<<<<<<< HEAD
 @@ -401,7 +401,7 @@ AUTOMAKE_OPTIONS = gnu
+=======
+@@ -384,7 +384,7 @@ AUTOMAKE_OPTIONS = gnu
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # libtoolize and in case some developer needs to switch back to an
  # old Automake version.
  ACLOCAL_AMFLAGS = -I m4

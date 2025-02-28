@@ -7,7 +7,11 @@ from sys import argv
 import json
 
 if len(argv) != 2:
+<<<<<<< HEAD
     print("JSON info files script requires output file as argument")
+=======
+    print("JSON info files script requires ouput file as argument")
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     exit(1)
 
 output_path = Path(argv[1])
@@ -47,6 +51,7 @@ for device_id, profile in output.get("profiles", {}).items():
 
 
 if output:
+<<<<<<< HEAD
     (
         default_packages,
         output["arch_packages"],
@@ -54,6 +59,9 @@ if output:
         linux_release,
         linux_vermagic,
     ) = run(
+=======
+    default_packages, output["arch_packages"] = run(
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         [
             "make",
             "--no-print-directory",
@@ -61,23 +69,33 @@ if output:
             "target/linux/",
             "val.DEFAULT_PACKAGES",
             "val.ARCH_PACKAGES",
+<<<<<<< HEAD
             "val.LINUX_VERSION",
             "val.LINUX_RELEASE",
             "val.LINUX_VERMAGIC",
             "V=s",
         ],
         stdout=PIPE,
+=======
+        ],
+        stdout=PIPE,
+        stderr=PIPE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         check=True,
         env=environ.copy().update({"TOPDIR": Path().cwd()}),
         universal_newlines=True,
     ).stdout.splitlines()
 
     output["default_packages"] = sorted(default_packages.split())
+<<<<<<< HEAD
     output["linux_kernel"] = {
         "version": linux_version,
         "release": linux_release,
         "vermagic": linux_vermagic,
     }
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     output_path.write_text(json.dumps(output, sort_keys=True, separators=(",", ":")))
 else:
     print("JSON info file script could not find any JSON files for target")

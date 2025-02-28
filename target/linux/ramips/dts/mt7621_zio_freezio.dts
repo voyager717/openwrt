@@ -5,4 +5,18 @@
 / {
 	compatible = "zio,freezio", "mediatek,mt7621-soc";
 	model = "ZIO FREEZIO";
+<<<<<<< HEAD
+=======
+
+	leds {
+		compatible = "gpio-leds";
+
+		usb {
+			label = "green:usb";
+			gpios = <&gpio 27 GPIO_ACTIVE_LOW>;
+			trigger-sources = <&xhci_ehci_port1>;
+			linux,default-trigger = "usbport";
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

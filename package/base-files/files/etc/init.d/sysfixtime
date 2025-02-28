@@ -8,6 +8,7 @@ RTC_DEV=/dev/rtc0
 HWCLOCK=/sbin/hwclock
 
 boot() {
+<<<<<<< HEAD
 	hwclock_load
 	local maxtime="$(find_max_time)"
 	local curtime="$(date +%s)"
@@ -30,11 +31,29 @@ hwclock_load() {
 }
 
 hwclock_save(){
+=======
+	start && exit 0
+
+	local maxtime="$(maxtime)"
+	local curtime="$(date +%s)"
+	[ $curtime -lt $maxtime ] && date -s @$maxtime
+}
+
+start() {
+	[ -e "$RTC_DEV" ] && [ -e "$HWCLOCK" ] && $HWCLOCK -s -u -f $RTC_DEV
+}
+
+stop() {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	[ -e "$RTC_DEV" ] && [ -e "$HWCLOCK" ] && $HWCLOCK -w -u -f $RTC_DEV && \
 		logger -t sysfixtime "saved '$(date)' to $RTC_DEV"
 }
 
+<<<<<<< HEAD
 find_max_time() {
+=======
+maxtime() {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local file newest
 
 	for file in $( find /etc -type f ) ; do

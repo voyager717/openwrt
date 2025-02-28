@@ -9,6 +9,7 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+<<<<<<< HEAD
 	arcadyan,vrv9510kwac23|\
 	avm,fritz3370-rev2-hynix|\
 	avm,fritz3370-rev2-micron|\
@@ -22,6 +23,13 @@ platform_do_upgrade() {
 	avm,fritz7430|\
 	avm,fritz7490|\
 	avm,fritz7490-micron|\
+=======
+	avm,fritz3370-rev2-hynix|\
+	avm,fritz3370-rev2-micron|\
+	avm,fritz7362sl|\
+	avm,fritz7412|\
+	avm,fritz7430|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	bt,homehub-v5a|\
 	zyxel,p-2812hnu-f1|\
 	zyxel,p-2812hnu-f3)

@@ -26,7 +26,11 @@ Getopt::Long::GetOptions(
 
 if ($version)
 {
+<<<<<<< HEAD
 	print "makeinfo (OpenWrt stub) 9.99\n";
+=======
+	print "makeinfo (OpenWrt stub) 4.13\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	exit 0;
 }
 

@@ -2,11 +2,18 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
 	compatible = "zyxel,keenetic-extra-ii", "mediatek,mt7628an-soc";
 	model = "Zyxel Keenetic Extra II";
+=======
+
+/ {
+	compatible = "zyxel,keenetic-extra-ii", "mediatek,mt7628an-soc";
+	model = "ZyXEL Keenetic Extra II";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	aliases {
 		led-boot = &led_power;
@@ -45,9 +52,15 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+=======
+			label = "green:power";
+			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+			default-state = "keep";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		internet {
@@ -61,8 +74,12 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ohci_port1>, <&ehci_port1>;
 			linux,default-trigger = "usbport";
@@ -79,6 +96,7 @@
 			gpios = <&gpio 6 GPIO_ACTIVE_HIGH>;
 		};
 	};
+<<<<<<< HEAD
 
 	virtual_flash {
 		compatible = "mtd-concat";
@@ -96,6 +114,8 @@
 			};
 		};
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi0 {
@@ -104,7 +124,12 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <32000000>;
+=======
+		spi-max-frequency = <10000000>;
+		broken-flash-reset;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -123,6 +148,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "rf-eeprom";
 				reg = <0x40000 0x10000>;
@@ -149,6 +175,17 @@
 
 			firmware1: partition@50000 {
 				label = "firmware_1";
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+			};
+
+			partition@50000 {
+				compatible = "denx,uimage";
+				label = "firmware";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				reg = <0x50000 0xe90000>;
 			};
 
@@ -188,9 +225,16 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			firmware2: partition@1050000 {
 				label = "firmware_2";
 				reg = <0x1050000 0xe90000>;
+=======
+			partition@1050000 {
+				label = "firmware_2";
+				reg = <0x1050000 0xe90000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@1ee0000 {
@@ -203,8 +247,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -213,9 +261,12 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -224,10 +275,15 @@
 
 &pcie0 {
 	mt76@0,0 {
+<<<<<<< HEAD
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		reg = <0x0000 0 0 0 0>;
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };

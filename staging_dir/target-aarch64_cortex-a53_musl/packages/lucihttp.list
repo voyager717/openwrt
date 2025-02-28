@@ -1,0 +1,13 @@
+./
+./usr
+./usr/include
+./usr/include/lucihttp
+./usr/include/lucihttp/utils.h
+./usr/include/lucihttp/lua.h
+./usr/include/lucihttp/urlencoded-parser.h
+./usr/include/lucihttp/multipart-parser.h
+./usr/lib
+./usr/lib/liblucihttp.so.0.1
+./usr/lib/liblucihttp.so
+./usr/lib/liblucihttp.so.0
+./host

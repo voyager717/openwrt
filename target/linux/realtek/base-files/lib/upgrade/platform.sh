@@ -4,6 +4,7 @@ REQUIRE_IMAGE_METADATA=1
 RAMFS_COPY_BIN='fw_printenv fw_setenv'
 RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
 
+<<<<<<< HEAD
 # The TP-Link bootloader gets its flash layout from "bootargs".
 # Use this to our advantage, and:
 #  1. Disable the second rootfs (usrimg2)
@@ -19,6 +20,8 @@ tplink_sg2xxx_fix_mtdparts() {
 	echo -e "$args" | fw_setenv --script -
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 platform_check_image() {
 	return 0
 }
@@ -27,11 +30,14 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+<<<<<<< HEAD
 	tplink,sg2008p-v1|\
 	tplink,sg2210p-v3)
 		tplink_sg2xxx_fix_mtdparts
 		default_do_upgrade "$1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*)
 		default_do_upgrade "$1"
 		;;

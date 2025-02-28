@@ -9,10 +9,13 @@
  * option) any later version.
  */
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /include/ "fsl/p1010si-pre.dtsi"
 
 / {
@@ -57,6 +60,7 @@
 						reg = <0x0 0x0050000>;
 						label = "u-boot";
 						read-only;
+<<<<<<< HEAD
 
 						nvmem-layout {
 							compatible = "fixed-layout";
@@ -69,6 +73,8 @@
 								#nvmem-cell-cells = <1>;
 							};
 						};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					};
 
 					partition@50000 {
@@ -93,6 +99,7 @@
 						reg = <0x00ff0000 0x00010000>;
 						label = "caldata";
 						read-only;
+<<<<<<< HEAD
 
 						nvmem-layout {
 							compatible = "fixed-layout";
@@ -107,6 +114,8 @@
 								reg = <0x5000 0x440>;
 							};
 						};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					};
 				};
 			};
@@ -118,6 +127,7 @@
 		usb@22000 {
 			phy_type = "utmi";
 			dr_mode = "host";
+<<<<<<< HEAD
 
 			port@1 {
 				#address-cells = <1>;
@@ -271,6 +281,25 @@
 						};
 					};
 				};
+=======
+		};
+
+		mdio@24000 {
+			phy0: ethernet-phy@0 {
+				reg = <0x0>;
+				qca,ar8327-initvals = <
+					0x00004 0x07600000 /* PAD0_MODE */
+					0x00008 0x00000000 /* PAD5_MODE */
+					0x0000c 0x01000000 /* PAD6_MODE */
+					0x00010 0x40000000 /* POWER_ON_STRAP */
+					0x00050 0xcf35cf35 /* LED_CTRL0 */
+					0x00054 0xcf35cf35 /* LED_CTRL1 */
+					0x00058 0xcf35cf35 /* LED_CTRL2 */
+					0x0005c 0x03ffff00 /* LED_CTRL3 */
+					0x0007c 0x0000007e /* PORT0_STATUS */
+					0x00094 0x00000200 /* PORT6_STATUS */
+				>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 
@@ -283,6 +312,7 @@
 		};
 
 		enet0: ethernet@b0000 {
+<<<<<<< HEAD
 			phy-connection-type = "rgmii-id";
 			nvmem-cells = <&macaddr_uboot_4fc00 0>;
 			nvmem-cell-names = "mac-address";
@@ -291,6 +321,11 @@
 				speed = <1000>;
 				full-duplex;
 			};
+=======
+			phy-handle = <&phy0>;
+			phy-connection-type = "rgmii-id";
+			mtd-mac-address = <&uboot 0x4fc00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		enet1: ethernet@b1000 {
@@ -343,6 +378,7 @@
 				  0x1000000 0x0 0x0
 				  0x1000000 0x0 0x0
 				  0x0 0x100000>;
+<<<<<<< HEAD
 
 			ath9k: wifi@0,0 {
 				compatible = "pci168c,0033";
@@ -353,6 +389,8 @@
 				nvmem-cells = <&cal_caldata_1000>, <&macaddr_uboot_4fc00 0>;
 				nvmem-cell-names = "calibration", "mac-address";
 			};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 
@@ -368,6 +406,7 @@
 				  0x1000000 0x0 0x0
 				  0x1000000 0x0 0x0
 				  0x0 0x100000>;
+<<<<<<< HEAD
 
 			wifi@0,0 {
 				compatible = "pci168c,0030";
@@ -384,6 +423,8 @@
 				nvmem-cells = <&cal_caldata_5000>, <&macaddr_uboot_4fc00 (-1)>;
 				nvmem-cell-names = "calibration", "mac-address";
 			};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 
@@ -394,6 +435,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		led-0 {
 			gpios = <&ath9k 1 GPIO_ACTIVE_LOW>;
 			color = <LED_COLOR_ID_GREEN>;
@@ -436,19 +478,52 @@
 			};
 		};
 
+=======
+		system_green: system {
+			gpios = <&gpio0 2 1>; /* active low */
+			label = "tp-link:blue:system";
+		};
+
+		usb1 {
+			gpios = <&gpio0 3 1>; /* active low */
+			label = "tp-link:green:usb1";
+		};
+
+		usb2 {
+			gpios = <&gpio0 4 1>; /* active low */
+			label = "tp-link:green:usb2";
+		};
+
+		usbpower {
+			gpios = <&gpio0 10 1>; /* active low */
+			label = "tp-link:usb:power";
+		};
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	buttons {
 		compatible = "gpio-keys";
 
 		reset {
 			label = "Reset button";
+<<<<<<< HEAD
 			gpios = <&gpio0 5 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
+=======
+			gpios = <&gpio0 5 1>; /* active low */
+			linux,code = <0x198>; /* KEY_RESTART */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		rfkill {
 			label = "RFKILL switch";
+<<<<<<< HEAD
 			gpios = <&gpio0 11 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RFKILL>;
+=======
+			gpios = <&gpio0 11 1>; /* active low */
+			linux,code = <0xf7>; /* RFKill */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -508,6 +583,7 @@
 		/delete-node/ crypto@30000; /* Pulled in by p1010si-post */
 	};
 };
+<<<<<<< HEAD
 
 /*
  * For the OpenWrt 22.03 release, since Linux 5.10.138 now uses
@@ -521,3 +597,5 @@
 		/delete-property/ pci1;
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

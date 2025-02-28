@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=zlib
+<<<<<<< HEAD
 PKG_VERSION:=1.3.1
 PKG_RELEASE:=1
 
@@ -19,6 +20,18 @@ PKG_MIRROR_HASH:=6558577038f4839057fad93afb295bf32e84dc9bd2c33512d40a5eab6d4889e
 PKG_LICENSE:=Zlib
 PKG_LICENSE_FILES:=LICENSE
 PKG_CPE_ID:=cpe:/a:zlib:zlib
+=======
+PKG_VERSION:=1.2.11
+PKG_RELEASE:=6
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@SF/libpng http://www.zlib.net
+PKG_HASH:=4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066
+
+PKG_LICENSE:=Zlib
+PKG_LICENSE_FILES:=README
+PKG_CPE_ID:=cpe:/a:gnu:zlib
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_CONFIG_DEPENDS:= CONFIG_ZLIB_OPTIMIZE_SPEED
 

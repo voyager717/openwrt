@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9563_tplink_eap2x5-1port.dtsi"
 
 / {
@@ -19,21 +22,33 @@
 		compatible = "gpio-leds";
 
 		led_status_green: status_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 
 		led_status_amber: status_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
 		};
 
 		led_status_red: status_red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -47,6 +62,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &art {
 	nvmem-layout {
@@ -81,3 +97,5 @@
 		nvmem-cell-names = "mac-address", "calibration";
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -1,0 +1,12 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4/openwrt-build
+srcdir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: GIO
+Description: glib I/O library
+Version: 2.66.4
+Requires: glib-2.0, gobject-2.0
+Requires.private: gmodule-no-export-2.0, zlib
+Libs: -L${prefix}/gio -lgio-2.0
+Cflags: -I${prefix}/gio -I${srcdir}/gio -I${prefix}/. -I${srcdir}/. -I${prefix}/glib -I${srcdir}/glib -I${prefix}/gobject -I${srcdir}/gobject -I${prefix}/gmodule -I${srcdir}/gmodule

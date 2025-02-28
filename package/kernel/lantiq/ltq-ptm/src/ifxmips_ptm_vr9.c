@@ -54,7 +54,11 @@
 
 static inline void init_pmu(void);
 static inline void uninit_pmu(void);
+<<<<<<< HEAD
 static inline int reset_ppe(struct platform_device *pdev);
+=======
+static inline void reset_ppe(struct platform_device *pdev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline void init_pdma(void);
 static inline void init_mailbox(void);
 static inline void init_atm_tc(void);
@@ -82,7 +86,11 @@ static inline void uninit_pmu(void)
 {
 }
 
+<<<<<<< HEAD
 static inline int reset_ppe(struct platform_device *pdev)
+=======
+static inline void reset_ppe(struct platform_device *pdev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct device *dev = &pdev->dev;
 	struct reset_control *dsp;
@@ -90,6 +98,7 @@ static inline int reset_ppe(struct platform_device *pdev)
 	struct reset_control *tc;
 
 	dsp = devm_reset_control_get(dev, "dsp");
+<<<<<<< HEAD
 	if (IS_ERR(dsp))
 		return dev_err_probe(dev, PTR_ERR(dsp), "Failed to lookup dsp reset");
 
@@ -100,6 +109,27 @@ static inline int reset_ppe(struct platform_device *pdev)
 	tc = devm_reset_control_get(dev, "tc");
 	if (IS_ERR(tc))
 		return dev_err_probe(dev, PTR_ERR(tc), "Failed to lookup tc reset");
+=======
+	if (IS_ERR(dsp)) {
+		if (PTR_ERR(dsp) != -EPROBE_DEFER)
+			dev_err(dev, "Failed to lookup dsp reset\n");
+// 		return PTR_ERR(dsp);
+	}
+
+	dfe = devm_reset_control_get(dev, "dfe");
+	if (IS_ERR(dfe)) {
+		if (PTR_ERR(dfe) != -EPROBE_DEFER)
+			dev_err(dev, "Failed to lookup dfe reset\n");
+// 		return PTR_ERR(dfe);
+	}
+
+	tc = devm_reset_control_get(dev, "tc");
+	if (IS_ERR(tc)) {
+		if (PTR_ERR(tc) != -EPROBE_DEFER)
+			dev_err(dev, "Failed to lookup tc reset\n");
+// 		return PTR_ERR(tc);
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	reset_control_assert(dsp);
 	udelay(1000);
@@ -111,8 +141,11 @@ static inline int reset_ppe(struct platform_device *pdev)
 	udelay(1000);
 	*PP32_SRST |= 0x000303CF;
 	udelay(1000);
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static inline void init_pdma(void)
@@ -256,6 +289,7 @@ void ifx_ptm_get_fw_ver(unsigned int *major, unsigned int *mid, unsigned int *mi
     }
 }
 
+<<<<<<< HEAD
 int ifx_ptm_init_chip(struct platform_device *pdev)
 {
     int r;
@@ -265,6 +299,13 @@ int ifx_ptm_init_chip(struct platform_device *pdev)
     r = reset_ppe(pdev);
     if (r)
         return r;
+=======
+void ifx_ptm_init_chip(struct platform_device *pdev)
+{
+    init_pmu();
+
+    reset_ppe(pdev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     init_pdma();
 
@@ -273,8 +314,11 @@ int ifx_ptm_init_chip(struct platform_device *pdev)
     init_atm_tc();
 
     clear_share_buffer();
+<<<<<<< HEAD
 
     return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ifx_ptm_uninit_chip(void)

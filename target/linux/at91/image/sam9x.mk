@@ -16,11 +16,19 @@ define Build/at91-sdcard
 	::$(DEVICE_NAME)-fit.itb
 
   mcopy -i $@.boot \
+<<<<<<< HEAD
 	$(BIN_DIR)/u-boot-$(if $(findstring sam9x60,$@),$(DEVICE_DTS:at91-%=%),at91sam9x5ek)_mmc/u-boot.bin \
 	::u-boot.bin
 
   mcopy -i $@.boot \
 	$(BIN_DIR)/at91bootstrap-$(if $(findstring sam9x60,$@),$(DEVICE_DTS:at91-%=%),at91sam9x5ek)sd_uboot/at91bootstrap.bin \
+=======
+	$(BIN_DIR)/u-boot-at91sam9x5ek_mmc/u-boot.bin \
+	::u-boot.bin
+
+  mcopy -i $@.boot \
+	$(BIN_DIR)/at91bootstrap-at91sam9x5eksd_uboot/at91bootstrap.bin \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	::BOOT.bin
 
   $(CP) uboot-env.txt $@-uboot-env.txt
@@ -35,7 +43,11 @@ define Build/at91-sdcard
   ./gen_at91_sdcard_img.sh \
 	$@.img \
 	$@.boot \
+<<<<<<< HEAD
 	$(IMAGE_ROOTFS) \
+=======
+	$(KDIR)/root.ext4 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(AT91_SD_BOOT_PARTSIZE) \
 	$(CONFIG_TARGET_ROOTFS_PARTSIZE)
 
@@ -112,6 +124,7 @@ define Device/atmel_at91sam9x35ek
 endef
 TARGET_DEVICES += atmel_at91sam9x35ek
 
+<<<<<<< HEAD
 define Device/microchip_sam9x60ek
   $(Device/evaluation-dtb)
   DEVICE_VENDOR := Microchip
@@ -121,14 +134,21 @@ define Device/microchip_sam9x60ek
 endef
 TARGET_DEVICES += microchip_sam9x60ek
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/calamp_lmu5000
   $(Device/production)
   DEVICE_VENDOR := CalAmp
   DEVICE_MODEL := LMU5000
+<<<<<<< HEAD
   DEVICE_DTS := at91-lmu5000
   DEVICE_PACKAGES := kmod-rtc-pcf2123 kmod-usb-acm \
 	kmod-usb-serial-option kmod-usb-serial-sierrawireless \
 	kmod-pinctrl-mcp23s08-spi
+=======
+  DEVICE_PACKAGES := kmod-rtc-pcf2123 kmod-usb-acm \
+	kmod-usb-serial-option kmod-usb-serial-sierrawireless kmod-gpio-mcp23s08
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += calamp_lmu5000
 
@@ -205,7 +225,10 @@ define Device/laird_wb45n
   $(Device/evaluation-fit)
   DEVICE_VENDOR := Laird
   DEVICE_MODEL := WB45N
+<<<<<<< HEAD
   DEVICE_DTS := at91-wb45n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := \
 	kmod-mmc-at91 kmod-ath6kl-sdio ath6k-firmware \
 	kmod-usb-storage kmod-fs-vfat kmod-fs-msdos \

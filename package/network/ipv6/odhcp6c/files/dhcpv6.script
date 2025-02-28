@@ -237,8 +237,11 @@ esac
 
 # user rules
 [ -f /etc/odhcp6c.user ] && . /etc/odhcp6c.user "$@"
+<<<<<<< HEAD
 for f in /etc/odhcp6c.user.d/*; do
   [ -f "$f" ] && (. "$f" "$@")
 done
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 exit 0

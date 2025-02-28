@@ -5,12 +5,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=busybox
+<<<<<<< HEAD
 PKG_VERSION:=1.37.0
 PKG_RELEASE:=4
+=======
+PKG_VERSION:=1.33.2
+PKG_RELEASE:=$(AUTORELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_FLAGS:=essential
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://www.busybox.net/downloads \
+<<<<<<< HEAD
 		https://sources.buildroot.net/$(PKG_NAME)
 PKG_HASH:=3311dff32e746499f4df0d5df04d7eb396382d7e108bb9250e7b519b837043a4
 
@@ -23,6 +29,18 @@ endif
 
 PKG_CHECK_FORMAT_SECURITY:=0
 
+=======
+		http://sources.buildroot.net
+PKG_HASH:=6843ba7977081e735fa0fdb05893e3c002c8c5ad7c9c80da206e603cc0ac47e7
+
+PKG_BUILD_DEPENDS:=BUSYBOX_CONFIG_PAM:libpam
+PKG_BUILD_PARALLEL:=1
+PKG_CHECK_FORMAT_SECURITY:=0
+
+#Busybox use it's own PIE config flag and LDFLAGS are used with ld, not gcc.
+PKG_ASLR_PIE:=0
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=LICENSE archival/libarchive/bz/LICENSE
 PKG_CPE_ID:=cpe:/a:busybox:busybox
@@ -37,7 +55,11 @@ endif
 include $(INCLUDE_DIR)/package.mk
 
 ifeq ($(DUMP),)
+<<<<<<< HEAD
   STAMP_CONFIGURED:=$(strip $(STAMP_CONFIGURED))_$(shell grep '^CONFIG_BUSYBOX_' $(TOPDIR)/.config | $(MKHASH) md5)
+=======
+  STAMP_CONFIGURED:=$(strip $(STAMP_CONFIGURED))_$(shell grep '^CONFIG_BUSYBOX_' $(TOPDIR)/.config | mkhash md5)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 # All files provided by busybox will serve as fallback alternatives by opkg.
@@ -75,6 +97,7 @@ define Package/busybox/config
 	source "$(SOURCE)/Config.in"
 endef
 
+<<<<<<< HEAD
 ifneq ($(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_FEATURE_SYSLOG)$(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_FEATURE_SYSLOGD_CFG),)
 define Package/busybox/conffiles/syslog
 /etc/syslog.conf
@@ -93,25 +116,49 @@ $(Package/busybox/conffiles/crond)
 endef
 
 Package/busybox-selinux/conffiles = $(Package/busybox/conffiles)
+=======
+ifdef CONFIG_BUSYBOX_CONFIG_FEATURE_SYSLOG
+define Package/busybox/conffiles
+/etc/syslog.conf
+endef
+
+Package/busybox-selinux/conffiles = $(Package/busybox/conffiles)
+endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifndef CONFIG_USE_MUSL
 LDLIBS:=m crypt
 endif
 
 LDLIBS += $(call BUSYBOX_IF_ENABLED,PAM,pam pam_misc pthread)
+<<<<<<< HEAD
 
 ifeq ($(CONFIG_USE_GLIBC),y)
   LDLIBS += $(call BUSYBOX_IF_ENABLED,NSLOOKUP,resolv)
+=======
+ifeq ($(CONFIG_USE_GLIBC),y)
+  LDLIBS += $(call BUSYBOX_IF_ENABLED,NSLOOKUP_OPENWRT,resolv)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 ifeq ($(BUILD_VARIANT),selinux)
   LDLIBS += selinux sepol
 endif
 
+<<<<<<< HEAD
 MAKE_VARS :=
 MAKE_FLAGS += \
 	EXTRA_CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" \
 	EXTRA_LDFLAGS="$(TARGET_LDFLAGS) $(TARGET_CFLAGS)" \
+=======
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto=jobserver -fuse-linker-plugin
+
+MAKE_VARS :=
+MAKE_FLAGS += \
+	EXTRA_CFLAGS="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS)" \
+	EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	LDLIBS="$(LDLIBS)" \
 	LD="$(TARGET_CC)" \
 	SKIP_STRIP=y
@@ -143,6 +190,7 @@ define Package/busybox/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(CP) $(PKG_INSTALL_DIR)/* $(1)/
+<<<<<<< HEAD
 	$(INSTALL_DIR) $(1)/etc/profile.d
 	$(INSTALL_BIN) ./files/busybox-history-file.sh $(1)/etc/profile.d
 ifneq ($(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_FEATURE_SYSLOG)$(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_FEATURE_SYSLOGD_CFG),)
@@ -151,6 +199,10 @@ endif
 ifneq ($(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_CROND),)
 	$(INSTALL_BIN) ./files/cron $(1)/etc/init.d/cron
 	$(INSTALL_DIR) $(1)/etc/crontabs
+=======
+ifneq ($(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_CROND),)
+	$(INSTALL_BIN) ./files/cron $(1)/etc/init.d/cron
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 ifneq ($(CONFIG_BUSYBOX_$(BUSYBOX_SYM)_NTPD),)
 	$(INSTALL_BIN) ./files/sysntpd $(1)/etc/init.d/sysntpd

@@ -7,7 +7,11 @@ Signed-off-by: Steven Barth <steven@midlink.org>
 
 --- a/Makefile
 +++ b/Makefile
+<<<<<<< HEAD
 @@ -67,7 +67,7 @@ CRT_LIBS = $(addprefix lib/,$(notdir $(C
+=======
+@@ -66,7 +66,7 @@ CRT_LIBS = $(addprefix lib/,$(notdir $(C
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  STATIC_LIBS = lib/libc.a
  SHARED_LIBS = lib/libc.so
  TOOL_LIBS = lib/musl-gcc.specs
@@ -16,7 +20,11 @@ Signed-off-by: Steven Barth <steven@midlink.org>
  ALL_TOOLS = obj/musl-gcc
  
  WRAPCC_GCC = gcc
+<<<<<<< HEAD
 @@ -88,7 +88,7 @@ else
+=======
+@@ -86,7 +86,7 @@ else
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  all: $(ALL_LIBS) $(ALL_TOOLS)
  
@@ -25,7 +33,11 @@ Signed-off-by: Steven Barth <steven@midlink.org>
  
  $(ALL_LIBS) $(ALL_TOOLS) $(ALL_OBJS) $(ALL_OBJS:%.o=%.lo) $(GENH) $(GENH_INT): | $(OBJ_DIRS)
  
+<<<<<<< HEAD
 @@ -115,6 +115,8 @@ obj/crt/rcrt1.o: $(srcdir)/ldso/dlstart.
+=======
+@@ -113,6 +113,8 @@ obj/crt/rcrt1.o: $(srcdir)/ldso/dlstart.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  obj/crt/Scrt1.o obj/crt/rcrt1.o: CFLAGS_ALL += -fPIC
  
@@ -34,7 +46,11 @@ Signed-off-by: Steven Barth <steven@midlink.org>
  OPTIMIZE_SRCS = $(wildcard $(OPTIMIZE_GLOBS:%=$(srcdir)/src/%))
  $(OPTIMIZE_SRCS:$(srcdir)/%.c=obj/%.o) $(OPTIMIZE_SRCS:$(srcdir)/%.c=obj/%.lo): CFLAGS += -O3
  
+<<<<<<< HEAD
 @@ -167,6 +169,11 @@ lib/libc.a: $(AOBJS)
+=======
+@@ -165,6 +167,11 @@ lib/libc.a: $(AOBJS)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	$(AR) rc $@ $(AOBJS)
  	$(RANLIB) $@
  

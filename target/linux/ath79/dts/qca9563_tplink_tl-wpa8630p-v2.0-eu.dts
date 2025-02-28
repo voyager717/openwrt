@@ -1,10 +1,15 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include "qca9563_tplink_tl-wpa8630.dtsi"
+=======
+#include "qca9563_tplink_tl-wpa8630p-v2.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,tl-wpa8630p-v2.0-eu", "qca,qca9563";
 	model = "TP-Link WPA8630P v2.0 (EU)";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &eth0;
@@ -30,12 +35,18 @@
 		reg = <0x040000 0x5e0000>;
 	};
 
+=======
+};
+
+&partitions {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	partition@620000 {
 		label = "partition-table";
 		reg = <0x620000 0x010000>;
 		read-only;
 	};
 
+<<<<<<< HEAD
 	partition@630000 {
 		label = "info";
 		reg = <0x630000 0x010000>;
@@ -52,6 +63,12 @@
 				#nvmem-cell-cells = <1>;
 			};
 		};
+=======
+	info: partition@630000 {
+		label = "info";
+		reg = <0x630000 0x010000>;
+		read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	partition@640000 {
@@ -60,6 +77,7 @@
 		read-only;
 	};
 
+<<<<<<< HEAD
 	partition@7f0000 {
 		label = "art";
 		reg = <0x7f0000 0x010000>;
@@ -99,3 +117,11 @@
 	nvmem-cells = <&macaddr_info_8 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+	art: partition@7f0000 {
+		label = "art";
+		reg = <0x7f0000 0x010000>;
+		read-only;
+	};
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

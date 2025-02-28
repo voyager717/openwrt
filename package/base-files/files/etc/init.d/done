@@ -5,7 +5,10 @@ START=95
 boot() {
 	mount_root done
 	rm -f /sysupgrade.tgz && sync
+<<<<<<< HEAD
 	rm -f /tmp/sysupgrade.tar && sync
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	# process user commands
 	[ -f /etc/rc.local ] && {

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+. /usr/share/libubox/jshn.sh
+. /lib/functions.sh
+
+##获得art分区
+artPartName='Factory'
+artPartBlock=$(find_mtd_part "$artPartName")
+if [ -z "${artPartBlock}" ];then
+
+    artPartName='factory'
+    artPartBlock=$(find_mmc_part "${artPartName}")
+fi
+
+##修改SSID
+br_mac=`hexdump -C -s 0x2a ${artPartBlock} | sed -n "1p" | cut -c 11-28 | sed 's/\ //g'`
+tail_mac=`echo "${br_mac}" | cut -c 7-12 | tr '[a-z]' '[A-Z]'`
+
+wificonf use /etc/wireless/mediatek/mt7981.dbdc.b0.dat
+old_ssid_2g=`wificonf get SSID1`
+if [ "${old_ssid_2g}" == "MTK_CHEETAH_AP_2.4G" ];then
+	wificonf set SSID1 WIFI6-2.4G-${tail_mac}
+fi
+
+wificonf use /etc/wireless/mediatek/mt7981.dbdc.b1.dat
+old_ssid_5g=`wificonf get SSID1`
+if [ "${old_ssid_5g}" == "MTK_CHEETAH_AP_5G" ];then
+	wificonf set SSID1 WIFI6-5G-${tail_mac}
+fi
+sync
+
+exit 0
+

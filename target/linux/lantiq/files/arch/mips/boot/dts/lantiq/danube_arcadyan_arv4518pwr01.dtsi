@@ -105,7 +105,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 14 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 14 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -124,8 +128,12 @@
 
 &gsw {
 	phy-mode = "mii";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_boardconfig_16>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&boardconfig 0x16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &localbus {
@@ -160,6 +168,7 @@
 				label = "boardconfig";
 				reg = <0x3f0000 0x10000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -170,6 +179,8 @@
 						reg = <0x16 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -192,7 +203,11 @@
 		    <&pci_req1_pins>, <&pci_req2_pins>;
 	pinctrl-names = "default";
 
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	req-mask = <0xf>;
 };
 

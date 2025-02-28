@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "NEC Aterm WG800HP";
@@ -38,14 +41,22 @@
 		};
 
 		led_power_red: power_red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -136,6 +147,7 @@
 				label = "board_data";
 				reg = <0x7e0000 0x010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -186,6 +198,14 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+			};
+
+			art: partition@7f0000 {
+				label = "art";
+				reg = <0x7f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -213,13 +233,17 @@
 
 	phy-mode = "sgmii";
 	phy-handle = <&phy0>;
+<<<<<<< HEAD
 
 	nvmem-cells = <&macaddr_board_data_280 0>;
 	nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -227,11 +251,17 @@
 		nvmem-cells = <&cal_art_5000>, <&macaddr_board_data_880 0>;
 		nvmem-cell-names = "calibration", "mac-address";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&macaddr_board_data_680 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	aliases {
@@ -30,8 +33,12 @@
 		compatible = "gpio-leds";
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -91,6 +98,7 @@
 				label = "pri-data";
 				reg = <0x050000 0x010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -119,6 +127,14 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			};
+
+			art: partition@60000 {
+				label = "art";
+				reg = <0x060000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -151,8 +167,13 @@
 
 	phy-handle = <&phy0>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_pridata_400 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&pridata 0x400>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
@@ -160,8 +181,12 @@
 
 	pll-data = <0x03000101 0x00000101 0x00001616>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_pridata_400 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&pridata 0x400>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	fixed-link {
 		speed = <1000>;
@@ -188,6 +213,10 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

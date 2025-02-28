@@ -133,14 +133,22 @@ class Path(object):
     def tar(path, subdir, into=None, ts=None):
         """Pack ``path`` into tarball ``into``."""
         # --sort=name requires a recent build of GNU tar
+<<<<<<< HEAD
         args = ['tar', '--numeric-owner', '--owner=0', '--group=0', '--sort=name', '--mode=a-s']
+=======
+        args = ['tar', '--numeric-owner', '--owner=0', '--group=0', '--sort=name']
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         args += ['-C', path, '-cf', into, subdir]
         envs = os.environ.copy()
         if ts is not None:
             args.append('--mtime=@%d' % ts)
+<<<<<<< HEAD
         if into.endswith('.zst'):
             args.append('-I zstd -T0 --ultra -20')
         elif into.endswith('.xz'):
+=======
+        if into.endswith('.xz'):
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
             envs['XZ_OPT'] = '-7e'
             args.append('-J')
         elif into.endswith('.bz2'):
@@ -209,7 +217,11 @@ class GitHubCommitTsCache(object):
 
 
 class DownloadGitHubTarball(object):
+<<<<<<< HEAD
     """Download and repack archive tarball from GitHub.
+=======
+    """Download and repack archive tarabll from GitHub.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     Compared with the method of packing after cloning the whole repo, this
     method is more friendly to users with fragile internet connection.
@@ -222,7 +234,11 @@ class DownloadGitHubTarball(object):
 
      - GitHub archives do not contain source codes for submodules.
 
+<<<<<<< HEAD
      - GitHub archives seem to respect .gitattributes and ignore paths with
+=======
+     - GitHub archives seem to respect .gitattributes and ignore pathes with
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
        export-ignore attributes.
 
     For the first two issues, the method will fail loudly to allow fallback to
@@ -241,7 +257,10 @@ class DownloadGitHubTarball(object):
         self.version = args.version
         self.subdir = args.subdir
         self.source = args.source
+<<<<<<< HEAD
         self.submodules = args.submodules
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         self.url = args.url
         self._init_owner_repo()
         self.xhash = args.hash
@@ -252,8 +271,11 @@ class DownloadGitHubTarball(object):
 
     def download(self):
         """Download and repack GitHub archive tarball."""
+<<<<<<< HEAD
         if self.submodules and self.submodules != ['skip']:
             raise self._error('Fetching submodules is not yet supported')
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         self._init_commit_ts()
         with Path(TMPDIR_DL, keep=True) as dir_dl:
             # fetch tarball from GitHub
@@ -267,7 +289,11 @@ class DownloadGitHubTarball(object):
                     dir0 = os.path.join(dir_untar.path, tarball_prefix)
                     dir1 = os.path.join(dir_untar.path, self.subdir)
                     # submodules check
+<<<<<<< HEAD
                     if self.submodules != ['skip'] and self._has_submodule(dir0):
+=======
+                    if self._has_submodule(dir0):
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
                         raise self._error('Fetching submodules is not yet supported')
                     # rename subdir
                     os.rename(dir0, dir1)
@@ -420,7 +446,10 @@ def main():
     parser.add_argument('--version', help='Source code version')
     parser.add_argument('--source', help='Source tarball filename')
     parser.add_argument('--hash', help='Source tarball\'s expected sha256sum')
+<<<<<<< HEAD
     parser.add_argument('--submodules', nargs='*', help='List of submodules, or "skip"')
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     args = parser.parse_args()
     try:
         method = DownloadGitHubTarball(args)

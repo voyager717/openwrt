@@ -1,6 +1,10 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -427,7 +427,7 @@ EOF
+=======
+@@ -425,7 +425,7 @@ EOF
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  check_cap()
  {

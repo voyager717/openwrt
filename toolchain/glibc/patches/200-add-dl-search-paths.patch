@@ -2,7 +2,11 @@ add /usr/lib to default search path for the dynamic linker
 
 --- a/Makeconfig
 +++ b/Makeconfig
+<<<<<<< HEAD
 @@ -632,6 +632,9 @@ else
+=======
+@@ -601,6 +601,9 @@ else
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  default-rpath = $(libdir)
  endif
  

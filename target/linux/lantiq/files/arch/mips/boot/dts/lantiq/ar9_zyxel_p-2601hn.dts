@@ -1,11 +1,18 @@
 #include "ar9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
 	compatible = "zyxel,p-2601hn", "lantiq,xway", "lantiq,ar9";
 	model = "Zyxel P-2601HN-Fx";
+=======
+
+/ {
+	compatible = "zyxel,p-2601hn", "lantiq,xway", "lantiq,ar9";
+	model = "ZyXEL P-2601HN-Fx";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	chosen {
 		bootargs = "console=ttyLTQ0,115200";
@@ -47,14 +54,22 @@
 		compatible = "gpio-leds";
 
 		power_green: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&stp 11 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
 		power_red: power2 {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 29 GPIO_ACTIVE_LOW>;
 		};
 		online: online {
@@ -106,7 +121,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 9 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };

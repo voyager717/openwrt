@@ -34,7 +34,11 @@ define KernelPackage/hwmon-ad7418
   KCONFIG:=CONFIG_SENSORS_AD7418
   FILES:=$(LINUX_DIR)/drivers/hwmon/ad7418.ko
   AUTOLOAD:=$(call AutoLoad,60,ad7418 ad7418)
+<<<<<<< HEAD
   $(call AddDepends/hwmon,+kmod-i2c-core +kmod-regmap-core)
+=======
+  $(call AddDepends/hwmon,+kmod-i2c-core)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/hwmon-ad7418/description
@@ -43,6 +47,23 @@ endef
 
 $(eval $(call KernelPackage,hwmon-ad7418))
 
+<<<<<<< HEAD
+=======
+define KernelPackage/hwmon-ads1015
+  TITLE:=Texas Instruments ADS1015
+  KCONFIG:= CONFIG_SENSORS_ADS1015
+  FILES:= $(LINUX_DIR)/drivers/hwmon/ads1015.ko
+  AUTOLOAD:=$(call AutoLoad,60,ads1015)
+  $(call AddDepends/hwmon,+kmod-i2c-core)
+endef
+
+define KernelPackage/hwmon-ads1015/description
+ Kernel module for Texas Instruments ADS1015 Analog-to-Digital converter
+endef
+
+$(eval $(call KernelPackage,hwmon-ads1015))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-adt7410
   TITLE:=ADT7410 monitoring support
   KCONFIG:= \
@@ -52,7 +73,11 @@ define KernelPackage/hwmon-adt7410
 	$(LINUX_DIR)/drivers/hwmon/adt7x10.ko \
 	$(LINUX_DIR)/drivers/hwmon/adt7410.ko
   AUTOLOAD:=$(call AutoLoad,60,adt7x10 adt7410)
+<<<<<<< HEAD
   $(call AddDepends/hwmon,+kmod-i2c-core +kmod-regmap-core)
+=======
+  $(call AddDepends/hwmon,+kmod-i2c-core)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/hwmon-adt7410/description
@@ -77,6 +102,7 @@ endef
 $(eval $(call KernelPackage,hwmon-adt7475))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-coretemp
   TITLE:=Intel Core/Core2/Atom temperature sensor
   KCONFIG:=CONFIG_SENSORS_CORETEMP
@@ -94,6 +120,8 @@ endef
 $(eval $(call KernelPackage,hwmon-coretemp))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-dme1737
   TITLE:=SMSC DME1737 and compatible monitoring support
   KCONFIG:=CONFIG_SENSORS_DME1737
@@ -125,6 +153,7 @@ endef
 $(eval $(call KernelPackage,hwmon-drivetemp))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-emc2305
   TITLE:=Microchip EMC2301/2/3/5 fan controller
   KCONFIG:=CONFIG_SENSORS_EMC2305
@@ -159,6 +188,8 @@ endef
 $(eval $(call KernelPackage,hwmon-gsc))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-gpiofan
   TITLE:=Generic GPIO FAN support
   KCONFIG:=CONFIG_SENSORS_GPIO_FAN
@@ -189,6 +220,7 @@ endef
 $(eval $(call KernelPackage,hwmon-f71882fg))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-g762
   TITLE:=G762/G763 fan speed PWM controller support
   KCONFIG:=CONFIG_SENSORS_G762
@@ -204,6 +236,8 @@ endef
 $(eval $(call KernelPackage,hwmon-g762))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-ina209
   TITLE:=INA209 monitoring support
   KCONFIG:=CONFIG_SENSORS_INA209
@@ -249,6 +283,7 @@ endef
 $(eval $(call KernelPackage,hwmon-it87))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-jc42
   TITLE:=Jedec JC42.4 compliant temperature sensors support
   KCONFIG:=CONFIG_SENSORS_JC42
@@ -264,6 +299,8 @@ endef
 $(eval $(call KernelPackage,hwmon-jc42))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-lm63
   TITLE:=LM63/64 monitoring support
   KCONFIG:=CONFIG_SENSORS_LM63
@@ -279,6 +316,7 @@ endef
 $(eval $(call KernelPackage,hwmon-lm63))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-lm70
   TITLE:=LM70 monitoring support
   KCONFIG:=CONFIG_SENSORS_LM70 \
@@ -296,6 +334,8 @@ endef
 $(eval $(call KernelPackage,hwmon-lm70))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-lm75
   TITLE:=LM75 monitoring support
   KCONFIG:=CONFIG_SENSORS_LM75
@@ -401,6 +441,7 @@ endef
 $(eval $(call KernelPackage,hwmon-ltc4151))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-max6642
   TITLE:=MAX6642 monitoring support
   KCONFIG:=CONFIG_SENSORS_MAX6642
@@ -431,6 +472,8 @@ endef
 $(eval $(call KernelPackage,hwmon-max6697))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-mcp3021
   TITLE:=MCP3021/3221 monitoring support
   KCONFIG:=CONFIG_SENSORS_MCP3021
@@ -449,11 +492,17 @@ $(eval $(call KernelPackage,hwmon-mcp3021))
 define KernelPackage/hwmon-nct6775
   TITLE:=NCT6106D/6775F/6776F/6779D/6791D/6792D/6793D and compatibles monitoring support
   KCONFIG:=CONFIG_SENSORS_NCT6775
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/drivers/hwmon/nct6775.ko \
 	$(LINUX_DIR)/drivers/hwmon/nct6775-core.ko
   AUTOLOAD:=$(call AutoProbe,nct6775)
   $(call AddDepends/hwmon,@PCI_SUPPORT @TARGET_x86 +kmod-hwmon-vid +kmod-regmap-core)
+=======
+  FILES:=$(LINUX_DIR)/drivers/hwmon/nct6775.ko
+  AUTOLOAD:=$(call AutoProbe,nct6775)
+  $(call AddDepends/hwmon,@PCI_SUPPORT @TARGET_x86 +kmod-hwmon-vid)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/hwmon-nct6775/description
@@ -463,6 +512,7 @@ endef
 $(eval $(call KernelPackage,hwmon-nct6775))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-nct7802
   TITLE:=NCT7802Y and compatibles monitoring support
   KCONFIG:=CONFIG_SENSORS_NCT7802
@@ -478,6 +528,8 @@ endef
 $(eval $(call KernelPackage,hwmon-nct7802))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-pc87360
   TITLE:=PC87360 monitoring support
   KCONFIG:=CONFIG_SENSORS_PC87360
@@ -572,6 +624,7 @@ endef
 $(eval $(call KernelPackage,hwmon-sht21))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-sht3x
   TITLE:=Sensiron SHT3x and compat. monitoring support
   KCONFIG:=CONFIG_SENSORS_SHT3x
@@ -602,6 +655,8 @@ endef
 $(eval $(call KernelPackage,hwmon-tc654))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-tmp102
   TITLE:=Texas Instruments TMP102 monitoring support
   KCONFIG:=CONFIG_SENSORS_TMP102
@@ -647,6 +702,7 @@ endef
 $(eval $(call KernelPackage,hwmon-tmp421))
 
 
+<<<<<<< HEAD
 define KernelPackage/hwmon-tps23861
   TITLE:=Texas Instruments TPS23861 PoE PSE
   KCONFIG:=CONFIG_SENSORS_TPS23861
@@ -661,6 +717,8 @@ endef
 
 $(eval $(call KernelPackage,hwmon-tps23861))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/hwmon-vid
   TITLE:=VID/VRM/VRD voltage conversion module.
   KCONFIG:=CONFIG_HWMON_VID

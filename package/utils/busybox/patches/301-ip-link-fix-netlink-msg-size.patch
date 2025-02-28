@@ -1,6 +1,10 @@
 --- a/networking/libiproute/iplink.c
 +++ b/networking/libiproute/iplink.c
+<<<<<<< HEAD
 @@ -953,7 +953,7 @@ static int do_add_or_delete(char **argv,
+=======
+@@ -652,7 +652,7 @@ static int do_add_or_delete(char **argv,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	}
  	xrtnl_open(&rth);
  	ll_init_map(&rth);

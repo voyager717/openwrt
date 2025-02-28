@@ -16,6 +16,11 @@ Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
  drivers/net/phy/mv88e61xx.c | 14 ++++++++++++++
  1 file changed, 14 insertions(+)
 
+<<<<<<< HEAD
+=======
+diff --git a/drivers/net/phy/mv88e61xx.c b/drivers/net/phy/mv88e61xx.c
+index 889327639d..e0b648a54e 100644
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/drivers/net/phy/mv88e61xx.c
 +++ b/drivers/net/phy/mv88e61xx.c
 @@ -180,6 +180,7 @@
@@ -26,7 +31,11 @@ Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
  #define PORT_SWITCH_ID_6172		0x1720
  #define PORT_SWITCH_ID_6176		0x1760
  #define PORT_SWITCH_ID_6220		0x2200
+<<<<<<< HEAD
 @@ -997,6 +998,7 @@ static int mv88e61xx_probe(struct phy_de
+=======
+@@ -997,6 +998,7 @@ static int mv88e61xx_probe(struct phy_device *phydev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	switch (priv->id) {
  	case PORT_SWITCH_ID_6096:
  	case PORT_SWITCH_ID_6097:
@@ -34,7 +43,11 @@ Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
  	case PORT_SWITCH_ID_6172:
  	case PORT_SWITCH_ID_6176:
  	case PORT_SWITCH_ID_6240:
+<<<<<<< HEAD
 @@ -1152,6 +1154,17 @@ static struct phy_driver mv88e61xx_drive
+=======
+@@ -1152,6 +1154,17 @@ static struct phy_driver mv88e61xx_driver = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	.shutdown = &genphy_shutdown,
  };
  
@@ -52,7 +65,11 @@ Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
  static struct phy_driver mv88e609x_driver = {
  	.name = "Marvell MV88E609x",
  	.uid = 0x1410c89,
+<<<<<<< HEAD
 @@ -1177,6 +1190,7 @@ static struct phy_driver mv88e6071_drive
+=======
+@@ -1177,6 +1190,7 @@ static struct phy_driver mv88e6071_driver = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  int phy_mv88e61xx_init(void)
  {
  	phy_register(&mv88e61xx_driver);
@@ -60,3 +77,9 @@ Signed-off-by: Pawel Dembicki <paweldembicki@gmail.com>
  	phy_register(&mv88e609x_driver);
  	phy_register(&mv88e6071_driver);
  
+<<<<<<< HEAD
+=======
+-- 
+2.20.1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

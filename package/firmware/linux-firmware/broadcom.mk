@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Package/brcmfmac-firmware-4339-sdio = $(call Package/firmware-default,Broadcom 4339 FullMAC SDIO firmware,,LICENCE.cypressb)
 define Package/brcmfmac-firmware-4339-sdio/install
 	$(INSTALL_DIR) $(1)/lib/firmware/cypress
@@ -12,6 +13,9 @@ endef
 $(eval $(call BuildPackage,brcmfmac-firmware-4339-sdio))
 
 Package/brcmfmac-firmware-43602a1-pcie = $(call Package/firmware-default,Broadcom 43602a1 FullMAC PCIe firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-43602a1-pcie = $(call Package/firmware-default,Broadcom 43602a1 FullMAC PCIe firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-43602a1-pcie/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -20,7 +24,11 @@ define Package/brcmfmac-firmware-43602a1-pcie/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-43602a1-pcie))
 
+<<<<<<< HEAD
 Package/brcmfmac-firmware-4366b1-pcie = $(call Package/firmware-default,Broadcom 4366b1 FullMAC PCIe firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-4366b1-pcie = $(call Package/firmware-default,Broadcom 4366b1 FullMAC PCIe firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-4366b1-pcie/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -29,7 +37,11 @@ define Package/brcmfmac-firmware-4366b1-pcie/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-4366b1-pcie))
 
+<<<<<<< HEAD
 Package/brcmfmac-firmware-4366c0-pcie = $(call Package/firmware-default,Broadcom 4366c0 FullMAC PCIe firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-4366c0-pcie = $(call Package/firmware-default,Broadcom 4366c0 FullMAC PCIe firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-4366c0-pcie/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -38,7 +50,11 @@ define Package/brcmfmac-firmware-4366c0-pcie/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-4366c0-pcie))
 
+<<<<<<< HEAD
 Package/brcmfmac-firmware-4329-sdio = $(call Package/firmware-default,Broadcom BCM4329 FullMac SDIO firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-4329-sdio = $(call Package/firmware-default,Broadcom BCM4329 FullMac SDIO firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-4329-sdio/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -47,6 +63,7 @@ define Package/brcmfmac-firmware-4329-sdio/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-4329-sdio))
 
+<<<<<<< HEAD
 Package/brcmfmac-nvram-43430-sdio = $(call Package/firmware-default,Broadcom BCM43430 SDIO NVRAM,,LICENCE.broadcom_bcm43xx)
 define Package/brcmfmac-nvram-43430-sdio/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
@@ -96,6 +113,27 @@ endef
 $(eval $(call BuildPackage,brcmfmac-nvram-43430-sdio))
 
 Package/brcmfmac-firmware-43430a0-sdio = $(call Package/firmware-default,Broadcom BCM43430a0 FullMac SDIO firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-43430-sdio-rpi-3b = $(call Package/firmware-default,Broadcom BCM43430 NVRAM for Raspberry Pi 3B)
+define Package/brcmfmac-firmware-43430-sdio-rpi-3b/install
+	$(INSTALL_DIR) $(1)/lib/firmware/brcm
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/brcm/brcmfmac43430-sdio.raspberrypi,3-model-b.txt \
+		$(1)/lib/firmware/brcm/brcmfmac43430-sdio.raspberrypi,3-model-b.txt
+endef
+$(eval $(call BuildPackage,brcmfmac-firmware-43430-sdio-rpi-3b))
+
+Package/brcmfmac-firmware-43430-sdio-rpi-zero-w = $(call Package/firmware-default,Broadcom BCM43430 NVRAM for Raspberry Pi Zero W)
+define Package/brcmfmac-firmware-43430-sdio-rpi-zero-w/install
+	$(INSTALL_DIR) $(1)/lib/firmware/brcm
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/brcm/brcmfmac43430-sdio.raspberrypi,3-model-b.txt \
+		$(1)/lib/firmware/brcm/brcmfmac43430-sdio.raspberrypi,model-zero-w.txt
+endef
+$(eval $(call BuildPackage,brcmfmac-firmware-43430-sdio-rpi-zero-w))
+
+Package/brcmfmac-firmware-43430a0-sdio = $(call Package/firmware-default,Broadcom BCM43430a0 FullMac SDIO firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-43430a0-sdio/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -104,6 +142,7 @@ define Package/brcmfmac-firmware-43430a0-sdio/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-43430a0-sdio))
 
+<<<<<<< HEAD
 Package/brcmfmac-nvram-43455-sdio = $(call Package/firmware-default,Broadcom BCM43455 SDIO NVRAM,,LICENCE.broadcom_bcm43xx)
 define Package/brcmfmac-nvram-43455-sdio/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
@@ -168,6 +207,27 @@ endef
 $(eval $(call BuildPackage,brcmfmac-nvram-4356-sdio))
 
 Package/brcmfmac-firmware-usb = $(call Package/firmware-default,Broadcom BCM43xx fullmac USB firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmfmac-firmware-43455-sdio-rpi-3b-plus = $(call Package/firmware-default,Broadcom BCM43455 NVRAM for Raspberry Pi 3B+)
+define Package/brcmfmac-firmware-43455-sdio-rpi-3b-plus/install
+	$(INSTALL_DIR) $(1)/lib/firmware/brcm
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/brcm/brcmfmac43455-sdio.raspberrypi,3-model-b-plus.txt \
+		$(1)/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,3-model-b-plus.txt
+endef
+$(eval $(call BuildPackage,brcmfmac-firmware-43455-sdio-rpi-3b-plus))
+
+Package/brcmfmac-firmware-43455-sdio-rpi-4b = $(call Package/firmware-default,Broadcom BCM43455 NVRAM for Raspberry Pi 4B)
+define Package/brcmfmac-firmware-43455-sdio-rpi-4b/install
+	$(INSTALL_DIR) $(1)/lib/firmware/brcm
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/brcm/brcmfmac43455-sdio.raspberrypi,4-model-b.txt \
+		$(1)/lib/firmware/brcm/brcmfmac43455-sdio.raspberrypi,4-model-b.txt
+endef
+$(eval $(call BuildPackage,brcmfmac-firmware-43455-sdio-rpi-4b))
+
+Package/brcmfmac-firmware-usb = $(call Package/firmware-default,Broadcom BCM43xx fullmac USB firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmfmac-firmware-usb/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \
@@ -179,7 +239,11 @@ define Package/brcmfmac-firmware-usb/install
 endef
 $(eval $(call BuildPackage,brcmfmac-firmware-usb))
 
+<<<<<<< HEAD
 Package/brcmsmac-firmware = $(call Package/firmware-default,Broadcom BCM43xx softmac PCIe firmware,,LICENCE.broadcom_bcm43xx)
+=======
+Package/brcmsmac-firmware = $(call Package/firmware-default,Broadcom BCM43xx softmac PCIe firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/brcmsmac-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/brcm
 	$(INSTALL_DATA) \

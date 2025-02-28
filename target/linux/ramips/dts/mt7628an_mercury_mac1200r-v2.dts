@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "mercury,mac1200r-v2", "mediatek,mt7628an-soc";
@@ -19,8 +22,12 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -44,6 +51,7 @@
 				reg = <0x0 0x1d800>;
 			};
 
+<<<<<<< HEAD
 			partition@1d800 {
 				label = "factory_info";
 				reg = <0x1d800 0x800>;
@@ -78,6 +86,18 @@
 						reg = <0x1000 0x200>;
 					};
 				};
+=======
+			factory: partition@1d800 {
+				label = "factory_info";
+				reg = <0x1d800 0x800>;
+				read-only;
+			};
+
+			art: partition@1e000 {
+				label = "art";
+				reg = <0x1e000 0x2000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -101,8 +121,12 @@
 
 &ethernet {
 	pinctrl-names = "default";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_d>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0xd>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -111,9 +135,13 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -123,8 +151,12 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_art_1000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };

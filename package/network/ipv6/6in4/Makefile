@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=6in4
+<<<<<<< HEAD
 PKG_RELEASE:=29
+=======
+PKG_RELEASE:=26
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk
@@ -16,7 +20,11 @@ include $(INCLUDE_DIR)/package.mk
 define Package/6in4
   SECTION:=net
   CATEGORY:=Network
+<<<<<<< HEAD
   DEPENDS:=@IPV6 +kmod-sit +uclient-fetch +resolveip
+=======
+  DEPENDS:=@IPV6 +kmod-sit +uclient-fetch
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=IPv6-in-IPv4 configuration support
   MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
   PKGARCH:=all

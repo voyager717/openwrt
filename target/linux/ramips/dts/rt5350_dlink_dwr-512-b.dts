@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dwr-512-b", "ralink,rt5350-soc";
@@ -16,7 +19,12 @@
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		wps {
 			label = "wps";
@@ -39,8 +47,12 @@
 			gpios = <&gpio0 8 GPIO_ACTIVE_HIGH>;
 		};
 		led_status: status {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 		2g {
@@ -103,6 +115,7 @@
 				reg = <0x10000 0x7e0000>;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "config";
 				reg = <0x7f0000 0x10000>;
@@ -120,6 +133,11 @@
 						reg = <0xe08a 0x200>;
 					};
 				};
+=======
+			config: partition@7f0000 {
+				label = "config";
+				reg = <0x7f0000 0x10000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -131,7 +149,11 @@
 	spidev@0 {
 		#address-cells = <1>;
 		#size-cells = <1>;
+<<<<<<< HEAD
 		compatible = "silabs,si3210";
+=======
+		compatible = "siliconlabs,si3210";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reg = <0>;
 		spi-max-frequency = <1000000>;
@@ -150,6 +172,7 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_config_e07e>;
 	nvmem-cell-names = "mac-address";
 };
@@ -158,4 +181,13 @@
 	ralink,led-polarity = <1>;
 	nvmem-cells = <&eeprom_config_e08a>, <&macaddr_config_e07e>;
 	nvmem-cell-names = "eeprom", "mac-address";
+=======
+	mtd-mac-address = <&config 0xe07e>;
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&config 0xe08a>;
+	ralink,led-polarity = <1>;
+	mtd-mac-address = <&config 0xe07e>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

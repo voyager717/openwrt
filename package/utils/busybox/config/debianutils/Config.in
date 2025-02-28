@@ -7,12 +7,20 @@
 menu "Debian Utilities"
 
 config BUSYBOX_CONFIG_PIPE_PROGRESS
+<<<<<<< HEAD
 	bool "pipe_progress (576 bytes)"
+=======
+	bool "pipe_progress (275 bytes)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_PIPE_PROGRESS
 	help
 	Display a dot to indicate pipe activity.
 config BUSYBOX_CONFIG_RUN_PARTS
+<<<<<<< HEAD
 	bool "run-parts (6.2 kb)"
+=======
+	bool "run-parts (6.1 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_RUN_PARTS
 	help
 	run-parts is a utility designed to run all the scripts in a directory.
@@ -61,7 +69,11 @@ config BUSYBOX_CONFIG_FEATURE_START_STOP_DAEMON_FANCY
 	-v|--verbose
 	-N|--nicelevel N
 config BUSYBOX_CONFIG_WHICH
+<<<<<<< HEAD
 	bool "which (4 kb)"
+=======
+	bool "which (3.8 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_WHICH
 	help
 	which is used to find programs in your PATH and

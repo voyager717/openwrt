@@ -38,6 +38,7 @@
 
 &pcie0 {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -45,6 +46,8 @@
 		nvmem-cells = <&cal_art_5000>, <&macaddr_art_0 (-1)>;
 		nvmem-cell-names = "calibration", "mac-address";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -72,6 +75,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@50000 {
 				label = "art";
 				reg = <0x050000 0x010000>;
@@ -96,6 +100,12 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+			art: partition@50000 {
+				label = "art";
+				reg = <0x050000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@60000 {
@@ -126,8 +136,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x00>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-handle = <&phy4>;
 
 	gmac_config: gmac-config {
@@ -140,6 +154,12 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 (-2)>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x00>;
+	mtd-mac-address-increment = <(-2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

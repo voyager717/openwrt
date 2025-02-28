@@ -37,6 +37,7 @@
 #define __LITTLE_ENDIAN LITTLE_ENDIAN
 #endif
 
+<<<<<<< HEAD
 #ifndef __linux__
 #if __BYTE_ORDER == __LITTLE_ENDIAN
 #define htobe16(x) bswap_16(x)
@@ -85,4 +86,6 @@
 #endif
 #endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #endif

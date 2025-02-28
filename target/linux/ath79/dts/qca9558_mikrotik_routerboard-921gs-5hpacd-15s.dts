@@ -17,6 +17,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &mdio1 {
 	status = "okay";
 };
@@ -25,6 +26,8 @@
 	status = "okay";
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie1 {
 	status = "okay";
 

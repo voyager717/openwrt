@@ -13,7 +13,11 @@ define Profile/Default
 	kmod-sun4i-emac \
 	rtl8188eu-firmware \
 	swconfig \
+<<<<<<< HEAD
 	wpad-basic-mbedtls
+=======
+	wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   PRIORITY := 1
 endef
 

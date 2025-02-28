@@ -16,7 +16,10 @@ reload_service() {
 start_service() {
 	procd_open_instance
 	procd_set_param command "$PROG"
+<<<<<<< HEAD
 	procd_set_param watch block
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	procd_set_param respawn
 	procd_close_instance
 }

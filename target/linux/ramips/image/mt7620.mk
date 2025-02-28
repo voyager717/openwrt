@@ -2,7 +2,10 @@
 # MT7620A Profiles
 #
 
+<<<<<<< HEAD
 include ./common-sercomm.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include ./common-tp-link.mk
 
 DEVICE_VARS += DLINK_ROM_ID DLINK_FAMILY_MEMBER DLINK_FIRMWARE_SIZE DLINK_IMAGE_OFFSET
@@ -10,9 +13,15 @@ DEVICE_VARS += DLINK_ROM_ID DLINK_FAMILY_MEMBER DLINK_FIRMWARE_SIZE DLINK_IMAGE_
 define Build/elecom-header
 	cp $@ $(KDIR)/v_0.0.0.bin
 	( \
+<<<<<<< HEAD
 		$(MKHASH) md5 $(KDIR)/v_0.0.0.bin && \
 		echo 458 \
 	) | $(MKHASH) md5 > $(KDIR)/v_0.0.0.md5
+=======
+		mkhash md5 $(KDIR)/v_0.0.0.bin && \
+		echo 458 \
+	) | mkhash md5 > $(KDIR)/v_0.0.0.md5
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(STAGING_DIR_HOST)/bin/tar -c \
 		$(if $(SOURCE_DATE_EPOCH),--mtime=@$(SOURCE_DATE_EPOCH)) \
 		--owner=0 --group=0 -f $@ -C $(KDIR) v_0.0.0.bin v_0.0.0.md5
@@ -55,13 +64,18 @@ define Device/alfa-network_tube-e4g
   DEVICE_VENDOR := ALFA Network
   DEVICE_MODEL := Tube-E4G
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci uboot-envtools uqmi -iwinfo \
+<<<<<<< HEAD
 	-kmod-rt2800-soc -wpad-basic-mbedtls
+=======
+	-kmod-rt2800-soc -wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += tube-e4g
 endef
 TARGET_DEVICES += alfa-network_tube-e4g
 
 define Device/amit_jboot
   DLINK_IMAGE_OFFSET := 0x10000
+<<<<<<< HEAD
   KERNEL := $(KERNEL_DTB) | uImage lzma -M 0x4f4b4c49
   LOADER_FLASH_OFFS := 0x20000
   LOADER_TYPE := bin
@@ -92,6 +106,20 @@ define Device/asus_rp-n53
   SOC := mt7620a
   IMAGE_SIZE := 7872k
   DEVICE_VENDOR := ASUS
+=======
+  KERNEL := $(KERNEL_DTB)
+  KERNEL_SIZE := 2048k
+  IMAGES += factory.bin
+  IMAGE/sysupgrade.bin := mkdlinkfw | pad-rootfs | append-metadata
+  IMAGE/factory.bin := mkdlinkfw | pad-rootfs | mkdlinkfw-factory
+  DEVICE_PACKAGES := jboot-tools kmod-usb2 kmod-usb-ohci
+endef
+
+define Device/asus_rp-n53
+  SOC := mt7620a
+  IMAGE_SIZE := 7872k
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := RP-N53
   DEVICE_PACKAGES := kmod-rt2800-pci
   SUPPORTED_DEVICES += rp-n53
@@ -101,7 +129,11 @@ TARGET_DEVICES += asus_rp-n53
 define Device/asus_rt-ac51u
   SOC := mt7620a
   IMAGE_SIZE := 16064k
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
+=======
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := RT-AC51U
   DEVICE_PACKAGES := kmod-mt76x0e kmod-usb2 kmod-usb-ohci \
 	kmod-usb-ledtrig-usbport
@@ -112,7 +144,11 @@ TARGET_DEVICES += asus_rt-ac51u
 define Device/asus_rt-ac54u
   SOC := mt7620a
   IMAGE_SIZE := 16064k
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
+=======
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := RT-AC54U
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci \
 	kmod-usb-ledtrig-usbport
@@ -122,17 +158,27 @@ TARGET_DEVICES += asus_rt-ac54u
 define Device/asus_rt-n12p
   SOC := mt7620n
   IMAGE_SIZE := 16064k
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
   DEVICE_MODEL := RT-N11P/RT-N12+/RT-N12Eb1
   SUPPORTED_DEVICES += rt-n12p
   DEFAULT := n
+=======
+  DEVICE_VENDOR := Asus
+  DEVICE_MODEL := RT-N11P/RT-N12+/RT-N12Eb1
+  SUPPORTED_DEVICES += rt-n12p
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += asus_rt-n12p
 
 define Device/asus_rt-n14u
   SOC := mt7620n
   IMAGE_SIZE := 16064k
+<<<<<<< HEAD
   DEVICE_VENDOR := ASUS
+=======
+  DEVICE_VENDOR := Asus
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := RT-N14u
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci
   SUPPORTED_DEVICES += rt-n14u
@@ -145,6 +191,7 @@ define Device/bdcom_wap2100-sk
   DEVICE_VENDOR := BDCOM
   DEVICE_MODEL := WAP2100-SK (ZTE ZXECS EBG3130)
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mt76x2 kmod-mt76x0e \
+<<<<<<< HEAD
 	kmod-mmc-mtk kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += bdcom_wap2100-sk
@@ -159,6 +206,12 @@ define Device/bolt_bl100
 endef
 TARGET_DEVICES += bolt_bl100
 
+=======
+	kmod-sdhci-mt7620 kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += bdcom_wap2100-sk
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/buffalo_whr-1166d
   SOC := mt7620a
   IMAGE_SIZE := 16064k
@@ -203,13 +256,20 @@ define Device/comfast_cf-wr800n
   DEVICE_VENDOR := Comfast
   DEVICE_MODEL := CF-WR800N
   SUPPORTED_DEVICES += cf-wr800n
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += comfast_cf-wr800n
 
 define Device/dlink_dch-m225
   $(Device/seama)
   SOC := mt7620a
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SEAMA_SIGNATURE := wapn22_dlink.2013gui_dap1320b
   IMAGE_SIZE := 6848k
   DEVICE_VENDOR := D-Link
@@ -223,7 +283,10 @@ define Device/dlink_dir-510l
   $(Device/amit_jboot)
   SOC := mt7620a
   IMAGE_SIZE := 14208k
+<<<<<<< HEAD
   LOADER_FLASH_OFFS := 0x220000
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-510L
   DEVICE_PACKAGES += kmod-mt76x0e
@@ -234,6 +297,7 @@ define Device/dlink_dir-510l
 endef
 TARGET_DEVICES += dlink_dir-510l
 
+<<<<<<< HEAD
 define Device/dlink_dir-806a-b1
   SOC := mt7620a
   IMAGE_SIZE := 7872k
@@ -247,6 +311,8 @@ define Device/dlink_dir-806a-b1
 endef
 TARGET_DEVICES += dlink_dir-806a-b1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dlink_dir-810l
   SOC := mt7620a
   DEVICE_PACKAGES := kmod-mt76x0e
@@ -267,7 +333,10 @@ define Device/dlink_dwr-116-a1
   DLINK_ROM_ID := DLK6E3803001
   DLINK_FAMILY_MEMBER := 0x6E38
   DLINK_FIRMWARE_SIZE := 0x7E0000
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += dlink_dwr-116-a1
 
@@ -352,6 +421,7 @@ define Device/dlink_dwr-960
 endef
 TARGET_DEVICES += dlink_dwr-960
 
+<<<<<<< HEAD
 define Device/dlink_dwr-961-a1
   $(Device/amit_jboot)
   SOC := mt7620a
@@ -394,6 +464,8 @@ define Device/domywifi_dw22d
 endef
 TARGET_DEVICES += domywifi_dw22d
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dovado_tiny-ac
   SOC := mt7620a
   IMAGE_SIZE := 7872k
@@ -404,6 +476,7 @@ define Device/dovado_tiny-ac
 endef
 TARGET_DEVICES += dovado_tiny-ac
 
+<<<<<<< HEAD
 define Device/edimax_br-6208ac-v2
   SOC := mt7620a
   DEVICE_VENDOR := Edimax
@@ -420,15 +493,25 @@ define Device/edimax_br-6208ac-v2
 endef
 TARGET_DEVICES += edimax_br-6208ac-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/edimax_br-6478ac-v2
   SOC := mt7620a
   DEVICE_VENDOR := Edimax
   DEVICE_MODEL := BR-6478AC
   DEVICE_VARIANT := V2
+<<<<<<< HEAD
   IMAGE_SIZE := 7744k
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
 	edimax-header -s CSYS -m RN68 -f 0x70000 -S 0x01100000 | pad-rootfs | \
 	check-size | append-metadata
+=======
+  BLOCKSIZE := 64k
+  IMAGE_SIZE := 7744k
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
+	edimax-header -s CSYS -m RN68 -f 0x70000 -S 0x01100000 | pad-rootfs | \
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci \
 	kmod-usb-ledtrig-usbport
 endef
@@ -438,10 +521,18 @@ define Device/edimax_ew-7476rpc
   SOC := mt7620a
   DEVICE_VENDOR := Edimax
   DEVICE_MODEL := EW-7476RPC
+<<<<<<< HEAD
   IMAGE_SIZE := 7744k
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
 	edimax-header -s CSYS -m RN79 -f 0x70000 -S 0x01100000 | pad-rootfs | \
 	check-size | append-metadata
+=======
+  BLOCKSIZE := 4k
+  IMAGE_SIZE := 7744k
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
+	edimax-header -s CSYS -m RN79 -f 0x70000 -S 0x01100000 | pad-rootfs | \
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-mt76x2 kmod-phy-realtek
 endef
 TARGET_DEVICES += edimax_ew-7476rpc
@@ -450,10 +541,18 @@ define Device/edimax_ew-7478ac
   SOC := mt7620a
   DEVICE_VENDOR := Edimax
   DEVICE_MODEL := EW-7478AC
+<<<<<<< HEAD
   IMAGE_SIZE := 7744k
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
 	edimax-header -s CSYS -m RN70 -f 0x70000 -S 0x01100000 | pad-rootfs | \
 	check-size | append-metadata
+=======
+  BLOCKSIZE := 4k
+  IMAGE_SIZE := 7744k
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
+	edimax-header -s CSYS -m RN70 -f 0x70000 -S 0x01100000 | pad-rootfs | \
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-mt76x2 kmod-phy-realtek
 endef
 TARGET_DEVICES += edimax_ew-7478ac
@@ -462,10 +561,18 @@ define Device/edimax_ew-7478apc
   SOC := mt7620a
   DEVICE_VENDOR := Edimax
   DEVICE_MODEL := EW-7478APC
+<<<<<<< HEAD
   IMAGE_SIZE := 7744k
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
 	edimax-header -s CSYS -m RN75 -f 0x70000 -S 0x01100000 | pad-rootfs | \
 	check-size | append-metadata
+=======
+  BLOCKSIZE := 4k
+  IMAGE_SIZE := 7744k
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | \
+	edimax-header -s CSYS -m RN75 -f 0x70000 -S 0x01100000 | pad-rootfs | \
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci \
 	kmod-usb-ledtrig-usbport
 endef
@@ -483,6 +590,7 @@ define Device/elecom_wrh-300cr
 endef
 TARGET_DEVICES += elecom_wrh-300cr
 
+<<<<<<< HEAD
 define Device/engenius_epg600
   $(Device/uimage-lzma-loader)
   SOC := mt7620a
@@ -499,6 +607,11 @@ TARGET_DEVICES += engenius_epg600
 
 define Device/engenius_esr600
   SOC := mt7620a
+=======
+define Device/engenius_esr600
+  SOC := mt7620a
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 15616k
   IMAGES += factory.dlf
   IMAGE/factory.dlf := $$(sysupgrade_bin) | check-size | \
@@ -518,7 +631,11 @@ define Device/fon_fon2601
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci
   KERNEL_INITRAMFS := $$(KERNEL) | uimage-padhdr
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | uimage-padhdr | \
+<<<<<<< HEAD
 	pad-rootfs | check-size | append-metadata
+=======
+	pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += fon_fon2601
 
@@ -557,27 +674,45 @@ define Device/head-weblink_hdrm200
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := Head Weblink
   DEVICE_MODEL := HDRM2000
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk \
+=======
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	uqmi kmod-usb-serial-option
 endef
 TARGET_DEVICES += head-weblink_hdrm200
 
 define Device/hiwifi_hc5661
   SOC := mt7620a
+<<<<<<< HEAD
   IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5661
   DEVICE_PACKAGES := kmod-mmc-mtk
+=======
+  IMAGE_SIZE := 15872k
+  DEVICE_VENDOR := HiWiFi
+  DEVICE_MODEL := HC5661
+  DEVICE_PACKAGES := kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += hc5661
 endef
 TARGET_DEVICES += hiwifi_hc5661
 
 define Device/hiwifi_hc5761
   SOC := mt7620a
+<<<<<<< HEAD
   IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5761
   DEVICE_PACKAGES := kmod-mt76x0e kmod-usb2 kmod-usb-ohci kmod-mmc-mtk \
+=======
+  IMAGE_SIZE := 15872k
+  DEVICE_VENDOR := HiWiFi
+  DEVICE_MODEL := HC5761
+  DEVICE_PACKAGES := kmod-mt76x0e kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	kmod-usb-ledtrig-usbport
   SUPPORTED_DEVICES += hc5761
 endef
@@ -585,11 +720,19 @@ TARGET_DEVICES += hiwifi_hc5761
 
 define Device/hiwifi_hc5861
   SOC := mt7620a
+<<<<<<< HEAD
   IMAGE_SIZE := 15808k
   DEVICE_VENDOR := HiWiFi
   DEVICE_MODEL := HC5861
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk \
 	kmod-phy-realtek kmod-usb-ledtrig-usbport
+=======
+  IMAGE_SIZE := 15872k
+  DEVICE_VENDOR := HiWiFi
+  DEVICE_MODEL := HC5861
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
+	kmod-usb-ledtrig-usbport
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += hc5861
 endef
 TARGET_DEVICES += hiwifi_hc5861
@@ -599,11 +742,16 @@ define Device/hnet_c108
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := HNET
   DEVICE_MODEL := C108
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += c108
 endef
 TARGET_DEVICES += hnet_c108
 
+<<<<<<< HEAD
 define Device/humax_e2
   SOC := mt7620a
   IMAGE_SIZE := 7744k
@@ -618,6 +766,8 @@ define Device/humax_e2
 endef
 TARGET_DEVICES += humax_e2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/sunvalley_filehub_common
   SOC := mt7620n
   IMAGE_SIZE := 6144k
@@ -632,8 +782,11 @@ define Device/sunvalley_filehub_common
   IMAGES += kernel.bin rootfs.bin
   IMAGE/kernel.bin := append-loader-okli $(1) | check-size 64k
   IMAGE/rootfs.bin := $$(sysupgrade_bin) | check-size
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
        check-size 7744k | append-metadata
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/hootoo_ht-tm05
@@ -794,6 +947,7 @@ define Device/microduino_microwrt
 endef
 TARGET_DEVICES += microduino_microwrt
 
+<<<<<<< HEAD
 define Device/netcore_nw5212
   SOC := mt7620a
   IMAGE_SIZE := 16064k
@@ -803,10 +957,16 @@ define Device/netcore_nw5212
 endef
 TARGET_DEVICES += netcore_nw5212
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear_ex2700
   SOC := mt7620a
   NETGEAR_HW_ID := 29764623+4+0+32+2x2+0
   NETGEAR_BOARD_ID := EX2700
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3776k
   IMAGES += factory.bin
   KERNEL := $(KERNEL_DTB) | uImage lzma | pad-offset 64k 64 | \
@@ -822,6 +982,10 @@ TARGET_DEVICES += netgear_ex2700
 define Device/netgear_ex3700
   SOC := mt7620a
   NETGEAR_BOARD_ID := U12H319T00_NETGEAR
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 7744k
   IMAGES += factory.chk
   IMAGE/factory.chk := $$(sysupgrade_bin) | check-size | netgear-chk
@@ -835,6 +999,10 @@ TARGET_DEVICES += netgear_ex3700
 define Device/netgear_ex6120
   SOC := mt7620a
   NETGEAR_BOARD_ID := U12H319T30_NETGEAR
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 7744k
   IMAGES += factory.chk
   IMAGE/factory.chk := $$(sysupgrade_bin) | check-size | netgear-chk
@@ -847,6 +1015,10 @@ TARGET_DEVICES += netgear_ex6120
 define Device/netgear_ex6130
   SOC := mt7620a
   NETGEAR_BOARD_ID := U12H319T50_NETGEAR
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 7744k
   IMAGES += factory.chk
   IMAGE/factory.chk := $$(sysupgrade_bin) | check-size | netgear-chk
@@ -859,6 +1031,10 @@ TARGET_DEVICES += netgear_ex6130
 define Device/netgear_jwnr2010-v5
   $(Device/netgear_sercomm_nor)
   SOC := mt7620n
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3840k
   DEVICE_MODEL := JWNR2010
   DEVICE_VARIANT := v5
@@ -871,6 +1047,7 @@ define Device/netgear_jwnr2010-v5
 endef
 TARGET_DEVICES += netgear_jwnr2010-v5
 
+<<<<<<< HEAD
 define Device/netgear_pr2000
   $(Device/netgear_sercomm_nor)
   SOC := mt7620n
@@ -885,11 +1062,17 @@ define Device/netgear_pr2000
 endef
 TARGET_DEVICES += netgear_pr2000
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear_wn3000rp-v3
   SOC := mt7620a
   IMAGE_SIZE := 7872k
   NETGEAR_HW_ID := 29764836+8+0+32+2x2+0
   NETGEAR_BOARD_ID := WN3000RPv3
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += factory.bin
   KERNEL := $(KERNEL_DTB) | uImage lzma | pad-offset 64k 64 | \
 	append-uImage-fakehdr filesystem
@@ -898,6 +1081,7 @@ define Device/netgear_wn3000rp-v3
   DEVICE_MODEL := WN3000RP
   DEVICE_VARIANT := v3
   SUPPORTED_DEVICES += wn3000rpv3
+<<<<<<< HEAD
   DEFAULT := n
 endef
 TARGET_DEVICES += netgear_wn3000rp-v3
@@ -917,6 +1101,11 @@ define Device/netgear_wn3100rp-v2
 endef
 TARGET_DEVICES += netgear_wn3100rp-v2
 
+=======
+endef
+TARGET_DEVICES += netgear_wn3000rp-v3
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netis_wf2770
   SOC := mt7620a
   IMAGE_SIZE := 16064k
@@ -930,6 +1119,10 @@ TARGET_DEVICES += netis_wf2770
 
 define Device/nexx_wt3020-4m
   SOC := mt7620n
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 3776k
   IMAGES += factory.bin
   IMAGE/factory.bin := $$(sysupgrade_bin) | check-size | \
@@ -966,6 +1159,7 @@ define Device/ohyeah_oy-0001
 endef
 TARGET_DEVICES += ohyeah_oy-0001
 
+<<<<<<< HEAD
 define Device/phicomm_k2-v22.4
   SOC := mt7620a
   IMAGE_SIZE := 7872k
@@ -987,6 +1181,8 @@ define Device/phicomm_k2-v22.5
 endef
 TARGET_DEVICES += phicomm_k2-v22.5
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/phicomm_k2g
   SOC := mt7620a
   IMAGE_SIZE := 7552k
@@ -1006,6 +1202,20 @@ define Device/phicomm_psg1208
 endef
 TARGET_DEVICES += phicomm_psg1208
 
+<<<<<<< HEAD
+=======
+define Device/phicomm_psg1218a
+  SOC := mt7620a
+  IMAGE_SIZE := 7872k
+  DEVICE_VENDOR := Phicomm
+  DEVICE_MODEL := PSG1218
+  DEVICE_VARIANT:= Ax
+  DEVICE_PACKAGES := kmod-mt76x2
+  SUPPORTED_DEVICES += psg1218 psg1218a
+endef
+TARGET_DEVICES += phicomm_psg1218a
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/phicomm_psg1218b
   SOC := mt7620a
   IMAGE_SIZE := 7872k
@@ -1023,7 +1233,11 @@ define Device/planex_cs-qr10
   DEVICE_VENDOR := Planex
   DEVICE_MODEL := CS-QR10
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sound-core \
+<<<<<<< HEAD
 	kmod-sound-mt7620 kmod-i2c-ralink kmod-mmc-mtk
+=======
+	kmod-sound-mt7620 kmod-i2c-ralink kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += cs-qr10
 endef
 TARGET_DEVICES += planex_cs-qr10
@@ -1113,6 +1327,7 @@ define Device/ravpower_rp-wd03
 endef
 TARGET_DEVICES += ravpower_rp-wd03
 
+<<<<<<< HEAD
 define Device/rostelecom_rt-fl-1
   $(Device/sercomm_cpj)
   DEVICE_MODEL := RT-FL-1
@@ -1134,12 +1349,18 @@ define Device/rostelecom_s1010
 endef
 TARGET_DEVICES += rostelecom_s1010
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/sanlinking_d240
   SOC := mt7620a
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := Sanlinking Technologies
   DEVICE_MODEL := D240
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += d240
 endef
 TARGET_DEVICES += sanlinking_d240
@@ -1156,6 +1377,10 @@ TARGET_DEVICES += sercomm_na930
 
 define Device/sitecom_wlr-4100-v1-002
   SOC := mt7620a
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 7744k
   IMAGES += factory.dlf
   IMAGE/factory.dlf := $$(sysupgrade_bin) | check-size | \
@@ -1167,6 +1392,7 @@ define Device/sitecom_wlr-4100-v1-002
 endef
 TARGET_DEVICES += sitecom_wlr-4100-v1-002
 
+<<<<<<< HEAD
 define Device/snr_cpe-w4n-mt
   $(Device/uimage-lzma-loader)
   SOC := mt7620n
@@ -1178,6 +1404,8 @@ define Device/snr_cpe-w4n-mt
 endef
 TARGET_DEVICES += snr_cpe-w4n-mt
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_archer-c20i
   $(Device/tplink-v2)
   SOC := mt7620a
@@ -1220,6 +1448,7 @@ define Device/tplink_archer-c2-v1
   DEVICE_MODEL := Archer C2
   DEVICE_VARIANT := v1
   DEVICE_PACKAGES := kmod-mt76x0e kmod-usb2 kmod-usb-ohci \
+<<<<<<< HEAD
 	kmod-usb-ledtrig-usbport kmod-switch-rtl8367b
 endef
 TARGET_DEVICES += tplink_archer-c2-v1
@@ -1241,6 +1470,12 @@ define Device/tplink_archer-c5-v4
 endef
 TARGET_DEVICES += tplink_archer-c5-v4
 
+=======
+	kmod-usb-ledtrig-usbport kmod-switch-rtl8366-smi kmod-switch-rtl8367b
+endef
+TARGET_DEVICES += tplink_archer-c2-v1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_archer-c50-v1
   $(Device/tplink-v2)
   SOC := mt7620a
@@ -1273,6 +1508,7 @@ define Device/tplink_archer-mr200
 endef
 TARGET_DEVICES += tplink_archer-mr200
 
+<<<<<<< HEAD
 define Device/tplink_ec220-g5-v2
   $(Device/tplink-v2)
   SOC := mt7620a
@@ -1291,6 +1527,10 @@ TARGET_DEVICES += tplink_ec220-g5-v2
 
 define Device/tplink_re200-v1
   $(Device/tplink-v1-okli)
+=======
+define Device/tplink_re200-v1
+  $(Device/tplink-v1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SOC := mt7620a
   DEVICE_MODEL := RE200
   DEVICE_VARIANT := v1
@@ -1302,7 +1542,11 @@ endef
 TARGET_DEVICES += tplink_re200-v1
 
 define Device/tplink_re210-v1
+<<<<<<< HEAD
   $(Device/tplink-v1-okli)
+=======
+  $(Device/tplink-v1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SOC := mt7620a
   DEVICE_MODEL := RE210
   DEVICE_VARIANT := v1
@@ -1322,6 +1566,7 @@ define Device/trendnet_tew-810dr
 endef
 TARGET_DEVICES += trendnet_tew-810dr
 
+<<<<<<< HEAD
 define Device/trendnet_tha103ac
   SOC := mt7620a
   DEVICE_PACKAGES := kmod-mt76x0e rssileds
@@ -1335,6 +1580,12 @@ TARGET_DEVICES += trendnet_tha103ac
 define Device/vonets_var11n-300
   SOC := mt7620n
   IMAGE_SIZE := 3776k
+=======
+define Device/vonets_var11n-300
+  SOC := mt7620n
+  IMAGE_SIZE := 3776k
+  BLOCKSIZE := 4k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VENDOR := Vonets
   DEVICE_MODEL := VAR11N-300
   DEFAULT := n
@@ -1350,6 +1601,7 @@ define Device/wavlink_wl-wn530hg4
 endef
 TARGET_DEVICES += wavlink_wl-wn530hg4
 
+<<<<<<< HEAD
 define Device/wavlink_wl-wn531g3
   SOC := mt7620a
   IMAGE_SIZE := 7808k
@@ -1381,6 +1633,8 @@ define Device/wavlink_wl-wn535k1
 endef
 TARGET_DEVICES += wavlink_wl-wn535k1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/wavlink_wl-wn579x3
   SOC := mt7620a
   IMAGE_SIZE := 7744k
@@ -1390,6 +1644,7 @@ define Device/wavlink_wl-wn579x3
 endef
 TARGET_DEVICES += wavlink_wl-wn579x3
 
+<<<<<<< HEAD
 define Device/wevo_air-duo
   SOC := mt7620a
   IMAGE_SIZE := 15040k
@@ -1401,6 +1656,8 @@ define Device/wevo_air-duo
 endef
 TARGET_DEVICES += wevo_air-duo
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/wrtnode_wrtnode
   SOC := mt7620n
   IMAGE_SIZE := 16064k
@@ -1421,6 +1678,7 @@ define Device/xiaomi_miwifi-mini
 endef
 TARGET_DEVICES += xiaomi_miwifi-mini
 
+<<<<<<< HEAD
 define Device/youku_x2
   SOC := mt7620a
   IMAGE_SIZE := 16064k
@@ -1433,16 +1691,24 @@ define Device/youku_x2
 endef
 TARGET_DEVICES += youku_x2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/youku_yk-l1
   SOC := mt7620a
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := Youku
   DEVICE_MODEL := YK-L1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mmc-mtk \
 	kmod-usb-ledtrig-usbport
   SUPPORTED_DEVICES += youku-yk1 youku,yk1
   UIMAGE_MAGIC := 0x12291000
   UIMAGE_NAME := 400000000000000000000000
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
+	kmod-usb-ledtrig-usbport
+  SUPPORTED_DEVICES += youku-yk1 youku,yk1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += youku_yk-l1
 
@@ -1451,10 +1717,15 @@ define Device/youku_yk-l1c
   IMAGE_SIZE := 16064k
   DEVICE_VENDOR := Youku
   DEVICE_MODEL := YK-L1c
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mmc-mtk \
 	kmod-usb-ledtrig-usbport
   UIMAGE_MAGIC := 0x12291000
   UIMAGE_NAME := 400000000000000000000000
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 \
+	kmod-usb-ledtrig-usbport
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += youku_yk-l1c
 
@@ -1504,7 +1775,11 @@ define Device/zbtlink_zbt-we1026-5g-16m
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-WE1026-5G
   DEVICE_VARIANT := 16M
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += we1026-5g-16m zbtlink,we1026-5g-16m
 endef
 TARGET_DEVICES += zbtlink_zbt-we1026-5g-16m
@@ -1515,7 +1790,11 @@ define Device/zbtlink_zbt-we1026-h-32m
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-WE1026-H
   DEVICE_VARIANT := 32M
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += zbtlink_zbt-we1026-h-32m
 
@@ -1534,7 +1813,11 @@ define Device/zbtlink_zbt-we826-16m
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-WE826
   DEVICE_VARIANT := 16M
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += zbt-we826 zbt-we826-16M
 endef
 TARGET_DEVICES += zbtlink_zbt-we826-16m
@@ -1545,7 +1828,11 @@ define Device/zbtlink_zbt-we826-32m
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-WE826
   DEVICE_VARIANT := 32M
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-mmc-mtk
+=======
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += zbt-we826-32M
 endef
 TARGET_DEVICES += zbtlink_zbt-we826-32m
@@ -1555,7 +1842,11 @@ define Device/zbtlink_zbt-we826-e
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := Zbtlink
   DEVICE_MODEL := ZBT-WE826-E
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-mmc-mtk uqmi \
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-sdhci-mt7620 uqmi \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	kmod-usb-serial-option
 endef
 TARGET_DEVICES += zbtlink_zbt-we826-e
@@ -1567,7 +1858,10 @@ define Device/zbtlink_zbt-wr8305rt
   DEVICE_MODEL := ZBT-WR8305RT
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci
   SUPPORTED_DEVICES += zbt-wr8305rt
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += zbtlink_zbt-wr8305rt
 
@@ -1581,6 +1875,7 @@ define Device/zte_q7
 endef
 TARGET_DEVICES += zte_q7
 
+<<<<<<< HEAD
 define Device/zyxel_keenetic-lite-iii-a
   SOC := mt7620n
   IMAGE_SIZE := 7872k
@@ -1597,6 +1892,12 @@ define Device/zyxel_keenetic-omni
   SOC := mt7620n
   IMAGE_SIZE := 7872k
   DEVICE_VENDOR := Zyxel
+=======
+define Device/zyxel_keenetic-omni
+  SOC := mt7620n
+  IMAGE_SIZE := 7872k
+  DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := Keenetic Omni
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport
   IMAGES += factory.bin
@@ -1609,7 +1910,11 @@ TARGET_DEVICES += zyxel_keenetic-omni
 define Device/zyxel_keenetic-omni-ii
   SOC := mt7620n
   IMAGE_SIZE := 7872k
+<<<<<<< HEAD
   DEVICE_VENDOR := Zyxel
+=======
+  DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := Keenetic Omni II
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport
   IMAGES += factory.bin
@@ -1622,10 +1927,17 @@ TARGET_DEVICES += zyxel_keenetic-omni-ii
 define Device/zyxel_keenetic-viva
   SOC := mt7620a
   IMAGE_SIZE := 16064k
+<<<<<<< HEAD
   DEVICE_VENDOR := Zyxel
   DEVICE_MODEL := Keenetic Viva
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport \
 	kmod-switch-rtl8367b
+=======
+  DEVICE_VENDOR := ZyXEL
+  DEVICE_MODEL := Keenetic Viva
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport \
+	kmod-switch-rtl8366-smi kmod-switch-rtl8367b
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += factory.bin
   IMAGE/factory.bin := $$(sysupgrade_bin) | pad-to 64k | check-size | \
 	zyimage -d 8997 -v "ZyXEL Keenetic Viva"

@@ -38,6 +38,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -59,6 +60,15 @@
 			};
 
 			partition@50000 {
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+			};
+
+			firmware: partition@50000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				compatible = "denx,uimage";
 				label = "firmware";
 				reg = <0x50000 0x3fb0000>;
@@ -66,6 +76,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000>;
@@ -76,3 +87,5 @@
 	nvmem-cells = <&macaddr_factory_e006>;
 	nvmem-cell-names = "mac-address";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

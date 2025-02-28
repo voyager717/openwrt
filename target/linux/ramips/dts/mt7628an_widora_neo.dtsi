@@ -46,6 +46,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &spi0 {
 	status = "okay";
 
@@ -110,6 +111,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &state_default {
 	gpio {
 		groups = "gpio";
@@ -169,17 +172,28 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_28>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x28>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &sdhci {
 	status = "okay";
+<<<<<<< HEAD
+=======
+	mediatek,cd-low;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

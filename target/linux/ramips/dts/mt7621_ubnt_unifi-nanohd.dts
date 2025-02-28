@@ -32,6 +32,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@70000 {
 				label = "factory";
 				reg = <0x70000 0x10000>;
@@ -66,6 +67,18 @@
 						reg = <0x0 0x6>;
 					};
 				};
+=======
+			factory: partition@70000 {
+				label = "factory";
+				reg = <0x70000 0x10000>;
+				read-only;
+			};
+
+			eeprom: partition@80000 {
+				label = "eeprom";
+				reg = <0x80000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@90000 {
@@ -94,6 +107,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &gmac0 {
 	nvmem-cells = <&macaddr_eeprom_0>;
 	nvmem-cell-names = "mac-address";
@@ -107,4 +121,8 @@
 &wlan_5g {
 	nvmem-cells = <&eeprom_factory_8000>;
 	nvmem-cell-names = "eeprom";
+=======
+&wlan_5g {
+	mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

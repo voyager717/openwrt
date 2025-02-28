@@ -74,6 +74,7 @@
 		"connect": "AT+CGACT=1,${profile}",
 		"finalize": "AT+CGDATA=\\\"M-MBIM\\\",${profile},1",
 		"disconnect": "AT+CGACT=0,${profile}"
+<<<<<<< HEAD
 	},
 	"quectel": {
 		"initialize": [
@@ -136,5 +137,7 @@
 		],
 		"connect": "AT+SPTZCMD=\\\"Y29ubm1hbmN0bCBuZGlzZGlhbCBBVF5ORElTRFVOPSJ1c2IwIiwxLDE=\\\"",
 		"disconnect": "AT+SPTZCMD=\\\"Y29ubm1hbmN0bCBuZGlzZGlhbCBBVF5ORElTRFVOPSJ1c2IwIiwwLDE=\\\""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 }

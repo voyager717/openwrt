@@ -3,9 +3,14 @@
 # Copyright (C) 2016 LEDE-Project.org
 #
 
+<<<<<<< HEAD
 RAMFS_COPY_BIN='fw_printenv fw_setenv seq strings'
 RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
 
+=======
+RAMFS_COPY_BIN='fw_printenv fw_setenv'
+RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 REQUIRE_IMAGE_METADATA=1
 
 platform_check_image() {
@@ -14,7 +19,11 @@ platform_check_image() {
 	kobol,helios4|\
 	solidrun,clearfog-base-a1|\
 	solidrun,clearfog-pro-a1)
+<<<<<<< HEAD
 		legacy_sdcard_check_image "$1"
+=======
+		platform_check_image_sdcard "$1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	*)
 		return 0
@@ -24,6 +33,7 @@ platform_check_image() {
 
 platform_do_upgrade() {
 	case "$(board_name)" in
+<<<<<<< HEAD
 	buffalo,ls220de)
 		# Kernel UBI volume name must be "boot"
 		CI_KERNPART=boot
@@ -46,10 +56,16 @@ platform_do_upgrade() {
 		return 1
 	fi
 	;;
+=======
+	buffalo,ls421de)
+		nand_do_upgrade "$1"
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	cznic,turris-omnia|\
 	kobol,helios4|\
 	solidrun,clearfog-base-a1|\
 	solidrun,clearfog-pro-a1)
+<<<<<<< HEAD
 		legacy_sdcard_do_upgrade "$1"
 		;;
 	fortinet,fg-30e|\
@@ -77,6 +93,9 @@ platform_do_upgrade() {
 	iptime,nas1dual)
 		PART_NAME=firmware
 		default_do_upgrade "$1"
+=======
+		platform_do_upgrade_sdcard "$1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	linksys,wrt1200ac|\
 	linksys,wrt1900ac-v1|\
@@ -97,7 +116,11 @@ platform_copy_config() {
 	kobol,helios4|\
 	solidrun,clearfog-base-a1|\
 	solidrun,clearfog-pro-a1)
+<<<<<<< HEAD
 		legacy_sdcard_copy_config
+=======
+		platform_copy_config_sdcard
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	linksys,wrt1200ac|\
 	linksys,wrt1900ac-v1|\

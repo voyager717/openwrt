@@ -4,6 +4,7 @@
 	model = "Ubiquiti EdgeRouter X";
 	compatible = "ubnt,edgerouter-x", "mediatek,mt7621-soc";
 };
+<<<<<<< HEAD
 
 &gmac1 {
 	status = "okay";
@@ -25,3 +26,5 @@
 		};
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

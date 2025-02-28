@@ -6,10 +6,13 @@
 #ifndef LKC_H
 #define LKC_H
 
+<<<<<<< HEAD
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "expr.h"
 
 #ifdef __cplusplus
@@ -20,6 +23,13 @@ extern "C" {
 
 #define SRCTREE "srctree"
 
+<<<<<<< HEAD
+=======
+#ifndef PACKAGE
+#define PACKAGE "linux"
+#endif
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifndef CONFIG_
 #define CONFIG_ "CONFIG_"
 #endif
@@ -30,6 +40,19 @@ static inline const char *CONFIG_prefix(void)
 #undef CONFIG_
 #define CONFIG_ CONFIG_prefix()
 
+<<<<<<< HEAD
+=======
+enum conf_def_mode {
+	def_default,
+	def_yes,
+	def_mod,
+	def_y2m,
+	def_m2y,
+	def_no,
+	def_random
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 extern int yylineno;
 void zconfdump(FILE *out);
 void zconf_starthelp(void);
@@ -42,6 +65,13 @@ extern int recursive_is_error;
 
 /* confdata.c */
 const char *conf_get_configname(void);
+<<<<<<< HEAD
+=======
+void sym_set_change_count(int count);
+void sym_add_change_count(int count);
+bool conf_set_all_new_symbols(enum conf_def_mode mode);
+void conf_rewrite_mod_or_yes(enum conf_def_mode mode);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void set_all_choice_values(struct symbol *csym);
 
 /* confdata.c and expr.c */
@@ -53,6 +83,27 @@ static inline void xfwrite(const void *str, size_t len, size_t count, FILE *out)
 		fprintf(stderr, "Error in writing or end of file.\n");
 }
 
+<<<<<<< HEAD
+=======
+/* menu.c */
+void _menu_init(void);
+void menu_warn(struct menu *menu, const char *fmt, ...);
+struct menu *menu_add_menu(void);
+void menu_end_menu(void);
+void menu_add_entry(struct symbol *sym);
+void menu_add_dep(struct expr *dep);
+void menu_add_visibility(struct expr *dep);
+struct property *menu_add_prop(enum prop_type type, struct expr *expr, struct expr *dep);
+struct property *menu_add_prompt(enum prop_type type, char *prompt, struct expr *dep);
+void menu_add_expr(enum prop_type type, struct expr *expr, struct expr *dep);
+void menu_add_symbol(enum prop_type type, struct symbol *sym, struct expr *dep);
+void menu_add_option_modules(void);
+void menu_add_option_defconfig_list(void);
+void menu_add_option_allnoconfig_y(void);
+void menu_finalize(struct menu *parent);
+void menu_set_type(int type);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* util.c */
 struct file *file_lookup(const char *name);
 void *xmalloc(size_t size);
@@ -77,6 +128,7 @@ struct gstr str_new(void);
 void str_free(struct gstr *gs);
 void str_append(struct gstr *gs, const char *s);
 void str_printf(struct gstr *gs, const char *fmt, ...);
+<<<<<<< HEAD
 char *str_get(struct gstr *gs);
 
 /* menu.c */
@@ -106,6 +158,9 @@ const char *menu_get_help(struct menu *menu);
 int get_jump_key_char(void);
 struct gstr get_relations_str(struct symbol **sym_arr, struct list_head *head);
 void menu_get_ext_help(struct menu *menu, struct gstr *help);
+=======
+const char *str_get(struct gstr *gs);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /* symbol.c */
 void sym_clear_all_valid(void);
@@ -126,6 +181,14 @@ static inline struct symbol *sym_get_choice_value(struct symbol *sym)
 	return (struct symbol *)sym->curr.val;
 }
 
+<<<<<<< HEAD
+=======
+static inline bool sym_set_choice_value(struct symbol *ch, struct symbol *chval)
+{
+	return sym_set_tristate_value(chval, yes);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline bool sym_is_choice(struct symbol *sym)
 {
 	return sym->flags & SYMBOL_CHOICE ? true : false;

@@ -38,6 +38,7 @@ menuconfig TARGET_OPTIONS
 		  Most people will answer N.
 
 
+<<<<<<< HEAD
 	choice BPF_TOOLCHAIN
 		prompt "BPF toolchain" if DEVEL
 		default BPF_TOOLCHAIN_PREBUILT if HAS_PREBUILT_LLVM_TOOLCHAIN
@@ -71,6 +72,8 @@ menuconfig TARGET_OPTIONS
 		default "/usr/local/opt/llvm" if HOST_OS_MACOS
 		default ""
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 menuconfig EXTERNAL_TOOLCHAIN
 	bool
 	prompt "Use external toolchain"  if DEVEL
@@ -96,7 +99,10 @@ menuconfig EXTERNAL_TOOLCHAIN
 		default "arm-unknown-linux-gnu"      if arm
 		default "armeb-unknown-linux-gnu"    if armeb
 		default "i486-unknown-linux-gnu"     if i386
+<<<<<<< HEAD
 		default "loongarch64-unknown-linux-gnu" if loongarch64
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default "mips-unknown-linux-gnu"     if mips
 		default "mipsel-unknown-linux-gnu"   if mipsel
 		default "powerpc-unknown-linux-gnu"  if powerpc
@@ -111,7 +117,10 @@ menuconfig EXTERNAL_TOOLCHAIN
 		default "arm-unknown-linux-gnu-"      if arm
 		default "armeb-unknown-linux-gnu-"    if armeb
 		default "i486-unknown-linux-gnu-"     if i386
+<<<<<<< HEAD
 		default "loongarch64-unknown-linux-gnu-" if loongarch64
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default "mips-unknown-linux-gnu-"     if mips
 		default "mipsel-unknown-linux-gnu-"   if mipsel
 		default "powerpc-unknown-linux-gnu-"  if powerpc
@@ -126,7 +135,10 @@ menuconfig EXTERNAL_TOOLCHAIN
 		default "/opt/cross/arm-unknown-linux-gnu"      if arm
 		default "/opt/cross/armeb-unknown-linux-gnu"    if armeb
 		default "/opt/cross/i486-unknown-linux-gnu"     if i386
+<<<<<<< HEAD
 		default "/opt/cross/loongarch64-unknown-linux-gnu" if loongarch64
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default "/opt/cross/mips-unknown-linux-gnu"     if mips
 		default "/opt/cross/mipsel-unknown-linux-gnu"   if mipsel
 		default "/opt/cross/powerpc-unknown-linux-gnu"  if powerpc
@@ -152,6 +164,7 @@ menuconfig EXTERNAL_TOOLCHAIN
 
 	endchoice
 
+<<<<<<< HEAD
 	config EXTERNAL_GCC_VERSION
 		string
 		prompt "External Toolchain GCC Version" if DEVEL
@@ -160,6 +173,8 @@ menuconfig EXTERNAL_TOOLCHAIN
 		  Manually specify the GCC version used by the selected
 		  external toolchain.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	config TOOLCHAIN_LIBC
 		string
 		depends on EXTERNAL_TOOLCHAIN && !NATIVE_TOOLCHAIN
@@ -179,7 +194,10 @@ menuconfig EXTERNAL_TOOLCHAIN
 		string
 		prompt "Toolchain include path"  if DEVEL
 		depends on EXTERNAL_TOOLCHAIN && !NATIVE_TOOLCHAIN
+<<<<<<< HEAD
 		default "./usr/include ./include/fortify ./include" if EXTERNAL_TOOLCHAIN_LIBC_USE_MUSL
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default "./usr/include ./include"
 		help
 		  Specify additional directories searched for header files (override
@@ -207,6 +225,10 @@ menuconfig EXTRA_TARGET_ARCH
 	bool
 	prompt "Enable an extra toolchain target architecture" if TOOLCHAINOPTS
 	depends on !sparc
+<<<<<<< HEAD
+=======
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	  Some builds may require a 'biarch' toolchain. This option
 	  allows you to specify an additional target arch.
@@ -257,6 +279,7 @@ comment "Binary tools"
 
 source "toolchain/binutils/Config.in"
 
+<<<<<<< HEAD
 config DWARVES
 	bool
 	prompt "Build pahole" if TOOLCHAINOPTS
@@ -264,6 +287,8 @@ config DWARVES
 	help
 	  Enable if you want to build pahole and the dwarves tools.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 comment "Compiler"
 	depends on TOOLCHAINOPTS
 
@@ -310,6 +335,7 @@ config GDB
 	help
 	  Enable if you want to build the gdb.
 
+<<<<<<< HEAD
 config GDB_PYTHON
 	bool
 	depends on GDB
@@ -339,6 +365,8 @@ config USE_LLVM_BUILD
 	default y if !DEVEL && NEED_BPF_TOOLCHAIN && (BUILDBOT || !HAS_PREBUILT_LLVM_TOOLCHAIN)
 	bool
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config USE_GLIBC
 	default y if !TOOLCHAINOPTS && !EXTERNAL_TOOLCHAIN && !NATIVE_TOOLCHAIN && (arc)
 	bool

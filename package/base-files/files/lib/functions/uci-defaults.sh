@@ -96,7 +96,11 @@ ucidef_set_interfaces_lan_wan() {
 
 ucidef_set_bridge_device() {
 	json_select_object bridge
+<<<<<<< HEAD
 	json_add_string name "${1:-switch0}"
+=======
+	json_add_string name "${1:switch0}"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	json_select ..
 }
 
@@ -106,6 +110,7 @@ ucidef_set_bridge_mac() {
 	json_select ..
 }
 
+<<<<<<< HEAD
 _ucidef_set_network_device_common() {
 	json_select_object "network_device"
 	json_select_object "${1}"
@@ -133,6 +138,14 @@ ucidef_set_network_device_gro() {
 
 ucidef_set_network_device_conduit() {
 	_ucidef_set_network_device_common $1 conduit $2
+=======
+ucidef_set_network_device_mac() {
+	json_select_object "network-device"
+	json_select_object "${1}"
+	json_add_string macaddr "${2}"
+	json_select ..
+	json_select ..
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 _ucidef_add_switch_port() {
@@ -439,6 +452,7 @@ ucidef_set_led_default() {
 	json_select ..
 }
 
+<<<<<<< HEAD
 ucidef_set_led_heartbeat() {
 	_ucidef_set_led_common "$1" "$2" "$3"
 
@@ -448,6 +462,8 @@ ucidef_set_led_heartbeat() {
 	json_select ..
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ucidef_set_led_gpio() {
 	local gpio="$4"
 	local inverted="$5"
@@ -647,6 +663,7 @@ ucidef_set_hostname() {
 	json_select ..
 }
 
+<<<<<<< HEAD
 ucidef_set_timezone() {
 	local timezone="$1"
 	json_select_object system
@@ -733,6 +750,8 @@ ucidef_set_ssh_authorized_key() {
 	json_select ..
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ucidef_set_ntpserver() {
 	local server
 
@@ -745,6 +764,7 @@ ucidef_set_ntpserver() {
 	json_select ..
 }
 
+<<<<<<< HEAD
 ucidef_set_poe() {
 	json_select_object poe
 		json_add_string "budget" "$1"
@@ -771,6 +791,8 @@ ucidef_add_wlan() {
 	ucidef_wlan_idx="$((ucidef_wlan_idx + 1))"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 board_config_update() {
 	json_init
 	[ -f ${CFG} ] && json_load "$(cat ${CFG})"

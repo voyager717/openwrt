@@ -44,6 +44,7 @@ proto_6in4_setup() {
 	local cfg="$1"
 	local iface="$2"
 	local link="6in4-$cfg"
+<<<<<<< HEAD
 	local remoteip
 
 	local mtu ttl tos ipaddr peeraddr ip6addr ip6prefix ip6prefixes tunlink tunnelid username password updatekey device nohostroute
@@ -54,10 +55,20 @@ proto_6in4_setup() {
 
 	[ -z "$peeraddr" ] && {
 		proto_notify_error "$cfg" "MISSING_PEER_ADDRESS"
+=======
+
+	local mtu ttl tos ipaddr peeraddr ip6addr ip6prefix ip6prefixes tunlink tunnelid username password updatekey
+	json_get_vars mtu ttl tos ipaddr peeraddr ip6addr tunlink tunnelid username password updatekey
+	json_for_each_item proto_6in4_add_prefix ip6prefix ip6prefixes
+
+	[ -z "$peeraddr" ] && {
+		proto_notify_error "$cfg" "MISSING_ADDRESS"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		proto_block_restart "$cfg"
 		return
 	}
 
+<<<<<<< HEAD
 	remoteip=$(resolveip -t 10 -4 "$peeraddr")
 
 	if [ -z "$remoteip" ]; then
@@ -73,6 +84,9 @@ proto_6in4_setup() {
 	if [ "${nohostroute}" != "1" ]; then
 		( proto_add_host_dependency "$cfg" "$peeraddr" "$tunlink" )
 	fi
+=======
+	( proto_add_host_dependency "$cfg" "$peeraddr" "$tunlink" )
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	[ -z "$ipaddr" ] && {
 		local wanif="$tunlink"
@@ -173,8 +187,11 @@ proto_6in4_init_config() {
 	proto_config_add_int "mtu"
 	proto_config_add_int "ttl"
 	proto_config_add_string "tos"
+<<<<<<< HEAD
 	proto_config_add_string "device"
 	proto_config_add_boolean "nohostroute"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 [ -n "$INCLUDE_ONLY" ] || {

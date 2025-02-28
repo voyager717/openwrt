@@ -1,6 +1,10 @@
 --- a/drivers/net/wireless/marvell/libertas/cfg.c
 +++ b/drivers/net/wireless/marvell/libertas/cfg.c
+<<<<<<< HEAD
 @@ -2102,6 +2102,8 @@ struct wireless_dev *lbs_cfg_alloc(struc
+=======
+@@ -2053,6 +2053,8 @@ struct wireless_dev *lbs_cfg_alloc(struc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		goto err_wiphy_new;
  	}
  

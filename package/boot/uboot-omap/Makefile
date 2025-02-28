@@ -8,17 +8,27 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
+<<<<<<< HEAD
 PKG_VERSION:=2021.07
 PKG_RELEASE:=21
 
 PKG_HASH:=312b7eeae44581d1362c3a3f02c28d806647756c82ba8c72241c7cdbe68ba77e
+=======
+PKG_VERSION:=2020.04
+PKG_RELEASE:=1
+
+PKG_HASH:=fe732aaf037d9cc3c0909bad8362af366ae964bbdac6913a34081ff4ad565372
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
 
 define U-Boot/Default
   BUILD_TARGET:=omap
+<<<<<<< HEAD
   BUILD_SUBTARGET:=generic
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   UBOOT_IMAGE:=u-boot.img MLO
 endef
 
@@ -32,12 +42,23 @@ define U-Boot/am335x_evm
   BUILD_DEVICES:=ti_am335x-evm ti_am335x-bone-black
 endef
 
+<<<<<<< HEAD
+=======
+define U-Boot/omap3_overo
+  NAME:=Gumstix Overo
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define U-Boot/omap3_beagle
   NAME:=BeagleBoard
   BUILD_DEVICES:=ti_omap3-beagle
 endef
 
+<<<<<<< HEAD
 UBOOT_TARGETS:=omap4_panda am335x_evm omap3_beagle
+=======
+UBOOT_TARGETS:=omap4_panda am335x_evm omap3_overo omap3_beagle
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/InstallDev
 	$(foreach device,$(BUILD_DEVICES), \

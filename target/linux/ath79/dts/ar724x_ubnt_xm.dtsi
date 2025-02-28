@@ -58,6 +58,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "art";
 				reg = <0x7f0000 0x010000>;
@@ -76,6 +77,12 @@
 						reg = <0x6 0x6>;
 					};
 				};
+=======
+			art: partition@7f0000 {
+				label = "art";
+				reg = <0x7f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -93,13 +100,21 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_6>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

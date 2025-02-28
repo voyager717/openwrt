@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 config MXS_SD_BOOT_PARTSIZE
 	int "Boot (SD Card) filesystem partition size (in MB)"
 	depends on TARGET_mxs
+=======
+config TARGET_BOOTFS_PARTSIZE
+	int "Boot (SD Card) filesystem partition size (in MB)"
+	depends on TARGET_mxs_olinuxino-maxi || TARGET_mxs_olinuxino-micro
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default 8
 	help
 	    On the Olimex OLinuXino boards, mainline U-Boot loads the

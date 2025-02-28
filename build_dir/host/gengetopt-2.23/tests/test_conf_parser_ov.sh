@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+set -ex
+
+"$@" ./test_conf_parser_ov -r "bar" --float 2.14 -i 100 -c ./test_conf.conf \
+	--opta "FOO"

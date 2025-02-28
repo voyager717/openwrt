@@ -1,0 +1,142 @@
+Index: drivers/net/usb/qmi_wwan.c
+===================================================================
+--- a/drivers.orig/net/usb/qmi_wwan.c
++++ b/drivers/net/usb/qmi_wwan.c
+@@ -1400,7 +1400,7 @@
+ 	{QMI_GOBI_DEVICE(0x05c6, 0x9225)},	/* Sony Gobi 2000 Modem device (N0279, VU730) */
+ 	{QMI_GOBI_DEVICE(0x05c6, 0x9245)},	/* Samsung Gobi 2000 Modem device (VL176) */
+ 	{QMI_GOBI_DEVICE(0x03f0, 0x251d)},	/* HP Gobi 2000 Modem device (VP412) */
+-	{QMI_GOBI_DEVICE(0x05c6, 0x9215)},	/* Acer Gobi 2000 Modem device (VP413) */
+-	{QMI_FIXED_INTF(0x05c6, 0x9215, 4)},	/* Quectel EC20 Mini PCIe */
++//	{QMI_GOBI_DEVICE(0x05c6, 0x9215)},	/* Acer Gobi 2000 Modem device (VP413) */
++// 	{QMI_FIXED_INTF(0x05c6, 0x9215, 4)},	/* Quectel EC20 Mini PCIe */
+ 	{QMI_GOBI_DEVICE(0x05c6, 0x9265)},	/* Asus Gobi 2000 Modem device (VR305) */
+ 	{QMI_GOBI_DEVICE(0x05c6, 0x9235)},	/* Top Global Gobi 2000 Modem device (VR306) */
+Index: drivers/usb/serial/qcserial.c
+===================================================================
+--- a/drivers.orig/usb/serial/qcserial.c
++++ b/drivers/usb/serial/qcserial.c
+@@ -88,7 +88,7 @@
+ 	{USB_DEVICE(0x03f0, 0x241d)},	/* HP Gobi 2000 QDL device (VP412) */
+ 	{USB_DEVICE(0x03f0, 0x251d)},	/* HP Gobi 2000 Modem device (VP412) */
+ 	{USB_DEVICE(0x05c6, 0x9214)},	/* Acer Gobi 2000 QDL device (VP413) */
+-	{USB_DEVICE(0x05c6, 0x9215)},	/* Acer Gobi 2000 Modem device (VP413) */
++//	{USB_DEVICE(0x05c6, 0x9215)},	/* Acer Gobi 2000 Modem device (VP413) */
+ 	{USB_DEVICE(0x05c6, 0x9264)},	/* Asus Gobi 2000 QDL device (VR305) */
+ 	{USB_DEVICE(0x05c6, 0x9265)},	/* Asus Gobi 2000 Modem device (VR305) */
+ 	{USB_DEVICE(0x05c6, 0x9234)},	/* Top Global Gobi 2000 QDL device (VR306) */
+Index: drivers/usb/serial/option.c
+===================================================================
+--- a/drivers.orig/usb/serial/option.c
++++ b/drivers/usb/serial/option.c
+@@ -602,4 +602,54 @@
+ static const struct usb_device_id option_ids[] = {
++	{ USB_DEVICE(0x05C6, 0X9215) }, /* Quectel EC20 */
++	{ USB_DEVICE(0x2C7C, 0x0125) }, /* Quectel EC20 R2.0/EC20 R2.1/EC25/EG25-G/EM05 */
++	{ USB_DEVICE(0x2C7C, 0x0121) }, /* Quectel EC21/EG21-G */
++	{ USB_DEVICE(0x2C7C, 0x0191) }, /* Quectel EG91 */
++	{ USB_DEVICE(0x2C7C, 0x0195) }, /* Quectel EG95 */
++	{ USB_DEVICE(0x2C7C, 0x0306) }, /* Quectel EG06/EP06/EM06 */
++	{ USB_DEVICE(0x2C7C, 0x030B) }, /* Quectel EG060K/EM060K,SDX12 */
++	{ USB_DEVICE(0x2C7C, 0x0512) }, /* Quectel EG12/EM12/EG18 */
++	{ USB_DEVICE(0x2C7C, 0x0296) }, /* Quectel BG96 */
++	{ USB_DEVICE(0x2C7C, 0x0700) }, /* Quectel BG95/BG77/BG600L-M3/BC69 */
++	{ USB_DEVICE(0x2C7C, 0x0435) }, /* Quectel AG35 */
++	{ USB_DEVICE(0x2C7C, 0x0415) }, /* Quectel AG15 */
++	{ USB_DEVICE(0x2C7C, 0x0452) }, /* Quectel AG520R */
++	{ USB_DEVICE(0x2C7C, 0x0455) }, /* Quectel AG550R */
++	{ USB_DEVICE(0x2C7C, 0x0620) }, /* Quectel EG20 */
++	{ USB_DEVICE(0x2C7C, 0x0800) }, /* Quectel RG500Q/RM500Q/RG510Q/RM510Q */
++	{ USB_DEVICE(0x2C7C, 0x0801) }, /* Quectel RM520N */
++	{ USB_DEVICE(0x2C7C, 0x0900) }, /* Quectel RG500U */
++	{ USB_DEVICE(0x2C7C, 0x6026) }, /* Quectel EC200T */
++	{ USB_DEVICE(0x2C7C, 0x6002) }, /* Quectel EC200S */
++	{ USB_DEVICE(0x2C7C, 0x6005) }, /* Quectel EC200A */
++	{ USB_DEVICE(0x12D1, 0x1573) }, /* HUAWEI ME909u-521 */
++	{ USB_DEVICE(0x12D1, 0x15C1) }, /* HUAWEI ME909u-120/821 */
++	{ USB_DEVICE(0x12D1, 0x1C25) },	/* HUAWEI MU709s-2/6 */
++	{ USB_DEVICE(0x05C6, 0x90B6) }, /* STRONGTISING CJ907 */
++	{ USB_DEVICE(0x19D2, 0x0199) }, /* THINKWILL ML7810 */
++	{ USB_DEVICE(0x19D2, 0x0532) }, /* THINKWILL ML7820 */
++	{ USB_DEVICE(0x1286, 0x4E3D) }, /* Luat Air720 */
++	{ USB_DEVICE(0x1C9E, 0x9B11) }, /* Tricheer_LM9248 */
++	{ USB_DEVICE(0x2CB7, 0x0001) }, /* Fibocom L71x */
++	{ USB_DEVICE(0x2CB7, 0x0A04) }, /* Fibocom FG621/FM650 ECM*/
++	{ USB_DEVICE(0x2CB7, 0x0A05) }, /* Fibocom FG621/FM650 NCM*/
++	{ USB_DEVICE(0x2CB7, 0x0A06) }, /* Fibocom FG621/FM650 RNDIS*/
++	{ USB_DEVICE(0x1782, 0x4d11) }, /* Fibocom L610 */
++	{ USB_DEVICE(0x1508, 0x1000) }, /* Fibocom NL668 ECM*/
++	{ USB_DEVICE(0x1508, 0x1001) }, /* Fibocom NL668  GOBINET*/
++	{ USB_DEVICE(0x2CB7, 0x0104) }, /* Fibocom NL678 NL952 FM150 GOBINET*/
++	{ USB_DEVICE(0x2CB7, 0x0105) }, /* Fibocom NL678 NL952 FM150 ECM*/
++	{ USB_DEVICE(0x2CB7, 0x010A) }, /* Fibocom NL678 NL952 FM150 ECM*/
++	{ USB_DEVICE(0x1E0E, 0x9001) }, /* SIMCOM SIM7600*/
++	{ USB_DEVICE(0x1C9E, 0x9B05) }, /* LONGSUNG U8300W/C */
++	{ USB_DEVICE(0x1C9E, 0x9B3C) }, /* LONGSUNG U9300W/C */
++	{ USB_DEVICE(0x05C6, 0x9025) }, /* YUGA CKM920 NC5 */
++	{ USB_DEVICE(0x1286, 0x4E3C) }, /* YUGA CKM920 A** */
++	{ USB_DEVICE(0x05C6, 0xF601) }, /* Meig */
++	{ USB_DEVICE(0x05C6, 0xF615) }, /* Meig */
++	{ USB_DEVICE(0x2DEE, 0x4D22) }, /* Meig SLM828 NDIS */
++	{ USB_DEVICE(0x2DEE, 0x4D23) }, /* Meig SLM828 ECM */
++	{ USB_DEVICE(0x2DEE, 0x4D38) }, /* Meig SLM828 RNDIS */
++	{ USB_DEVICE(0x2DEE, 0x4D57) }, /* Meig SLM770A */
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_COLT) },
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_RICOLA) },
+ 	{ USB_DEVICE(OPTION_VENDOR_ID, OPTION_PRODUCT_RICOLA_LIGHT) },
+@@ -2205,6 +2249,7 @@
+ #ifdef CONFIG_PM
+ 	.suspend           = usb_wwan_suspend,
+ 	.resume            = usb_wwan_resume,
++	.reset_resume	   = usb_wwan_resume,
+ #endif
+ };
+
+@@ -2248,6 +2293,32 @@
+	*/
+	if (device_flags & NUMEP2 && iface_desc->bNumEndpoints != 2)
+		return -ENODEV;
++
++	if ((serial->dev->descriptor.idVendor == cpu_to_le16(0x2C7C)) || (serial->dev->descriptor.idVendor == cpu_to_le16(0x05C6))) {
++	//some interfaces can be used as USB Network device (ecm, rndis, mbim)
++		if (serial->interface->cur_altsetting->desc.bInterfaceClass != 0xFF) {
++			return -ENODEV;
++		}
++		//interface 4 can be used as USB Network device (qmi)
++		else if ((serial->dev->descriptor.idProduct != cpu_to_le16(0x6026)) && (serial->dev->descriptor.idProduct != cpu_to_le16(0x6002))   \
++			&& (serial->dev->descriptor.idProduct != cpu_to_le16(0x6005)) && (serial->dev->descriptor.idProduct != cpu_to_le16(0x0900)) \
++			&& (serial->interface->cur_altsetting->desc.bInterfaceNumber >= 4)) {
++			return -ENODEV;
++		}
++	}
++
++	if (serial->dev->descriptor.idVendor == cpu_to_le16(0x1508) && serial->dev->descriptor.idProduct == cpu_to_le16(0x1001) && \
++		serial->interface->cur_altsetting->desc.bInterfaceNumber >= 4) {
++		printk(KERN_INFO "Discover the 4 th interface for fibocom\n");
++		return -ENODEV;
++	}
++
++	if (serial->dev->descriptor.idVendor == cpu_to_le16(0x2C7C) && serial->dev->descriptor.idProduct == cpu_to_le16(0x0105) && \
++		serial->interface->cur_altsetting->desc.bInterfaceNumber >= 4) {
++		printk(KERN_INFO "Discover the 4 th interface for fibocom\n");
++		return -ENODEV;
++	}
++
+
+	/* Store the device flags so we can use them during attach. */
+	usb_set_serial_data(serial, (void *)device_flags);
+--- a/drivers.orig/usb/serial/usb_wwan.c	2017-04-07 11:55:23.000000000 +0800
++++ b/drivers/usb/serial/usb_wwan.c	2020-07-14 19:22:12.000000000 +0800
+@@ -477,5 +477,11 @@
+ 	usb_fill_bulk_urb(urb, serial->dev,
+ 			  usb_sndbulkpipe(serial->dev, endpoint) | dir,
+ 			  buf, len, callback, ctx);
++			  
++	if (dir == USB_DIR_OUT) {
++		struct usb_device_descriptor *desc = &serial->dev->descriptor;
++		if ((desc->idVendor == cpu_to_le16(0x2C7C)) || (desc->idVendor == cpu_to_le16(0x05C6)))
++			urb->transfer_flags |= URB_ZERO_PACKET;
++	}
+ 
+ 	if (intfdata->use_zlp && dir == USB_DIR_OUT)
+ }

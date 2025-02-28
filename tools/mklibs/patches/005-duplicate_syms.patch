@@ -23,7 +23,11 @@
      for name in needed_symbols:
 -        if not name in symbol_provider:
 -            if not needed_symbols[name].weak:
+<<<<<<< HEAD
 -                print("WARNING: Unresolvable symbol %s" % name)
+=======
+-                print "WARNING: Unresolvable symbol %s" % name
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -        else:
 -            lib = symbol_provider[name]
 -            library_symbols_used[lib].add(library_symbols[lib][name])

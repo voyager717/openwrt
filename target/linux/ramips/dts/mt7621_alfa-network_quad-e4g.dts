@@ -147,6 +147,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &ethernet {
 	pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>;
 };
@@ -154,6 +155,10 @@
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
+=======
+&gmac0 {
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -181,8 +186,12 @@
 		port@4 {
 			status = "okay";
 			label = "wan";
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_factory_e006>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&factory 0xe006>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -241,6 +250,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -259,6 +269,12 @@
 						reg = <0xe006 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {

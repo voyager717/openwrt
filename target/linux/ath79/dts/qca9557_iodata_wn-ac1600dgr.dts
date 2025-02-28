@@ -22,6 +22,7 @@
 		debounce-interval = <60>;
 	};
 };
+<<<<<<< HEAD
 
 &pcie1 {
 	wifi@0,0 {
@@ -29,3 +30,5 @@
 		/delete-property/ nvmem-cell-names;
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

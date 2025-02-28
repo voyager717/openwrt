@@ -1,14 +1,19 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include "qca955x.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/leds/common.h>
+=======
+#include "qca9558_netgear_ex7300.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "Netgear EX7300";
 	compatible = "netgear,ex7300", "qca,qca9558";
+<<<<<<< HEAD
 
 	aliases {
 		led-boot = &led_power_green;
@@ -247,4 +252,6 @@
 	phy-mode = "rgmii-rxid";
 
 	pll-data = <0x86000000 0x80000101 0x80001313>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

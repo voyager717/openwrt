@@ -20,6 +20,10 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_platform.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <asm/time.h>
 #include <asm/machdep.h>
@@ -34,7 +38,11 @@
 
 #include "mpc85xx.h"
 
+<<<<<<< HEAD
 static void __init red_15w_rev1_pic_init(void)
+=======
+void __init red_15w_rev1_pic_init(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct mpic *mpic;
 
@@ -61,9 +69,25 @@ static void __init red_15w_rev1_setup_arch(void)
 
 machine_arch_initcall(red_15w_rev1, mpc85xx_common_publish_devices);
 
+<<<<<<< HEAD
 define_machine(red_15w_rev1) {
 	.name			= "P1010 RDB",
 	.compatible		= "sophos,red-15w-rev1",
+=======
+/*
+ * Called very early, device-tree isn't unflattened
+ */
+static int __init red_15w_rev1_probe(void)
+{
+	if (of_machine_is_compatible("sophos,red-15w-rev1"))
+		return 1;
+	return 0;
+}
+
+define_machine(red_15w_rev1) {
+	.name			= "P1010 RDB",
+	.probe			= red_15w_rev1_probe,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.setup_arch		= red_15w_rev1_setup_arch,
 	.init_IRQ		= red_15w_rev1_pic_init,
 #ifdef CONFIG_PCI
@@ -71,5 +95,9 @@ define_machine(red_15w_rev1) {
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 #endif
 	.get_irq		= mpic_get_irq,
+<<<<<<< HEAD
+=======
+	.calibrate_decr		= generic_calibrate_decr,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.progress		= udbg_progress,
 };

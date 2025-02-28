@@ -363,7 +363,11 @@ void print_title(WINDOW *dialog, const char *title, int width)
 /*
  * Print a string of text in a window, automatically wrap around to the
  * next line if the string is too long to fit on one line. Newline
+<<<<<<< HEAD
  * characters '\n' are properly processed.  We start on a new line
+=======
+ * characters '\n' are propperly processed.  We start on a new line
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  * if there is no room for at least 4 nonblanks following a double-space.
  */
 void print_autowrap(WINDOW * win, const char *prompt, int width, int y, int x)
@@ -541,7 +545,11 @@ int first_alpha(const char *string, const char *exempt)
  * lxdialog suggest <ESC> <ESC> which is correctly translated to two
  * times esc. But then we need to ignore the second esc to avoid stepping
  * out one menu too much. Filter away all escaped key sequences since
+<<<<<<< HEAD
  * keypad(FALSE) turn off ncurses support for escape sequences - and that's
+=======
+ * keypad(FALSE) turn off ncurses support for escape sequences - and thats
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  * needed to make notimeout() do as expected.
  */
 int on_key_esc(WINDOW *win)

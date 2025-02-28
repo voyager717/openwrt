@@ -2,6 +2,7 @@
 
 START=99
 
+<<<<<<< HEAD
 mmc_resetbc() {
 	local part_label="$1"
 
@@ -31,6 +32,8 @@ mmc_resetbc() {
 	fi
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 boot() {
 	case $(board_name) in
 	alfa-network,ap120c-ac)
@@ -39,6 +42,7 @@ boot() {
 		;;
 	linksys,ea6350v3|\
 	linksys,ea8300|\
+<<<<<<< HEAD
 	linksys,mr8300|\
 	linksys,whw01|\
 	linksys,whw03v2)
@@ -50,5 +54,10 @@ boot() {
 	netgear,wac510)
 		fw_setenv boot_cnt=0
 		;;
+=======
+	linksys,mr8300)
+		mtd resetbc s_env || true
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 }

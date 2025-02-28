@@ -14,7 +14,11 @@ Signed-off-by: Phil Elwell <phil@raspberrypi.org>
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/cfg80211.c
+<<<<<<< HEAD
 @@ -3314,6 +3314,10 @@ brcmf_cfg80211_set_power_mgmt(struct wip
+=======
+@@ -2961,6 +2961,10 @@ brcmf_cfg80211_set_power_mgmt(struct wip
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	 * preference in cfg struct to apply this to
  	 * FW later while initializing the dongle
  	 */

@@ -9,7 +9,10 @@
 
 /dts-v1/;
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "apm82181.dtsi"
 
 / {
@@ -17,8 +20,16 @@
 	compatible = "meraki,mr24", "meraki,ikarem", "apm,bluestone";
 
 	aliases {
+<<<<<<< HEAD
 		/delete-property/ ethernet0;
 		serial0 = &UART1;
+=======
+		serial0 = &UART1;
+		led-boot = &status;
+		led-failsafe = &failsafe;
+		led-running = &status;
+		led-upgrade = &status;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -39,6 +50,7 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &ndfc {
 	/* Ikarem has 32MB of NAND */
 	status = "okay";
@@ -51,6 +63,14 @@
 			#address-cells = <1>;
 			#size-cells = <1>;
 
+=======
+&EBC0 {
+	/* Ikarem has 32MB of NAND */
+	ndfc@1,0 {
+		status = "okay";
+		/* 32 MiB NAND Flash */
+		nand {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			partition@0 {
 				label = "u-boot";
 				reg = <0x00000000 0x00150000>;
@@ -67,10 +87,13 @@
 				label = "u-boot-env";
 				reg = <0x00150000 0x00010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "u-boot,env";
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@160000 {
@@ -90,6 +113,7 @@
 			};
 
 			partition@180000 {
+<<<<<<< HEAD
 				compatible = "linux,ubi";
 				label = "ubi";
 				reg = <0x00180000 0x01e80000>;
@@ -109,6 +133,10 @@
 						};
 					};
 				};
+=======
+				label = "ubi";
+				reg = <0x00180000 0x01e80000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -131,9 +159,12 @@
 &EMAC0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_board_66>;
 	nvmem-cell-names = "mac-address";
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-mode = "rgmii-id";
 	phy-map = <0x2>;
 	phy-address = <0x1>;
@@ -154,6 +185,7 @@
 	leds {
 		compatible = "gpio-leds";
 
+<<<<<<< HEAD
 		led-0 {
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_POWER;
@@ -198,6 +230,40 @@
 			color = <LED_COLOR_ID_GREEN>;
 			function = LED_FUNCTION_WLAN;
 			function-enumerator = <3>;
+=======
+		status: power-green {
+			label = "mr24:green:power";
+			gpios = <&GPIO0 18 GPIO_ACTIVE_LOW>;
+		};
+
+		failsafe: power-orange {
+			label = "mr24:orange:power";
+			gpios = <&GPIO0 19 GPIO_ACTIVE_LOW>;
+		};
+
+		lan {
+			label = "mr24:green:wan";
+			gpios = <&GPIO0 17 GPIO_ACTIVE_LOW>;
+		};
+
+		ssi-0 {
+			label = "mr24:green:wifi1";
+			gpios = <&GPIO0 23 GPIO_ACTIVE_LOW>;
+		};
+
+		ssi-1 {
+			label = "mr24:green:wifi2";
+			gpios = <&GPIO0 22 GPIO_ACTIVE_LOW>;
+		};
+
+		ssi-2 {
+			label = "mr24:green:wifi3";
+			gpios = <&GPIO0 21 GPIO_ACTIVE_LOW>;
+		};
+
+		ssi-3 {
+			label = "mr24:green:wifi4";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&GPIO0 20 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -205,7 +271,11 @@
 	keys {
 		compatible = "gpio-keys";
 
+<<<<<<< HEAD
 		button-restart {
+=======
+		reset {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			/* Label as per Meraki's "MR24 Installation Guide" */
 			label = "Factory Reset Button";
 			linux,code = <KEY_RESTART>;
@@ -273,3 +343,10 @@
 		};
 	};
 };
+<<<<<<< HEAD
+=======
+
+&MSI {
+	status = "okay";
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

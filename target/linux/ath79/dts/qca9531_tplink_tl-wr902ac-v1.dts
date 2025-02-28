@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,tl-wr902ac-v1", "qca,qca9531";
@@ -22,8 +25,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
@@ -40,22 +47,34 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_HIGH>;
 			trigger-sources = <&hub_port0>;
 			linux,default-trigger = "usbport";
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -126,6 +145,7 @@
 				reg = <0x020000 0x730000>;
 			};
 
+<<<<<<< HEAD
 			partition@750000 {
 				label = "info";
 				reg = <0x750000 0x010000>;
@@ -142,6 +162,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			info: partition@750000 {
+				label = "info";
+				reg = <0x750000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@760000 {
@@ -150,6 +176,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "art";
 				reg = <0x7f0000 0x010000>;
@@ -168,6 +195,12 @@
 						reg = <0x5000 0x844>;
 					};
 				};
+=======
+			art: partition@7f0000 {
+				label = "art";
+				reg = <0x7f0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -178,8 +211,13 @@
 
 	phy-handle = <&swphy4>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_info_8 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&info 0x8>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
@@ -189,8 +227,13 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_info_8 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {
@@ -199,8 +242,11 @@
 	wifi@0,0 {
 		compatible = "pci168c,0050";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&cal_art_5000>, <&macaddr_info_8 (-1)>;
 		nvmem-cell-names = "calibration", "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -209,5 +255,16 @@
 };
 
 &usb0 {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port0: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -17,7 +17,10 @@
 check_peer_activity() {
   local cfg=$1
   local iface=$2
+<<<<<<< HEAD
   local disabled
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   local public_key
   local endpoint_host
   local endpoint_port
@@ -25,6 +28,7 @@ check_peer_activity() {
   local last_handshake
   local idle_seconds
 
+<<<<<<< HEAD
   config_get_bool disabled "${cfg}" "disabled" 0
   config_get public_key "${cfg}" "public_key"
   config_get endpoint_host "${cfg}" "endpoint_host"
@@ -35,6 +39,11 @@ check_peer_activity() {
     return 0
   fi
 
+=======
+  config_get public_key "${cfg}" "public_key"
+  config_get endpoint_host "${cfg}" "endpoint_host"
+  config_get endpoint_port "${cfg}" "endpoint_port"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   persistent_keepalive=$(wg show ${iface} persistent-keepalive | grep ${public_key} | awk '{print $2}')
 
   # only process peers with endpoints and keepalive set
@@ -59,7 +68,11 @@ check_peer_activity() {
 }
 
 # query ubus for all active wireguard interfaces
+<<<<<<< HEAD
 eval $(ubus -S call network.interface dump | jsonfilter -e 'wg_ifaces=@.interface[@.up=true && @.proto="wireguard"].interface')
+=======
+wg_ifaces=$(ubus -S call network.interface dump | jsonfilter -e '@.interface[@.up=true]' | jsonfilter -a -e '@[@.proto="wireguard"].interface' | tr "\n" " ")
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 # check every peer in every active wireguard interface
 config_load network

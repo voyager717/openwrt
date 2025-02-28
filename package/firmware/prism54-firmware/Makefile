@@ -8,19 +8,38 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=prism54-firmware
 PKG_RELEASE:=1
 
+<<<<<<< HEAD
 DL_SUBDIR:=$(PKG_NAME)-$(PKG_RELEASE)
 
 # P54 SoftMAC firmware (jbnore.free.fr seems to be rather slow, so we use daemonizer.de)
+=======
+# Prism54 FullMAC firmware (jbnore.free.fr seems to be rather slow, so we use daemonizer.de)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PRG_URL:=https://daemonizer.de/prism54/prism54-fw/
 
 include $(INCLUDE_DIR)/package.mk
 
 
+<<<<<<< HEAD
 # P54 firmwares
+=======
+# PRISM54/P54 firmwares
+PRISM54FW:=1.0.4.3.arm
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 P54USBFW:=2.13.24.0.lm87.arm
 P54PCIFW:=2.13.12.0.arm
 P54SPIFW:=2.13.0.0.a.13.14.arm
 
+<<<<<<< HEAD
+=======
+define Download/prism54-firmware
+  FILE:=$(PRISM54FW)
+  URL:=$(PRG_URL)/fw-fullmac
+  HASH:=dce24156c57234dba131429fbe8cd1de8ba818c9481ddc33cf7e5af9d57a737c
+endef
+$(eval $(call Download,prism54-firmware))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Download/p54-usb-firmware
   FILE:=$(P54USBFW)
   URL:=$(PRG_URL)/fw-usb
@@ -49,6 +68,14 @@ define Package/prism54-firmware-default
   URL:=https://daemonizer.de/prism54/prism54-fw
 endef
 
+<<<<<<< HEAD
+=======
+define Package/prism54-firmware
+$(Package/prism54-firmware-default)
+  TITLE:=prism54 firmware
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/p54-usb-firmware
 $(Package/prism54-firmware-default)
   TITLE:=p54-usb firmware
@@ -73,6 +100,14 @@ define Build/Compile
 
 endef
 
+<<<<<<< HEAD
+=======
+define Package/prism54-firmware/install
+	$(INSTALL_DIR) $(1)/lib/firmware
+	$(INSTALL_DATA) $(DL_DIR)/$(PRISM54FW) $(1)/lib/firmware/isl3890
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/p54-usb-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware
 	$(INSTALL_DATA) $(DL_DIR)/$(P54USBFW) $(1)/lib/firmware/isl3887usb
@@ -89,6 +124,10 @@ define Package/p54-spi-firmware/install
 endef
 
 
+<<<<<<< HEAD
+=======
+$(eval $(call BuildPackage,prism54-firmware))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,p54-usb-firmware))
 $(eval $(call BuildPackage,p54-pci-firmware))
 $(eval $(call BuildPackage,p54-spi-firmware))

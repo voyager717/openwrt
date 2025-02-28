@@ -5,10 +5,13 @@
 / {
 	model = "GL.iNet 6416";
 	compatible = "glinet,6416", "qca,ar9331";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &wmac;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi {
@@ -28,6 +31,7 @@
 				reg = <0x0 0x20000>;
 				label = "u-boot";
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -38,6 +42,8 @@
 						reg = <0x1fc00 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@20000 {
@@ -46,6 +52,7 @@
 				label = "firmware";
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				reg = <0xff0000 0x10000>;
 				label = "art";
@@ -60,10 +67,17 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				reg = <0xff0000 0x10000>;
+				label = "art";
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 };
+<<<<<<< HEAD
 
 &eth0 {
 	nvmem-cells = <&macaddr_uboot_1fc00>;
@@ -79,3 +93,5 @@
 	nvmem-cells = <&macaddr_uboot_1fc00>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

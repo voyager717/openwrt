@@ -1,0 +1,7 @@
+[D-BUS Service]
+Name=com.example.SystemdActivatable3
+Exec=/bin/false 3
+SystemdService=dbus-com.example.SystemdActivatable3.service
+# This AppArmor label doesn't actually exist, but that's OK - nothing
+# prevents us from sending messages to it.
+AssumedAppArmorLabel=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/dbus-1.13.12/test/test-apparmor-activation-com.example.SystemdActivatable3

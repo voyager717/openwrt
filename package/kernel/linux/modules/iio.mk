@@ -25,6 +25,7 @@ endef
 
 $(eval $(call KernelPackage,iio-core))
 
+<<<<<<< HEAD
 define AddDepends/iio
   SUBMENU:=$(IIO_MENU)
   DEPENDS+=+kmod-iio-core $(1)
@@ -36,6 +37,16 @@ define KernelPackage/iio-kfifo-buf
   FILES:=$(LINUX_DIR)/drivers/iio/buffer/kfifo_buf.ko
   AUTOLOAD:=$(call AutoLoad,55,kfifo_buf)
   $(call AddDepends/iio)
+=======
+
+define KernelPackage/iio-kfifo-buf
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=Industrial I/O buffering based on kfifo
+  DEPENDS:=+kmod-iio-core
+  KCONFIG:=CONFIG_IIO_KFIFO_BUF
+  FILES:=$(LINUX_DIR)/drivers/iio/buffer/kfifo_buf.ko
+  AUTOLOAD:=$(call AutoLoad,55,kfifo_buf)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-kfifo-buf/description
@@ -46,6 +57,7 @@ endef
 $(eval $(call KernelPackage,iio-kfifo-buf))
 
 
+<<<<<<< HEAD
 define KernelPackage/industrialio-hw-consumer
   TITLE:=Provides a bonding way to an other device in hardware
   KCONFIG:=CONFIG_IIO_BUFFER_HW_CONSUMER
@@ -85,6 +97,15 @@ define KernelPackage/industrialio-triggered-buffer
   FILES:=$(LINUX_DIR)/drivers/iio/buffer/industrialio-triggered-buffer.ko
   AUTOLOAD:=$(call AutoLoad,55,industrialio-triggered-buffer)
   $(call AddDepends/iio)
+=======
+define KernelPackage/industrialio-triggered-buffer
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=Provides helper functions for setting up triggered buffers.
+  DEPENDS:=+kmod-iio-core +kmod-iio-kfifo-buf
+  KCONFIG:=CONFIG_IIO_TRIGGERED_BUFFER
+  FILES:=$(LINUX_DIR)/drivers/iio/buffer/industrialio-triggered-buffer.ko
+  AUTOLOAD:=$(call AutoLoad,55,industrialio-triggered-buffer)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/industrialio-triggered-buffer/description
@@ -95,14 +116,22 @@ $(eval $(call KernelPackage,industrialio-triggered-buffer))
 
 
 define KernelPackage/iio-ad799x
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Analog Devices AD799x ADC driver
   KCONFIG:= \
 	CONFIG_AD799X_RING_BUFFER=y \
 	CONFIG_AD799X
   FILES:=$(LINUX_DIR)/drivers/iio/adc/ad799x.ko
   AUTOLOAD:=$(call AutoLoad,56,ad799x)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-ad799x/description
@@ -113,6 +142,7 @@ endef
 
 $(eval $(call KernelPackage,iio-ad799x))
 
+<<<<<<< HEAD
 define KernelPackage/iio-ads1015
   DEPENDS:=+kmod-i2c-core +kmod-regmap-i2c +kmod-industrialio-triggered-buffer
   TITLE:=Texas Instruments ADS1015 ADC driver
@@ -130,13 +160,21 @@ $(eval $(call KernelPackage,iio-ads1015))
 
 define KernelPackage/iio-hmc5843
   DEPENDS:=+kmod-i2c-core +kmod-regmap-i2c +kmod-industrialio-triggered-buffer
+=======
+define KernelPackage/iio-hmc5843
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core +kmod-regmap-i2c +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Honeywell HMC58x3 Magnetometer
   KCONFIG:= CONFIG_SENSORS_HMC5843_I2C
   FILES:= \
       $(LINUX_DIR)/drivers/iio/magnetometer/hmc5843_i2c.ko \
       $(LINUX_DIR)/drivers/iio/magnetometer/hmc5843_core.ko
   AUTOLOAD:=$(call AutoLoad,56,hmc5843)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-hmc5843/description
@@ -146,12 +184,20 @@ endef
 $(eval $(call KernelPackage,iio-hmc5843))
 
 define KernelPackage/iio-bh1750
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=ROHM BH1750 ambient light sensor
   KCONFIG:= CONFIG_BH1750
   FILES:=$(LINUX_DIR)/drivers/iio/light/bh1750.ko
   AUTOLOAD:=$(call AutoLoad,56,bh1750)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-bh1750/description
   ROHM BH1750 ambient light sensor (i2c bus)
@@ -159,12 +205,20 @@ endef
 $(eval $(call KernelPackage,iio-bh1750))
 
 define KernelPackage/iio-am2315
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Asong AM2315 humidity/temperature sensor
   KCONFIG:= CONFIG_AM2315
   FILES:=$(LINUX_DIR)/drivers/iio/humidity/am2315.ko
   AUTOLOAD:=$(call AutoLoad,56,am2315)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-am2315/description
   Aosong AM2315 humidity/temperature sensor (I2C bus)
@@ -172,13 +226,21 @@ endef
 $(eval $(call KernelPackage,iio-am2315))
 
 define KernelPackage/iio-mxs-lradc
+<<<<<<< HEAD
   DEPENDS:=@TARGET_mxs +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=@TARGET_mxs +kmod-iio-core +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Freescale i.MX23/i.MX28 LRADC ADC driver
   KCONFIG:= \
 	CONFIG_MXS_LRADC_ADC
   FILES:=$(LINUX_DIR)/drivers/iio/adc/mxs-lradc-adc.ko
   AUTOLOAD:=$(call AutoLoad,56,mxs-lradc-adc)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-mxs-lradc/description
@@ -188,13 +250,21 @@ endef
 $(eval $(call KernelPackage,iio-mxs-lradc))
 
 define KernelPackage/iio-dht11
+<<<<<<< HEAD
   DEPENDS:=@GPIO_SUPPORT @USES_DEVICETREE
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-iio-core @GPIO_SUPPORT @USES_DEVICETREE
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=DHT11 (and compatible) humidity and temperature sensors
   KCONFIG:= \
 	CONFIG_DHT11
   FILES:=$(LINUX_DIR)/drivers/iio/humidity/dht11.ko
   AUTOLOAD:=$(call AutoLoad,56,dht11)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-dht11/description
@@ -207,11 +277,19 @@ $(eval $(call KernelPackage,iio-dht11))
 
 
 define KernelPackage/iio-bme680
+<<<<<<< HEAD
   TITLE:=BME680 gas/humidity/pressure/temperature sensor
   DEPENDS:=+kmod-regmap-core
   KCONFIG:=CONFIG_BME680
   FILES:=$(LINUX_DIR)/drivers/iio/chemical/bme680_core.ko
   $(call AddDepends/iio)
+=======
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=BME680 gas/humidity/pressure/temperature sensor
+  DEPENDS:=+kmod-iio-core +kmod-regmap-core
+  KCONFIG:=CONFIG_BME680
+  FILES:=$(LINUX_DIR)/drivers/iio/chemical/bme680_core.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-bme680/description
@@ -222,12 +300,19 @@ endef
 $(eval $(call KernelPackage,iio-bme680))
 
 define KernelPackage/iio-bme680-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=BME680 gas/humidity/pressure/temperature sensor (I2C)
   DEPENDS:=+kmod-iio-bme680 +kmod-regmap-i2c
   KCONFIG:=CONFIG_BME680_I2C
   FILES:=$(LINUX_DIR)/drivers/iio/chemical/bme680_i2c.ko
   AUTOLOAD:=$(call AutoProbe,bme680-i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-bme680-i2c/description
  This driver adds support for Bosch Sensortec's BME680 connected via I2C.
@@ -236,12 +321,19 @@ endef
 $(eval $(call KernelPackage,iio-bme680-i2c))
 
 define KernelPackage/iio-bme680-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=BME680 gas/humidity/pressure/temperature sensor (SPI)
   DEPENDS:=+kmod-iio-bme680 +kmod-regmap-spi
   KCONFIG:=CONFIG_BME680_SPI
   FILES:=$(LINUX_DIR)/drivers/iio/chemical/bme680_spi.ko
   AUTOLOAD:=$(call AutoProbe,bme680-spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-bme680-spi/description
  This driver adds support for Bosch Sensortec's BME680 connected via SPI.
@@ -251,11 +343,19 @@ $(eval $(call KernelPackage,iio-bme680-spi))
 
 
 define KernelPackage/iio-bmp280
+<<<<<<< HEAD
   TITLE:=BMP180/BMP280/BME280 pressure/temperatur sensor
   DEPENDS:=+kmod-regmap-core
   KCONFIG:=CONFIG_BMP280
   FILES:=$(LINUX_DIR)/drivers/iio/pressure/bmp280.ko
   $(call AddDepends/iio)
+=======
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=BMP180/BMP280/BME280 pressure/temperatur sensor
+  DEPENDS:=+kmod-iio-core +kmod-regmap-core
+  KCONFIG:=CONFIG_BMP280
+  FILES:=$(LINUX_DIR)/drivers/iio/pressure/bmp280.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-bmp280/description
@@ -268,12 +368,19 @@ $(eval $(call KernelPackage,iio-bmp280))
 
 
 define KernelPackage/iio-bmp280-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=BMP180/BMP280/BME280 pressure/temperatur sensor (I2C)
   DEPENDS:=+kmod-iio-bmp280 +kmod-i2c-core +kmod-regmap-i2c
   KCONFIG:=CONFIG_BMP280_I2C
   FILES:=$(LINUX_DIR)/drivers/iio/pressure/bmp280-i2c.ko
   AUTOLOAD:=$(call AutoProbe,bmp280-i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-bmp280-i2c/description
  This driver adds support for Bosch Sensortec's digital pressure and
@@ -284,12 +391,19 @@ $(eval $(call KernelPackage,iio-bmp280-i2c))
 
 
 define KernelPackage/iio-bmp280-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=BMP180/BMP280/BME280 pressure/temperatur sensor (SPI)
   DEPENDS:=+kmod-iio-bmp280 +kmod-spi-bitbang
   KCONFIG:=CONFIG_BMP280_SPI
   FILES:=$(LINUX_DIR)/drivers/iio/pressure/bmp280-spi.ko
   AUTOLOAD:=$(call AutoProbe,bmp280-spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define KernelPackage/iio-bmp280-spi/description
  This driver adds support for Bosch Sensortec's digital pressure and
@@ -299,7 +413,12 @@ endef
 $(eval $(call KernelPackage,iio-bmp280-spi))
 
 define KernelPackage/iio-htu21
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=HTU21 humidity & temperature sensor
   KCONFIG:= \
        CONFIG_HTU21 \
@@ -308,7 +427,10 @@ define KernelPackage/iio-htu21
        $(LINUX_DIR)/drivers/iio/humidity/htu21.ko \
        $(LINUX_DIR)/drivers/iio/common/ms_sensors/ms_sensors_i2c.ko
   AUTOLOAD:=$(call AutoLoad,56,htu21)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-htu21/description
@@ -322,13 +444,21 @@ $(eval $(call KernelPackage,iio-htu21))
 
 
 define KernelPackage/iio-ccs811
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=AMS CCS811 VOC sensor
   KCONFIG:= \
 	CONFIG_CCS811
   FILES:= $(LINUX_DIR)/drivers/iio/chemical/ccs811.ko
   AUTOLOAD:=$(call AutoLoad,56,ccs811)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-ccs811/description
@@ -339,12 +469,20 @@ $(eval $(call KernelPackage,iio-ccs811))
 
 
 define KernelPackage/iio-si7020
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Silicon Labs Si7020 sensor
   KCONFIG:= CONFIG_SI7020
   FILES:=$(LINUX_DIR)/drivers/iio/humidity/si7020.ko
   AUTOLOAD:=$(call AutoLoad,56,si7020)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-si7020/description
@@ -357,15 +495,24 @@ $(eval $(call KernelPackage,iio-si7020))
 
 
 define KernelPackage/iio-st_accel
+<<<<<<< HEAD
   TITLE:=STMicroelectronics accelerometer 3-Axis Driver
   DEPENDS:=+kmod-regmap-core +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=STMicroelectronics accelerometer 3-Axis Driver
+  DEPENDS:=+kmod-iio-core +kmod-regmap-core +kmod-industrialio-triggered-buffer
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_IIO_ST_ACCEL_3AXIS \
 	CONFIG_IIO_ST_SENSORS_CORE
   FILES:= \
 	$(LINUX_DIR)/drivers/iio/accel/st_accel.ko \
 	$(LINUX_DIR)/drivers/iio/common/st_sensors/st_sensors.ko
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-st_accel/description
@@ -379,6 +526,10 @@ $(eval $(call KernelPackage,iio-st_accel))
 
 
 define KernelPackage/iio-st_accel-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=STMicroelectronics accelerometer 3-Axis Driver (I2C)
   DEPENDS:=+kmod-iio-st_accel +kmod-i2c-core +kmod-regmap-i2c
   KCONFIG:= CONFIG_IIO_ST_ACCEL_I2C_3AXIS
@@ -386,7 +537,10 @@ define KernelPackage/iio-st_accel-i2c
 	$(LINUX_DIR)/drivers/iio/accel/st_accel_i2c.ko \
 	$(LINUX_DIR)/drivers/iio/common/st_sensors/st_sensors_i2c.ko
   AUTOLOAD:=$(call AutoLoad,56,st_accel_i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-st_accel-i2c/description
@@ -397,6 +551,10 @@ $(eval $(call KernelPackage,iio-st_accel-i2c))
 
 
 define KernelPackage/iio-st_accel-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=STMicroelectronics accelerometer 3-Axis Driver (SPI)
   DEPENDS:=+kmod-iio-st_accel +kmod-regmap-spi
   KCONFIG:= CONFIG_IIO_ST_ACCEL_SPI_3AXIS
@@ -404,7 +562,10 @@ define KernelPackage/iio-st_accel-spi
 	$(LINUX_DIR)/drivers/iio/accel/st_accel_spi.ko \
 	$(LINUX_DIR)/drivers/iio/common/st_sensors/st_sensors_spi.ko
   AUTOLOAD:=$(call AutoLoad,56,st_accel_spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-st_accel-spi/description
@@ -415,12 +576,20 @@ $(eval $(call KernelPackage,iio-st_accel-spi))
 
 
 define KernelPackage/iio-lsm6dsx
+<<<<<<< HEAD
   DEPENDS:=+kmod-iio-kfifo-buf +kmod-regmap-core +kmod-industrialio-triggered-buffer
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-iio-core +kmod-iio-kfifo-buf +kmod-regmap-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=ST LSM6DSx driver for IMU MEMS sensors
   KCONFIG:=CONFIG_IIO_ST_LSM6DSX
   FILES:=$(LINUX_DIR)/drivers/iio/imu/st_lsm6dsx/st_lsm6dsx.ko
   AUTOLOAD:=$(call AutoProbe,st_lsm6dsx)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-lsm6dsx/description
@@ -431,12 +600,19 @@ $(eval $(call KernelPackage,iio-lsm6dsx))
 
 
 define KernelPackage/iio-lsm6dsx-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEPENDS:=+kmod-iio-lsm6dsx +kmod-i2c-core +kmod-regmap-i2c
   TITLE:=ST LSM6DSx driver for IMU MEMS sensors (I2C)
   KCONFIG:=CONFIG_IIO_ST_LSM6DSX
   FILES:=$(LINUX_DIR)/drivers/iio/imu/st_lsm6dsx/st_lsm6dsx_i2c.ko
   AUTOLOAD:=$(call AutoProbe,st_lsm6dsx-i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-lsm6dsx-i2c/description
@@ -447,12 +623,19 @@ $(eval $(call KernelPackage,iio-lsm6dsx-i2c))
 
 
 define KernelPackage/iio-lsm6dsx-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEPENDS:=+kmod-iio-lsm6dsx +kmod-regmap-spi
   TITLE:=ST LSM6DSx driver for IMU MEMS sensors (SPI)
   KCONFIG:=CONFIG_IIO_ST_LSM6DSX
   FILES:=$(LINUX_DIR)/drivers/iio/imu/st_lsm6dsx/st_lsm6dsx_spi.ko
   AUTOLOAD:=$(call AutoProbe,st_lsm6dsx-spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-lsm6dsx-spi/description
@@ -463,6 +646,7 @@ $(eval $(call KernelPackage,iio-lsm6dsx-spi))
 
 
 define KernelPackage/iio-sps30
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core +kmod-industrialio-triggered-buffer +kmod-lib-crc8
   TITLE:=Sensirion SPS30 particulate matter sensor
   KCONFIG:= \
@@ -473,6 +657,14 @@ define KernelPackage/iio-sps30
 	$(LINUX_DIR)/drivers/iio/chemical/sps30_i2c.ko
   AUTOLOAD:=$(call AutoProbe,sps30 sps30_i2c)
   $(call AddDepends/iio)
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core +kmod-industrialio-triggered-buffer +kmod-lib-crc8
+  TITLE:=Sensirion SPS30 particulate matter sensor
+  KCONFIG:=CONFIG_SPS30
+  FILES:=$(LINUX_DIR)/drivers/iio/chemical/sps30.ko
+  AUTOLOAD:=$(call AutoProbe,sps30)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-sps30/description
@@ -483,12 +675,20 @@ $(eval $(call KernelPackage,iio-sps30))
 
 
 define KernelPackage/iio-tsl4531
+<<<<<<< HEAD
   DEPENDS:=+kmod-i2c-core
+=======
+  SUBMENU:=$(IIO_MENU)
+  DEPENDS:=+kmod-i2c-core +kmod-iio-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=TAOS TSL4531 ambient light sensor
   KCONFIG:= CONFIG_TSL4531
   FILES:=$(LINUX_DIR)/drivers/iio/light/tsl4531.ko
   AUTOLOAD:=$(call AutoLoad,56,tsl4531)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-tsl4531/description
@@ -501,12 +701,21 @@ $(eval $(call KernelPackage,iio-tsl4531))
 
 
 define KernelPackage/iio-fxas21002c
+<<<<<<< HEAD
   TITLE:=Freescale FXAS21002C 3-axis gyro driver
   DEPENDS:=+kmod-regmap-core +kmod-industrialio-triggered-buffer
   KCONFIG:= CONFIG_FXAS21002C
   FILES:=$(LINUX_DIR)/drivers/iio/gyro/fxas21002c_core.ko
   AUTOLOAD:=$(call AutoLoad,56,fxas21002c)
   $(call AddDepends/iio)
+=======
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=Freescale FXAS21002C 3-axis gyro driver
+  DEPENDS:=+kmod-iio-core +kmod-regmap-core +kmod-industrialio-triggered-buffer
+  KCONFIG:= CONFIG_FXAS21002C
+  FILES:=$(LINUX_DIR)/drivers/iio/gyro/fxas21002c_core.ko
+  AUTOLOAD:=$(call AutoLoad,56,fxas21002c)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxas21002c/description
@@ -517,12 +726,19 @@ $(eval $(call KernelPackage,iio-fxas21002c))
 
 
 define KernelPackage/iio-fxas21002c-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Freescale FXAS21002C 3-axis gyro driver (I2C)
   DEPENDS:=+kmod-iio-fxas21002c +kmod-i2c-core +kmod-regmap-i2c
   KCONFIG:= CONFIG_FXAS21002C_I2C
   FILES:=$(LINUX_DIR)/drivers/iio/gyro/fxas21002c_i2c.ko
   AUTOLOAD:=$(call AutoLoad,56,fxas21002c_i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxas21002c-i2c/description
@@ -534,12 +750,19 @@ endef
 $(eval $(call KernelPackage,iio-fxas21002c-i2c))
 
 define KernelPackage/iio-fxas21002c-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEPENDS:=+kmod-iio-fxas21002c +kmod-regmap-spi
   TITLE:=Freescale FXAS21002C 3-axis gyro driver (SPI)
   KCONFIG:= CONFIG_FXAS21002C_SPI
   FILES:=$(LINUX_DIR)/drivers/iio/gyro/fxas21002c_spi.ko
   AUTOLOAD:=$(call AutoLoad,56,fxas21002c_spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxas21002c-spi/description
@@ -551,12 +774,21 @@ $(eval $(call KernelPackage,iio-fxas21002c-spi))
 
 
 define KernelPackage/iio-fxos8700
+<<<<<<< HEAD
   TITLE:=Freescale FXOS8700 3-axis accelerometer driver
   DEPENDS:=+kmod-regmap-core
   KCONFIG:= CONFIG_FXOS8700
   FILES:=$(LINUX_DIR)/drivers/iio/imu/fxos8700_core.ko
   AUTOLOAD:=$(call AutoLoad,56,fxos8700)
   $(call AddDepends/iio)
+=======
+  SUBMENU:=$(IIO_MENU)
+  TITLE:=Freescale FXOS8700 3-axis accelerometer driver
+  DEPENDS:=+kmod-iio-core +kmod-regmap-core
+  KCONFIG:= CONFIG_FXOS8700
+  FILES:=$(LINUX_DIR)/drivers/iio/imu/fxos8700_core.ko
+  AUTOLOAD:=$(call AutoLoad,56,fxos8700)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxos8700/description
@@ -567,12 +799,19 @@ $(eval $(call KernelPackage,iio-fxos8700))
 
 
 define KernelPackage/iio-fxos8700-i2c
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Freescale FXOS8700 3-axis acceleromter driver (I2C)
   DEPENDS:=+kmod-iio-fxos8700 +kmod-i2c-core +kmod-regmap-i2c
   KCONFIG:= CONFIG_FXOS8700_I2C
   FILES:=$(LINUX_DIR)/drivers/iio/imu/fxos8700_i2c.ko
   AUTOLOAD:=$(call AutoLoad,56,fxos8700_i2c)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxos8700-i2c/description
@@ -584,12 +823,19 @@ endef
 $(eval $(call KernelPackage,iio-fxos8700-i2c))
 
 define KernelPackage/iio-fxos8700-spi
+<<<<<<< HEAD
+=======
+  SUBMENU:=$(IIO_MENU)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEPENDS:=+kmod-iio-fxos8700 +kmod-regmap-spi
   TITLE:=Freescale FXOS8700 3-axis accelerometer driver (SPI)
   KCONFIG:= CONFIG_FXOS8700_SPI
   FILES:=$(LINUX_DIR)/drivers/iio/imu/fxos8700_spi.ko
   AUTOLOAD:=$(call AutoLoad,56,fxos8700_spi)
+<<<<<<< HEAD
   $(call AddDepends/iio)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/iio-fxos8700-spi/description
@@ -598,6 +844,7 @@ define KernelPackage/iio-fxos8700-spi/description
 endef
 
 $(eval $(call KernelPackage,iio-fxos8700-spi))
+<<<<<<< HEAD
 
 define KernelPackage/iio-ti-am335x-adc
   TITLE:= TI Sitara AM335x ADC driver
@@ -612,3 +859,5 @@ define KernelPackage/iio-ti-am335x-adc/description
 endef
 
 $(eval $(call KernelPackage,iio-ti-am335x-adc))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -6,7 +6,11 @@
 };
 
 &localbus {
+<<<<<<< HEAD
 	flash1: flash@1 {
+=======
+	flash@1 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "lantiq,nand-xway";
 		bank-width = <2>;
 		reg = <1 0x0 0x2000000>;
@@ -14,7 +18,11 @@
 		pinctrl-0 = <&nand_pins>, <&nand_cs1_pins>;
 		pinctrl-names = "default";
 
+<<<<<<< HEAD
 		nand-ecc-engine = <&flash1>;
+=======
+		nand-ecc-mode = "on-die";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";

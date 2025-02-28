@@ -11,7 +11,11 @@ CRYPTO_MODULES = \
 	ALGAPI2=crypto_algapi \
 	BLKCIPHER2=crypto_blkcipher
 
+<<<<<<< HEAD
 CRYPTO_TARGET = $(BOARD)/$(SUBTARGET)
+=======
+CRYPTO_TARGET = $(BOARD)/$(if $(SUBTARGET),$(SUBTARGET),generic)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 crypto_confvar=CONFIG_CRYPTO_$(word 1,$(subst =,$(space),$(1)))
 crypto_file=$(LINUX_DIR)/crypto/$(word 2,$(subst =,$(space),$(1))).ko
@@ -50,6 +54,7 @@ $(eval $(call KernelPackage,crypto-aead))
 
 define KernelPackage/crypto-arc4
   TITLE:=ARC4 cipher CryptoAPI module
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-user
   KCONFIG:= \
 	  CONFIG_CRYPTO_ARC4 \
@@ -57,6 +62,10 @@ define KernelPackage/crypto-arc4
   FILES:= \
 	  $(LINUX_DIR)/crypto/arc4.ko \
 	  $(LINUX_DIR)/lib/crypto/libarc4.ko
+=======
+  KCONFIG:=CONFIG_CRYPTO_ARC4
+  FILES:=$(LINUX_DIR)/crypto/arc4.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,09,arc4)
   $(call AddDepends/crypto)
 endef
@@ -68,16 +77,22 @@ define KernelPackage/crypto-authenc
   TITLE:=Combined mode wrapper for IPsec
   DEPENDS:=+kmod-crypto-manager +kmod-crypto-null
   KCONFIG:=CONFIG_CRYPTO_AUTHENC
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/crypto/authenc.ko \
 	$(LINUX_DIR)/crypto/authencesn.ko
   AUTOLOAD:=$(call AutoLoad,09,authenc authencesn)
+=======
+  FILES:=$(LINUX_DIR)/crypto/authenc.ko
+  AUTOLOAD:=$(call AutoLoad,09,authenc)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/crypto)
 endef
 
 $(eval $(call KernelPackage,crypto-authenc))
 
 
+<<<<<<< HEAD
 define KernelPackage/crypto-blake2b
   TITLE:=Support for BLAKE2b cryptographic hash function (RFC 7693)
   DEPENDS:=+kmod-crypto-hash
@@ -90,6 +105,8 @@ endef
 $(eval $(call KernelPackage,crypto-blake2b))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-cbc
   TITLE:=Cipher Block Chaining CryptoAPI module
   DEPENDS:=+kmod-crypto-manager
@@ -114,6 +131,7 @@ endef
 $(eval $(call KernelPackage,crypto-ccm))
 
 
+<<<<<<< HEAD
 define KernelPackage/crypto-chacha20poly1305
   TITLE:=ChaCha20-Poly1305 AEAD support, RFC7539 (used by strongSwan IPsec VPN)
   DEPENDS:=+kmod-crypto-aead +kmod-crypto-manager
@@ -126,6 +144,8 @@ endef
 $(eval $(call KernelPackage,crypto-chacha20poly1305))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-cmac
   TITLE:=Support for Cipher-based Message Authentication Code (CMAC)
   DEPENDS:=+kmod-crypto-hash
@@ -226,7 +246,11 @@ $(eval $(call KernelPackage,crypto-ecb))
 
 define KernelPackage/crypto-ecdh
   TITLE:=ECDH algorithm
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-kpp +kmod-crypto-rng
+=======
+  DEPENDS:=+kmod-crypto-kpp
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= CONFIG_CRYPTO_ECDH
   FILES:= \
 	$(LINUX_DIR)/crypto/ecdh_generic.ko \
@@ -240,7 +264,11 @@ $(eval $(call KernelPackage,crypto-ecdh))
 
 define KernelPackage/crypto-echainiv
   TITLE:=Encrypted Chain IV Generator
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-aead +kmod-crypto-geniv
+=======
+  DEPENDS:=+kmod-crypto-aead
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_CRYPTO_ECHAINIV
   FILES:=$(LINUX_DIR)/crypto/echainiv.ko
   AUTOLOAD:=$(call AutoLoad,09,echainiv)
@@ -249,6 +277,7 @@ endef
 
 $(eval $(call KernelPackage,crypto-echainiv))
 
+<<<<<<< HEAD
 define KernelPackage/crypto-engine
   TITLE:=Crypto engine
   KCONFIG:=CONFIG_CRYPTO_ENGINE
@@ -270,6 +299,8 @@ endef
 
 $(eval $(call KernelPackage,crypto-essiv))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/crypto-fcrypt
   TITLE:=FCRYPT cipher CryptoAPI module
@@ -308,10 +339,15 @@ $(eval $(call KernelPackage,crypto-xcbc))
 
 define KernelPackage/crypto-gf128
   TITLE:=GF(2^128) multiplication functions CryptoAPI module
+<<<<<<< HEAD
   KCONFIG:= \
 	CONFIG_CRYPTO_GF128MUL \
 	CONFIG_CRYPTO_LIB_GF128MUL
   FILES:=$(LINUX_DIR)/lib/crypto/gf128mul.ko
+=======
+  KCONFIG:=CONFIG_CRYPTO_GF128MUL
+  FILES:=$(LINUX_DIR)/crypto/gf128mul.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,09,gf128mul)
   $(call AddDepends/crypto)
 endef
@@ -335,8 +371,12 @@ define KernelPackage/crypto-ghash/arm-ce
   AUTOLOAD+=$(call AutoLoad,09,ghash-arm-ce)
 endef
 
+<<<<<<< HEAD
 KernelPackage/crypto-ghash/imx/cortexa7=$(KernelPackage/crypto-ghash/arm-ce)
 KernelPackage/crypto-ghash/imx/cortexa9=$(KernelPackage/crypto-ghash/arm-ce)
+=======
+KernelPackage/crypto-ghash/imx6=$(KernelPackage/crypto-ghash/arm-ce)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 KernelPackage/crypto-ghash/ipq40xx=$(KernelPackage/crypto-ghash/arm-ce)
 KernelPackage/crypto-ghash/mvebu/cortexa9=$(KernelPackage/crypto-ghash/arm-ce)
 
@@ -366,6 +406,7 @@ endef
 $(eval $(call KernelPackage,crypto-hmac))
 
 
+<<<<<<< HEAD
 define KernelPackage/crypto-hw-atmel
   TITLE:=Microchip / Atmel ECC/SHA/RNG hw accelerator
   DEPENDS:=+kmod-i2c-core +kmod-crypto-ecdh +kmod-crypto-sha1 \
@@ -386,6 +427,8 @@ endef
 $(eval $(call KernelPackage,crypto-hw-atmel))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-hw-ccp
   TITLE:=AMD Cryptographic Coprocessor
   DEPENDS:= \
@@ -415,7 +458,11 @@ $(eval $(call KernelPackage,crypto-hw-ccp))
 
 define KernelPackage/crypto-hw-geode
   TITLE:=AMD Geode hardware crypto module
+<<<<<<< HEAD
   DEPENDS:=@TARGET_x86_geode +kmod-crypto-manager
+=======
+  DEPENDS:=+kmod-crypto-manager
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_HW=y \
 	CONFIG_CRYPTO_DEV_GEODE
@@ -429,7 +476,11 @@ $(eval $(call KernelPackage,crypto-hw-geode))
 
 define KernelPackage/crypto-hw-hifn-795x
   TITLE:=HIFN 795x crypto accelerator
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-random-core +kmod-crypto-manager
+=======
+  DEPENDS:=+kmod-random-core +kmod-crypto-manager
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_HW=y \
 	CONFIG_CRYPTO_DEV_HIFN_795X \
@@ -441,6 +492,7 @@ endef
 
 $(eval $(call KernelPackage,crypto-hw-hifn-795x))
 
+<<<<<<< HEAD
 define KernelPackage/crypto-hw-ixp4xx
   TITLE:=Intel IXP4xx crypto accelerator
   DEPENDS:=@TARGET_ixp4xx +kmod-random-core +kmod-crypto-manager +kmod-crypto-authenc +kmod-crypto-des
@@ -454,6 +506,8 @@ endef
 
 $(eval $(call KernelPackage,crypto-hw-ixp4xx))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/crypto-hw-padlock
   TITLE:=VIA PadLock ACE with AES/SHA hw crypto module
@@ -475,9 +529,14 @@ $(eval $(call KernelPackage,crypto-hw-padlock))
 
 define KernelPackage/crypto-hw-safexcel
   TITLE:= MVEBU SafeXcel Crypto Engine module
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_mvebu_cortexa53||TARGET_mvebu_cortexa72||TARGET_mediatek_filogic||TARGET_mediatek_mt7623) \
 	+eip197-mini-firmware +kmod-crypto-authenc +kmod-crypto-des +kmod-crypto-md5 +kmod-crypto-hmac \
 	+kmod-crypto-sha1 +kmod-crypto-sha256 +kmod-crypto-sha512
+=======
+  DEPENDS:=@(TARGET_mvebu_cortexa53||TARGET_mvebu_cortexa72) +eip197-mini-firmware \
+	+kmod-crypto-authenc +kmod-crypto-md5 +kmod-crypto-hmac +kmod-crypto-sha256 +kmod-crypto-sha512
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_HW=y \
 	CONFIG_CRYPTO_DEV_SAFEXCEL
@@ -503,8 +562,12 @@ $(eval $(call KernelPackage,crypto-hw-safexcel))
 
 define KernelPackage/crypto-hw-talitos
   TITLE:=Freescale integrated security engine (SEC) driver
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_mpc85xx||TARGET_layerscape) +kmod-crypto-manager \
 	+kmod-crypto-hash +kmod-random-core +kmod-crypto-authenc +kmod-crypto-des
+=======
+  DEPENDS:=+kmod-crypto-manager +kmod-crypto-hash +kmod-random-core +kmod-crypto-authenc +kmod-crypto-des
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_HW=y \
 	CONFIG_CRYPTO_DEV_TALITOS \
@@ -518,6 +581,7 @@ endef
 
 $(eval $(call KernelPackage,crypto-hw-talitos))
 
+<<<<<<< HEAD
 define KernelPackage/crypto-hw-eip93
   TITLE:=MTK EIP93 crypto module
   DEPENDS:=@TARGET_ramips_mt7621 \
@@ -547,6 +611,8 @@ IPSEC offload with authenc(hmac(sha1/sha256), aes/cbc/rfc3686)
 endef
 
 $(eval $(call KernelPackage,crypto-hw-eip93))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/crypto-kpp
   TITLE:=Key-agreement Protocol Primitives
@@ -558,6 +624,10 @@ endef
 
 $(eval $(call KernelPackage,crypto-kpp))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-lib-chacha20
   TITLE:=ChaCha library interface
   KCONFIG:=CONFIG_CRYPTO_LIB_CHACHA
@@ -578,8 +648,11 @@ define KernelPackage/crypto-lib-chacha20/arm
   FILES:=$(LINUX_DIR)/arch/arm/crypto/chacha-neon.ko
 endef
 
+<<<<<<< HEAD
 KernelPackage/crypto-lib-chacha20/armeb=$(KernelPackage/crypto-lib-chacha20/arm)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-lib-chacha20/aarch64
   KCONFIG+=CONFIG_CRYPTO_CHACHA20_NEON
   FILES+=$(LINUX_DIR)/arch/arm64/crypto/chacha-neon.ko
@@ -628,7 +701,11 @@ define KernelPackage/crypto-lib-curve25519/config
   imply PACKAGE_kmod-crypto-kpp
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-lib-curve25519/x86_64
+=======
+define KernelPackage/crypto-lib-curve25519/x86/64
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG+=CONFIG_CRYPTO_CURVE25519_X86
   FILES+=$(LINUX_DIR)/arch/x86/crypto/curve25519-x86_64.ko
 endef
@@ -643,11 +720,14 @@ ifeq ($(ARCH)-$(CONFIG_KERNEL_MODE_NEON),arm-y)
 	  $(KernelPackage/crypto-lib-curve25519/arm-neon)
 endif
 
+<<<<<<< HEAD
 ifdef KernelPackage/crypto-lib-curve25519/$(ARCH)
   KernelPackage/crypto-lib-curve25519/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-lib-curve25519/$(ARCH))
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,crypto-lib-curve25519))
 
 
@@ -673,8 +753,11 @@ define KernelPackage/crypto-lib-poly1305/arm
   FILES:=$(LINUX_DIR)/arch/arm/crypto/poly1305-arm.ko
 endef
 
+<<<<<<< HEAD
 KernelPackage/crypto-lib-poly1305/armeb=$(KernelPackage/crypto-lib-poly1305/arm)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-lib-poly1305/aarch64
   KCONFIG+=CONFIG_CRYPTO_POLY1305_NEON
   FILES:=$(LINUX_DIR)/arch/arm64/crypto/poly1305-neon.ko
@@ -699,7 +782,11 @@ $(eval $(call KernelPackage,crypto-lib-poly1305))
 
 define KernelPackage/crypto-manager
   TITLE:=CryptoAPI algorithm manager
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-aead +kmod-crypto-hash
+=======
+  DEPENDS:=+kmod-crypto-aead +kmod-crypto-hash +kmod-crypto-pcompress
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_MANAGER \
 	CONFIG_CRYPTO_MANAGER2
@@ -728,8 +815,12 @@ define KernelPackage/crypto-md5
   DEPENDS:=+kmod-crypto-hash
   KCONFIG:= \
 	CONFIG_CRYPTO_MD5 \
+<<<<<<< HEAD
 	CONFIG_CRYPTO_MD5_OCTEON \
 	CONFIG_CRYPTO_MD5_PPC
+=======
+	CONFIG_CRYPTO_MD5_OCTEON
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/crypto/md5.ko
   AUTOLOAD:=$(call AutoLoad,09,md5)
   $(call AddDepends/crypto)
@@ -740,6 +831,7 @@ define KernelPackage/crypto-md5/octeon
   AUTOLOAD+=$(call AutoLoad,09,octeon-md5)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-md5/powerpc
   FILES+=$(LINUX_DIR)/arch/powerpc/crypto/md5-ppc.ko
   AUTOLOAD+=$(call AutoLoad,09,md5-ppc)
@@ -750,6 +842,8 @@ ifdef KernelPackage/crypto-md5/$(ARCH)
 	  $(KernelPackage/crypto-md5/$(ARCH))
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,crypto-md5))
 
 
@@ -767,9 +861,14 @@ $(eval $(call KernelPackage,crypto-michael-mic))
 
 define KernelPackage/crypto-misc
   TITLE:=Other CryptoAPI modules
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-xts +kmod-crypto-user
   KCONFIG:= \
 	CONFIG_CRYPTO_USER_API_ENABLE_OBSOLETE=y \
+=======
+  DEPENDS:=+kmod-crypto-xts
+  KCONFIG:= \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CRYPTO_CAMELLIA_X86_64 \
 	CONFIG_CRYPTO_BLOWFISH_X86_64 \
 	CONFIG_CRYPTO_TWOFISH_X86_64 \
@@ -788,9 +887,17 @@ define KernelPackage/crypto-misc
 	CONFIG_CRYPTO_CAMELLIA \
 	CONFIG_CRYPTO_CAST5 \
 	CONFIG_CRYPTO_CAST6 \
+<<<<<<< HEAD
 	CONFIG_CRYPTO_KHAZAD \
 	CONFIG_CRYPTO_SERPENT \
 	CONFIG_CRYPTO_TEA \
+=======
+	CONFIG_CRYPTO_FCRYPT \
+	CONFIG_CRYPTO_KHAZAD \
+	CONFIG_CRYPTO_SERPENT \
+	CONFIG_CRYPTO_TEA \
+	CONFIG_CRYPTO_TGR192 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CRYPTO_TWOFISH \
 	CONFIG_CRYPTO_TWOFISH_COMMON \
 	CONFIG_CRYPTO_TWOFISH_586 \
@@ -803,6 +910,10 @@ define KernelPackage/crypto-misc
 	$(LINUX_DIR)/crypto/cast6_generic.ko \
 	$(LINUX_DIR)/crypto/khazad.ko \
 	$(LINUX_DIR)/crypto/tea.ko \
+<<<<<<< HEAD
+=======
+	$(LINUX_DIR)/crypto/tgr192.ko \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(LINUX_DIR)/crypto/twofish_common.ko \
 	$(LINUX_DIR)/crypto/wp512.ko \
 	$(LINUX_DIR)/crypto/twofish_generic.ko \
@@ -810,7 +921,11 @@ define KernelPackage/crypto-misc
 	$(LINUX_DIR)/crypto/blowfish_generic.ko \
 	$(LINUX_DIR)/crypto/serpent_generic.ko
   AUTOLOAD:=$(call AutoLoad,10,anubis camellia_generic cast_common \
+<<<<<<< HEAD
 	cast5_generic cast6_generic khazad tea twofish_common \
+=======
+	cast5_generic cast6_generic khazad tea tgr192 twofish_common \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	wp512 blowfish_common serpent_generic)
   ifndef CONFIG_TARGET_x86
 	AUTOLOAD+= $(call AutoLoad,10,twofish_generic blowfish_generic)
@@ -823,14 +938,25 @@ ifndef CONFIG_TARGET_x86_64
     FILES+= \
 	$(LINUX_DIR)/arch/x86/crypto/twofish-i586.ko \
 	$(LINUX_DIR)/arch/x86/crypto/serpent-sse2-i586.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/crypto/cryptd.ko \
 	$(LINUX_DIR)/crypto/crypto_simd.ko
     AUTOLOAD+= $(call AutoLoad,10,cryptd \
+=======
+	$(LINUX_DIR)/arch/x86/crypto/glue_helper.ko \
+	$(LINUX_DIR)/crypto/cryptd.ko \
+	$(LINUX_DIR)/crypto/crypto_simd.ko
+    AUTOLOAD+= $(call AutoLoad,10,cryptd glue_helper \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	serpent-sse2-i586 twofish-i586 blowfish_generic)
   endef
 endif
 
+<<<<<<< HEAD
 define KernelPackage/crypto-misc/x86_64
+=======
+define KernelPackage/crypto-misc/x86/64
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES+= \
 	$(LINUX_DIR)/arch/x86/crypto/camellia-x86_64.ko \
 	$(LINUX_DIR)/arch/x86/crypto/blowfish-x86_64.ko \
@@ -850,11 +976,14 @@ define KernelPackage/crypto-misc/x86_64
 	twofish-avx-x86_64 blowfish-x86_64 serpent-avx-x86_64 serpent-avx2)
 endef
 
+<<<<<<< HEAD
 ifdef KernelPackage/crypto-misc/$(ARCH)
   KernelPackage/crypto-misc/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-misc/$(ARCH))
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call KernelPackage,crypto-misc))
 
 
@@ -881,13 +1010,33 @@ endef
 $(eval $(call KernelPackage,crypto-pcbc))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/crypto-pcompress
+  TITLE:=CryptoAPI Partial (de)compression operations
+  KCONFIG:= \
+	CONFIG_CRYPTO_PCOMP=y \
+	CONFIG_CRYPTO_PCOMP2
+  FILES:=$(LINUX_DIR)/crypto/pcompress.ko
+  AUTOLOAD:=$(call AutoLoad,09,pcompress)
+  $(call AddDepends/crypto)
+endef
+
+$(eval $(call KernelPackage,crypto-pcompress))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-rsa
   TITLE:=RSA algorithm
   DEPENDS:=+kmod-crypto-manager +kmod-asn1-decoder
   KCONFIG:= CONFIG_CRYPTO_RSA
   HIDDEN:=1
   FILES:= \
+<<<<<<< HEAD
 	$(LINUX_DIR)/lib/crypto/mpi/mpi.ko \
+=======
+	$(LINUX_DIR)/lib/mpi/mpi.ko \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(LINUX_DIR)/crypto/akcipher.ko \
 	$(LINUX_DIR)/crypto/rsa_generic.ko
   AUTOLOAD:=$(call AutoLoad,10,rsa_generic)
@@ -911,7 +1060,11 @@ $(eval $(call KernelPackage,crypto-rmd160))
 
 define KernelPackage/crypto-rng
   TITLE:=CryptoAPI random number generation
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac +kmod-crypto-sha512 +kmod-crypto-sha3
+=======
+  DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac +kmod-crypto-sha256
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_DRBG \
 	CONFIG_CRYPTO_DRBG_HMAC=y \
@@ -930,6 +1083,7 @@ endef
 $(eval $(call KernelPackage,crypto-rng))
 
 
+<<<<<<< HEAD
 define KernelPackage/crypto-geniv
   TITLE:=CryptoAPI Shared IV generator
   HIDDEN:=1
@@ -946,6 +1100,11 @@ $(eval $(call KernelPackage,crypto-geniv))
 define KernelPackage/crypto-seqiv
   TITLE:=CryptoAPI Sequence Number IV Generator
   DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng +kmod-crypto-geniv
+=======
+define KernelPackage/crypto-seqiv
+  TITLE:=CryptoAPI Sequence Number IV Generator
+  DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_CRYPTO_SEQIV
   FILES:=$(LINUX_DIR)/crypto/seqiv.ko
   AUTOLOAD:=$(call AutoLoad,09,seqiv)
@@ -962,9 +1121,13 @@ define KernelPackage/crypto-sha1
 	CONFIG_CRYPTO_SHA1 \
 	CONFIG_CRYPTO_SHA1_ARM \
 	CONFIG_CRYPTO_SHA1_ARM_NEON \
+<<<<<<< HEAD
 	CONFIG_CRYPTO_SHA1_ARM64_CE \
 	CONFIG_CRYPTO_SHA1_OCTEON \
 	CONFIG_CRYPTO_SHA1_PPC_SPE \
+=======
+	CONFIG_CRYPTO_SHA1_OCTEON \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CRYPTO_SHA1_SSSE3
   FILES:=$(LINUX_DIR)/crypto/sha1_generic.ko
   AUTOLOAD:=$(call AutoLoad,09,sha1_generic)
@@ -982,6 +1145,7 @@ define KernelPackage/crypto-sha1/arm-neon
   AUTOLOAD+=$(call AutoLoad,09,sha1-arm-neon)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-sha1/aarch64-ce
   FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha1-ce.ko
   AUTOLOAD+=$(call AutoLoad,09,sha1-ce)
@@ -997,12 +1161,18 @@ KernelPackage/crypto-sha1/mvebu/cortexa53=$(KernelPackage/crypto-sha1/aarch64-ce
 KernelPackage/crypto-sha1/mvebu/cortexa72=$(KernelPackage/crypto-sha1/aarch64-ce)
 KernelPackage/crypto-sha1/qualcommax=$(KernelPackage/crypto-sha1/aarch64-ce)
 KernelPackage/crypto-sha1/rockchip/armv8=$(KernelPackage/crypto-sha1/aarch64-ce)
+=======
+KernelPackage/crypto-sha1/imx6=$(KernelPackage/crypto-sha1/arm-neon)
+KernelPackage/crypto-sha1/ipq40xx=$(KernelPackage/crypto-sha1/arm-neon)
+KernelPackage/crypto-sha1/mvebu/cortexa9=$(KernelPackage/crypto-sha1/arm-neon)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/crypto-sha1/octeon
   FILES+=$(LINUX_DIR)/arch/mips/cavium-octeon/crypto/octeon-sha1.ko
   AUTOLOAD+=$(call AutoLoad,09,octeon-sha1)
 endef
 
+<<<<<<< HEAD
 KernelPackage/crypto-sha1/tegra=$(KernelPackage/crypto-sha1/arm)
 
 define KernelPackage/crypto-sha1/mpc85xx
@@ -1021,10 +1191,19 @@ ifdef KernelPackage/crypto-sha1/$(ARCH)
   KernelPackage/crypto-sha1/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-sha1/$(ARCH))
 endif
+=======
+KernelPackage/crypto-sha1/tegra=$(KernelPakcage/crypto-sha1/arm)
+
+define KernelPackage/crypto-sha1/x86/64
+  FILES+=$(LINUX_DIR)/arch/x86/crypto/sha1-ssse3.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha1-ssse3)
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call KernelPackage,crypto-sha1))
 
 
+<<<<<<< HEAD
 define KernelPackage/crypto-sha3
   TITLE:=SHA3 digest CryptoAPI module
   DEPENDS:=+kmod-crypto-hash
@@ -1037,15 +1216,20 @@ endef
 $(eval $(call KernelPackage,crypto-sha3))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-sha256
   TITLE:=SHA224 SHA256 digest CryptoAPI module
   DEPENDS:=+kmod-crypto-hash
   KCONFIG:= \
 	CONFIG_CRYPTO_SHA256 \
 	CONFIG_CRYPTO_SHA256_OCTEON \
+<<<<<<< HEAD
 	CONFIG_CRYPTO_SHA256_PPC_SPE \
 	CONFIG_CRYPTO_SHA256_ARM64 \
 	CONFIG_CRYPTO_SHA2_ARM64_CE \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CRYPTO_SHA256_SSSE3
   FILES:= \
 	$(LINUX_DIR)/crypto/sha256_generic.ko \
@@ -1054,6 +1238,7 @@ define KernelPackage/crypto-sha256
   $(call AddDepends/crypto)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-sha256/aarch64
   FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha256-arm64.ko
   AUTOLOAD+=$(call AutoLoad,09,sha256-arm64)
@@ -1065,11 +1250,14 @@ define KernelPackage/crypto-sha256/aarch64-ce
   AUTOLOAD+=$(call AutoLoad,09,sha2-ce)
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-sha256/octeon
   FILES+=$(LINUX_DIR)/arch/mips/cavium-octeon/crypto/octeon-sha256.ko
   AUTOLOAD+=$(call AutoLoad,09,octeon-sha256)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-sha256/mpc85xx
   FILES+=$(LINUX_DIR)/arch/powerpc/crypto/sha256-ppc-spe.ko
   AUTOLOAD+=$(call AutoLoad,09,sha256-ppc-spe)
@@ -1093,6 +1281,12 @@ ifdef KernelPackage/crypto-sha256/$(ARCH)
   KernelPackage/crypto-sha256/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-sha256/$(ARCH))
 endif
+=======
+define KernelPackage/crypto-sha256/x86/64
+  FILES+=$(LINUX_DIR)/arch/x86/crypto/sha256-ssse3.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha256-ssse3)
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call KernelPackage,crypto-sha256))
 
@@ -1103,7 +1297,10 @@ define KernelPackage/crypto-sha512
   KCONFIG:= \
 	CONFIG_CRYPTO_SHA512 \
 	CONFIG_CRYPTO_SHA512_ARM \
+<<<<<<< HEAD
 	CONFIG_CRYPTO_SHA512_ARM64 \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CRYPTO_SHA512_OCTEON \
 	CONFIG_CRYPTO_SHA512_SSSE3
   FILES:=$(LINUX_DIR)/crypto/sha512_generic.ko
@@ -1116,6 +1313,7 @@ define KernelPackage/crypto-sha512/arm
   AUTOLOAD+=$(call AutoLoad,09,sha512-arm)
 endef
 
+<<<<<<< HEAD
 define KernelPackage/crypto-sha512/aarch64
   FILES+=$(LINUX_DIR)/arch/arm64/crypto/sha512-arm64.ko
   AUTOLOAD+=$(call AutoLoad,09,sha512-arm64)
@@ -1123,6 +1321,9 @@ endef
 
 KernelPackage/crypto-sha512/imx/cortexa7=$(KernelPackage/crypto-sha512/arm)
 KernelPackage/crypto-sha512/imx/cortexa9=$(KernelPackage/crypto-sha512/arm)
+=======
+KernelPackage/crypto-sha512/imx6=$(KernelPackage/crypto-sha512/arm)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 KernelPackage/crypto-sha512/ipq40xx=$(KernelPackage/crypto-sha512/arm)
 KernelPackage/crypto-sha512/mvebu/cortexa9=$(KernelPackage/crypto-sha512/arm)
 
@@ -1133,6 +1334,7 @@ endef
 
 KernelPackage/crypto-sha512/tegra=$(KernelPackage/crypto-sha512/arm)
 
+<<<<<<< HEAD
 ifndef CONFIG_TARGET_uml
 define KernelPackage/crypto-sha512/x86_64
   FILES+=$(LINUX_DIR)/arch/x86/crypto/sha512-ssse3.ko
@@ -1144,6 +1346,12 @@ ifdef KernelPackage/crypto-sha512/$(ARCH)
   KernelPackage/crypto-sha512/$(CRYPTO_TARGET)=\
 	  $(KernelPackage/crypto-sha512/$(ARCH))
 endif
+=======
+define KernelPackage/crypto-sha512/x86/64
+  FILES+=$(LINUX_DIR)/arch/x86/crypto/sha512-ssse3.ko
+  AUTOLOAD+=$(call AutoLoad,09,sha512-ssse3)
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call KernelPackage,crypto-sha512))
 
@@ -1160,7 +1368,11 @@ $(eval $(call KernelPackage,crypto-test))
 
 define KernelPackage/crypto-user
   TITLE:=CryptoAPI userspace interface
+<<<<<<< HEAD
   DEPENDS:=+kmod-crypto-hash +kmod-crypto-manager +kmod-crypto-rng
+=======
+  DEPENDS:=+kmod-crypto-hash +kmod-crypto-manager
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_CRYPTO_USER \
 	CONFIG_CRYPTO_USER_API \
@@ -1182,6 +1394,19 @@ endef
 $(eval $(call KernelPackage,crypto-user))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/crypto-wq
+  TITLE:=CryptoAPI work queue handling
+  KCONFIG:=CONFIG_CRYPTO_WORKQUEUE
+  FILES:=$(LINUX_DIR)/crypto/crypto_wq.ko
+  AUTOLOAD:=$(call AutoLoad,09,crypto_wq)
+  $(call AddDepends/crypto)
+endef
+$(eval $(call KernelPackage,crypto-wq))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/crypto-xts
   TITLE:=XTS cipher CryptoAPI module
   DEPENDS:=+kmod-crypto-gf128 +kmod-crypto-manager
@@ -1193,6 +1418,7 @@ endef
 
 $(eval $(call KernelPackage,crypto-xts))
 
+<<<<<<< HEAD
 
 define KernelPackage/crypto-xxhash
   TITLE:=xxHash non-cryptographic hash algorithm
@@ -1205,3 +1431,5 @@ endef
 
 $(eval $(call KernelPackage,crypto-xxhash))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9558_devolo_dvl1xxx.dtsi"
 
 / {
@@ -36,15 +39,23 @@
 		compatible = "gpio-leds";
 
 		led_status_blue: status_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		led_status_red: status_red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -97,8 +108,13 @@
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x00>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-handle = <&phy1>;
 	pll-data = <0x03000101 0x00000101 0x00001313>;

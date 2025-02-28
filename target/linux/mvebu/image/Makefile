@@ -34,9 +34,13 @@ define Build/boot-img-ext4
 	$(foreach dts,$(DEVICE_DTS), $(CP) $(KDIR)/image-$(dts).dtb $@.boot/$(dts).dtb;)
 	$(CP) $(IMAGE_KERNEL) $@.boot/$(KERNEL_NAME)
 	-$(CP) $@-boot.scr $@.boot/boot.scr
+<<<<<<< HEAD
 	make_ext4fs -J -L kernel -l $(CONFIG_TARGET_KERNEL_PARTSIZE)M \
 		$(if $(SOURCE_DATE_EPOCH),-T $(SOURCE_DATE_EPOCH)) \
 		$@.bootimg $@.boot
+=======
+	make_ext4fs -J -L kernel -l $(CONFIG_TARGET_KERNEL_PARTSIZE)M $@.bootimg $@.boot
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/buffalo-kernel-jffs2
@@ -53,6 +57,7 @@ define Build/buffalo-kernel-jffs2
 	rm -rf $(KDIR)/kernel_jffs2 $@.fakerd
 endef
 
+<<<<<<< HEAD
 define Build/buffalo-kernel-ubifs
 	rm -rf $@-ubidir
 	mkdir -p $@-ubidir
@@ -120,6 +125,8 @@ define Build/ctera-firmware
 	rm -rf $@.tmp
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/sdcard-img
 	SIGNATURE="$(IMG_PART_SIGNATURE)" \
 	./gen_mvebu_sdcard_img.sh $@ \
@@ -136,9 +143,26 @@ define Build/sdcard-img-ext4
 		83 $(CONFIG_TARGET_ROOTFS_PARTSIZE) $(IMAGE_ROOTFS)
 endef
 
+<<<<<<< HEAD
 define Build/uDPU-firmware
 	(rm -fR $@-fw; mkdir -p $@-fw)
 	$(CP) $(BIN_DIR)/$(DEVICE_IMG_PREFIX)-initramfs.itb $@-fw/recovery.itb
+=======
+define Build/omnia-medkit-initramfs
+	$(TAR) -c -T /dev/null -f $@
+	rm -rf $(dir $(IMAGE_KERNEL))boot
+	mkdir -p $(dir $(IMAGE_KERNEL))boot/boot/
+	cp $(KDIR)/zImage-initramfs $(dir $(IMAGE_KERNEL))boot/boot/zImage
+	cp $(KDIR)/image-$(DEVICE_DTS).dtb $(dir $(IMAGE_KERNEL))boot/boot/dtb
+	$(TAR) -rp --numeric-owner --owner=0 --group=0 --sort=name \
+		$(if $(SOURCE_DATE_EPOCH),--mtime="@$(SOURCE_DATE_EPOCH)") \
+		--file=$@ -C $(dir $(IMAGE_KERNEL))boot/ .
+endef
+
+define Build/uDPU-firmware
+	(rm -fR $@-fw; mkdir -p $@-fw)
+	$(CP) $(BIN_DIR)/$(IMAGE_PREFIX)-initramfs.itb $@-fw/recovery.itb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(CP) $@-boot.scr $@-fw/boot.scr
 	$(TAR) -cvzp --numeric-owner --owner=0 --group=0 --sort=name \
 		$(if $(SOURCE_DATE_EPOCH),--mtime="@$(SOURCE_DATE_EPOCH)") \
@@ -148,7 +172,11 @@ define Build/uDPU-firmware
 		-f $@-fw/boot.tgz -C $@.boot .
 	$(TAR) -cvzp --numeric-owner --owner=0 --group=0 --sort=name \
 		$(if $(SOURCE_DATE_EPOCH),--mtime="@$(SOURCE_DATE_EPOCH)") \
+<<<<<<< HEAD
 		-f $(KDIR_TMP)/$(DEVICE_IMG_PREFIX)-firmware.tgz -C $@-fw .
+=======
+		-f $(KDIR_TMP)/$(IMAGE_PREFIX)-firmware.tgz -C $@-fw .
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/Default

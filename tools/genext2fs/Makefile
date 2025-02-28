@@ -8,11 +8,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=genext2fs
+<<<<<<< HEAD
 PKG_VERSION:=1.5.0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://codeload.github.com/bestouff/$(PKG_NAME)/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=d3861e4fe89131bd21fbd25cf0b683b727b5c030c4c336fadcd738ada830aab0
+=======
+PKG_VERSION:=1.4.1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=@SF/genext2fs
+PKG_HASH:=404dbbfa7a86a6c3de8225c8da254d026b17fd288e05cec4df2cc7e1f4feecfc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/host-build.mk
 
@@ -33,6 +41,7 @@ HOST_CONFIGURE_ARGS = \
 	--mandir=/usr/man \
 	--infodir=/usr/info \
 
+<<<<<<< HEAD
 define Host/Configure
 	(cd $(HOST_BUILD_DIR); \
 		./autogen.sh \
@@ -40,6 +49,8 @@ define Host/Configure
 	$(call Host/Configure/Default)
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Host/Compile
 	$(MAKE) -C $(HOST_BUILD_DIR) \
 		CFLAGS="$(HOST_CFLAGS)" \

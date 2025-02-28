@@ -10,7 +10,11 @@ case "$FIRMWARE" in
 	case $board in
 		bt,homehub-v5a)
 			caldata_extract_ubi "caldata" 0x5000 0x844
+<<<<<<< HEAD
 			ath10k_patch_mac $(macaddr_add $(mtd_get_mac_binary_ubi caldata 0x110c) 3)
+=======
+			ath10k_patch_mac $(macaddr_add $(mtd_get_mac_binary_ubi caldata 0x110c) +3)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			;;
 		*)
 			caldata_die "board $board is not supported yet"

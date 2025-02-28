@@ -1,0 +1,9 @@
+chacha-neon.ko
+ip6_udp_tunnel.ko
+libchacha.ko
+libchacha20poly1305.ko
+libcurve25519-generic.ko
+libcurve25519.ko
+poly1305-neon.ko
+udp_tunnel.ko
+wireguard.ko

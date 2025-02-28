@@ -17,7 +17,11 @@ define Package/ltq-dsl-base
   CATEGORY:=Network
   TITLE:=DSL related files for Intel/Lantiq DSL Chipsets
   URL:=http://openwrt.org/
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_lantiq||TARGET_ipq40xx) +jshn
+=======
+  DEPENDS:=@TARGET_lantiq +jshn
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/ltq-dsl-base/description

@@ -9,6 +9,7 @@
  /* ============================= */
  /* Local Macros & Definitions    */
  /* ============================= */
+<<<<<<< HEAD
 @@ -862,7 +864,9 @@ void  vmmc_module_exit(void)
  #ifdef MODULE
  MODULE_DESCRIPTION("VMMC(VoiceMacroMipsCore) device driver - www.lantiq.com");
@@ -19,6 +20,8 @@
  MODULE_LICENSE("Dual BSD/GPL");
  
  #if (LINUX_VERSION_CODE < KERNEL_VERSION(2,6,17))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/src/mps/drv_mps_vmmc_linux.c
 +++ b/src/mps/drv_mps_vmmc_linux.c
 @@ -80,11 +80,15 @@

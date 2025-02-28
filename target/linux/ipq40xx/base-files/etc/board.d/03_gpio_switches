@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/uci-defaults.sh
 
@@ -6,9 +10,12 @@ board_config_update
 board=$(board_name)
 
 case "$board" in
+<<<<<<< HEAD
 aruba,ap-303h)
 	ucidef_add_gpio_switch "poe_passtrough" "POE passtrough disable" "546" "1"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 cellc,rtl30vw)
 	ucidef_add_gpio_switch "w_disable" "W_DISABLE mPCIE pin" "398" "1"
 	ucidef_add_gpio_switch "pmd_resin_n" "PMD_RESIN_N pin" "399" "1"
@@ -16,11 +23,16 @@ cellc,rtl30vw)
 	ucidef_add_gpio_switch "usb_vcc" "USB power" "401" "0"
 	;;
 cilab,meshpoint-one)
+<<<<<<< HEAD
 	ucidef_add_gpio_switch "poe_passtrough" "POE passtrough enable" "513" "1"
+=======
+	ucidef_add_gpio_switch "poe_passtrough" "POE passtrough enable" "413" "1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 compex,wpj428)
 	ucidef_add_gpio_switch "sim_card_select" "SIM card select" "3" "0"
 	;;
+<<<<<<< HEAD
 mikrotik,cap-ac)
 	ucidef_add_gpio_switch "poe_passtrough" "POE passtrough enable" "514" "0"
 	;;
@@ -44,6 +56,8 @@ zte,mf287pro|\
 zte,mf289f)
 	ucidef_add_gpio_switch "power_btn_block" "Power button blocker" "521" "0"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 esac
 
 board_config_flush

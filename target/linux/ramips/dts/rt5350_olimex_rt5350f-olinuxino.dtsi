@@ -4,6 +4,10 @@
 	compatible = "olimex,rt5350f-olinuxino", "ralink,rt5350-soc";
 
 	aliases {
+<<<<<<< HEAD
+=======
+		serial0 = &uartlite;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		serial1 = &uart;
 	};
 };
@@ -33,6 +37,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -51,6 +56,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -74,8 +85,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -84,9 +99,14 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	ralink,led-polarity = <1>;
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&factory 0x0>;
+	ralink,led-polarity = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &i2c {

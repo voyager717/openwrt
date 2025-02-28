@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "vr9_tplink_vr200.dtsi"
 
 / {
@@ -21,8 +24,12 @@
 
 &leds {
 	wps {
+<<<<<<< HEAD
 		function = LED_FUNCTION_WPS;
 		color = <LED_COLOR_ID_BLUE>;
+=======
+		label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 	};
 };

@@ -1,7 +1,11 @@
 From 3f7be04a148d23cdb5fd320e0e2923983f8bd1f4 Mon Sep 17 00:00:00 2001
 From: Luka Perkov <luka@openwrt.org>
 Date: Tue, 6 Aug 2013 22:51:00 +0200
+<<<<<<< HEAD
 Subject: MIPS: add board support for Zyxel P-2812HNU-Fx
+=======
+Subject: MIPS: add board support for ZyXEL P-2812HNU-Fx
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 Signed-off-by: Luka Perkov <luka@openwrt.org>
 
@@ -51,7 +55,11 @@ Signed-off-by: Luka Perkov <luka@openwrt.org>
 +/*
 + * Copyright (C) 2013 Luka Perkov <luka@openwrt.org>
 + *
+<<<<<<< HEAD
 + * The values have been extracted from original Zyxel U-Boot.
+=======
++ * The values have been extracted from original ZyXEL U-Boot.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 + *
 + * SPDX-License-Identifier:	GPL-2.0+
 + */
@@ -243,7 +251,11 @@ Signed-off-by: Luka Perkov <luka@openwrt.org>
 +
 +#define CONFIG_MACH_TYPE	"P-2812HNU-Fx"
 +#define CONFIG_IDENT_STRING	" "CONFIG_MACH_TYPE
+<<<<<<< HEAD
 +#define CONFIG_BOARD_NAME	"Zyxel P-2812HNU-Fx"
+=======
++#define CONFIG_BOARD_NAME	"ZyXEL P-2812HNU-Fx"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +
 +/* Configure SoC */
 +#define CONFIG_LTQ_SUPPORT_UART			/* Enable ASC and UART */

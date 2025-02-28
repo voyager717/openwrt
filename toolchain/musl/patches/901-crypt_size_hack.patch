@@ -43,7 +43,11 @@
  typedef uint32_t BF_word;
  typedef int32_t BF_word_signed;
  
+<<<<<<< HEAD
 @@ -804,3 +815,4 @@ char *__crypt_blowfish(const char *key,
+=======
+@@ -796,3 +807,4 @@ char *__crypt_blowfish(const char *key,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  	return "*";
  }

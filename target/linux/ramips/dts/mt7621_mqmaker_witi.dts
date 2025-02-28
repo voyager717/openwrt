@@ -57,6 +57,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -80,6 +81,11 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -98,22 +104,35 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <5000000 6000000>;
 		nvmem-cells = <&eeprom_factory_8000>, <&macaddr_factory_e000 0>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+		ieee80211-freq-limit = <5000000 6000000>;
+		mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &pcie1 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <2400000 2500000>;
 		nvmem-cells = <&eeprom_factory_0>, <&macaddr_factory_e000 0>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+		ieee80211-freq-limit = <2400000 2500000>;
+		mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -132,6 +151,9 @@
 	ethphy5: ethernet-phy@5 {
 		reg = <5>;
 	};
+=======
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -158,10 +180,16 @@
 
 		port@4 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "wan1";
 
 			nvmem-cells = <&macaddr_factory_e000 1>;
 			nvmem-cell-names = "mac-address";
+=======
+			label = "wan";
+			mtd-mac-address = <&factory 0xe000>;
+			mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

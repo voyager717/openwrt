@@ -107,7 +107,11 @@ void aes_chip_init (void)
 
     // start crypto engine with write to ILR
     aes->controlr.SM = 1;
+<<<<<<< HEAD
     aes->controlr.NDC = 1;
+=======
+    aes->controlr.NDC = 0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     asm("sync");
     aes->controlr.ENDI = 1;
     asm("sync");

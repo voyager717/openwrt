@@ -5,10 +5,13 @@
 / {
 	compatible = "tplink,archer-c5-v1", "qca,qca9558";
 	model = "TP-Link Archer C5 v1";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &eth1;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &keys {
@@ -29,6 +32,7 @@
 };
 
 &mtdparts {
+<<<<<<< HEAD
 	partition@0 {
 		label = "u-boot";
 		reg = <0x000000 0x020000>;
@@ -45,6 +49,12 @@
 				#nvmem-cell-cells = <1>;
 			};
 		};
+=======
+	uboot: partition@0 {
+		label = "u-boot";
+		reg = <0x000000 0x020000>;
+		read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	partition@20000 {
@@ -53,6 +63,7 @@
 		compatible = "tplink,firmware";
 	};
 
+<<<<<<< HEAD
 	partition@ff0000 {
 		label = "art";
 		reg = <0xff0000 0x010000>;
@@ -97,3 +108,11 @@
 	nvmem-cells = <&macaddr_uboot_1fc00 0>, <&cal_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
+=======
+	art: partition@ff0000 {
+		label = "art";
+		reg = <0xff0000 0x010000>;
+		read-only;
+	};
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

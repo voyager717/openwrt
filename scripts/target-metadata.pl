@@ -10,6 +10,7 @@ sub target_config_features(@) {
 
 	while ($_ = shift @_) {
 		/^arm_v(\w+)$/ and $ret .= "\tselect arm_v$1\n";
+<<<<<<< HEAD
 		/^audio$/ and $ret .= "\tselect AUDIO_SUPPORT\n";
 		/^boot-part$/ and $ret .= "\tselect USES_BOOT_PART\n";
 		/^broken$/ and $ret .= "\tdepends on BROKEN\n";
@@ -48,6 +49,42 @@ sub target_config_features(@) {
 		/^usb$/ and $ret .= "\tselect USB_SUPPORT\n";
 		/^usbgadget$/ and $ret .= "\tselect USB_GADGET_SUPPORT\n";
 		/^virtio$/ and $ret .= "\tselect VIRTIO_SUPPORT\n";
+=======
+		/^broken$/ and $ret .= "\tdepends on BROKEN\n";
+		/^audio$/ and $ret .= "\tselect AUDIO_SUPPORT\n";
+		/^display$/ and $ret .= "\tselect DISPLAY_SUPPORT\n";
+		/^dt$/ and $ret .= "\tselect USES_DEVICETREE\n";
+		/^gpio$/ and $ret .= "\tselect GPIO_SUPPORT\n";
+		/^pci$/ and $ret .= "\tselect PCI_SUPPORT\n";
+		/^pcie$/ and $ret .= "\tselect PCIE_SUPPORT\n";
+		/^usb$/ and $ret .= "\tselect USB_SUPPORT\n";
+		/^usbgadget$/ and $ret .= "\tselect USB_GADGET_SUPPORT\n";
+		/^pcmcia$/ and $ret .= "\tselect PCMCIA_SUPPORT\n";
+		/^pwm$/ and $ret .= "\select PWM_SUPPORT\n";
+		/^rtc$/ and $ret .= "\tselect RTC_SUPPORT\n";
+		/^squashfs$/ and $ret .= "\tselect USES_SQUASHFS\n";
+		/^jffs2$/ and $ret .= "\tselect USES_JFFS2\n";
+		/^jffs2_nand$/ and $ret .= "\tselect USES_JFFS2_NAND\n";
+		/^ext4$/ and $ret .= "\tselect USES_EXT4\n";
+		/^targz$/ and $ret .= "\tselect USES_TARGZ\n";
+		/^cpiogz$/ and $ret .= "\tselect USES_CPIOGZ\n";
+		/^minor$/ and $ret .= "\tselect USES_MINOR\n";
+		/^ubifs$/ and $ret .= "\tselect USES_UBIFS\n";
+		/^fpu$/ and $ret .= "\tselect HAS_FPU\n";
+		/^spe_fpu$/ and $ret .= "\tselect HAS_SPE_FPU\n";
+		/^ramdisk$/ and $ret .= "\tselect USES_INITRAMFS\n";
+		/^powerpc64$/ and $ret .= "\tselect powerpc64\n";
+		/^nommu$/ and $ret .= "\tselect NOMMU\n";
+		/^mips16$/ and $ret .= "\tselect HAS_MIPS16\n";
+		/^rfkill$/ and $ret .= "\tselect RFKILL_SUPPORT\n";
+		/^low_mem$/ and $ret .= "\tselect LOW_MEMORY_FOOTPRINT\n";
+		/^small_flash$/ and $ret .= "\tselect SMALL_FLASH\n";
+		/^nand$/ and $ret .= "\tselect NAND_SUPPORT\n";
+		/^virtio$/ and $ret .= "\tselect VIRTIO_SUPPORT\n";
+		/^rootfs-part$/ and $ret .= "\tselect USES_ROOTFS_PART\n";
+		/^boot-part$/ and $ret .= "\tselect USES_BOOT_PART\n";
+		/^testing-kernel$/ and $ret .= "\tselect HAS_TESTING_KERNEL\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	return $ret;
 }
@@ -146,7 +183,11 @@ sub merge_package_lists($$) {
 	my %pkgs;
 
 	foreach my $pkg (@$list1, @$list2) {
+<<<<<<< HEAD
 		$pkgs{$pkg =~ s/^~//r} = 1;
+=======
+		$pkgs{$pkg} = 1;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	foreach my $pkg (keys %pkgs) {
 		push @l, $pkg unless ($pkg =~ /^-/ or $pkgs{"-$pkg"});
@@ -179,7 +220,11 @@ EOF
 	print <<EOF;
 choice
 	prompt "Target System"
+<<<<<<< HEAD
 	default TARGET_mediatek
+=======
+	default TARGET_ath79
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	reset if !DEVEL
 	
 EOF
@@ -219,6 +264,7 @@ choice
 EOF
 	foreach my $target (@target) {
 		my $profile = $target->{profiles}->[0];
+<<<<<<< HEAD
 		foreach my $p (@{$target->{profiles}}) {
 			last unless $target->{default_profile};
 			my $name = $p->{id};
@@ -227,6 +273,8 @@ EOF
 			$profile = $p;
 			last;
 		}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$profile or next;
 		print <<EOF;
 	default TARGET_$target->{conf}_$profile->{id} if TARGET_$target->{conf} && !BUILDBOT

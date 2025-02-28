@@ -16,6 +16,13 @@
 		led-upgrade = &led_sys;
 	};
 
+<<<<<<< HEAD
+=======
+	chosen {
+		bootargs = "console=ttyS0,115200";
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	memory@0 {
 		device_type = "memory";
 		reg = <0x0 0x8000000>;
@@ -25,6 +32,7 @@
 		compatible = "gpio-keys-polled";
 		poll-interval = <20>;
 
+<<<<<<< HEAD
 		/* is this pin 3 on the external RTL8231 (&gpio1)? */
 		/*reset {
 			label = "reset";
@@ -36,16 +44,37 @@
 	leds {
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinmux_disable_sys_led>;
+=======
+		reset {
+			label = "reset";
+			gpios = <&gpio0 67 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RESTART>;
+		};
+	};
+
+	leds {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "gpio-leds";
 
 		led_sys: sys {
 			label = "green:sys";
+<<<<<<< HEAD
 			gpios = <&gpio0 0 GPIO_ACTIVE_HIGH>;
+=======
+			gpios = <&gpio0 47 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 		// GPIO 25: power on/off all port leds
 	};
 };
 
+<<<<<<< HEAD
+=======
+&gpio0 {
+	indirect-access-bus-id = <0>;
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &spi0 {
 	status = "okay";
 

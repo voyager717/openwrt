@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "ar7240_tplink.dtsi"
 
 &leds {
@@ -26,13 +29,18 @@
 	};
 
 	wan {
+<<<<<<< HEAD
 		function = LED_FUNCTION_WAN;
 		color = <LED_COLOR_ID_GREEN>;
+=======
+		label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 	};
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_uboot_1fc00 (-1)>;
 	nvmem-cell-names = "mac-address";
 };
@@ -40,6 +48,15 @@
 &eth1 {
 	nvmem-cells = <&macaddr_uboot_1fc00 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <(-1)>;
+};
+
+&eth1 {
+	mtd-mac-address = <&uboot 0x1fc00>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ath9k {

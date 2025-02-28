@@ -3,6 +3,7 @@
 	"access": {
 		"service": {
 			"methods": [ "event" ]
+<<<<<<< HEAD
 		},
 		"wpa_supplicant": {
 			"methods": [ "phy_set_state", "phy_set_macaddr_list", "phy_status" ]
@@ -16,5 +17,10 @@
 	},
 	"subscribe": [ "udebug" ],
 	"publish": [ "hostapd", "hostapd.*", "wpa_supplicant", "wpa_supplicant.*", "hostapd-auth" ],
+=======
+		}
+	},
+	"publish": [ "hostapd", "hostapd.*", "wpa_supplicant", "wpa_supplicant.*" ],
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	"send": [ "bss.*", "wps_credentials" ]
 }

@@ -1,0 +1,102 @@
+Performing C SOURCE FILE Test C_FLAG__Wshorten_64_to_32 failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_7125b/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_7125b.dir/build.make CMakeFiles/cmTC_7125b.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7125b.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wshorten_64_to_32  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wshorten-64-to-32 -o CMakeFiles/cmTC_7125b.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wshorten-64-to-32'
+gmake[5]: *** [CMakeFiles/cmTC_7125b.dir/build.make:85: CMakeFiles/cmTC_7125b.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_7125b/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test C_FLAG__Wextended_offsetof failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_a8ecb/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_a8ecb.dir/build.make CMakeFiles/cmTC_a8ecb.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a8ecb.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wextended_offsetof  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wextended-offsetof -o CMakeFiles/cmTC_a8ecb.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wextended-offsetof'; did you mean '-Winvalid-offsetof'?
+gmake[5]: *** [CMakeFiles/cmTC_a8ecb.dir/build.make:85: CMakeFiles/cmTC_a8ecb.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_a8ecb/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test C_FLAG__Wlanguage_extension_token failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_213cb/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_213cb.dir/build.make CMakeFiles/cmTC_213cb.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_213cb.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wlanguage_extension_token  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wlanguage-extension-token -o CMakeFiles/cmTC_213cb.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wlanguage-extension-token'
+gmake[5]: *** [CMakeFiles/cmTC_213cb.dir/build.make:85: CMakeFiles/cmTC_213cb.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_213cb/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test C_FLAG__Wmissing_variable_declarations failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_9f4bb/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_9f4bb.dir/build.make CMakeFiles/cmTC_9f4bb.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9f4bb.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wmissing_variable_declarations  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wmissing-variable-declarations -o CMakeFiles/cmTC_9f4bb.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wmissing-variable-declarations'; did you mean '-Wmissing-declarations'?
+gmake[5]: *** [CMakeFiles/cmTC_9f4bb.dir/build.make:85: CMakeFiles/cmTC_9f4bb.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_9f4bb/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test C_FLAG__Wunreachable_code_break failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_59d35/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_59d35.dir/build.make CMakeFiles/cmTC_59d35.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_59d35.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wunreachable_code_break  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wunreachable-code-break -o CMakeFiles/cmTC_59d35.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wunreachable-code-break'; did you mean '-Wunreachable-code'?
+gmake[5]: *** [CMakeFiles/cmTC_59d35.dir/build.make:85: CMakeFiles/cmTC_59d35.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_59d35/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test C_FLAG__Wheader_guard failed with the following output:
+Change Dir: /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_2ff04/fast && gmake[4]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+/usr/bin/gmake  -f CMakeFiles/cmTC_2ff04.dir/build.make CMakeFiles/cmTC_2ff04.dir/build
+gmake[5]: Entering directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_2ff04.dir/src.c.o
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/bin/aarch64-openwrt-linux-musl-gcc -DC_FLAG__Wheader_guard  -Os -pipe -mcpu=cortex-a53 -fno-caller-saves -fno-plt -fhonour-copts -Wno-error=unused-but-set-variable -Wno-error=unused-result -fmacro-prefix-map=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0=nghttp2-1.43.0 -Wformat -Werror=format-security -fstack-protector -D_FORTIFY_SOURCE=1 -Wl,-z,now -Wl,-z,relro    -Wheader-guard -o CMakeFiles/cmTC_2ff04.dir/src.c.o -c /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp/src.c
+aarch64-openwrt-linux-musl-gcc: error: unrecognized command line option '-Wheader-guard'
+gmake[5]: *** [CMakeFiles/cmTC_2ff04.dir/build.make:85: CMakeFiles/cmTC_2ff04.dir/src.c.o] Error 1
+gmake[5]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+gmake[4]: *** [Makefile:140: cmTC_2ff04/fast] Error 2
+gmake[4]: Leaving directory '/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/nghttp2-1.43.0/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+int main(void) { return 0; }

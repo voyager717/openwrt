@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=mbedtls
+<<<<<<< HEAD
 PKG_VERSION:=3.6.2
 PKG_RELEASE:=1
 PKG_BUILD_FLAGS:=no-mips16 gc-sections no-lto
@@ -82,13 +83,35 @@ MBEDTLS_BUILD_OPTS= \
   CONFIG_MBEDTLS_SSL_TLS1_3_COMPATIBILITY_MODE
 
 PKG_CONFIG_DEPENDS := $(MBEDTLS_BUILD_OPTS)
+=======
+PKG_VERSION:=2.16.12
+PKG_RELEASE:=$(AUTORELEASE)
+PKG_USE_MIPS16:=0
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/ARMmbed/mbedtls/tar.gz/v$(PKG_VERSION)?
+PKG_HASH:=294871ab1864a65d0b74325e9219d5bcd6e91c34a3c59270c357bb9ae4d5c393
+
+PKG_BUILD_PARALLEL:=1
+PKG_LICENSE:=GPL-2.0-or-later
+PKG_LICENSE_FILES:=gpl-2.0.txt
+PKG_CPE_ID:=cpe:/a:arm:mbed_tls
+
+PKG_CONFIG_DEPENDS := \
+	CONFIG_LIBMBEDTLS_DEBUG_C \
+	CONFIG_LIBMBEDTLS_HKDF_C
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 define Package/mbedtls/Default
   TITLE:=Embedded SSL
+<<<<<<< HEAD
   URL:=https://www.trustedfirmware.org/projects/mbed-tls/
+=======
+  URL:=https://tls.mbed.org
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/mbedtls/Default/description
@@ -102,12 +125,38 @@ $(call Package/mbedtls/Default)
   CATEGORY:=Libraries
   SUBMENU:=SSL
   TITLE+= (library)
+<<<<<<< HEAD
   ABI_VERSION:=21
   MENU:=1
 endef
 
 define Package/libmbedtls/config
 	source "$(SOURCE)/Config.in"
+=======
+  ABI_VERSION:=12
+endef
+
+define Package/libmbedtls/config
+config LIBMBEDTLS_DEBUG_C
+	depends on PACKAGE_libmbedtls
+	bool "Enable debug functions"
+	default n
+	help
+	 This option enables mbedtls library's debug functions.
+
+	 It increases the uncompressed libmbedtls binary size
+	 by around 60 KiB (for an ARMv5 platform).
+
+	 Usually, you don't need this, so don't select this if you're unsure.
+
+config LIBMBEDTLS_HKDF_C
+	depends on PACKAGE_libmbedtls
+	bool "Enable the HKDF algorithm (RFC 5869)"
+	default n
+	help
+	 This option adds support for the Hashed Message Authentication Code
+	 (HMAC)-based key derivation function (HKDF).
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/mbedtls-util
@@ -129,14 +178,24 @@ This package contains mbedtls helper programs for private key and
 CSR generation (gen_key, cert_req)
 endef
 
+<<<<<<< HEAD
 TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS))
 
 CMAKE_OPTIONS += \
 	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
+=======
+PKG_INSTALL:=1
+
+TARGET_CFLAGS += -ffunction-sections -fdata-sections
+TARGET_CFLAGS := $(filter-out -O%,$(TARGET_CFLAGS))
+
+CMAKE_OPTIONS += \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	-DUSE_SHARED_MBEDTLS_LIBRARY:Bool=ON \
 	-DENABLE_TESTING:Bool=OFF \
 	-DENABLE_PROGRAMS:Bool=ON
 
+<<<<<<< HEAD
 define Build/Prepare
        $(call Build/Prepare/Default)
 
@@ -145,10 +204,29 @@ define Build/Prepare
 	 $(PKG_BUILD_DIR)/scripts/config.py \
 	 -f $(PKG_BUILD_DIR)/include/mbedtls/mbedtls_config.h \
 	 $(if $($(opt)),set,unset) $(patsubst CONFIG_%,%,$(opt))),)
+=======
+define Build/Configure
+	$(Build/Configure/Default)
+
+	awk 'BEGIN { rc = 1 } \
+	     /#define MBEDTLS_DEBUG_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_DEBUG_C),,// )#define MBEDTLS_DEBUG_C"; rc = 0 } \
+	     { print } \
+	     END { exit(rc) }' $(PKG_BUILD_DIR)/include/mbedtls/config.h \
+	     >$(PKG_BUILD_DIR)/include/mbedtls/config.h.new && \
+	mv $(PKG_BUILD_DIR)/include/mbedtls/config.h.new $(PKG_BUILD_DIR)/include/mbedtls/config.h
+
+	awk 'BEGIN { rc = 1 } \
+	     /#define MBEDTLS_HKDF_C/ { $$$$0 = "$(if $(CONFIG_LIBMBEDTLS_HKDF_C),,// )#define MBEDTLS_HKDF_C"; rc = 0 } \
+	     { print } \
+	     END { exit(rc) }' $(PKG_BUILD_DIR)/include/mbedtls/config.h \
+	     >$(PKG_BUILD_DIR)/include/mbedtls/config.h.new && \
+	mv $(PKG_BUILD_DIR)/include/mbedtls/config.h.new $(PKG_BUILD_DIR)/include/mbedtls/config.h
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
+<<<<<<< HEAD
 	$(CP) \
 		$(PKG_INSTALL_DIR)/usr/include/mbedtls \
 		$(PKG_INSTALL_DIR)/usr/include/psa \
@@ -163,6 +241,12 @@ define Build/InstallDev
 		$(PKG_INSTALL_DIR)/usr/lib/pkgconfig/mbedtls.pc \
 		$(PKG_INSTALL_DIR)/usr/lib/pkgconfig/mbedx509.pc \
 		$(1)/usr/lib/pkgconfig/
+=======
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/mbedtls $(1)/usr/include/
+	$(INSTALL_DIR) $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.so* $(1)/usr/lib/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/lib*.a $(1)/usr/lib/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libmbedtls/install

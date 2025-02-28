@@ -82,15 +82,22 @@ ppp_generic_init_config() {
 	proto_config_add_boolean persist
 	proto_config_add_int maxfail
 	proto_config_add_int holdoff
+<<<<<<< HEAD
 	proto_config_add_boolean sourcefilter
 	proto_config_add_boolean delegate
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 ppp_generic_setup() {
 	local config="$1"; shift
 	local localip
 
+<<<<<<< HEAD
 	json_get_vars ip6table demand keepalive keepalive_adaptive username password pppd_options pppname unnumbered persist maxfail holdoff peerdns sourcefilter delegate
+=======
+	json_get_vars ip6table demand keepalive keepalive_adaptive username password pppd_options pppname unnumbered persist maxfail holdoff peerdns
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	[ ! -e /proc/sys/net/ipv6 ] && ipv6=0 || json_get_var ipv6 ipv6
 
@@ -135,8 +142,11 @@ ppp_generic_setup() {
 	[ "${keepalive_adaptive:-1}" -lt 1 ] && lcp_adaptive=""
 	[ -n "$connect" ] || json_get_var connect connect
 	[ -n "$disconnect" ] || json_get_var disconnect disconnect
+<<<<<<< HEAD
 	[ "$sourcefilter" = "0" ] || sourcefilter=""
 	[ "$delegate" != "0" ] && delegate=""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	proto_run_command "$config" /usr/sbin/pppd \
 		nodetach ipparam "$config" \
@@ -147,8 +157,11 @@ ppp_generic_setup() {
 		${autoipv6:+set AUTOIPV6=1} \
 		${ip6table:+set IP6TABLE=$ip6table} \
 		${peerdns:+set PEERDNS=$peerdns} \
+<<<<<<< HEAD
 		${sourcefilter:+set NOSOURCEFILTER=1} \
 		${delegate:+set DELEGATE=0} \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		nodefaultroute \
 		usepeerdns \
 		$demand $persist maxfail $maxfail \
@@ -226,7 +239,13 @@ proto_pppoe_setup() {
 	local config="$1"
 	local iface="$2"
 
+<<<<<<< HEAD
 	/sbin/modprobe -qa slhc ppp_generic pppox pppoe
+=======
+	for module in slhc ppp_generic pppox pppoe; do
+		/sbin/insmod $module 2>&- >&-
+	done
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	json_get_var mtu mtu
 	mtu="${mtu:-1492}"
@@ -238,7 +257,11 @@ proto_pppoe_setup() {
 	json_get_var padi_timeout padi_timeout
 
 	ppp_generic_setup "$config" \
+<<<<<<< HEAD
 		plugin pppoe.so \
+=======
+		plugin rp-pppoe.so \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		${ac:+rp_pppoe_ac "$ac"} \
 		${service:+rp_pppoe_service "$service"} \
 		${host_uniq:+host-uniq "$host_uniq"} \
@@ -266,7 +289,13 @@ proto_pppoa_setup() {
 	local config="$1"
 	local iface="$2"
 
+<<<<<<< HEAD
 	/sbin/modprobe -qa slhc ppp_generic pppox pppoatm
+=======
+	for module in slhc ppp_generic pppox pppoatm; do
+		/sbin/insmod $module 2>&- >&-
+	done
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	json_get_vars atmdev vci vpi encaps
 
@@ -313,8 +342,18 @@ proto_pptp_setup() {
 		exit 1
 	}
 
+<<<<<<< HEAD
 	/sbin/modprobe -qa slhc ppp_generic ppp_async ppp_mppe ip_gre gre pptp
 	sleep 1
+=======
+	local load
+	for module in slhc ppp_generic ppp_async ppp_mppe ip_gre gre pptp; do
+		grep -q "^$module " /proc/modules && continue
+		/sbin/insmod $module 2>&- >&-
+		load=1
+	done
+	[ "$load" = "1" ] && sleep 1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	ppp_generic_setup "$config" \
 		plugin pptp.so \
@@ -328,7 +367,15 @@ proto_pptp_teardown() {
 
 [ -n "$INCLUDE_ONLY" ] || {
 	add_protocol ppp
+<<<<<<< HEAD
 	[ -f /usr/lib/pppd/*/pppoe.so ] && add_protocol pppoe
 	[ -f /usr/lib/pppd/*/pppoatm.so ] && add_protocol pppoa
 	[ -f /usr/lib/pppd/*/pptp.so ] && add_protocol pptp
 }
+=======
+	[ -f /usr/lib/pppd/*/rp-pppoe.so ] && add_protocol pppoe
+	[ -f /usr/lib/pppd/*/pppoatm.so ] && add_protocol pppoa
+	[ -f /usr/lib/pppd/*/pptp.so ] && add_protocol pptp
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

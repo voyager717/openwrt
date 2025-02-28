@@ -10,7 +10,11 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=linux-atm
 PKG_VERSION:=2.5.2
+<<<<<<< HEAD
 PKG_RELEASE:=8
+=======
+PKG_RELEASE:=7
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/$(PKG_NAME)
@@ -21,7 +25,10 @@ PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPL-2.0+
 PKG_CPE_ID:=cpe:/a:linux-atm:linux-atm
 PKG_FIXUP:=autoreconf
+<<<<<<< HEAD
 PKG_FLAGS:=nonshared
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -99,8 +106,11 @@ endef
 
 $(foreach t,$(ATM_DEBUG_TOOLS),$(eval $(call GenAtmPlugin,atm-$(t),$(t))))
 
+<<<<<<< HEAD
 TARGET_CFLAGS += -I$(LINUX_DIR)/user_headers/include
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/Configure
 	$(call Build/Configure/Default)
 	# prevent autoheader invocation

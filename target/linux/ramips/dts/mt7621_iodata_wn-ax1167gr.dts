@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "iodata,wn-ax1167gr", "mediatek,mt7621-soc";
@@ -23,14 +26,22 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -91,6 +102,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -131,6 +143,18 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+			};
+
+			iNIC_rf: partition@50000 {
+				label = "iNIC_rf";
+				reg = <0x50000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@60000 {
@@ -161,6 +185,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_iNIC_rf_4>;
 	nvmem-cell-names = "mac-address";
 };
@@ -176,10 +201,23 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&iNIC_rf 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0x4>;
+			mtd-mac-address-increment = <1>;
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan4";
@@ -216,16 +254,24 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_iNIC_rf_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&iNIC_rf 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &pcie1 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };

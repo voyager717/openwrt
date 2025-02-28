@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 DTS_DIR := $(DTS_DIR)/mediatek
 
 DEVICE_VARS += BUFFALO_TRX_MAGIC
@@ -184,11 +185,37 @@ define Device/dlink_eagle-pro-ai-r32-a1
   IMAGE/recovery.bin := append-kernel | pad-to $$(KERNEL_SIZE) | append-ubi | pad-to $$(IMAGE_SIZE) | dlink-ai-recovery-header DLK6E6015001 \x8D\x57\x30\x0B \x00\x00\x2C\x00 \x00\x00\xD0\x02 \x60\x6E
 endef
 TARGET_DEVICES += dlink_eagle-pro-ai-r32-a1
+=======
+KERNEL_LOADADDR := 0x44080000
+
+define Device/bpi_bananapi-r64
+  DEVICE_VENDOR := Bpi
+  DEVICE_MODEL := Banana Pi R64
+  DEVICE_DTS := mt7622-bananapi-bpi-r64
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := bananapi,bpi-r64
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb3 kmod-ata-ahci-mtk
+endef
+TARGET_DEVICES += bpi_bananapi-r64
+
+define Device/bpi_bananapi-r64-rootdisk
+  DEVICE_VENDOR := Bpi
+  DEVICE_MODEL := Banana Pi R64 (rootdisk)
+  DEVICE_DTS := mt7622-bananapi-bpi-r64-rootdisk
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := bananapi,bpi-r64
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb3 kmod-ata-ahci-mtk
+  IMAGES := sysupgrade-emmc.bin.gz
+  IMAGE/sysupgrade-emmc.bin.gz := sysupgrade-emmc | gzip | append-metadata
+endef
+TARGET_DEVICES += bpi_bananapi-r64-rootdisk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/elecom_wrc-2533gent
   DEVICE_VENDOR := Elecom
   DEVICE_MODEL := WRC-2533GENT
   DEVICE_DTS := mt7622-elecom-wrc-2533gent
+<<<<<<< HEAD
   DEVICE_DTS_DIR := ../dts
   DEVICE_PACKAGES := kmod-btmtkuart kmod-mt7615-firmware kmod-usb3 swconfig
 endef
@@ -255,10 +282,19 @@ define Device/linksys_e8450-ubi
 endef
 TARGET_DEVICES += linksys_e8450-ubi
 
+=======
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb3 kmod-mt7615e \
+	kmod-mt7615-firmware kmod-btmtkuart swconfig
+endef
+TARGET_DEVICES += elecom_wrc-2533gent
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mediatek_mt7622-rfb1
   DEVICE_VENDOR := MediaTek
   DEVICE_MODEL := MTK7622 rfb1 AP
   DEVICE_DTS := mt7622-rfb1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ata-ahci-mtk kmod-btmtkuart kmod-usb3
 endef
 TARGET_DEVICES += mediatek_mt7622-rfb1
@@ -453,3 +489,36 @@ endif
   DEVICE_COMPAT_MESSAGE := Flash layout changes require a manual reinstall using factory.bin.
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6s
+=======
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb3 kmod-ata-ahci-mtk
+endef
+TARGET_DEVICES += mediatek_mt7622-rfb1
+
+define Device/mediatek_mt7622-ubi
+  DEVICE_VENDOR := MediaTek
+  DEVICE_MODEL := MTK7622 AP (UBI)
+  DEVICE_DTS := mt7622-rfb1-ubi
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  SUPPORTED_DEVICES := mediatek,mt7622,ubi
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  IMAGE_SIZE := 36864k
+  KERNEL_IN_UBI := 1
+  IMAGES += factory.bin
+  IMAGE/factory.bin := append-ubi | check-size $$$$(IMAGE_SIZE)
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb3 kmod-ata-ahci-mtk
+endef
+TARGET_DEVICES += mediatek_mt7622-ubi
+
+define Device/ubnt_unifi-6-lr
+  DEVICE_VENDOR := Ubiquiti
+  DEVICE_MODEL := UniFi 6 LR
+  DEVICE_DTS := mt7622-ubnt-unifi-6-lr
+  DEVICE_DTS_DIR := $(DTS_DIR)/mediatek
+  DEVICE_PACKAGES := kmod-mt7915e
+endef
+TARGET_DEVICES += ubnt_unifi-6-lr
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

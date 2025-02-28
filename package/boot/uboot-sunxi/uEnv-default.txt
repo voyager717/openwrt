@@ -1,8 +1,14 @@
 setenv fdt_high ffffffff
+<<<<<<< HEAD
 setenv mmc_rootpart 2
 part uuid mmc ${mmc_bootdev}:${mmc_rootpart} uuid
 setenv loadkernel fatload mmc \$mmc_bootdev \$kernel_addr_r uImage
 setenv loaddtb fatload mmc \$mmc_bootdev \$fdt_addr_r dtb
 setenv bootargs console=ttyS0,115200 earlyprintk root=PARTUUID=${uuid} rootwait
+=======
+setenv loadkernel fatload mmc 0 \$kernel_addr_r uImage
+setenv loaddtb fatload mmc 0 \$fdt_addr_r dtb
+setenv bootargs console=ttyS0,115200 earlyprintk root=/dev/mmcblk0p2 rootwait
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 setenv uenvcmd run loadkernel \&\& run loaddtb \&\& bootm \$kernel_addr_r - \$fdt_addr_r
 run uenvcmd

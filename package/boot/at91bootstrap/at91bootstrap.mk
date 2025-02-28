@@ -5,7 +5,11 @@ PKG_FLAGS:=nonshared
 export GCC_HONOUR_COPTS=s
 
 define Package/at91bootstrap/install/default
+<<<<<<< HEAD
 	$(CP) -avL $(PKG_BUILD_DIR)/$(BINARIES_DIR)/at91bootstrap.bin $(1)/
+=======
+	$(CP) -avL $(PKG_BUILD_DIR)/binaries/at91bootstrap.bin $(1)/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 Package/at91bootstrap/install = $(Package/at91bootstrap/install/default)

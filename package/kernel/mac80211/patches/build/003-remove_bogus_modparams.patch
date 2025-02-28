@@ -1,6 +1,10 @@
 --- a/compat/main.c
 +++ b/compat/main.c
+<<<<<<< HEAD
 @@ -19,31 +19,6 @@ MODULE_LICENSE("GPL");
+=======
+@@ -20,31 +20,6 @@ MODULE_LICENSE("GPL");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #error "You need a CPTCFG_VERSION"
  #endif
  

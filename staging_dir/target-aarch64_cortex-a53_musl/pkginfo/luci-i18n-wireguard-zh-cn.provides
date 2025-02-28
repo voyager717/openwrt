@@ -1,0 +1,11 @@
+chacha-neon.ko
+ip6_udp_tunnel.ko
+libc.so
+libchacha.ko
+libchacha20poly1305.ko
+libcurve25519-generic.ko
+libcurve25519.ko
+libgcc_s.so.1
+poly1305-neon.ko
+udp_tunnel.ko
+wireguard.ko

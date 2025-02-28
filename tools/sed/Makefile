@@ -7,6 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=sed
+<<<<<<< HEAD
 PKG_VERSION:=4.9
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -14,6 +15,13 @@ PKG_SOURCE_URL:=@GNU/$(PKG_NAME)
 PKG_HASH:=d1478a18f033a73ac16822901f6533d30b6be561bcbce46ffd7abce93602282e
 PKG_CPE_ID:=cpe:/a:gnu:sed
 
+=======
+PKG_VERSION:=4.8
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@GNU/$(PKG_NAME)
+PKG_HASH:=f79b0cfea71b37a8eeec8490db6c5f7ae7719c35587f21edb0617f370eeff633
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 export SED:=
 
 HOST_BUILD_PARALLEL:=1

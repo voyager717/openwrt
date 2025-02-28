@@ -55,6 +55,7 @@
 				label = "info";
 				reg = <0x030000 0x010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -67,6 +68,8 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@40000 {
@@ -93,6 +96,7 @@
 				label = "art";
 				reg = <0xff0000 0x010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -103,6 +107,8 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -120,15 +126,33 @@
 
 	pinctrl-names = "default";
 	pinctrl-0 = <&mdio_pins>;
+<<<<<<< HEAD
+=======
+
+	phy-mask = <0x10>;
+
+	phy4: ethernet-phy@4 {
+		reg = <4>;
+		reset-gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	pll-data = <0x03000000 0x00000101 0x00001313>;
 
 	nvmem-cells = <&macaddr_info_8 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	phy-handle = <&phy4>;
+	phy-mode = "sgmii";
+	pll-data = <0x03000000 0x00000101 0x00001313>;
+
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	qca956x-serdes-fixup;
 
@@ -140,6 +164,11 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_info_8 0>, <&calibration_ath9k>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&info 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

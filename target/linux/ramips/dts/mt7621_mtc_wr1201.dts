@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "mtc,wr1201", "mediatek,mt7621-soc";
@@ -20,14 +23,22 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";
@@ -39,8 +50,12 @@
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 23 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -81,6 +96,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -105,6 +121,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -122,6 +144,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &ethernet {
 	pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>;
 };
@@ -129,6 +152,10 @@
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_4 0>;
 	nvmem-cell-names = "mac-address";
+=======
+&gmac0 {
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -156,8 +183,13 @@
 		port@4 {
 			status = "okay";
 			label = "wan";
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_factory_4 1>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&factory 0x4>;
+			mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -166,6 +198,7 @@
 	status = "okay";
 };
 
+<<<<<<< HEAD
 &pcie_pins {
 	uart3 {
 		groups = "uart3";
@@ -178,14 +211,23 @@
 
 	reset-gpios = <&gpio 8 GPIO_ACTIVE_LOW>,
 		      <&gpio 19 GPIO_ACTIVE_LOW>;
+=======
+&pcie {
+	status = "okay";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {
 	wifi@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <5000000 6000000>;
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+		ieee80211-freq-limit = <5000000 6000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		led {
 			led-sources = <2>;
@@ -197,9 +239,14 @@
 &pcie1 {
 	wifi@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <2400000 2500000>;
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+		ieee80211-freq-limit = <2400000 2500000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		led {
 			led-sources = <2>;

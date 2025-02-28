@@ -9,6 +9,7 @@ define Device/tplink_archer-a7-v5
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k-ct \
 	ath10k-firmware-qca988x-ct
   TPLINK_BOARD_ID := ARCHER-A7-V5
+<<<<<<< HEAD
 endef
 TARGET_DEVICES += tplink_archer-a7-v5
 
@@ -24,6 +25,12 @@ define Device/tplink_archer-a9-v6
 endef
 TARGET_DEVICES += tplink_archer-a9-v6
 
+=======
+  BOARDNAME := ARCHER-A7-V5
+endef
+TARGET_DEVICES += tplink_archer-a7-v5
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_archer-c2-v3
   $(Device/tplink-safeloader-uimage)
   SOC := qca9563
@@ -192,6 +199,10 @@ define Device/tplink_archer-c7-v4
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k-ct \
 	ath10k-firmware-qca988x-ct
   TPLINK_BOARD_ID := ARCHER-C7-V4
+<<<<<<< HEAD
+=======
+  BOARDNAME := ARCHER-C7-V4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += archer-c7-v4
 endef
 TARGET_DEVICES += tplink_archer-c7-v4
@@ -205,6 +216,10 @@ define Device/tplink_archer-c7-v5
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k-ct \
 	ath10k-firmware-qca988x-ct
   TPLINK_BOARD_ID := ARCHER-C7-V5
+<<<<<<< HEAD
+=======
+  BOARDNAME := ARCHER-C7-V5
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += archer-c7-v5
 endef
 TARGET_DEVICES += tplink_archer-c7-v5
@@ -216,6 +231,10 @@ define Device/tplink_archer-d50-v1
   DEVICE_VARIANT := v1
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport \
 	kmod-ath10k-ct-smallbuffers ath10k-firmware-qca988x-ct
+<<<<<<< HEAD
+=======
+  BOARDNAME := ARCHER-D50-V1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 7808k
   TPLINK_HWID := 0xC1200001
   TPLINK_HWREV := 0x00000046
@@ -350,6 +369,7 @@ define Device/tplink_cpe510-v3
 endef
 TARGET_DEVICES += tplink_cpe510-v3
 
+<<<<<<< HEAD
 define Device/tplink_cpe605-v1
   $(Device/tplink-safeloader-okli)
   SOC := ar9344
@@ -360,6 +380,8 @@ define Device/tplink_cpe605-v1
 endef
 TARGET_DEVICES += tplink_cpe605-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_cpe610-v1
   $(Device/tplink-safeloader-okli)
   SOC := ar9344
@@ -380,6 +402,7 @@ define Device/tplink_cpe610-v2
 endef
 TARGET_DEVICES += tplink_cpe610-v2
 
+<<<<<<< HEAD
 define Device/tplink_cpe710-v1
   $(Device/tplink-safeloader-uimage)
   SOC := qca9563
@@ -402,6 +425,8 @@ define Device/tplink_cpe710-v2
 endef
 TARGET_DEVICES += tplink_cpe710-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink-eap2x5
   $(Device/tplink-safeloader)
   LOADER_TYPE := elf
@@ -422,6 +447,7 @@ define Device/tplink_eap225-outdoor-v1
 endef
 TARGET_DEVICES += tplink_eap225-outdoor-v1
 
+<<<<<<< HEAD
 define Device/tplink_eap225-outdoor-v3
   $(Device/tplink-eap2x5)
   SOC := qca9563
@@ -444,6 +470,8 @@ define Device/tplink_eap225-v1
 endef
 TARGET_DEVICES += tplink_eap225-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_eap225-v3
   $(Device/tplink-eap2x5)
   SOC := qca9563
@@ -455,6 +483,7 @@ define Device/tplink_eap225-v3
 endef
 TARGET_DEVICES += tplink_eap225-v3
 
+<<<<<<< HEAD
 define Device/tplink_eap225-v4
   $(Device/tplink-eap2x5)
   SOC := qca9563
@@ -466,6 +495,8 @@ define Device/tplink_eap225-v4
 endef
 TARGET_DEVICES += tplink_eap225-v4
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_eap225-wall-v2
   $(Device/tplink-eap2x5)
   SOC := qca9561
@@ -494,14 +525,18 @@ define Device/tplink_eap245-v3
   IMAGE_SIZE := 14592k
   DEVICE_MODEL := EAP245
   DEVICE_VARIANT := v3
+<<<<<<< HEAD
   DEVICE_ALT0_VENDOR := $$(DEVICE_VENDOR)
   DEVICE_ALT0_MODEL := EAP265 HD
   DEVICE_ALT0_VARIANT := v1
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca99x0-ct
   TPLINK_BOARD_ID := EAP245-V3
 endef
 TARGET_DEVICES += tplink_eap245-v3
 
+<<<<<<< HEAD
 define Device/tplink_deco-m4r-v1
   $(Device/tplink-safeloader-uimage)
   SOC := qca9563
@@ -526,6 +561,8 @@ define Device/tplink_deco-s4-v2
 endef
 TARGET_DEVICES += tplink_deco-s4-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_re350k-v1
   $(Device/tplink-safeloader)
   SOC := qca9558
@@ -542,7 +579,10 @@ define Device/tplink_rex5x-v1
   SOC := qca9558
   IMAGE_SIZE := 6016k
   DEVICE_PACKAGES := kmod-ath10k-ct-smallbuffers ath10k-firmware-qca988x-ct
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/tplink_re355-v1
@@ -572,7 +612,10 @@ define Device/tplink_re450-v2
   DEVICE_PACKAGES := kmod-ath10k-ct-smallbuffers ath10k-firmware-qca988x-ct
   TPLINK_BOARD_ID := RE450-V2
   LOADER_TYPE := elf
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_re450-v2
 
@@ -588,6 +631,7 @@ define Device/tplink_re450-v3
 endef
 TARGET_DEVICES += tplink_re450-v3
 
+<<<<<<< HEAD
 define Device/tplink_re455-v1
   $(Device/tplink-safeloader)
   SOC := qca9563
@@ -600,6 +644,8 @@ define Device/tplink_re455-v1
 endef
 TARGET_DEVICES += tplink_re455-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-mr6400-v1
   $(Device/tplink-8mlzma)
   SOC := qca9531
@@ -612,6 +658,7 @@ define Device/tplink_tl-mr6400-v1
 endef
 TARGET_DEVICES += tplink_tl-mr6400-v1
 
+<<<<<<< HEAD
 define Device/tplink_tl-wa1201-v2
   $(Device/tplink-safeloader-uimage)
   SOC := qca9563
@@ -623,6 +670,8 @@ define Device/tplink_tl-wa1201-v2
 endef
 TARGET_DEVICES += tplink_tl-wa1201-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-wdr3500-v1
   $(Device/tplink-8mlzma)
   SOC := ar9344
@@ -689,6 +738,7 @@ define Device/tplink_tl-wdr4900-v2
 endef
 TARGET_DEVICES += tplink_tl-wdr4900-v2
 
+<<<<<<< HEAD
 define Device/tplink_tl-wdr6500-v2
   $(Device/tplink-8mlzma)
   SOC := qca9561
@@ -705,6 +755,8 @@ define Device/tplink_tl-wdr6500-v2
 endef
 TARGET_DEVICES += tplink_tl-wdr6500-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-wdr7500-v3
   $(Device/tplink-8mlzma)
   SOC := qca9558
@@ -733,10 +785,16 @@ define Device/tplink_tl-wr1043nd-v1
   SOC := ar9132
   DEVICE_MODEL := TL-WR1043N/ND
   DEVICE_VARIANT := v1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-switch-rtl8366rb
   TPLINK_HWID := 0x10430001
   SUPPORTED_DEVICES += tl-wr1043nd
   DEFAULT := n
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport
+  TPLINK_HWID := 0x10430001
+  SUPPORTED_DEVICES += tl-wr1043nd
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_tl-wr1043nd-v1
 
@@ -802,10 +860,17 @@ define Device/tplink_tl-wr2543-v1
   SOC := ar7242
   DEVICE_MODEL := TL-WR2543N/ND
   DEVICE_VARIANT := v1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-switch-rtl8367
   TPLINK_HWID := 0x25430001
   IMAGE/sysupgrade.bin := tplink-v1-image sysupgrade -v 3.13.99 | \
 	check-size | append-metadata
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport
+  TPLINK_HWID := 0x25430001
+  IMAGE/sysupgrade.bin := tplink-v1-image sysupgrade -v 3.13.99 | \
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.bin := tplink-v1-image factory -v 3.13.99
   SUPPORTED_DEVICES += tl-wr2543n
 endef
@@ -819,7 +884,10 @@ define Device/tplink_tl-wr710n-v1
   DEVICE_PACKAGES := kmod-usb-chipidea2 kmod-usb-ledtrig-usbport
   TPLINK_HWID := 0x07100001
   SUPPORTED_DEVICES += tl-wr710n
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_tl-wr710n-v1
 
@@ -832,7 +900,10 @@ define Device/tplink_tl-wr710n-v2.1
   TPLINK_HWID := 0x07100002
   TPLINK_HWREV := 0x2
   SUPPORTED_DEVICES += tl-wr710n
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_tl-wr710n-v2.1
 
@@ -854,6 +925,7 @@ define Device/tplink_tl-wr810n-v2
   DEVICE_VARIANT := v2
   TPLINK_HWID := 0x8100002
   SUPPORTED_DEVICES += tl-wr810n-v2
+<<<<<<< HEAD
   DEFAULT := n
 endef
 TARGET_DEVICES += tplink_tl-wr810n-v2
@@ -876,6 +948,11 @@ define Device/tplink_tl-wr841hp-v3
 endef
 TARGET_DEVICES += tplink_tl-wr841hp-v3
 
+=======
+endef
+TARGET_DEVICES += tplink_tl-wr810n-v2
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_tl-wr842n-v1
   $(Device/tplink-8m)
   SOC := ar7241
@@ -884,7 +961,10 @@ define Device/tplink_tl-wr842n-v1
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport
   TPLINK_HWID := 0x8420001
   SUPPORTED_DEVICES += tl-mr3420
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_tl-wr842n-v1
 
@@ -896,7 +976,10 @@ define Device/tplink_tl-wr842n-v2
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport
   TPLINK_HWID := 0x8420002
   SUPPORTED_DEVICES += tl-wr842n-v2
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += tplink_tl-wr842n-v2
 
@@ -925,6 +1008,7 @@ define Device/tplink_tl-wr902ac-v1
 endef
 TARGET_DEVICES += tplink_tl-wr902ac-v1
 
+<<<<<<< HEAD
 define Device/tplink_tl-wr941hp-v1
   $(Device/tplink-safeloader)
   SOC := tp9343
@@ -935,6 +1019,8 @@ define Device/tplink_tl-wr941hp-v1
 endef
 TARGET_DEVICES += tplink_tl-wr941hp-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink_wbs210-v1
   $(Device/tplink-safeloader-okli)
   SOC := ar9344

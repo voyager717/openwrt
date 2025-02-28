@@ -54,6 +54,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "devdata";
 				reg = <0xff0000 0x10000>;
@@ -72,12 +73,21 @@
 						reg = <0x4004 0x6>;
 					};
 				};
+=======
+			devdata: partition@ff0000 {
+				label = "devdata";
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
 };
+<<<<<<< HEAD
 
 &ethernet {
 	nvmem-cells = <&macaddr_devdata_4004>;
 	nvmem-cell-names = "mac-address";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

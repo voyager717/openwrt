@@ -5,6 +5,7 @@
 / {
 	compatible = "tplink,re200-v3", "mediatek,mt7628an-soc";
 	model = "TP-Link RE200 v3";
+<<<<<<< HEAD
 
 	leds {
 		wifi_red {
@@ -16,4 +17,6 @@
 
 &led_power {
 	gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

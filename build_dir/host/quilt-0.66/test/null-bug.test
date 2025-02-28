@@ -1,0 +1,31 @@
+	$ mkdir patches
+
+	$ echo file > file
+	$ quilt new remove.diff
+	> Patch %{P}remove.diff is now on top
+
+	$ quilt add file
+	> File file added to patch %{P}remove.diff
+
+In this case, the original file in the --- line must not have .orig appended
+or else patch won't know the real original filename anymore.
+
+	$ rm -f file
+	$ quilt diff -p0
+	> Index: file
+	> ===================================================================
+	> --- file
+	> +++ /dev/null
+	> @@ -1 +0,0 @@
+	> -file
+
+	$ quilt refresh -p0
+	> Refreshed patch %{P}remove.diff
+
+	$ quilt pop -q
+	> Removing patch %{P}remove.diff
+	> No patches applied
+
+	$ quilt push -q
+	> Applying patch %{P}remove.diff
+	> Now at patch %{P}remove.diff

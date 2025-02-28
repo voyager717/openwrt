@@ -3,16 +3,26 @@ include $(INCLUDE_DIR)/version.mk
 
 PKG_NAME:=ipq-wifi
 PKG_RELEASE:=1
+<<<<<<< HEAD
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/firmware/qca-wireless.git
 PKG_SOURCE_DATE:=2025-02-16
 PKG_SOURCE_VERSION:=331dd0ead646f0d3fe38cb4bf83cce4b448343e8
 PKG_MIRROR_HASH:=f49b3acd56a1cf4a0d52413b060d6adbd65c2754b44cabe096fed69172febbb5
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_FLAGS:=nonshared
 
 include $(INCLUDE_DIR)/package.mk
 
+<<<<<<< HEAD
+=======
+define Build/Prepare
+	mkdir -p $(PKG_BUILD_DIR)
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/Compile
 endef
 
@@ -27,6 +37,7 @@ endef
 # <https://wireless.wiki.kernel.org/en/users/drivers/ath10k/boardfiles>
 
 ALLWIFIBOARDS:= \
+<<<<<<< HEAD
 	8devices_mango \
 	aliyun_ap8220 \
 	arcadyan_aw1000 \
@@ -74,6 +85,33 @@ ALLWIFIBOARDS:= \
 	zte_mf287 \
 	zte_mf287plus \
 	zyxel_nbg7815
+=======
+	8dev_habanero-dvk \
+	aruba_ap-303 \
+	avm_fritzrepeater-1200 \
+	buffalo_wtr-m2133hp \
+	cellc_rtl30vw \
+	devolo_magic-2-wifi-next \
+	dlink_dap2610 \
+	edgecore_ecw5410 \
+	edgecore_oap100 \
+	engenius_eap2200 \
+	engenius_emd1 \
+	engenius_emr3500 \
+	ezviz_cs-w3-wd1200g-eup \
+	glinet_gl-ap1300 \
+	glinet_gl-s1300 \
+	linksys_ea8300 \
+	linksys_mr8300-v0 \
+	luma_wrtq-329acn \
+	mikrotik_hap-ac2 \
+	mikrotik_sxtsq-5-ac \
+	mobipromo_cm520-79f \
+	nec_wg2600hp3 \
+	plasmacloud_pa1200 \
+	plasmacloud_pa2200 \
+	qxwlan_e2600ac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ALLWIFIPACKAGES:=$(foreach BOARD,$(ALLWIFIBOARDS),ipq-wifi-$(BOARD))
 
@@ -81,7 +119,11 @@ define Package/ipq-wifi-default
   SUBMENU:=ath10k Board-Specific Overrides
   SECTION:=firmware
   CATEGORY:=Firmware
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x||TARGET_qualcommax)
+=======
+  DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=Custom Board
 endef
 
@@ -90,16 +132,20 @@ define ipq-wifi-install-one-to
   $(INSTALL_DATA) $(1) $(2)/lib/firmware/ath10k/$(3)/board-2.bin
 endef
 
+<<<<<<< HEAD
 define ipq-wifi-install-ath11-one-to
   $(INSTALL_DIR)  $(2)/lib/firmware/ath11k/$(3)/
   $(INSTALL_DATA) $(1) $(2)/lib/firmware/ath11k/$(3)/board-2.bin
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define ipq-wifi-install-one
   $(if $(filter $(suffix $(1)),.QCA4019 .qca4019),\
     $(call ipq-wifi-install-one-to,$(1),$(2),QCA4019/hw1.0),\
   $(if $(filter $(suffix $(1)),.QCA9888 .qca9888),\
     $(call ipq-wifi-install-one-to,$(1),$(2),QCA9888/hw2.0),\
+<<<<<<< HEAD
   $(if $(filter $(suffix $(1)),.QCA9889 .qca9889),\
     $(call ipq-wifi-install-one-to,$(1),$(2),QCA9887/hw1.0),\
   $(if $(filter $(suffix $(1)),.QCA9984 .qca9984),\
@@ -118,6 +164,12 @@ define ipq-wifi-install-one
     $(call ipq-wifi-install-ath11-one-to,$(1),$(2),QCN9074/hw1.0),\
     $(error Unrecognized board-file suffix '$(suffix $(1))' for '$(1)')\
   ))))))))))
+=======
+  $(if $(filter $(suffix $(1)),.QCA9984 .qca9984),\
+    $(call ipq-wifi-install-one-to,$(1),$(2),QCA9984/hw1.0),\
+    $(error Unrecognized board-file suffix '$(suffix $(1))' for '$(1)')\
+  )))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 endef
 # Blank line required at end of above define due to foreach context
@@ -142,13 +194,18 @@ Do not install it for any other device!
   endef
 
   define Package/ipq-wifi-$(1)/install-overlay
+<<<<<<< HEAD
     $$$$(foreach IPQ_WIFI_BOARD_FILE,$$$$(wildcard $(PKG_BUILD_DIR)/board-$(1).*),\
+=======
+    $$$$(foreach IPQ_WIFI_BOARD_FILE,$$$$(wildcard board-$(1).*),\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       $$$$(call ipq-wifi-install-one,$$$$(IPQ_WIFI_BOARD_FILE),$$(1)))
   endef
 
   PREV_BOARD+=ipq-wifi-$(1)
 endef
 
+<<<<<<< HEAD
 # To add local files for testing:
 # 1. create a new directory in the ipq-wifi package directory called "files".
 # 2. place there the needed board files.
@@ -214,5 +271,36 @@ $(eval $(call generate-ipq-wifi-package,zte_mf269,ZTE MF269))
 $(eval $(call generate-ipq-wifi-package,zte_mf287,ZTE MF287))
 $(eval $(call generate-ipq-wifi-package,zte_mf287plus,ZTE MF287Plus))
 $(eval $(call generate-ipq-wifi-package,zyxel_nbg7815,Zyxel NBG7815))
+=======
+# Add board name to ALLWIFIBOARDS
+# Place files in this directory as board-<devicename>.<qca4019|qca9888|qca9984>
+# Add $(eval $(call generate-ipq-wifi-package,<devicename>,<display name>))
+
+$(eval $(call generate-ipq-wifi-package,8dev_habanero-dvk,8devices Habanero DVK))
+$(eval $(call generate-ipq-wifi-package,aruba_ap-303,Aruba AP-303))
+$(eval $(call generate-ipq-wifi-package,avm_fritzrepeater-1200,AVM FRITZRepeater 1200))
+$(eval $(call generate-ipq-wifi-package,buffalo_wtr-m2133hp,Buffalo WTR-M2133HP))
+$(eval $(call generate-ipq-wifi-package,cellc_rtl30vw, Cell C RTL30VW))
+$(eval $(call generate-ipq-wifi-package,devolo_magic-2-wifi-next,devolo Magic 2 WiFi next))
+$(eval $(call generate-ipq-wifi-package,dlink_dap2610,D-Link DAP-2610))
+$(eval $(call generate-ipq-wifi-package,edgecore_ecw5410,Edgecore ECW5410))
+$(eval $(call generate-ipq-wifi-package,edgecore_oap100,Edgecore OAP100))
+$(eval $(call generate-ipq-wifi-package,engenius_eap2200,EnGenius EAP2200))
+$(eval $(call generate-ipq-wifi-package,engenius_emd1,EnGenius EMD1))
+$(eval $(call generate-ipq-wifi-package,engenius_emr3500,EnGenius EMR3500))
+$(eval $(call generate-ipq-wifi-package,ezviz_cs-w3-wd1200g-eup,EZVIZ CS-W3-WD1200G EUP))
+$(eval $(call generate-ipq-wifi-package,glinet_gl-ap1300,GL.iNet GL-AP1300))
+$(eval $(call generate-ipq-wifi-package,glinet_gl-s1300,GL.iNet GL-S1300))
+$(eval $(call generate-ipq-wifi-package,linksys_ea8300,Linksys EA8300))
+$(eval $(call generate-ipq-wifi-package,linksys_mr8300-v0,Linksys MR8300))
+$(eval $(call generate-ipq-wifi-package,luma_wrtq-329acn,Luma WRTQ-329ACN))
+$(eval $(call generate-ipq-wifi-package,mikrotik_hap-ac2,Mikrotik hAP ac2))
+$(eval $(call generate-ipq-wifi-package,mikrotik_sxtsq-5-ac,MikroTik SXTsq 5 ac))
+$(eval $(call generate-ipq-wifi-package,mobipromo_cm520-79f,MobiPromo CM520-79F))
+$(eval $(call generate-ipq-wifi-package,nec_wg2600hp3,NEC Platforms WG2600HP3))
+$(eval $(call generate-ipq-wifi-package,plasmacloud_pa1200,Plasma Cloud PA1200))
+$(eval $(call generate-ipq-wifi-package,plasmacloud_pa2200,Plasma Cloud PA2200))
+$(eval $(call generate-ipq-wifi-package,qxwlan_e2600ac,Qxwlan E2600AC))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(foreach PACKAGE,$(ALLWIFIPACKAGES),$(eval $(call BuildPackage,$(PACKAGE))))

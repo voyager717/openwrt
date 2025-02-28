@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions/uci-defaults.sh
 
@@ -7,10 +11,16 @@ boardname="${board##*,}"
 board_config_update
 
 case $board in
+<<<<<<< HEAD
 friendlyarm,nanopi-r1|\
 friendlyarm,nanopi-r1s-h5)
 	ucidef_set_led_netdev "wan" "WAN" "green:wan" "eth0"
 	ucidef_set_led_netdev "lan" "LAN" "green:lan" "eth1"
+=======
+friendlyarm,nanopi-r1)
+	ucidef_set_led_netdev "wan" "WAN" "nanopi:green:wan" "eth0"
+	ucidef_set_led_netdev "lan" "LAN" "nanopi:green:lan" "eth1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	;;
 esac
 

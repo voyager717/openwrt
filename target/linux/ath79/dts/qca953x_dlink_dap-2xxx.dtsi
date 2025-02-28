@@ -41,6 +41,7 @@
 				reg = <0x60000 0x10000>;
 				read-only;
 			};
+<<<<<<< HEAD
 
 			partition@ff0000 {
 				label = "art";
@@ -57,6 +58,8 @@
 					};
 				};
 			};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -64,6 +67,10 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_ath9k>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

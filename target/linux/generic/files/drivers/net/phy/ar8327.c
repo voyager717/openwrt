@@ -183,7 +183,11 @@ ar8327_phy_fixup(struct ar8xxx_priv *priv, int phy)
 
 	case 2:
 		ar8xxx_phy_mmd_write(priv, phy, 0x7, 0x3c, 0x0);
+<<<<<<< HEAD
 		fallthrough;
+=======
+		/* fallthrough */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	case 4:
 		ar8xxx_phy_mmd_write(priv, phy, 0x3, 0x800d, 0x803f);
 		ar8xxx_phy_dbg_write(priv, phy, 0x3d, 0x6860);

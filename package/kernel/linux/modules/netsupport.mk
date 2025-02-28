@@ -42,6 +42,7 @@ endef
 $(eval $(call KernelPackage,atmtcp))
 
 
+<<<<<<< HEAD
 define KernelPackage/appletalk
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Appletalk protocol support
@@ -60,14 +61,21 @@ endef
 $(eval $(call KernelPackage,appletalk))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/bonding
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Ethernet bonding driver
   KCONFIG:=CONFIG_BONDING
+<<<<<<< HEAD
   DEPENDS:=PACKAGE_kmod-tls:kmod-tls
   FILES:=$(LINUX_DIR)/drivers/net/bonding/bonding.ko
   AUTOLOAD:=$(call AutoLoad,40,bonding)
   MODPARAMS.bonding:=max_bonds=0
+=======
+  FILES:=$(LINUX_DIR)/drivers/net/bonding/bonding.ko
+  AUTOLOAD:=$(call AutoLoad,40,bonding)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/bonding/description
@@ -110,8 +118,12 @@ define KernelPackage/vxlan
 	+kmod-udptunnel4 \
 	+IPV6:kmod-udptunnel6
   KCONFIG:=CONFIG_VXLAN
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/drivers/net/vxlan/vxlan.ko
+=======
+  FILES:=$(LINUX_DIR)/drivers/net/vxlan.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,13,vxlan)
 endef
 
@@ -183,6 +195,41 @@ endef
 $(eval $(call KernelPackage,misdn))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/isdn4linux
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Old ISDN4Linux (deprecated)
+  DEPENDS:=+kmod-ppp
+  KCONFIG:= \
+	CONFIG_ISDN=y \
+    CONFIG_ISDN_I4L \
+    CONFIG_ISDN_PPP=y \
+    CONFIG_ISDN_PPP_VJ=y \
+    CONFIG_ISDN_MPP=y \
+    CONFIG_IPPP_FILTER=y \
+    CONFIG_ISDN_PPP_BSDCOMP \
+    CONFIG_ISDN_CAPI_MIDDLEWARE=y \
+    CONFIG_ISDN_CAPI_CAPIFS_BOOL=y \
+    CONFIG_ISDN_AUDIO=y \
+    CONFIG_ISDN_TTY_FAX=y \
+    CONFIG_ISDN_X25=y \
+    CONFIG_ISDN_DIVERSION
+  FILES:= \
+    $(LINUX_DIR)/drivers/isdn/divert/dss1_divert.ko \
+	$(LINUX_DIR)/drivers/isdn/i4l/isdn.ko \
+	$(LINUX_DIR)/drivers/isdn/i4l/isdn_bsdcomp.ko
+  AUTOLOAD:=$(call AutoLoad,40,isdn isdn_bsdcomp dss1_divert)
+endef
+
+define KernelPackage/isdn4linux/description
+  This driver allows you to use an ISDN adapter for networking
+endef
+
+$(eval $(call KernelPackage,isdn4linux))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/ipip
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=IP-in-IP encapsulation
@@ -235,8 +282,15 @@ $(eval $(call KernelPackage,ipsec))
 IPSEC4-m = \
 	ipv4/ah4 \
 	ipv4/esp4 \
+<<<<<<< HEAD
 	ipv4/ipcomp \
 	ipv4/xfrm4_tunnel
+=======
+	ipv4/xfrm4_tunnel \
+	ipv4/ipcomp \
+
+IPSEC4-m += $(ifeq ($$(strip $$(call CompareKernelPatchVer,$$(KERNEL_PATCHVER),le,5.2))),ipv4/xfrm4_mode_beet ipv4/xfrm4_mode_transport ipv4/xfrm4_mode_tunnel)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/ipsec4
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -246,6 +300,12 @@ define KernelPackage/ipsec4
 	CONFIG_INET_AH \
 	CONFIG_INET_ESP \
 	CONFIG_INET_IPCOMP \
+<<<<<<< HEAD
+=======
+	CONFIG_INET_XFRM_MODE_BEET \
+	CONFIG_INET_XFRM_MODE_TRANSPORT \
+	CONFIG_INET_XFRM_MODE_TUNNEL \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_INET_XFRM_TUNNEL \
 	CONFIG_INET_ESP_OFFLOAD=n
   FILES:=$(foreach mod,$(IPSEC4-m),$(LINUX_DIR)/net/$(mod).ko)
@@ -258,6 +318,12 @@ define KernelPackage/ipsec4/description
  - ah4
  - esp4
  - ipcomp4
+<<<<<<< HEAD
+=======
+ - xfrm4_mode_beet
+ - xfrm4_mode_transport
+ - xfrm4_mode_tunnel
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  - xfrm4_tunnel
 endef
 
@@ -267,8 +333,15 @@ $(eval $(call KernelPackage,ipsec4))
 IPSEC6-m = \
 	ipv6/ah6 \
 	ipv6/esp6 \
+<<<<<<< HEAD
 	ipv6/ipcomp6 \
 	ipv6/xfrm6_tunnel
+=======
+	ipv6/xfrm6_tunnel \
+	ipv6/ipcomp6 \
+
+IPSEC6-m += $(ifeq ($$(strip $$(call CompareKernelPatchVer,$$(KERNEL_PATCHVER),le,5.2))),ipv6/xfrm6_mode_beet ipv6/xfrm6_mode_transport ipv6/xfrm6_mode_tunnel)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/ipsec6
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -278,6 +351,12 @@ define KernelPackage/ipsec6
 	CONFIG_INET6_AH \
 	CONFIG_INET6_ESP \
 	CONFIG_INET6_IPCOMP \
+<<<<<<< HEAD
+=======
+	CONFIG_INET6_XFRM_MODE_BEET \
+	CONFIG_INET6_XFRM_MODE_TRANSPORT \
+	CONFIG_INET6_XFRM_MODE_TUNNEL \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_INET6_XFRM_TUNNEL \
 	CONFIG_INET6_ESP_OFFLOAD=n
   FILES:=$(foreach mod,$(IPSEC6-m),$(LINUX_DIR)/net/$(mod).ko)
@@ -290,6 +369,12 @@ define KernelPackage/ipsec6/description
  - ah6
  - esp6
  - ipcomp6
+<<<<<<< HEAD
+=======
+ - xfrm6_mode_beet
+ - xfrm6_mode_transport
+ - xfrm6_mode_tunnel
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  - xfrm6_tunnel
 endef
 
@@ -348,7 +433,11 @@ $(eval $(call KernelPackage,ip6-vti))
 define KernelPackage/xfrm-interface
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=IPsec XFRM Interface
+<<<<<<< HEAD
   DEPENDS:=@IPV6 +kmod-ipsec4 +kmod-ipsec6
+=======
+  DEPENDS:=+kmod-ipsec4 +IPV6:kmod-ipsec6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_XFRM_INTERFACE
   FILES:=$(LINUX_DIR)/net/xfrm/xfrm_interface.ko
   AUTOLOAD:=$(call AutoProbe,xfrm_interface)
@@ -536,6 +625,7 @@ endef
 $(eval $(call KernelPackage,veth))
 
 
+<<<<<<< HEAD
 define KernelPackage/vrf
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Virtual Routing and Forwarding (Lite)
@@ -553,6 +643,8 @@ endef
 $(eval $(call KernelPackage,vrf))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/slhc
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   HIDDEN:=1
@@ -710,8 +802,17 @@ endef
 $(eval $(call KernelPackage,mppe))
 
 
+<<<<<<< HEAD
 SCHED_MODULES_CORE = sch_ingress sch_hfsc sch_htb sch_tbf cls_basic cls_fw cls_route cls_flow cls_u32 em_u32 act_gact act_mirred act_skbedit cls_matchall
 SCHED_FILES_CORE = $(foreach mod,$(SCHED_MODULES_CORE),$(LINUX_DIR)/net/sched/$(mod).ko)
+=======
+SCHED_MODULES = $(patsubst $(LINUX_DIR)/net/sched/%.ko,%,$(wildcard $(LINUX_DIR)/net/sched/*.ko))
+SCHED_MODULES_CORE = sch_ingress sch_fq_codel sch_hfsc sch_htb sch_tbf cls_basic cls_fw cls_route cls_flow cls_tcindex cls_u32 em_u32 act_gact act_mirred act_skbedit cls_matchall
+SCHED_MODULES_FILTER = $(SCHED_MODULES_CORE) act_connmark act_ctinfo sch_cake sch_netem sch_mqprio em_ipset cls_bpf cls_flower act_bpf act_vlan
+SCHED_MODULES_EXTRA = $(filter-out $(SCHED_MODULES_FILTER),$(SCHED_MODULES))
+SCHED_FILES = $(patsubst %,$(LINUX_DIR)/net/sched/%.ko,$(filter $(SCHED_MODULES_CORE),$(SCHED_MODULES)))
+SCHED_FILES_EXTRA = $(patsubst %,$(LINUX_DIR)/net/sched/%.ko,$(SCHED_MODULES_EXTRA))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/sched-core
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -722,12 +823,20 @@ define KernelPackage/sched-core
 	CONFIG_NET_SCH_HTB \
 	CONFIG_NET_SCH_TBF \
 	CONFIG_NET_SCH_INGRESS \
+<<<<<<< HEAD
+=======
+	CONFIG_NET_SCH_FQ_CODEL \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_NET_CLS=y \
 	CONFIG_NET_CLS_ACT=y \
 	CONFIG_NET_CLS_BASIC \
 	CONFIG_NET_CLS_FLOW \
 	CONFIG_NET_CLS_FW \
 	CONFIG_NET_CLS_ROUTE4 \
+<<<<<<< HEAD
+=======
+	CONFIG_NET_CLS_TCINDEX \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_NET_CLS_U32 \
 	CONFIG_NET_ACT_GACT \
 	CONFIG_NET_ACT_MIRRED \
@@ -735,7 +844,11 @@ define KernelPackage/sched-core
 	CONFIG_NET_CLS_MATCHALL \
 	CONFIG_NET_EMATCH=y \
 	CONFIG_NET_EMATCH_U32
+<<<<<<< HEAD
   FILES:=$(SCHED_FILES_CORE)
+=======
+  FILES:=$(SCHED_FILES)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,70, $(SCHED_MODULES_CORE))
 endef
 
@@ -746,6 +859,7 @@ endef
 $(eval $(call KernelPackage,sched-core))
 
 
+<<<<<<< HEAD
 define KernelPackage/sched-act-police
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Traffic Policing
@@ -792,6 +906,37 @@ define KernelPackage/sched-act-ipt/description
 endef
 
 $(eval $(call KernelPackage,sched-act-ipt))
+=======
+define KernelPackage/sched-cake
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Cake fq_codel/blue derived shaper
+  DEPENDS:=+kmod-sched-core
+  KCONFIG:=CONFIG_NET_SCH_CAKE
+  FILES:=$(LINUX_DIR)/net/sched/sch_cake.ko
+  AUTOLOAD:=$(call AutoProbe,sch_cake)
+endef
+
+define KernelPackage/sched-cake/description
+ Common Applications Kept Enhanced fq_codel/blue derived shaper
+endef
+
+$(eval $(call KernelPackage,sched-cake))
+
+define KernelPackage/sched-flower
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Flower traffic classifier
+  DEPENDS:=+kmod-sched-core
+  KCONFIG:=CONFIG_NET_CLS_FLOWER
+  FILES:=$(LINUX_DIR)/net/sched/cls_flower.ko
+  AUTOLOAD:=$(call AutoProbe, cls_flower)
+endef
+
+define KernelPackage/sched-flower/description
+ Allows to classify packets based on a configurable combination of packet keys and masks.
+endef
+
+$(eval $(call KernelPackage,sched-flower))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 define KernelPackage/sched-act-vlan
@@ -810,6 +955,7 @@ endef
 $(eval $(call KernelPackage,sched-act-vlan))
 
 
+<<<<<<< HEAD
 define KernelPackage/sched-bpf
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Traffic shaper support for Berkeley Packet Filter
@@ -840,6 +986,22 @@ endef
 
 $(eval $(call KernelPackage,sched-cake))
 
+=======
+define KernelPackage/sched-mqprio
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Multi-queue priority scheduler (MQPRIO)
+  DEPENDS:=+kmod-sched-core
+  KCONFIG:=CONFIG_NET_SCH_MQPRIO
+  FILES:=$(LINUX_DIR)/net/sched/sch_mqprio.ko
+  AUTOLOAD:=$(call AutoProbe, sch_mqprio)
+endef
+
+define KernelPackage/sched-mqprio/description
+  This scheduler allows QOS to be offloaded on NICs that have support for offloading QOS schedulers.
+endef
+
+$(eval $(call KernelPackage,sched-mqprio))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/sched-connmark
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -851,7 +1013,10 @@ define KernelPackage/sched-connmark
 endef
 $(eval $(call KernelPackage,sched-connmark))
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sched-ctinfo
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Traffic shaper ctinfo support
@@ -862,6 +1027,7 @@ define KernelPackage/sched-ctinfo
 endef
 $(eval $(call KernelPackage,sched-ctinfo))
 
+<<<<<<< HEAD
 
 define KernelPackage/sched-drr
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -911,6 +1077,8 @@ endef
 $(eval $(call KernelPackage,sched-fq-pie))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sched-ipset
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Traffic shaper ipset support
@@ -925,6 +1093,7 @@ endef
 $(eval $(call KernelPackage,sched-ipset))
 
 
+<<<<<<< HEAD
 define KernelPackage/sched-mqprio-common
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=mqprio queue common dependencies support
@@ -1014,6 +1183,21 @@ define KernelPackage/sched-skbprio
 endef
 
 $(eval $(call KernelPackage,sched-skbprio))
+=======
+define KernelPackage/sched-bpf
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Traffic shaper support for Berkeley Packet Filter
+  KCONFIG:= \
+	CONFIG_NET_CLS_BPF \
+	CONFIG_NET_ACT_BPF
+  FILES:= \
+	$(LINUX_DIR)/net/sched/cls_bpf.ko \
+	$(LINUX_DIR)/net/sched/act_bpf.ko
+  AUTOLOAD:=$(call AutoLoad,72,cls_bpf act_bpf)
+endef
+
+$(eval $(call KernelPackage,sched-bpf))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 define KernelPackage/bpf-test
@@ -1026,6 +1210,7 @@ endef
 $(eval $(call KernelPackage,bpf-test))
 
 
+<<<<<<< HEAD
 SCHED_MODULES_EXTRA = sch_codel sch_gred sch_multiq sch_sfq sch_teql sch_fq sch_ets act_pedit act_simple act_skbmod act_csum em_cmp em_nbyte em_meta em_text
 SCHED_FILES_EXTRA = $(foreach mod,$(SCHED_MODULES_EXTRA),$(LINUX_DIR)/net/sched/$(mod).ko)
 
@@ -1044,6 +1229,28 @@ define KernelPackage/sched
 	CONFIG_NET_ACT_PEDIT \
 	CONFIG_NET_ACT_SIMP \
 	CONFIG_NET_ACT_SKBMOD \
+=======
+define KernelPackage/sched
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Extra traffic schedulers
+  DEPENDS:=+kmod-sched-core +kmod-ipt-core +kmod-lib-crc32c
+  KCONFIG:= \
+	CONFIG_NET_SCH_CODEL \
+	CONFIG_NET_SCH_DSMARK \
+	CONFIG_NET_SCH_FIFO \
+	CONFIG_NET_SCH_GRED \
+	CONFIG_NET_SCH_MULTIQ \
+	CONFIG_NET_SCH_PRIO \
+	CONFIG_NET_SCH_RED \
+	CONFIG_NET_SCH_SFQ \
+	CONFIG_NET_SCH_TEQL \
+	CONFIG_NET_SCH_FQ \
+	CONFIG_NET_SCH_PIE \
+	CONFIG_NET_ACT_POLICE \
+	CONFIG_NET_ACT_IPT \
+	CONFIG_NET_ACT_PEDIT \
+	CONFIG_NET_ACT_SIMP \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_NET_ACT_CSUM \
 	CONFIG_NET_EMATCH_CMP \
 	CONFIG_NET_EMATCH_NBYTE \
@@ -1090,6 +1297,7 @@ endef
 
 $(eval $(call KernelPackage,tcp-bbr))
 
+<<<<<<< HEAD
 define KernelPackage/tls
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=In-kernel TLS Support with HW Offload
@@ -1108,6 +1316,8 @@ endef
 
 $(eval $(call KernelPackage,tls))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/tcp-hybla
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -1127,6 +1337,7 @@ endef
 $(eval $(call KernelPackage,tcp-hybla))
 
 
+<<<<<<< HEAD
 define KernelPackage/tcp-scalable
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=TCP-Scalable congestion control algorithm
@@ -1145,6 +1356,8 @@ endef
 $(eval $(call KernelPackage,tcp-scalable))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/ax25
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=AX25 support
@@ -1252,8 +1465,12 @@ define KernelPackage/sctp
      CONFIG_SCTP_DEFAULT_COOKIE_HMAC_MD5=y
   FILES:= $(LINUX_DIR)/net/sctp/sctp.ko
   AUTOLOAD:= $(call AutoLoad,32,sctp)
+<<<<<<< HEAD
   DEPENDS:=+kmod-lib-crc32c +kmod-crypto-md5 +kmod-crypto-hmac \
     +kmod-udptunnel4 +kmod-udptunnel6
+=======
+  DEPENDS:=+kmod-lib-crc32c +kmod-crypto-md5 +kmod-crypto-hmac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/sctp/description
@@ -1263,6 +1480,7 @@ endef
 $(eval $(call KernelPackage,sctp))
 
 
+<<<<<<< HEAD
 define KernelPackage/sctp-diag
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=SCTP diag support
@@ -1275,6 +1493,8 @@ endef
 $(eval $(call KernelPackage,sctp-diag))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/netem
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Network emulation functionality
@@ -1327,6 +1547,7 @@ define KernelPackage/rxrpc
   HIDDEN:=1
   KCONFIG:= \
 	CONFIG_AF_RXRPC \
+<<<<<<< HEAD
 	CONFIG_AF_RXRPC_IPV6=y \
 	CONFIG_RXKAD \
 	CONFIG_AF_RXRPC_DEBUG=n
@@ -1341,6 +1562,14 @@ define KernelPackage/rxrpc
 	+kmod-crypto-pcbc \
 	+kmod-udptunnel4 \
 	+IPV6:kmod-udptunnel6
+=======
+	CONFIG_RXKAD=m \
+	CONFIG_AF_RXRPC_DEBUG=n
+  FILES:= \
+	$(LINUX_DIR)/net/rxrpc/rxrpc.ko
+  AUTOLOAD:=$(call AutoLoad,30,rxrpc.ko)
+  DEPENDS:= +kmod-crypto-manager +kmod-crypto-pcbc +kmod-crypto-fcrypt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/rxrpc/description
@@ -1376,6 +1605,7 @@ $(eval $(call KernelPackage,mpls))
 define KernelPackage/9pnet
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Plan 9 Resource Sharing Support (9P2000)
+<<<<<<< HEAD
   KCONFIG:= \
 	CONFIG_NET_9P \
 	CONFIG_NET_9P_DEBUG=n \
@@ -1383,6 +1613,18 @@ define KernelPackage/9pnet
   FILES:= \
 	$(LINUX_DIR)/net/9p/9pnet.ko
   AUTOLOAD:=$(call AutoLoad,29,9pnet)
+=======
+  DEPENDS:=@VIRTIO_SUPPORT
+  KCONFIG:= \
+	CONFIG_NET_9P \
+	CONFIG_NET_9P_DEBUG=n \
+	CONFIG_NET_9P_XEN=n \
+	CONFIG_NET_9P_VIRTIO
+  FILES:= \
+	$(LINUX_DIR)/net/9p/9pnet.ko \
+	$(LINUX_DIR)/net/9p/9pnet_virtio.ko
+  AUTOLOAD:=$(call AutoLoad,29,9pnet 9pnet_virtio)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/9pnet/description
@@ -1392,6 +1634,7 @@ endef
 
 $(eval $(call KernelPackage,9pnet))
 
+<<<<<<< HEAD
 define KernelPackage/9pvirtio
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=Plan 9 Virtio Support
@@ -1411,6 +1654,8 @@ endef
 
 $(eval $(call KernelPackage,9pvirtio))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/nlmon
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
@@ -1442,6 +1687,7 @@ endef
 
 $(eval $(call KernelPackage,mdio))
 
+<<<<<<< HEAD
 define KernelPackage/mdio-bus-mux
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=MDIO bus multiplexers
@@ -1457,6 +1703,8 @@ endef
 
 $(eval $(call KernelPackage,mdio-bus-mux))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/macsec
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=IEEE 802.1AE MAC-level encryption (MAC)
@@ -1488,6 +1736,7 @@ endef
 $(eval $(call KernelPackage,netlink-diag))
 
 
+<<<<<<< HEAD
 define KernelPackage/inet-diag
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=INET diag support for ss utility
@@ -1546,6 +1795,8 @@ endef
 $(eval $(call KernelPackage,xdp-sockets-diag))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/wireguard
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=WireGuard secure network tunnel
@@ -1571,6 +1822,7 @@ define KernelPackage/wireguard/description
 endef
 
 $(eval $(call KernelPackage,wireguard))
+<<<<<<< HEAD
 
 
 define KernelPackage/netconsole
@@ -1667,3 +1919,5 @@ define KernelPackage/packet-diag
 endef
 
 $(eval $(call KernelPackage,packet-diag))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

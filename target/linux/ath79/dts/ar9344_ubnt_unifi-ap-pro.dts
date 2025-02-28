@@ -100,6 +100,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "art";
 				reg = <0xff0000 0x10000>;
@@ -122,6 +123,12 @@
 						reg = <0x5000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "art";
+				reg = <0xff0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -133,16 +140,24 @@
 	wifi@0,0 {
 		compatible = "pci168c,0033";
 		reg = <0 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&calibration_art_5000>;
 		nvmem-cell-names = "calibration";
+=======
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&calibration_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &mdio0 {
@@ -164,8 +179,12 @@
 
 	pll-data = <0x6000000 0x101 0x1616>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-mode = "rgmii";
 	phy-handle = <&phy0>;

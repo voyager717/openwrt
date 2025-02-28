@@ -104,6 +104,7 @@
         hash->controlr.INIT = 1;  \
     } while(0)
 
+<<<<<<< HEAD
 #define MD5_HASH_INIT                  \
     do {                               \
         volatile struct deu_hash_t *hash = (struct deu_hash_t *) HASH_START; \
@@ -112,6 +113,8 @@
         hash->controlr.INIT = 1;  \
     } while(0)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /* DEU STRUCTURES */
 
 struct clc_controlr_t {

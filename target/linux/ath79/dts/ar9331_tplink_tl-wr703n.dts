@@ -8,5 +8,9 @@
 };
 
 &reg_usb_vbus {
+<<<<<<< HEAD
 	gpios = <&gpio 8 GPIO_ACTIVE_HIGH>;
+=======
+	gpio = <&gpio 8 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

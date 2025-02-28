@@ -1,0 +1,2 @@
+libfakeroot_inode64.lo: libfakeroot_inode64.c /usr/include/stdc-predef.h
+/usr/include/stdc-predef.h:

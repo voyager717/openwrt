@@ -36,6 +36,7 @@
 			linux,default-trigger = "phy0tpt";
 		};
 	};
+<<<<<<< HEAD
 
 	gpio_export {
 		compatible = "gpio-export";
@@ -47,6 +48,8 @@
 			gpios = <&gpio0 13 GPIO_ACTIVE_HIGH>;
 		};
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ehci {
@@ -64,8 +67,12 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };

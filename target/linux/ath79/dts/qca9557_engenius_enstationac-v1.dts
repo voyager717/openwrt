@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "engenius,enstationac-v1", "qca,qca9557";
@@ -33,15 +36,23 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 22 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -64,6 +75,7 @@
 };
 
 &partitions {
+<<<<<<< HEAD
 	partition@ff0000 {
 		label = "art";
 		reg = <0xff0000 0x010000>;
@@ -84,6 +96,12 @@
 				reg = <0x5000 0x844>;
 			};
 		};
+=======
+	art: partition@ff0000 {
+		label = "art";
+		reg = <0xff0000 0x010000>;
+		read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -107,8 +125,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-handle = <&phy1>;
 	phy-mode = "rgmii-id";
@@ -119,8 +141,13 @@
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-handle = <&phy2>;
 
@@ -128,6 +155,7 @@
 
 	qca955x-sgmii-fixup;
 };
+<<<<<<< HEAD
 
 &pcie0 {
 	status = "okay";
@@ -139,3 +167,5 @@
 		nvmem-cell-names = "calibration", "mac-address";
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

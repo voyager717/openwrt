@@ -9,7 +9,11 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ct-bugcheck
+<<<<<<< HEAD
 PKG_RELEASE:=2016.07.21
+=======
+PKG_RELEASE:=2016-07-21
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 

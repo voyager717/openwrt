@@ -1,12 +1,21 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -413,14 +413,8 @@ EOF
+=======
+@@ -411,14 +411,8 @@ EOF
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      if $CC -I$INCLUDE -o $TMPDIR/strtest $TMPDIR/strtest.c >/dev/null 2>&1; then
  	echo "no"
      else
 -	if ${PKG_CONFIG} libbsd --exists; then
+<<<<<<< HEAD
 -		echo 'CFLAGS += -DHAVE_LIBBSD' "$(${PKG_CONFIG} libbsd --cflags)" >>$CONFIG
 -		echo 'LDLIBS +=' "$(${PKG_CONFIG} libbsd --libs)" >> $CONFIG
+=======
+-		echo 'CFLAGS += -DHAVE_LIBBSD' `${PKG_CONFIG} libbsd --cflags` >>$CONFIG
+-		echo 'LDLIBS +=' `${PKG_CONFIG} libbsd --libs` >> $CONFIG
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -		echo "no"
 -	else
 -		echo 'CFLAGS += -DNEED_STRLCPY' >>$CONFIG

@@ -1,0 +1,2 @@
+set CC_FOR_TARGET "aarch64-openwrt-linux-musl-gcc"
+set CXX_FOR_TARGET "aarch64-openwrt-linux-musl-g++"

@@ -1,6 +1,10 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 [ -f /etc/opkg.conf ] && grep -q "src/" /etc/opkg.conf || exit 0
+=======
+[ -f /etc/opkg.conf ] && grep -q "src\/" /etc/opkg.conf || exit 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 echo -e "# Old feeds from previous image\n# Uncomment to reenable\n" >> /etc/opkg/customfeeds.conf
 sed -n "s/.*\(src\/.*\)/# \1/p" /etc/opkg.conf >> /etc/opkg/customfeeds.conf

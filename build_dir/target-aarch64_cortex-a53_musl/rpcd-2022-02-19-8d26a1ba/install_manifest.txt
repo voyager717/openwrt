@@ -1,0 +1,4 @@
+/usr/sbin/rpcd
+/usr/lib/file.so
+/usr/lib/rpcsys.so
+/usr/lib/iwinfo.so

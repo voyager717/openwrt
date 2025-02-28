@@ -137,7 +137,11 @@ DEVICE_VARS += BIN_TAIL
 
 define Device/Default
 	KERNEL := kernel-bin
+<<<<<<< HEAD
 	DEVICE_IMG_NAME = $$(DEVICE_IMG_PREFIX)-$$(1).$$(2)
+=======
+	IMAGE_NAME = $$(IMAGE_PREFIX)-$$(1).$$(2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	KERNEL_NAME = vmlinux.lzma
 	KERNEL_INITRAMFS_NAME = vmlinux-initramfs.lzma
 	FILESYSTEMS := $(FS_64K)
@@ -146,6 +150,7 @@ define Device/Default
 endef
 
 define Device/standard
+<<<<<<< HEAD
   DEVICE_VENDOR := Generic
   DEVICE_MODEL := Image with LZMA loader and LZMA compressed kernel
 endef
@@ -153,13 +158,24 @@ endef
 define Device/standard-noloader-gz
   DEVICE_VENDOR := Generic
   DEVICE_MODEL := Image with gzipped kernel
+=======
+  DEVICE_TITLE := Image with LZMA loader and LZMA compressed kernel
+endef
+
+define Device/standard-noloader-gz
+  DEVICE_TITLE := Image with gzipped kernel
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_NAME = vmlinux.gz
   IMAGE/trx := append-rootfs | trx-without-loader
 endef
 
 define Device/standard-noloader-nodictionarylzma
+<<<<<<< HEAD
   DEVICE_VENDOR := Generic
   DEVICE_MODEL := Image with LZMA compressed kernel matching CFE decompressor
+=======
+  DEVICE_TITLE := Image with LZMA compressed kernel matching CFE decompressor
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_NAME = vmlinux-nodictionary.lzma
   IMAGE/trx := append-rootfs | trx-without-loader
 endef

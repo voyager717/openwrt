@@ -18,13 +18,22 @@ setup_interface () {
 	proto_add_ipv4_address "$ip" "${subnet:-255.255.255.0}"
 	# TODO: apply $broadcast
 
+<<<<<<< HEAD
 	local ip_net IP PREFIX NETWORK NETMASK BROADCAST
 	ipcalc "$ip/$mask" && ip_net="$NETWORK"
+=======
+	local ip_net
+	eval "$(ipcalc.sh "$ip/$mask")";ip_net="$NETWORK"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	local i
 	for i in $router; do
 		local gw_net
+<<<<<<< HEAD
 		ipcalc "$i/$mask" && gw_net="$NETWORK"
+=======
+		eval "$(ipcalc.sh "$i/$mask")";gw_net="$NETWORK"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		[ "$ip_net" != "$gw_net" ] && proto_add_ipv4_route "$i" 32 "" "$ip"
 		proto_add_ipv4_route 0.0.0.0 0 "$i" "$ip"
@@ -60,7 +69,10 @@ setup_interface () {
 	[ -n "$message" ]  && json_add_string message "$message"
 	[ -n "$timezone" ] && json_add_int timezone "$timezone"
 	[ -n "$lease" ]    && json_add_int leasetime "$lease"
+<<<<<<< HEAD
 	[ -n "$serverid" ] && json_add_string dhcpserver "$serverid"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	proto_close_data
 
 	proto_send_update "$INTERFACE"

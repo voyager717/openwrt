@@ -7,12 +7,20 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=gmp
+<<<<<<< HEAD
 PKG_VERSION:=6.3.0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GNU/gmp/
 PKG_HASH:=e56fd59d76810932a0555aa15a14b61c16bed66110d3c75cc2ac49ddaa9ab24c
 PKG_CPE_ID:=cpe:/a:gmplib:gmp
+=======
+PKG_VERSION:=6.2.1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@GNU/gmp/
+PKG_HASH:=fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_FIXUP:=autoreconf
 
@@ -32,8 +40,11 @@ ifeq ($(GNU_HOST_NAME),x86_64-linux-gnux32)
 HOST_CONFIGURE_ARGS += ABI=x32
 endif
 
+<<<<<<< HEAD
 define Host/Uninstall
 	-$(call Host/Compile/Default,uninstall)
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call HostBuild))

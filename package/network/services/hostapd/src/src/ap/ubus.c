@@ -11,7 +11,10 @@
 #include "utils/eloop.h"
 #include "utils/wpabuf.h"
 #include "common/ieee802_11_defs.h"
+<<<<<<< HEAD
 #include "common/hw_features_common.h"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "hostapd.h"
 #include "neighbor_db.h"
 #include "wps_hostapd.h"
@@ -22,13 +25,24 @@
 #include "rrm.h"
 #include "wnm_ap.h"
 #include "taxonomy.h"
+<<<<<<< HEAD
 #include "airtime_policy.h"
 #include "hw_features.h"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static struct ubus_context *ctx;
 static struct blob_buf b;
 static int ctx_ref;
 
+<<<<<<< HEAD
+=======
+static inline struct hapd_interfaces *get_hapd_interfaces_from_object(struct ubus_object *obj)
+{
+	return container_of(obj, struct hapd_interfaces, ubus);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static inline struct hostapd_data *get_hapd_from_object(struct ubus_object *obj)
 {
 	return container_of(obj, struct hostapd_data, ubus.obj);
@@ -39,6 +53,15 @@ struct ubus_banned_client {
 	u8 addr[ETH_ALEN];
 };
 
+<<<<<<< HEAD
+=======
+static void ubus_receive(int sock, void *eloop_ctx, void *sock_ctx)
+{
+	struct ubus_context *ctx = eloop_ctx;
+	ubus_handle_event(ctx);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void ubus_reconnect_timeout(void *eloop_data, void *user_ctx)
 {
 	if (ubus_reconnect(ctx, NULL)) {
@@ -46,12 +69,20 @@ static void ubus_reconnect_timeout(void *eloop_data, void *user_ctx)
 		return;
 	}
 
+<<<<<<< HEAD
 	ubus_add_uloop(ctx);
+=======
+	eloop_register_read_sock(ctx->sock.fd, ubus_receive, ctx, NULL);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void hostapd_ubus_connection_lost(struct ubus_context *ctx)
 {
+<<<<<<< HEAD
 	uloop_fd_delete(&ctx->sock);
+=======
+	eloop_unregister_read_sock(ctx->sock.fd);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	eloop_register_timeout(1, 0, ubus_reconnect_timeout, ctx, NULL);
 }
 
@@ -60,14 +91,21 @@ static bool hostapd_ubus_init(void)
 	if (ctx)
 		return true;
 
+<<<<<<< HEAD
 	eloop_add_uloop();
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ctx = ubus_connect(NULL);
 	if (!ctx)
 		return false;
 
 	ctx->connection_lost = hostapd_ubus_connection_lost;
+<<<<<<< HEAD
 	ubus_add_uloop(ctx);
 
+=======
+	eloop_register_read_sock(ctx->sock.fd, ubus_receive, ctx, NULL);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return true;
 }
 
@@ -85,7 +123,11 @@ static void hostapd_ubus_ref_dec(void)
 	if (ctx_ref)
 		return;
 
+<<<<<<< HEAD
 	uloop_fd_delete(&ctx->sock);
+=======
+	eloop_unregister_read_sock(ctx->sock.fd);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ubus_free(ctx);
 	ctx = NULL;
 }
@@ -118,6 +160,41 @@ static void hostapd_notify_ubus(struct ubus_object *obj, char *bssname, char *ev
 	free(event_type);
 }
 
+<<<<<<< HEAD
+=======
+static void hostapd_send_procd_event(char *bssname, char *event)
+{
+	char *name, *s;
+	uint32_t id;
+	void *v;
+
+	if (!ctx || ubus_lookup_id(ctx, "service", &id))
+		return;
+
+	if (asprintf(&name, "hostapd.%s.%s", bssname, event) < 0)
+		return;
+
+	blob_buf_init(&b, 0);
+
+	s = blobmsg_alloc_string_buffer(&b, "type", strlen(name) + 1);
+	sprintf(s, "%s", name);
+	blobmsg_add_string_buffer(&b);
+
+	v = blobmsg_open_table(&b, "data");
+	blobmsg_close_table(&b, v);
+
+	ubus_invoke(ctx, id, "event", b.head, NULL, NULL, 1000);
+
+	free(name);
+}
+
+static void hostapd_send_shared_event(struct ubus_object *obj, char *bssname, char *event)
+{
+	hostapd_send_procd_event(bssname, event);
+	hostapd_notify_ubus(obj, bssname, event);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void
 hostapd_bss_del_ban(void *eloop_data, void *user_ctx)
 {
@@ -162,8 +239,15 @@ hostapd_bss_reload(struct ubus_context *ctx, struct ubus_object *obj,
 		   struct blob_attr *msg)
 {
 	struct hostapd_data *hapd = container_of(obj, struct hostapd_data, ubus.obj);
+<<<<<<< HEAD
 
 	return hostapd_reload_config(hapd->iface);
+=======
+	int ret = hostapd_reload_config(hapd->iface, 1);
+
+	hostapd_send_shared_event(&hapd->iface->interfaces->ubus, hapd->conf->iface, "reload");
+	return ret;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 
@@ -257,7 +341,10 @@ hostapd_bss_get_clients(struct ubus_context *ctx, struct ubus_object *obj,
 		{ "wmm", WLAN_STA_WMM },
 		{ "ht", WLAN_STA_HT },
 		{ "vht", WLAN_STA_VHT },
+<<<<<<< HEAD
 		{ "he", WLAN_STA_HE },
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		{ "wps", WLAN_STA_WPS },
 		{ "mfp", WLAN_STA_MFP },
 	};
@@ -275,10 +362,13 @@ hostapd_bss_get_clients(struct ubus_context *ctx, struct ubus_object *obj,
 			blobmsg_add_u8(&b, sta_flags[i].name,
 				       !!(sta->flags & sta_flags[i].flag));
 
+<<<<<<< HEAD
 #ifdef CONFIG_MBO
 		blobmsg_add_u8(&b, "mbo", !!(sta->cell_capa));
 #endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		r = blobmsg_open_array(&b, "rrm");
 		for (i = 0; i < ARRAY_SIZE(sta->rrm_enabled_capa); i++)
 			blobmsg_add_u32(&b, "", sta->rrm_enabled_capa[i]);
@@ -347,13 +437,46 @@ hostapd_bss_get_features(struct ubus_context *ctx, struct ubus_object *obj,
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+/* Imported from iw/util.c
+ *  https://git.kernel.org/pub/scm/linux/kernel/git/jberg/iw.git/tree/util.c?id=4b25ae3537af48dbf9d0abf94132e5ba01b32c18#n200
+ */
+int ieee80211_frequency_to_channel(int freq)
+{
+	/* see 802.11-2007 17.3.8.3.2 and Annex J */
+	if (freq == 2484)
+		return 14;
+	/* see 802.11ax D6.1 27.3.23.2 and Annex E */
+	else if (freq == 5935)
+		return 2;
+	else if (freq < 2484)
+		return (freq - 2407) / 5;
+	else if (freq >= 4910 && freq <= 4980)
+		return (freq - 4000) / 5;
+	else if (freq < 5950)
+		return (freq - 5000) / 5;
+	else if (freq <= 45000) /* DMG band lower limit */
+		/* see 802.11ax D6.1 27.3.23.2 */
+		return (freq - 5950) / 5;
+	else if (freq >= 58320 && freq <= 70200)
+		return (freq - 56160) / 2160;
+	else
+		return 0;
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int
 hostapd_bss_get_status(struct ubus_context *ctx, struct ubus_object *obj,
 		       struct ubus_request_data *req, const char *method,
 		       struct blob_attr *msg)
 {
 	struct hostapd_data *hapd = container_of(obj, struct hostapd_data, ubus.obj);
+<<<<<<< HEAD
 	void *airtime_table, *dfs_table, *rrm_table, *wnm_table;
+=======
+	void *airtime_table, *dfs_table;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct os_reltime now;
 	char ssid[SSID_MAX_LEN + 1];
 	char phy_name[17];
@@ -369,7 +492,10 @@ hostapd_bss_get_status(struct ubus_context *ctx, struct ubus_object *obj,
 				      &op_class, &channel);
 
 	blob_buf_init(&b, 0);
+<<<<<<< HEAD
 	blobmsg_add_string(&b, "driver", hapd->driver->name);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	blobmsg_add_string(&b, "status", hostapd_state_text(hapd->iface->state));
 	blobmsg_printf(&b, "bssid", MACSTR, MAC2STR(hapd->conf->bssid));
 
@@ -381,16 +507,20 @@ hostapd_bss_get_status(struct ubus_context *ctx, struct ubus_object *obj,
 	blobmsg_add_u32(&b, "channel", channel);
 	blobmsg_add_u32(&b, "op_class", op_class);
 	blobmsg_add_u32(&b, "beacon_interval", hapd->iconf->beacon_int);
+<<<<<<< HEAD
 #ifdef CONFIG_IEEE80211AX
 	blobmsg_add_u32(&b, "bss_color", hapd->iface->conf->he_op.he_bss_color_disabled ? -1 :
 					 hapd->iface->conf->he_op.he_bss_color);
 #else
 	blobmsg_add_u32(&b, "bss_color", -1);
 #endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	snprintf(phy_name, 17, "%s", hapd->iface->phy);
 	blobmsg_add_string(&b, "phy", phy_name);
 
+<<<<<<< HEAD
 	/* RRM */
 	rrm_table = blobmsg_open_table(&b, "rrm");
 	blobmsg_add_u64(&b, "neighbor_report_tx", hapd->openwrt_stats.rrm.neighbor_report_tx);
@@ -403,6 +533,8 @@ hostapd_bss_get_status(struct ubus_context *ctx, struct ubus_object *obj,
 	blobmsg_add_u64(&b, "bss_transition_response_rx", hapd->openwrt_stats.wnm.bss_transition_response_rx);
 	blobmsg_close_table(&b, wnm_table);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	/* Airtime */
 	airtime_table = blobmsg_open_table(&b, "airtime");
 	blobmsg_add_u64(&b, "time", hapd->iface->last_channel_time);
@@ -645,6 +777,71 @@ enum {
 	__CONFIG_MAX
 };
 
+<<<<<<< HEAD
+=======
+static const struct blobmsg_policy config_add_policy[__CONFIG_MAX] = {
+	[CONFIG_IFACE] = { "iface", BLOBMSG_TYPE_STRING },
+	[CONFIG_FILE] = { "config", BLOBMSG_TYPE_STRING },
+};
+
+static int
+hostapd_config_add(struct ubus_context *ctx, struct ubus_object *obj,
+		   struct ubus_request_data *req, const char *method,
+		   struct blob_attr *msg)
+{
+	struct blob_attr *tb[__CONFIG_MAX];
+	struct hapd_interfaces *interfaces = get_hapd_interfaces_from_object(obj);
+	char buf[128];
+
+	blobmsg_parse(config_add_policy, __CONFIG_MAX, tb, blob_data(msg), blob_len(msg));
+
+	if (!tb[CONFIG_FILE] || !tb[CONFIG_IFACE])
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	snprintf(buf, sizeof(buf), "bss_config=%s:%s",
+		blobmsg_get_string(tb[CONFIG_IFACE]),
+		blobmsg_get_string(tb[CONFIG_FILE]));
+
+	if (hostapd_add_iface(interfaces, buf))
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	blob_buf_init(&b, 0);
+	blobmsg_add_u32(&b, "pid", getpid());
+	ubus_send_reply(ctx, req, b.head);
+
+	return UBUS_STATUS_OK;
+}
+
+enum {
+	CONFIG_REM_IFACE,
+	__CONFIG_REM_MAX
+};
+
+static const struct blobmsg_policy config_remove_policy[__CONFIG_REM_MAX] = {
+	[CONFIG_REM_IFACE] = { "iface", BLOBMSG_TYPE_STRING },
+};
+
+static int
+hostapd_config_remove(struct ubus_context *ctx, struct ubus_object *obj,
+		      struct ubus_request_data *req, const char *method,
+		      struct blob_attr *msg)
+{
+	struct blob_attr *tb[__CONFIG_REM_MAX];
+	struct hapd_interfaces *interfaces = get_hapd_interfaces_from_object(obj);
+	char buf[128];
+
+	blobmsg_parse(config_remove_policy, __CONFIG_REM_MAX, tb, blob_data(msg), blob_len(msg));
+
+	if (!tb[CONFIG_REM_IFACE])
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	if (hostapd_remove_iface(interfaces, blobmsg_get_string(tb[CONFIG_REM_IFACE])))
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	return UBUS_STATUS_OK;
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 enum {
 	CSA_FREQ,
 	CSA_BCN_COUNT,
@@ -654,9 +851,13 @@ enum {
 	CSA_SEC_CHANNEL_OFFSET,
 	CSA_HT,
 	CSA_VHT,
+<<<<<<< HEAD
 	CSA_HE,
 	CSA_BLOCK_TX,
 	CSA_FORCE,
+=======
+	CSA_BLOCK_TX,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	__CSA_MAX
 };
 
@@ -669,6 +870,7 @@ static const struct blobmsg_policy csa_policy[__CSA_MAX] = {
 	[CSA_SEC_CHANNEL_OFFSET] = { "sec_channel_offset", BLOBMSG_TYPE_INT32 },
 	[CSA_HT] = { "ht", BLOBMSG_TYPE_BOOL },
 	[CSA_VHT] = { "vht", BLOBMSG_TYPE_BOOL },
+<<<<<<< HEAD
 	[CSA_HE] = { "he", BLOBMSG_TYPE_BOOL },
 	[CSA_BLOCK_TX] = { "block_tx", BLOBMSG_TYPE_BOOL },
 	[CSA_FORCE] = { "force", BLOBMSG_TYPE_BOOL },
@@ -683,6 +885,11 @@ static void switch_chan_fallback_cb(void *eloop_data, void *user_ctx)
 	hostapd_switch_channel_fallback(iface, freq_params);
 }
 
+=======
+	[CSA_BLOCK_TX] = { "block_tx", BLOBMSG_TYPE_BOOL },
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef NEED_AP_MLME
 static int
 hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
@@ -691,6 +898,7 @@ hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
 {
 	struct blob_attr *tb[__CSA_MAX];
 	struct hostapd_data *hapd = get_hapd_from_object(obj);
+<<<<<<< HEAD
 	struct hostapd_config *iconf = hapd->iface->conf;
 	struct hostapd_freq_params *freq_params;
 	struct hostapd_hw_modes *mode = hapd->iface->current_mode;
@@ -706,12 +914,16 @@ hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
 	u8 seg0 = 0, seg1 = 0;
 	int ret = UBUS_STATUS_OK;
 	int i;
+=======
+	struct csa_settings css;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	blobmsg_parse(csa_policy, __CSA_MAX, tb, blob_data(msg), blob_len(msg));
 
 	if (!tb[CSA_FREQ])
 		return UBUS_STATUS_INVALID_ARGUMENT;
 
+<<<<<<< HEAD
 	switch (iconf->vht_oper_chwidth) {
 	case CHANWIDTH_USE_HT:
 		if (iconf->secondary_channel)
@@ -727,6 +939,9 @@ hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
 		break;
 	}
 
+=======
+	memset(&css, 0, sizeof(css));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	css.freq_params.freq = blobmsg_get_u32(tb[CSA_FREQ]);
 
 #define SET_CSA_SETTING(name, field, type) \
@@ -742,6 +957,7 @@ hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
 	SET_CSA_SETTING(CSA_SEC_CHANNEL_OFFSET, freq_params.sec_channel_offset, u32);
 	SET_CSA_SETTING(CSA_HT, freq_params.ht_enabled, bool);
 	SET_CSA_SETTING(CSA_VHT, freq_params.vht_enabled, bool);
+<<<<<<< HEAD
 	SET_CSA_SETTING(CSA_HE, freq_params.he_enabled, bool);
 	SET_CSA_SETTING(CSA_BLOCK_TX, block_tx, bool);
 
@@ -794,6 +1010,14 @@ hostapd_switch_chan(struct ubus_context *ctx, struct ubus_object *obj,
 			       hapd->iface, freq_params);
 
 	return 0;
+=======
+	SET_CSA_SETTING(CSA_BLOCK_TX, block_tx, bool);
+
+
+	if (hostapd_switch_channel(hapd, &css) != 0)
+		return UBUS_STATUS_NOT_SUPPORTED;
+	return UBUS_STATUS_OK;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #undef SET_CSA_SETTING
 }
 #endif
@@ -981,8 +1205,11 @@ hostapd_bss_mgmt_enable(struct ubus_context *ctx, struct ubus_object *obj,
 	}
 
 	__hostapd_bss_mgmt_enable(hapd, flags);
+<<<<<<< HEAD
 
 	return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 
@@ -1135,7 +1362,11 @@ hostapd_rrm_nr_set(struct ubus_context *ctx, struct ubus_object *obj,
 			memcpy(&ssid, s, ssid.ssid_len);
 		}
 
+<<<<<<< HEAD
 		hostapd_neighbor_set(hapd, bssid, &ssid, data, NULL, NULL, 0, 0);
+=======
+		hostapd_neighbor_set(hapd, bssid, &ssid, data, NULL, NULL, 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		wpabuf_free(data);
 		continue;
 
@@ -1330,8 +1561,12 @@ void hostapd_ubus_handle_link_measurement(struct hostapd_data *hapd, const u8 *d
 
 static int
 hostapd_bss_tr_send(struct hostapd_data *hapd, u8 *addr, bool disassoc_imminent, bool abridged,
+<<<<<<< HEAD
 		    u16 disassoc_timer, u8 validity_period, u8 dialog_token,
 		    struct blob_attr *neighbors, u8 mbo_reason, u8 cell_pref, u8 reassoc_delay)
+=======
+		    u16 disassoc_timer, u8 validity_period, struct blob_attr *neighbors)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct blob_attr *cur;
 	struct sta_info *sta;
@@ -1339,8 +1574,11 @@ hostapd_bss_tr_send(struct hostapd_data *hapd, u8 *addr, bool disassoc_imminent,
 	int rem;
 	u8 *nr = NULL;
 	u8 req_mode = 0;
+<<<<<<< HEAD
 	u8 mbo[10];
 	size_t mbo_len = 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	sta = ap_get_sta(hapd, addr);
 	if (!sta)
@@ -1392,6 +1630,7 @@ hostapd_bss_tr_send(struct hostapd_data *hapd, u8 *addr, bool disassoc_imminent,
 	if (disassoc_imminent)
 		req_mode |= WNM_BSS_TM_REQ_DISASSOC_IMMINENT;
 
+<<<<<<< HEAD
 #ifdef CONFIG_MBO
 	u8 *mbo_pos = mbo;
 
@@ -1423,6 +1662,10 @@ hostapd_bss_tr_send(struct hostapd_data *hapd, u8 *addr, bool disassoc_imminent,
 
 	if (wnm_send_bss_tm_req(hapd, sta, req_mode, disassoc_timer, validity_period, NULL,
 				dialog_token, NULL, nr, nr_len, mbo_len ? mbo : NULL, mbo_len))
+=======
+	if (wnm_send_bss_tm_req(hapd, sta, req_mode, disassoc_timer, validity_period, NULL,
+				NULL, nr, nr_len, NULL, 0))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		return UBUS_STATUS_UNKNOWN_ERROR;
 
 	return 0;
@@ -1435,12 +1678,15 @@ enum {
 	BSS_TR_VALID_PERIOD,
 	BSS_TR_NEIGHBORS,
 	BSS_TR_ABRIDGED,
+<<<<<<< HEAD
 	BSS_TR_DIALOG_TOKEN,
 #ifdef CONFIG_MBO
 	BSS_TR_MBO_REASON,
 	BSS_TR_CELL_PREF,
 	BSS_TR_REASSOC_DELAY,
 #endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	__BSS_TR_DISASSOC_MAX
 };
 
@@ -1451,12 +1697,15 @@ static const struct blobmsg_policy bss_tr_policy[__BSS_TR_DISASSOC_MAX] = {
 	[BSS_TR_VALID_PERIOD] = { "validity_period", BLOBMSG_TYPE_INT32 },
 	[BSS_TR_NEIGHBORS] = { "neighbors", BLOBMSG_TYPE_ARRAY },
 	[BSS_TR_ABRIDGED] = { "abridged", BLOBMSG_TYPE_BOOL },
+<<<<<<< HEAD
 	[BSS_TR_DIALOG_TOKEN] = { "dialog_token", BLOBMSG_TYPE_INT32 },
 #ifdef CONFIG_MBO
 	[BSS_TR_MBO_REASON] = { "mbo_reason", BLOBMSG_TYPE_INT32 },
 	[BSS_TR_CELL_PREF] = { "cell_pref", BLOBMSG_TYPE_INT32 },
 	[BSS_TR_REASSOC_DELAY] = { "reassoc_delay", BLOBMSG_TYPE_INT32 },
 #endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 static int
@@ -1470,12 +1719,17 @@ hostapd_bss_transition_request(struct ubus_context *ctx, struct ubus_object *obj
 	u32 da_timer = 0;
 	u32 valid_period = 0;
 	u8 addr[ETH_ALEN];
+<<<<<<< HEAD
 	u32 dialog_token = 1;
 	bool abridged;
 	bool da_imminent;
 	u8 mbo_reason;
 	u8 cell_pref;
 	u8 reassoc_delay;
+=======
+	bool abridged;
+	bool da_imminent;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	blobmsg_parse(bss_tr_policy, __BSS_TR_DISASSOC_MAX, tb, blob_data(msg), blob_len(msg));
 
@@ -1491,6 +1745,7 @@ hostapd_bss_transition_request(struct ubus_context *ctx, struct ubus_object *obj
 	if (tb[BSS_TR_VALID_PERIOD])
 		valid_period = blobmsg_get_u32(tb[BSS_TR_VALID_PERIOD]);
 
+<<<<<<< HEAD
 	if (tb[BSS_TR_DIALOG_TOKEN])
 		dialog_token = blobmsg_get_u32(tb[BSS_TR_DIALOG_TOKEN]);
 
@@ -1626,6 +1881,65 @@ static const struct ubus_method bss_methods[] = {
 #ifdef CONFIG_AIRTIME_POLICY
 	UBUS_METHOD("update_airtime", hostapd_bss_update_airtime, airtime_policy),
 #endif
+=======
+	da_imminent = !!(tb[BSS_TR_DA_IMMINENT] && blobmsg_get_bool(tb[BSS_TR_DA_IMMINENT]));
+	abridged = !!(tb[BSS_TR_ABRIDGED] && blobmsg_get_bool(tb[BSS_TR_ABRIDGED]));
+
+	return hostapd_bss_tr_send(hapd, addr, da_imminent, abridged, da_timer, valid_period,
+				   tb[BSS_TR_NEIGHBORS]);
+}
+
+enum {
+	WNM_DISASSOC_ADDR,
+	WNM_DISASSOC_DURATION,
+	WNM_DISASSOC_NEIGHBORS,
+	WNM_DISASSOC_ABRIDGED,
+	__WNM_DISASSOC_MAX,
+};
+
+static const struct blobmsg_policy wnm_disassoc_policy[__WNM_DISASSOC_MAX] = {
+	[WNM_DISASSOC_ADDR] = { "addr", BLOBMSG_TYPE_STRING },
+	[WNM_DISASSOC_DURATION] { "duration", BLOBMSG_TYPE_INT32 },
+	[WNM_DISASSOC_NEIGHBORS] { "neighbors", BLOBMSG_TYPE_ARRAY },
+	[WNM_DISASSOC_ABRIDGED] { "abridged", BLOBMSG_TYPE_BOOL },
+};
+
+static int
+hostapd_wnm_disassoc_imminent(struct ubus_context *ctx, struct ubus_object *obj,
+			      struct ubus_request_data *ureq, const char *method,
+			      struct blob_attr *msg)
+{
+	struct hostapd_data *hapd = container_of(obj, struct hostapd_data, ubus.obj);
+	struct blob_attr *tb[__WNM_DISASSOC_MAX];
+	struct sta_info *sta;
+	int duration = 10;
+	u8 addr[ETH_ALEN];
+	bool abridged;
+
+	blobmsg_parse(wnm_disassoc_policy, __WNM_DISASSOC_MAX, tb, blob_data(msg), blob_len(msg));
+
+	if (!tb[WNM_DISASSOC_ADDR])
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	if (hwaddr_aton(blobmsg_data(tb[WNM_DISASSOC_ADDR]), addr))
+		return UBUS_STATUS_INVALID_ARGUMENT;
+
+	if (tb[WNM_DISASSOC_DURATION])
+		duration = blobmsg_get_u32(tb[WNM_DISASSOC_DURATION]);
+
+	abridged = !!(tb[WNM_DISASSOC_ABRIDGED] && blobmsg_get_bool(tb[WNM_DISASSOC_ABRIDGED]));
+
+	return hostapd_bss_tr_send(hapd, addr, true, abridged, duration, duration,
+				   tb[WNM_DISASSOC_NEIGHBORS]);
+}
+#endif
+
+static const struct ubus_method bss_methods[] = {
+	UBUS_METHOD_NOARG("reload", hostapd_bss_reload),
+	UBUS_METHOD_NOARG("get_clients", hostapd_bss_get_clients),
+	UBUS_METHOD_NOARG("get_status", hostapd_bss_get_status),
+	UBUS_METHOD("del_client", hostapd_bss_del_client, del_policy),
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	UBUS_METHOD_NOARG("list_bans", hostapd_bss_list_bans),
 #ifdef CONFIG_WPS
 	UBUS_METHOD_NOARG("wps_start", hostapd_bss_wps_start),
@@ -1646,6 +1960,10 @@ static const struct ubus_method bss_methods[] = {
 	UBUS_METHOD("rrm_beacon_req", hostapd_rrm_beacon_req, beacon_req_policy),
 	UBUS_METHOD("link_measurement_req", hostapd_rrm_lm_req, lm_req_policy),
 #ifdef CONFIG_WNM_AP
+<<<<<<< HEAD
+=======
+	UBUS_METHOD("wnm_disassoc_imminent", hostapd_wnm_disassoc_imminent, wnm_disassoc_policy),
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	UBUS_METHOD("bss_transition_request", hostapd_bss_transition_request, bss_tr_policy),
 #endif
 };
@@ -1658,6 +1976,7 @@ static int avl_compare_macaddr(const void *k1, const void *k2, void *ptr)
 	return memcmp(k1, k2, ETH_ALEN);
 }
 
+<<<<<<< HEAD
 static int
 hostapd_wired_get_clients(struct ubus_context *ctx, struct ubus_object *obj,
 			  struct ubus_request_data *req, const char *method,
@@ -1737,6 +2056,8 @@ static const struct ubus_method wired_methods[] = {
 static struct ubus_object_type wired_object_type =
 	UBUS_OBJECT_TYPE("hostapd_wired", wired_methods);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void hostapd_ubus_add_bss(struct hostapd_data *hapd)
 {
 	struct ubus_object *obj = &hapd->ubus.obj;
@@ -1756,6 +2077,7 @@ void hostapd_ubus_add_bss(struct hostapd_data *hapd)
 
 	avl_init(&hapd->ubus.banned, avl_compare_macaddr, false, NULL);
 	obj->name = name;
+<<<<<<< HEAD
 	if (!strcmp(hapd->driver->name, "wired")) {
 		obj->type = &wired_object_type;
 		obj->methods = wired_object_type.methods;
@@ -1767,6 +2089,15 @@ void hostapd_ubus_add_bss(struct hostapd_data *hapd)
 	}
 	ret = ubus_add_object(ctx, obj);
 	hostapd_ubus_ref_inc();
+=======
+	obj->type = &bss_object_type;
+	obj->methods = bss_object_type.methods;
+	obj->n_methods = bss_object_type.n_methods;
+	ret = ubus_add_object(ctx, obj);
+	hostapd_ubus_ref_inc();
+
+	hostapd_send_shared_event(&hapd->iface->interfaces->ubus, hapd->conf->iface, "add");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void hostapd_ubus_free_bss(struct hostapd_data *hapd)
@@ -1782,6 +2113,11 @@ void hostapd_ubus_free_bss(struct hostapd_data *hapd)
 	if (!ctx)
 		return;
 
+<<<<<<< HEAD
+=======
+	hostapd_send_shared_event(&hapd->iface->interfaces->ubus, hapd->conf->iface, "remove");
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (obj->id) {
 		ubus_remove_object(ctx, obj);
 		hostapd_ubus_ref_dec();
@@ -1790,6 +2126,7 @@ void hostapd_ubus_free_bss(struct hostapd_data *hapd)
 	free(name);
 }
 
+<<<<<<< HEAD
 static void
 hostapd_ubus_vlan_action(struct hostapd_data *hapd, struct hostapd_vlan *vlan,
 			 const char *action)
@@ -1825,6 +2162,47 @@ void hostapd_ubus_add_vlan(struct hostapd_data *hapd, struct hostapd_vlan *vlan)
 void hostapd_ubus_remove_vlan(struct hostapd_data *hapd, struct hostapd_vlan *vlan)
 {
 	hostapd_ubus_vlan_action(hapd, vlan, "vlan_remove");
+=======
+static const struct ubus_method daemon_methods[] = {
+	UBUS_METHOD("config_add", hostapd_config_add, config_add_policy),
+	UBUS_METHOD("config_remove", hostapd_config_remove, config_remove_policy),
+};
+
+static struct ubus_object_type daemon_object_type =
+	UBUS_OBJECT_TYPE("hostapd", daemon_methods);
+
+void hostapd_ubus_add(struct hapd_interfaces *interfaces)
+{
+	struct ubus_object *obj = &interfaces->ubus;
+	int ret;
+
+	if (!hostapd_ubus_init())
+		return;
+
+	obj->name = strdup("hostapd");
+
+	obj->type = &daemon_object_type;
+	obj->methods = daemon_object_type.methods;
+	obj->n_methods = daemon_object_type.n_methods;
+	ret = ubus_add_object(ctx, obj);
+	hostapd_ubus_ref_inc();
+}
+
+void hostapd_ubus_free(struct hapd_interfaces *interfaces)
+{
+	struct ubus_object *obj = &interfaces->ubus;
+	char *name = (char *) obj->name;
+
+	if (!ctx)
+		return;
+
+	if (obj->id) {
+		ubus_remove_object(ctx, obj);
+		hostapd_ubus_ref_dec();
+	}
+
+	free(name);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 struct ubus_event_req {
@@ -1869,7 +2247,10 @@ int hostapd_ubus_handle_event(struct hostapd_data *hapd, struct hostapd_ubus_req
 
 	blob_buf_init(&b, 0);
 	blobmsg_add_macaddr(&b, "address", addr);
+<<<<<<< HEAD
 	blobmsg_add_string(&b, "ifname", hapd->conf->iface);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (req->mgmt_frame)
 		blobmsg_add_macaddr(&b, "target", req->mgmt_frame->da);
 	if (req->ssi_signal)
@@ -1944,11 +2325,15 @@ void hostapd_ubus_notify(struct hostapd_data *hapd, const char *type, const u8 *
 
 	blob_buf_init(&b, 0);
 	blobmsg_add_macaddr(&b, "address", addr);
+<<<<<<< HEAD
 	blobmsg_add_string(&b, "ifname", hapd->conf->iface);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	ubus_notify(ctx, &hapd->ubus.obj, type, b.head, -1);
 }
 
+<<<<<<< HEAD
 void hostapd_ubus_notify_authorized(struct hostapd_data *hapd, struct sta_info *sta,
 				    const char *auth_alg)
 {
@@ -1973,6 +2358,8 @@ void hostapd_ubus_notify_authorized(struct hostapd_data *hapd, struct sta_info *
 	ubus_notify(ctx, &hapd->ubus.obj, "sta-authorized", b.head, -1);
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void hostapd_ubus_notify_beacon_report(
 	struct hostapd_data *hapd, const u8 *addr, u8 token, u8 rep_mode,
 	struct rrm_measurement_beacon_report *rep, size_t len)
@@ -1995,11 +2382,15 @@ void hostapd_ubus_notify_beacon_report(
 	blobmsg_add_macaddr(&b, "bssid", rep->bssid);
 	blobmsg_add_u16(&b, "antenna-id", rep->antenna_id);
 	blobmsg_add_u16(&b, "parent-tsf", rep->parent_tsf);
+<<<<<<< HEAD
 	blobmsg_add_u16(&b, "rep-mode", rep_mode);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	ubus_notify(ctx, &hapd->ubus.obj, "beacon-report", b.head, -1);
 }
 
+<<<<<<< HEAD
 void hostapd_ubus_notify_radar_detected(struct hostapd_iface *iface, int frequency,
 					int chan_width, int cf1, int cf2)
 {
@@ -2039,12 +2430,18 @@ static void hostapd_ubus_notify_bss_transition_add_candidate_list(
 }
 #endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void hostapd_ubus_notify_bss_transition_response(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 status_code,
 	u8 bss_termination_delay, const u8 *target_bssid,
 	const u8 *candidate_list, u16 candidate_list_len)
 {
 #ifdef CONFIG_WNM_AP
+<<<<<<< HEAD
+=======
+	char *cl_str;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	u16 i;
 
 	if (!hapd->ubus.obj.has_subscribers)
@@ -2060,12 +2457,22 @@ void hostapd_ubus_notify_bss_transition_response(
 	blobmsg_add_u8(&b, "bss-termination-delay", bss_termination_delay);
 	if (target_bssid)
 		blobmsg_add_macaddr(&b, "target-bssid", target_bssid);
+<<<<<<< HEAD
 	
 	hostapd_ubus_notify_bss_transition_add_candidate_list(candidate_list, candidate_list_len);
+=======
+	if (candidate_list_len > 0) {
+		cl_str = blobmsg_alloc_string_buffer(&b, "candidate-list", candidate_list_len * 2 + 1);
+		for (i = 0; i < candidate_list_len; i++)
+			snprintf(&cl_str[i*2], 3, "%02X", candidate_list[i]);
+		blobmsg_add_string_buffer(&b);
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	ubus_notify(ctx, &hapd->ubus.obj, "bss-transition-response", b.head, -1);
 #endif
 }
+<<<<<<< HEAD
 
 int hostapd_ubus_notify_bss_transition_query(
 	struct hostapd_data *hapd, const u8 *addr, u8 dialog_token, u8 reason,
@@ -2130,3 +2537,5 @@ void hostapd_ubus_notify_csa(struct hostapd_data *hapd, int freq)
 
 	ubus_notify(ctx, &hapd->ubus.obj, "channel-switch", b.head, -1);
 }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -33,6 +33,7 @@ endef
 $(eval $(call KernelPackage,skge))
 
 
+<<<<<<< HEAD
 define KernelPackage/ag71xx
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Atheros AR7XXX/AR9XXX ethernet mac support
@@ -60,6 +61,8 @@ endef
 $(eval $(call KernelPackage,ag71xx-legacy))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/alx
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Qualcomm Atheros AR816x/AR817x PCI-E Ethernet Network Driver
@@ -123,8 +126,12 @@ $(eval $(call KernelPackage,atl1e))
 define KernelPackage/libphy
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=PHY library
+<<<<<<< HEAD
   KCONFIG:=CONFIG_PHYLIB \
 	   CONFIG_PHYLIB_LEDS=y
+=======
+  KCONFIG:=CONFIG_PHYLIB
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/net/phy/libphy.ko
   AUTOLOAD:=$(call AutoLoad,15,libphy,1)
 endef
@@ -139,7 +146,10 @@ $(eval $(call KernelPackage,libphy))
 define KernelPackage/phylink
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Model for MAC to optional PHY connection
+<<<<<<< HEAD
   DEPENDS:=+kmod-libphy
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_PHYLINK
   FILES:=$(LINUX_DIR)/drivers/net/phy/phylink.ko
   AUTOLOAD:=$(call AutoLoad,15,phylink,1)
@@ -167,6 +177,7 @@ endef
 $(eval $(call KernelPackage,mii))
 
 
+<<<<<<< HEAD
 define KernelPackage/mdio-devres
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Supports MDIO device registration
@@ -188,12 +199,23 @@ define KernelPackage/mdio-gpio
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:= Supports GPIO lib-based MDIO busses
   DEPENDS:=+kmod-libphy @GPIO_SUPPORT +(TARGET_armsr||TARGET_bcm27xx_bcm2708||TARGET_loongarch64||TARGET_malta||TARGET_tegra):kmod-of-mdio
+=======
+define KernelPackage/mdio-gpio
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:= Supports GPIO lib-based MDIO busses
+  DEPENDS:=+kmod-libphy @GPIO_SUPPORT +(TARGET_armvirt||TARGET_bcm27xx_bcm2708||TARGET_tegra):kmod-of-mdio
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= \
 	CONFIG_MDIO_BITBANG \
 	CONFIG_MDIO_GPIO
   FILES:= \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/net/mdio/mdio-gpio.ko \
 	$(LINUX_DIR)/drivers/net/mdio/mdio-bitbang.ko
+=======
+	$(LINUX_DIR)/drivers/net/phy/mdio-gpio.ko \
+	$(LINUX_DIR)/drivers/net/phy/mdio-bitbang.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,mdio-gpio)
 endef
 
@@ -223,6 +245,7 @@ endef
 
 $(eval $(call KernelPackage,et131x))
 
+<<<<<<< HEAD
 define KernelPackage/phy-microchip
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=Microchip Ethernet PHY driver
@@ -238,6 +261,8 @@ endef
 
 $(eval $(call KernelPackage,phy-microchip))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/phylib-broadcom
    SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -252,6 +277,7 @@ endef
 $(eval $(call KernelPackage,phylib-broadcom))
 
 
+<<<<<<< HEAD
 define KernelPackage/phylib-qcom
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=Qualcomm Ethernet PHY library
@@ -310,6 +336,8 @@ endef
 $(eval $(call KernelPackage,phy-ax88796b))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/phy-broadcom
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=Broadcom Ethernet PHY driver
@@ -343,6 +371,7 @@ endef
 $(eval $(call KernelPackage,phy-bcm84881))
 
 
+<<<<<<< HEAD
 define KernelPackage/phy-intel-xway
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=Intel XWAY PHYs
@@ -443,14 +472,22 @@ endef
 
 $(eval $(call KernelPackage,phy-micrel))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/phy-realtek
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=Realtek Ethernet PHY driver
+<<<<<<< HEAD
    KCONFIG:=CONFIG_REALTEK_PHY \
     CONFIG_REALTEK_PHY_HWMON=y
    DEPENDS:=+kmod-libphy +kmod-hwmon-core
    FILES:=$(LINUX_DIR)/drivers/net/phy/realtek/realtek.ko
+=======
+   KCONFIG:=CONFIG_REALTEK_PHY
+   DEPENDS:=+kmod-libphy
+   FILES:=$(LINUX_DIR)/drivers/net/phy/realtek.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
    AUTOLOAD:=$(call AutoLoad,18,realtek,1)
 endef
 
@@ -461,6 +498,7 @@ endef
 $(eval $(call KernelPackage,phy-realtek))
 
 
+<<<<<<< HEAD
 define KernelPackage/phy-smsc
    SUBMENU:=$(NETWORK_DEVICES_MENU)
    TITLE:=SMSC PHY driver
@@ -696,12 +734,18 @@ endef
 $(eval $(call KernelPackage,dsa-rtl8365mb))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/swconfig
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=switch configuration API
   DEPENDS:=+kmod-libphy
+<<<<<<< HEAD
   KCONFIG:=CONFIG_SWCONFIG \
 	   CONFIG_SWCONFIG_LEDS=y
+=======
+  KCONFIG:=CONFIG_SWCONFIG
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/net/phy/swconfig.ko
   AUTOLOAD:=$(call AutoLoad,41,swconfig)
 endef
@@ -712,6 +756,39 @@ endef
 
 $(eval $(call KernelPackage,swconfig))
 
+<<<<<<< HEAD
+=======
+define KernelPackage/switch-bcm53xx
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Broadcom bcm53xx switch support
+  DEPENDS:=+kmod-swconfig
+  KCONFIG:=CONFIG_SWCONFIG_B53
+  FILES:=$(LINUX_DIR)/drivers/net/phy/b53/b53_common.ko
+  AUTOLOAD:=$(call AutoLoad,42,b53_common)
+endef
+
+define KernelPackage/switch-bcm53xx/description
+  Broadcom bcm53xx switch support
+endef
+
+$(eval $(call KernelPackage,switch-bcm53xx))
+
+define KernelPackage/switch-bcm53xx-mdio
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Broadcom bcm53xx switch MDIO support
+  DEPENDS:=+kmod-switch-bcm53xx
+  KCONFIG:=CONFIG_SWCONFIG_B53_PHY_DRIVER
+  FILES:=$(LINUX_DIR)/drivers/net/phy/b53/b53_mdio.ko
+  AUTOLOAD:=$(call AutoLoad,42,b53_mdio)
+endef
+
+define KernelPackage/switch-bcm53xx-mdio/description
+  Broadcom bcm53xx switch MDIO support
+endef
+
+$(eval $(call KernelPackage,switch-bcm53xx-mdio))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/switch-ip17xx
   SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -748,7 +825,11 @@ $(eval $(call KernelPackage,switch-rtl8306))
 define KernelPackage/switch-rtl8366-smi
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Realtek RTL8366 SMI switch interface support
+<<<<<<< HEAD
   DEPENDS:=@GPIO_SUPPORT +kmod-swconfig +(TARGET_armsr||TARGET_bcm27xx_bcm2708||TARGET_loongarch64||TARGET_malta||TARGET_tegra):kmod-of-mdio
+=======
+  DEPENDS:=@GPIO_SUPPORT +kmod-swconfig +(TARGET_armvirt||TARGET_bcm27xx_bcm2708||TARGET_tegra):kmod-of-mdio
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_RTL8366_SMI
   FILES:=$(LINUX_DIR)/drivers/net/phy/rtl8366_smi.ko
   AUTOLOAD:=$(call AutoLoad,42,rtl8366_smi,1)
@@ -767,7 +848,11 @@ define KernelPackage/switch-rtl8366rb
   DEPENDS:=+kmod-switch-rtl8366-smi
   KCONFIG:=CONFIG_RTL8366RB_PHY
   FILES:=$(LINUX_DIR)/drivers/net/phy/rtl8366rb.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,43,rtl8366rb,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,43,rtl8366rb)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/switch-rtl8366rb/description
@@ -783,7 +868,11 @@ define KernelPackage/switch-rtl8366s
   DEPENDS:=+kmod-switch-rtl8366-smi
   KCONFIG:=CONFIG_RTL8366S_PHY
   FILES:=$(LINUX_DIR)/drivers/net/phy/rtl8366s.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,43,rtl8366s,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,43,rtl8366s)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/switch-rtl8366s/description
@@ -793,6 +882,7 @@ endef
 $(eval $(call KernelPackage,switch-rtl8366s))
 
 
+<<<<<<< HEAD
 define KernelPackage/switch-rtl8367
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Realtek RTL8367 switch support
@@ -809,6 +899,8 @@ endef
 $(eval $(call KernelPackage,switch-rtl8367))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/switch-rtl8367b
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Realtek RTL8367R/B switch support
@@ -825,6 +917,7 @@ endef
 $(eval $(call KernelPackage,switch-rtl8367b))
 
 
+<<<<<<< HEAD
 define KernelPackage/switch-ar8xxx
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Atheros AR8216/8327 switch support
@@ -842,6 +935,8 @@ endef
 $(eval $(call KernelPackage,switch-ar8xxx))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/natsemi
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=National Semiconductor DP8381x series
@@ -876,6 +971,7 @@ endef
 $(eval $(call KernelPackage,r6040))
 
 
+<<<<<<< HEAD
 define KernelPackage/rmnet
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=RmNet MAP support
@@ -893,6 +989,8 @@ endef
 $(eval $(call KernelPackage,rmnet))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/niu
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Sun Neptune 10Gbit Ethernet support
@@ -1019,10 +1117,17 @@ $(eval $(call KernelPackage,8139cp))
 define KernelPackage/r8169
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=RealTek RTL-8169 PCI Gigabit Ethernet Adapter kernel support
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-mii +r8169-firmware +kmod-phy-realtek +kmod-mdio-devres
   KCONFIG:= \
     CONFIG_R8169 \
     CONFIG_R8169_LEDS=y
+=======
+  DEPENDS:=@PCI_SUPPORT +kmod-mii +r8169-firmware +kmod-phy-realtek
+  KCONFIG:=CONFIG_R8169 \
+    CONFIG_R8169_NAPI=y \
+    CONFIG_R8169_VLAN=n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/realtek/r8169.ko
   AUTOLOAD:=$(call AutoProbe,r8169)
 endef
@@ -1113,7 +1218,11 @@ define KernelPackage/igb
     CONFIG_IGB_HWMON=y \
     CONFIG_IGB_DCA=n
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igb/igb.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,35,igb,1)
+=======
+  AUTOLOAD:=$(call AutoLoad,35,igb)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/igb/description
@@ -1144,7 +1253,11 @@ $(eval $(call KernelPackage,igbvf))
 define KernelPackage/ixgbe
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Intel(R) 82598/82599 PCI-Express 10 Gigabit Ethernet support
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-mdio +kmod-ptp +kmod-hwmon-core +kmod-libphy +kmod-mdio-devres
+=======
+  DEPENDS:=@PCI_SUPPORT +kmod-mdio +kmod-ptp +kmod-hwmon-core +kmod-libphy
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_IXGBE \
     CONFIG_IXGBE_VXLAN=n \
     CONFIG_IXGBE_HWMON=y \
@@ -1278,7 +1391,11 @@ define KernelPackage/tg3
   TITLE:=Broadcom Tigon3 Gigabit Ethernet
   KCONFIG:=CONFIG_TIGON3 \
 	CONFIG_TIGON3_HWMON=n
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +!TARGET_bcm47xx:kmod-libphy +kmod-ptp
+=======
+  DEPENDS:=+!TARGET_bcm47xx:kmod-libphy +kmod-ptp
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/broadcom/tg3.ko
   AUTOLOAD:=$(call AutoLoad,19,tg3,1)
@@ -1294,7 +1411,11 @@ $(eval $(call KernelPackage,tg3))
 define KernelPackage/hfcpci
   TITLE:=HFC PCI cards (single port) support for mISDN
   KCONFIG:=CONFIG_MISDN_HFCPCI
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-misdn
+=======
+  DEPENDS:=+kmod-misdn
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   FILES:=$(LINUX_DIR)/drivers/isdn/hardware/mISDN/hfcpci.ko
   AUTOLOAD:=$(call AutoLoad,31,hfcpci)
@@ -1311,7 +1432,11 @@ $(eval $(call KernelPackage,hfcpci))
 define KernelPackage/hfcmulti
   TITLE:=HFC multiport cards (HFC-4S/8S/E1) support for mISDN
   KCONFIG:=CONFIG_MISDN_HFCMULTI
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-misdn
+=======
+  DEPENDS:=+kmod-misdn
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   FILES:=$(LINUX_DIR)/drivers/isdn/hardware/mISDN/hfcmulti.ko
   AUTOLOAD:=$(call AutoLoad,31,hfcmulti)
@@ -1341,6 +1466,7 @@ endef
 $(eval $(call KernelPackage,macvlan))
 
 
+<<<<<<< HEAD
 define KernelPackage/ipvlan
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=IP-VLAN support
@@ -1357,6 +1483,8 @@ endef
 $(eval $(call KernelPackage,ipvlan))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/tulip
   TITLE:=Tulip family network device support
   DEPENDS:=@PCI_SUPPORT +kmod-mii
@@ -1475,6 +1603,7 @@ endef
 
 $(eval $(call KernelPackage,forcedeth))
 
+<<<<<<< HEAD
 define KernelPackage/fixed-phy
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=MDIO Bus/PHY emulation with fixed speed/link PHYs
@@ -1499,6 +1628,16 @@ define KernelPackage/of-mdio
   FILES:= \
 	$(LINUX_DIR)/drivers/net/mdio/of_mdio.ko \
 	$(LINUX_DIR)/drivers/net/mdio/fwnode_mdio.ko
+=======
+define KernelPackage/of-mdio
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=OpenFirmware MDIO support
+  DEPENDS:=+kmod-libphy
+  KCONFIG:=CONFIG_OF_MDIO
+  FILES:= \
+	$(LINUX_DIR)/drivers/net/phy/fixed_phy.ko \
+	$(LINUX_DIR)/drivers/of/of_mdio.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,41,of_mdio)
 endef
 
@@ -1591,6 +1730,7 @@ endef
 
 $(eval $(call KernelPackage,bnx2x))
 
+<<<<<<< HEAD
 define KernelPackage/bnxt-en
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Broadcom NetXtreme-C/E network driver
@@ -1613,6 +1753,8 @@ endef
 
 $(eval $(call KernelPackage,bnxt-en))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/be2net
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Broadcom Emulex OneConnect 10Gbps NIC
@@ -1646,7 +1788,11 @@ define KernelPackage/mlx4-core
 	CONFIG_MLX4_CORE=y \
 	CONFIG_MLX4_CORE_GEN2=y \
 	CONFIG_MLX4_DEBUG=n
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoLoad,36,mlx4_core mlx4_en,1)
+=======
+  AUTOLOAD:=$(call AutoProbe,mlx4_core mlx4_en)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/mlx4-core/description
@@ -1658,7 +1804,11 @@ $(eval $(call KernelPackage,mlx4-core))
 define KernelPackage/mlx5-core
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Mellanox ConnectX(R) mlx5 core Network Driver
+<<<<<<< HEAD
   DEPENDS:=@PCI_SUPPORT +kmod-ptp +kmod-mlxfw +kmod-hwmon-core
+=======
+  DEPENDS:=@PCI_SUPPORT +kmod-ptp
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/mellanox/mlx5/core/mlx5_core.ko
   KCONFIG:= CONFIG_MLX5_CORE \
 	CONFIG_MLX5_CORE_EN=y \
@@ -1675,9 +1825,14 @@ define KernelPackage/mlx5-core
 	CONFIG_MLX5_MPFS=y \
 	CONFIG_MLX5_SW_STEERING=n \
 	CONFIG_MLX5_TC_CT=n \
+<<<<<<< HEAD
 	CONFIG_MLX5_TLS=n \
 	CONFIG_MLX5_VFIO_PCI=n
   AUTOLOAD:=$(call AutoLoad,36,mlx5_core,1)
+=======
+	CONFIG_MLX5_TLS=n
+  AUTOLOAD:=$(call AutoProbe,mlx5_core)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/mlx5-core/description
@@ -1687,6 +1842,7 @@ endef
 $(eval $(call KernelPackage,mlx5-core))
 
 
+<<<<<<< HEAD
 define KernelPackage/mlxfw
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=Mellanox Technologies firmware flash module
@@ -1830,6 +1986,8 @@ endef
 $(eval $(call KernelPackage,qlcnic))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/sfp
   SUBMENU:=$(NETWORK_DEVICES_MENU)
   TITLE:=SFP cage support
@@ -1839,7 +1997,11 @@ define KernelPackage/sfp
 	CONFIG_MDIO_I2C
   FILES:= \
 	$(LINUX_DIR)/drivers/net/phy/sfp.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/net/mdio/mdio-i2c.ko
+=======
+	$(LINUX_DIR)/drivers/net/phy/mdio-i2c.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,mdio-i2c sfp)
 endef
 
@@ -1849,6 +2011,7 @@ endef
 
 $(eval $(call KernelPackage,sfp))
 
+<<<<<<< HEAD
 
 define KernelPackage/pcs-xpcs
   SUBMENU:=$(NETWORK_DEVICES_MENU)
@@ -1887,6 +2050,15 @@ define KernelPackage/igc
   KCONFIG:=CONFIG_IGC
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igc/igc.ko
   AUTOLOAD:=$(call AutoLoad,34,igc,1)
+=======
+define KernelPackage/igc
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Intel(R) Ethernet Controller I225 Series support
+  DEPENDS:=@PCI_SUPPORT
+  KCONFIG:=CONFIG_IGC
+  FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/igc/igc.ko
+  AUTOLOAD:=$(call AutoProbe,igc)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/igc/description
@@ -1932,6 +2104,7 @@ define KernelPackage/sfc-falcon/description
 endef
 
 $(eval $(call KernelPackage,sfc-falcon))
+<<<<<<< HEAD
 
 
 define KernelPackage/wwan
@@ -2061,3 +2234,5 @@ define KernelPackage/amazon-ena/description
 endef
 
 $(eval $(call KernelPackage,amazon-ena))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

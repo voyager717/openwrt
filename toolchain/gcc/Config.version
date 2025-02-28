@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 config GCC_VERSION_11
 	default y if GCC_USE_VERSION_11
 	bool
@@ -8,10 +9,23 @@ config GCC_VERSION_12
 
 config GCC_VERSION_14
 	default y if GCC_USE_VERSION_14
+=======
+config GCC_VERSION_7
+	default y if GCC_USE_VERSION_7
+	bool
+
+config GCC_VERSION_9
+	default y if GCC_USE_VERSION_9
+	bool
+
+config GCC_VERSION_10
+	default y if GCC_USE_VERSION_10
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	bool
 
 config GCC_VERSION
 	string
+<<<<<<< HEAD
 	default EXTERNAL_GCC_VERSION	if EXTERNAL_TOOLCHAIN && !NATIVE_TOOLCHAIN
 	default "11.3.0"	if GCC_VERSION_11
 	default "12.3.0"	if GCC_VERSION_12
@@ -22,3 +36,14 @@ config GCC_USE_DEFAULT_VERSION
 	bool
 	default y if !TOOLCHAINOPTS || GCC_USE_VERSION_13
 	imply KERNEL_WERROR
+=======
+	default "7.5.0"		if GCC_VERSION_7
+	default "9.3.0"		if GCC_VERSION_9
+	default "10.2.0"	if GCC_VERSION_10
+	default "8.4.0"
+
+config GCC_USE_IREMAP
+	bool
+	default y if GCC_USE_VERSION_7
+	default n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

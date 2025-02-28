@@ -3,8 +3,13 @@
 # Copyright 2020 NXP
 #
 
+<<<<<<< HEAD
 RAMFS_COPY_BIN=""
 RAMFS_COPY_DATA=""
+=======
+RAMFS_COPY_BIN="/usr/sbin/fw_printenv /usr/sbin/fw_setenv /usr/sbin/ubinfo /bin/echo"
+RAMFS_COPY_DATA="/etc/fw_env.config /var/lock/fw_printenv.lock"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 REQUIRE_IMAGE_METADATA=1
 
@@ -32,6 +37,7 @@ platform_do_upgrade_sdboot() {
 	tar xf $tar_file ${board_dir}/root -O  | dd of=/dev/mmcblk0p2 bs=512k > /dev/null 2>&1
 
 }
+<<<<<<< HEAD
 
 platform_do_upgrade_traverse_slotubi() {
 	part="$(awk -F 'ubi.mtd=' '{printf $2}' /proc/cmdline | sed -e 's/ .*$//')"
@@ -52,6 +58,25 @@ platform_do_upgrade_traverse_slotubi() {
 	return $?
 }
 
+=======
+platform_do_upgrade_traverse_nandubi() {
+	bootsys=$(fw_printenv bootsys | awk -F= '{{print $2}}')
+	newbootsys=2
+	if [ "$bootsys" -eq "2" ]; then
+		newbootsys=1
+	fi
+
+	# If nand_do_upgrade succeeds, we don't have an opportunity to add any actions of
+	# our own, so do it here and set back on failure
+	echo "Setting bootsys to #${newbootsys}"
+	fw_setenv bootsys $newbootsys
+	CI_UBIPART="nandubi"
+	CI_KERNPART="kernel${newbootsys}"
+	CI_ROOTPART="rootfs${newbootsys}"
+	nand_do_upgrade "$1" || (echo "Upgrade failed, setting bootsys ${bootsys}" && fw_setenv bootsys $bootsys)
+
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 platform_copy_config_sdboot() {
 	local diskdev partdev parttype=ext4
 
@@ -74,7 +99,10 @@ platform_copy_config() {
 	fsl,ls1012a-frwy-sdboot | \
 	fsl,ls1021a-iot-sdboot | \
 	fsl,ls1021a-twr-sdboot | \
+<<<<<<< HEAD
 	fsl,ls1028a-rdb-sdboot | \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fsl,ls1043a-rdb-sdboot | \
 	fsl,ls1046a-frwy-sdboot | \
 	fsl,ls1046a-rdb-sdboot | \
@@ -88,8 +116,14 @@ platform_check_image() {
 	local board=$(board_name)
 
 	case "$board" in
+<<<<<<< HEAD
 	traverse,ten64)
 		nand_do_platform_check "ten64-mtd" $1
+=======
+	traverse,ls1043v | \
+	traverse,ls1043s)
+		nand_do_platform_check "traverse-ls1043" $1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		return $?
 		;;
 	fsl,ls1012a-frdm | \
@@ -98,8 +132,11 @@ platform_check_image() {
 	fsl,ls1021a-iot-sdboot | \
 	fsl,ls1021a-twr | \
 	fsl,ls1021a-twr-sdboot | \
+<<<<<<< HEAD
 	fsl,ls1028a-rdb | \
 	fsl,ls1028a-rdb-sdboot | \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fsl,ls1043a-rdb | \
 	fsl,ls1043a-rdb-sdboot | \
 	fsl,ls1046a-frwy | \
@@ -128,13 +165,22 @@ platform_do_upgrade() {
 	touch /var/lock/fw_printenv.lock
 
 	case "$board" in
+<<<<<<< HEAD
 	traverse,ten64)
 		platform_do_upgrade_traverse_slotubi "${1}"
+=======
+	traverse,ls1043v | \
+	traverse,ls1043s)
+		platform_do_upgrade_traverse_nandubi "$1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	fsl,ls1012a-frdm | \
 	fsl,ls1012a-rdb | \
 	fsl,ls1021a-twr | \
+<<<<<<< HEAD
 	fsl,ls1028a-rdb | \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fsl,ls1043a-rdb | \
 	fsl,ls1046a-frwy | \
 	fsl,ls1046a-rdb | \
@@ -147,7 +193,10 @@ platform_do_upgrade() {
 	fsl,ls1012a-frwy-sdboot | \
 	fsl,ls1021a-iot-sdboot | \
 	fsl,ls1021a-twr-sdboot | \
+<<<<<<< HEAD
 	fsl,ls1028a-rdb-sdboot | \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fsl,ls1043a-rdb-sdboot | \
 	fsl,ls1046a-frwy-sdboot | \
 	fsl,ls1046a-rdb-sdboot | \

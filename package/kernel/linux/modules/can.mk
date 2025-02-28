@@ -13,7 +13,10 @@ define KernelPackage/can
   KCONFIG:=\
 	CONFIG_CAN=m \
 	CONFIG_CAN_DEV \
+<<<<<<< HEAD
 	CONFIG_CAN_NETLINK=y \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_CAN_CALC_BITTIMING=y \
 	CONFIG_CAN_LEDS=y \
 	CONFIG_CAN_AT91=n \
@@ -120,9 +123,15 @@ $(eval $(call KernelPackage,can-c-can-platform))
 define KernelPackage/can-flexcan
   TITLE:=Support for Freescale FLEXCAN based chips
   KCONFIG:=CONFIG_CAN_FLEXCAN
+<<<<<<< HEAD
   FILES:=$(LINUX_DIR)/drivers/net/can/flexcan/flexcan.ko
   AUTOLOAD:=$(call AutoProbe,flexcan)
   $(call AddDepends/can,@TARGET_imx)
+=======
+  FILES:=$(LINUX_DIR)/drivers/net/can/flexcan.ko
+  AUTOLOAD:=$(call AutoProbe,flexcan)
+  $(call AddDepends/can,@TARGET_imx6)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/can-flexcan/description
@@ -153,7 +162,11 @@ define KernelPackage/can-mcp251x
 	CONFIG_SPI=y \
 	CONFIG_CAN_MCP251X
   FILES:=$(LINUX_DIR)/drivers/net/can/spi/mcp251x.ko
+<<<<<<< HEAD
   AUTOLOAD:=$(call AutoProbe,mcp251x)
+=======
+  AUTOLOAD:=$(call AutoProbe,can-mcp251x)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/can)
 endef
 
@@ -183,7 +196,11 @@ $(eval $(call KernelPackage,can-raw))
 define KernelPackage/can-slcan
   TITLE:=Serial / USB serial CAN Adaptors (slcan)
   KCONFIG:=CONFIG_CAN_SLCAN
+<<<<<<< HEAD
   FILES:=$(LINUX_DIR)/drivers/net/can/slcan/slcan.ko
+=======
+  FILES:=$(LINUX_DIR)/drivers/net/can/slcan.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,slcan)
   $(call AddDepends/can)
 endef
@@ -231,9 +248,15 @@ $(eval $(call KernelPackage,can-usb-ems))
 
 define KernelPackage/can-usb-esd
   TITLE:=ESD USB/2 CAN/USB interface
+<<<<<<< HEAD
   KCONFIG:=CONFIG_CAN_ESD_USB
   FILES:=$(LINUX_DIR)/drivers/net/can/usb/esd_usb.ko
   AUTOLOAD:=$(call AutoProbe,esd_usb2 esd_usb)
+=======
+  KCONFIG:=CONFIG_CAN_ESD_USB2
+  FILES:=$(LINUX_DIR)/drivers/net/can/usb/esd_usb2.ko
+  AUTOLOAD:=$(call AutoProbe,esd_usb2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/can,+kmod-usb-core)
 endef
 
@@ -245,6 +268,7 @@ endef
 $(eval $(call KernelPackage,can-usb-esd))
 
 
+<<<<<<< HEAD
 define KernelPackage/can-usb-gs
   TITLE:=Geschwister Schneider UG interfaces
   KCONFIG:=CONFIG_CAN_GS_USB
@@ -264,6 +288,8 @@ endef
 $(eval $(call KernelPackage,can-usb-gs))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/can-usb-kvaser
   TITLE:=Kvaser CAN/USB interface
   KCONFIG:=CONFIG_CAN_KVASER_USB

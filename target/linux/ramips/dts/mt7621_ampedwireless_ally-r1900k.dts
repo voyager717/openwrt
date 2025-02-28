@@ -7,6 +7,7 @@
 	model = "Amped Wireless ALLY-R1900K";
 };
 
+<<<<<<< HEAD
 &gmac1 {
 	status = "okay";
 	label = "lan3";
@@ -17,6 +18,8 @@
 	/delete-property/ interrupts;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &switch0 {
 	ports {
 		port@1 {
@@ -33,5 +36,13 @@
 			status = "okay";
 			label = "lan2";
 		};
+<<<<<<< HEAD
+=======
+
+		port@4 {
+			status = "okay";
+			label = "lan3";
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

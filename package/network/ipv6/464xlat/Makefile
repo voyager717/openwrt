@@ -1,7 +1,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=464xlat
+<<<<<<< HEAD
 PKG_RELEASE:=13
+=======
+PKG_RELEASE:=12
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE_DATE:=2018-01-16
 PKG_MAINTAINER:=Hans Dedecker <dedeckeh@gmail.com>

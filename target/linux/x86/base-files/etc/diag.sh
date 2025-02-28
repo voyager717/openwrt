@@ -73,10 +73,13 @@ set_state() {
 		status_led_blink_preinit_regular
 		;;
 
+<<<<<<< HEAD
 	upgrade)
 		status_led_blink_preinit_regular
 		;;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	done)
 		status_led_on
 		;;

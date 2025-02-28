@@ -7,6 +7,7 @@ include $(INCLUDE_DIR)/image.mk
 
 KERNEL_LOADADDR:=0x8000
 
+<<<<<<< HEAD
 # Some info about Ctera firmware:
 # 1. It's simple tar file (GNU standard), but it must have ".firm" suffix.
 # 2. It contains two images: kernel and romdisk. Both are required.
@@ -108,11 +109,19 @@ define Device/kernel-size-migration-linksys
     4. If envs are ok, please apply FACTORY image with command:\n$\
     \t sysupgrade -F -n OPENWRT_FACTORY_IMAGE.bin \n$\
     5. System should start normally. If not, serial console will be required.
+=======
+define Device/dsa-migration
+  DEVICE_COMPAT_VERSION := 1.1
+  DEVICE_COMPAT_MESSAGE := Config cannot be migrated from swconfig to DSA
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/Default
   PROFILES := Default
+<<<<<<< HEAD
   DEVICE_DTS_DIR := $(DTS_DIR)/marvell
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_DTS = kirkwood-$(lastword $(subst _, ,$(1)))
   KERNEL_DEPENDS = $$(wildcard $(DTS_DIR)/$$(DEVICE_DTS).dts)
   KERNEL := kernel-bin | append-dtb | uImage none
@@ -132,8 +141,12 @@ define Device/checkpoint_l-50
   DEVICE_VENDOR := Check Point
   DEVICE_MODEL := L-50
   DEVICE_PACKAGES := kmod-ath9k kmod-gpio-button-hotplug kmod-mvsdio \
+<<<<<<< HEAD
 	kmod-rtc-s35390a kmod-usb-ledtrig-usbport wpad-basic-mbedtls \
 	kmod-dsa-mv88e6xxx
+=======
+	kmod-rtc-s35390a kmod-usb-ledtrig-usbport wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := sysupgrade.bin
 endef
 TARGET_DEVICES += checkpoint_l-50
@@ -145,7 +158,11 @@ define Device/cisco_on100
   KERNEL_IN_UBI :=
   UBINIZE_OPTS := -E 5
   IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-mvsdio kmod-rtc-mv
+=======
+  DEVICE_PACKAGES := kmod-mvsdio
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += on100
 endef
 TARGET_DEVICES += cisco_on100
@@ -154,7 +171,10 @@ define Device/cloudengines_pogoe02
   DEVICE_VENDOR := Cloud Engines
   DEVICE_MODEL := Pogoplug E02
   DEVICE_DTS := kirkwood-pogo_e02
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-rtc-mv
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += pogo_e02
 endef
 TARGET_DEVICES += cloudengines_pogoe02
@@ -164,6 +184,7 @@ define Device/cloudengines_pogoplugv4
   DEVICE_MODEL := Pogoplug V4
   DEVICE_DTS := kirkwood-pogoplug-series-4
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 kmod-mvsdio kmod-usb3 \
+<<<<<<< HEAD
 	kmod-gpio-button-hotplug kmod-rtc-mv
 endef
 TARGET_DEVICES += cloudengines_pogoplugv4
@@ -212,22 +233,42 @@ define Device/iom_iconnect-1.1
   DEVICE_VENDOR := Iomega
   DEVICE_MODEL := Iconnect
   DEVICE_PACKAGES := kmod-rtc-mv
+=======
+	kmod-gpio-button-hotplug
+endef
+TARGET_DEVICES += cloudengines_pogoplugv4
+
+define Device/iom_iconnect-1.1
+  DEVICE_VENDOR := Iomega
+  DEVICE_MODEL := Iconnect
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_DTS := kirkwood-iconnect
   SUPPORTED_DEVICES += iconnect
 endef
 TARGET_DEVICES += iom_iconnect-1.1
 
 define Device/iom_ix2-200
+<<<<<<< HEAD
   $(Device/kernel-size-migration-iomega)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_VENDOR := Iomega
   DEVICE_MODEL := StorCenter ix2-200
   DEVICE_DTS := kirkwood-iomega_ix2_200
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 \
+<<<<<<< HEAD
 	kmod-gpio-button-hotplug kmod-hwmon-lm63 kmod-rtc-mv
   PAGESIZE := 512
   SUBPAGESIZE := 256
   BLOCKSIZE := 16k
   KERNEL_SIZE := 4096k
+=======
+	kmod-gpio-button-hotplug kmod-hwmon-lm63
+  PAGESIZE := 512
+  SUBPAGESIZE := 256
+  BLOCKSIZE := 16k
+  KERNEL_SIZE := 3072k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL_IN_UBI :=
   UBINIZE_OPTS := -E 5
   IMAGE_SIZE := 31744k
@@ -236,6 +277,7 @@ define Device/iom_ix2-200
 endef
 TARGET_DEVICES += iom_ix2-200
 
+<<<<<<< HEAD
 define Device/iom_ix4-200d
   $(Device/kernel-size-migration-iomega)
   DEVICE_VENDOR := Iomega
@@ -278,35 +320,63 @@ define Device/linksys
 	kmod-rtc-mv kmod-dsa-mv88e6xxx
   KERNEL_IN_UBI :=
   KERNEL_SIZE := 4096k
+=======
+define Device/linksys
+  DEVICE_VENDOR := Linksys
+  DEVICE_PACKAGES := kmod-mwl8k wpad-basic-wolfssl kmod-gpio-button-hotplug
+  KERNEL_IN_UBI :=
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   UBINIZE_OPTS := -E 5
   IMAGE/factory.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi
 endef
 
 define Device/linksys_e4200-v2
   $(Device/linksys)
+<<<<<<< HEAD
   DEVICE_MODEL := E4200
   DEVICE_VARIANT := v2
+=======
+  $(Device/dsa-migration)
+  DEVICE_MODEL := E4200
+  DEVICE_VARIANT := v2
+  KERNEL_SIZE := 2688k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += linksys,viper linksys-viper
 endef
 TARGET_DEVICES += linksys_e4200-v2
 
 define Device/linksys_ea3500
   $(Device/linksys)
+<<<<<<< HEAD
+=======
+  $(Device/dsa-migration)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := EA3500
   PAGESIZE := 512
   SUBPAGESIZE := 256
   BLOCKSIZE := 16k
+<<<<<<< HEAD
+=======
+  KERNEL_SIZE := 2624k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += linksys,audi linksys-audi
 endef
 TARGET_DEVICES += linksys_ea3500
 
 define Device/linksys_ea4500
   $(Device/linksys)
+<<<<<<< HEAD
   DEVICE_MODEL := EA4500
+=======
+  $(Device/dsa-migration)
+  DEVICE_MODEL := EA4500
+  KERNEL_SIZE := 2688k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += linksys,viper linksys-viper
 endef
 TARGET_DEVICES += linksys_ea4500
 
+<<<<<<< HEAD
 define Device/netgear_readynas-duo-v2
   DEVICE_VENDOR := NETGEAR
   DEVICE_MODEL := ReadyNAS Duo
@@ -329,11 +399,17 @@ define Device/netgear_stora
 endef
 TARGET_DEVICES += netgear_stora
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/raidsonic_ib-nas62x0
   DEVICE_VENDOR := RaidSonic
   DEVICE_MODEL := ICY BOX IB-NAS62x0
   DEVICE_DTS := kirkwood-ib62x0
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 kmod-rtc-mv
+=======
+  DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += ib62x0
 endef
 TARGET_DEVICES += raidsonic_ib-nas62x0
@@ -342,7 +418,11 @@ define Device/seagate_blackarmor-nas220
   DEVICE_VENDOR := Seagate
   DEVICE_MODEL := Blackarmor NAS220
   DEVICE_PACKAGES := kmod-hwmon-adt7475 kmod-fs-ext4 kmod-ata-marvell-sata \
+<<<<<<< HEAD
 	mdadm kmod-gpio-button-hotplug kmod-rtc-mv
+=======
+	mdadm kmod-gpio-button-hotplug
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   PAGESIZE := 512
   SUBPAGESIZE := 256
   BLOCKSIZE := 16k
@@ -353,7 +433,10 @@ TARGET_DEVICES += seagate_blackarmor-nas220
 define Device/seagate_dockstar
   DEVICE_VENDOR := Seagate
   DEVICE_MODEL := FreeAgent Dockstar
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-rtc-mv
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += dockstar
 endef
 TARGET_DEVICES += seagate_dockstar
@@ -361,7 +444,11 @@ TARGET_DEVICES += seagate_dockstar
 define Device/seagate_goflexnet
   DEVICE_VENDOR := Seagate
   DEVICE_MODEL := GoFlexNet
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 kmod-rtc-mv
+=======
+  DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += goflexnet
 endef
 TARGET_DEVICES += seagate_goflexnet
@@ -369,30 +456,51 @@ TARGET_DEVICES += seagate_goflexnet
 define Device/seagate_goflexhome
   DEVICE_VENDOR := Seagate
   DEVICE_MODEL := GoFlexHome
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 kmod-rtc-mv
+=======
+  DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += goflexhome
 endef
 TARGET_DEVICES += seagate_goflexhome
 
 define Device/zyxel_nsa310b
+<<<<<<< HEAD
   DEVICE_VENDOR := Zyxel
   DEVICE_MODEL := NSA310b
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-r8169 kmod-fs-ext4 \
 	kmod-gpio-button-hotplug kmod-hwmon-lm85 kmod-rtc-mv
+=======
+  DEVICE_VENDOR := ZyXEL
+  DEVICE_MODEL := NSA310b
+  DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-r8169 kmod-fs-ext4 \
+	kmod-gpio-button-hotplug kmod-hwmon-lm85
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += nsa310b
 endef
 TARGET_DEVICES += zyxel_nsa310b
 
 define Device/zyxel_nsa310s
+<<<<<<< HEAD
   DEVICE_VENDOR := Zyxel
   DEVICE_MODEL := NSA310S
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 \
 	kmod-gpio-button-hotplug kmod-rtc-mv
+=======
+  DEVICE_VENDOR := ZyXEL
+  DEVICE_MODEL := NSA310S
+  DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 kmod-gpio-button-hotplug
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += zyxel_nsa310s
 
 define Device/zyxel_nsa325
+<<<<<<< HEAD
   DEVICE_VENDOR := Zyxel
+=======
+  DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := NSA325
   DEVICE_VARIANT := v1/v2
   DEVICE_PACKAGES := kmod-ata-marvell-sata kmod-fs-ext4 \

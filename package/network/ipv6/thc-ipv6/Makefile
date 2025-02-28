@@ -8,13 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=thc-ipv6
+<<<<<<< HEAD
 PKG_VERSION:=3.8
+=======
+PKG_VERSION:=2.7
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_RELEASE:=1
 PKG_LICENSE:=GPL-3.0
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GITHUB/vanhauser-thc/THC-Archive/master/Tools
+<<<<<<< HEAD
 PKG_HASH:=b60be61a8b0a944a66e3b719704b4c03c1bc2c22f32d5d21e99e434c82a9d769
+=======
+PKG_HASH:=440a3ae98b57100c397ec4f8634468dbbb0c3b48788c6b74af2a597a90544a96
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 
@@ -31,7 +39,11 @@ THC_APPLETS := \
 	fuzz_dhcps6 implementation6 implementation6d inverse_lookup6          \
 	kill_router6 ndpexhaust6 node_query6 parasite6 passive_discovery6     \
 	randicmp6 redir6 rsmurf6 sendpees6 sendpeesmp6 smurf6 thcping6        \
+<<<<<<< HEAD
 	toobig6 trace6 toobigsniff6 flood_unreach6 connect6
+=======
+	toobig6 trace6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 THC_DEPENDS_dnsdict6 := +libpthread
 THC_DEPENDS_thcping6 := +librt

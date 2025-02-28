@@ -3,6 +3,24 @@
 # Copyright (C) 2010 Vertical Communications
 
 
+<<<<<<< HEAD
+=======
+##2023-04-11:zzk
+find_mmc_part() {                                                                                   
+        local DEVNAME PARTNAME                                                                      
+                                                                                                    
+        if grep -q "$1" /proc/mtd; then                                                             
+                echo "" && return 0                                                                 
+        fi                                                                                          
+                                                                                                    
+        for DEVNAME in /sys/block/mmcblk*/mmcblk*p*; do                                             
+                PARTNAME=$(grep PARTNAME ${DEVNAME}/uevent | cut -f2 -d'=')                         
+                [ "$PARTNAME" = "$1" ] && echo "/dev/$(basename $DEVNAME)" && return 0              
+        done                                                                                        
+}         
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 debug () {
 	${DEBUG:-:} "$@"
 }
@@ -32,6 +50,7 @@ xor() {
 	printf "%0${retlen}x" "$ret"
 }
 
+<<<<<<< HEAD
 data_2bin() {
 	local data=$1
 	local len=${#1}
@@ -56,6 +75,8 @@ data_2xor_val() {
 	echo -n ${xor_data:0:-1}
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 append() {
 	local var="$1"
 	local value="$2"
@@ -64,6 +85,7 @@ append() {
 	eval "export ${NO_EXPORT:+-n} -- \"$var=\${$var:+\${$var}\${value:+\$sep}}\$value\""
 }
 
+<<<<<<< HEAD
 prepend() {
 	local var="$1"
 	local value="$2"
@@ -72,6 +94,8 @@ prepend() {
 	eval "export ${NO_EXPORT:+-n} -- \"$var=\$value\${$var:+\${sep}\${$var}}\""
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 list_contains() {
 	local var="$1"
 	local str="$2"
@@ -211,10 +235,15 @@ config_list_foreach() {
 
 default_prerm() {
 	local root="${IPKG_INSTROOT}"
+<<<<<<< HEAD
 	[ -z "$pkgname" ] && local pkgname="$(basename ${1%.*})"
 	local ret=0
 	local filelist="${root}/usr/lib/opkg/info/${pkgname}.list"
 	[ -f "$root/lib/apk/packages/${pkgname}.list" ] && filelist="$root/lib/apk/packages/${pkgname}.list"
+=======
+	local pkgname="$(basename ${1%.*})"
+	local ret=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if [ -f "$root/usr/lib/opkg/info/${pkgname}.prerm-pkg" ]; then
 		( . "$root/usr/lib/opkg/info/${pkgname}.prerm-pkg" )
@@ -222,7 +251,11 @@ default_prerm() {
 	fi
 
 	local shell="$(command -v bash)"
+<<<<<<< HEAD
 	for i in $(grep -s "^/etc/init.d/" "$filelist"); do
+=======
+	for i in $(grep -s "^/etc/init.d/" "$root/usr/lib/opkg/info/${pkgname}.list"); do
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if [ -n "$root" ]; then
 			${shell:-/bin/sh} "$root/etc/rc.common" "$root$i" disable
 		else
@@ -237,19 +270,31 @@ default_prerm() {
 }
 
 add_group_and_user() {
+<<<<<<< HEAD
 	[ -z "$pkgname" ] && local pkgname="$(basename ${1%.*})"
 	local rusers="$(sed -ne 's/^Require-User: *//p' $root/usr/lib/opkg/info/${pkgname}.control 2>/dev/null)"
 	if [ -f "$root/lib/apk/packages/${pkgname}.rusers" ]; then
 		local rusers="$(cat $root/lib/apk/packages/${pkgname}.rusers)"
 	fi
+=======
+	local pkgname="$1"
+	local rusers="$(sed -ne 's/^Require-User: *//p' $root/usr/lib/opkg/info/${pkgname}.control 2>/dev/null)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if [ -n "$rusers" ]; then
 		local tuple oIFS="$IFS"
 		for tuple in $rusers; do
+<<<<<<< HEAD
 			local uid gid uname gname addngroups addngroup addngname addngid
 
 			IFS=":"
 			set -- $tuple; uname="$1"; gname="$2"; addngroups="$3"
+=======
+			local uid gid uname gname
+
+			IFS=":"
+			set -- $tuple; uname="$1"; gname="$2"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			IFS="="
 			set -- $uname; uname="$1"; uid="$2"
 			set -- $gname; gname="$1"; gid="$2"
@@ -269,6 +314,7 @@ add_group_and_user() {
 				group_add_user "$gname" "$uname"
 			fi
 
+<<<<<<< HEAD
 			if [ -n "$uname" ] &&  [ -n "$addngroups" ]; then
 				oIFS="$IFS"
 				IFS=","
@@ -336,12 +382,16 @@ update_alternatives() {
 					fi
 				;;
 			esac
+=======
+			unset uid gid uname gname
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		done
 	fi
 }
 
 default_postinst() {
 	local root="${IPKG_INSTROOT}"
+<<<<<<< HEAD
 	[ -z "$pkgname" ] && local pkgname="$(basename ${1%.*})"
 	local filelist="${root}/usr/lib/opkg/info/${pkgname}.list"
 	[ -f "$root/lib/apk/packages/${pkgname}.list" ] && filelist="$root/lib/apk/packages/${pkgname}.list"
@@ -355,6 +405,17 @@ default_postinst() {
 	if [ -e "${root}/lib/apk/packages/${pkgname}.list" ]; then
 		filelist="${root}/lib/apk/packages/${pkgname}.list"
 		update_alternatives install "${pkgname}"
+=======
+	local pkgname="$(basename ${1%.*})"
+	local filelist="/usr/lib/opkg/info/${pkgname}.list"
+	local ret=0
+
+	add_group_and_user "${pkgname}"
+
+	if [ -f "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" ]; then
+		( . "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" )
+		ret=$?
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 
 	if [ -d "$root/rootfs-overlay" ]; then
@@ -382,6 +443,7 @@ default_postinst() {
 		rm -f /tmp/luci-indexcache
 	fi
 
+<<<<<<< HEAD
 	if [ -f "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" ]; then
 		( . "$root/usr/lib/opkg/info/${pkgname}.postinst-pkg" )
 		ret=$?
@@ -389,6 +451,10 @@ default_postinst() {
 
 	local shell="$(command -v bash)"
 	for i in $(grep -s "^/etc/init.d/" "$filelist"); do
+=======
+	local shell="$(command -v bash)"
+	for i in $(grep -s "^/etc/init.d/" "$root$filelist"); do
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if [ -n "$root" ]; then
 			${shell:-/bin/sh} "$root/etc/rc.common" "$root$i" enable
 		else
@@ -410,11 +476,14 @@ include() {
 	done
 }
 
+<<<<<<< HEAD
 ipcalc() {
 	set -- $(ipcalc.sh "$@")
 	[ $? -eq 0 ] && export -- "$@"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 find_mtd_index() {
 	local PART="$(grep "\"$1\"" /proc/mtd | awk -F: '{print $1}')"
 	local INDEX="${PART##mtd}"
@@ -430,6 +499,7 @@ find_mtd_part() {
 	echo "${INDEX:+$PREFIX$INDEX}"
 }
 
+<<<<<<< HEAD
 find_mmc_part() {
 	local DEVNAME PARTNAME ROOTDEV
 
@@ -449,6 +519,8 @@ find_mmc_part() {
 	done
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 group_add() {
 	local name="$1"
 	local gid="$2"
@@ -471,7 +543,11 @@ group_add_next() {
 		return
 	fi
 	gids=$(cut -d: -f3 ${IPKG_INSTROOT}/etc/group)
+<<<<<<< HEAD
 	gid=32768
+=======
+	gid=65536
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	while echo "$gids" | grep -q "^$gid$"; do
 		gid=$((gid + 1))
 	done
@@ -486,9 +562,12 @@ group_add_user() {
 	echo "$grp" | grep -q ":$" && delim=""
 	[ -n "$IPKG_INSTROOT" ] || lock /var/lock/passwd
 	sed -i "s/$grp/$grp$delim$2/g" ${IPKG_INSTROOT}/etc/group
+<<<<<<< HEAD
 	if [ -z "$IPKG_INSTROOT" ] && [ -x /usr/sbin/selinuxenabled ] && selinuxenabled; then
 		restorecon /etc/group
 	fi
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	[ -n "$IPKG_INSTROOT" ] || lock -u /var/lock/passwd
 }
 
@@ -502,7 +581,11 @@ user_add() {
 	local rc
 	[ -z "$uid" ] && {
 		uids=$(cut -d: -f3 ${IPKG_INSTROOT}/etc/passwd)
+<<<<<<< HEAD
 		uid=32768
+=======
+		uid=65536
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		while echo "$uids" | grep -q "^$uid$"; do
 			uid=$((uid + 1))
 		done
@@ -523,6 +606,7 @@ board_name() {
 	[ -e /tmp/sysinfo/board_name ] && cat /tmp/sysinfo/board_name || echo "generic"
 }
 
+<<<<<<< HEAD
 cmdline_get_var() {
 	local var=$1
 	local cmdlinevar tmp
@@ -534,3 +618,6 @@ cmdline_get_var() {
 }
 
 [ -z "$IPKG_INSTROOT" ] && [ -f /lib/config/uci.sh ] && . /lib/config/uci.sh || true
+=======
+[ -z "$IPKG_INSTROOT" ] && [ -f /lib/config/uci.sh ] && . /lib/config/uci.sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

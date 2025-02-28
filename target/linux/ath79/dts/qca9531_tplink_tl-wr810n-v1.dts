@@ -11,7 +11,11 @@
 		regulator-name = "usb_vbus";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 11 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 		regulator-always-on;
 	};
@@ -19,6 +23,11 @@
 
 &usb0 {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	vbus-supply = <&reg_usb_vbus>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {

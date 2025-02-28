@@ -1,0 +1,9 @@
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/install/strip.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/install.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/list_install_components.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/rebuild_cache.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/edit_cache.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/install/local.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/uhttpd_lua.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/uhttpd_ubus.dir
+/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/uhttpd-2021-03-21-15346de8/CMakeFiles/uhttpd.dir

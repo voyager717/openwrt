@@ -19,6 +19,7 @@ preinit_set_mac_address() {
 		ip link set dev dmz address $(macaddr_add $mac 8) 2>/dev/null
 		ip link set dev dsl address $(macaddr_add $mac 9) 2>/dev/null
 		;;
+<<<<<<< HEAD
 	endian,4i-edge-200)
 		mac=$(cat /sys/class/net/eth0/address)
 
@@ -31,6 +32,8 @@ preinit_set_mac_address() {
 		mac=$(mtd_get_mac_binary u-boot 0x3ffa8)
 		ip link set dev eth0 address $mac 2>/dev/null
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 }
 

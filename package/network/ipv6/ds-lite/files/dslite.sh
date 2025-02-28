@@ -1,9 +1,14 @@
 #!/bin/sh
+<<<<<<< HEAD
 # dslite.sh - IPv4-in-IPv6 tunnel backend for ipip6 and ds-lite
 # Copyright (c) 2013 OpenWrt.org
 # Copyright (c) 2013 Steven Barth <steven@midlink.org>
 # Copyright (c) 2021 Kenji Uno <ku@digitaldolphins.jp>
 # Copyright (c) 2024 Arayuki Mago <ms@missing233.com>
+=======
+# dslite.sh - IPv4-in-IPv6 tunnel backend
+# Copyright (c) 2013 OpenWrt.org
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 [ -n "$INCLUDE_ONLY" ] || {
 	. /lib/functions.sh
@@ -12,6 +17,7 @@
 	init_proto "$@"
 }
 
+<<<<<<< HEAD
 tnl_setup() {
 	local cfg="$1"
 	local iface="$2"
@@ -19,6 +25,12 @@ tnl_setup() {
 	local ip4addr="$4"
 	local ip4gateway="$5"
 	local link="$tnl_type-$cfg"
+=======
+proto_dslite_setup() {
+	local cfg="$1"
+	local iface="$2"
+	local link="ds-$cfg"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local remoteip6
 
 	local mtu ttl peeraddr ip6addr tunlink zone weakif encaplimit
@@ -65,7 +77,11 @@ tnl_setup() {
 
 	proto_init_update "$link" 1
 	proto_add_ipv4_route "0.0.0.0" 0
+<<<<<<< HEAD
 	proto_add_ipv4_address "$ip4addr" "" "" "$ip4gateway"
+=======
+	proto_add_ipv4_address "192.0.0.2" "" "" "192.0.0.1"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	proto_add_tunnel
 	json_add_string mode ipip6
@@ -82,6 +98,7 @@ tnl_setup() {
 	proto_add_data
 	[ -n "$zone" ] && json_add_string zone "$zone"
 
+<<<<<<< HEAD
 	if [ "$tnl_type" = "ds" ]; then
 		json_add_array firewall
 			json_add_object ""
@@ -91,13 +108,30 @@ tnl_setup() {
 		json_close_array
 	fi
 
+=======
+	json_add_array firewall
+	  json_add_object ""
+	    json_add_string type nat
+	    json_add_string target ACCEPT
+	  json_close_object
+	json_close_array
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	proto_close_data
 
 	proto_send_update "$cfg"
 }
 
+<<<<<<< HEAD
 init_config() {
 	no_device=1
+=======
+proto_dslite_teardown() {
+	local cfg="$1"
+}
+
+proto_dslite_init_config() {
+	no_device=1             
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	available=1
 
 	proto_config_add_string "ip6addr"
@@ -110,6 +144,7 @@ init_config() {
 	proto_config_add_string "weakif"
 }
 
+<<<<<<< HEAD
 proto_ipip6_init_config() {
 	init_config
 	proto_config_add_string "ip4ifaddr"
@@ -140,4 +175,8 @@ proto_dslite_teardown() {
 [ -n "$INCLUDE_ONLY" ] || {
 	add_protocol ipip6
 	add_protocol dslite
+=======
+[ -n "$INCLUDE_ONLY" ] || {
+        add_protocol dslite
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }

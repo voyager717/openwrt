@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9556_avm_fritz-repeater.dtsi"
 
 #include <dt-bindings/gpio/gpio.h>
@@ -47,21 +50,33 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&spi_gpio 6 GPIO_ACTIVE_HIGH>;
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&spi_gpio 5 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "phy1tpt";
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_HIGH>;
 		};
 
@@ -94,6 +109,7 @@
 
 &pcie0 {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -101,6 +117,8 @@
 		nvmem-cells = <&cal_urlader_198a>;
 		nvmem-cell-names = "calibration";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &phy0 {

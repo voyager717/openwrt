@@ -2,11 +2,18 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 / {
 	compatible = "d-team,newifi-d2", "mediatek,mt7621-soc";
 	model = "D-Team Newifi D2";
+=======
+
+/ {
+	compatible = "d-team,newifi-d2", "mediatek,mt7621-soc";
+	model = "Newifi-D2";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	aliases {
 		led-boot = &led_power_blue;
@@ -24,14 +31,22 @@
 		compatible = "gpio-leds";
 
 		power-amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_blue: power-blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
@@ -56,8 +71,12 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&xhci_ehci_port1>, <&ehci_port2>;
 			linux,default-trigger = "usbport";
@@ -80,6 +99,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	reg_power_usb3: regulator {
 		compatible = "regulator-fixed";
 		regulator-name = "power_usb3";
@@ -88,6 +108,17 @@
 		gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 		enable-active-high;
 		regulator-boot-on;
+=======
+	gpio_export {
+		compatible = "gpio-export";
+		#size-cells = <0>;
+
+		power_usb3 {
+			gpio-export,name = "power_usb3";
+			gpio-export,output = <1>;
+			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
+		};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -117,6 +148,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -143,6 +175,12 @@
 						reg = <0xe006 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -154,10 +192,13 @@
 	};
 };
 
+<<<<<<< HEAD
 &xhci {
 	vbus-supply = <&reg_power_usb3>;
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie {
 	status = "okay";
 };
@@ -165,8 +206,12 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
@@ -174,14 +219,22 @@
 &pcie1 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_e000>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
@@ -209,8 +262,12 @@
 		port@4 {
 			status = "okay";
 			label = "wan";
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_factory_e006>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&factory 0xe006>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

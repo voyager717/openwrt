@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=missing-macros
+<<<<<<< HEAD
 PKG_RELEASE:=12
+=======
+PKG_RELEASE:=11
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/host-build.mk
 
@@ -20,6 +24,7 @@ endef
 
 define Host/Install
 	$(INSTALL_DIR) $(STAGING_DIR_HOST)/share/aclocal
+<<<<<<< HEAD
 	$(INSTALL_DATA) $(HOST_BUILD_DIR)/m4/*.m4 $(STAGING_DIR_HOST)/share/aclocal/
 	$(INSTALL_DIR) $(STAGING_DIR_HOST)/bin
 	$(INSTALL_BIN) $(HOST_BUILD_DIR)/bin/* $(STAGING_DIR_HOST)/bin/
@@ -28,6 +33,11 @@ define Host/Install
 	$(LN) makeinfo $(STAGING_DIR_HOST)/bin/texi2dvi
 	$(LN) makeinfo $(STAGING_DIR_HOST)/bin/pdftexi2dvi
 	$(LN) makeinfo $(STAGING_DIR_HOST)/bin/texi2html
+=======
+	$(INSTALL_DATA) ./src/m4/*.m4 $(STAGING_DIR_HOST)/share/aclocal/
+	$(INSTALL_DIR) $(STAGING_DIR_HOST)/bin
+	$(INSTALL_BIN) ./src/bin/* $(STAGING_DIR_HOST)/bin/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call HostBuild))

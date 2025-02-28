@@ -27,7 +27,10 @@ CFLAGS=""
 TOOLCHAIN="."
 
 LIBC_TYPE=""
+<<<<<<< HEAD
 GCC_VERSION=""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 # Library specs
@@ -41,12 +44,15 @@ LIB_SPECS="
 	ssp:      libssp
 	gfortran: libgfortran
 	gomp:	  libgomp
+<<<<<<< HEAD
 	atomic:	  libatomic
 	quadmath: libquadmath
 	asan:	  libasan
 	tasan:	  libtsan
 	lasan:	  liblsan
 	ubasan:	  libubsan
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "
 
 # Binary specs
@@ -57,7 +63,10 @@ BIN_SPECS="
 	gdbserver: gdbserver
 "
 
+<<<<<<< HEAD
 OVERWRITE_CONFIG=""
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 test_c() {
 	cat <<-EOT | "${CC:-false}" $CFLAGS -o /dev/null -x c - 2>/dev/null
@@ -206,6 +215,7 @@ find_bins() {
 	return 1
 }
 
+<<<<<<< HEAD
 find_gcc_version() {
 	if [ -f $TOOLCHAIN/info.mk ]; then
 		GCC_VERSION=$(grep GCC_VERSION $TOOLCHAIN/info.mk | sed 's/GCC_VERSION=//')
@@ -219,6 +229,8 @@ find_gcc_version() {
 		head -1 | sed 's/gcc-//')
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 wrap_bin_cc() {
 	local out="$1"
@@ -302,11 +314,16 @@ print_config() {
 	local mksubtarget
 
 	local target="$("$CC" $CFLAGS -dumpmachine)"
+<<<<<<< HEAD
 	local version="$("$CC" $CFLAGS -dumpversion)"
 	local cpuarch="${target%%-*}"
 
 	# get CC; strip version; strip gcc and add - suffix
 	local prefix="${CC##*/}"; prefix="${prefix%-$version}"; prefix="${prefix%-*}-"
+=======
+	local cpuarch="${target%%-*}"
+	local prefix="${CC##*/}"; prefix="${prefix%-*}-"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local config="${0%/scripts/*}/.config"
 
 	# if no target specified, print choice list and exit
@@ -341,6 +358,7 @@ print_config() {
 	fi
 
 	# bail out if there is a .config already
+<<<<<<< HEAD
 	if [ -f "$config" ]; then
 		if [ "$OVERWRITE_CONFIG" == "" ]; then
 			echo "There already is a .config file, refusing to overwrite!" >&2
@@ -348,6 +366,11 @@ print_config() {
 		else
 			echo "There already is a .config file, trying to overwrite!"
 		fi
+=======
+	if [ -f "${0%/scripts/*}/.config" ]; then
+		echo "There already is a .config file, refusing to overwrite!" >&2
+		return 1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 
 	case "$mktarget" in */*)
@@ -355,11 +378,16 @@ print_config() {
 		mktarget="${mktarget%/*}"
 	;; esac
 
+<<<<<<< HEAD
 	if [ ! -f "$config" ]; then
 		touch "$config"
 	fi
 
 	echo "CONFIG_TARGET_${mktarget}=y" >> "$config"
+=======
+
+	echo "CONFIG_TARGET_${mktarget}=y" > "$config"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if [ -n "$mksubtarget" ]; then
 		echo "CONFIG_TARGET_${mktarget}_${mksubtarget}=y" >> "$config"
@@ -389,6 +417,7 @@ print_config() {
 	echo "CONFIG_TOOLCHAIN_PREFIX=\"$prefix\"" >> "$config"
 	echo "CONFIG_TARGET_NAME=\"$target\"" >> "$config"
 
+<<<<<<< HEAD
 	if [ -f "$config" ]; then
 		sed -i '/CONFIG_EXTERNAL_TOOLCHAIN_LIBC_USE_MUSL/d' "$config"
 		sed -i '/CONFIG_EXTERNAL_TOOLCHAIN_LIBC_USE_GLIBC/d' "$config"
@@ -412,6 +441,14 @@ print_config() {
 
 	local lib
 	for lib in C RT PTHREAD GCC STDCPP SSP GFORTRAN GOMP ATOMIC QUADMATH ASAN TSAN LSAN UBSAN; do
+=======
+	if [ "$LIBC_TYPE" != glibc ]; then
+		echo "CONFIG_TOOLCHAIN_LIBC=\"$LIBC_TYPE\"" >> "$config"
+	fi
+
+	local lib
+	for lib in C RT PTHREAD GCC STDCPP SSP GFORTRAN GOMP; do
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		local file
 		local spec=""
 		local llib="$(echo "$lib" | sed -e 's#.*#\L&#')"
@@ -500,6 +537,7 @@ probe_cpp() {
 }
 
 probe_libc() {
+<<<<<<< HEAD
 	if [ -f $TOOLCHAIN/info.mk ]; then
 		LIBC_TYPE=$(grep LIBC_TYPE $TOOLCHAIN/info.mk | sed 's/LIBC_TYPE=//')
 		return 0
@@ -507,6 +545,8 @@ probe_libc() {
 
 	echo "Warning! Can't find info.mk, trying to detect with alternative way."
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if [ -z "$LIBC_TYPE" ]; then
 		if test_uclibc; then
 			LIBC_TYPE="uclibc"
@@ -584,6 +624,7 @@ while [ -n "$1" ]; do
 			exit $?
 		;;
 
+<<<<<<< HEAD
 		--overwrite-config)
 			OVERWRITE_CONFIG=y
 		;;
@@ -592,6 +633,10 @@ while [ -n "$1" ]; do
 			if probe_cc; then
 				probe_libc
 				find_gcc_version
+=======
+		--config)
+			if probe_cc; then
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				print_config "$1"
 				exit $?
 			fi
@@ -630,9 +675,13 @@ while [ -n "$1" ]; do
 			echo -e "  Most commands also take a --cflags parameter which " >&2
 			echo -e "  is used to specify C flags to be passed to the "     >&2
 			echo -e "  cross compiler when performing tests."               >&2
+<<<<<<< HEAD
 			echo -e "  This parameter may be repeated multiple times."      >&2
 			echo -e "  Use --overwrite-config before --config to overwrite" >&2
 			echo -e "  an already present config with the required changes.">&2
+=======
+			echo -e "  This paremter may be repeated multiple times."       >&2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			exit 1
 		;;
 

@@ -20,14 +20,21 @@ TARGETS=$*
   exit 1
 }
 
+<<<<<<< HEAD
 find $TARGETS -not -path \*/lib/firmware/\* -a -type f -a -exec file {} \; | \
+=======
+find $TARGETS -type f -a -exec file {} \; | \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   sed -n -e 's/^\(.*\):.*ELF.*\(executable\|relocatable\|shared object\).*,.*/\1:\2/p' | \
 (
   IFS=":"
   while read F S; do
     echo "$SELF: $F: $S"
 	[ "${S}" = "relocatable" ] && {
+<<<<<<< HEAD
 		[ "${F##*.}" == "o" ] && continue
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		eval "$STRIP_KMOD $F"
 	} || {
 		b=$(stat -c '%a' $F)

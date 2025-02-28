@@ -1,6 +1,10 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 [ -x /sbin/udhcpc ] || exit 0
+=======
+[ -L /sbin/udhcpc ] || exit 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions.sh
 . ../netifd-proto.sh
@@ -67,7 +71,11 @@ proto_dhcp_setup() {
 		-p /var/run/udhcpc-$iface.pid \
 		-s /lib/netifd/dhcp.script \
 		-f -t 0 -i "$iface" \
+<<<<<<< HEAD
 		${ipaddr:+-r ${ipaddr/\/*/}} \
+=======
+		${ipaddr:+-r $ipaddr} \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		${hostname:+-x "hostname:$hostname"} \
 		${vendorid:+-V "$vendorid"} \
 		$clientid $defaultreqopts $broadcast $norelease $dhcpopts

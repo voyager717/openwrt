@@ -25,6 +25,11 @@
 #define IFXMIPS_ATM_CORE_H
 
 
+<<<<<<< HEAD
+=======
+#define INT_NUM_IM2_IRL24	(INT_NUM_IM2_IRL0 + 24)
+#define INT_NUM_IM2_IRL13	(INT_NUM_IM2_IRL0 + 13)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define CONFIG_IFXMIPS_DSL_CPE_MEI
 #define IFX_REG_W32(_v, _r)               __raw_writel((_v), (volatile unsigned int *)(_r))
 #define IFX_REG_R32(_r)                    __raw_readl((volatile unsigned int *)(_r))
@@ -32,7 +37,11 @@
 #define SET_BITS(x, msb, lsb, value)    (((x) & ~(((1 << ((msb) + 1)) - 1) ^ ((1 << (lsb)) - 1))) | (((value) & ((1 << (1 + (msb) - (lsb))) - 1)) << (lsb)))
 
 struct ltq_atm_ops {
+<<<<<<< HEAD
 	int (*init)(struct platform_device *pdev);
+=======
+	void (*init)(struct platform_device *pdev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	void (*shutdown)(void);
 
 	int (*start)(int pp32);
@@ -237,8 +246,11 @@ struct atm_priv_data {
 	void *oam_buf_base;
 	void *tx_desc_base;
 	void *tx_skb_base;
+<<<<<<< HEAD
 
 	int irq;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 #include "ifxmips_atm_ppe_common.h"

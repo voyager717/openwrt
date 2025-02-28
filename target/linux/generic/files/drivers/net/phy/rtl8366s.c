@@ -1291,6 +1291,10 @@ MODULE_DEVICE_TABLE(of, rtl8366s_match);
 static struct platform_driver rtl8366s_driver = {
 	.driver = {
 		.name		= RTL8366S_DRIVER_NAME,
+<<<<<<< HEAD
+=======
+		.owner		= THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CONFIG_OF
 		.of_match_table = of_match_ptr(rtl8366s_match),
 #endif

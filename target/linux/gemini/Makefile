@@ -9,9 +9,14 @@ BOARD:=gemini
 BOARDNAME:=Cortina Systems CS351x
 FEATURES:=squashfs pci rtc usb dt gpio display ext4 rootfs-part boot-part
 CPU_TYPE:=fa526
+<<<<<<< HEAD
 SUBTARGETS:=generic
 
 KERNEL_PATCHVER:=6.6
+=======
+
+KERNEL_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Target/Description
 	Build firmware images for the StorLink/Cortina Gemini CS351x ARM FA526 CPU

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "iodata,wn-dx1200gr", "mediatek,mt7621-soc";
@@ -15,21 +18,33 @@
 		led-failsafe = &led_power;
 		led-running = &led_power;
 		led-upgrade = &led_power;
+<<<<<<< HEAD
 		label-mac-device = &gmac1;
+=======
+		label-mac-device = &wan;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	leds {
 		compatible = "gpio-leds";
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
 		};
 	};
@@ -61,11 +76,14 @@
 &nand {
 	status = "okay";
 
+<<<<<<< HEAD
 	mediatek,bbt;
 	mediatek,bmt-remap-range =
 		<0x0000000 0x0800000>,
 		<0x3600000 0x4980000>;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	partitions {
 		compatible = "fixed-partitions";
 		#address-cells = <1>;
@@ -83,6 +101,7 @@
 			read-only;
 		};
 
+<<<<<<< HEAD
 		partition@200000 {
 			label = "factory";
 			reg = <0x200000 0x200000>;
@@ -108,6 +127,11 @@
 					reg = <0x1e006 0x6>;
 				};
 			};
+=======
+		factory: partition@200000 {
+			label = "factory";
+			reg = <0x200000 0x200000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@400000 {
@@ -157,6 +181,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_1e000>;
 	nvmem-cell-names = "mac-address";
 };
@@ -172,10 +197,22 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&factory 0x1e000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		wan: port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&factory 0x1e006>;
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan4";
@@ -206,10 +243,16 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <2400000 2500000>;
 
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+
+		mediatek,mtd-eeprom = <&factory 0x0>;
+		ieee80211-freq-limit = <2400000 2500000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
@@ -217,10 +260,16 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <5000000 6000000>;
 
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+		ieee80211-freq-limit = <5000000 6000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 

@@ -13,10 +13,15 @@ platform_do_upgrade() {
 	local board=$(board_name)
 
 	case "$board" in
+<<<<<<< HEAD
 	hpe,msm460|\
 	ocedo,panda|\
 	sophos,red-15w-rev1|\
 	watchguard,firebox-t10)
+=======
+	ocedo,panda|\
+	sophos,red-15w-rev1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		nand_do_upgrade "$1"
 		;;
 	*)

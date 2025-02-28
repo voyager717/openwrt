@@ -41,7 +41,10 @@
 #include <linux/atm.h>
 #include <linux/clk.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
 #include <linux/version.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifdef CONFIG_XFRM
   #include <net/xfrm.h>
 #endif
@@ -200,11 +203,15 @@ static inline void mailbox_aal_rx_handler(void);
 static irqreturn_t mailbox_irq_handler(int, void *);
 static inline void mailbox_signal(unsigned int, int);
 static void do_ppe_tasklet(unsigned long);
+<<<<<<< HEAD
 #if LINUX_VERSION_CODE < KERNEL_VERSION(5,9,0)
 DECLARE_TASKLET(g_dma_tasklet, do_ppe_tasklet, 0);
 #else
 DECLARE_TASKLET_OLD(g_dma_tasklet, do_ppe_tasklet);
 #endif
+=======
+DECLARE_TASKLET(g_dma_tasklet, do_ppe_tasklet, 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*
  *  QSB & HTU setting functions
@@ -435,7 +442,11 @@ static int ppe_open(struct atm_vcc *vcc)
 		*MBOX_IGU1_ISRC = (1 << RX_DMA_CH_AAL) | (1 << RX_DMA_CH_OAM);
 		*MBOX_IGU1_IER  = (1 << RX_DMA_CH_AAL) | (1 << RX_DMA_CH_OAM);
 
+<<<<<<< HEAD
 		enable_irq(g_atm_priv_data.irq);
+=======
+		enable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	/*  set port    */
@@ -481,7 +492,11 @@ static void ppe_close(struct atm_vcc *vcc)
 
 	/*  disable irq */
 	if ( g_atm_priv_data.conn_table == 0 )
+<<<<<<< HEAD
 		disable_irq(g_atm_priv_data.irq);
+=======
+		disable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	/*  release bandwidth   */
 	switch ( vcc->qos.txtp.traffic_class )
@@ -1022,7 +1037,11 @@ static void do_ppe_tasklet(unsigned long data)
 	else if (*MBOX_IGU1_ISR >> (FIRST_QSB_QID + 16)) /* TX queue */
 		tasklet_schedule(&g_dma_tasklet);
 	else
+<<<<<<< HEAD
 		enable_irq(g_atm_priv_data.irq);
+=======
+		enable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static irqreturn_t mailbox_irq_handler(int irq, void *dev_id)
@@ -1030,7 +1049,11 @@ static irqreturn_t mailbox_irq_handler(int irq, void *dev_id)
 	if ( !*MBOX_IGU1_ISR )
 		return IRQ_HANDLED;
 
+<<<<<<< HEAD
 	disable_irq_nosync(g_atm_priv_data.irq);
+=======
+	disable_irq_nosync(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	tasklet_schedule(&g_dma_tasklet);
 
 	return IRQ_HANDLED;
@@ -1782,10 +1805,14 @@ static int ltq_atm_probe(struct platform_device *pdev)
 		goto INIT_PRIV_DATA_FAIL;
 	}
 
+<<<<<<< HEAD
 	ret = ops->init(pdev);
 	if (ret)
 		return ret;
 
+=======
+	ops->init(pdev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	init_rx_tables();
 	init_tx_tables();
 
@@ -1808,6 +1835,7 @@ static int ltq_atm_probe(struct platform_device *pdev)
 		}
 	}
 
+<<<<<<< HEAD
 	g_atm_priv_data.irq = platform_get_irq(pdev, 0);
 	if (g_atm_priv_data.irq < 0) {
 		pr_err("platform_get_irq fail");
@@ -1816,15 +1844,27 @@ static int ltq_atm_probe(struct platform_device *pdev)
 
 	/*  register interrupt handler  */
 	ret = request_irq(g_atm_priv_data.irq, mailbox_irq_handler, 0, "atm_mailbox_isr", &g_atm_priv_data);
+=======
+	/*  register interrupt handler  */
+	ret = request_irq(PPE_MAILBOX_IGU1_INT, mailbox_irq_handler, 0, "atm_mailbox_isr", &g_atm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if ( ret ) {
 		if ( ret == -EBUSY ) {
 			pr_err("IRQ may be occupied by other driver, please reconfig to disable it.\n");
 		} else {
+<<<<<<< HEAD
 			pr_err("request_irq fail irq:%d\n", g_atm_priv_data.irq);
 		}
 		goto REQUEST_IRQ_PPE_MAILBOX_IGU1_INT_FAIL;
 	}
 	disable_irq(g_atm_priv_data.irq);
+=======
+			pr_err("request_irq fail irq:%d\n", PPE_MAILBOX_IGU1_INT);
+		}
+		goto REQUEST_IRQ_PPE_MAILBOX_IGU1_INT_FAIL;
+	}
+	disable_irq(PPE_MAILBOX_IGU1_INT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 
 	ret = ops->start(0);
@@ -1854,7 +1894,11 @@ static int ltq_atm_probe(struct platform_device *pdev)
 	return 0;
 
 PP32_START_FAIL:
+<<<<<<< HEAD
 	free_irq(g_atm_priv_data.irq, &g_atm_priv_data);
+=======
+	free_irq(PPE_MAILBOX_IGU1_INT, &g_atm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 REQUEST_IRQ_PPE_MAILBOX_IGU1_INT_FAIL:
 ATM_DEV_REGISTER_FAIL:
 	while ( port_num-- > 0 )
@@ -1877,7 +1921,11 @@ static int ltq_atm_remove(struct platform_device *pdev)
 
 	ops->stop(0);
 
+<<<<<<< HEAD
 	free_irq(g_atm_priv_data.irq, &g_atm_priv_data);
+=======
+	free_irq(PPE_MAILBOX_IGU1_INT, &g_atm_priv_data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	for ( port_num = 0; port_num < ATM_PORT_NUMBER; port_num++ )
 		atm_dev_deregister(g_atm_priv_data.port[port_num].dev);
@@ -1894,6 +1942,10 @@ static struct platform_driver ltq_atm_driver = {
 	.remove = ltq_atm_remove,
 	.driver = {
 		.name = "atm",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		.of_match_table = ltq_atm_match,
 	},
 };

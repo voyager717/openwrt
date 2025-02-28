@@ -156,7 +156,11 @@ void rt2880_port_init(struct fe_priv *priv, struct device_node *np)
 	const __be32 *id = of_get_property(np, "reg", NULL);
 	const __be32 *link;
 	int size;
+<<<<<<< HEAD
 	phy_interface_t phy_mode = PHY_INTERFACE_MODE_NA;
+=======
+	int phy_mode;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!id || (be32_to_cpu(*id) != 0)) {
 		pr_err("%s: invalid port id\n", np->name);
@@ -172,7 +176,11 @@ void rt2880_port_init(struct fe_priv *priv, struct device_node *np)
 		return;
 	}
 
+<<<<<<< HEAD
 	of_get_phy_mode(np, &phy_mode);
+=======
+	phy_mode = of_get_phy_mode(np);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	switch (phy_mode) {
 	case PHY_INTERFACE_MODE_RGMII:
 		break;

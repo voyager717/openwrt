@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 define Build/dongwon-header
 	head -c 4 $@ > $@.tmp
 	head -c 8 /dev/zero >> $@.tmp
@@ -28,11 +29,27 @@ define Build/zyxel-buildkerneljffs
 		-o $@ \
 		-d $@.tmp
 	rm -rf $@.tmp
+=======
+# attention: only zlib compression is allowed for the boot fs
+define Build/zyxel-buildkerneljffs
+	rm -rf  $(KDIR_TMP)/zyxelnbg6716
+	mkdir -p $(KDIR_TMP)/zyxelnbg6716/image/boot
+	cp $@ $(KDIR_TMP)/zyxelnbg6716/image/boot/vmlinux.lzma.uImage
+	$(STAGING_DIR_HOST)/bin/mkfs.jffs2 \
+		--big-endian --squash-uids -v -e 128KiB -q -f -n -x lzma -x rtime \
+		-o $@ \
+		-d $(KDIR_TMP)/zyxelnbg6716/image
+	rm -rf $(KDIR_TMP)/zyxelnbg6716
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/zyxel-factory
 	let \
+<<<<<<< HEAD
 		maxsize="$(call exp_units,$(RAS_ROOTFS_SIZE))"; \
+=======
+		maxsize="$(subst k,* 1024,$(RAS_ROOTFS_SIZE))"; \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		let size="$$(stat -c%s $@)"; \
 		if [ $$size -lt $$maxsize ]; then \
 			$(STAGING_DIR_HOST)/bin/mkrasimage \
@@ -97,6 +114,7 @@ define Device/domywifi_dw33d
 endef
 TARGET_DEVICES += domywifi_dw33d
 
+<<<<<<< HEAD
 define Device/dongwon_dw02-412h
   SOC := qca9557
   DEVICE_VENDOR := Dongwon T&I
@@ -132,6 +150,8 @@ define Device/dongwon_dw02-412h-128m
 endef
 TARGET_DEVICES += dongwon_dw02-412h-128m
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/glinet_gl-ar300m-common-nand
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
@@ -157,6 +177,10 @@ TARGET_DEVICES += glinet_gl-ar300m-nand
 define Device/glinet_gl-ar300m-nor
   $(Device/glinet_gl-ar300m-common-nand)
   DEVICE_VARIANT := NOR
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += glinet,gl-ar300m-nand gl-ar300m
 endef
 TARGET_DEVICES += glinet_gl-ar300m-nor
@@ -182,6 +206,10 @@ TARGET_DEVICES += glinet_gl-ar750s-nor-nand
 define Device/glinet_gl-ar750s-nor
   $(Device/glinet_gl-ar750s-common)
   DEVICE_VARIANT := NOR
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += gl-ar750s glinet,gl-ar750s glinet,gl-ar750s-nor-nand
 endef
 TARGET_DEVICES += glinet_gl-ar750s-nor
@@ -190,8 +218,12 @@ define Device/glinet_gl-e750
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := GL-E750
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca9887-ct kmod-usb2 \
 	kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+=======
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca9887-ct kmod-usb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += gl-e750
   KERNEL_SIZE := 4096k
   IMAGE_SIZE := 131072k
@@ -204,6 +236,7 @@ define Device/glinet_gl-e750
 endef
 TARGET_DEVICES += glinet_gl-e750
 
+<<<<<<< HEAD
 define Device/glinet_gl-s200-common
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
@@ -322,6 +355,9 @@ endef
 TARGET_DEVICES += meraki_mr18
 
 # fake rootfs is mandatory, pad-offset 129 equals (2 * uimage_header + '\0')
+=======
+# fake rootfs is mandatory, pad-offset 129 equals (2 * uimage_header + 0xff)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear_ath79_nand
   DEVICE_VENDOR := NETGEAR
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport
@@ -329,6 +365,7 @@ define Device/netgear_ath79_nand
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   IMAGE_SIZE := 25600k
+<<<<<<< HEAD
   KERNEL := kernel-bin | append-dtb | lzma | \
 	pad-offset $$(BLOCKSIZE) 129 | uImage lzma | pad-extra 1 | \
 	append-uImage-fakehdr filesystem $$(UIMAGE_MAGIC)
@@ -366,6 +403,21 @@ define Device/netgear_r6100
 endef
 TARGET_DEVICES += netgear_r6100
 
+=======
+  KERNEL := kernel-bin | append-dtb | lzma -d20 | \
+	pad-offset $$(KERNEL_SIZE) 129 | uImage lzma | \
+	append-string -e '\xff' | \
+	append-uImage-fakehdr filesystem $$(UIMAGE_MAGIC)
+  KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma -d20 | uImage lzma
+  IMAGES := sysupgrade.bin factory.img
+  IMAGE/factory.img := append-kernel | append-ubi | netgear-dni | \
+	check-size
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata | \
+	check-size
+  UBINIZE_OPTS := -E 5
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear_wndr3700-v4
   SOC := ar9344
   DEVICE_MODEL := WNDR3700
@@ -409,9 +461,12 @@ TARGET_DEVICES += netgear_wndr4300tn
 
 define Device/netgear_wndr4300-v2
   SOC := qca9563
+<<<<<<< HEAD
   DEVICE_COMPAT_VERSION := 1.1
   DEVICE_COMPAT_MESSAGE := Partition table has been changed to fix the \
 	first reboot issue. Please reflash factory image with nmrp or tftp.
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := WNDR4300
   DEVICE_VARIANT := v2
   UIMAGE_MAGIC := 0x27051956
@@ -423,9 +478,12 @@ TARGET_DEVICES += netgear_wndr4300-v2
 
 define Device/netgear_wndr4500-v3
   SOC := qca9563
+<<<<<<< HEAD
   DEVICE_COMPAT_VERSION := 1.1
   DEVICE_COMPAT_MESSAGE := Partition table has been changed to fix the \
 	first reboot issue. Please reflash factory image with nmrp or tftp.
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := WNDR4500
   DEVICE_VARIANT := v3
   UIMAGE_MAGIC := 0x27051956
@@ -435,6 +493,7 @@ define Device/netgear_wndr4500-v3
 endef
 TARGET_DEVICES += netgear_wndr4500-v3
 
+<<<<<<< HEAD
 define Device/zte_mf28x_common
   SOC := qca9563
   DEVICE_VENDOR := ZTE
@@ -497,6 +556,11 @@ TARGET_DEVICES += zte_mf286r
 define Device/zyxel_nbg6716
   SOC := qca9558
   DEVICE_VENDOR := Zyxel
+=======
+define Device/zyxel_nbg6716
+  SOC := qca9558
+  DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := NBG6716
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-ath10k-ct \
 	ath10k-firmware-qca988x-ct
@@ -506,9 +570,14 @@ define Device/zyxel_nbg6716
   KERNEL_SIZE := 4096k
   BLOCKSIZE := 128k
   PAGESIZE := 2048
+<<<<<<< HEAD
   LOADER_TYPE := bin
   KERNEL := kernel-bin | append-dtb | lzma | loader-kernel | uImage none | \
 	zyxel-buildkerneljffs | check-size 4096k
+=======
+  KERNEL := kernel-bin | append-dtb | uImage none | zyxel-buildkerneljffs | \
+	check-size 4096k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := sysupgrade.tar sysupgrade-4M-Kernel.bin factory.bin
   IMAGE/sysupgrade.tar/squashfs := append-rootfs | pad-to $$$$(BLOCKSIZE) | \
 	sysupgrade-tar rootfs=$$$$@ | append-metadata
@@ -519,6 +588,7 @@ define Device/zyxel_nbg6716
   UBINIZE_OPTS := -E 5
 endef
 TARGET_DEVICES += zyxel_nbg6716
+<<<<<<< HEAD
 
 define Device/zyxel_emg2926_q10a
   $(Device/zyxel_nbg6716)
@@ -526,3 +596,5 @@ define Device/zyxel_emg2926_q10a
   RAS_BOARD := AAVK-EMG2926Q10A
 endef
 TARGET_DEVICES += zyxel_emg2926_q10a
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

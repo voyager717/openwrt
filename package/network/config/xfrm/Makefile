@@ -2,7 +2,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=xfrm
+<<<<<<< HEAD
 PKG_RELEASE:=5
+=======
+PKG_RELEASE:=3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk

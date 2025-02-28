@@ -2,33 +2,51 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dir-860l-b1", "mediatek,mt7621-soc";
 	model = "D-Link DIR-860L B1";
 
 	aliases {
+<<<<<<< HEAD
 		label-mac-device = &gmac0;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		led-boot = &led_power_green;
 		led-failsafe = &led_power_green;
 		led-running = &led_power_green;
 		led-upgrade = &led_power_green;
+<<<<<<< HEAD
+=======
+		label-mac-device = &gmac0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	leds {
 		compatible = "gpio-leds";
 
 		power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_green: power2 {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
@@ -85,6 +103,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@34000 {
 				label = "radio";
 				reg = <0x34000 0x4000>;
@@ -110,6 +129,15 @@
 			};
 
 			partition@38000 {
+=======
+			radio: partition@34000 {
+				label = "radio";
+				reg = <0x34000 0x4000>;
+				read-only;
+			};
+
+			factory: partition@38000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "factory";
 				reg = <0x38000 0x8000>;
 				read-only;
@@ -131,6 +159,7 @@
 };
 
 &gmac0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_radio_4>;
 	nvmem-cell-names = "mac-address";
 };
@@ -146,10 +175,21 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+	mtd-mac-address = <&radio 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan4";
@@ -182,8 +222,12 @@
 &pcie0 {
 	wifi0: mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_radio_2000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&radio 0x2000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
@@ -191,8 +235,12 @@
 &pcie1 {
 	wifi1: mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_radio_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&radio 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <2400000 2500000>;
 	};
 };

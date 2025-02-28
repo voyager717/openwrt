@@ -70,6 +70,7 @@
 				reg = <0x850000 0x7a0000>;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "ART";
 				reg = <0xff0000 0x010000>;
@@ -94,6 +95,12 @@
 						reg = <0x5000 0x440>;
 					};
 				};
+=======
+			art: partition@ff0000 {
+				label = "ART";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -102,6 +109,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0x1>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		eee-broken-100tx;
@@ -114,8 +126,12 @@
 
 	pll-data = <0x02000000 0x00000101 0x00001313>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-mode = "rgmii-id";
 	phy-handle = <&phy0>;
@@ -131,8 +147,14 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 1>, <&calibration_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+	mtd-mac-address = <&art 0x0>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -141,10 +163,16 @@
 	ath9k: wifi@0,0 {
 		compatible = "pci168c,0030";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&macaddr_art_0 8>, <&calibration_art_5000>;
 		nvmem-cell-names = "mac-address", "calibration";
 
 		gpio-controller;
 		#gpio-cells = <2>;
+=======
+		qca,no-eeprom;
+		mtd-mac-address = <&art 0x0>;
+		mtd-mac-address-increment = <8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

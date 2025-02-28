@@ -4,8 +4,11 @@ use lib "$FindBin::Bin";
 use strict;
 use metadata;
 use Getopt::Long;
+<<<<<<< HEAD
 use Time::Piece;
 use JSON::PP;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 my %board;
 
@@ -162,8 +165,11 @@ sub mconf_depends {
 		$depend =~ s/^([@\+]+)// and $flags = $1;
 		my $condition = $parent_condition;
 
+<<<<<<< HEAD
 		$depend = $2 if	$depend =~ /^(.+):(.+)$/ and $dep->{$1} eq 'select';
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		next if $condition eq $depend;
 		next if $seen->{"$parent_condition:$depend"};
 		next if $seen->{":$depend"};
@@ -236,7 +242,11 @@ sub mconf_depends {
 		mconf_depends($pkgname, $tdep->[0], 1, $dep, $seen, $tdep->[1]);
 	}
 
+<<<<<<< HEAD
 	foreach my $depend (sort keys %$dep) {
+=======
+	foreach my $depend (keys %$dep) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		my $m = $dep->{$depend};
 		$res .= "\t\t$m $depend\n";
 	}
@@ -373,7 +383,11 @@ sub and_condition($) {
 
 sub gen_condition ($) {
 	my $condition = shift;
+<<<<<<< HEAD
 	# remove '!()', just as include/package-pack.mk does
+=======
+	# remove '!()', just as include/package-ipkg.mk does
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$condition =~ s/[()!]//g;
 	return join("", map(and_condition($_), split('\|\|', $condition)));
 }
@@ -589,6 +603,7 @@ sub gen_usergroup_list() {
 	}
 }
 
+<<<<<<< HEAD
 sub gen_package_manifest_json() {
 	my $json;
 	parse_package_metadata($ARGV[0]) or exit 1;
@@ -793,6 +808,8 @@ sub gen_package_cyclonedxsbom() {
 	print dump_cyclonedxsbom_json(@components);
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 sub parse_command() {
 	GetOptions("ignore=s", \@ignore);
 	my $cmd = shift @ARGV;
@@ -802,9 +819,12 @@ sub parse_command() {
 		/^kconfig/ and return gen_kconfig_overrides();
 		/^source$/ and return gen_package_source();
 		/^pkgaux$/ and return gen_package_auxiliary();
+<<<<<<< HEAD
 		/^pkgmanifestjson$/ and return gen_package_manifest_json();
 		/^imgcyclonedxsbom$/ and return gen_image_cyclonedxsbom();
 		/^pkgcyclonedxsbom$/ and return gen_package_cyclonedxsbom();
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		/^license$/ and return gen_package_license(0);
 		/^licensefull$/ and return gen_package_license(1);
 		/^usergroup$/ and return gen_usergroup_list();
@@ -812,6 +832,7 @@ sub parse_command() {
 	}
 	die <<EOF
 Available Commands:
+<<<<<<< HEAD
 	$0 mk [file]					Package metadata in makefile format
 	$0 config [file] 				Package metadata in Kconfig format
 	$0 kconfig [file] [config] [patchver]	Kernel config overrides
@@ -823,6 +844,16 @@ Available Commands:
 	$0 license [file] 				Package license information
 	$0 licensefull [file] 			Package license information (full list)
 	$0 usergroup [file]				Package usergroup allocation list
+=======
+	$0 mk [file]				Package metadata in makefile format
+	$0 config [file] 			Package metadata in Kconfig format
+	$0 kconfig [file] [config] [patchver]	Kernel config overrides
+	$0 source [file] 			Package source file information
+	$0 pkgaux [file]			Package auxiliary variables in makefile format
+	$0 license [file] 			Package license information
+	$0 licensefull [file] 			Package license information (full list)
+	$0 usergroup [file]			Package usergroup allocation list
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$0 version_filter [patchver] [list...]	Filter list of version tagged strings
 
 Options:

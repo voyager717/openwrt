@@ -1,6 +1,10 @@
 
 #
+<<<<<<< HEAD
 # Copyright (C) 2006-2023 OpenWrt.org
+=======
+# Copyright (C) 2006-2010 OpenWrt.org
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -39,6 +43,7 @@ endef
 
 $(eval $(call KernelPackage,nf-reject6))
 
+<<<<<<< HEAD
 define KernelPackage/nf-conncount
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter conncount support
@@ -50,6 +55,8 @@ define KernelPackage/nf-conncount
 endef
 
 $(eval $(call KernelPackage,nf-conncount))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/nf-ipt
   SUBMENU:=$(NF_MENU)
@@ -68,7 +75,11 @@ define KernelPackage/nf-ipt6
   KCONFIG:=$(KCONFIG_NF_IPT6)
   FILES:=$(foreach mod,$(NF_IPT6-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(NF_IPT6-m)))
+<<<<<<< HEAD
   DEPENDS:=+kmod-nf-ipt +kmod-nf-log6
+=======
+  DEPENDS:=+kmod-nf-ipt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,nf-ipt6))
@@ -81,7 +92,11 @@ define KernelPackage/ipt-core
   KCONFIG:=$(KCONFIG_IPT_CORE)
   FILES:=$(foreach mod,$(IPT_CORE-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_CORE-m)))
+<<<<<<< HEAD
   DEPENDS:=+kmod-nf-reject +kmod-nf-ipt +kmod-nf-log
+=======
+  DEPENDS:=+kmod-nf-reject +kmod-nf-ipt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/ipt-core/description
@@ -132,6 +147,7 @@ endef
 $(eval $(call KernelPackage,nf-conntrack6))
 
 
+<<<<<<< HEAD
 define KernelPackage/nf-dup-inet
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables dup in ip/ip6/inet family support
@@ -171,6 +187,8 @@ endef
 $(eval $(call KernelPackage,nf-log6))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/nf-nat
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter NAT
@@ -203,13 +221,20 @@ define KernelPackage/nf-flow
 	CONFIG_NF_FLOW_TABLE \
 	CONFIG_NF_FLOW_TABLE_HW
   DEPENDS:=+kmod-nf-conntrack
+<<<<<<< HEAD
   FILES:= $(LINUX_DIR)/net/netfilter/nf_flow_table.ko
+=======
+  FILES:= \
+	$(LINUX_DIR)/net/netfilter/nf_flow_table.ko \
+	$(LINUX_DIR)/net/netfilter/nf_flow_table_hw.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,nf_flow_table nf_flow_table_hw)
 endef
 
 $(eval $(call KernelPackage,nf-flow))
 
 
+<<<<<<< HEAD
 define KernelPackage/nf-socket
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter socket lookup support
@@ -232,6 +257,8 @@ endef
 $(eval $(call KernelPackage,nf-tproxy))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define AddDepends/ipt
   SUBMENU:=$(NF_MENU)
   DEPENDS+= +kmod-ipt-core $(1)
@@ -261,7 +288,10 @@ $(eval $(call KernelPackage,ipt-conntrack))
 
 define KernelPackage/ipt-conntrack-extra
   TITLE:=Extra connection tracking modules
+<<<<<<< HEAD
   DEPENDS:=+kmod-nf-conncount
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=$(KCONFIG_IPT_CONNTRACK_EXTRA)
   FILES:=$(foreach mod,$(IPT_CONNTRACK_EXTRA-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_CONNTRACK_EXTRA-m)))
@@ -376,7 +406,10 @@ IPSET_MODULES:= \
 	ipset/ip_set_bitmap_ipmac \
 	ipset/ip_set_bitmap_port \
 	ipset/ip_set_hash_ip \
+<<<<<<< HEAD
 	ipset/ip_set_hash_ipmac \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ipset/ip_set_hash_ipmark \
 	ipset/ip_set_hash_ipport \
 	ipset/ip_set_hash_ipportip \
@@ -614,7 +647,11 @@ define KernelPackage/nf-nathelper-extra
   KCONFIG:=$(KCONFIG_NF_NATHELPER_EXTRA)
   FILES:=$(foreach mod,$(NF_NATHELPER_EXTRA-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(NF_NATHELPER_EXTRA-m)))
+<<<<<<< HEAD
   DEPENDS:=+kmod-nf-nat +kmod-lib-textsearch +kmod-asn1-decoder
+=======
+  DEPENDS:=+kmod-nf-nat +kmod-lib-textsearch +kmod-ipt-raw +kmod-asn1-decoder
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/nf-nathelper-extra/description
@@ -635,6 +672,26 @@ endef
 $(eval $(call KernelPackage,nf-nathelper-extra))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/ipt-ulog
+  TITLE:=Module for user-space packet logging
+  KCONFIG:=$(KCONFIG_IPT_ULOG)
+  FILES:=$(foreach mod,$(IPT_ULOG-m),$(LINUX_DIR)/net/$(mod).ko)
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_ULOG-m)))
+  $(call AddDepends/ipt)
+endef
+
+define KernelPackage/ipt-ulog/description
+ Netfilter (IPv4) module for user-space packet logging
+ Includes:
+ - ULOG
+endef
+
+$(eval $(call KernelPackage,ipt-ulog))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/ipt-nflog
   TITLE:=Module for user-space packet logging
   KCONFIG:=$(KCONFIG_IPT_NFLOG)
@@ -700,6 +757,7 @@ endef
 
 $(eval $(call KernelPackage,ipt-led))
 
+<<<<<<< HEAD
 define KernelPackage/ipt-socket
   TITLE:=Iptables socket matching support
   DEPENDS+=+kmod-nf-socket +kmod-nf-conntrack
@@ -718,6 +776,11 @@ $(eval $(call KernelPackage,ipt-socket))
 define KernelPackage/ipt-tproxy
   TITLE:=Transparent proxying support
   DEPENDS+=+kmod-nf-tproxy +kmod-nf-conntrack
+=======
+define KernelPackage/ipt-tproxy
+  TITLE:=Transparent proxying support
+  DEPENDS+=+kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +IPV6:kmod-ip6tables
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=$(KCONFIG_IPT_TPROXY)
   FILES:=$(foreach mod,$(IPT_TPROXY-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_TPROXY-m)))
@@ -732,7 +795,11 @@ $(eval $(call KernelPackage,ipt-tproxy))
 
 define KernelPackage/ipt-tee
   TITLE:=TEE support
+<<<<<<< HEAD
   DEPENDS:=+kmod-ipt-conntrack +kmod-nf-dup-inet
+=======
+  DEPENDS:=+kmod-ipt-conntrack
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=$(KCONFIG_IPT_TEE)
   FILES:=$(foreach mod,$(IPT_TEE-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir nf_tee $(IPT_TEE-m)))
@@ -818,6 +885,30 @@ endef
 
 $(eval $(call KernelPackage,ipt-cluster))
 
+<<<<<<< HEAD
+=======
+define KernelPackage/ipt-clusterip
+  TITLE:=Module for CLUSTERIP
+  KCONFIG:=$(KCONFIG_IPT_CLUSTERIP)
+  FILES:=$(foreach mod,$(IPT_CLUSTERIP-m),$(LINUX_DIR)/net/$(mod).ko)
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(IPT_CLUSTERIP-m)))
+  $(call AddDepends/ipt,+kmod-nf-conntrack)
+endef
+
+define KernelPackage/ipt-clusterip/description
+ Netfilter (IPv4-only) module for CLUSTERIP
+ The CLUSTERIP target allows you to build load-balancing clusters of
+ network servers without having a dedicated load-balancing
+ router/server/switch.
+
+ To use it also enable iptables-mod-clusterip
+
+ see `iptables -j CLUSTERIP --help` for more information.
+endef
+
+$(eval $(call KernelPackage,ipt-clusterip))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/ipt-extra
   TITLE:=Extra modules
@@ -1048,6 +1139,7 @@ endef
 $(eval $(call KernelPackage,nfnetlink-queue))
 
 
+<<<<<<< HEAD
 define KernelPackage/nfnetlink-cthelper
   TITLE:=Netfilter User space conntrack helpers
   FILES:=$(LINUX_DIR)/net/netfilter/nfnetlink_cthelper.ko
@@ -1082,12 +1174,18 @@ endef
 $(eval $(call KernelPackage,nfnetlink-cttimeout))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/nf-conntrack-netlink
   TITLE:=Connection tracking netlink interface
   FILES:=$(LINUX_DIR)/net/netfilter/nf_conntrack_netlink.ko
   KCONFIG:=CONFIG_NF_CT_NETLINK CONFIG_NF_CONNTRACK_EVENTS=y CONFIG_NETFILTER_NETLINK_GLUE_CT=y
   AUTOLOAD:=$(call AutoProbe,nf_conntrack_netlink)
+<<<<<<< HEAD
   $(call AddDepends/nfnetlink,+kmod-nf-conntrack)
+=======
+  $(call AddDepends/nfnetlink,+kmod-ipt-conntrack)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/nf-conntrack-netlink/description
@@ -1135,7 +1233,11 @@ $(eval $(call KernelPackage,ipt-rpfilter))
 define KernelPackage/nft-core
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables support
+<<<<<<< HEAD
   DEPENDS:=+kmod-nfnetlink +kmod-nf-reject +IPV6:kmod-nf-reject6 +IPV6:kmod-nf-conntrack6 +kmod-nf-nat +kmod-nf-log +IPV6:kmod-nf-log6 +kmod-lib-crc32c
+=======
+  DEPENDS:=+kmod-nfnetlink +kmod-nf-reject +IPV6:kmod-nf-reject6 +IPV6:kmod-nf-conntrack6 +kmod-nf-nat
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(foreach mod,$(NFT_CORE-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(NFT_CORE-m)))
   KCONFIG:= \
@@ -1170,12 +1272,17 @@ define KernelPackage/nft-bridge
   FILES:=$(foreach mod,$(NFT_BRIDGE-m),$(LINUX_DIR)/net/$(mod).ko)
   AUTOLOAD:=$(call AutoProbe,$(notdir $(NFT_BRIDGE-m)))
   KCONFIG:= \
+<<<<<<< HEAD
+=======
+	CONFIG_NF_LOG_BRIDGE=n \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(KCONFIG_NFT_BRIDGE)
 endef
 
 $(eval $(call KernelPackage,nft-bridge))
 
 
+<<<<<<< HEAD
 define KernelPackage/nft-dup-inet
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables dup in ip/ip6/inet family support
@@ -1192,6 +1299,8 @@ endef
 $(eval $(call KernelPackage,nft-dup-inet))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/nft-nat
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables NAT support
@@ -1210,23 +1319,52 @@ define KernelPackage/nft-offload
   DEPENDS:=@IPV6 +kmod-nf-flow +kmod-nft-nat
   KCONFIG:= \
 	CONFIG_NF_FLOW_TABLE_INET \
+<<<<<<< HEAD
 	CONFIG_NFT_FLOW_OFFLOAD
   FILES:= \
 	$(LINUX_DIR)/net/netfilter/nf_flow_table_inet.ko \
 	$(LINUX_DIR)/net/netfilter/nft_flow_offload.ko
   AUTOLOAD:=$(call AutoProbe,nf_flow_table_inet nft_flow_offload)
+=======
+	CONFIG_NF_FLOW_TABLE_IPV4 \
+	CONFIG_NF_FLOW_TABLE_IPV6 \
+	CONFIG_NFT_FLOW_OFFLOAD
+  FILES:= \
+	$(LINUX_DIR)/net/netfilter/nf_flow_table_inet.ko \
+	$(LINUX_DIR)/net/ipv4/netfilter/nf_flow_table_ipv4.ko \
+	$(LINUX_DIR)/net/ipv6/netfilter/nf_flow_table_ipv6.ko \
+	$(LINUX_DIR)/net/netfilter/nft_flow_offload.ko
+  AUTOLOAD:=$(call AutoProbe,nf_flow_table_inet nf_flow_table_ipv4 nf_flow_table_ipv6 nft_flow_offload)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,nft-offload))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/nft-nat6
+  SUBMENU:=$(NF_MENU)
+  TITLE:=Netfilter nf_tables IPv6-NAT support
+  DEPENDS:=+kmod-nft-nat +kmod-nf-nat6
+  FILES:=$(foreach mod,$(NFT_NAT6-m),$(LINUX_DIR)/net/$(mod).ko)
+  AUTOLOAD:=$(call AutoProbe,$(notdir $(NFT_NAT6-m)))
+  KCONFIG:=$(KCONFIG_NFT_NAT6)
+endef
+
+$(eval $(call KernelPackage,nft-nat6))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/nft-netdev
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables netdev support
   DEPENDS:=+kmod-nft-core
   KCONFIG:= \
 	CONFIG_NETFILTER_INGRESS=y \
+<<<<<<< HEAD
 	CONFIG_NETFILTER_EGRESS=y \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_NF_TABLES_NETDEV \
 	CONFIG_NF_DUP_NETDEV \
 	CONFIG_NFT_DUP_NETDEV \
@@ -1263,6 +1401,7 @@ define KernelPackage/nft-queue
 endef
 
 $(eval $(call KernelPackage,nft-queue))
+<<<<<<< HEAD
 
 define KernelPackage/nft-socket
   SUBMENU:=$(NF_MENU)
@@ -1318,3 +1457,5 @@ define KernelPackage/nft-connlimit
 endef
 
 $(eval $(call KernelPackage,nft-connlimit))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

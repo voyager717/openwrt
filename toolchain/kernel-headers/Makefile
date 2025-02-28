@@ -17,17 +17,24 @@ include $(INCLUDE_DIR)/kernel.mk
 PKG_NAME:=linux
 PKG_VERSION:=$(LINUX_VERSION)
 PKG_SOURCE:=$(LINUX_SOURCE)
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/o:linux:linux_kernel
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifneq ($(call qstrip,$(CONFIG_KERNEL_GIT_CLONE_URI)),)
   PKG_SOURCE_PROTO:=git
   PKG_SOURCE_URL:=$(call qstrip,$(CONFIG_KERNEL_GIT_CLONE_URI))
   PKG_SOURCE_VERSION:=$(call qstrip,$(CONFIG_KERNEL_GIT_REF))
   PKG_MIRROR_HASH:=$(call qstrip,$(CONFIG_KERNEL_GIT_MIRROR_HASH))
 ifdef CHECK
+<<<<<<< HEAD
   PLATFORM_DIR:=$(firstword $(wildcard $(TOPDIR)/target/linux/feeds/$(BOARD) $(TOPDIR)/target/linux/$(BOARD)))
   include $(PLATFORM_DIR)/Makefile
   include $(INCLUDE_DIR)/kernel-version.mk
   include $(INCLUDE_DIR)/kernel-build.mk
+=======
+  include $(INCLUDE_DIR)/kernel-version.mk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   PKG_VERSION:=$(LINUX_VERSION)
 else
   PKG_SOURCE:=$(LINUX_SOURCE)
@@ -72,7 +79,10 @@ ifneq ($(CONFIG_mips)$(CONFIG_mipsel),)
 		$(HOST_BUILD_DIR)/arch/mips/include/asm/asm.h \
 		$(HOST_BUILD_DIR)/arch/mips/include/asm/regdef.h \
 		$(HOST_BUILD_DIR)/arch/mips/include/asm/asm-eva.h \
+<<<<<<< HEAD
 		$(HOST_BUILD_DIR)/arch/mips/include/asm/isa-rev.h \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(BUILD_DIR_TOOLCHAIN)/linux-dev/include/asm/
   endef
 endif
@@ -94,6 +104,10 @@ define Host/Prepare
 endef
 
 define Host/Configure
+<<<<<<< HEAD
+=======
+	env
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	yes '' | $(HOST_KMAKE) oldconfig
 	$(call Host/Configure/all)
 	$(call Host/Configure/post/$(ARCH))

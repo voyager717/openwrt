@@ -9,8 +9,13 @@ validate_system_section() {
 		'hostname:string:OpenWrt' \
 		'conloglevel:uinteger' \
 		'buffersize:uinteger' \
+<<<<<<< HEAD
 		'timezone:string:GMT0' \
 		'zonename:string:UTC'
+=======
+		'timezone:string:UTC' \
+		'zonename:string'
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 system_config() {

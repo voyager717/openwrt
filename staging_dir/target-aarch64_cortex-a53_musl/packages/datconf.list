@@ -1,0 +1,11 @@
+./
+./usr
+./usr/include
+./usr/include/libdatconf.h
+./usr/include/libkvcutil.h
+./usr/lib
+./usr/lib/libkvcutil.so.1.0.0.0
+./usr/lib/libdatconf.a
+./usr/lib/libkvcutil.so
+./usr/lib/libkvcutil.so.1
+./host

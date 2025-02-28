@@ -34,7 +34,11 @@ MODULE_PARM_DESC(msg_level, "Message level (-1=defaults,0=none,...,16=all)");
 
 #define ETH_SWITCH_HEADER_LEN	2
 
+<<<<<<< HEAD
 static int ag71xx_tx_packets(struct ag71xx *ag, bool flush, int budget);
+=======
+static int ag71xx_tx_packets(struct ag71xx *ag, bool flush);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static inline unsigned int ag71xx_max_frame_len(unsigned int mtu)
 {
@@ -333,7 +337,11 @@ static unsigned char *ag71xx_speed_str(struct ag71xx *ag)
 	return "?";
 }
 
+<<<<<<< HEAD
 static void ag71xx_hw_set_macaddr(struct ag71xx *ag, const unsigned char *mac)
+=======
+static void ag71xx_hw_set_macaddr(struct ag71xx *ag, unsigned char *mac)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	u32 t;
 
@@ -407,11 +415,19 @@ static void ag71xx_dma_reset(struct ag71xx *ag)
 			 FIFO_CFG4_VT)
 
 #define FIFO_CFG5_INIT	(FIFO_CFG5_DE | FIFO_CFG5_DV | FIFO_CFG5_FC | \
+<<<<<<< HEAD
 			 FIFO_CFG5_CE | FIFO_CFG5_LM | FIFO_CFG5_LO | \
 			 FIFO_CFG5_OK | FIFO_CFG5_MC | FIFO_CFG5_BC | \
 			 FIFO_CFG5_DR | FIFO_CFG5_CF | FIFO_CFG5_UO | \
 			 FIFO_CFG5_VT | FIFO_CFG5_LE | FIFO_CFG5_FT | \
 			 FIFO_CFG5_UC | FIFO_CFG5_SF)
+=======
+			 FIFO_CFG5_CE | FIFO_CFG5_LO | FIFO_CFG5_OK | \
+			 FIFO_CFG5_MC | FIFO_CFG5_BC | FIFO_CFG5_DR | \
+			 FIFO_CFG5_CF | FIFO_CFG5_PF | FIFO_CFG5_VT | \
+			 FIFO_CFG5_LE | FIFO_CFG5_FT | FIFO_CFG5_16 | \
+			 FIFO_CFG5_17 | FIFO_CFG5_SF)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static void ag71xx_hw_stop(struct ag71xx *ag)
 {
@@ -478,7 +494,11 @@ static void ag71xx_fast_reset(struct ag71xx *ag)
 	mii_reg = ag71xx_rr(ag, AG71XX_REG_MII_CFG);
 	rx_ds = ag71xx_rr(ag, AG71XX_REG_RX_DESC);
 
+<<<<<<< HEAD
 	ag71xx_tx_packets(ag, true, 0);
+=======
+	ag71xx_tx_packets(ag, true);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	reset_control_assert(ag->mac_reset);
 	udelay(10);
@@ -941,7 +961,11 @@ __ag71xx_link_adjust(struct ag71xx *ag, bool update)
 		 * The wr, rr functions cannot be used since this hidden register
 		 * is outside of the normal ag71xx register block.
 		 */
+<<<<<<< HEAD
 		void __iomem *dam = ioremap(0xb90001bc, 0x4);
+=======
+		void __iomem *dam = ioremap_nocache(0xb90001bc, 0x4);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (dam) {
 			__raw_writel(__raw_readl(dam) & ~BIT(27), dam);
 			(void)__raw_readl(dam);
@@ -1162,10 +1186,40 @@ static int ag71xx_do_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 {
 	struct ag71xx *ag = netdev_priv(dev);
 
+<<<<<<< HEAD
 	if (ag->phy_dev == NULL)
 		return -ENODEV;
 
 	return phy_mii_ioctl(ag->phy_dev, ifr, cmd);
+=======
+
+	switch (cmd) {
+	case SIOCSIFHWADDR:
+		if (copy_from_user
+			(dev->dev_addr, ifr->ifr_data, sizeof(dev->dev_addr)))
+			return -EFAULT;
+		return 0;
+
+	case SIOCGIFHWADDR:
+		if (copy_to_user
+			(ifr->ifr_data, dev->dev_addr, sizeof(dev->dev_addr)))
+			return -EFAULT;
+		return 0;
+
+	case SIOCGMIIPHY:
+	case SIOCGMIIREG:
+	case SIOCSMIIREG:
+		if (ag->phy_dev == NULL)
+			break;
+
+		return phy_mii_ioctl(ag->phy_dev, ifr, cmd);
+
+	default:
+		break;
+	}
+
+	return -EOPNOTSUPP;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void ag71xx_oom_timer_handler(struct timer_list *t)
@@ -1175,7 +1229,11 @@ static void ag71xx_oom_timer_handler(struct timer_list *t)
 	napi_schedule(&ag->napi);
 }
 
+<<<<<<< HEAD
 static void ag71xx_tx_timeout(struct net_device *dev, unsigned int txqueue)
+=======
+static void ag71xx_tx_timeout(struct net_device *dev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct ag71xx *ag = netdev_priv(dev);
 
@@ -1222,7 +1280,11 @@ static bool ag71xx_check_dma_stuck(struct ag71xx *ag)
 	return false;
 }
 
+<<<<<<< HEAD
 static int ag71xx_tx_packets(struct ag71xx *ag, bool flush, int budget)
+=======
+static int ag71xx_tx_packets(struct ag71xx *ag, bool flush)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct ag71xx_ring *ring = &ag->tx_ring;
 	bool dma_stuck = false;
@@ -1255,7 +1317,11 @@ static int ag71xx_tx_packets(struct ag71xx *ag, bool flush, int budget)
 		if (!skb)
 			continue;
 
+<<<<<<< HEAD
 		napi_consume_skb(skb, budget);
+=======
+		dev_kfree_skb_any(skb);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ring->buf[i].skb = NULL;
 
 		bytes_compl += ring->buf[i].len;
@@ -1296,6 +1362,10 @@ static int ag71xx_rx_packets(struct ag71xx *ag, int limit)
 	int ring_mask = BIT(ring->order) - 1;
 	int ring_size = BIT(ring->order);
 	struct list_head rx_list;
+<<<<<<< HEAD
+=======
+	struct sk_buff *next;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	struct sk_buff *skb;
 	int done = 0;
 
@@ -1328,7 +1398,11 @@ static int ag71xx_rx_packets(struct ag71xx *ag, int limit)
 		dev->stats.rx_packets++;
 		dev->stats.rx_bytes += pktlen;
 
+<<<<<<< HEAD
 		skb = napi_build_skb(ring->buf[i].rx_buf, ag71xx_buffer_size(ag));
+=======
+		skb = build_skb(ring->buf[i].rx_buf, ag71xx_buffer_size(ag));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (!skb) {
 			skb_free_frag(ring->buf[i].rx_buf);
 			goto next;
@@ -1355,7 +1429,11 @@ next:
 
 	ag71xx_ring_rx_refill(ag);
 
+<<<<<<< HEAD
 	list_for_each_entry(skb, &rx_list, list)
+=======
+	list_for_each_entry_safe(skb, next, &rx_list, list)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		skb->protocol = eth_type_trans(skb, dev);
 	netif_receive_skb_list(&rx_list);
 
@@ -1376,7 +1454,11 @@ static int ag71xx_poll(struct napi_struct *napi, int limit)
 	int tx_done;
 	int rx_done;
 
+<<<<<<< HEAD
 	tx_done = ag71xx_tx_packets(ag, false, limit);
+=======
+	tx_done = ag71xx_tx_packets(ag, false);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	DBG("%s: processing RX ring\n", dev->name);
 	rx_done = ag71xx_rx_packets(ag, limit);
@@ -1478,7 +1560,11 @@ static const struct net_device_ops ag71xx_netdev_ops = {
 	.ndo_open		= ag71xx_open,
 	.ndo_stop		= ag71xx_stop,
 	.ndo_start_xmit		= ag71xx_hard_start_xmit,
+<<<<<<< HEAD
 	.ndo_eth_ioctl		= ag71xx_do_ioctl,
+=======
+	.ndo_do_ioctl		= ag71xx_do_ioctl,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.ndo_tx_timeout		= ag71xx_tx_timeout,
 	.ndo_change_mtu		= ag71xx_change_mtu,
 	.ndo_set_mac_address	= eth_mac_addr,
@@ -1491,6 +1577,10 @@ static int ag71xx_probe(struct platform_device *pdev)
 	struct net_device *dev;
 	struct resource *res;
 	struct ag71xx *ag;
+<<<<<<< HEAD
+=======
+	const void *mac_addr;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	u32 max_frame_len;
 	int tx_size, err;
 
@@ -1559,25 +1649,37 @@ static int ag71xx_probe(struct platform_device *pdev)
 		ag->pllregmap = NULL;
 	}
 
+<<<<<<< HEAD
 	ag->mac_base = devm_ioremap(&pdev->dev, res->start,
 				    res->end - res->start + 1);
+=======
+	ag->mac_base = devm_ioremap_nocache(&pdev->dev, res->start,
+					    res->end - res->start + 1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!ag->mac_base)
 		return -ENOMEM;
 
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 1);
 	if (res) {
+<<<<<<< HEAD
 		ag->mii_base = devm_ioremap(&pdev->dev, res->start,
+=======
+		ag->mii_base = devm_ioremap_nocache(&pdev->dev, res->start,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					    res->end - res->start + 1);
 		if (!ag->mii_base)
 			return -ENOMEM;
 	}
 
+<<<<<<< HEAD
 	/* ensure that HW is in manual polling mode before interrupts are
 	 * activated. Otherwise ag71xx_interrupt might call napi_schedule
 	 * before it is initialized by netif_napi_add.
 	 */
 	ag71xx_int_disable(ag, AG71XX_INT_POLL);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	dev->irq = platform_get_irq(pdev, 0);
 	err = devm_request_irq(&pdev->dev, dev->irq, ag71xx_interrupt,
 			       0x0, dev_name(&pdev->dev), dev);
@@ -1645,6 +1747,7 @@ static int ag71xx_probe(struct platform_device *pdev)
 	ag->stop_desc->ctrl = 0;
 	ag->stop_desc->next = (u32) ag->stop_desc_dma;
 
+<<<<<<< HEAD
 	err = of_get_ethdev_address(np, dev);
 	if (err) {
 		if (err == -EPROBE_DEFER)
@@ -1656,6 +1759,18 @@ static int ag71xx_probe(struct platform_device *pdev)
 
 	err = of_get_phy_mode(np, &ag->phy_if_mode);
 	if (err < 0) {
+=======
+	mac_addr = of_get_mac_address(np);
+	if (IS_ERR_OR_NULL(mac_addr) || !is_valid_ether_addr(mac_addr)) {
+		dev_err(&pdev->dev, "invalid MAC address, using random address\n");
+		eth_random_addr(dev->dev_addr);
+	} else {
+		memcpy(dev->dev_addr, mac_addr, ETH_ALEN);
+	}
+
+	ag->phy_if_mode = of_get_phy_mode(np);
+	if (ag->phy_if_mode < 0) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		dev_err(&pdev->dev, "missing phy-mode property in DT\n");
 		return ag->phy_if_mode;
 	}
@@ -1678,7 +1793,11 @@ static int ag71xx_probe(struct platform_device *pdev)
 			break;
 		}
 
+<<<<<<< HEAD
 	netif_napi_add_weight(dev, &ag->napi, ag71xx_poll, AG71XX_NAPI_WEIGHT);
+=======
+	netif_napi_add(dev, &ag->napi, ag71xx_poll, AG71XX_NAPI_WEIGHT);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	ag71xx_dump_regs(ag);
 

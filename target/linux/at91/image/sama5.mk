@@ -15,17 +15,36 @@ define Build/at91-sdcard
 	$(KDIR)/$(DEVICE_NAME)-fit-zImage.itb \
 	::$(DEVICE_NAME)-fit.itb
 
+<<<<<<< HEAD
   mcopy -i $@.boot \
 	$(BIN_DIR)/u-boot-$(DEVICE_DTS:at91-%=%)_mmc/u-boot.bin \
 	::u-boot.bin
 
   $(if $(findstring sama5d4-xplained,$@), \
 	  mcopy -i $@.boot \
+=======
+  $(if $(findstring sama5d27-som1-ek,$@), \
+      mcopy -i $@.boot \
+          $(BIN_DIR)/u-boot-$(DEVICE_DTS:at91-%=%)_mmc1/u-boot.bin \
+          ::u-boot.bin
+      mcopy -i $@.boot \
+          $(BIN_DIR)/at91bootstrap-$(DEVICE_DTS:at91-%=%)sd1_uboot/at91bootstrap.bin \
+          ::BOOT.bin,
+      mcopy -i $@.boot \
+          $(BIN_DIR)/u-boot-$(DEVICE_DTS:at91-%=%)_mmc/u-boot.bin \
+          ::u-boot.bin
+      $(if $(findstring sama5d4-xplained,$@), \
+          mcopy -i $@.boot \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
               $(BIN_DIR)/at91bootstrap-$(DEVICE_DTS:at91-%=%)sd_uboot_secure/at91bootstrap.bin \
               ::BOOT.bin,
           mcopy -i $@.boot \
               $(BIN_DIR)/at91bootstrap-$(DEVICE_DTS:at91-%=%)sd_uboot/at91bootstrap.bin \
+<<<<<<< HEAD
               ::BOOT.bin)
+=======
+              ::BOOT.bin))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
   $(CP) uboot-env.txt $@-uboot-env.txt
   sed -i '2d;3d' $@-uboot-env.txt
@@ -39,7 +58,11 @@ define Build/at91-sdcard
   ./gen_at91_sdcard_img.sh \
 	$@.img \
 	$@.boot \
+<<<<<<< HEAD
 	$(IMAGE_ROOTFS) \
+=======
+	$(KDIR)/root.ext4 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(AT91_SD_BOOT_PARTSIZE) \
 	$(CONFIG_TARGET_ROOTFS_PARTSIZE)
 
@@ -48,6 +71,7 @@ define Build/at91-sdcard
   rm -f $@.img $@.boot $@-uboot.env $@-uboot-env.txt)
 endef
 
+<<<<<<< HEAD
 define Device/microchip_sama5d2-icp
   $(Device/evaluation-dtb)
   DEVICE_VENDOR := Microchip
@@ -59,6 +83,8 @@ define Device/microchip_sama5d2-icp
 endef
 TARGET_DEVICES += microchip_sama5d2-icp
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/microchip_sama5d2-xplained
   $(Device/evaluation-dtb)
   DEVICE_VENDOR := Microchip
@@ -81,6 +107,7 @@ define Device/microchip_sama5d27-som1-ek
 endef
 TARGET_DEVICES += microchip_sama5d27-som1-ek
 
+<<<<<<< HEAD
 define Device/microchip_sama5d27-wlsom1-ek
   $(Device/evaluation-dtb)
   DEVICE_VENDOR := Microchip
@@ -92,6 +119,8 @@ define Device/microchip_sama5d27-wlsom1-ek
 endef
 TARGET_DEVICES += microchip_sama5d27-wlsom1-ek
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/microchip_sama5d2-ptc-ek
   $(Device/evaluation-dtb)
   DEVICE_VENDOR := Microchip
@@ -120,7 +149,10 @@ ifeq ($(strip $(CONFIG_EXTERNAL_KERNEL_TREE)),"")
     $(Device/evaluation-fit)
     DEVICE_VENDOR := Laird
     DEVICE_MODEL := WB50N
+<<<<<<< HEAD
     DEVICE_DTS := at91-wb50n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     DEVICE_PACKAGES := \
 	  kmod-mmc-at91 kmod-ath6kl-sdio ath6k-firmware \
 	  kmod-usb-storage kmod-fs-vfat kmod-fs-msdos \

@@ -40,8 +40,11 @@
 &ohci {
 	status = "disabled";
 };
+<<<<<<< HEAD
 
 &wifi5 {
 	nvmem-cells = <&eeprom_factory_8000>;
 	nvmem-cell-names = "eeprom";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

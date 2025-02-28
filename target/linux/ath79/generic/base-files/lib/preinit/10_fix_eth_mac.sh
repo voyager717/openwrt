@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 . /lib/functions/system.sh
+=======
+. /lib/functions.sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 preinit_set_mac_address() {
 	case $(board_name) in
@@ -12,6 +16,7 @@ preinit_set_mac_address() {
 		ip link set dev eth0 address $(mtd_get_mac_ascii bdcfg "lanmac")
 		ip link set dev eth1 address $(mtd_get_mac_ascii bdcfg "wanmac")
 		;;
+<<<<<<< HEAD
 	engenius,epg5000|\
 	engenius,esr1200|\
 	engenius,esr1750|\
@@ -31,6 +36,18 @@ preinit_set_mac_address() {
 	tplink,deco-s4-v2)
 		base_mac=$(mtd_get_mac_encrypted_deco $(find_mtd_part config))
 		ip link set dev eth0 address $base_mac
+=======
+	enterasys,ws-ap3705i)
+		ip link set dev eth0 address $(mtd_get_mac_ascii u-boot-env0 ethaddr)
+		;;
+	siemens,ws-ap3610)
+		ip link set dev eth0 address $(mtd_get_mac_ascii cfg1 ethaddr)
+		;;
+	zyxel,nbg6616)
+		ethaddr=$(mtd_get_mac_ascii u-boot-env ethaddr)
+		ip link set dev eth0 address $(macaddr_add $ethaddr 2)
+		ip link set dev eth1 address $(macaddr_add $ethaddr 3)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	esac
 }

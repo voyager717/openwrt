@@ -10,11 +10,19 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_SOURCE_URL:=https://github.com/chunkeey/FritzBox-4040-UBOOT
 PKG_SOURCE_PROTO:=git
+<<<<<<< HEAD
 PKG_SOURCE_VERSION:=9d89013f9cc963eca25856c61fa066091d35f8de
 PKG_SOURCE_DATE:=2022-05-01
 PKG_MIRROR_HASH:=4e8106a7877ae6aa8da44bf95401b860d11f7d51417cc5a61ce59a353d4ee866
 
 PKG_RELEASE:=5
+=======
+PKG_SOURCE_VERSION:=f92be9d783b1210c020d5d6129e210a94bb7e290
+PKG_SOURCE_DATE:=2019-10-19
+PKG_MIRROR_HASH:=e40a7f624b1758b276f81c765ef1da568c595b8bd54568b9cceca7d170ebc612
+
+PKG_RELEASE:=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
@@ -41,11 +49,14 @@ define U-Boot/fritz4040
   BUILD_DEVICES:=avm_fritzbox-4040
 endef
 
+<<<<<<< HEAD
 define U-Boot/fritz7520
   NAME:=FritzBox 7520
   BUILD_DEVICES:=avm_fritzbox-7530
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define U-Boot/fritz7530
   NAME:=FritzBox 7530
   BUILD_DEVICES:=avm_fritzbox-7530
@@ -77,6 +88,10 @@ define Package/u-boot/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/upload-to-f4040.sh $(1)/
 endef
 
+<<<<<<< HEAD
 UBOOT_TARGETS := fritz1200 fritz3000 fritz4040 fritz7520 fritz7530
+=======
+UBOOT_TARGETS := fritz1200 fritz3000 fritz4040 fritz7530
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(eval $(call BuildPackage/U-Boot))

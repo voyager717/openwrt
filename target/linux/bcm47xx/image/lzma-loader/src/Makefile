@@ -18,8 +18,13 @@
 #
 
 TEXT_START	:= 0x80001000
+<<<<<<< HEAD
 BZ_TEXT_START	:= 0x80d00000
 BZ_STACK_START	:= 0x80e00000
+=======
+BZ_TEXT_START	:= 0x80600000
+BZ_STACK_START	:= 0x80700000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 OBJCOPY		:= $(CROSS_COMPILE)objcopy -O binary -R .reginfo -R .note -R .comment -R .mdebug -S
 

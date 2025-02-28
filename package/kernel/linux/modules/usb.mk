@@ -179,6 +179,7 @@ endef
 
 $(eval $(call KernelPackage,usb-gadget-eth))
 
+<<<<<<< HEAD
 define KernelPackage/usb-gadget-ncm
   TITLE:=USB Network Control Model (NCM) Gadget support
   KCONFIG:=CONFIG_USB_G_NCM
@@ -196,6 +197,8 @@ define KernelPackage/usb-gadget-ncm/description
 endef
 
 $(eval $(call KernelPackage,usb-gadget-ncm))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/usb-gadget-serial
   TITLE:=USB Serial Gadget support
@@ -272,13 +275,20 @@ $(eval $(call KernelPackage,usb-uhci,1))
 define KernelPackage/usb-ohci
   TITLE:=Support for OHCI controllers
   DEPENDS:= \
+<<<<<<< HEAD
 	+TARGET_ath79:kmod-phy-ath79-usb \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	+TARGET_bcm53xx:kmod-usb-bcma \
 	+TARGET_bcm47xx:kmod-usb-bcma \
 	+TARGET_bcm47xx:kmod-usb-ssb
   KCONFIG:= \
 	CONFIG_USB_OHCI \
 	CONFIG_USB_OHCI_HCD \
+<<<<<<< HEAD
+=======
+	CONFIG_USB_OHCI_ATH79=y \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_USB_OHCI_HCD_AT91=y \
 	CONFIG_USB_OHCI_BCM63XX=y \
 	CONFIG_USB_OCTEON_OHCI=y \
@@ -331,6 +341,20 @@ define KernelPackage/usb-bcma
 endef
 $(eval $(call KernelPackage,usb-bcma))
 
+<<<<<<< HEAD
+=======
+define KernelPackage/usb-fotg210
+  TITLE:=Support for FOTG210 USB host controllers
+  DEPENDS:=@USB_SUPPORT @TARGET_gemini
+  KCONFIG:=CONFIG_USB_FOTG210_HCD
+  FILES:= \
+	$(if $(CONFIG_USB_FOTG210_HCD),$(LINUX_DIR)/drivers/usb/host/fotg210-hcd.ko)
+  AUTOLOAD:=$(call AutoLoad,50,fotg210-hcd,1)
+  $(call AddDepends/usb)
+endef
+$(eval $(call KernelPackage,usb-fotg210))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/usb-ssb
   TITLE:=Support for SSB USB controllers
   DEPENDS:=@USB_SUPPORT @TARGET_bcm47xx
@@ -418,9 +442,18 @@ $(eval $(call KernelPackage,usb2-pci))
 
 define KernelPackage/usb-dwc2
   TITLE:=DWC2 USB controller driver
+<<<<<<< HEAD
   DEPENDS:=+USB_GADGET_SUPPORT:kmod-usb-gadget +kmod-usb-roles
   KCONFIG:= \
 	CONFIG_USB_DWC2 \
+=======
+  DEPENDS:=+USB_GADGET_SUPPORT:kmod-usb-gadget
+  KCONFIG:= \
+	CONFIG_USB_PCI=y \
+	CONFIG_USB_DWC2 \
+	CONFIG_USB_DWC2_PCI \
+	CONFIG_USB_DWC2_PLATFORM \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_USB_DWC2_DEBUG=n \
 	CONFIG_USB_DWC2_VERBOSE=n \
 	CONFIG_USB_DWC2_TRACK_MISSED_SOFS=n \
@@ -439,6 +472,7 @@ endef
 $(eval $(call KernelPackage,usb-dwc2))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-dwc2-pci
   TITLE:=DWC2 USB controller driver (PCI)
   DEPENDS:=@PCI_SUPPORT +kmod-usb-dwc2 +kmod-usb-phy-nop
@@ -497,6 +531,8 @@ endef
 $(eval $(call KernelPackage,usb-cdns3))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/usb-dwc3
   TITLE:=DWC3 USB controller driver
   KCONFIG:= \
@@ -519,6 +555,7 @@ endef
 $(eval $(call KernelPackage,usb-dwc3))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-dwc3-octeon
   TITLE:=DWC3 Cavium Octeon USB driver
   DEPENDS:=@TARGET_octeon +kmod-usb-dwc3
@@ -539,6 +576,11 @@ $(eval $(call KernelPackage,usb-dwc3-octeon))
 define KernelPackage/usb-dwc3-qcom
   TITLE:=DWC3 Qualcomm USB driver
   DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x||TARGET_qualcommax) +kmod-usb-dwc3
+=======
+define KernelPackage/usb-dwc3-qcom
+  TITLE:=DWC3 Qualcomm USB driver
+  DEPENDS:=@(TARGET_ipq40xx||TARGET_ipq806x) +kmod-usb-dwc3
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:= CONFIG_USB_DWC3_QCOM
   FILES:= $(LINUX_DIR)/drivers/usb/dwc3/dwc3-qcom.ko
   AUTOLOAD:=$(call AutoLoad,53,dwc3-qcom,1)
@@ -589,11 +631,18 @@ $(eval $(call KernelPackage,usb-wdm))
 define KernelPackage/usb-audio
   TITLE:=Support for USB audio devices
   KCONFIG:= \
+<<<<<<< HEAD
+=======
+	CONFIG_USB_AUDIO \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_SND_USB=y \
 	CONFIG_SND_USB_AUDIO
   $(call AddDepends/usb)
   $(call AddDepends/sound)
+<<<<<<< HEAD
   DEPENDS+=+kmod-media-controller
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(LINUX_DIR)/sound/usb/snd-usbmidi-lib.ko \
 	$(LINUX_DIR)/sound/usb/snd-usb-audio.ko
@@ -673,6 +722,7 @@ endef
 $(eval $(call KernelPackage,usb-serial-ch341))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-serial-ch348
   TITLE:=Support for CH348 devices
   KCONFIG:=CONFIG_USB_SERIAL_CH348
@@ -688,6 +738,8 @@ endef
 $(eval $(call KernelPackage,usb-serial-ch348))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/usb-serial-edgeport
   TITLE:=Support for Digi Edgeport devices
   KCONFIG:=CONFIG_USB_SERIAL_EDGEPORT
@@ -821,9 +873,14 @@ $(eval $(call KernelPackage,usb-serial-mct))
 
 define KernelPackage/usb-serial-mos7720
   TITLE:=Support for Moschip MOS7720 devices
+<<<<<<< HEAD
   KCONFIG:=CONFIG_USB_SERIAL_MOS7720 CONFIG_USB_SERIAL_MOS7715_PARPORT=y
   FILES:=$(LINUX_DIR)/drivers/usb/serial/mos7720.ko
   DEPENDS:=+kmod-ppdev
+=======
+  KCONFIG:=CONFIG_USB_SERIAL_MOS7720
+  FILES:=$(LINUX_DIR)/drivers/usb/serial/mos7720.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,mos7720)
   $(call AddDepends/usb-serial)
 endef
@@ -992,7 +1049,11 @@ define KernelPackage/usb-serial-wwan
   TITLE:=Support for GSM and CDMA modems
   KCONFIG:=CONFIG_USB_SERIAL_WWAN
   FILES:=$(LINUX_DIR)/drivers/usb/serial/usb_wwan.ko
+<<<<<<< HEAD
   HIDDEN:=1
+=======
+  #HIDDEN:=1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,usb_wwan)
   $(call AddDepends/usb-serial)
 endef
@@ -1215,9 +1276,13 @@ $(eval $(call KernelPackage,usb-net-aqc111))
 
 define KernelPackage/usb-net-asix
   TITLE:=Kernel module for USB-to-Ethernet Asix convertors
+<<<<<<< HEAD
   DEPENDS:= \
 	+kmod-libphy +kmod-net-selftests +kmod-mdio-devres +kmod-phy-ax88796b \
 	+kmod-phylink
+=======
+  DEPENDS:=+kmod-libphy
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_USB_NET_AX8817X
   FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/asix.ko
   AUTOLOAD:=$(call AutoProbe,asix)
@@ -1280,6 +1345,7 @@ endef
 $(eval $(call KernelPackage,usb-net-kaweth))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-net-lan78xx
   TITLE:=USB-To-Ethernet Microchip LAN78XX convertors
   DEPENDS:=+kmod-fixed-phy +kmod-phy-microchip +PACKAGE_kmod-of-mdio:kmod-of-mdio
@@ -1297,6 +1363,8 @@ endef
 $(eval $(call KernelPackage,usb-net-lan78xx))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/usb-net-pegasus
   TITLE:=Kernel module for USB-to-Ethernet Pegasus convertors
   KCONFIG:=CONFIG_USB_PEGASUS
@@ -1327,6 +1395,7 @@ endef
 $(eval $(call KernelPackage,usb-net-mcs7830))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-net-smsc75xx
   TITLE:=SMSC LAN75XX based USB 2.0 Gigabit ethernet devices
   DEPENDS:=+kmod-libphy
@@ -1346,6 +1415,10 @@ $(eval $(call KernelPackage,usb-net-smsc75xx))
 define KernelPackage/usb-net-smsc95xx
   TITLE:=SMSC LAN95XX based USB 2.0 10/100 ethernet devices
   DEPENDS:=+kmod-libphy +kmod-phy-smsc +kmod-net-selftests
+=======
+define KernelPackage/usb-net-smsc95xx
+  TITLE:=SMSC LAN95XX based USB 2.0 10/100 ethernet devices
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_USB_NET_SMSC95XX
   FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/smsc95xx.ko
   AUTOLOAD:=$(call AutoProbe,smsc95xx)
@@ -1452,7 +1525,10 @@ $(eval $(call KernelPackage,usb-net-rtl8150))
 
 define KernelPackage/usb-net-rtl8152
   TITLE:=Kernel module for USB-to-Ethernet Realtek convertors
+<<<<<<< HEAD
   DEPENDS:=+r8152-firmware +kmod-crypto-sha256 +kmod-usb-net-cdc-ncm
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_USB_RTL8152
   FILES:=$(LINUX_DIR)/drivers/$(USBNET_DIR)/r8152.ko
   AUTOLOAD:=$(call AutoProbe,r8152)
@@ -1518,7 +1594,11 @@ define KernelPackage/usb-net-cdc-ncm
   KCONFIG:=CONFIG_USB_NET_CDC_NCM
   FILES:= $(LINUX_DIR)/drivers/$(USBNET_DIR)/cdc_ncm.ko
   AUTOLOAD:=$(call AutoProbe,cdc_ncm)
+<<<<<<< HEAD
   $(call AddDepends/usb-net,+kmod-usb-net-cdc-ether)
+=======
+  $(call AddDepends/usb-net)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/usb-net-cdc-ncm/description
@@ -1620,8 +1700,13 @@ $(eval $(call KernelPackage,usb-hid))
 define KernelPackage/usb-hid-cp2112
   SUBMENU:=$(USB_MENU)
   TITLE:=Silicon Labs CP2112 HID USB to SMBus Master Bridge
+<<<<<<< HEAD
   KCONFIG:=CONFIG_HID_CP2112
   DEPENDS:=@GPIO_SUPPORT +kmod-usb-hid +kmod-i2c-core
+=======
+  KCONFIG:=CONFIG_GPIOLIB=y CONFIG_HID_CP2112
+  DEPENDS:=+kmod-usb-hid +kmod-i2c-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/hid/hid-cp2112.ko
   AUTOLOAD:=$(call AutoProbe,hid-cp2112)
 endef
@@ -1634,6 +1719,7 @@ endef
 $(eval $(call KernelPackage,usb-hid-cp2112))
 
 
+<<<<<<< HEAD
 define KernelPackage/usb-hid-mcp2221
   SUBMENU:=$(USB_MENU)
   TITLE:=Microchip USB 2.0 to I2C/UART Protocol Converter with GPIO
@@ -1651,6 +1737,8 @@ endef
 $(eval $(call KernelPackage,usb-hid-mcp2221))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/usb-yealink
   TITLE:=USB Yealink VOIP phone
   DEPENDS:=+kmod-input-evdev
@@ -1735,6 +1823,7 @@ endef
 
 $(eval $(call KernelPackage,usbip-server))
 
+<<<<<<< HEAD
 define KernelPackage/usb-chipidea
   TITLE:=Host and device support for Chipidea controllers
   DEPENDS:=+USB_GADGET_SUPPORT:kmod-usb-gadget @TARGET_ath79 +kmod-usb-ehci +kmod-usb-phy-nop +kmod-usb-roles +kmod-phy-ath79-usb
@@ -1742,13 +1831,27 @@ define KernelPackage/usb-chipidea
 	CONFIG_EXTCON \
 	CONFIG_USB_CHIPIDEA \
 	CONFIG_USB_CHIPIDEA_GENERIC \
+=======
+
+define KernelPackage/usb-chipidea
+  TITLE:=Host and device support for Chipidea controllers
+  DEPENDS:=+USB_GADGET_SUPPORT:kmod-usb-gadget @TARGET_ath79 +kmod-usb-ehci +kmod-usb-phy-nop
+  KCONFIG:= \
+	CONFIG_EXTCON \
+	CONFIG_USB_CHIPIDEA \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_USB_CHIPIDEA_HOST=y \
 	CONFIG_USB_CHIPIDEA_UDC=y \
 	CONFIG_USB_CHIPIDEA_DEBUG=y
   FILES:= \
 	$(LINUX_DIR)/drivers/extcon/extcon-core.ko \
 	$(LINUX_DIR)/drivers/usb/chipidea/ci_hdrc.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/usb/common/ulpi.ko
+=======
+	$(LINUX_DIR)/drivers/usb/common/ulpi.ko \
+	$(LINUX_DIR)/drivers/usb/roles/roles.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,39,ci_hdrc,1)
   $(call AddDepends/usb)
 endef
@@ -1797,13 +1900,21 @@ endef
 
 $(eval $(call KernelPackage,usbmon))
 
+<<<<<<< HEAD
 XHCI_MODULES := xhci-pci xhci-plat-hcd
+=======
+XHCI_MODULES := xhci-hcd xhci-pci xhci-plat-hcd
+ifdef CONFIG_TARGET_ramips_mt7621
+  XHCI_MODULES += xhci-mtk
+endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 XHCI_FILES := $(wildcard $(patsubst %,$(LINUX_DIR)/drivers/usb/host/%.ko,$(XHCI_MODULES)))
 XHCI_AUTOLOAD := $(patsubst $(LINUX_DIR)/drivers/usb/host/%.ko,%,$(XHCI_FILES))
 
 define KernelPackage/usb3
   TITLE:=Support for USB3 controllers
   DEPENDS:= \
+<<<<<<< HEAD
 	+kmod-usb-xhci-hcd \
 	+TARGET_bcm53xx:kmod-usb-bcma \
 	+TARGET_bcm53xx:kmod-phy-bcm-ns-usb3 \
@@ -1816,6 +1927,17 @@ define KernelPackage/usb3
 	CONFIG_USB_PCI=y \
 	CONFIG_USB_XHCI_PCI \
 	CONFIG_USB_XHCI_PLATFORM
+=======
+	+TARGET_bcm53xx:kmod-usb-bcma \
+	+TARGET_bcm53xx:kmod-phy-bcm-ns-usb3
+  KCONFIG:= \
+	CONFIG_USB_PCI=y \
+	CONFIG_USB_XHCI_HCD \
+	CONFIG_USB_XHCI_PCI \
+	CONFIG_USB_XHCI_PLATFORM \
+	CONFIG_USB_XHCI_MTK \
+	CONFIG_USB_XHCI_HCD_DEBUGGING=n
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:= \
 	$(XHCI_FILES)
   AUTOLOAD:=$(call AutoLoad,54,$(XHCI_AUTOLOAD),1)
@@ -1846,6 +1968,7 @@ endef
 
 $(eval $(call KernelPackage,usb-net2280))
 
+<<<<<<< HEAD
 define KernelPackage/usb-roles
   TITLE:=USB Role Switch Library Module
   KCONFIG:=CONFIG_USB_ROLE_SWITCH
@@ -1913,6 +2036,8 @@ endef
 $(eval $(call KernelPackage,usb-xhci-pci-renesas))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/chaoskey
   SUBMENU:=$(USB_MENU)
   TITLE:=Chaoskey hardware RNG support

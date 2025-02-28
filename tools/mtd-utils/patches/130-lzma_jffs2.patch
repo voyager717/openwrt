@@ -1,14 +1,33 @@
 --- a/jffsX-utils/Makemodule.am
 +++ b/jffsX-utils/Makemodule.am
+<<<<<<< HEAD
 @@ -9,8 +9,9 @@ mkfs_jffs2_SOURCES = \
  	include/mtd/jffs2-user.h \
  	include/list.h \
  	include/rbtree.h
+=======
+@@ -4,11 +4,19 @@ mkfs_jffs2_SOURCES = \
+ 	jffsX-utils/compr_zlib.c \
+ 	jffsX-utils/compr.h \
+ 	jffsX-utils/rbtree.c \
+-	jffsX-utils/compr_lzo.c \
++	jffsX-utils/compr_lzma.c \
++	jffsX-utils/lzma/LzFind.c \
++	jffsX-utils/lzma/LzmaEnc.c \
++	jffsX-utils/lzma/LzmaDec.c \
+ 	jffsX-utils/compr.c \
+ 	jffsX-utils/compr_rtime.c
++
++if !WITHOUT_LZO
++mkfs_jffs2_SOURCES += jffsX-utils/compr_lzo.c
++endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +
  mkfs_jffs2_LDADD = libmtd.a $(ZLIB_LIBS) $(LZO_LIBS)
 -mkfs_jffs2_CPPFLAGS = $(AM_CPPFLAGS) $(ZLIB_CFLAGS) $(LZO_CFLAGS)
 +mkfs_jffs2_CPPFLAGS = $(AM_CPPFLAGS) $(ZLIB_CFLAGS) $(LZO_CFLAGS) -I./include/linux/lzma
  
+<<<<<<< HEAD
  jffs2reader_SOURCES = jffsX-utils/jffs2reader.c	include/mtd/jffs2-user.h
  jffs2reader_LDADD = libmtd.a $(ZLIB_LIBS) $(LZO_LIBS)
 @@ -32,6 +33,14 @@ if WITH_ZLIB
@@ -33,23 +52,52 @@
  	jffs2_lzo_init();
  #endif
 +#ifdef WITH_LZMA
+=======
+ jffs2reader_SOURCES = jffsX-utils/jffs2reader.c
+ jffs2reader_LDADD = libmtd.a $(ZLIB_LIBS) $(LZO_LIBS)
+--- a/jffsX-utils/compr.c
++++ b/jffsX-utils/compr.c
+@@ -520,6 +520,9 @@ int jffs2_compressors_init(void)
+ #ifdef CONFIG_JFFS2_LZO
+ 	jffs2_lzo_init();
+ #endif
++#ifdef CONFIG_JFFS2_LZMA
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +	jffs2_lzma_init();
 +#endif
  	return 0;
  }
  
+<<<<<<< HEAD
 @@ -485,5 +488,8 @@ int jffs2_compressors_exit(void)
  #ifdef WITH_LZO
  	jffs2_lzo_exit();
  #endif
 +#ifdef WITH_LZMA
+=======
+@@ -534,5 +537,8 @@ int jffs2_compressors_exit(void)
+ #ifdef CONFIG_JFFS2_LZO
+ 	jffs2_lzo_exit();
+ #endif
++#ifdef CONFIG_JFFS2_LZMA
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +	jffs2_lzma_exit();
 +#endif
  	return 0;
  }
 --- a/jffsX-utils/compr.h
 +++ b/jffsX-utils/compr.h
+<<<<<<< HEAD
 @@ -22,8 +22,9 @@
+=======
+@@ -18,13 +18,14 @@
+ 
+ #define CONFIG_JFFS2_ZLIB
+ #define CONFIG_JFFS2_RTIME
+-#define CONFIG_JFFS2_LZO
++#define CONFIG_JFFS2_LZMA
+ 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #define JFFS2_RUBINMIPS_PRIORITY 10
  #define JFFS2_DYNRUBIN_PRIORITY  20
  #define JFFS2_RTIME_PRIORITY     50
@@ -61,11 +109,19 @@
  
  #define JFFS2_COMPR_MODE_NONE       0
  #define JFFS2_COMPR_MODE_PRIORITY   1
+<<<<<<< HEAD
 @@ -110,5 +111,10 @@ void jffs2_rtime_exit(void);
  int jffs2_lzo_init(void);
  void jffs2_lzo_exit(void);
  #endif
 +#ifdef WITH_LZMA
+=======
+@@ -115,5 +116,10 @@ void jffs2_rtime_exit(void);
+ int jffs2_lzo_init(void);
+ void jffs2_lzo_exit(void);
+ #endif
++#ifdef CONFIG_JFFS2_LZMA
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +int jffs2_lzma_init(void);
 +void jffs2_lzma_exit(void);
 +#endif
@@ -5013,7 +5069,11 @@
 +}
 --- a/jffsX-utils/mkfs.jffs2.c
 +++ b/jffsX-utils/mkfs.jffs2.c
+<<<<<<< HEAD
 @@ -1668,11 +1668,11 @@ int main(int argc, char **argv)
+=======
+@@ -1667,11 +1667,11 @@ int main(int argc, char **argv)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  						  }
  						  erase_block_size *= units;
  
@@ -5029,6 +5089,7 @@
  						  }
  						  break;
  					  }
+<<<<<<< HEAD
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -19,6 +19,10 @@ if WITH_ZSTD
@@ -5071,3 +5132,5 @@
  	xattr/acl support: ${with_xattr}
  	SELinux support:   ${with_selinux}
  	fscrypt support:   ${with_crypto}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

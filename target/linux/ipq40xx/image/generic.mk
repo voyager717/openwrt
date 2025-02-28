@@ -3,6 +3,7 @@ DEVICE_VARS += NETGEAR_BOARD_ID NETGEAR_HW_ID
 DEVICE_VARS += RAS_BOARD RAS_ROOTFS_SIZE RAS_VERSION
 DEVICE_VARS += WRGG_DEVNAME WRGG_SIGNATURE
 
+<<<<<<< HEAD
 define Build/netgear-fit-padding
 	./netgear-fit-padding.py $@ $@.new
 	mv $@.new $@
@@ -11,26 +12,47 @@ endef
 define Device/FitImage
 	KERNEL_SUFFIX := -uImage.itb
 	KERNEL = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(DEVICE_DTS).dtb
+=======
+define Device/FitImage
+	KERNEL_SUFFIX := -fit-uImage.itb
+	KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	KERNEL_NAME := Image
 endef
 
 define Device/FitImageLzma
+<<<<<<< HEAD
 	KERNEL_SUFFIX := -uImage.itb
 	KERNEL = kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(DEVICE_DTS).dtb
+=======
+	KERNEL_SUFFIX := -fit-uImage.itb
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	KERNEL_NAME := Image
 endef
 
 define Device/FitzImage
+<<<<<<< HEAD
 	KERNEL_SUFFIX := -zImage.itb
 	KERNEL = kernel-bin | fit none $$(KDIR)/image-$$(DEVICE_DTS).dtb
+=======
+	KERNEL_SUFFIX := -fit-zImage.itb
+	KERNEL = kernel-bin | fit none $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	KERNEL_NAME := zImage
 endef
 
 define Device/UbiFit
 	KERNEL_IN_UBI := 1
+<<<<<<< HEAD
 	IMAGES := factory.ubi sysupgrade.bin
 	IMAGE/factory.ubi := append-ubi
 	IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+=======
+	IMAGES := nand-factory.ubi nand-sysupgrade.bin
+	IMAGE/nand-factory.ubi := append-ubi
+	IMAGE/nand-sysupgrade.bin := sysupgrade-tar | append-metadata
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/DniImage
@@ -38,9 +60,15 @@ define Device/DniImage
 	NETGEAR_BOARD_ID :=
 	NETGEAR_HW_ID :=
 	IMAGES += factory.img
+<<<<<<< HEAD
 	IMAGE/factory.img := append-kernel | netgear-fit-padding | append-uImage-fakehdr filesystem | append-rootfs | pad-rootfs | netgear-dni
 	IMAGE/sysupgrade.bin := append-kernel | netgear-fit-padding | append-uImage-fakehdr filesystem | \
 		append-rootfs | pad-rootfs | check-size | append-metadata
+=======
+	IMAGE/factory.img := append-kernel | pad-offset 64k 64 | append-uImage-fakehdr filesystem | append-rootfs | pad-rootfs | netgear-dni
+	IMAGE/sysupgrade.bin := append-kernel | pad-offset 64k 64 | append-uImage-fakehdr filesystem | \
+		append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/append-rootfshdr
@@ -48,6 +76,7 @@ define Build/append-rootfshdr
 		-O linux -T filesystem \
 		-C lzma -a $(KERNEL_LOADADDR) -e $(if $(KERNEL_ENTRY),$(KERNEL_ENTRY),$(KERNEL_LOADADDR)) \
 		-n root.squashfs -d $(IMAGE_ROOTFS) $@.new
+<<<<<<< HEAD
 	cat $(IMAGE_KERNEL) > $@.$1
 	dd if=$@.new bs=64 count=1 >> $@.$1
 endef
@@ -65,6 +94,9 @@ endef
 
 define Build/copy-file
 	cat "$(1)" > "$@"
+=======
+	dd if=$@.new bs=64 count=1 >> $(IMAGE_KERNEL)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Build/mkmylofw_32m
@@ -73,7 +105,11 @@ define Build/mkmylofw_32m
 
 	let \
 		size="$$(stat -c%s $@)" \
+<<<<<<< HEAD
 		pad="$(call exp_units,$(BLOCKSIZE))" \
+=======
+		pad="$(subst k,* 1024,$(BLOCKSIZE))" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		pad="(pad - (size % pad)) % pad" \
 		newsize='size + pad'; \
 		$(STAGING_DIR_HOST)/bin/mkmylofw \
@@ -83,6 +119,7 @@ define Build/mkmylofw_32m
 	@mv $@.new $@
 endef
 
+<<<<<<< HEAD
 define Build/wac5xx-netgear-tar
 	mkdir $@.tmp
 	mv $@ $@.tmp/wac5xx-ubifs-root.img
@@ -96,12 +133,18 @@ endef
 define Build/qsdk-ipq-factory-nand-askey
 	$(TOPDIR)/scripts/mkits-qsdk-ipq-image.sh $@.its\
 		askey_kernel $@.$1 \
+=======
+define Build/qsdk-ipq-factory-nand-askey
+	$(TOPDIR)/scripts/mkits-qsdk-ipq-image.sh $@.its\
+		askey_kernel $(IMAGE_KERNEL) \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		askey_fs $(IMAGE_ROOTFS) \
 		ubifs $@
 	PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) mkimage -f $@.its $@.new
 	@mv $@.new $@
 endef
 
+<<<<<<< HEAD
 define Build/qsdk-ipq-app-gpt
 	cp $@ $@.tmp 2>/dev/null || true
 	ptgen -g -o $@.tmp -a 1 -l 1024 \
@@ -112,6 +155,8 @@ define Build/qsdk-ipq-app-gpt
 	rm $@.tmp
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/SenaoFW
 	-$(STAGING_DIR_HOST)/bin/mksenaofw \
 		-n $(BOARD_NAME) -r $(VENDOR_ID) -p $(1) \
@@ -136,7 +181,12 @@ define Device/8dev_habanero-dvk
 	DEVICE_MODEL := Habanero DVK
 	IMAGE_SIZE := 30976k
 	SOC := qcom-ipq4019
+<<<<<<< HEAD
 	IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | append-rootfs | pad-rootfs | check-size | append-metadata
+=======
+	DEVICE_PACKAGES := ipq-wifi-8dev_habanero-dvk
+	IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += 8dev_habanero-dvk
 
@@ -165,8 +215,13 @@ define Device/alfa-network_ap120c-ac
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	IMAGE_SIZE := 65536k
+<<<<<<< HEAD
 	IMAGES := factory.bin sysupgrade.bin
 	IMAGE/factory.bin := append-ubi | qsdk-ipq-factory-nand
+=======
+	IMAGES := nand-factory.bin nand-sysupgrade.bin
+	IMAGE/nand-factory.bin := append-ubi | qsdk-ipq-factory-nand
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += alfa-network_ap120c-ac
 
@@ -174,27 +229,41 @@ define Device/aruba_glenmorangie
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := Aruba
 	SOC := qcom-ipq4029
+<<<<<<< HEAD
+=======
+	DEVICE_PACKAGES := ipq-wifi-aruba_ap-303
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/aruba_ap-303
 	$(call Device/aruba_glenmorangie)
 	DEVICE_MODEL := AP-303
+<<<<<<< HEAD
 	DEVICE_DTS_CONFIG := Glenmorangie@1
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += aruba_ap-303
 
 define Device/aruba_ap-303h
 	$(call Device/aruba_glenmorangie)
 	DEVICE_MODEL := AP-303H
+<<<<<<< HEAD
 	DEVICE_DTS_CONFIG := Aberlour@1
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += aruba_ap-303h
 
 define Device/aruba_ap-365
 	$(call Device/aruba_glenmorangie)
 	DEVICE_MODEL := AP-365
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-hwmon-ad7418
 	DEVICE_DTS_CONFIG := Bunker@1
+=======
+	DEVICE_PACKAGES += kmod-hwmon-ad7418
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += aruba_ap-365
 
@@ -207,6 +276,7 @@ define Device/asus_map-ac2200
 endef
 TARGET_DEVICES += asus_map-ac2200
 
+<<<<<<< HEAD
 # WARNING: this is an initramfs image that gets you half of the way there
 #          you need to delete the jffs2 ubi volume and sysupgrade to the final image
 # to get a "trx" you can flash via web UI for ac42u/ac58u:
@@ -236,15 +306,24 @@ define Device/asus_rt-ac42u
 endef
 TARGET_DEVICES += asus_rt-ac42u
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/asus_rt-ac58u
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := ASUS
 	DEVICE_MODEL := RT-AC58U
+<<<<<<< HEAD
 	DEVICE_ALT0_VENDOR := ASUS
 	DEVICE_ALT0_MODEL := RT-ACRH13
 	SOC := qcom-ipq4018
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+=======
+	SOC := qcom-ipq4018
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	DTB_SIZE := 65536
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 20439364
 	FILESYSTEMS := squashfs
 #	Someone - in their infinite wisdom - decided to put the firmware
@@ -269,7 +348,11 @@ define Device/avm_fritzbox-4040
 	UBOOT_PARTITION_SIZE := 524288
 	IMAGES += eva.bin
 	IMAGE/eva.bin := append-uboot | pad-to $$$$(UBOOT_PARTITION_SIZE) | append-kernel | append-rootfs | pad-rootfs
+<<<<<<< HEAD
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
+=======
+	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_PACKAGES := fritz-tffs fritz-caldata
 endef
 TARGET_DEVICES += avm_fritzbox-4040
@@ -278,10 +361,15 @@ define Device/avm_fritzbox-7530
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := AVM
 	DEVICE_MODEL := FRITZ!Box 7530
+<<<<<<< HEAD
 	DEVICE_ALT0_VENDOR := AVM
 	DEVICE_ALT0_MODEL := FRITZ!Box 7520
 	SOC := qcom-ipq4019
 	DEVICE_PACKAGES := fritz-caldata fritz-tffs-nand ltq-vdsl-vr11-app
+=======
+	SOC := qcom-ipq4019
+	DEVICE_PACKAGES := fritz-caldata fritz-tffs-nand
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += avm_fritzbox-7530
 
@@ -290,7 +378,11 @@ define Device/avm_fritzrepeater-1200
 	DEVICE_VENDOR := AVM
 	DEVICE_MODEL := FRITZ!Repeater 1200
 	SOC := qcom-ipq4019
+<<<<<<< HEAD
 	DEVICE_PACKAGES := fritz-caldata fritz-tffs-nand
+=======
+	DEVICE_PACKAGES := fritz-caldata fritz-tffs-nand ipq-wifi-avm_fritzrepeater-1200
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += avm_fritzrepeater-1200
 
@@ -309,13 +401,18 @@ define Device/buffalo_wtr-m2133hp
 	DEVICE_VENDOR := Buffalo
 	DEVICE_MODEL := WTR-M2133HP
 	SOC := qcom-ipq4019
+<<<<<<< HEAD
 	DEVICE_PACKAGES := ath10k-firmware-qca9984-ct
+=======
+	DEVICE_PACKAGES := ath10k-firmware-qca9984-ct ipq-wifi-buffalo_wtr-m2133hp
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 endef
 TARGET_DEVICES += buffalo_wtr-m2133hp
 
 define Device/cellc_rtl30vw
+<<<<<<< HEAD
 	KERNEL_SUFFIX := -zImage.itb
 	KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(DEVICE_DTS).dtb
 	KERNEL = kernel-bin | fit none $$(KDIR)/image-$$(DEVICE_DTS).dtb | uImage lzma | pad-to 2048
@@ -324,6 +421,16 @@ define Device/cellc_rtl30vw
 	IMAGES := factory.bin sysupgrade.bin
 	IMAGE/factory.bin := append-rootfshdr kernel | append-ubi | qsdk-ipq-factory-nand-askey kernel
 	IMAGE/sysupgrade.bin := append-rootfshdr kernel | sysupgrade-tar kernel=$$$$@.kernel | append-metadata
+=======
+	KERNEL_SUFFIX := -fit-uImage.itb
+	KERNEL_INITRAMFS = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
+	KERNEL = kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb | uImage lzma | pad-to 2048
+	KERNEL_NAME := Image
+	KERNEL_IN_UBI :=
+	IMAGES := nand-factory.bin nand-sysupgrade.bin
+	IMAGE/nand-factory.bin := append-rootfshdr | append-ubi | qsdk-ipq-factory-nand-askey
+	IMAGE/nand-sysupgrade.bin := append-rootfshdr | sysupgrade-tar | append-metadata
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := Cell C
 	DEVICE_MODEL := RTL30VW
 	SOC := qcom-ipq4019
@@ -333,7 +440,11 @@ define Device/cellc_rtl30vw
 	IMAGE_SIZE := 57344k
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+=======
+	DEVICE_PACKAGES := kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi ipq-wifi-cellc_rtl30vw
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += cellc_rtl30vw
 
@@ -341,10 +452,16 @@ define Device/cilab_meshpoint-one
 	$(call Device/8dev_jalapeno-common)
 	DEVICE_VENDOR := Crisis Innovation Lab
 	DEVICE_MODEL := MeshPoint.One
+<<<<<<< HEAD
 	DEVICE_PACKAGES += kmod-i2c-gpio kmod-iio-bmp280-i2c kmod-hwmon-ina2xx kmod-rtc-pcf2127
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += cilab_meshpoint-one
+=======
+	DEVICE_PACKAGES := kmod-i2c-gpio kmod-iio-bmp280-i2c kmod-hwmon-ina2xx kmod-rtc-pcf2127
+endef
+TARGET_DEVICES += cilab_meshpoint-one
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/compex_wpj419
 	$(call Device/FitImage)
@@ -358,11 +475,18 @@ define Device/compex_wpj419
 	PAGESIZE := 2048
 	FILESYSTEMS := squashfs
 endef
+<<<<<<< HEAD
 # Missing DSA Setup
 #TARGET_DEVICES += compex_wpj419
 
 define Device/compex_wpj428
 	$(call Device/FitzImage)
+=======
+TARGET_DEVICES += compex_wpj419
+
+define Device/compex_wpj428
+	$(call Device/FitImage)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := Compex
 	DEVICE_MODEL := WPJ428
 	SOC := qcom-ipq4028
@@ -374,12 +498,19 @@ define Device/compex_wpj428
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
 	IMAGE/cpximg-6a04.bin := append-kernel | append-rootfs | pad-rootfs | mkmylofw_32m 0x8A2 3
 	DEVICE_PACKAGES := kmod-gpio-beeper
+<<<<<<< HEAD
 	DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += compex_wpj428
 
 define Device/devolo_magic-2-wifi-next
+<<<<<<< HEAD
 	$(call Device/FitzImage)
+=======
+	$(call Device/FitImage)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := devolo
 	DEVICE_MODEL := Magic 2 WiFi next
 	SOC := qcom-ipq4018
@@ -387,13 +518,21 @@ define Device/devolo_magic-2-wifi-next
 
 	# If the bootloader sees 0xDEADC0DE and this trailer at the 64k boundary of a TFTP image
 	# it will bootm it, just like we want for the initramfs.
+<<<<<<< HEAD
 	KERNEL_INITRAMFS := kernel-bin | gzip | fit gzip $$(KDIR)/image-$$(DEVICE_DTS).dtb | pad-to 64k |\
+=======
+	KERNEL_INITRAMFS := kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to 64k |\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		append-string -e '\xDE\xAD\xC0\xDE{"fl_initramfs":""}\x00'
 
 	IMAGE_SIZE := 26624k
 	IMAGES := sysupgrade.bin
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
+<<<<<<< HEAD
 	DEFAULT := n
+=======
+	DEVICE_PACKAGES := ipq-wifi-devolo_magic-2-wifi-next
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += devolo_magic-2-wifi-next
 
@@ -420,6 +559,10 @@ define Device/dlink_dap-2610
 	# append-rootfs must start on an erase block boundary.
 	IMAGE/factory.bin    := append-kernel | pad-offset 6144k 160 | append-rootfs | wrgg-image | check-size
 	IMAGE/sysupgrade.bin := append-kernel | wrgg-image | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | check-size | append-metadata
+<<<<<<< HEAD
+=======
+	DEVICE_PACKAGES := ipq-wifi-dlink_dap2610
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += dlink_dap-2610
 
@@ -444,19 +587,30 @@ define Device/edgecore_oap100
 	SOC := qcom-ipq4019
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 	IMAGES := sysupgrade.bin
 	DEVICE_DTS_CONFIG := config@ap.dk07.1-c1
 	DEVICE_PACKAGES := kmod-usb-acm kmod-usb-net kmod-usb-net-cdc-qmi uqmi
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += edgecore_oap100
+=======
+	IMAGES := nand-sysupgrade.bin
+	DEVICE_DTS_CONFIG := config@ap.dk07.1-c1
+	DEVICE_PACKAGES := ipq-wifi-edgecore_oap100 kmod-usb-acm kmod-usb-net kmod-usb-net-cdc-qmi uqmi
+endef
+TARGET_DEVICES += edgecore_oap100
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/engenius_eap1300
 	$(call Device/FitImage)
 	DEVICE_VENDOR := EnGenius
 	DEVICE_MODEL := EAP1300
+<<<<<<< HEAD
 	DEVICE_ALT0_VENDOR := EnGenius
 	DEVICE_ALT0_MODEL := EAP1300EXT
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_DTS_CONFIG := config@4
 	BOARD_NAME := eap1300
 	SOC := qcom-ipq4018
@@ -474,10 +628,16 @@ define Device/engenius_eap2200
 	SOC := qcom-ipq4019
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += engenius_eap2200
+=======
+	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct ipq-wifi-engenius_eap2200 -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers
+endef
+TARGET_DEVICES += engenius_eap2200
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/engenius_emd1
 	$(call Device/FitImage)
@@ -489,9 +649,15 @@ define Device/engenius_emd1
 	IMAGES += factory.bin
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
 	IMAGE/factory.bin := qsdk-ipq-factory-nor | check-size
+<<<<<<< HEAD
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += engenius_emd1
+=======
+	DEVICE_PACKAGES := ipq-wifi-engenius_emd1
+endef
+TARGET_DEVICES += engenius_emd1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/engenius_emr3500
 	$(call Device/FitImage)
@@ -504,10 +670,16 @@ define Device/engenius_emr3500
 	IMAGES += factory.bin
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
 	IMAGE/factory.bin := qsdk-ipq-factory-nor | check-size
+<<<<<<< HEAD
 	DEFAULT := n
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += engenius_emr3500
+=======
+	DEVICE_PACKAGES := ipq-wifi-engenius_emr3500
+endef
+TARGET_DEVICES += engenius_emr3500
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/engenius_ens620ext
 	$(call Device/FitImage)
@@ -533,6 +705,7 @@ define Device/engenius_ens620ext
 	IMAGE/factory_30.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | check-size | SenaoFW $$$$(PRODUCT_ID) $$$$(FW_VER)
 	IMAGE/factory_35.bin := qsdk-ipq-factory-nor | check-size | SenaoFW $$$$(PRODUCT_ID_NEW) $$$$(FW_VER_NEW)
 endef
+<<<<<<< HEAD
 # Missing DSA Setup
 #TARGET_DEVICES += engenius_ens620ext
 
@@ -555,12 +728,16 @@ define Device/extreme-networks_ws-ap391x
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
 endef
 TARGET_DEVICES += extreme-networks_ws-ap391x
+=======
+TARGET_DEVICES += engenius_ens620ext
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/ezviz_cs-w3-wd1200g-eup
 	$(call Device/FitImage)
 	DEVICE_VENDOR := EZVIZ
 	DEVICE_MODEL := CS-W3-WD1200G
 	DEVICE_VARIANT := EUP
+<<<<<<< HEAD
 	IMAGE_SIZE := 14848k
 	KERNEL_SIZE = 6m
 	SOC := qcom-ipq4018
@@ -586,6 +763,18 @@ define Device/glinet_gl-a1300
 endef
 TARGET_DEVICES += glinet_gl-a1300
 
+=======
+	DEVICE_DTS_CONFIG := config@4
+	IMAGE_SIZE := 14848k
+	SOC := qcom-ipq4018
+	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
+		append-metadata
+	DEVICE_PACKAGES := -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers \
+		ipq-wifi-ezviz_cs-w3-wd1200g-eup
+endef
+TARGET_DEVICES += ezviz_cs-w3-wd1200g-eup
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/glinet_gl-ap1300
 	$(call Device/FitImage)
 	$(call Device/UbiFit)
@@ -597,12 +786,20 @@ define Device/glinet_gl-ap1300
 	PAGESIZE := 2048
 	IMAGE_SIZE := 131072k
 	KERNEL_INSTALL := 1
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-usb-net-qmi-wwan kmod-usb-serial-option uqmi
+=======
+	DEVICE_PACKAGES := ipq-wifi-glinet_gl-ap1300
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += glinet_gl-ap1300
 
 define Device/glinet_gl-b1300
+<<<<<<< HEAD
 	$(call Device/FitzImage)
+=======
+	$(call Device/FitImage)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := GL.iNet
 	DEVICE_MODEL := GL-B1300
 	BOARD_NAME := gl-b1300
@@ -613,6 +810,7 @@ define Device/glinet_gl-b1300
 endef
 TARGET_DEVICES += glinet_gl-b1300
 
+<<<<<<< HEAD
 define Device/glinet_gl-b2200
 	$(call Device/FitzImage)
 	DEVICE_VENDOR := GL.iNet
@@ -633,6 +831,10 @@ TARGET_DEVICES += glinet_gl-b2200
 
 define Device/glinet_gl-s1300
 	$(call Device/FitzImage)
+=======
+define Device/glinet_gl-s1300
+	$(call Device/FitImage)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := GL.iNet
 	DEVICE_MODEL := GL-S1300
 	SOC := qcom-ipq4029
@@ -640,6 +842,7 @@ define Device/glinet_gl-s1300
 	IMAGE_SIZE := 26624k
 	IMAGES := sysupgrade.bin
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-fs-ext4 kmod-mmc kmod-spi-dev
 endef
 TARGET_DEVICES += glinet_gl-s1300
@@ -655,39 +858,66 @@ define Device/kernel-size-6350-8300
 	(e.g. "sysupgrade -n -F openwrt-squashfs-factory.bin" on command line)
 endef
 
+=======
+	DEVICE_PACKAGES := ipq-wifi-glinet_gl-s1300 kmod-fs-ext4 kmod-mmc kmod-spi-dev
+endef
+TARGET_DEVICES += glinet_gl-s1300
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/linksys_ea6350v3
 	# The Linksys EA6350v3 has a uboot bootloader that does not
 	# support either booting lzma kernel images nor booting UBI
 	# partitions. This uboot, however, supports raw kernel images and
 	# gzipped images.
 	#
+<<<<<<< HEAD
 	# As configured by the OEM factory, the device will boot the kernel
 	# from a fixed address with a fixed length of 3 MiB. Also, the
 	# device has a hard-coded kernel command line that requires the
+=======
+	# As for the time of writing this, the device will boot the kernel
+	# from a fixed address with a fixed length of 3MiB. Also, the
+	# device has a hard-coded kernel command line that requieres the
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	# rootfs and alt_rootfs to be in mtd11 and mtd13 respectively.
 	# Oh... and the kernel partition overlaps with the rootfs
 	# partition (the same for alt_kernel and alt_rootfs).
 	#
 	# If you are planing re-partitioning the device, you may want to
+<<<<<<< HEAD
 	# keep these details in mind:
 	# 1. The kernel addresses you should honor are 0x00000000 and
 	#    0x02800000 respectively.
 	# 2. The kernel size (plus the dtb) cannot exceed 3 MiB in size
 	#    unless the uboot environment variable "kernsize" is increased.
+=======
+	# keep those details in mind:
+	# 1. The kernel adresses you should honor are 0x00000000 and
+	#    0x02800000 respectively.
+	# 2. The kernel size (plus the dtb) cannot exceed 3.00MiB in size.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	# 3. You can use 'zImage', but not a raw 'Image' packed with lzma.
 	# 4. The kernel command line from uboot is harcoded to boot with
 	#    rootfs either in mtd11 or mtd13.
 	$(call Device/FitzImage)
+<<<<<<< HEAD
 	$(call Device/kernel-size-6350-8300)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_VENDOR := Linksys
 	DEVICE_MODEL := EA6350
 	DEVICE_VARIANT := v3
 	SOC := qcom-ipq4018
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 	KERNEL_SIZE := 5120k
 	IMAGE_SIZE := 35840k
 	NAND_SIZE := 128m
+=======
+	KERNEL_SIZE := 3072k
+	IMAGE_SIZE := 37888k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	UBINIZE_OPTS := -E 5
 	IMAGES += factory.bin
 	IMAGE/factory.bin := append-kernel | append-uImage-fakehdr filesystem | pad-to $$$$(KERNEL_SIZE) | append-ubi | linksys-image type=EA6350v3
@@ -696,6 +926,7 @@ TARGET_DEVICES += linksys_ea6350v3
 
 define Device/linksys_ea8300
 	$(call Device/FitzImage)
+<<<<<<< HEAD
 	$(call Device/kernel-size-6350-8300)
 	DEVICE_VENDOR := Linksys
 	DEVICE_MODEL := EA8300
@@ -703,17 +934,29 @@ define Device/linksys_ea8300
 	KERNEL_SIZE := 5120k
 	IMAGE_SIZE := 84992k
 	NAND_SIZE := 256m
+=======
+	DEVICE_VENDOR := Linksys
+	DEVICE_MODEL := EA8300
+	SOC := qcom-ipq4019
+	KERNEL_SIZE := 3072k
+	IMAGE_SIZE := 87040k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	UBINIZE_OPTS := -E 5    # EOD marks to "hide" factory sig at EOF
 	IMAGES += factory.bin
 	IMAGE/factory.bin  := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | linksys-image type=EA8300
+<<<<<<< HEAD
 	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct kmod-usb-ledtrig-usbport
+=======
+	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct ipq-wifi-linksys_ea8300 kmod-usb-ledtrig-usbport
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += linksys_ea8300
 
 define Device/linksys_mr8300
 	$(call Device/FitzImage)
+<<<<<<< HEAD
 	$(call Device/kernel-size-6350-8300)
 	DEVICE_VENDOR := Linksys
 	DEVICE_MODEL := MR8300
@@ -721,11 +964,19 @@ define Device/linksys_mr8300
 	KERNEL_SIZE := 5120k
 	IMAGE_SIZE := 84992k
 	NAND_SIZE := 256m
+=======
+	DEVICE_VENDOR := Linksys
+	DEVICE_MODEL := MR8300
+	SOC := qcom-ipq4019
+	KERNEL_SIZE := 3072k
+	IMAGE_SIZE := 87040k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	UBINIZE_OPTS := -E 5    # EOD marks to "hide" factory sig at EOF
 	IMAGES += factory.bin
 	IMAGE/factory.bin  := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi | linksys-image type=MR8300
+<<<<<<< HEAD
 	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct kmod-usb-ledtrig-usbport
 endef
 TARGET_DEVICES += linksys_mr8300
@@ -779,18 +1030,29 @@ define Device/linksys_whw01
 endef
 TARGET_DEVICES += linksys_whw01
 
+=======
+	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct ipq-wifi-linksys_mr8300-v0 kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += linksys_mr8300
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/luma_wrtq-329acn
 	$(call Device/FitImage)
 	DEVICE_VENDOR := Luma Home
 	DEVICE_MODEL := WRTQ-329ACN
 	SOC := qcom-ipq4018
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-ath3k kmod-eeprom-at24 kmod-i2c-gpio
+=======
+	DEVICE_PACKAGES := ipq-wifi-luma_wrtq-329acn kmod-ath3k kmod-eeprom-at24 kmod-i2c-gpio
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 76632k
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 endef
 TARGET_DEVICES += luma_wrtq-329acn
 
+<<<<<<< HEAD
 define Device/meraki_common
 	$(call Device/FitImage)
 	DEVICE_VENDOR := Cisco Meraki
@@ -814,6 +1076,19 @@ define Device/meraki_mr74
 endef
 TARGET_DEVICES += meraki_mr74
 
+=======
+define Device/meraki_mr33
+	$(call Device/FitImage)
+	DEVICE_VENDOR := Cisco Meraki
+	DEVICE_MODEL := MR33
+	SOC := qcom-ipq4029
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	DEVICE_PACKAGES := -swconfig ath10k-firmware-qca9887-ct
+endef
+TARGET_DEVICES += meraki_mr33
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/mobipromo_cm520-79f
 	$(call Device/FitzImage)
 	$(call Device/UbiFit)
@@ -822,7 +1097,11 @@ define Device/mobipromo_cm520-79f
 	SOC := qcom-ipq4019
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 	DEVICE_PACKAGES := kmod-usb-ledtrig-usbport
+=======
+	DEVICE_PACKAGES := ipq-wifi-mobipromo_cm520-79f kmod-usb-ledtrig-usbport
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += mobipromo_cm520-79f
 
@@ -850,6 +1129,7 @@ define Device/netgear_ex6150v2
 endef
 TARGET_DEVICES += netgear_ex6150v2
 
+<<<<<<< HEAD
 define Device/netgear_orbi
 	$(call Device/DniImage)
 	SOC := qcom-ipq4019
@@ -966,6 +1246,8 @@ define Device/netgear_wac510
 endef
 TARGET_DEVICES += netgear_wac510
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/openmesh_a42
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := OpenMesh
@@ -973,7 +1255,11 @@ define Device/openmesh_a42
 	SOC := qcom-ipq4018
 	DEVICE_DTS_CONFIG := config@om.a42
 	BLOCKSIZE := 64k
+<<<<<<< HEAD
 	KERNEL = kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+=======
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 15616k
 	IMAGES += factory.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=A42
@@ -988,7 +1274,11 @@ define Device/openmesh_a62
 	SOC := qcom-ipq4019
 	DEVICE_DTS_CONFIG := config@om.a62
 	BLOCKSIZE := 64k
+<<<<<<< HEAD
 	KERNEL = kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+=======
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 15552k
 	IMAGES += factory.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=A62
@@ -997,6 +1287,7 @@ define Device/openmesh_a62
 endef
 TARGET_DEVICES += openmesh_a62
 
+<<<<<<< HEAD
 define Device/p2w_r619ac
 	$(call Device/FitzImage)
 	$(call Device/UbiFit)
@@ -1034,6 +1325,8 @@ define Device/pakedge_wr-1
 endef
 TARGET_DEVICES += pakedge_wr-1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/plasmacloud_pa1200
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := Plasma Cloud
@@ -1041,11 +1334,19 @@ define Device/plasmacloud_pa1200
 	SOC := qcom-ipq4018
 	DEVICE_DTS_CONFIG := config@pc.pa1200
 	BLOCKSIZE := 64k
+<<<<<<< HEAD
 	KERNEL = kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+=======
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 15616k
 	IMAGES += factory.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=PA1200
 	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-rootfs | sysupgrade-tar rootfs=$$$$@ | append-metadata
+<<<<<<< HEAD
+=======
+	DEVICE_PACKAGES := ipq-wifi-plasmacloud_pa1200
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += plasmacloud_pa1200
 
@@ -1056,15 +1357,57 @@ define Device/plasmacloud_pa2200
 	SOC := qcom-ipq4019
 	DEVICE_DTS_CONFIG := config@pc.pa2200
 	BLOCKSIZE := 64k
+<<<<<<< HEAD
 	KERNEL = kernel-bin | lzma | fit lzma $$(KDIR)/image-$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+=======
+	KERNEL = kernel-bin | lzma | fit lzma $$(DTS_DIR)/$$(DEVICE_DTS).dtb | pad-to $$(BLOCKSIZE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	IMAGE_SIZE := 15552k
 	IMAGES += factory.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=PA2200
 	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-rootfs | sysupgrade-tar rootfs=$$$$@ | append-metadata
+<<<<<<< HEAD
 	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct
 endef
 TARGET_DEVICES += plasmacloud_pa2200
 
+=======
+	DEVICE_PACKAGES := ath10k-firmware-qca9888-ct ipq-wifi-plasmacloud_pa2200
+endef
+TARGET_DEVICES += plasmacloud_pa2200
+
+define Device/qcom_ap-dk01.1-c1
+	DEVICE_VENDOR := Qualcomm Atheros
+	DEVICE_MODEL := AP-DK01.1
+	DEVICE_VARIANT := C1
+	BOARD_NAME := ap-dk01.1-c1
+	SOC := qcom-ipq4019
+	DEVICE_DTS := qcom-ipq4019-ap.dk01.1-c1
+	KERNEL_INSTALL := 1
+	KERNEL_SIZE := 4096k
+	IMAGE_SIZE := 26624k
+	$(call Device/FitImage)
+	IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(KERNEL_SIZE) | append-rootfs | pad-rootfs | append-metadata
+endef
+TARGET_DEVICES += qcom_ap-dk01.1-c1
+
+define Device/qcom_ap-dk04.1-c1
+	$(call Device/FitImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := Qualcomm Atheros
+	DEVICE_MODEL := AP-DK04.1
+	DEVICE_VARIANT := C1
+	SOC := qcom-ipq4019
+	DEVICE_DTS := qcom-ipq4019-ap.dk04.1-c1
+	KERNEL_INSTALL := 1
+	KERNEL_SIZE := 4048k
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	BOARD_NAME := ap-dk04.1-c1
+endef
+TARGET_DEVICES += qcom_ap-dk04.1-c1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/qxwlan_e2600ac-c1
 	$(call Device/FitImage)
 	DEVICE_VENDOR := Qxwlan
@@ -1072,8 +1415,15 @@ define Device/qxwlan_e2600ac-c1
 	DEVICE_VARIANT := C1
 	BOARD_NAME := e2600ac-c1
 	SOC := qcom-ipq4019
+<<<<<<< HEAD
 	IMAGE_SIZE := 31232k
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
+=======
+	KERNEL_SIZE := 4096k
+	IMAGE_SIZE := 31232k
+	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
+	DEVICE_PACKAGES := ipq-wifi-qxwlan_e2600ac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += qxwlan_e2600ac-c1
 
@@ -1087,6 +1437,7 @@ define Device/qxwlan_e2600ac-c2
 	KERNEL_INSTALL := 1
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
+<<<<<<< HEAD
 endef
 TARGET_DEVICES += qxwlan_e2600ac-c2
 
@@ -1162,6 +1513,12 @@ endef
 # Missing DSA Setup
 #TARGET_DEVICES += tel_x1pro
 
+=======
+	DEVICE_PACKAGES := ipq-wifi-qxwlan_e2600ac
+endef
+TARGET_DEVICES += qxwlan_e2600ac-c2
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/unielec_u4019-32m
 	$(call Device/FitImage)
 	DEVICE_VENDOR := Unielec
@@ -1172,6 +1529,7 @@ define Device/unielec_u4019-32m
 	KERNEL_SIZE := 4096k
 	IMAGE_SIZE := 31232k
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
+<<<<<<< HEAD
 	DEFAULT := n
 endef
 # Missing DSA Setup
@@ -1294,6 +1652,14 @@ TARGET_DEVICES += zte_mf289f
 define Device/zyxel_nbg6617
 	$(call Device/FitImageLzma)
 	DEVICE_VENDOR := Zyxel
+=======
+endef
+TARGET_DEVICES += unielec_u4019-32m
+
+define Device/zyxel_nbg6617
+	$(call Device/FitImageLzma)
+	DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_MODEL := NBG6617
 	SOC := qcom-ipq4018
 	KERNEL_SIZE := 4096k
@@ -1303,7 +1669,11 @@ define Device/zyxel_nbg6617
 	RAS_VERSION := "$(VERSION_DIST) $(REVISION)"
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata
 	IMAGES += factory.bin
+<<<<<<< HEAD
 #	The Zyxel firmware allows flashing thru the web-gui only when the rootfs is
+=======
+#	The ZyXEL firmware allows flashing thru the web-gui only when the rootfs is
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #	at least as large as the one of the initial firmware image (not the current
 #	one on the device). This only applies to the Web-UI, the bootlaoder ignores
 #	this minimum-size. However, the larger image can be flashed both ways.
@@ -1315,13 +1685,24 @@ TARGET_DEVICES += zyxel_nbg6617
 
 define Device/zyxel_wre6606
 	$(call Device/FitImage)
+<<<<<<< HEAD
 	DEVICE_VENDOR := Zyxel
+=======
+	DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	DEVICE_MODEL := WRE6606
 	DEVICE_DTS_CONFIG := config@4
 	SOC := qcom-ipq4018
 	IMAGE_SIZE := 13184k
+<<<<<<< HEAD
 	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | check-size | append-metadata
 	DEVICE_PACKAGES := -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers
 endef
 # Missing DSA Setup
 #TARGET_DEVICES += zyxel_wre6606
+=======
+	IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | append-metadata | check-size
+	DEVICE_PACKAGES := -kmod-ath10k-ct kmod-ath10k-ct-smallbuffers
+endef
+TARGET_DEVICES += zyxel_wre6606
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

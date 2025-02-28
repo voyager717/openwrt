@@ -61,6 +61,11 @@
 #define NEXT_TX_DESP_IDX(X)	(((X) + 1) & (ring->tx_ring_size - 1))
 #define NEXT_RX_DESP_IDX(X)	(((X) + 1) & (ring->rx_ring_size - 1))
 
+<<<<<<< HEAD
+=======
+#define SYSC_REG_RSTCTRL	0x34
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int fe_msg_level = -1;
 module_param_named(msg_level, fe_msg_level, int, 0);
 MODULE_PARM_DESC(msg_level, "Message level (-1=defaults,0=none,...,16=all)");
@@ -125,6 +130,7 @@ void fe_m32(struct fe_priv *eth, u32 clear, u32 set, unsigned reg)
 	spin_unlock(&eth->page_lock);
 }
 
+<<<<<<< HEAD
 static void fe_reset_fe(struct fe_priv *priv)
 {
 	if (!priv->resets)
@@ -134,6 +140,20 @@ static void fe_reset_fe(struct fe_priv *priv)
 	usleep_range(60, 120);
 	reset_control_deassert(priv->resets);
 	usleep_range(1000, 1200);
+=======
+void fe_reset(u32 reset_bits)
+{
+	u32 t;
+
+	t = rt_sysc_r32(SYSC_REG_RSTCTRL);
+	t |= reset_bits;
+	rt_sysc_w32(t, SYSC_REG_RSTCTRL);
+	usleep_range(10, 20);
+
+	t &= ~reset_bits;
+	rt_sysc_w32(t, SYSC_REG_RSTCTRL);
+	usleep_range(10, 20);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static inline void fe_int_disable(u32 mask)
@@ -152,7 +172,11 @@ static inline void fe_int_enable(u32 mask)
 	fe_reg_r32(FE_REG_FE_INT_ENABLE);
 }
 
+<<<<<<< HEAD
 static inline void fe_hw_set_macaddr(struct fe_priv *priv, const unsigned char *mac)
+=======
+static inline void fe_hw_set_macaddr(struct fe_priv *priv, unsigned char *mac)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	unsigned long flags;
 
@@ -487,7 +511,11 @@ static void fe_get_stats64(struct net_device *dev,
 	}
 
 	do {
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin(&hwstats->syncp);
+=======
+		start = u64_stats_fetch_begin_irq(&hwstats->syncp);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		storage->rx_packets = hwstats->rx_packets;
 		storage->tx_packets = hwstats->tx_packets;
 		storage->rx_bytes = hwstats->rx_bytes;
@@ -499,7 +527,11 @@ static void fe_get_stats64(struct net_device *dev,
 		storage->rx_crc_errors = hwstats->rx_fcs_errors;
 		storage->rx_errors = hwstats->rx_checksum_errors;
 		storage->tx_aborted_errors = hwstats->tx_skip;
+<<<<<<< HEAD
 	} while (u64_stats_fetch_retry(&hwstats->syncp, start));
+=======
+	} while (u64_stats_fetch_retry_irq(&hwstats->syncp, start));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	storage->tx_errors = priv->netdev->stats.tx_errors;
 	storage->rx_dropped = priv->netdev->stats.rx_dropped;
@@ -1080,7 +1112,11 @@ poll_again:
 	return rx_done;
 }
 
+<<<<<<< HEAD
 static void fe_tx_timeout(struct net_device *dev, unsigned int txqueue)
+=======
+static void fe_tx_timeout(struct net_device *dev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct fe_priv *priv = netdev_priv(dev);
 	struct fe_tx_ring *ring = &priv->tx_ring;
@@ -1348,6 +1384,7 @@ static int __init fe_init(struct net_device *dev)
 {
 	struct fe_priv *priv = netdev_priv(dev);
 	struct device_node *port;
+<<<<<<< HEAD
 	int err;
 
 	fe_reset_fe(priv);
@@ -1362,6 +1399,27 @@ static int __init fe_init(struct net_device *dev)
 
 	/* Set the MAC address if it is correct, if not use a random MAC address  */
 	if (of_get_ethdev_address(priv->dev->of_node, dev)) {
+=======
+	const char *mac_addr;
+	int err;
+
+	priv->soc->reset_fe();
+
+	if (priv->soc->switch_init)
+		if (priv->soc->switch_init(priv)) {
+			netdev_err(dev, "failed to initialize switch core\n");
+			return -ENODEV;
+		}
+
+	fe_reset_phy(priv);
+
+	mac_addr = of_get_mac_address(priv->dev->of_node);
+	if (!IS_ERR_OR_NULL(mac_addr))
+		ether_addr_copy(dev->dev_addr, mac_addr);
+
+	/* If the mac address is invalid, use random mac address  */
+	if (!is_valid_ether_addr(dev->dev_addr)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		eth_hw_addr_random(dev);
 		dev_err(priv->dev, "generated random MAC address %pM\n",
 			dev->dev_addr);
@@ -1409,6 +1467,10 @@ static void fe_uninit(struct net_device *dev)
 	fe_mdio_cleanup(priv);
 
 	fe_reg_w32(0, FE_REG_FE_INT_ENABLE);
+<<<<<<< HEAD
+=======
+	free_irq(dev->irq, dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static int fe_do_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
@@ -1474,7 +1536,11 @@ static const struct net_device_ops fe_netdev_ops = {
 	.ndo_start_xmit		= fe_start_xmit,
 	.ndo_set_mac_address	= fe_set_mac_address,
 	.ndo_validate_addr	= eth_validate_addr,
+<<<<<<< HEAD
 	.ndo_eth_ioctl		= fe_do_ioctl,
+=======
+	.ndo_do_ioctl		= fe_do_ioctl,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.ndo_change_mtu		= fe_change_mtu,
 	.ndo_tx_timeout		= fe_tx_timeout,
 	.ndo_get_stats64        = fe_get_stats64,
@@ -1522,6 +1588,10 @@ static void fe_pending_work(struct work_struct *work)
 
 static int fe_probe(struct platform_device *pdev)
 {
+<<<<<<< HEAD
+=======
+	struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	const struct of_device_id *match;
 	struct fe_soc_data *soc;
 	struct net_device *netdev;
@@ -1529,9 +1599,13 @@ static int fe_probe(struct platform_device *pdev)
 	struct clk *sysclk;
 	int err, napi_weight;
 
+<<<<<<< HEAD
 	err = device_reset(&pdev->dev);
 	if (err)
 		dev_err(&pdev->dev, "failed to reset device\n");
+=======
+	device_reset(&pdev->dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	match = of_match_device(of_fe_match, &pdev->dev);
 	soc = (struct fe_soc_data *)match->data;
@@ -1541,6 +1615,7 @@ static int fe_probe(struct platform_device *pdev)
 	else
 		soc->reg_table = fe_reg_table;
 
+<<<<<<< HEAD
 	fe_base = devm_platform_ioremap_resource(pdev, 0);
 	if (IS_ERR(fe_base))
 		return PTR_ERR(fe_base);
@@ -1549,6 +1624,19 @@ static int fe_probe(struct platform_device *pdev)
 	if (!netdev) {
 		dev_err(&pdev->dev, "alloc_etherdev failed\n");
 		return -ENOMEM;
+=======
+	fe_base = devm_ioremap_resource(&pdev->dev, res);
+	if (IS_ERR(fe_base)) {
+		err = -EADDRNOTAVAIL;
+		goto err_out;
+	}
+
+	netdev = alloc_etherdev(sizeof(*priv));
+	if (!netdev) {
+		dev_err(&pdev->dev, "alloc_etherdev failed\n");
+		err = -ENOMEM;
+		goto err_iounmap;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	SET_NETDEV_DEV(netdev, &pdev->dev);
@@ -1558,6 +1646,7 @@ static int fe_probe(struct platform_device *pdev)
 	netdev->irq = platform_get_irq(pdev, 0);
 	if (netdev->irq < 0) {
 		dev_err(&pdev->dev, "no IRQ resource found\n");
+<<<<<<< HEAD
 		return -ENXIO;
 	}
 
@@ -1567,6 +1656,10 @@ static int fe_probe(struct platform_device *pdev)
 	if (IS_ERR(priv->resets)) {
 		dev_err(&pdev->dev, "Failed to get resets for FE and ESW cores: %pe\n", priv->resets);
 		return PTR_ERR(priv->resets);
+=======
+		err = -ENXIO;
+		goto err_free_dev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	if (soc->init_data)
@@ -1583,12 +1676,24 @@ static int fe_probe(struct platform_device *pdev)
 	if (fe_reg_table[FE_REG_FE_DMA_VID_BASE])
 		netdev->features |= NETIF_F_HW_VLAN_CTAG_FILTER;
 
+<<<<<<< HEAD
 	if (fe_reg_table[FE_REG_FE_COUNTER_BASE]) {
 		priv->hw_stats = devm_kzalloc(&pdev->dev, sizeof(*priv->hw_stats), GFP_KERNEL);
 		if (!priv->hw_stats)
 			return -ENOMEM;
 		spin_lock_init(&priv->hw_stats->stats_lock);
 		u64_stats_init(&priv->hw_stats->syncp);
+=======
+	priv = netdev_priv(netdev);
+	spin_lock_init(&priv->page_lock);
+	if (fe_reg_table[FE_REG_FE_COUNTER_BASE]) {
+		priv->hw_stats = kzalloc(sizeof(*priv->hw_stats), GFP_KERNEL);
+		if (!priv->hw_stats) {
+			err = -ENOMEM;
+			goto err_free_dev;
+		}
+		spin_lock_init(&priv->hw_stats->stats_lock);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	sysclk = devm_clk_get(&pdev->dev, NULL);
@@ -1596,13 +1701,23 @@ static int fe_probe(struct platform_device *pdev)
 		priv->sysclk = clk_get_rate(sysclk);
 	} else if ((priv->flags & FE_FLAG_CALIBRATE_CLK)) {
 		dev_err(&pdev->dev, "this soc needs a clk for calibration\n");
+<<<<<<< HEAD
 		return -ENXIO;
+=======
+		err = -ENXIO;
+		goto err_free_dev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	priv->switch_np = of_parse_phandle(pdev->dev.of_node, "mediatek,switch", 0);
 	if ((priv->flags & FE_FLAG_HAS_SWITCH) && !priv->switch_np) {
 		dev_err(&pdev->dev, "failed to read switch phandle\n");
+<<<<<<< HEAD
 		return -ENODEV;
+=======
+		err = -ENODEV;
+		goto err_free_dev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	priv->netdev = netdev;
@@ -1614,6 +1729,10 @@ static int fe_probe(struct platform_device *pdev)
 	priv->tx_ring.tx_ring_size = NUM_DMA_DESC;
 	priv->rx_ring.rx_ring_size = NUM_DMA_DESC;
 	INIT_WORK(&priv->pending_work, fe_pending_work);
+<<<<<<< HEAD
+=======
+	u64_stats_init(&priv->hw_stats->syncp);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	napi_weight = 16;
 	if (priv->flags & FE_FLAG_NAPI_WEIGHT) {
@@ -1621,6 +1740,7 @@ static int fe_probe(struct platform_device *pdev)
 		priv->tx_ring.tx_ring_size *= 4;
 		priv->rx_ring.rx_ring_size *= 4;
 	}
+<<<<<<< HEAD
 	netif_napi_add_weight(netdev, &priv->rx_napi, fe_poll, napi_weight);
 	fe_set_ethtool_ops(netdev);
 
@@ -1628,6 +1748,15 @@ static int fe_probe(struct platform_device *pdev)
 	if (err) {
 		dev_err(&pdev->dev, "error bringing up device\n");
 		return err;
+=======
+	netif_napi_add(netdev, &priv->rx_napi, fe_poll, napi_weight);
+	fe_set_ethtool_ops(netdev);
+
+	err = register_netdev(netdev);
+	if (err) {
+		dev_err(&pdev->dev, "error bringing up device\n");
+		goto err_free_dev;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 
 	platform_set_drvdata(pdev, netdev);
@@ -1636,6 +1765,16 @@ static int fe_probe(struct platform_device *pdev)
 		   netdev->base_addr, netdev->irq);
 
 	return 0;
+<<<<<<< HEAD
+=======
+
+err_free_dev:
+	free_netdev(netdev);
+err_iounmap:
+	devm_iounmap(&pdev->dev, fe_base);
+err_out:
+	return err;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static int fe_remove(struct platform_device *pdev)
@@ -1644,9 +1783,18 @@ static int fe_remove(struct platform_device *pdev)
 	struct fe_priv *priv = netdev_priv(dev);
 
 	netif_napi_del(&priv->rx_napi);
+<<<<<<< HEAD
 
 	cancel_work_sync(&priv->pending_work);
 
+=======
+	kfree(priv->hw_stats);
+
+	cancel_work_sync(&priv->pending_work);
+
+	unregister_netdev(dev);
+	free_netdev(dev);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	platform_set_drvdata(pdev, NULL);
 
 	return 0;
@@ -1657,6 +1805,10 @@ static struct platform_driver fe_driver = {
 	.remove = fe_remove,
 	.driver = {
 		.name = "mtk_soc_eth",
+<<<<<<< HEAD
+=======
+		.owner = THIS_MODULE,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		.of_match_table = of_fe_match,
 	},
 };

@@ -149,6 +149,7 @@ uci_remove_list() {
 	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} del_list "$PACKAGE.$CONFIG.$OPTION=$VALUE"
 }
 
+<<<<<<< HEAD
 uci_revert() {
 	local PACKAGE="$1"
 	local CONFIG="$2"
@@ -157,6 +158,8 @@ uci_revert() {
 	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} revert "$PACKAGE${CONFIG:+.$CONFIG}${OPTION:+.$OPTION}"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 uci_commit() {
 	local PACKAGE="$1"
 	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} commit $PACKAGE

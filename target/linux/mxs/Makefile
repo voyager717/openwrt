@@ -9,10 +9,15 @@ BOARD:=mxs
 BOARDNAME:=Freescale i.MX23/i.MX28
 FEATURES:=ext4 rtc usb gpio
 CPU_TYPE:=arm926ej-s
+<<<<<<< HEAD
 SUBTARGETS:=generic
 
 KERNEL_PATCHVER:=6.6
 
+=======
+
+KERNEL_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 KERNELNAME:=zImage dtbs
 
 define Target/Description

@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ds-lite
+<<<<<<< HEAD
 PKG_RELEASE:=9
+=======
+PKG_RELEASE:=8
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=GPL-2.0
 
 include $(INCLUDE_DIR)/package.mk
@@ -17,13 +21,21 @@ define Package/ds-lite
   SECTION:=net
   CATEGORY:=Network
   DEPENDS:=@IPV6 +kmod-ip6-tunnel +resolveip
+<<<<<<< HEAD
   TITLE:=IPv4 over IPv6 (RFC2473 and DS-Lite) configuration support
+=======
+  TITLE:=Dual-Stack Lite (DS-Lite) configuration support
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   MAINTAINER:=Steven Barth <steven@midlink.org>
   PKGARCH:=all
 endef
 
 define Package/ds-lite/description
+<<<<<<< HEAD
 Provides support for IPv4 over IPv6 (RFC2473 and DS-Lite) in /etc/config/network.
+=======
+Provides support for Dual-Stack Lite in /etc/config/network.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 Refer to http://wiki.openwrt.org/doc/uci/network for
 configuration details.
 endef

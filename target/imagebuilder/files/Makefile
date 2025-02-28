@@ -13,7 +13,10 @@ export TOPDIR LC_ALL LANG
 export OPENWRT_VERBOSE=s
 all: help
 
+<<<<<<< HEAD
 export ORIG_PATH:=$(if $(ORIG_PATH),$(ORIG_PATH),$(PATH))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 export PATH:=$(TOPDIR)/staging_dir/host/bin:$(PATH)
 
 ifneq ($(OPENWRT_BUILD),1)
@@ -28,7 +31,10 @@ include $(INCLUDE_DIR)/rootfs.mk
 
 include $(INCLUDE_DIR)/version.mk
 export REVISION
+<<<<<<< HEAD
 export SOURCE_DATE_EPOCH
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Helptext
 Available Commands:
@@ -36,11 +42,16 @@ Available Commands:
 	info:	Show a list of available target profiles
 	clean:	Remove images and temporary build files
 	image:	Build an image (see below for more information).
+<<<<<<< HEAD
 	manifest: Show all package that will be installed into the image
 	package_whatdepends: Show which packages have a dependency on this
 	package_depends: Show installation dependency of the package
 
 image:
+=======
+
+Building images:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	By default 'make image' will create an image with the default
 	target profile and package set. You can use the following parameters
 	to change that:
@@ -52,9 +63,14 @@ image:
 	make image EXTRA_IMAGE_NAME="<string>" # Add this to the output image filename (sanitized)
 	make image DISABLED_SERVICES="<svc1> [<svc2> [<svc3> ..]]" # Which services in /etc/init.d/ should be disabled
 	make image ADD_LOCAL_KEY=1 # store locally generated signing key in built images
+<<<<<<< HEAD
 	make image ROOTFS_PARTSIZE="<size>" # override the default rootfs partition size in MegaBytes
 
 manifest:
+=======
+
+Print manifest:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	List "all" packages which get installed into the image.
 	You can use the following parameters:
 
@@ -62,6 +78,7 @@ manifest:
 	make manifest PACKAGES="<pkg1> [<pkg2> [<pkg3> ...]]" # include extra packages
 	make manifest STRIP_ABI=1 # remove ABI version from printed package names
 
+<<<<<<< HEAD
 
 package_whatdepends:
 	List "all" packages that have a dependency on this package
@@ -75,6 +92,8 @@ package_depends:
 
 	make package_depends PACKAGE="<pkg>"
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 $(eval $(call shexport,Helptext))
 
@@ -83,12 +102,17 @@ help: FORCE
 
 
 # override variables from rules.mk
+<<<<<<< HEAD
 BUILD_KEY_APK_SEC=$(TOPDIR)/keys/local-private-key.pem
 BUILD_KEY_APK_PUB=$(TOPDIR)/keys/local-public-key.pem
 export PACKAGE_DIR:=$(TOPDIR)/packages
 LISTS_DIR:=$(subst $(space),/,$(patsubst %,..,$(subst /,$(space),$(TARGET_DIR))))$(DL_DIR)
 export PACKAGE_DIR_ALL:=$(TOPDIR)/packages
 
+=======
+PACKAGE_DIR:=$(TOPDIR)/packages
+LISTS_DIR:=$(subst $(space),/,$(patsubst %,..,$(subst /,$(space),$(TARGET_DIR))))$(DL_DIR)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 export OPKG_KEYS:=$(TOPDIR)/keys
 OPKG:=$(call opkg,$(TARGET_DIR)) \
 	-f $(TOPDIR)/repositories.conf \
@@ -96,6 +120,7 @@ OPKG:=$(call opkg,$(TARGET_DIR)) \
 	--cache $(DL_DIR) \
 	--lists-dir $(LISTS_DIR)
 
+<<<<<<< HEAD
 export APK_KEYS:=$(TOPDIR)/keys
 APK:=$(call apk,$(TARGET_DIR)) \
 	--repositories-file $(TOPDIR)/repositories \
@@ -106,6 +131,9 @@ APK:=$(call apk,$(TARGET_DIR)) \
 
 include $(INCLUDE_DIR)/target.mk
 include $(INCLUDE_DIR)/default-packages.mk
+=======
+include $(INCLUDE_DIR)/target.mk
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 -include .profiles.mk
 
 USER_PROFILE ?= $(firstword $(PROFILE_NAMES))
@@ -116,7 +144,11 @@ PROFILE_LIST = $(foreach p,$(PROFILE_NAMES), \
 
 
 .profiles.mk: .targetinfo
+<<<<<<< HEAD
 	@$(SCRIPT_DIR)/target-metadata.pl profile_mk $< '$(BOARD)/$(SUBTARGET)' > $@
+=======
+	@$(SCRIPT_DIR)/target-metadata.pl profile_mk $< '$(BOARD)$(if $(SUBTARGET),/$(SUBTARGET))' > $@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 staging_dir/host/.prereq-build: include/prereq-build.mk
 	mkdir -p tmp
@@ -134,17 +166,26 @@ staging_dir/host/.prereq-build: include/prereq-build.mk
 
 _call_info: FORCE
 	echo 'Current Target: "$(TARGETID)"'
+<<<<<<< HEAD
 	echo 'Current Architecture: "$(ARCH)"'
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	echo 'Current Revision: "$(REVISION)"'
 	echo 'Default Packages: $(DEFAULT_PACKAGES)'
 	echo 'Available Profiles:'
 	echo; $(PROFILE_LIST)
 
+<<<<<<< HEAD
 BUILD_PACKAGES:=$(sort $(DEFAULT_PACKAGES) $($(USER_PROFILE)_PACKAGES) kernel)
 # "-pkgname" in the package list means remove "pkgname" from the package list
 BUILD_PACKAGES:=$(filter-out $(filter -%,$(BUILD_PACKAGES)) $(patsubst -%,%,$(filter -%,$(BUILD_PACKAGES))),$(BUILD_PACKAGES))
 BUILD_PACKAGES:=$(USER_PACKAGES) $(BUILD_PACKAGES)
 BUILD_PACKAGES:=$(filter-out $(filter -%,$(BUILD_PACKAGES)) $(patsubst -%,%,$(filter -%,$(BUILD_PACKAGES))),$(BUILD_PACKAGES))
+=======
+BUILD_PACKAGES:=$(USER_PACKAGES) $(sort $(DEFAULT_PACKAGES) $($(USER_PROFILE)_PACKAGES) kernel)
+# "-pkgname" in the package list means remove "pkgname" from the package list
+BUILD_PACKAGES:=$(filter-out $(filter -%,$(BUILD_PACKAGES)) $(patsubst -%,%,$(filter -%,$(BUILD_PACKAGES))),$(BUILD_PACKAGES))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PACKAGES:=
 
 _call_image: staging_dir/host/.prereq-build
@@ -165,23 +206,31 @@ _call_manifest: FORCE
 	mkdir -p $(TARGET_DIR) $(BIN_DIR) $(TMP_DIR) $(DL_DIR)
 	$(MAKE) package_reload >/dev/null
 	$(MAKE) package_install >/dev/null
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
 	$(OPKG) list-installed $(if $(STRIP_ABI),--strip-abi)
 else
 	$(APK) list --quiet --manifest --no-network
 endif
+=======
+	$(OPKG) list-installed $(if $(STRIP_ABI),--strip-abi)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 package_index: FORCE
 	@echo >&2
 	@echo Building package index... >&2
 	@mkdir -p $(TMP_DIR) $(TARGET_DIR)/tmp
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	(cd $(PACKAGE_DIR); $(SCRIPT_DIR)/ipkg-make-index.sh . > Packages && \
 		gzip -9nc Packages > Packages.gz; \
 		$(if $(CONFIG_SIGNATURE_CHECK), \
 			$(STAGING_DIR_HOST)/bin/usign -S -m Packages -s $(BUILD_KEY)) \
 	) >/dev/null 2>/dev/null
 	$(OPKG) update >&2 || true
+<<<<<<< HEAD
 else
 	(cd $(PACKAGE_DIR); $(APK) mkndx \
 		$(if $(CONFIG_SIGNATURE_CHECK), --keys-dir $(APK_KEYS) --sign $(BUILD_KEY_APK_SEC)) \
@@ -190,6 +239,10 @@ endif
 
 package_reload:
 ifeq ($(CONFIG_USE_APK),)
+=======
+
+package_reload:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if [ -d "$(PACKAGE_DIR)" ] && ( \
 			[ ! -f "$(PACKAGE_DIR)/Packages" ] || \
 			[ ! -f "$(PACKAGE_DIR)/Packages.gz" ] || \
@@ -200,6 +253,7 @@ ifeq ($(CONFIG_USE_APK),)
 		mkdir -p $(TARGET_DIR)/tmp; \
 		$(OPKG) update >&2 || true; \
 	fi
+<<<<<<< HEAD
 else
 	$(APK) add --arch $(ARCH_PACKAGES) --initdb
 	if [ -d "$(PACKAGE_DIR)" ] && ( \
@@ -219,10 +273,17 @@ ifeq ($(CONFIG_USE_APK),)
 else
 	@$(APK) list --size 2>/dev/null
 endif
+=======
+
+package_list: FORCE
+	@$(MAKE) -s package_reload
+	@$(OPKG) list --size 2>/dev/null
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 package_install: FORCE
 	@echo
 	@echo Installing packages...
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
 	$(OPKG) install $(wildcard $(PACKAGE_DIR)/libc_*.ipk)
 	$(OPKG) install $(wildcard $(PACKAGE_DIR)/kernel_*.ipk)
@@ -233,19 +294,28 @@ else
         "libc=$(LIBC_VERSION)" \
         "kernel=$(KERNEL_VERSION)"
 endif
+=======
+	$(OPKG) install $(firstword $(wildcard $(LINUX_DIR)/libc_*.ipk $(PACKAGE_DIR)/libc_*.ipk))
+	$(OPKG) install $(firstword $(wildcard $(LINUX_DIR)/kernel_*.ipk $(PACKAGE_DIR)/kernel_*.ipk))
+	$(OPKG) install $(BUILD_PACKAGES)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 prepare_rootfs: FORCE
 	@echo
 	@echo Finalizing root filesystem...
 
 	$(CP) $(TARGET_DIR) $(TARGET_DIR_ORIG)
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(if $(CONFIG_SIGNATURE_CHECK), \
 		$(if $(ADD_LOCAL_KEY), \
 			OPKG_KEYS=$(TARGET_DIR)/etc/opkg/keys/ \
 			$(SCRIPT_DIR)/opkg-key add $(BUILD_KEY).pub \
 		) \
 	)
+<<<<<<< HEAD
 else
 	$(if $(CONFIG_SIGNATURE_CHECK), \
 		$(if $(ADD_LOCAL_KEY), \
@@ -254,12 +324,15 @@ else
 		) \
 	)
 endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(call prepare_rootfs,$(TARGET_DIR),$(USER_FILES),$(DISABLED_SERVICES))
 
 build_image: FORCE
 	@echo
 	@echo Building images...
 	rm -rf $(BUILD_DIR)/json_info_files/
+<<<<<<< HEAD
 	if [ -d "target/linux/feeds/$(BOARD)" ]; then \
 		$(NO_TRACE_MAKE) -C target/linux/feeds/$(BOARD)/image install TARGET_BUILD=1 IB=1 EXTRA_IMAGE_NAME="$(EXTRA_IMAGE_NAME)" \
 			$(if $(USER_PROFILE),PROFILE="$(USER_PROFILE)"); \
@@ -267,6 +340,10 @@ build_image: FORCE
 		$(NO_TRACE_MAKE) -C target/linux/$(BOARD)/image install TARGET_BUILD=1 IB=1 EXTRA_IMAGE_NAME="$(EXTRA_IMAGE_NAME)" \
 			$(if $(USER_PROFILE),PROFILE="$(USER_PROFILE)"); \
 	fi
+=======
+	$(NO_TRACE_MAKE) -C target/linux/$(BOARD)/image install TARGET_BUILD=1 IB=1 EXTRA_IMAGE_NAME="$(EXTRA_IMAGE_NAME)" \
+		$(if $(USER_PROFILE),PROFILE="$(USER_PROFILE)")
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $(BIN_DIR)/profiles.json: FORCE
 	$(if $(CONFIG_JSON_OVERVIEW_IMAGE_INFO), \
@@ -301,7 +378,10 @@ endif
 
 _check_keys: FORCE
 ifneq ($(CONFIG_SIGNATURE_CHECK),)
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	@if [ ! -s $(BUILD_KEY) -o ! -s $(BUILD_KEY).pub ]; then \
 		echo Generate local signing keys... >&2; \
 		$(STAGING_DIR_HOST)/bin/usign -G \
@@ -315,6 +395,7 @@ ifeq ($(CONFIG_USE_APK),)
 			-p $(BUILD_KEY).pub \
 			-s $(BUILD_KEY); \
 	fi
+<<<<<<< HEAD
 else
 	@if [ ! -s $(BUILD_KEY_APK_SEC) -o ! -s $(BUILD_KEY_APK_PUB) ]; then \
 		echo Generate local signing keys... >&2; \
@@ -324,6 +405,8 @@ else
 		sed -i '1s/^/untrusted comment: Local build key\n/' $(BUILD_KEY_APK_PUB); \
 	fi
 endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 image:
@@ -335,8 +418,12 @@ image:
 		$(if $(FILES),USER_FILES="$(FILES)") \
 		$(if $(PACKAGES),USER_PACKAGES="$(PACKAGES)") \
 		$(if $(BIN_DIR),BIN_DIR="$(BIN_DIR)") \
+<<<<<<< HEAD
 		$(if $(DISABLED_SERVICES),DISABLED_SERVICES="$(DISABLED_SERVICES)") \
 		$(if $(ROOTFS_PARTSIZE),CONFIG_TARGET_ROOTFS_PARTSIZE="$(ROOTFS_PARTSIZE)"))
+=======
+		$(if $(DISABLED_SERVICES),DISABLED_SERVICES="$(DISABLED_SERVICES)"))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 manifest: FORCE
 	$(MAKE) -s _check_profile
@@ -346,12 +433,17 @@ manifest: FORCE
 		$(if $(PROFILE),USER_PROFILE="$(PROFILE_FILTER)") \
 		$(if $(PACKAGES),USER_PACKAGES="$(PACKAGES)"))
 
+<<<<<<< HEAD
 package_whatdepends: FORCE
+=======
+whatdepends: FORCE
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifeq ($(PACKAGE),)
 	@echo 'Variable `PACKAGE` is not set but required by `whatdepends`'
 	@exit 1
 endif
 	@$(MAKE) -s package_reload
+<<<<<<< HEAD
 ifeq ($(CONFIG_USE_APK),)
 	@$(OPKG) whatdepends -A $(PACKAGE)
 else
@@ -371,3 +463,8 @@ else
 endif
 
 .SILENT: help info image manifest package_whatdepends package_depends
+=======
+	@$(OPKG) whatdepends -A $(PACKAGE)
+
+.SILENT: help info image manifest whatdepends
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

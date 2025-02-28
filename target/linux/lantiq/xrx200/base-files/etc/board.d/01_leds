@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2011-2015 OpenWrt.org
 #
@@ -10,6 +14,15 @@ board_config_update
 led_wifi="$(get_dt_led wifi)"
 [ -n "$led_wifi" ] && ucidef_set_led_wlan "wifi" "wifi" "$led_wifi" "phy0tpt"
 
+<<<<<<< HEAD
+=======
+led_usb="$(get_dt_led usb)"
+[ -n "$led_usb" ] && ucidef_set_led_usbdev "usb" "usb" "$led_usb" "1-1"
+
+led_usb2="$(get_dt_led usb2)"
+[ -n "$led_usb2" ] && ucidef_set_led_usbdev "usb2" "usb2" "$led_usb2" "2-1"
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 led_dsl="$(get_dt_led dsl)"
 [ -n "$led_dsl" ] && {
 	led_internet="$(get_dt_led internet)"
@@ -28,6 +41,7 @@ arcadyan,arv7519rw22)
 	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0.1"
 	;;
 arcadyan,vgv7510kw22-nor|\
+<<<<<<< HEAD
 arcadyan,vgv7510kw22-brn)
 	ucidef_set_led_netdev "internet" "internet" "$led_internet" "wan"
 	;;
@@ -35,6 +49,9 @@ arcadyan,vrv9510kwac23)
 	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0"
 	ucidef_set_led_wlan "wifi" "wifi" "green:wlan" "phy1radio"
 	;;
+=======
+arcadyan,vgv7510kw22-brn|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 zyxel,p-2812hnu-f1|\
 zyxel,p-2812hnu-f3)
 	ucidef_set_led_wlan "wifi" "wifi" "green:wlan" "phy0radio"
@@ -44,6 +61,7 @@ arcadyan,vgv7519-brn)
 	ucidef_set_led_wlan "wifi" "wifi" "green:wireless" "phy0radio"
 	;;
 avm,fritz3370-rev2-hynix|\
+<<<<<<< HEAD
 avm,fritz3370-rev2-micron|\
 avm,fritz3390|\
 avm,fritz3490|\
@@ -52,6 +70,9 @@ avm,fritz5490|\
 avm,fritz5490-micron|\
 avm,fritz7490|\
 avm,fritz7490-micron)
+=======
+avm,fritz3370-rev2-micron)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ucidef_set_led_switch "lan" "LAN" "green:lan" "switch0" "0x17"
 	;;
 bt,homehub-v5a)
@@ -64,6 +85,12 @@ buffalo,wbmr-300hpd)
 	ucidef_set_led_switch "lan3" "LAN3" "green:lan3" "switch0" "0x20"
 	ucidef_set_led_default "router" "router" "green:router" "1"
 	;;
+<<<<<<< HEAD
+=======
+netgear,dm200)
+	ucidef_set_led_netdev "lan" "lan" "green:lan" "eth0"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 esac
 
 board_config_flush

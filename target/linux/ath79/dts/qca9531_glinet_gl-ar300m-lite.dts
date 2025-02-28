@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9531_glinet_gl-ar300m.dtsi"
 
 / {
@@ -9,7 +12,10 @@
 	model = "GL.iNet GL-AR300M-Lite";
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /delete-node/ &nand_flash;
 
 &nor_firmware {
@@ -24,6 +30,7 @@
 };
 
 &led_status {
+<<<<<<< HEAD
 	function = LED_FUNCTION_STATUS;
 	color = <LED_COLOR_ID_RED>;
 };
@@ -33,3 +40,11 @@
 	color = <LED_COLOR_ID_GREEN>;
 };
 
+=======
+	label = "red:status";
+};
+
+&led_wlan {
+	label = "green:wlan";
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

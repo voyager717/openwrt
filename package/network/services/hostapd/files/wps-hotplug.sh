@@ -38,6 +38,7 @@ wps_catch_credentials() {
 	done
 }
 
+<<<<<<< HEAD
 if [ "$ACTION" = "released" ] && [ "$BUTTON" = "wps" ]; then
 	# If the button was pressed for 3 seconds or more, trigger WPS on
 	# wpa_supplicant only, no matter if hostapd is running or not.  If
@@ -52,6 +53,15 @@ if [ "$ACTION" = "released" ] && [ "$BUTTON" = "wps" ]; then
 		done
 		[ $wps_done = 0 ] || return 0
 	fi
+=======
+if [ "$ACTION" = "pressed" -a "$BUTTON" = "wps" ]; then
+	wps_done=0
+	ubusobjs="$( ubus -S list hostapd.* )"
+	for ubusobj in $ubusobjs; do
+		ubus -S call $ubusobj wps_start && wps_done=1
+	done
+	[ $wps_done = 0 ] || return 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	wps_done=0
 	ubusobjs="$( ubus -S list wpa_supplicant.* )"
 	for ubusobj in $ubusobjs; do

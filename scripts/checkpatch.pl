@@ -4697,7 +4697,11 @@ sub process {
 ## 		    $line !~ /^.\s*$Type\s+$Ident(?:\s*=[^,{]*)?\s*,\s*$Type\s*$Ident.*/) {
 ##
 ## 			# Remove any bracketed sections to ensure we do not
+<<<<<<< HEAD
 ## 			# falsely report the parameters of functions.
+=======
+## 			# falsly report the parameters of functions.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ## 			my $ln = $line;
 ## 			while ($ln =~ s/\([^\(\)]*\)//g) {
 ## 			}

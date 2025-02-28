@@ -6,6 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=secilc
+<<<<<<< HEAD
 PKG_VERSION:=3.5
 PKG_RELEASE:=1
 
@@ -15,6 +16,18 @@ PKG_HASH:=3eebc5a1f97847fa530cf90654b9f3b8f21a13c9ea3d07495325651580cd3373
 HOST_BUILD_DEPENDS:=libsepol/host
 
 PKG_MAINTAINER:=Dominick Grift <dominick.grift@defensec.nl>
+=======
+PKG_VERSION:=3.2
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/3.2
+PKG_HASH:=5f6e6528a281b29ac5e558babffc3d8aab682fd8df8977daff5f266a50292cc3
+HOST_BUILD_DEPENDS:=libsepol/host
+
+PKG_MAINTAINER:=Dominick Grift <dominick.grift@defensec.nl>
+PKG_CPE_ID:=cpe:/a:selinuxproject:secilc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_LICENSE:=BSD-2-Clause
 PKG_LICENSE_FILES:=COPYING
 

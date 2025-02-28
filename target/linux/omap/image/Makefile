@@ -33,13 +33,20 @@ define Device/Default
   PROFILES := Default
   KERNEL_NAME := zImage
   KERNEL := kernel-bin
+<<<<<<< HEAD
   DTS_DIR := $(DTS_DIR)/ti/omap
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_DTS = $(lastword $(subst _, ,$(1)))
   IMAGES := sdcard.img.gz
   IMAGE/sdcard.img.gz := omap-sdcard | append-metadata | gzip
 endef
 
+<<<<<<< HEAD
 #uboot-omap-am335x_evm uboot-omap-omap3_beagle uboot-omap-omap4_panda
+=======
+#uboot-omap-am335x_evm uboot-omap-omap3_beagle uboot-omap-omap3_overo uboot-omap-omap4_panda
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/ti_am335x-evm
   DEVICE_VENDOR := Texas Instruments

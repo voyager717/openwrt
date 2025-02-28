@@ -12,7 +12,10 @@ users can bring up the board without difficulty.
   LS1012ARDB        (QSPI NOR boot)
   LS1012AFRDM       (QSPI NOR boot)
   LS1012AFRWY       (QSPI NOR boot)
+<<<<<<< HEAD
   LS1028ARDB        (QSPI NOR boot    | SD card boot)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   LS1043ARDB        (NOR boot         | SD card boot)
   LS1046ARDB        (QSPI NOR boot    | SD card boot)
   LS1046AFRWY       (QSPI NOR boot    | SD card boot)
@@ -96,6 +99,7 @@ from SD card. (sdcard.img images are gz-iped to save space. Please extract them 
   => sf write a0000000 0 $filesize
   => reset
 
+<<<<<<< HEAD
 * LS1028ARDB
   Board has only one bank. Those commands will replace stock bootloader
   and firmware.
@@ -105,6 +109,8 @@ from SD card. (sdcard.img images are gz-iped to save space. Please extract them 
   => sf write a0000000 0 $filesize
   => reset
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 * LS1043ARDB
   Start up from bank0, and program firmware to bank4 with below commands.
   Switch to bank4 to start up OpenWrt.

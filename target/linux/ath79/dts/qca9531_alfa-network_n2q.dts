@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca9531_alfa-network_r36a.dtsi"
 
 / {
@@ -64,8 +67,12 @@
 		};
 
 		led_usb: usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "usbport";
 			trigger-sources = <&hub_port0>;
@@ -77,8 +84,12 @@
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -110,6 +121,7 @@
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_1002 (-2)>;
 	nvmem-cell-names = "mac-address";
 };
@@ -117,6 +129,15 @@
 &eth1 {
 	nvmem-cells = <&macaddr_art_1002 (-1)>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x1002>;
+	mtd-mac-address-increment = <(-2)>;
+};
+
+&eth1 {
+	mtd-mac-address = <&art 0x1002>;
+	mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {

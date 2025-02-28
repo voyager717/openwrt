@@ -1,7 +1,11 @@
 FEATURES += low_mem pcmcia small_flash
 BOARDNAME:=Legacy (BMIPS3300)
 
+<<<<<<< HEAD
 DEFAULT_PACKAGES += wpad-basic-mbedtls
+=======
+DEFAULT_PACKAGES += wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Target/Description
 	Build firmware for Broadcom BCM47xx and BCM53xx devices with

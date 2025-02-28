@@ -1,0 +1,8 @@
+/usr/lib/libz.so.1.2.11
+/usr/lib/libz.so.1
+/usr/lib/libz.so
+/usr/lib/libz.a
+/usr/include/zconf.h
+/usr/include/zlib.h
+/usr/share/man/man3/zlib.3
+/usr/share/pkgconfig/zlib.pc

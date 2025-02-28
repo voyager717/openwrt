@@ -20,6 +20,10 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_platform.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <asm/time.h>
 #include <asm/machdep.h>
@@ -35,7 +39,11 @@
 
 #include "mpc85xx.h"
 
+<<<<<<< HEAD
 static void __init ws_ap3710i_pic_init(void)
+=======
+void __init ws_ap3710i_pic_init(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct mpic *mpic;
 
@@ -65,9 +73,25 @@ static void __init ws_ap3710i_setup_arch(void)
 
 machine_arch_initcall(ws_ap3710i, mpc85xx_common_publish_devices);
 
+<<<<<<< HEAD
 define_machine(ws_ap3710i) {
 	.name			= "P1020 RDB",
 	.compatible		= "enterasys,ws-ap3710i",
+=======
+/*
+ * Called very early, device-tree isn't unflattened
+ */
+static int __init ws_ap3710i_probe(void)
+{
+	if (of_machine_is_compatible("enterasys,ws-ap3710i"))
+		return 1;
+	return 0;
+}
+
+define_machine(ws_ap3710i) {
+	.name			= "P1020 RDB",
+	.probe			= ws_ap3710i_probe,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.setup_arch		= ws_ap3710i_setup_arch,
 	.init_IRQ		= ws_ap3710i_pic_init,
 #ifdef CONFIG_PCI
@@ -75,5 +99,9 @@ define_machine(ws_ap3710i) {
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 #endif
 	.get_irq		= mpic_get_irq,
+<<<<<<< HEAD
+=======
+	.calibrate_decr		= generic_calibrate_decr,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.progress		= udbg_progress,
 };

@@ -10,12 +10,21 @@ DEFAULT_PACKAGES+=kmod-leds-gpio \
 	kmod-ltq-vdsl-vr9-mei \
 	kmod-ltq-vdsl-vr9 \
 	kmod-ltq-atm-vr9 \
+<<<<<<< HEAD
 	kmod-ltq-deu-vr9 \
 	kmod-ltq-ptm-vr9 \
 	ltq-vdsl-vr9-app \
 	dsl-vrx200-firmware-xdsl-a \
 	dsl-vrx200-firmware-xdsl-b-patch \
 	ppp-mod-pppoa
+=======
+	kmod-ltq-ptm-vr9 \
+	ltq-vdsl-app \
+	dsl-vrx200-firmware-xdsl-a \
+	dsl-vrx200-firmware-xdsl-b-patch \
+	ppp-mod-pppoa \
+	swconfig
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Target/Description
 	Lantiq XRX200

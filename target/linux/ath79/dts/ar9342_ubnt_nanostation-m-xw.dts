@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include "ar9342_ubnt_xw_rssileds.dtsi"
+=======
+#include "ar9342_ubnt_xw.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "ubnt,nanostation-m-xw", "ubnt,xw", "qca,ar9342";
@@ -11,6 +15,10 @@
 	status = "okay";
 
 	phy4-mii-enable;
+<<<<<<< HEAD
+=======
+	phy-mask = <0x23>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy0: ethernet-phy@0 {
 		reg = <0>;

@@ -5,10 +5,13 @@
 / {
 	compatible = "netgear,r6220", "mediatek,mt7621-soc";
 	model = "Netgear R6220";
+<<<<<<< HEAD
 
 	aliases {
 		label-mac-device = &gmac0;
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &nand {
@@ -41,6 +44,7 @@
 			reg = <0x600000 0x1c00000>;
 		};
 
+<<<<<<< HEAD
 		partition@2e00000 {
 			label = "factory";
 			reg = <0x2e00000 0x100000>;
@@ -65,6 +69,12 @@
 					reg = <0x8000 0x200>;
 				};
 			};
+=======
+		factory: partition@2e00000 {
+			label = "factory";
+			reg = <0x2e00000 0x100000>;
+			read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		partition@4200000 {
@@ -74,6 +84,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_4 0>;
@@ -84,3 +95,5 @@
 	nvmem-cells = <&macaddr_factory_4 1>;
 	nvmem-cell-names = "mac-address";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

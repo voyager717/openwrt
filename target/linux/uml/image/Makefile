@@ -30,4 +30,8 @@ $(eval $(call BuildImage))
 $(eval $(call TestHostCommand,glibc-static, \
 	Please install a static glibc package. (Missing libutil.a, librt.a or libpthread.a), \
 	echo 'int main(int argc, char **argv) { login(0); timer_gettime(0, 0); return 0; }' | \
+<<<<<<< HEAD
 		gcc -include utmp.h -include time.h -x c -o $(TMP_DIR)/a.out - -static -lutil -lrt))
+=======
+		gcc -include utmp.h -x c -o $(TMP_DIR)/a.out - -static -lutil -lrt))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

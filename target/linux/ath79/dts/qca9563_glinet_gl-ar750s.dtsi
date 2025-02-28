@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "glinet,gl-ar750s", "qca,qca9563";
@@ -42,8 +45,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -93,6 +100,7 @@
 				reg = <0x040000 0x010000>;
 			};
 
+<<<<<<< HEAD
 			partition@50000 {
 				label = "art";
 				reg = <0x050000 0x010000>;
@@ -117,6 +125,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@50000 {
+				label = "art";
+				reg = <0x050000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			/* Firmware / Kernel flash type specific */
@@ -145,8 +159,12 @@
 	status = "okay";
 
 	phy-handle = <&phy0>;
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &gpio {
@@ -161,6 +179,11 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy0: ethernet-phy@0 {
 		reg = <0>;
 		phy-mode = "sgmii";
@@ -173,6 +196,7 @@
 
 &pcie {
 	status = "okay";
+<<<<<<< HEAD
 
 	wifi@0,0 {
 		compatible = "qcom,ath10k";
@@ -180,6 +204,8 @@
 		nvmem-cells = <&cal_art_5000>, <&macaddr_art_0 1>;
 		nvmem-cell-names = "calibration", "mac-address";
 	};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb0 {
@@ -201,6 +227,10 @@
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "ravpower,rp-wd009", "mediatek,mt7628an-soc";
@@ -17,6 +20,13 @@
 		led-upgrade = &led_globe;
 	};
 
+<<<<<<< HEAD
+=======
+	chosen {
+		bootargs = "console=ttyS0,57600";
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	leds {
 		compatible = "gpio-leds";
 
@@ -38,14 +48,22 @@
 		};
 
 		sd_white {
+<<<<<<< HEAD
 			function = LED_FUNCTION_SD;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:sd";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 
 		sd_red {
+<<<<<<< HEAD
 			function = LED_FUNCTION_SD;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:sd";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -84,6 +102,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &pinctrl {
 	ephy-digital;
 
@@ -100,6 +119,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &state_default {
 	gpio {
 		groups = "uart1", "wled_an", "p0led_an", "p2led_an", "p3led_an",
@@ -110,9 +131,12 @@
 
 &sdhci {
 	status = "okay";
+<<<<<<< HEAD
 
 	pinctrl-0 = <&sdxc_iot_mode>;
 	pinctrl-1 = <&sdxc_iot_mode>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &i2c {
@@ -128,8 +152,12 @@
 &pcie0 {
 	wifi@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5470000 6000000>;
 	};
 };
@@ -159,6 +187,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -181,6 +210,12 @@
 						reg = <0x4 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -223,6 +258,7 @@
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
@@ -231,4 +267,10 @@
 &ethernet {
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
+=======
+};
+
+&ethernet {
+	mtd-mac-address = <&factory 0x4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

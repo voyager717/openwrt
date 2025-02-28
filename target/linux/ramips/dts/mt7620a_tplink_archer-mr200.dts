@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,archer-mr200", "ralink,mt7620a-soc";
@@ -23,20 +26,32 @@
 		compatible = "gpio-leds";
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 1 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
 		};
 
@@ -46,8 +61,12 @@
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio1 15 GPIO_ACTIVE_LOW>;
 		};
 
@@ -72,8 +91,12 @@
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_WHITE>;
+=======
+			label = "white:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio3 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy1tpt";
 		};
@@ -144,6 +167,7 @@
 				reg = <0x20000 0x7b0000>;
 			};
 
+<<<<<<< HEAD
 			partition@7d0000 {
 				label = "rom";
 				reg = <0x7d0000 0x10000>;
@@ -158,6 +182,12 @@
 						reg = <0xf100 0x6>;
 					};
 				};
+=======
+			rom: partition@7d0000 {
+				label = "rom";
+				reg = <0x7d0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@7e0000 {
@@ -166,6 +196,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7f0000 {
 				label = "radio";
 				reg = <0x7f0000 0x10000>;
@@ -184,6 +215,12 @@
 						reg = <0x8000 0x200>;
 					};
 				};
+=======
+			radio: partition@7f0000 {
+				label = "radio";
+				reg = <0x7f0000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -197,8 +234,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_rom_f100>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&rom 0xf100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &ehci {
@@ -210,8 +251,12 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&eeprom_radio_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	ralink,mtd-eeprom = <&radio 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -221,7 +266,11 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_radio_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&radio 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

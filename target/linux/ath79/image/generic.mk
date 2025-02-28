@@ -1,9 +1,13 @@
 include ./common-buffalo.mk
+<<<<<<< HEAD
 include ./common-nec.mk
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include ./common-netgear.mk
 include ./common-senao.mk
 include ./common-tp-link.mk
 include ./common-yuncore.mk
+<<<<<<< HEAD
 include ./common-ubnt.mk
 
 DEVICE_VARS += ADDPATTERN_ID ADDPATTERN_VERSION
@@ -13,6 +17,32 @@ DEVICE_VARS += ELECOM_HWID
 DEVICE_VARS += MOXA_MAGIC MOXA_HWID
 DEVICE_VARS += OPENMESH_CE_TYPE ZYXEL_MODEL_STRING
 DEVICE_VARS += SUPPORTED_TELTONIKA_DEVICES
+=======
+
+DEVICE_VARS += ADDPATTERN_ID ADDPATTERN_VERSION
+DEVICE_VARS += SEAMA_SIGNATURE SEAMA_MTDBLOCK
+DEVICE_VARS += KERNEL_INITRAMFS_PREFIX DAP_SIGNATURE
+DEVICE_VARS += EDIMAX_HEADER_MAGIC EDIMAX_HEADER_MODEL
+DEVICE_VARS += OPENMESH_CE_TYPE
+
+define Build/add-elecom-factory-initramfs
+  $(eval edimax_model=$(word 1,$(1)))
+  $(eval product=$(word 2,$(1)))
+
+  $(STAGING_DIR_HOST)/bin/mkedimaximg \
+	-b -s CSYS -m $(edimax_model) \
+	-f 0x70000 -S 0x01100000 \
+	-i $@ -o $@.factory
+
+  $(call Build/elecom-product-header,$(product) $@.factory)
+
+  if [ "$$(stat -c%s $@.factory)" -le $$(($(subst k,* 1024,$(subst m, * 1024k,$(IMAGE_SIZE))))) ]; then \
+	mv $@.factory $(BIN_DIR)/$(KERNEL_INITRAMFS_PREFIX)-factory.bin; \
+  else \
+	echo "WARNING: initramfs kernel image too big, cannot generate factory image" >&2; \
+  fi
+endef
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/addpattern
 	-$(STAGING_DIR_HOST)/bin/addpattern -B $(ADDPATTERN_ID) \
@@ -21,7 +51,11 @@ define Build/addpattern
 endef
 
 define Build/append-md5sum-bin
+<<<<<<< HEAD
 	$(MKHASH) md5 $@ | sed 's/../\\\\x&/g' |\
+=======
+	$(STAGING_DIR_HOST)/bin/mkhash md5 $@ | sed 's/../\\\\x&/g' |\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		xargs echo -ne >> $@
 endef
 
@@ -34,6 +68,7 @@ define Build/cybertan-trx
 	-rm $@-empty.bin
 endef
 
+<<<<<<< HEAD
 define Build/dlink-sge-signature
 	( \
 		crc=$$(gzip -c $@ | tail -c 8 | od -An -tx4 --endian little | cut -d " " -f2); \
@@ -45,6 +80,8 @@ define Build/dlink-sge-signature
 	mv $@.new $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/edimax-headers
 	$(eval edimax_magic=$(word 1,$(1)))
 	$(eval edimax_model=$(word 2,$(1)))
@@ -86,7 +123,11 @@ define Build/mkmylofw_16m
 
 	let \
 		size="$$(stat -c%s $@)" \
+<<<<<<< HEAD
 		pad="$(call exp_units,$(BLOCKSIZE))" \
+=======
+		pad="$(subst k,* 1024,$(BLOCKSIZE))" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		pad="(pad - (size % pad)) % pad" \
 		newsize='size + pad' ; \
 		[ $$newsize -lt $$((0x660000)) ] && newsize=0x660000 ; \
@@ -139,11 +180,16 @@ define Build/teltonika-fw-fake-checksum
 	# from begin of the firmware file) with 16 bytes stored just before
 	# 0xdeadc0de marker. Values are only compared, MD5 sum is not verified.
 	let \
+<<<<<<< HEAD
 		offs="$$(stat -c%s $@) - $(1)"; \
+=======
+		offs="$$(stat -c%s $@) - 20"; \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		dd if=$@ bs=1 count=16 skip=76 |\
 		dd of=$@ bs=1 count=16 seek=$$offs conv=notrunc
 endef
 
+<<<<<<< HEAD
 define Build/teltonika-v1-header
 	$(STAGING_DIR_HOST)/bin/mktplinkfw \
 		-c -H $(TPLINK_HWID) -W $(TPLINK_HWREV) -L $(KERNEL_LOADADDR) \
@@ -182,16 +228,37 @@ define Build/append-metadata-teltonika
 	echo $(call metadata_json_teltonika) | fwtool -I - $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/wrgg-pad-rootfs
 	$(STAGING_DIR_HOST)/bin/padjffs2 $(IMAGE_ROOTFS) -c 64 >>$@
 endef
 
+<<<<<<< HEAD
 define Build/zyxel-tar-bz2
 	mkdir -p $@.tmp
 	mv $@ $@.tmp/$(word 2,$(1))
 	cp $(KDIR)/loader-$(DEVICE_NAME).uImage $@.tmp/$(word 1,$(1)).lzma.uImage
 	$(TAR) -cjf $@ -C $@.tmp .
 	rm -rf $@.tmp
+=======
+
+define Device/seama
+  KERNEL := kernel-bin | append-dtb | relocate-kernel | lzma
+  KERNEL_INITRAMFS := $$(KERNEL) | seama
+  IMAGES += factory.bin
+  SEAMA_MTDBLOCK := 1
+
+  # 64 bytes offset:
+  # - 28 bytes seama_header
+  # - 36 bytes of META data (4-bytes aligned)
+  IMAGE/default := append-kernel | pad-offset $$$$(BLOCKSIZE) 64 | append-rootfs
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | seama | pad-rootfs | \
+	append-metadata | check-size
+  IMAGE/factory.bin := $$(IMAGE/default) | pad-rootfs -x 64 | seama | \
+	seama-seal | check-size
+  SEAMA_SIGNATURE :=
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 
@@ -205,6 +272,7 @@ define Device/8dev_carambola2
 endef
 TARGET_DEVICES += 8dev_carambola2
 
+<<<<<<< HEAD
 define Device/8dev_carambola3
   SOC := qca9531
   DEVICE_VENDOR := 8devices
@@ -215,6 +283,8 @@ define Device/8dev_carambola3
 endef
 TARGET_DEVICES += 8dev_carambola3
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/8dev_lima
   SOC := qca9531
   DEVICE_VENDOR := 8devices
@@ -234,7 +304,11 @@ define Device/adtran_bsap1880
   IMAGE_SIZE := 11200k
   IMAGES += kernel.bin rootfs.bin
   IMAGE/kernel.bin := append-kernel
+<<<<<<< HEAD
   IMAGE/rootfs.bin := append-rootfs | pad-rootfs | pad-to $$(BLOCKSIZE)
+=======
+  IMAGE/rootfs.bin := append-rootfs | pad-rootfs
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | \
 	check-size | sysupgrade-tar rootfs=$$$$@ | append-metadata
 endef
@@ -252,6 +326,7 @@ define Device/adtran_bsap1840
 endef
 TARGET_DEVICES += adtran_bsap1840
 
+<<<<<<< HEAD
 define Device/alcatel_hh40v
   SOC := qca9531
   DEVICE_VENDOR := Alcatel
@@ -264,6 +339,8 @@ define Device/alcatel_hh40v
 endef
 TARGET_DEVICES += alcatel_hh40v
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/airtight_c-75
   SOC := qca9550
   DEVICE_VENDOR := AirTight Networks
@@ -336,6 +413,7 @@ define Device/alfa-network_r36a
 endef
 TARGET_DEVICES += alfa-network_r36a
 
+<<<<<<< HEAD
 define Device/alfa-network_tube-2hq
   SOC := qca9531
   DEVICE_VENDOR := ALFA Network
@@ -356,6 +434,8 @@ define Device/alfa-network_wifi-camppro-nano-duo
 endef
 TARGET_DEVICES += alfa-network_wifi-camppro-nano-duo
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/allnet_all-wap02860ac
   $(Device/senao_loader_okli)
   SOC := qca9558
@@ -368,6 +448,7 @@ define Device/allnet_all-wap02860ac
 endef
 TARGET_DEVICES += allnet_all-wap02860ac
 
+<<<<<<< HEAD
 define Device/araknis_an-300-ap-i-n
   $(Device/senao_loader_okli)
   SOC := ar9344
@@ -403,6 +484,8 @@ define Device/araknis_an-700-ap-i-ac
 endef
 TARGET_DEVICES += araknis_an-700-ap-i-ac
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/arduino_yun
   SOC := ar9331
   DEVICE_VENDOR := Arduino
@@ -420,6 +503,7 @@ define Device/aruba_ap-105
   DEVICE_MODEL := AP-105
   IMAGE_SIZE := 16000k
   DEVICE_PACKAGES := kmod-i2c-gpio kmod-tpm-i2c-atmel
+<<<<<<< HEAD
   LOADER_TYPE := bin
   LOADER_FLASH_OFFS := 0x42000
   COMPILE := loader-$(1).bin
@@ -579,13 +663,22 @@ define Device/atheros_db120
 endef
 TARGET_DEVICES += atheros_db120
 
+=======
+endef
+TARGET_DEVICES += aruba_ap-105
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/avm
   DEVICE_VENDOR := AVM
   KERNEL := kernel-bin | append-dtb | lzma | eva-image
   KERNEL_INITRAMFS := $$(KERNEL)
   IMAGE/sysupgrade.bin := append-kernel | pad-to 64k | \
 	append-squashfs-fakeroot-be | pad-to 256 | append-rootfs | pad-rootfs | \
+<<<<<<< HEAD
 	check-size | append-metadata
+=======
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := fritz-tffs
 endef
 
@@ -638,13 +731,25 @@ endef
 TARGET_DEVICES += avm_fritzdvbc
 
 define Device/belkin_f9x-v2
+<<<<<<< HEAD
   $(Device/loader-okli-uimage)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SOC := qca9558
   DEVICE_VENDOR := Belkin
   IMAGE_SIZE := 14464k
   DEVICE_PACKAGES += kmod-ath10k-ct ath10k-firmware-qca988x-ct kmod-usb2 \
 	kmod-usb3 kmod-usb-ledtrig-usbport
+<<<<<<< HEAD
   LOADER_FLASH_OFFS := 0x50000
+=======
+  LOADER_TYPE := bin
+  LOADER_FLASH_OFFS := 0x50000
+  COMPILE := loader-$(1).bin loader-$(1).uImage
+  COMPILE/loader-$(1).bin := loader-okli-compile
+  COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | \
+	lzma | uImage lzma
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49
   IMAGES += factory.bin
   IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | \
@@ -693,7 +798,11 @@ define Device/buffalo_wzr_ar7161
   SOC := ar7161
   BUFFALO_PRODUCT := WZR-HP-AG300H
   DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport \
+<<<<<<< HEAD
 	kmod-owl-loader
+=======
+	kmod-leds-reset kmod-owl-loader
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 32320k
   SUPPORTED_DEVICES += wzr-hp-ag300h
 endef
@@ -715,7 +824,11 @@ define Device/buffalo_wzr-hp-g300nh
   SOC := ar9132
   BUFFALO_PRODUCT := WZR-HP-G300NH
   BUFFALO_HWVER := 1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-gpio-cascade kmod-mux-gpio kmod-usb2 kmod-usb-ledtrig-usbport
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-gpio-nxp-74hc153
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   BLOCKSIZE := 128k
   IMAGE_SIZE := 32128k
   SUPPORTED_DEVICES += wzr-hp-g300nh
@@ -724,14 +837,20 @@ endef
 define Device/buffalo_wzr-hp-g300nh-rb
   $(Device/buffalo_wzr-hp-g300nh)
   DEVICE_MODEL := WZR-HP-G300NH (RTL8366RB switch)
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-switch-rtl8366rb
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += buffalo_wzr-hp-g300nh-rb
 
 define Device/buffalo_wzr-hp-g300nh-s
   $(Device/buffalo_wzr-hp-g300nh)
   DEVICE_MODEL := WZR-HP-G300NH (RTL8366S switch)
+<<<<<<< HEAD
   DEVICE_PACKAGES += kmod-switch-rtl8366s
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += buffalo_wzr-hp-g300nh-s
 
@@ -759,6 +878,7 @@ define Device/buffalo_wzr-hp-g450h
 endef
 TARGET_DEVICES += buffalo_wzr-hp-g450h
 
+<<<<<<< HEAD
 define Device/buffalo_wzr-450hp2
   $(Device/buffalo_common)
   SOC := qca9558
@@ -771,6 +891,8 @@ define Device/buffalo_wzr-450hp2
 endef
 TARGET_DEVICES += buffalo_wzr-450hp2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/comfast_cf-e110n-v2
   SOC := qca9533
   DEVICE_VENDOR := COMFAST
@@ -821,6 +943,7 @@ define Device/comfast_cf-e314n-v2
 endef
 TARGET_DEVICES += comfast_cf-e314n-v2
 
+<<<<<<< HEAD
 define Device/comfast_cf-e355ac-v2
   SOC := qca9531
   DEVICE_VENDOR := COMFAST
@@ -853,6 +976,8 @@ define Device/comfast_cf-e380ac-v2
 endef
 TARGET_DEVICES += comfast_cf-e380ac-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/comfast_cf-e5
   SOC := qca9531
   DEVICE_VENDOR := COMFAST
@@ -872,6 +997,7 @@ define Device/comfast_cf-e560ac
 endef
 TARGET_DEVICES += comfast_cf-e560ac
 
+<<<<<<< HEAD
 define Device/comfast_cf-ew71-v2
   SOC := qca9531
   DEVICE_VENDOR := COMFAST
@@ -882,6 +1008,8 @@ define Device/comfast_cf-ew71-v2
 endef
 TARGET_DEVICES += comfast_cf-ew71-v2
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/comfast_cf-ew72
   SOC := qca9531
   DEVICE_VENDOR := COMFAST
@@ -952,6 +1080,7 @@ define Device/compex_wpj531-16m
 endef
 TARGET_DEVICES += compex_wpj531-16m
 
+<<<<<<< HEAD
 define Device/compex_wpj558-16m
   SOC := qca9558
   IMAGE_SIZE := 16128k
@@ -966,6 +1095,8 @@ define Device/compex_wpj558-16m
 endef
 TARGET_DEVICES += compex_wpj558-16m
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/compex_wpj563
   SOC := qca9563
   DEVICE_PACKAGES := kmod-usb2 kmod-usb3
@@ -978,6 +1109,7 @@ define Device/compex_wpj563
 endef
 TARGET_DEVICES += compex_wpj563
 
+<<<<<<< HEAD
 define Device/dell_apl26-0ae
   SOC := qca9550
   DEVICE_VENDOR := Dell
@@ -1019,25 +1151,66 @@ TARGET_DEVICES += devolo_dvl1200e
 define Device/devolo_dvl1200i
   $(Device/devolo_wifi-pro)
   DEVICE_MODEL := WiFi pro 1200i
+=======
+define Device/devolo_dvl1200e
+  SOC := qca9558
+  DEVICE_VENDOR := devolo
+  DEVICE_MODEL := WiFi pro 1200e
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 15936k
+endef
+TARGET_DEVICES += devolo_dvl1200e
+
+define Device/devolo_dvl1200i
+  SOC := qca9558
+  DEVICE_VENDOR := devolo
+  DEVICE_MODEL := WiFi pro 1200i
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 15936k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += devolo_dvl1200i
 
 define Device/devolo_dvl1750c
+<<<<<<< HEAD
   $(Device/devolo_wifi-pro)
   DEVICE_MODEL := WiFi pro 1750c
+=======
+  SOC := qca9558
+  DEVICE_VENDOR := devolo
+  DEVICE_MODEL := WiFi pro 1750c
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 15936k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += devolo_dvl1750c
 
 define Device/devolo_dvl1750e
+<<<<<<< HEAD
   $(Device/devolo_wifi-pro)
   DEVICE_MODEL := WiFi pro 1750e
   DEVICE_PACKAGES += kmod-usb2
+=======
+  SOC := qca9558
+  DEVICE_VENDOR := devolo
+  DEVICE_MODEL := WiFi pro 1750e
+  DEVICE_PACKAGES := kmod-usb2 kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 15936k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += devolo_dvl1750e
 
 define Device/devolo_dvl1750i
+<<<<<<< HEAD
   $(Device/devolo_wifi-pro)
   DEVICE_MODEL := WiFi pro 1750i
+=======
+  SOC := qca9558
+  DEVICE_VENDOR := devolo
+  DEVICE_MODEL := WiFi pro 1750i
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+  IMAGE_SIZE := 15936k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += devolo_dvl1750i
 
@@ -1052,13 +1225,18 @@ TARGET_DEVICES += devolo_dvl1750x
 
 define Device/devolo_magic-2-wifi
   SOC := ar9344
+<<<<<<< HEAD
   DEVICE_VENDOR := devolo
+=======
+  DEVICE_VENDOR := Devolo
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := Magic 2 WiFi
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
   IMAGE_SIZE := 15872k
 endef
 TARGET_DEVICES += devolo_magic-2-wifi
 
+<<<<<<< HEAD
 define Device/dlink_covr
   $(Device/loader-okli-uimage)
   SOC := qca9563
@@ -1093,6 +1271,8 @@ define Device/dlink_covr-p2500-a1
 endef
 TARGET_DEVICES += dlink_covr-p2500-a1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dlink_dap-13xx
   SOC := qca9533
   DEVICE_VENDOR := D-Link
@@ -1125,8 +1305,12 @@ define Device/dlink_dap-2xxx
   IMAGE/factory.img := append-kernel | pad-offset 6144k 160 | \
 	append-rootfs | wrgg-pad-rootfs | mkwrggimg | check-size
   IMAGE/sysupgrade.bin := append-kernel | mkwrggimg | \
+<<<<<<< HEAD
 	pad-to $$$$(BLOCKSIZE) | append-rootfs | wrgg-pad-rootfs | \
 	check-size | append-metadata
+=======
+	pad-to $$$$(BLOCKSIZE) | append-rootfs | append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL := kernel-bin | append-dtb | relocate-kernel | lzma
   KERNEL_INITRAMFS := $$(KERNEL) | mkwrggimg
 endef
@@ -1160,13 +1344,18 @@ define Device/dlink_dap-2680-a1
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DAP-2680
   DEVICE_VARIANT := A1
+<<<<<<< HEAD
   DEVICE_PACKAGES := ath10k-firmware-qca9984-ct kmod-ath10k-ct
+=======
+  DEVICE_PACKAGES := ath10k-firmware-qca99x0-ct kmod-ath10k-ct
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 15232k
   DAP_SIGNATURE := wapac36_dkbs_dap2680
 endef
 TARGET_DEVICES += dlink_dap-2680-a1
 
 define Device/dlink_dap-2695-a1
+<<<<<<< HEAD
   $(Device/dlink_dap-2xxx)
   SOC := qca9558
   DEVICE_VENDOR := D-Link
@@ -1174,6 +1363,22 @@ define Device/dlink_dap-2695-a1
   DEVICE_VARIANT := A1
   DEVICE_PACKAGES := ath10k-firmware-qca988x-ct kmod-ath10k-ct
   IMAGE_SIZE := 15360k
+=======
+  SOC := qca9558
+  DEVICE_PACKAGES := ath10k-firmware-qca988x-ct kmod-ath10k-ct
+  DEVICE_VENDOR := D-Link
+  DEVICE_MODEL := DAP-2965
+  DEVICE_VARIANT := A1
+  IMAGES := factory.img sysupgrade.bin
+  IMAGE_SIZE := 15360k
+  IMAGE/default := append-kernel | pad-offset 65536 160
+  IMAGE/factory.img := $$(IMAGE/default) | append-rootfs | wrgg-pad-rootfs | \
+	mkwrggimg | check-size
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | mkwrggimg | append-rootfs | \
+	wrgg-pad-rootfs | append-metadata |  check-size
+  KERNEL := kernel-bin | append-dtb | relocate-kernel | lzma
+  KERNEL_INITRAMFS := $$(KERNEL) | mkwrggimg
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DAP_SIGNATURE := wapac02_dkbs_dap2695
   SUPPORTED_DEVICES += dap-2695-a1
 endef
@@ -1221,11 +1426,16 @@ define Device/dlink_dir-505
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-505
   IMAGE_SIZE := 7680k
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb-chipidea2
+=======
+  DEVICE_PACKAGES := kmod-usb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += dir-505-a1
 endef
 TARGET_DEVICES += dlink_dir-505
 
+<<<<<<< HEAD
 define Device/dlink_dir-629-a1
   $(Device/seama)
   SOC := qca9558
@@ -1239,11 +1449,14 @@ define Device/dlink_dir-629-a1
 endef
 TARGET_DEVICES += dlink_dir-629-a1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/dlink_dir-825-b1
   SOC := ar7161
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-825
   DEVICE_VARIANT := B1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport \
 	kmod-owl-loader kmod-switch-rtl8366s
   IMAGE_SIZE := 7808k
@@ -1252,6 +1465,14 @@ define Device/dlink_dir-825-b1
   IMAGE/factory.bin = append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | \
 	pad-rootfs | check-size $$$$(FACTORY_SIZE) | pad-to $$$$(FACTORY_SIZE) | \
 	append-string 01AP94-AR7161-RT-080619-00
+=======
+  IMAGE_SIZE := 6208k
+  IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
+	append-metadata | check-size
+  DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport \
+	kmod-leds-reset kmod-owl-loader
+  SUPPORTED_DEVICES += dir-825-b1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += dlink_dir-825-b1
 
@@ -1260,7 +1481,12 @@ define Device/dlink_dir-825-c1
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-825
   DEVICE_VARIANT := C1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-owl-loader
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-leds-reset \
+	kmod-owl-loader
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += dir-825-c1
   IMAGE_SIZE := 15936k
   IMAGES := factory.bin sysupgrade.bin
@@ -1268,7 +1494,12 @@ define Device/dlink_dir-825-c1
 	pad-rootfs
   IMAGE/factory.bin := $$(IMAGE/default) | pad-offset $$$$(IMAGE_SIZE) 26 | \
 	append-string 00DB120AR9344-RT-101214-00 | check-size
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += dlink_dir-825-c1
 
@@ -1277,7 +1508,11 @@ define Device/dlink_dir-835-a1
   DEVICE_VENDOR := D-Link
   DEVICE_MODEL := DIR-835
   DEVICE_VARIANT := A1
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb2 kmod-owl-loader
+=======
+  DEVICE_PACKAGES := kmod-usb2 kmod-leds-reset kmod-owl-loader
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += dir-835-a1
   IMAGE_SIZE := 15936k
   IMAGES := factory.bin sysupgrade.bin
@@ -1285,7 +1520,12 @@ define Device/dlink_dir-835-a1
 	pad-rootfs
   IMAGE/factory.bin := $$(IMAGE/default) | pad-offset $$$$(IMAGE_SIZE) 26 | \
 	append-string 00DB120AR9344-RT-101214-00 | check-size
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += dlink_dir-835-a1
 
@@ -1304,7 +1544,11 @@ define Device/dlink_dir-842-c
   IMAGE/default := append-kernel | uImage lzma | \
 	pad-offset $$$$(BLOCKSIZE) 64 | append-rootfs
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | seama | pad-rootfs | \
+<<<<<<< HEAD
 	check-size | append-metadata
+=======
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.bin := $$(IMAGE/default) | pad-rootfs -x 64 | seama | \
 	seama-seal | check-size
   IMAGE_SIZE := 15680k
@@ -1331,6 +1575,7 @@ define Device/dlink_dir-842-c3
 endef
 TARGET_DEVICES += dlink_dir-842-c3
 
+<<<<<<< HEAD
 define Device/elecom_wab
   DEVICE_VENDOR := ELECOM
   IMAGE_SIZE := 14336k
@@ -1364,18 +1609,36 @@ define Device/elecom_wab-s600-ps
   ELECOM_HWID := 01070028
 endef
 TARGET_DEVICES += elecom_wab-s600-ps
+=======
+define Device/dlink_dir-859-a1
+  $(Device/seama)
+  SOC := qca9563
+  DEVICE_VENDOR := D-Link
+  DEVICE_MODEL := DIR-859
+  DEVICE_VARIANT := A1
+  IMAGE_SIZE := 15872k
+  DEVICE_PACKAGES :=  kmod-usb2 kmod-ath10k-ct-smallbuffers ath10k-firmware-qca988x-ct
+  SEAMA_SIGNATURE := wrgac37_dlink.2013gui_dir859
+endef
+TARGET_DEVICES += dlink_dir-859-a1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Device/elecom_wrc-1750ghbk2-i
   SOC := qca9563
   DEVICE_VENDOR := ELECOM
   DEVICE_MODEL := WRC-1750GHBK2-I/C
   IMAGE_SIZE := 15808k
+<<<<<<< HEAD
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image initramfs-kernel.bin | \
 	pad-to 2 | edimax-header -b -s CSYS -m RN68 -f 0x70000 -S 0x01100000 | \
 	elecom-product-header WRC-1750GHBK2 | check-size
 endif
+=======
+  KERNEL_INITRAMFS := $$(KERNEL) | pad-to 2 | \
+	add-elecom-factory-initramfs RN68 WRC-1750GHBK2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
 endef
 TARGET_DEVICES += elecom_wrc-1750ghbk2-i
@@ -1385,6 +1648,7 @@ define Device/elecom_wrc-300ghbk2-i
   DEVICE_VENDOR := ELECOM
   DEVICE_MODEL := WRC-300GHBK2-I
   IMAGE_SIZE := 7616k
+<<<<<<< HEAD
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
   ARTIFACTS := initramfs-factory.bin
   ARTIFACT/initramfs-factory.bin := append-image initramfs-kernel.bin | \
@@ -1403,6 +1667,13 @@ define Device/embeddedwireless_balin
 endef
 TARGET_DEVICES += embeddedwireless_balin
 
+=======
+  KERNEL_INITRAMFS := $$(KERNEL) | pad-to 2 | \
+	add-elecom-factory-initramfs RN51 WRC-300GHBK2-I
+endef
+TARGET_DEVICES += elecom_wrc-300ghbk2-i
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/embeddedwireless_dorin
   SOC := ar9331
   DEVICE_VENDOR := Embedded Wireless
@@ -1424,6 +1695,7 @@ define Device/engenius_eap1200h
 endef
 TARGET_DEVICES += engenius_eap1200h
 
+<<<<<<< HEAD
 define Device/engenius_eap1750h
   $(Device/senao_loader_okli)
   SOC := qca9558
@@ -1436,6 +1708,8 @@ define Device/engenius_eap1750h
 endef
 TARGET_DEVICES += engenius_eap1750h
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/engenius_eap300-v2
   $(Device/senao_loader_okli)
   SOC := ar9341
@@ -1536,6 +1810,7 @@ define Device/engenius_epg5000
 endef
 TARGET_DEVICES += engenius_epg5000
 
+<<<<<<< HEAD
 define Device/engenius_esr1200
   SOC := qca9557
   DEVICE_VENDOR := EnGenius
@@ -1578,6 +1853,8 @@ define Device/engenius_esr900
 endef
 TARGET_DEVICES += engenius_esr900
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/engenius_ews511ap
   SOC := qca9531
   DEVICE_VENDOR := EnGenius
@@ -1587,6 +1864,7 @@ define Device/engenius_ews511ap
 endef
 TARGET_DEVICES += engenius_ews511ap
 
+<<<<<<< HEAD
 define Device/engenius_ews_dual_ap
   $(Device/senao_loader_okli)
   SOC := qca9558
@@ -1610,6 +1888,8 @@ define Device/engenius_ens1750
 endef
 TARGET_DEVICES += engenius_ens1750
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/enterasys_ws-ap3705i
   SOC := ar9344
   DEVICE_VENDOR := Enterasys
@@ -1629,6 +1909,7 @@ define Device/etactica_eg200
 endef
 TARGET_DEVICES += etactica_eg200
 
+<<<<<<< HEAD
 define Device/extreme-networks_ws-ap3805i
   SOC := qca9557
   BLOCKSIZE := 256k
@@ -1669,12 +1950,18 @@ define Device/fortinet_fap-221-b
 endef
 TARGET_DEVICES += fortinet_fap-221-b
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/glinet_6408
   $(Device/tplink-8mlzma)
   SOC := ar9331
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := 6408
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb-chipidea2
+=======
+  DEVICE_PACKAGES := kmod-usb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 8000k
   TPLINK_HWID := 0x08000001
   IMAGES := sysupgrade.bin
@@ -1687,7 +1974,11 @@ define Device/glinet_6416
   SOC := ar9331
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := 6416
+<<<<<<< HEAD
   DEVICE_PACKAGES := kmod-usb-chipidea2
+=======
+  DEVICE_PACKAGES := kmod-usb2
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE_SIZE := 16192k
   TPLINK_HWID := 0x08000001
   IMAGES := sysupgrade.bin
@@ -1755,6 +2046,7 @@ define Device/glinet_gl-usb150
 endef
 TARGET_DEVICES += glinet_gl-usb150
 
+<<<<<<< HEAD
 define Device/glinet_gl-x300b
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
@@ -1764,6 +2056,8 @@ define Device/glinet_gl-x300b
 endef
 TARGET_DEVICES += glinet_gl-x300b
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/glinet_gl-x750
   SOC := qca9531
   DEVICE_VENDOR := GL.iNet
@@ -1781,7 +2075,11 @@ define Device/hak5_lan-turtle
   TPLINK_HWID := 0x5348334c
   IMAGES := sysupgrade.bin
   DEVICE_PACKAGES := kmod-usb-chipidea2 -iwinfo -kmod-ath9k -swconfig \
+<<<<<<< HEAD
 	-uboot-envtools -wpad-basic-mbedtls
+=======
+	-uboot-envtools -wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += lan-turtle
 endef
 TARGET_DEVICES += hak5_lan-turtle
@@ -1794,7 +2092,11 @@ define Device/hak5_packet-squirrel
   TPLINK_HWID := 0x5351524c
   IMAGES := sysupgrade.bin
   DEVICE_PACKAGES := kmod-usb-chipidea2 -iwinfo -kmod-ath9k -swconfig \
+<<<<<<< HEAD
 	-uboot-envtools -wpad-basic-mbedtls
+=======
+	-uboot-envtools -wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUPPORTED_DEVICES += packet-squirrel
 endef
 TARGET_DEVICES += hak5_packet-squirrel
@@ -1812,6 +2114,7 @@ define Device/hak5_wifi-pineapple-nano
 endef
 TARGET_DEVICES += hak5_wifi-pineapple-nano
 
+<<<<<<< HEAD
 define Device/hiwifi_hc6361
   SOC := ar9331
   DEVICE_VENDOR := HiWiFi
@@ -1855,12 +2158,18 @@ define Device/huawei_ap6010dn
 endef
 TARGET_DEVICES += huawei_ap6010dn
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/iodata_etg3-r
   SOC := ar9342
   DEVICE_VENDOR := I-O DATA
   DEVICE_MODEL := ETG3-R
   IMAGE_SIZE := 7680k
+<<<<<<< HEAD
   DEVICE_PACKAGES := -iwinfo -kmod-ath9k -wpad-basic-mbedtls
+=======
+  DEVICE_PACKAGES := -iwinfo -kmod-ath9k -wpad-basic-wolfssl
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += iodata_etg3-r
 
@@ -1920,6 +2229,7 @@ define Device/jjplus_ja76pf2
   SOC := ar7161
   DEVICE_VENDOR := jjPlus
   DEVICE_MODEL := JA76PF2
+<<<<<<< HEAD
   DEVICE_PACKAGES += -kmod-ath9k -swconfig -wpad-basic-mbedtls -uboot-envtools fconfig kmod-hwmon-lm75
   LOADER_TYPE := bin
   LOADER_FLASH_OFFS := 0x60000
@@ -1950,6 +2260,21 @@ define Device/jjplus_jwap230
 endef
 TARGET_DEVICES += jjplus_jwap230
 
+=======
+  DEVICE_PACKAGES += -kmod-ath9k -swconfig -wpad-basic-wolfssl -uboot-envtools fconfig
+  IMAGES += kernel.bin rootfs.bin
+  IMAGE/kernel.bin := append-kernel
+  IMAGE/rootfs.bin := append-rootfs | pad-rootfs
+  IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | combined-image | \
+	append-metadata | check-size
+  KERNEL := kernel-bin | append-dtb | lzma | pad-to $$(BLOCKSIZE)
+  KERNEL_INITRAMFS := kernel-bin | append-dtb
+  IMAGE_SIZE := 16000k
+  SUPPORTED_DEVICES += ja76pf2
+endef
+TARGET_DEVICES += jjplus_ja76pf2
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/joyit_jt-or750i
   SOC := qca9531
   DEVICE_VENDOR := Joy-IT
@@ -1959,6 +2284,7 @@ define Device/joyit_jt-or750i
 endef
 TARGET_DEVICES += joyit_jt-or750i
 
+<<<<<<< HEAD
 define Device/kuwfi_c910
   $(Device/loader-okli-uimage)
   SOC := qca9533
@@ -2011,6 +2337,8 @@ define Device/letv_lba-047-ch
 endef
 TARGET_DEVICES += letv_lba-047-ch
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/librerouter_librerouter-v1
   SOC := qca9558
   DEVICE_VENDOR := Librerouter
@@ -2066,6 +2394,7 @@ define Device/mercury_mw4530r-v1
 endef
 TARGET_DEVICES += mercury_mw4530r-v1
 
+<<<<<<< HEAD
 define Device/moxa_awk-1137c
   SOC := ar9344
   DEVICE_MODEL := AWK-1137C
@@ -2103,11 +2432,17 @@ TARGET_DEVICES += nec_wf1200cr
 define Device/nec_wg1200cr
   $(Device/nec_wx1200cr)
   SOC := qca9563
+=======
+define Device/nec_wg1200cr
+  SOC := qca9563
+  DEVICE_VENDOR := NEC
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := Aterm WG1200CR
   IMAGE_SIZE := 7616k
   SEAMA_MTDBLOCK := 6
   SEAMA_SIGNATURE := wrgac72_necpf.2016gui_wg1200cr
   IMAGES += factory.bin
+<<<<<<< HEAD
   IMAGE/factory.bin := $$(IMAGE/default) | pad-rootfs -x 64 | seama | \
 	seama-seal | nec-enc 9gsiy9nzep452pad | check-size
 endef
@@ -2143,6 +2478,17 @@ define Device/nec_wg1800hp2
 endef
 TARGET_DEVICES += nec_wg1800hp2
 
+=======
+  IMAGE/default := append-kernel | pad-offset $$$$(BLOCKSIZE) 64 | append-rootfs
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | seama | pad-rootfs | \
+	append-metadata | check-size
+  IMAGE/factory.bin := $$(IMAGE/default) | pad-rootfs -x 64 | seama | \
+	seama-seal | nec-enc 9gsiy9nzep452pad | check-size
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca9888-ct
+endef
+TARGET_DEVICES += nec_wg1200cr
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/nec_wg800hp
   SOC := qca9563
   DEVICE_VENDOR := NEC
@@ -2156,6 +2502,7 @@ define Device/nec_wg800hp
 endef
 TARGET_DEVICES += nec_wg800hp
 
+<<<<<<< HEAD
 define Device/netgear_ex7300
   SOC := qca9558
   DEVICE_VENDOR := NETGEAR
@@ -2217,11 +2564,45 @@ define Device/netgear_wndap360
 endef
 TARGET_DEVICES += netgear_wndap360
 
+=======
+define Device/netgear_ex6400_ex7300
+  $(Device/netgear_generic)
+  SOC := qca9558
+  UIMAGE_MAGIC := 0x27051956
+  NETGEAR_BOARD_ID := EX7300series
+  NETGEAR_HW_ID := 29765104+16+0+128
+  IMAGE_SIZE := 15552k
+  IMAGE/default := append-kernel | pad-offset $$$$(BLOCKSIZE) 64 | \
+	netgear-rootfs | pad-rootfs
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+  IMAGE/factory.img := $$(IMAGE/default) | netgear-dni | \
+	check-size
+  DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca99x0-ct
+endef
+
+define Device/netgear_ex6400
+  $(Device/netgear_ex6400_ex7300)
+  DEVICE_MODEL := EX6400
+endef
+TARGET_DEVICES += netgear_ex6400
+
+define Device/netgear_ex7300
+  $(Device/netgear_ex6400_ex7300)
+  DEVICE_MODEL := EX7300
+endef
+TARGET_DEVICES += netgear_ex7300
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/netgear_wndr3x00
   $(Device/netgear_generic)
   SOC := ar7161
   DEVICE_PACKAGES := kmod-usb-ohci kmod-usb2 kmod-usb-ledtrig-usbport \
+<<<<<<< HEAD
 	kmod-leds-reset kmod-owl-loader kmod-switch-rtl8366s
+=======
+	kmod-leds-reset kmod-owl-loader
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/netgear_wndr3700
@@ -2334,7 +2715,11 @@ define Device/ocedo_koala
   DEVICE_MODEL := Koala
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
   SUPPORTED_DEVICES += koala
+<<<<<<< HEAD
   IMAGE_SIZE := 14848k
+=======
+  IMAGE_SIZE := 7424k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += ocedo_koala
 
@@ -2342,7 +2727,11 @@ define Device/ocedo_raccoon
   SOC := ar9344
   DEVICE_VENDOR := Ocedo
   DEVICE_MODEL := Raccoon
+<<<<<<< HEAD
   IMAGE_SIZE := 14848k
+=======
+  IMAGE_SIZE := 7424k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += ocedo_raccoon
 
@@ -2351,7 +2740,11 @@ define Device/ocedo_ursus
   DEVICE_VENDOR := Ocedo
   DEVICE_MODEL := Ursus
   DEVICE_PACKAGES := kmod-ath10k-ct ath10k-firmware-qca988x-ct
+<<<<<<< HEAD
   IMAGE_SIZE := 14848k
+=======
+  IMAGE_SIZE := 7424k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += ocedo_ursus
 
@@ -2372,6 +2765,10 @@ define Device/openmesh_common_64k
   DEVICE_VENDOR := OpenMesh
   DEVICE_PACKAGES := uboot-envtools
   IMAGE_SIZE := 7808k
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   OPENMESH_CE_TYPE :=
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma | \
 	pad-to $$(BLOCKSIZE)
@@ -2391,6 +2788,7 @@ define Device/openmesh_common_256k
 	openmesh-image ce_type=$$$$(OPENMESH_CE_TYPE) | append-metadata
 endef
 
+<<<<<<< HEAD
 define Device/openmesh_a40
   $(Device/openmesh_common_64k)
   SOC := qca9558
@@ -2411,6 +2809,8 @@ define Device/openmesh_a60
 endef
 TARGET_DEVICES += openmesh_a60
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/openmesh_mr600-v1
   $(Device/openmesh_common_64k)
   SOC := ar9344
@@ -2473,6 +2873,7 @@ define Device/openmesh_mr1750-v2
 endef
 TARGET_DEVICES += openmesh_mr1750-v2
 
+<<<<<<< HEAD
 define Device/openmesh_om2p-v1
   $(Device/openmesh_common_256k)
   SOC := ar7240
@@ -2483,6 +2884,8 @@ define Device/openmesh_om2p-v1
 endef
 TARGET_DEVICES += openmesh_om2p-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/openmesh_om2p-v2
   $(Device/openmesh_common_256k)
   SOC := ar9330
@@ -2561,6 +2964,7 @@ define Device/openmesh_om5p
 endef
 TARGET_DEVICES += openmesh_om5p
 
+<<<<<<< HEAD
 define Device/openmesh_om5p-ac-v1
   $(Device/openmesh_common_64k)
   SOC := qca9558
@@ -2572,6 +2976,8 @@ define Device/openmesh_om5p-ac-v1
 endef
 TARGET_DEVICES += openmesh_om5p-ac-v1
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/openmesh_om5p-ac-v2
   $(Device/openmesh_common_64k)
   SOC := qca9558
@@ -2583,6 +2989,7 @@ define Device/openmesh_om5p-ac-v2
 endef
 TARGET_DEVICES += openmesh_om5p-ac-v2
 
+<<<<<<< HEAD
 define Device/openmesh_om5p-an
   $(Device/openmesh_common_64k)
   SOC := ar9344
@@ -2592,6 +2999,8 @@ define Device/openmesh_om5p-an
 endef
 TARGET_DEVICES += openmesh_om5p-an
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/pcs_cap324
   SOC := ar9344
   DEVICE_VENDOR := PowerCloud Systems
@@ -2626,8 +3035,13 @@ define Device/phicomm_k2t
   DEVICE_MODEL := K2T
   IMAGE_SIZE := 15744k
   IMAGE/sysupgrade.bin := append-kernel | append-rootfs | pad-rootfs | \
+<<<<<<< HEAD
 	check-size | append-metadata
   DEVICE_PACKAGES := kmod-ath10k-ct-smallbuffers ath10k-firmware-qca9888-ct
+=======
+	append-metadata | check-size
+  DEVICE_PACKAGES := kmod-leds-reset kmod-ath10k-ct-smallbuffers ath10k-firmware-qca9888-ct
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += phicomm_k2t
 
@@ -2642,13 +3056,25 @@ endef
 TARGET_DEVICES += pisen_ts-d084
 
 define Device/pisen_wmb001n
+<<<<<<< HEAD
   $(Device/loader-okli-uimage)
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SOC := ar9341
   DEVICE_VENDOR := PISEN
   DEVICE_MODEL := WMB001N
   IMAGE_SIZE := 14080k
   DEVICE_PACKAGES := kmod-i2c-gpio kmod-usb2
+<<<<<<< HEAD
   LOADER_FLASH_OFFS := 0x20000
+=======
+  LOADER_TYPE := bin
+  LOADER_FLASH_OFFS := 0x20000
+  COMPILE := loader-$(1).bin loader-$(1).uImage
+  COMPILE/loader-$(1).bin := loader-okli-compile
+  COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | lzma | \
+	uImage lzma
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x4f4b4c49
   IMAGES += factory.bin
   IMAGE/factory.bin := $$(IMAGE/sysupgrade.bin) | pisen_wmb001n-factory $(1)
@@ -2670,6 +3096,10 @@ define Device/plasmacloud_pa300-common
   DEVICE_VENDOR := Plasma Cloud
   DEVICE_PACKAGES := uboot-envtools
   IMAGE_SIZE := 7168k
+<<<<<<< HEAD
+=======
+  BLOCKSIZE := 64k
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += factory.bin
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma | pad-to $$(BLOCKSIZE)
   IMAGE/factory.bin := append-rootfs | pad-rootfs | openmesh-image ce_type=PA300
@@ -2688,6 +3118,7 @@ define Device/plasmacloud_pa300e
 endef
 TARGET_DEVICES += plasmacloud_pa300e
 
+<<<<<<< HEAD
 define Device/qca_ap143
   $(Device/loader-okli-uimage)
   SOC := qca9533
@@ -2721,6 +3152,8 @@ define Device/qca_ap143-16m
 endef
 TARGET_DEVICES += qca_ap143-16m
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/qihoo_c301
   $(Device/seama)
   SOC := ar9344
@@ -2875,6 +3308,7 @@ define Device/rosinson_wr818
 endef
 TARGET_DEVICES += rosinson_wr818
 
+<<<<<<< HEAD
 define Device/ruckus_common
   DEVICE_VENDOR := Ruckus
   LOADER_TYPE := bin
@@ -2952,6 +3386,8 @@ define Device/ruckus_r500
 endef
 TARGET_DEVICES += ruckus_r500
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/samsung_wam250
   SOC := ar9344
   DEVICE_VENDOR := Samsung
@@ -3006,6 +3442,7 @@ define Device/sitecom_wlr-8100
 endef
 TARGET_DEVICES += sitecom_wlr-8100
 
+<<<<<<< HEAD
 define Device/sophos_ap15
   SOC := qca9557
   DEVICE_VENDOR := Sophos
@@ -3058,6 +3495,8 @@ define Device/sophos_ap100c
 endef
 TARGET_DEVICES += sophos_ap100c
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/telco_t1
   SOC := qca9531
   DEVICE_VENDOR := Telco
@@ -3069,6 +3508,7 @@ define Device/telco_t1
 endef
 TARGET_DEVICES += telco_t1
 
+<<<<<<< HEAD
 define Device/teltonika_rut230-v1
   SOC := ar9331
   DEVICE_VENDOR := Teltonika
@@ -3111,6 +3551,8 @@ define Device/teltonika_rut300
 endef
 TARGET_DEVICES += teltonika_rut300
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/teltonika_rut955
   SOC := ar9344
   DEVICE_VENDOR := Teltonika
@@ -3125,10 +3567,18 @@ define Device/teltonika_rut955
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | uImage lzma
   IMAGES += factory.bin
   IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs |\
+<<<<<<< HEAD
 	pad-rootfs | teltonika-fw-fake-checksum 20 | append-string master |\
 	append-md5sum-bin | check-size
   IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(BLOCKSIZE) |\
 	append-rootfs | pad-rootfs | check-size | append-metadata
+=======
+	pad-rootfs | teltonika-fw-fake-checksum | append-string master |\
+	append-md5sum-bin | check-size
+  IMAGE/sysupgrade.bin := append-kernel | pad-to $$$$(BLOCKSIZE) |\
+	append-rootfs | pad-rootfs | append-metadata |\
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += teltonika_rut955
 
@@ -3138,6 +3588,7 @@ define Device/teltonika_rut955-h7v3c0
 endef
 TARGET_DEVICES += teltonika_rut955-h7v3c0
 
+<<<<<<< HEAD
 define Device/trendnet_tew-673gru
   SOC := ar7161
   DEVICE_VENDOR := Trendnet
@@ -3154,6 +3605,8 @@ define Device/trendnet_tew-673gru
 endef
 TARGET_DEVICES += trendnet_tew-673gru
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/trendnet_tew-823dru
   SOC := qca9558
   DEVICE_VENDOR := Trendnet
@@ -3167,7 +3620,12 @@ define Device/trendnet_tew-823dru
 	pad-rootfs
   IMAGE/factory.bin := $$(IMAGE/default) | pad-offset $$$$(IMAGE_SIZE) 26 | \
 	append-string 00AP135AR9558-RT-131129-00 | check-size
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
+=======
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += trendnet_tew-823dru
 
@@ -3181,6 +3639,7 @@ define Device/wallys_dr531
 endef
 TARGET_DEVICES += wallys_dr531
 
+<<<<<<< HEAD
 define Device/watchguard_ap100
   $(Device/senao_loader_okli)
   SOC := ar9344
@@ -3236,6 +3695,8 @@ define Device/wd_mynet-n600
 endef
 TARGET_DEVICES += wd_mynet-n600
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/wd_mynet-n750
   $(Device/seama)
   SOC := ar9344
@@ -3259,7 +3720,10 @@ define Device/wd_mynet-wifi-rangeextender
   IMAGE/sysupgrade.bin := append-rootfs | pad-rootfs | cybertan-trx | \
 	addpattern | append-metadata
   SUPPORTED_DEVICES += mynet-rext
+<<<<<<< HEAD
   DEFAULT := n
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 TARGET_DEVICES += wd_mynet-wifi-rangeextender
 
@@ -3333,6 +3797,7 @@ define Device/yuncore_xd3200
 endef
 TARGET_DEVICES += yuncore_xd3200
 
+<<<<<<< HEAD
 define Device/yuncore_cpe830
   SOC := qca9533
   DEVICE_VENDOR := YunCore
@@ -3346,6 +3811,8 @@ define Device/yuncore_cpe830
 endef
 TARGET_DEVICES += yuncore_cpe830
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/yuncore_xd4200
   SOC := qca9563
   DEVICE_VENDOR := YunCore
@@ -3357,6 +3824,7 @@ define Device/yuncore_xd4200
 endef
 TARGET_DEVICES += yuncore_xd4200
 
+<<<<<<< HEAD
 define Device/ziking_cpe46b
   SOC := ar9330
   DEVICE_VENDOR := ZiKing
@@ -3367,6 +3835,8 @@ define Device/ziking_cpe46b
 endef
 TARGET_DEVICES += ziking_cpe46b
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/zbtlink_zbt-wd323
   SOC := ar9344
   DEVICE_VENDOR := ZBT
@@ -3377,6 +3847,7 @@ define Device/zbtlink_zbt-wd323
 endef
 TARGET_DEVICES += zbtlink_zbt-wd323
 
+<<<<<<< HEAD
 define Device/zyxel_nwa11xx
   $(Device/loader-okli-uimage)
   SOC := ar9342
@@ -3428,6 +3899,11 @@ TARGET_DEVICES += zyxel_nwa1123-ni
 define Device/zyxel_nbg6616
   SOC := qca9557
   DEVICE_VENDOR := Zyxel
+=======
+define Device/zyxel_nbg6616
+  SOC := qca9557
+  DEVICE_VENDOR := ZyXEL
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   DEVICE_MODEL := NBG6616
   DEVICE_PACKAGES := kmod-usb2 kmod-usb-ledtrig-usbport kmod-rtc-pcf8563 \
 	kmod-ath10k-ct ath10k-firmware-qca988x-ct

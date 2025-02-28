@@ -1,0 +1,21 @@
+Source-Makefile: package/mtk/applications/ated_ext/Makefile
+
+Package: ated_ext
+Submenu: Applications
+Version: 2
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread +libblkid
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: MTK Properties
+Category: MTK Properties
+Repository: base
+Title: ated_ext
+Maintainer: 
+Source: ated_ext-c78699ee.tar.bz2
+Type: ipkg
+Description:   ated_ext Daemon
+
+@@
+
+

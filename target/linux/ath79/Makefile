@@ -8,7 +8,12 @@ SUBTARGETS:=generic mikrotik nand tiny
 
 FEATURES:=ramdisk squashfs usbgadget
 
+<<<<<<< HEAD
 KERNEL_PATCHVER:=6.6
+=======
+KERNEL_PATCHVER:=5.4
+KERNEL_TESTING_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/target.mk
 

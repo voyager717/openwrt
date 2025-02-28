@@ -1,7 +1,10 @@
 #include "danube.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "arcadyan,arv4520pw", "lantiq,xway", "lantiq,danube";
@@ -48,8 +51,12 @@
 		compatible = "gpio-leds";
 
 		power_blue: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
@@ -62,6 +69,7 @@
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 		};
 		power_red: power2 {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_RED>;
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
@@ -74,6 +82,17 @@
 		wps2 {
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_RED>;
+=======
+			label = "red:power";
+			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
+		};
+		wps {
+			label = "yellow:wps";
+			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
+		};
+		wps2 {
+			label = "red:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 9 GPIO_ACTIVE_LOW>;
 		};
 		/*
@@ -100,8 +119,12 @@
 			gpios = <&gpiomm 4 GPIO_ACTIVE_LOW>;
 		};
 		led_usb: usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpiomm 5 GPIO_ACTIVE_LOW>;
 		};
 		wifi: wifi {
@@ -125,7 +148,11 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 
+<<<<<<< HEAD
 		gpios = <&gpio 28 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 28 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -150,8 +177,12 @@
 &gsw {
 	/* gpiomm 10 - switch */
 	phy-mode = "rmii";
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_boardconfig_16>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&boardconfig 0x16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &localbus {
@@ -186,6 +217,7 @@
 				label = "boardconfig";
 				reg = <0x3f0000 0x10000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -196,6 +228,8 @@
 						reg = <0x16 0x6>;
 					};
 				};
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -218,7 +252,11 @@
 	pinctrl-names = "default";
 
 	lantiq,external-clock;
+<<<<<<< HEAD
 	reset-gpios = <&gpio 21 GPIO_ACTIVE_LOW>;
+=======
+	gpio-reset = <&gpio 21 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {

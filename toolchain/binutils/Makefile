@@ -12,6 +12,7 @@ BIN_VERSION:=$(PKG_VERSION)
 
 PKG_SOURCE_URL:=@GNU/binutils/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:gnu:binutils
 
 TAR_OPTIONS += --exclude='*.rej'
@@ -26,6 +27,21 @@ endif
 
 ifeq ($(PKG_VERSION),2.43.1)
   PKG_HASH:=13f74202a3c4c51118b797a39ea4200d3f6cfbe224da6d1d95bb938480132dfd
+=======
+
+TAR_OPTIONS += --exclude='*.rej'
+
+ifeq ($(PKG_VERSION),2.32)
+  PKG_HASH:=0ab6c55dd86a92ed561972ba15b9b70a8b9f75557f896446c82e8b36e473ee04
+endif
+
+ifeq ($(PKG_VERSION),2.34)
+  PKG_HASH:=f00b0e8803dc9bab1e2165bd568528135be734df3fabf8d0161828cd56028952
+endif
+
+ifeq ($(PKG_VERSION),2.35.1)
+  PKG_HASH:=3ced91db9bf01182b7e420eab68039f2083aed0a214c0424e257eae3ddee8607
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 
 HOST_BUILD_PARALLEL:=1
@@ -34,24 +50,32 @@ PATCH_DIR:=./patches/$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/toolchain-build.mk
 
+<<<<<<< HEAD
 ifdef CONFIG_GCC_USE_GRAPHITE
   GRAPHITE_CONFIGURE:= --with-isl=$(STAGING_DIR_HOST)
 else
   GRAPHITE_CONFIGURE:= --without-isl --without-cloog
 endif
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 HOST_CONFIGURE_ARGS = \
 	--prefix=$(TOOLCHAIN_DIR) \
 	--build=$(GNU_HOST_NAME) \
 	--host=$(GNU_HOST_NAME) \
 	--target=$(REAL_GNU_TARGET_NAME) \
 	--with-sysroot=$(TOOLCHAIN_DIR) \
+<<<<<<< HEAD
 	--with-system-zlib \
 	--with-zstd \
 	--enable-deterministic-archives \
 	--enable-plugins \
 	--enable-lto \
 	--disable-gprofng \
+=======
+	--enable-deterministic-archives \
+	--enable-plugins \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	--disable-multilib \
 	--disable-werror \
 	--disable-nls \
@@ -74,13 +98,20 @@ ifneq ($(CONFIG_EXTRA_TARGET_ARCH),)
 		--enable-targets=$(call qstrip,$(CONFIG_EXTRA_TARGET_ARCH_NAME))-linux-$(TARGET_SUFFIX)
 endif
 
+<<<<<<< HEAD
 HOST_CONFIGURE_VARS += \
 	acx_cv_cc_gcc_supports_ada=false
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Host/Prepare
 	$(call Host/Prepare/Default)
 	ln -snf $(notdir $(HOST_BUILD_DIR)) $(BUILD_DIR_TOOLCHAIN)/$(PKG_NAME)
 	$(CP) $(SCRIPT_DIR)/config.{guess,sub} $(HOST_BUILD_DIR)/
+<<<<<<< HEAD
+=======
+	$(SED) 's, " Linaro.*,,' $(HOST_BUILD_DIR)/bfd/version.h
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Host/Compile
@@ -88,10 +119,29 @@ define Host/Compile
 endef
 
 define Host/Install
+<<<<<<< HEAD
 	$(MAKE) -C $(HOST_BUILD_DIR) \
 		install
 	$(call FixupLibdir,$(TOOLCHAIN_DIR))
 	$(CP) $(TOOLCHAIN_DIR)/bin/$(REAL_GNU_TARGET_NAME)-readelf $(HOST_BUILD_PREFIX)/bin/readelf
+=======
+	mkdir -p $(TOOLCHAIN_DIR)/initial
+	$(MAKE) -C $(HOST_BUILD_DIR) \
+		prefix=$(TOOLCHAIN_DIR)/initial \
+		install
+	$(MAKE) -C $(HOST_BUILD_DIR) \
+		prefix=$(TOOLCHAIN_DIR) \
+		install
+	$(call FixupLibdir,$(TOOLCHAIN_DIR)/initial)
+	$(RM) $(TOOLCHAIN_DIR)/initial/lib/libiberty.a
+	$(CP) $(TOOLCHAIN_DIR)/bin/$(REAL_GNU_TARGET_NAME)-readelf $(HOST_BUILD_PREFIX)/bin/readelf
+	# ARC gcc requires extlib.
+	# If extlib is not available in "initial" folder
+	# initial gcc will fail to build libc.
+	if [ -d $(TOOLCHAIN_DIR)/extlib ]; then \
+		$(CP) -r $(TOOLCHAIN_DIR)/extlib $(TOOLCHAIN_DIR)/initial/; \
+	fi
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Host/Clean

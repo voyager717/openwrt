@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SPDX-License-Identifier: GPL-2.0-only
 /conf
 /[gmnq]conf
@@ -12,3 +13,27 @@
 mconf_check
 # The next line should be removed after 23.05 is EOL
 *conf-cfg
+=======
+#
+# Generated files
+#
+*.moc
+*conf-cfg
+mconf_check
+
+#
+# configuration programs
+#
+conf
+mconf
+nconf
+qconf
+gconf
+
+#
+# temporary files from older version.  Should be removed
+#
+zconf.???.c
+zconf.hash.c
+.tmp_qtcheck
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -20,7 +20,10 @@
  */
 
 #include <sys/types.h>
+<<<<<<< HEAD
 #include <sys/random.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,14 +33,20 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdbool.h>
+<<<<<<< HEAD
 #include <errno.h>
 
 #include <mbedtls/bignum.h>
 #include <mbedtls/entropy.h>
+=======
+
+#include <mbedtls/bignum.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <mbedtls/x509_crt.h>
 #include <mbedtls/ecp.h>
 #include <mbedtls/rsa.h>
 #include <mbedtls/pk.h>
+<<<<<<< HEAD
 #include <mbedtls/asn1.h>
 #include <mbedtls/oid.h>
 
@@ -48,10 +57,19 @@
 #define PX5G_COPY "Copyright (c) 2009 Steven Barth <steven@midlink.org>"
 #define PX5G_LICENSE "Licensed under the GNU Lesser General Public License v2.1"
 
+=======
+
+#define PX5G_VERSION "0.2"
+#define PX5G_COPY "Copyright (c) 2009 Steven Barth <steven@midlink.org>"
+#define PX5G_LICENSE "Licensed under the GNU Lesser General Public License v2.1"
+
+static int urandom_fd;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static char buf[16384];
 
 static int _urandom(void *ctx, unsigned char *out, size_t len)
 {
+<<<<<<< HEAD
 	ssize_t ret;
 
 	ret = getrandom(out, len, 0);
@@ -68,6 +86,16 @@ static void write_file(const char *path, size_t len, bool pem, bool cert)
 	int fd = STDERR_FILENO;
 	ssize_t written;
 	int err;
+=======
+	read(urandom_fd, out, len);
+	return 0;
+}
+
+static void write_file(const char *path, int len, bool pem)
+{
+	FILE *f = stdout;
+	const char *buf_start = buf;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!pem)
 		buf_start += sizeof(buf) - len;
@@ -76,6 +104,7 @@ static void write_file(const char *path, size_t len, bool pem, bool cert)
 		fprintf(stderr, "No data to write\n");
 		exit(1);
 	}
+<<<<<<< HEAD
 	
 	if (cert)
 		mode |= S_IRGRP | S_IROTH;
@@ -84,10 +113,15 @@ static void write_file(const char *path, size_t len, bool pem, bool cert)
 		fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);
 
 	if (fd < 0) {
+=======
+
+	if (!f) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		fprintf(stderr, "error: I/O error\n");
 		exit(1);
 	}
 
+<<<<<<< HEAD
 	written = write(fd, buf_start, len);
 	if (written != len) {
 		fprintf(stderr, "writing key failed with: %s\n", strerror(errno));
@@ -100,6 +134,13 @@ static void write_file(const char *path, size_t len, bool pem, bool cert)
 	}
 	if (path)
 		close(fd);
+=======
+	if (path)
+		f = fopen(path, "w");
+
+	fwrite(buf_start, 1, len, f);
+	fclose(f);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static mbedtls_ecp_group_id ecp_curve(const char *name)
@@ -132,7 +173,11 @@ static void write_key(mbedtls_pk_context *key, const char *path, bool pem)
 			len = 0;
 	}
 
+<<<<<<< HEAD
 	write_file(path, len, pem, false);
+=======
+	write_file(path, len, pem);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void gen_key(mbedtls_pk_context *key, bool rsa, int ksize, int exp,
@@ -198,6 +243,7 @@ int selfsigned(char **arg)
 	mbedtls_pk_context key;
 	mbedtls_x509write_cert cert;
 	mbedtls_mpi serial;
+<<<<<<< HEAD
 	mbedtls_x509_san_list *san_list = NULL, *san_prev = NULL, *san_cur = NULL;
 	/*support
 	- MBEDTLS_X509_SAN_DNS_NAME
@@ -208,6 +254,8 @@ int selfsigned(char **arg)
 	mbedtls_asn1_sequence *eku = NULL, *ext_key_usage = NULL;
 	char *sanval, *santype;
 	uint8_t ipaddr[16] = { 0 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	char *subject = "";
 	unsigned int ksize = 512;
@@ -282,6 +330,7 @@ int selfsigned(char **arg)
 				oldc = delim + 1;
 			} while(*delim);
 			arg++;
+<<<<<<< HEAD
 		} else if (!strcmp(*arg, "-addext") && arg[1]) {
 			mbedtls_asn1_sequence **tail = &eku;
 			if (!strncmp(arg[1], "extendedKeyUsage=", strlen("extendedKeyUsage="))) {
@@ -332,6 +381,10 @@ int selfsigned(char **arg)
 			san_prev->next = san_cur;
 		}
 		san_prev = san_cur;
+=======
+		}
+		arg++;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	gen_key(&key, rsa, ksize, exp, curve, pem);
 
@@ -358,8 +411,11 @@ int selfsigned(char **arg)
 	mbedtls_x509write_crt_set_basic_constraints(&cert, 0, -1);
 	mbedtls_x509write_crt_set_subject_key_identifier(&cert);
 	mbedtls_x509write_crt_set_authority_key_identifier(&cert);
+<<<<<<< HEAD
 	mbedtls_x509write_crt_set_subject_alternative_name(&cert, san_list);
 	mbedtls_x509write_crt_set_ext_key_usage(&cert, ext_key_usage);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	_urandom(NULL, (void *) buf, 8);
 	for (len = 0; len < 8; len++)
@@ -383,7 +439,11 @@ int selfsigned(char **arg)
 			return 1;
 		}
 	}
+<<<<<<< HEAD
 	write_file(certpath, len, pem, true);
+=======
+	write_file(certpath, len, pem);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	mbedtls_x509write_crt_free(&cert);
 	mbedtls_mpi_free(&serial);
@@ -394,6 +454,11 @@ int selfsigned(char **arg)
 
 int main(int argc, char *argv[])
 {
+<<<<<<< HEAD
+=======
+	urandom_fd = open("/dev/urandom", O_RDONLY);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (!argv[1]) {
 		//Usage
 	} else if (!strcmp(argv[1], "eckey")) {

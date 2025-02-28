@@ -18,8 +18,11 @@ FLASH_OFFS	:=
 FLASH_MAX	:=
 BOARD		:=
 PLATFORM	:=
+<<<<<<< HEAD
 SUBTARGET	:=
 CACHE_FLAGS    := -DCONFIG_CACHELINE_SIZE=32
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifeq ($(TARGET_DIR),)
 TARGET_DIR	:= $(KDIR)
@@ -48,8 +51,11 @@ loader-compile: $(PKG_BUILD_DIR)/.prepared
 		FLASH_MAX=$(FLASH_MAX) \
 		BOARD="$(BOARD)" \
 		PLATFORM="$(PLATFORM)" \
+<<<<<<< HEAD
 		SUBTARGET="$(SUBTARGET)" \
 		CACHE_FLAGS="$(CACHE_FLAGS)" \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		clean all
 
 loader.gz: $(PKG_BUILD_DIR)/loader.bin

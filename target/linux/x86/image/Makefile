@@ -12,6 +12,7 @@ GRUB_TERMINAL_CONFIG =
 GRUB_CONSOLE_CMDLINE =
 
 ifneq ($(CONFIG_GRUB_CONSOLE),)
+<<<<<<< HEAD
   GRUB_CONSOLE_CMDLINE += console=tty1
   GRUB_TERMINALS += console
 endif
@@ -23,6 +24,23 @@ GRUB_SERIAL_CONFIG := serial --unit=0 --speed=$(CONFIG_GRUB_BAUDRATE) --word=8 -
 GRUB_TERMINALS += serial
 
 GRUB_TERMINAL_CONFIG := terminal_input $(GRUB_TERMINALS); terminal_output $(GRUB_TERMINALS)
+=======
+  GRUB_CONSOLE_CMDLINE += console=tty0
+  GRUB_TERMINALS += console
+endif
+
+GRUB_SERIAL:=$(call qstrip,$(CONFIG_GRUB_SERIAL))
+
+ifneq ($(GRUB_SERIAL),)
+  GRUB_CONSOLE_CMDLINE += console=$(GRUB_SERIAL),$(CONFIG_GRUB_BAUDRATE)n8$(if $(CONFIG_GRUB_FLOWCONTROL),r,)
+  GRUB_SERIAL_CONFIG := serial --unit=0 --speed=$(CONFIG_GRUB_BAUDRATE) --word=8 --parity=no --stop=1 --rtscts=$(if $(CONFIG_GRUB_FLOWCONTROL),on,off)
+  GRUB_TERMINALS += serial
+endif
+
+ifneq ($(GRUB_TERMINALS),)
+  GRUB_TERMINAL_CONFIG := terminal_input $(GRUB_TERMINALS); terminal_output $(GRUB_TERMINALS)
+endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ROOTPART:=$(call qstrip,$(CONFIG_TARGET_ROOTFS_PARTNAME))
 ROOTPART:=$(if $(ROOTPART),$(ROOTPART),PARTUUID=$(IMG_PART_SIGNATURE)-02)
@@ -105,7 +123,10 @@ define Device/Default
   IMAGE/combined.img.gz := grub-config pc | combined | grub-install | gzip | append-metadata
   IMAGE/combined.vdi := grub-config pc | combined | grub-install | qemu-image vdi
   IMAGE/combined.vmdk := grub-config pc | combined | grub-install | qemu-image vmdk
+<<<<<<< HEAD
   IMAGE/combined.vhdx := grub-config pc | combined | grub-install | qemu-image vhdx -o subformat=dynamic
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/rootfs.img := append-rootfs | pad-to $(ROOTFS_PARTSIZE)
   IMAGE/rootfs.img.gz := append-rootfs | pad-to $(ROOTFS_PARTSIZE) | gzip
   ARTIFACT/image-efi.iso := grub-config iso | iso efi
@@ -113,7 +134,10 @@ define Device/Default
   IMAGE/combined-efi.img.gz := grub-config efi | combined efi | grub-install efi | gzip | append-metadata
   IMAGE/combined-efi.vdi := grub-config efi | combined efi | grub-install efi | qemu-image vdi
   IMAGE/combined-efi.vmdk := grub-config efi | combined efi | grub-install efi | qemu-image vmdk
+<<<<<<< HEAD
   IMAGE/combined-efi.vhdx := grub-config efi | combined efi | grub-install efi | qemu-image vhdx -o subformat=dynamic
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ifeq ($(CONFIG_TARGET_IMAGES_GZIP),y)
     IMAGES-y := rootfs.img.gz
     IMAGES-$$(CONFIG_GRUB_IMAGES) += combined.img.gz
@@ -138,10 +162,13 @@ define Device/Default
     IMAGES-$$(CONFIG_GRUB_IMAGES) += combined.vmdk
     IMAGES-$$(CONFIG_GRUB_EFI_IMAGES) += combined-efi.vmdk
   endif
+<<<<<<< HEAD
   ifeq ($(CONFIG_VHDX_IMAGES),y)
     IMAGES-$$(CONFIG_GRUB_IMAGES) += combined.vhdx
     IMAGES-$$(CONFIG_GRUB_EFI_IMAGES) += combined-efi.vhdx
   endif
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES := $$(IMAGES-y)
   ARTIFACTS := $$(ARTIFACTS-y)
   SUPPORTED_DEVICES :=

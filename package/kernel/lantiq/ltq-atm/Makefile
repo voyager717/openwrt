@@ -22,6 +22,7 @@ define KernelPackage/ltq-atm-template
   URL:=http://www.lantiq.com/
   VARIANT:=$(1)
   DEPENDS:=@$(2) +kmod-atm +br2684ctl
+<<<<<<< HEAD
 ifeq ($(1),vr9)
   DEPENDS+= +PACKAGE_kmod-ltq-atm-$(1):kmod-ltq-vdsl-vr9-mei
 else
@@ -34,6 +35,15 @@ KernelPackage/ltq-atm-danube=$(call KernelPackage/ltq-atm-template,danube,(TARGE
 KernelPackage/ltq-atm-ar9=$(call KernelPackage/ltq-atm-template,ar9,TARGET_lantiq_xway)
 KernelPackage/ltq-atm-ase=$(call KernelPackage/ltq-atm-template,ase,TARGET_lantiq_ase)
 KernelPackage/ltq-atm-vr9=$(call KernelPackage/ltq-atm-template,vr9,(TARGET_lantiq_xrx200||TARGET_lantiq_xrx200_legacy))
+=======
+  FILES:=$(PKG_BUILD_DIR)/ltq_atm_$(1).ko
+endef
+
+KernelPackage/ltq-atm-danube=$(call KernelPackage/ltq-atm-template,danube,(TARGET_lantiq_xway||TARGET_lantiq_xway_legacy) +kmod-ltq-adsl-danube-mei)
+KernelPackage/ltq-atm-ar9=$(call KernelPackage/ltq-atm-template,ar9,TARGET_lantiq_xway +kmod-ltq-adsl-ar9-mei)
+KernelPackage/ltq-atm-ase=$(call KernelPackage/ltq-atm-template,ase,TARGET_lantiq_ase +kmod-ltq-adsl-ase-mei)
+KernelPackage/ltq-atm-vr9=$(call KernelPackage/ltq-atm-template,vr9,TARGET_lantiq_xrx200 +kmod-ltq-vdsl-vr9-mei)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/Configure
 endef
@@ -41,7 +51,11 @@ endef
 define Build/Compile
 	cd $(LINUX_DIR); \
 		ARCH=mips CROSS_COMPILE="$(KERNEL_CROSS)" \
+<<<<<<< HEAD
 		$(MAKE) $(KERNEL_MAKE_FLAGS) BUILD_VARIANT=$(BUILD_VARIANT) M=$(PKG_BUILD_DIR) V=1 modules
+=======
+		$(MAKE) BUILD_VARIANT=$(BUILD_VARIANT) M=$(PKG_BUILD_DIR) V=1 modules
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 $(eval $(call KernelPackage,ltq-atm-danube))

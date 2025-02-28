@@ -1,0 +1,11 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/host
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: libpkgconf
+Description: a library for accessing and manipulating development framework configuration
+URL: http://github.com/pkgconf/pkgconf
+Version: 1.7.3
+CFlags: -I${includedir}/pkgconf
+Libs: -L${libdir} -lpkgconf

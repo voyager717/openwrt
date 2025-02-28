@@ -1,0 +1,15 @@
+--- mt_wifi.orig/mt_wifi/embedded/common/cmm_info.c	2022-04-25 18:12:15.000000000 +0800
++++ mt_wifi/mt_wifi/embedded/common/cmm_info.c	2023-03-20 15:16:09.000000000 +0800
+@@ -7177,7 +7177,11 @@
+ 	}
+ 
+ 	/* for compatible with old API just do the printk to console*/
+-	MTWF_DBG(pAd, DBG_CAT_CFG, DBG_SUBCAT_ALL, DBG_LVL_INFO, "%s", msg);
++	wrq->u.data.length = strlen(msg);
++
++	if (copy_to_user(wrq->u.data.pointer, msg, wrq->u.data.length))
++		MTWF_DBG(pAd, DBG_CAT_CFG, DBG_SUBCAT_ALL, DBG_LVL_INFO, "%s", msg);
++
+ 	os_free_mem(msg);
+ 	os_free_mem(pMacTab);
+ 	return;

@@ -1,8 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wwan
+<<<<<<< HEAD
 PKG_VERSION:=2019.04.29
 PKG_RELEASE=6
+=======
+PKG_VERSION:=2019-04-29
+PKG_RELEASE=5
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=

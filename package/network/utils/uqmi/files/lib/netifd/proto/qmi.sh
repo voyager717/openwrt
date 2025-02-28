@@ -11,7 +11,10 @@ proto_qmi_init_config() {
 	no_device=1
 	proto_config_add_string "device:device"
 	proto_config_add_string apn
+<<<<<<< HEAD
 	proto_config_add_string v6apn
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	proto_config_add_string auth
 	proto_config_add_string username
 	proto_config_add_string password
@@ -20,11 +23,16 @@ proto_qmi_init_config() {
 	proto_config_add_string modes
 	proto_config_add_string pdptype
 	proto_config_add_int profile
+<<<<<<< HEAD
 	proto_config_add_int v6profile
 	proto_config_add_boolean dhcp
 	proto_config_add_boolean dhcpv6
 	proto_config_add_boolean sourcefilter
 	proto_config_add_boolean delegate
+=======
+	proto_config_add_boolean dhcp
+	proto_config_add_boolean dhcpv6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	proto_config_add_boolean autoconnect
 	proto_config_add_int plmn
 	proto_config_add_int timeout
@@ -34,6 +42,7 @@ proto_qmi_init_config() {
 
 proto_qmi_setup() {
 	local interface="$1"
+<<<<<<< HEAD
 
 	local connstat dataformat mcc mnc plmn_mode
 	local cid_4 cid_6 pdh_4 pdh_6
@@ -48,6 +57,18 @@ proto_qmi_setup() {
 
 	local profile v6profile dhcp dhcpv6 autoconnect plmn timeout
 	json_get_vars profile v6profile dhcp dhcpv6 autoconnect plmn timeout
+=======
+	local dataformat connstat plmn_mode mcc mnc
+	local device apn auth username password pincode delay modes pdptype
+	local profile dhcp dhcpv6 autoconnect plmn timeout mtu $PROTO_DEFAULT_OPTIONS
+	local ip4table ip6table
+	local cid_4 pdh_4 cid_6 pdh_6
+	local ip_6 ip_prefix_length gateway_6 dns1_6 dns2_6
+
+	json_get_vars device apn auth username password pincode delay modes
+	json_get_vars pdptype profile dhcp dhcpv6 autoconnect plmn ip4table
+	json_get_vars ip6table timeout mtu $PROTO_DEFAULT_OPTIONS
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	[ "$timeout" = "" ] && timeout="10"
 
@@ -89,9 +110,13 @@ proto_qmi_setup() {
 
 	echo "Waiting for SIM initialization"
 	local uninitialized_timeout=0
+<<<<<<< HEAD
 	# timeout 3s for first call to avoid hanging uqmi
 	uqmi -d "$device" -t 3000 --get-pin-status > /dev/null 2>&1
 	while uqmi -s -d "$device" -t 1000 --get-pin-status | grep '"UIM uninitialized"' > /dev/null; do
+=======
+	while uqmi -s -d "$device" --get-pin-status | grep '"UIM uninitialized"' > /dev/null; do
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		[ -e "$device" ] || return 1
 		if [ "$uninitialized_timeout" -lt "$timeout" -o "$timeout" = "0" ]; then
 			let uninitialized_timeout++
@@ -104,6 +129,7 @@ proto_qmi_setup() {
 		fi
 	done
 
+<<<<<<< HEAD
 	# Check if UIM application is stuck in illegal state
 	local uim_state_timeout=0
 	while true; do
@@ -139,6 +165,11 @@ proto_qmi_setup() {
 	   uqmi -s -d "$device" -t 1000 --get-pin-status | grep -q '"Not supported"\|"Invalid QMI command"' ; then
 		[ -n "$pincode" ] && {
 			uqmi -s -d "$device" -t 1000 --verify-pin1 "$pincode" > /dev/null || uqmi -s -d "$device" -t 1000 --uim-verify-pin1 "$pincode" > /dev/null || {
+=======
+	if uqmi -s -d "$device" --get-pin-status | grep '"Not supported"\|"Invalid QMI command"' > /dev/null; then
+		[ -n "$pincode" ] && {
+			uqmi -s -d "$device" --verify-pin1 "$pincode" > /dev/null || uqmi -s -d "$device" --uim-verify-pin1 "$pincode" > /dev/null || {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				echo "Unable to verify PIN"
 				proto_notify_error "$interface" PIN_FAILED
 				proto_block_restart "$interface"
@@ -146,12 +177,18 @@ proto_qmi_setup() {
 			}
 		}
 	else
+<<<<<<< HEAD
 		json_load "$(uqmi -s -d "$device" -t 1000 --get-pin-status)"
 		json_get_var pin1_status pin1_status
 		if [ -z "$pin1_status" ]; then
 			json_load "$(uqmi -s -d "$device" -t 1000 --uim-get-sim-state)"
 			json_get_var pin1_status pin1_status
 		fi
+=======
+		. /usr/share/libubox/jshn.sh
+		json_load "$(uqmi -s -d "$device" --get-pin-status)"
+		json_get_var pin1_status pin1_status
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		json_get_var pin1_verify_tries pin1_verify_tries
 
 		case "$pin1_status" in
@@ -172,7 +209,11 @@ proto_qmi_setup() {
 					return 1
 				}
 				if [ -n "$pincode" ]; then
+<<<<<<< HEAD
 					uqmi -s -d "$device" -t 1000 --verify-pin1 "$pincode" > /dev/null 2>&1 || uqmi -s -d "$device" -t 1000 --uim-verify-pin1 "$pincode" > /dev/null 2>&1 || {
+=======
+					uqmi -s -d "$device" --verify-pin1 "$pincode" > /dev/null 2>&1 || uqmi -s -d "$device" --uim-verify-pin1 "$pincode" > /dev/null 2>&1 || {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 						echo "Unable to verify PIN"
 						proto_notify_error "$interface" PIN_FAILED
 						proto_block_restart "$interface"
@@ -189,17 +230,28 @@ proto_qmi_setup() {
 				echo "PIN already verified"
 				;;
 			*)
+<<<<<<< HEAD
 				echo "PIN status failed (${pin1_status:-sim_not_present})"
+=======
+				echo "PIN status failed ($pin1_status)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				proto_notify_error "$interface" PIN_STATUS_FAILED
 				proto_block_restart "$interface"
 				return 1
 			;;
 		esac
+<<<<<<< HEAD
 		json_cleanup
 	fi
 
 	if [ -n "$plmn" ]; then
 		json_load "$(uqmi -s -d "$device" -t 1000 --get-plmn)"
+=======
+	fi
+
+	if [ -n "$plmn" ]; then
+		json_load "$(uqmi -s -d "$device" --get-plmn)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		json_get_var plmn_mode mode
 		json_get_vars mcc mnc || {
 			mcc=0
@@ -222,6 +274,7 @@ proto_qmi_setup() {
 		fi
 	fi
 
+<<<<<<< HEAD
 	# Cleanup current state if any
 	uqmi -s -d "$device" -t 1000 --stop-network 0xffffffff --autoconnect > /dev/null 2>&1
 	uqmi -s -d "$device" -t 1000 --set-ip-family ipv6 --stop-network 0xffffffff --autoconnect > /dev/null 2>&1
@@ -233,6 +286,27 @@ proto_qmi_setup() {
 	uqmi -s -d "$device" -t 1000 --set-data-format 802.3 > /dev/null 2>&1
 	uqmi -s -d "$device" -t 1000 --wda-set-data-format 802.3 > /dev/null 2>&1
 	dataformat="$(uqmi -s -d "$device" -t 1000 --wda-get-data-format)"
+=======
+	if [ -n "$mcc" -a -n "$mnc" ]; then
+		uqmi -s -d "$device" --set-plmn --mcc "$mcc" --mnc "$mnc" > /dev/null 2>&1 || {
+			echo "Unable to set PLMN"
+			proto_notify_error "$interface" PLMN_FAILED
+			proto_block_restart "$interface"
+			return 1
+		}
+	fi
+
+	# Cleanup current state if any
+	uqmi -s -d "$device" --stop-network 0xffffffff --autoconnect > /dev/null 2>&1
+
+	# Go online
+	uqmi -s -d "$device" --set-device-operating-mode online > /dev/null 2>&1
+
+	# Set IP format
+	uqmi -s -d "$device" --set-data-format 802.3 > /dev/null 2>&1
+	uqmi -s -d "$device" --wda-set-data-format 802.3 > /dev/null 2>&1
+	dataformat="$(uqmi -s -d "$device" --wda-get-data-format)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if [ "$dataformat" = '"raw-ip"' ]; then
 
@@ -245,6 +319,7 @@ proto_qmi_setup() {
 		echo "Y" > /sys/class/net/$ifname/qmi/raw_ip
 	fi
 
+<<<<<<< HEAD
 	uqmi -s -d "$device" -t 1000 --sync > /dev/null 2>&1
 
 	uqmi -s -d "$device" -t 20000 --network-register > /dev/null 2>&1
@@ -272,6 +347,18 @@ proto_qmi_setup() {
 	local registration_state=""
 	while true; do
 		registration_state=$(uqmi -s -d "$device" -t 1000 --get-serving-system 2>/dev/null | jsonfilter -e "@.registration" 2>/dev/null)
+=======
+	uqmi -s -d "$device" --sync > /dev/null 2>&1
+
+	uqmi -s -d "$device" --network-register > /dev/null 2>&1
+
+	echo "Waiting for network registration"
+	sleep 1
+	local registration_timeout=0
+	local registration_state=""
+	while true; do
+		registration_state=$(uqmi -s -d "$device" --get-serving-system 2>/dev/null | jsonfilter -e "@.registration" 2>/dev/null)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		[ "$registration_state" = "registered" ] && break
 
@@ -279,7 +366,11 @@ proto_qmi_setup() {
 			if [ "$registration_timeout" -lt "$timeout" ] || [ "$timeout" = "0" ]; then
 				[ "$registration_state" = "searching" ] || {
 					echo "Device stopped network registration. Restart network registration"
+<<<<<<< HEAD
 					uqmi -s -d "$device" -t 20000 --network-register > /dev/null 2>&1
+=======
+					uqmi -s -d "$device" --network-register > /dev/null 2>&1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				}
 				let registration_timeout++
 				sleep 1
@@ -292,6 +383,7 @@ proto_qmi_setup() {
 		fi
 
 		proto_notify_error "$interface" NETWORK_REGISTRATION_FAILED
+<<<<<<< HEAD
 		return 1
 	done
 
@@ -309,6 +401,19 @@ proto_qmi_setup() {
 	[ "$profile_pdptype" = "ip" ] && profile_pdptype="ipv4"
 	uqmi -s -d "$device" -t 1000 --modify-profile "3gpp,1" --apn "$apn" --pdp-type "$profile_pdptype" > /dev/null 2>&1
 
+=======
+		proto_block_restart "$interface"
+		return 1
+	done
+
+	[ -n "$modes" ] && uqmi -s -d "$device" --set-network-modes "$modes" > /dev/null 2>&1
+
+	echo "Starting network $interface"
+
+	pdptype=$(echo "$pdptype" | awk '{print tolower($0)}')
+	[ "$pdptype" = "ip" -o "$pdptype" = "ipv6" -o "$pdptype" = "ipv4v6" ] || pdptype="ip"
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if [ "$pdptype" = "ip" ]; then
 		[ -z "$autoconnect" ] && autoconnect=1
 		[ "$autoconnect" = 0 ] && autoconnect=""
@@ -317,16 +422,26 @@ proto_qmi_setup() {
 	fi
 
 	[ "$pdptype" = "ip" -o "$pdptype" = "ipv4v6" ] && {
+<<<<<<< HEAD
 		cid_4=$(uqmi -s -d "$device" -t 1000 --get-client-id wds)
+=======
+		cid_4=$(uqmi -s -d "$device" --get-client-id wds)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if ! [ "$cid_4" -eq "$cid_4" ] 2> /dev/null; then
 			echo "Unable to obtain client ID"
 			proto_notify_error "$interface" NO_CID
 			return 1
 		fi
 
+<<<<<<< HEAD
 		uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_4" --set-ip-family ipv4 > /dev/null 2>&1
 
 		pdh_4=$(uqmi -s -d "$device" -t 5000 --set-client-id wds,"$cid_4" \
+=======
+		uqmi -s -d "$device" --set-client-id wds,"$cid_4" --set-ip-family ipv4 > /dev/null 2>&1
+
+		pdh_4=$(uqmi -s -d "$device" --set-client-id wds,"$cid_4" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			--start-network \
 			${apn:+--apn $apn} \
 			${profile:+--profile $profile} \
@@ -338,29 +453,45 @@ proto_qmi_setup() {
 		# pdh_4 is a numeric value on success
 		if ! [ "$pdh_4" -eq "$pdh_4" ] 2> /dev/null; then
 			echo "Unable to connect IPv4"
+<<<<<<< HEAD
 			uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_4" --release-client-id wds > /dev/null 2>&1
+=======
+			uqmi -s -d "$device" --set-client-id wds,"$cid_4" --release-client-id wds > /dev/null 2>&1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			proto_notify_error "$interface" CALL_FAILED
 			return 1
 		fi
 
 		# Check data connection state
+<<<<<<< HEAD
 		connstat=$(uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_4" --get-data-status)
 		[ "$connstat" == '"connected"' ] || {
 			echo "No data link!"
 			uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_4" --release-client-id wds > /dev/null 2>&1
+=======
+		connstat=$(uqmi -s -d "$device" --get-data-status)
+		[ "$connstat" == '"connected"' ] || {
+			echo "No data link!"
+			uqmi -s -d "$device" --set-client-id wds,"$cid_4" --release-client-id wds > /dev/null 2>&1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			proto_notify_error "$interface" CALL_FAILED
 			return 1
 		}
 	}
 
 	[ "$pdptype" = "ipv6" -o "$pdptype" = "ipv4v6" ] && {
+<<<<<<< HEAD
 		cid_6=$(uqmi -s -d "$device" -t 1000 --get-client-id wds)
+=======
+		cid_6=$(uqmi -s -d "$device" --get-client-id wds)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if ! [ "$cid_6" -eq "$cid_6" ] 2> /dev/null; then
 			echo "Unable to obtain client ID"
 			proto_notify_error "$interface" NO_CID
 			return 1
 		fi
 
+<<<<<<< HEAD
 		uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_6" --set-ip-family ipv6 > /dev/null 2>&1
 
 		: "${v6apn:=${apn}}"
@@ -370,6 +501,14 @@ proto_qmi_setup() {
 			--start-network \
 			${v6apn:+--apn $v6apn} \
 			${v6profile:+--profile $v6profile} \
+=======
+		uqmi -s -d "$device" --set-client-id wds,"$cid_6" --set-ip-family ipv6 > /dev/null 2>&1
+
+		pdh_6=$(uqmi -s -d "$device" --set-client-id wds,"$cid_6" \
+			--start-network \
+			${apn:+--apn $apn} \
+			${profile:+--profile $profile} \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			${auth:+--auth-type $auth} \
 			${username:+--username $username} \
 			${password:+--password $password} \
@@ -378,16 +517,27 @@ proto_qmi_setup() {
 		# pdh_6 is a numeric value on success
 		if ! [ "$pdh_6" -eq "$pdh_6" ] 2> /dev/null; then
 			echo "Unable to connect IPv6"
+<<<<<<< HEAD
 			uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_6" --release-client-id wds > /dev/null 2>&1
+=======
+			uqmi -s -d "$device" --set-client-id wds,"$cid_6" --release-client-id wds > /dev/null 2>&1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			proto_notify_error "$interface" CALL_FAILED
 			return 1
 		fi
 
 		# Check data connection state
+<<<<<<< HEAD
 		connstat=$(uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_6" --set-ip-family ipv6 --get-data-status)
 		[ "$connstat" == '"connected"' ] || {
 			echo "No data link!"
 			uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid_6" --release-client-id wds > /dev/null 2>&1
+=======
+		connstat=$(uqmi -s -d "$device" --get-data-status)
+		[ "$connstat" == '"connected"' ] || {
+			echo "No data link!"
+			uqmi -s -d "$device" --set-client-id wds,"$cid_6" --release-client-id wds > /dev/null 2>&1
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			proto_notify_error "$interface" CALL_FAILED
 			return 1
 		}
@@ -412,7 +562,11 @@ proto_qmi_setup() {
 
 	[ -n "$pdh_6" ] && {
 		if [ -z "$dhcpv6" -o "$dhcpv6" = 0 ]; then
+<<<<<<< HEAD
 			json_load "$(uqmi -s -d $device -t 1000 --set-client-id wds,$cid_6 --get-current-settings)"
+=======
+			json_load "$(uqmi -s -d $device --set-client-id wds,$cid_6 --get-current-settings)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			json_select ipv6
 			json_get_var ip_6 ip
 			json_get_var gateway_6 gateway
@@ -440,14 +594,20 @@ proto_qmi_setup() {
 			json_init
 			json_add_string name "${interface}_6"
 			json_add_string ifname "@$interface"
+<<<<<<< HEAD
 			[ "$pdptype" = "ipv4v6" ] && json_add_string iface_464xlat "0"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			json_add_string proto "dhcpv6"
 			[ -n "$ip6table" ] && json_add_string ip6table "$ip6table"
 			proto_add_dynamic_defaults
 			# RFC 7278: Extend an IPv6 /64 Prefix to LAN
 			json_add_string extendprefix 1
+<<<<<<< HEAD
 			[ "$delegate" = "0" ] && json_add_boolean delegate "0"
 			[ "$sourcefilter" = "0" ] && json_add_boolean sourcefilter "0"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			[ -n "$zone" ] && json_add_string zone "$zone"
 			json_close_object
 			ubus call network add_dynamic "$(json_dump)"
@@ -456,7 +616,11 @@ proto_qmi_setup() {
 
 	[ -n "$pdh_4" ] && {
 		if [ "$dhcp" = 0 ]; then
+<<<<<<< HEAD
 			json_load "$(uqmi -s -d $device -t 1000 --set-client-id wds,$cid_4 --get-current-settings)"
+=======
+			json_load "$(uqmi -s -d $device --set-client-id wds,$cid_4 --get-current-settings)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			json_select ipv4
 			json_get_var ip_4 ip
 			json_get_var gateway_4 gateway
@@ -499,16 +663,28 @@ qmi_wds_stop() {
 
 	[ -n "$cid" ] || return
 
+<<<<<<< HEAD
 	uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid" \
+=======
+	uqmi -s -d "$device" --set-client-id wds,"$cid" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		--stop-network 0xffffffff \
 		--autoconnect > /dev/null 2>&1
 
 	[ -n "$pdh" ] && {
+<<<<<<< HEAD
 		uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid" \
 			--stop-network "$pdh" > /dev/null 2>&1
 	}
 
 	uqmi -s -d "$device" -t 1000 --set-client-id wds,"$cid" \
+=======
+		uqmi -s -d "$device" --set-client-id wds,"$cid" \
+			--stop-network "$pdh" > /dev/null 2>&1
+	}
+
+	uqmi -s -d "$device" --set-client-id wds,"$cid" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		--release-client-id wds > /dev/null 2>&1
 }
 

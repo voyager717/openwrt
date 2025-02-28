@@ -13,7 +13,10 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/sysfs.h>
+<<<<<<< HEAD
 #include <linux/mtd/mtd.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include "routerboot.h"
 
@@ -161,6 +164,7 @@ fail:
 	return ret;
 }
 
+<<<<<<< HEAD
 static void routerboot_mtd_notifier_add(struct mtd_info *mtd)
 {
 	/* Currently routerboot is only known to live on NOR flash */
@@ -197,21 +201,36 @@ static struct mtd_notifier routerboot_mtd_notifier = {
 	.remove = routerboot_mtd_notifier_remove,
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static int __init routerboot_init(void)
 {
 	rb_kobj = kobject_create_and_add("mikrotik", firmware_kobj);
 	if (!rb_kobj)
 		return -ENOMEM;
 
+<<<<<<< HEAD
 	register_mtd_user(&routerboot_mtd_notifier);
+=======
+	/*
+	 * We ignore the following return values and always register.
+	 * These init() routines are designed so that their failed state is
+	 * always manageable by the corresponding exit() calls.
+	 */
+	rb_hardconfig_init(rb_kobj);
+	rb_softconfig_init(rb_kobj);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return 0;
 }
 
 static void __exit routerboot_exit(void)
 {
+<<<<<<< HEAD
 	unregister_mtd_user(&routerboot_mtd_notifier);
 	/* Exit routines are idempotent */
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	rb_softconfig_exit();
 	rb_hardconfig_exit();
 	kobject_put(rb_kobj);	// recursive afaict

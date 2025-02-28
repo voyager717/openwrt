@@ -19,7 +19,11 @@ Signed-off-by: Daniel Schwierzeck <daniel.schwierzeck@gmail.com>
  endif
 --- a/arch/mips/include/asm/arch-vrx200/config.h
 +++ b/arch/mips/include/asm/arch-vrx200/config.h
+<<<<<<< HEAD
 @@ -168,7 +168,7 @@
+=======
+@@ -167,7 +167,7 @@
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #define CONFIG_SYS_TEXT_BASE		0xB0000000
  #endif
  

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dir-825-b1", "qca,ar7161";
@@ -17,33 +20,59 @@
 		led-upgrade = &led_power_orange;
 	};
 
+<<<<<<< HEAD
+=======
+	extosc: ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-output-names = "ref";
+		clock-frequency = <40000000>;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	leds {
 		compatible = "gpio-leds";
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 0 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&usb_ohci_port>, <&usb_ehci_port>;
 			linux,default-trigger = "usbport";
 		};
 
 		led_power_orange: power_orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
 
 		led_power_blue: power_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
@@ -101,12 +130,18 @@
 			#size-cells = <0>;
 			status = "okay";
 
+<<<<<<< HEAD
+=======
+			phy-mask = <0x10>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			phy4: ethernet-phy@4 {
 				reg = <4>;
 				phy-mode = "rgmii";
 			};
 		};
 	};
+<<<<<<< HEAD
 
 	virtual_flash {
 		compatible = "mtd-concat";
@@ -132,6 +167,30 @@
 
 &usb2 {
 	status = "okay";
+=======
+};
+
+&usb1 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ohci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+};
+
+&usb2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ehci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
@@ -141,25 +200,46 @@
 &pcie0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	ath9k0: wifi@11,0 {
 		compatible = "pci168c,0029";
 		reg = <0x8800 0 0 0 0>;
 		nvmem-cells = <&macaddr_lan 0>, <&cal_art_1000>;
 		nvmem-cell-names = "mac-address", "calibration";
+=======
+	ath9k0: wifi@0,11 {
+		compatible = "pci168c,0029";
+		reg = <0x8800 0 0 0 0>;
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 	};
 
+<<<<<<< HEAD
 	ath9k1: wifi@12,0 {
 		compatible = "pci168c,0029";
 		reg = <0x9000 0 0 0 0>;
 		nvmem-cells = <&macaddr_wan 1>, <&cal_art_5000>;
 		nvmem-cell-names = "mac-address", "calibration";
+=======
+	ath9k1: wifi@0,12 {
+		compatible = "pci168c,0029";
+		reg = <0x9000 0 0 0 0>;
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 	};
 };
 
+<<<<<<< HEAD
+=======
+&pll {
+	clocks = <&extosc>;
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &spi {
 	status = "okay";
 
@@ -185,8 +265,14 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			fwconcat0: partition@50000 {
 				label = "fwconcat0";
+=======
+			partition@50000 {
+				compatible = "denx,uimage";
+				label = "firmware";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				reg = <0x050000 0x610000>;
 			};
 
@@ -194,6 +280,7 @@
 				label = "caldata";
 				reg = <0x660000 0x010000>;
 				read-only;
+<<<<<<< HEAD
 
 				nvmem-layout {
 					compatible = "fixed-layout";
@@ -225,6 +312,14 @@
 			fwconcat1: partition@670000 {
 				label = "fwconcat1";
 				reg = <0x670000 0x190000>;
+=======
+			};
+
+			partition@670000 {
+				label = "unknown";
+				reg = <0x670000 0x190000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -235,9 +330,12 @@
 
 	pll-data = <0x11110000 0x00001099 0x00991099>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_lan 0>;
 	nvmem-cell-names = "mac-address";
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fixed-link {
 		speed = <1000>;
 		full-duplex;
@@ -249,9 +347,14 @@
 
 	pll-data = <0x11110000 0x00001099 0x00991099>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_wan 0>;
 	nvmem-cell-names = "mac-address";
 
 	phy-handle = <&phy4>;
 };
 
+=======
+	phy-handle = <&phy4>;
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

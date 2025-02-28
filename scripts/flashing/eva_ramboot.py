@@ -3,6 +3,10 @@
 import argparse
 
 from ftplib import FTP
+<<<<<<< HEAD
+=======
+from sys import argv
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 from os import stat
 
 parser = argparse.ArgumentParser(description='Tool to boot AVM EVA ramdisk images.')

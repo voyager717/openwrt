@@ -7,6 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ca-certificates
+<<<<<<< HEAD
 PKG_VERSION:=20240203
 PKG_RELEASE:=1
 PKG_MAINTAINER:=
@@ -17,13 +18,25 @@ PKG_LICENSE_FILES:=debian/copyright
 PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@DEBIAN/pool/main/c/ca-certificates
 PKG_HASH:=3286d3fc42c4d11b7086711a85f865b44065ce05cf1fb5376b2abed07622a9c6
+=======
+PKG_VERSION:=20210119
+PKG_RELEASE:=1
+PKG_MAINTAINER:=
+
+PKG_SOURCE:=$(PKG_NAME)_$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=http://ftp.debian.org/debian/pool/main/c/ca-certificates
+PKG_HASH:=daa3afae563711c30a0586ddae4336e8e3974c2b627faaca404c4e0141b64665
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_INSTALL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
+<<<<<<< HEAD
 TAR_OPTIONS+= --strip-components 1
 TAR_CMD=$(HOST_TAR) -C $(1) $(TAR_OPTIONS)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/ca-certificates
   SECTION:=base
   CATEGORY:=Base system
@@ -40,6 +53,16 @@ define Package/ca-bundle
   PROVIDES:=ca-certs
 endef
 
+<<<<<<< HEAD
+=======
+define Build/Prepare
+	$(DECOMPRESS_CMD) $(HOST_TAR) -C $(PKG_BUILD_DIR) $(TAR_OPTIONS)
+	$(Build/Patch)
+endef
+
+MAKE_PATH := work
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Build/Install
 	mkdir -p \
 		$(PKG_INSTALL_DIR)/usr/sbin \

@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=popt
+<<<<<<< HEAD
 PKG_VERSION:=1.19
 PKG_RELEASE:=1
 
@@ -16,6 +17,18 @@ PKG_SOURCE_URL:=http://ftp.rpm.org/popt/releases/popt-1.x/
 PKG_HASH:=c25a4838fc8e4c1c8aacb8bd620edb3084a3d63bf8987fdad3ca2758c63240f9
 PKG_LICENSE:=MIT
 PKG_CPE_ID:=cpe:/a:popt_project:popt
+=======
+PKG_VERSION:=1.16
+PKG_RELEASE:=2
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:= \
+	http://distfiles.gentoo.org/distfiles/ \
+	http://distcache.freebsd.org/ports-distfiles/ \
+	http://rpm5.org/files/popt/
+PKG_HASH:=e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8
+PKG_LICENSE:=MIT
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_FIXUP:=autoreconf
 PKG_REMOVE_FILES:=autogen.sh aclocal.m4
@@ -31,7 +44,11 @@ define Package/libpopt
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE:=A command line option parsing library
+<<<<<<< HEAD
   URL:=https://github.com/rpm-software-management/popt
+=======
+  URL:=http://rpm5.org/files/popt/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=0
 endef
 

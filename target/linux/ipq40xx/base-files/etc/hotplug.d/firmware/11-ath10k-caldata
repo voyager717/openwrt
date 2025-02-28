@@ -9,10 +9,17 @@ board=$(board_name)
 case "$FIRMWARE" in
 "ath10k/cal-pci-0000:01:00.0.bin")
 	case "$board" in
+<<<<<<< HEAD
 	meraki,mr33 |\
 	meraki,mr74)
 		caldata_extract_ubi "ART" 0x9000 0x844
 		caldata_valid "4408" || caldata_extract "ART" 0x9000 0x844
+=======
+	meraki,mr33)
+		caldata_extract_ubi "ART" 0x9000 0x844
+		caldata_valid "4408" || caldata_extract "ART" 0x9000 0x844
+		ath10k_patch_mac $(macaddr_add $(get_mac_binary "/sys/bus/i2c/devices/0-0050/eeprom" 0x66) +1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	esac
 	;;
@@ -23,9 +30,12 @@ case "$FIRMWARE" in
 		ln -sf /lib/firmware/ath10k/pre-cal-pci-0000\:00\:00.0.bin \
 			/lib/firmware/ath10k/QCA9888/hw2.0/board.bin
 		;;
+<<<<<<< HEAD
 	asus,rt-ac42u)
 		caldata_extract_ubi "Factory" 0x9000 0x2f20
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	avm,fritzrepeater-3000)
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3D000 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader0") || \
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C800 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader0") || \
@@ -34,12 +44,25 @@ case "$FIRMWARE" in
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C800 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1") || \
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C000 -e 0x212 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1")
 		;;
+<<<<<<< HEAD
+=======
+	buffalo,wtr-m2133hp)
+		caldata_extract "ART" 0x9000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary ORGDATA 0x32)
+		;;
+	engenius,eap2200 |\
+	openmesh,a62 |\
+	plasmacloud,pa2200)
+		caldata_extract "0:ART" 0x9000 0x2f20
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	linksys,ea8300 |\
 	linksys,mr8300)
 		caldata_extract "ART" 0x9000 0x2f20
 		# OEM assigns 4 sequential MACs
 		ath10k_patch_mac $(macaddr_setbit_la $(macaddr_add "$(cat /sys/class/net/eth0/address)" 4))
 		;;
+<<<<<<< HEAD
 	linksys,whw03)
 		caldata_extract_mmc "0:ART" 0x9000 0x2f20
 		ath10k_patch_mac $(macaddr_add "$(cat /sys/class/net/eth0/address)" 3)
@@ -53,12 +76,41 @@ case "$FIRMWARE" in
 		caldata_extract_mmc "0:ART" 0x9000 0x2f20
 		ath10k_patch_mac $(mmc_get_mac_binary ARTMTD 0x12)
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 	;;
 "ath10k/pre-cal-ahb-a000000.wifi.bin")
 	case "$board" in
+<<<<<<< HEAD
 	asus,map-ac2200|\
 	asus,rt-ac42u)
+=======
+	8dev,habanero-dvk |\
+	8dev,jalapeno |\
+	alfa-network,ap120c-ac |\
+	cilab,meshpoint-one |\
+	ezviz,cs-w3-wd1200g-eup |\
+	glinet,gl-ap1300 |\
+	glinet,gl-b1300 |\
+	glinet,gl-s1300 |\
+	linksys,ea6350v3 |\
+	mobipromo,cm520-79f |\
+	qcom,ap-dk01.1-c1)
+		caldata_extract "ART" 0x1000 0x2f20
+		;;
+	aruba,ap-303 |\
+	aruba,ap-303h |\
+	aruba,ap-365)
+		caldata_extract "ART" 0x1000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary mfginfo 0x1D)
+		;;
+	asus,map-ac2200)
+		caldata_extract_ubi "Factory" 0x1000 0x2f20
+		;;
+	asus,rt-ac58u)
+		CI_UBIPART=UBI_DEV
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		caldata_extract_ubi "Factory" 0x1000 0x2f20
 		;;
 	avm,fritzbox-4040)
@@ -74,7 +126,29 @@ case "$FIRMWARE" in
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C800 -e 0x207 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1") || \
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3D000 -e 0x207 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1")
 		;;
+<<<<<<< HEAD
 	cellc,rtl30vw)
+=======
+	buffalo,wtr-m2133hp)
+		caldata_extract "ART" 0x1000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary ORGDATA 0x26)
+		;;
+	cellc,rtl30vw |\
+	compex,wpj419 |\
+	compex,wpj428 |\
+	edgecore,ecw5211 |\
+	edgecore,oap100 |\
+	engenius,eap1300 |\
+	engenius,eap2200 |\
+	luma,wrtq-329acn|\
+	openmesh,a42 |\
+	openmesh,a62 |\
+	plasmacloud,pa1200 |\
+	plasmacloud,pa2200 |\
+	qxwlan,e2600ac-c1 |\
+	qxwlan,e2600ac-c2 |\
+	unielec,u4019-32m)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		caldata_extract "0:ART" 0x1000 0x2f20
 		;;
 	devolo,magic-2-wifi-next)
@@ -95,18 +169,23 @@ case "$FIRMWARE" in
 		;;
 	engenius,ens620ext)
 		caldata_extract "ART" 0x1000 0x2f20
+<<<<<<< HEAD
 		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii u-boot-env ethaddr) 2)
 		;;
 	extreme-networks,ws-ap3915i |\
 	extreme-networks,ws-ap391x)
 		caldata_extract "ART" 0x1000 0x2f20
 		ath10k_patch_mac $(mtd_get_mac_ascii CFG1 RADIOADDR0)
+=======
+		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii u-boot-env ethaddr) +2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	linksys,ea8300 |\
 	linksys,mr8300)
 		caldata_extract "ART" 0x1000 0x2f20
 		ath10k_patch_mac $(macaddr_add "$(cat /sys/class/net/eth0/address)" 2)
 		;;
+<<<<<<< HEAD
 	linksys,whw03)
 		caldata_extract_mmc "0:ART" 0x1000 0x2f20
 		ath10k_patch_mac $(macaddr_add "$(cat /sys/class/net/eth0/address)" 1)
@@ -123,10 +202,19 @@ case "$FIRMWARE" in
 	mikrotik,wap-ac |\
 	mikrotik,wap-ac-lte |\
 	mikrotik,wap-r-ac)
+=======
+	meraki,mr33)
+		caldata_extract_ubi "ART" 0x1000 0x2f20
+		caldata_valid "202f" || caldata_extract "ART" 0x1000 0x2f20
+		ath10k_patch_mac $(macaddr_add $(get_mac_binary "/sys/bus/i2c/devices/0-0050/eeprom" 0x66) +2)
+		;;
+	mikrotik,hap-ac2)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		wlan_data="/sys/firmware/mikrotik/hard_config/wlan_data"
 		( [ -f "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data" 0x0 0x2f20 ) || \
 		( [ -d "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data/data_0" 0x0 0x2f20 )
 		;;
+<<<<<<< HEAD
 	netgear,rbr40|\
 	netgear,rbs40|\
 	netgear,rbr50|\
@@ -147,6 +235,12 @@ case "$FIRMWARE" in
 		;;
 	sony,ncp-hg100-cellular)
 		caldata_extract_mmc "0:ART" 0x1000 0x2f20
+=======
+	netgear,ex6100v2 |\
+	netgear,ex6150v2)
+		caldata_extract "ART" 0x1000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary dnidata 0x0)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	zyxel,nbg6617 |\
 	zyxel,wre6606)
@@ -157,9 +251,38 @@ case "$FIRMWARE" in
 	;;
 "ath10k/pre-cal-ahb-a800000.wifi.bin")
 	case "$board" in
+<<<<<<< HEAD
 	asus,map-ac2200)
 		caldata_extract_ubi "Factory" 0x5000 0x2f20
 		;;
+=======
+	8dev,habanero-dvk |\
+	8dev,jalapeno |\
+	alfa-network,ap120c-ac |\
+	cilab,meshpoint-one |\
+	ezviz,cs-w3-wd1200g-eup |\
+	glinet,gl-ap1300 |\
+	glinet,gl-b1300 |\
+	glinet,gl-s1300 |\
+	linksys,ea6350v3 |\
+	mobipromo,cm520-79f |\
+	qcom,ap-dk01.1-c1)
+		caldata_extract "ART" 0x5000 0x2f20
+		;;
+	aruba,ap-303 |\
+	aruba,ap-303h |\
+	aruba,ap-365)
+		caldata_extract "ART" 0x5000 0x2f20
+		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_binary mfginfo 0x1D) +1)
+		;;
+	asus,map-ac2200)
+		caldata_extract_ubi "Factory" 0x5000 0x2f20
+		;;
+	asus,rt-ac58u)
+		CI_UBIPART=UBI_DEV
+		caldata_extract_ubi "Factory" 0x5000 0x2f20
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	avm,fritzbox-4040)
 		/usr/bin/fritz_cal_extract -i 1 -s 0x400 -e 0x208 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader_config")
 		;;
@@ -173,7 +296,29 @@ case "$FIRMWARE" in
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3D000 -e 0x208 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1") || \
 		/usr/bin/fritz_cal_extract -i 1 -s 0x3C000 -e 0x208 -l 12064 -o /lib/firmware/$FIRMWARE $(find_mtd_chardev "urlader1")
 		;;
+<<<<<<< HEAD
 	cellc,rtl30vw)
+=======
+	buffalo,wtr-m2133hp)
+		caldata_extract "ART" 0x5000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary ORGDATA 0x2c)
+		;;
+	cellc,rtl30vw |\
+	compex,wpj419 |\
+	compex,wpj428 |\
+	edgecore,ecw5211 |\
+	edgecore,oap100 |\
+	engenius,eap1300 |\
+	engenius,eap2200 |\
+	luma,wrtq-329acn|\
+	openmesh,a42 |\
+	openmesh,a62 |\
+	plasmacloud,pa1200 |\
+	plasmacloud,pa2200 |\
+	qxwlan,e2600ac-c1 |\
+	qxwlan,e2600ac-c2 |\
+	unielec,u4019-32m)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		caldata_extract "0:ART" 0x5000 0x2f20
 		;;
 	devolo,magic-2-wifi-next)
@@ -186,6 +331,7 @@ case "$FIRMWARE" in
 		;;
 	engenius,emd1)
 		caldata_extract "0:ART" 0x5000 0x2f20
+<<<<<<< HEAD
 		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii 0:APPSBLENV wlanaddr) 1)
 		;;
 	engenius,emr3500)
@@ -200,12 +346,24 @@ case "$FIRMWARE" in
 	extreme-networks,ws-ap391x)
 		caldata_extract "ART" 0x5000 0x2f20
 		ath10k_patch_mac $(mtd_get_mac_ascii CFG1 RADIOADDR1)
+=======
+		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii 0:APPSBLENV wlanaddr) +1)
+		;;
+	engenius,emr3500)
+		caldata_extract "0:ART" 0x5000 0x2f20
+		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii 0:APPSBLENV ethaddr) +1)
+		;;
+	engenius,ens620ext)
+		caldata_extract "ART" 0x5000 0x2f20
+		ath10k_patch_mac $(macaddr_add $(mtd_get_mac_ascii u-boot-env ethaddr) +3)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	linksys,ea8300 |\
 	linksys,mr8300)
 		caldata_extract "ART" 0x5000 0x2f20
 		ath10k_patch_mac $(macaddr_add "$(cat /sys/class/net/eth0/address)" 3)
 		;;
+<<<<<<< HEAD
 	linksys,whw03)
 		caldata_extract_mmc "0:ART" 0x5000 0x2f20
 		ath10k_patch_mac $(macaddr_add "$(cat /sys/class/net/eth0/address)" 2)
@@ -223,10 +381,20 @@ case "$FIRMWARE" in
 	mikrotik,wap-ac |\
 	mikrotik,wap-ac-lte |\
 	mikrotik,wap-r-ac)
+=======
+	meraki,mr33)
+		caldata_extract_ubi "ART" 0x5000 0x2f20
+		caldata_valid "202f" || caldata_extract "ART" 0x5000 0x2f20
+		ath10k_patch_mac $(macaddr_add $(get_mac_binary "/sys/bus/i2c/devices/0-0050/eeprom" 0x66) +3)
+		;;
+	mikrotik,hap-ac2|\
+	mikrotik,sxtsq-5-ac)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		wlan_data="/sys/firmware/mikrotik/hard_config/wlan_data"
 		( [ -f "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data" 0x8000 0x2f20 ) || \
 		( [ -d "$wlan_data" ] && caldata_sysfsload_from_file "$wlan_data/data_2" 0x0 0x2f20 )
 		;;
+<<<<<<< HEAD
 	netgear,rbr40|\
 	netgear,rbs40|\
 	netgear,rbr50|\
@@ -247,6 +415,12 @@ case "$FIRMWARE" in
 		;;
 	sony,ncp-hg100-cellular)
 		caldata_extract_mmc "0:ART" 0x5000 0x2f20
+=======
+	netgear,ex6100v2 |\
+	netgear,ex6150v2)
+		caldata_extract "ART" 0x5000 0x2f20
+		ath10k_patch_mac $(mtd_get_mac_binary dnidata 0xc)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	zyxel,nbg6617 |\
 	zyxel,wre6606)
@@ -255,6 +429,7 @@ case "$FIRMWARE" in
 		;;
 	esac
 	;;
+<<<<<<< HEAD
 "ath10k/QCA4019/hw1.0/board-ahb-a000000.wifi.bin")
 	case "$board" in
 	mikrotik,cap-ac |\
@@ -286,6 +461,8 @@ case "$FIRMWARE" in
 		;;
 	esac
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 *)
 	exit 1
 	;;

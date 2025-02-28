@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2011-2012 OpenWrt.org
 #
@@ -17,6 +21,7 @@ alfa-network,awusfree1|\
 alfa-network,quad-e4g|\
 alfa-network,r36m-e4g|\
 alfa-network,tube-e4g|\
+<<<<<<< HEAD
 engenius,epg600|\
 engenius,esr600h|\
 linksys,re7000|\
@@ -26,20 +31,30 @@ zyxel,keenetic-lite-iii-a)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x1000"
 	;;
 alfa-network,ax1800rm|\
+=======
+engenius,esr600h|\
+sitecom,wlr-4100-v1-002)
+	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x1000"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 allnet,all0256n-4m|\
 allnet,all0256n-8m|\
 allnet,all5002|\
 yuncore,ax820)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x10000" "0x10000"
 	;;
+<<<<<<< HEAD
 arcadyan,we420223-99|\
 dlink,dir-806a-b1)
 	ubootenv_add_uci_config "/dev/mtd2" "0x0" "0x1000" "0x1000"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ampedwireless,ally-00x19k|\
 ampedwireless,ally-r1900k)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x20000" "4"
 	;;
+<<<<<<< HEAD
 beeline,smartbox-giga|\
 beeline,smartbox-turbo|\
 beeline,smartbox-turbo-plus|\
@@ -61,12 +76,21 @@ kroks,kndrt31r16|\
 kroks,kndrt31r19|\
 mediatek,linkit-smart-7688|\
 samknows,whitebox-v8|\
+=======
+buffalo,wsr-1166dhp|\
+buffalo,wsr-600dhp|\
+mediatek,linkit-smart-7688|\
+samknows,whitebox-v8|\
+xiaomi,mi-router-3g-v2|\
+xiaomi,mi-router-4a-gigabit|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 xiaomi,mi-router-4c|\
 xiaomi,miwifi-nano|\
 zbtlink,zbt-wg2626|\
 zte,mf283plus)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x10000"
 	;;
+<<<<<<< HEAD
 asus,rt-ax53u|\
 asus,rt-ax54|\
 asus,4g-ax56|\
@@ -89,19 +113,28 @@ sim,simax1800t)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x20000"
 	ubootenv_add_uci_sys_config "/dev/mtd1" "0x40000" "0x40000" "0x20000"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 hootoo,ht-tm05|\
 ravpower,rp-wd03)
 	idx="$(find_mtd_index u-boot-env)"
 	[ -n "$idx" ] && \
 		ubootenv_add_uci_config "/dev/mtd$idx" "0x4000" "0x1000" "0x1000"
 	;;
+<<<<<<< HEAD
 beeline,smartbox-flash|\
 iptime,t5004|\
 linksys,ea6350-v4|\
+=======
+jcg,q20)
+	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x20000" "0x20000"
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 linksys,ea7300-v1|\
 linksys,ea7300-v2|\
 linksys,ea7500-v2|\
 linksys,ea8100-v1|\
+<<<<<<< HEAD
 linksys,ea8100-v2|\
 mts,wg430223|\
 ubnt,edgerouter-x|\
@@ -125,23 +158,30 @@ xiaomi,miwifi-3c)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x10000"
 	ubootenv_add_uci_sys_config "/dev/mtd2" "0x0" "0x4000" "0x10000"
 	;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 xiaomi,mi-router-3g|\
 xiaomi,mi-router-3-pro|\
 xiaomi,mi-router-4|\
 xiaomi,mi-router-ac2100|\
 xiaomi,redmi-router-ac2100)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x20000"
+<<<<<<< HEAD
 	ubootenv_add_uci_sys_config "/dev/mtd2" "0x0" "0x4000" "0x20000"
 	;;
 zyxel,lte3301-plus)
 	ubootenv_add_uci_config "/dev/mtd1" "0x0" "0x1000" "0x80000"
 	;;
 zyxel,lte5398-m904|\
+=======
+	;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 zyxel,nr7101)
 	idx="$(find_mtd_index Config)"
 	[ -n "$idx" ] && \
 		ubootenv_add_uci_config "/dev/mtd$idx" "0x0" "0x1000" "0x80000"
 	;;
+<<<<<<< HEAD
 bolt,arion|\
 xiaomi,mi-router-cr6606|\
 xiaomi,mi-router-cr6608|\
@@ -160,5 +200,11 @@ esac
 
 config_load ubootenv
 config_foreach ubootenv_add_app_config
+=======
+esac
+
+config_load ubootenv
+config_foreach ubootenv_add_app_config ubootenv
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 exit 0

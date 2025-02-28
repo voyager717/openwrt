@@ -1,5 +1,6 @@
 --- a/Makefile
 +++ b/Makefile
+<<<<<<< HEAD
 @@ -1,6 +1,6 @@
  # Comment out if openssl-dev is not present
  # of if you want to compile statc
@@ -8,3 +9,12 @@
  
  # comment in if you want to compile static tools
  #STATIC=-static
+=======
+@@ -1,5 +1,5 @@
+ # Comment out if openssl-dev is not present
+-HAVE_SSL=yes
++#HAVE_SSL=yes
+ 
+ CC=gcc
+ #CFLAGS=-g
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

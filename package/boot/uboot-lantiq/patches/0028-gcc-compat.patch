@@ -22,6 +22,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  delete mode 100644 include/linux/compiler-gcc4.h
  create mode 100644 include/linux/compiler-intel.h
 
+<<<<<<< HEAD
+=======
+diff --git a/include/linux/compiler-gcc.h b/include/linux/compiler-gcc.h
+index 9896e54..22ab246 100644
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/include/linux/compiler-gcc.h
 +++ b/include/linux/compiler-gcc.h
 @@ -5,11 +5,28 @@
@@ -145,6 +150,23 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
   */
 -#ifndef __pure
 -# define __pure				__attribute__((pure))
+<<<<<<< HEAD
+=======
+-#endif
+-#ifndef __aligned
+-# define __aligned(x)			__attribute__((aligned(x)))
+-#endif
+-#define __printf(a,b)			__attribute__((format(printf,a,b)))
+-#define  noinline			__attribute__((noinline))
+-#define __attribute_const__		__attribute__((__const__))
+-#define __maybe_unused			__attribute__((unused))
+-#define __always_unused			__attribute__((unused))
+-
+-#define __gcc_header(x) #x
+-#define _gcc_header(x) __gcc_header(linux/compiler-gcc##x.h)
+-#define gcc_header(x) _gcc_header(x)
+-#include gcc_header(__GNUC__)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +#define __pure			__attribute__((pure))
 +#define __aligned(x)		__attribute__((aligned(x)))
 +#define __printf(a, b)		__attribute__((format(printf, a, b)))
@@ -173,9 +195,13 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +
 +#if GCC_VERSION >= 30400
 +#define __must_check		__attribute__((warn_unused_result))
+<<<<<<< HEAD
  #endif
 -#ifndef __aligned
 -# define __aligned(x)			__attribute__((aligned(x)))
+=======
++#endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +
 +#if GCC_VERSION >= 40000
 +
@@ -192,6 +218,7 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +
 +#if GCC_VERSION >= 40100 && GCC_VERSION < 40600
 +# define __compiletime_object_size(obj) __builtin_object_size(obj, 0)
+<<<<<<< HEAD
  #endif
 -#define __printf(a,b)			__attribute__((format(printf,a,b)))
 -#define  noinline			__attribute__((noinline))
@@ -203,6 +230,9 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 -#define _gcc_header(x) __gcc_header(linux/compiler-gcc##x.h)
 -#define gcc_header(x) _gcc_header(x)
 -#include gcc_header(__GNUC__)
+=======
++#endif
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +
 +#if GCC_VERSION >= 40300
 +/* Mark functions as cold. gcc will assume any path leading to a call
@@ -324,6 +354,12 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 + * code
 + */
 +#define uninitialized_var(x) x = x
+<<<<<<< HEAD
+=======
+diff --git a/include/linux/compiler-gcc3.h b/include/linux/compiler-gcc3.h
+deleted file mode 100644
+index 2befe65..0000000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/include/linux/compiler-gcc3.h
 +++ /dev/null
 @@ -1,21 +0,0 @@
@@ -348,6 +384,12 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 -#define uninitialized_var(x) x = x
 -
 -#define __always_inline		inline __attribute__((always_inline))
+<<<<<<< HEAD
+=======
+diff --git a/include/linux/compiler-gcc4.h b/include/linux/compiler-gcc4.h
+deleted file mode 100644
+index 27d11ca..0000000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/include/linux/compiler-gcc4.h
 +++ /dev/null
 @@ -1,63 +0,0 @@
@@ -414,6 +456,12 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 -#define __compiletime_warning(message) __attribute__((warning(message)))
 -#define __compiletime_error(message) __attribute__((error(message)))
 -#endif
+<<<<<<< HEAD
+=======
+diff --git a/include/linux/compiler-intel.h b/include/linux/compiler-intel.h
+new file mode 100644
+index 0000000..d4c7113
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- /dev/null
 +++ b/include/linux/compiler-intel.h
 @@ -0,0 +1,45 @@
@@ -462,6 +510,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +#define __builtin_bswap16 _bswap16
 +#endif
 +
+<<<<<<< HEAD
+=======
+diff --git a/include/linux/compiler.h b/include/linux/compiler.h
+index 5be3dab..020ad16 100644
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/include/linux/compiler.h
 +++ b/include/linux/compiler.h
 @@ -5,16 +5,24 @@
@@ -490,7 +543,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  extern void __chk_user_ptr(const volatile void __user *);
  extern void __chk_io_ptr(const volatile void __iomem *);
  #else
+<<<<<<< HEAD
 @@ -27,20 +35,32 @@ extern void __chk_io_ptr(const volatile
+=======
+@@ -27,20 +35,32 @@ extern void __chk_io_ptr(const volatile void __iomem *);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # define __chk_user_ptr(x) (void)0
  # define __chk_io_ptr(x) (void)0
  # define __builtin_warning(x, y...) (1)
@@ -523,7 +580,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  
  /* Intel compiler defines __GNUC__. So we will overwrite implementations
   * coming from above header files here
+<<<<<<< HEAD
 @@ -49,6 +69,13 @@ extern void __chk_io_ptr(const volatile
+=======
+@@ -49,6 +69,13 @@ extern void __chk_io_ptr(const volatile void __iomem *);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # include <linux/compiler-intel.h>
  #endif
  
@@ -537,7 +598,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  /*
   * Generic compiler-dependent macros required for kernel
   * build go below this comment. Actual compiler/compiler version
+<<<<<<< HEAD
 @@ -117,7 +144,7 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -117,7 +144,7 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   */
  #define if(cond, ...) __trace_if( (cond , ## __VA_ARGS__) )
  #define __trace_if(cond) \
@@ -546,7 +611,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  	({								\
  		int ______r;						\
  		static struct ftrace_branch_data			\
+<<<<<<< HEAD
 @@ -144,6 +171,10 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -144,6 +171,10 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # define barrier() __memory_barrier()
  #endif
  
@@ -557,7 +626,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  /* Unreachable code */
  #ifndef unreachable
  # define unreachable() do { } while (1)
+<<<<<<< HEAD
 @@ -156,6 +187,135 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -156,6 +187,135 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      (typeof(ptr)) (__ptr + (off)); })
  #endif
  
@@ -693,7 +766,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  #endif /* __KERNEL__ */
  
  #endif /* __ASSEMBLY__ */
+<<<<<<< HEAD
 @@ -228,7 +388,7 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -228,7 +388,7 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  /*
   * Rather then using noinline to prevent stack consumption, use
@@ -702,7 +779,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
   */
  #define noinline_for_stack noinline
  
+<<<<<<< HEAD
 @@ -270,11 +430,28 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -270,11 +430,28 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  # define __section(S) __attribute__ ((__section__(#S)))
  #endif
  
@@ -731,7 +812,11 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
  /* Compile time object size, -1 for unknown */
  #ifndef __compiletime_object_size
  # define __compiletime_object_size(obj) -1
+<<<<<<< HEAD
 @@ -284,8 +461,49 @@ void ftrace_likely_update(struct ftrace_
+=======
+@@ -284,7 +461,48 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #endif
  #ifndef __compiletime_error
  # define __compiletime_error(message)
@@ -745,11 +830,19 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +#  define __compiletime_error_fallback(condition) \
 +	do { ((void)sizeof(char[1 - 2 * condition])); } while (0)
 +# endif
+<<<<<<< HEAD
 +#endif
 +#ifndef __compiletime_error_fallback
 +# define __compiletime_error_fallback(condition) do { } while (0)
  #endif
  
+=======
+ #endif
++#ifndef __compiletime_error_fallback
++# define __compiletime_error_fallback(condition) do { } while (0)
++#endif
++
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +#define __compiletime_assert(condition, msg, prefix, suffix)		\
 +	do {								\
 +		bool __cond = !(condition);				\
@@ -777,11 +870,18 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +#define compiletime_assert_atomic_type(t)				\
 +	compiletime_assert(__native_word(t),				\
 +		"Need native word sized stores/loads for atomicity.")
+<<<<<<< HEAD
 +
  /*
   * Prevent the compiler from merging or refetching accesses.  The compiler
   * is also forbidden from reordering successive instances of ACCESS_ONCE(),
 @@ -293,11 +511,45 @@ void ftrace_likely_update(struct ftrace_
+=======
+ 
+ /*
+  * Prevent the compiler from merging or refetching accesses.  The compiler
+@@ -293,11 +511,45 @@ void ftrace_likely_update(struct ftrace_branch_data *f, int val, int expect);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   * to make the compiler aware of ordering is to put the two invocations of
   * ACCESS_ONCE() in different C statements.
   *
@@ -833,3 +933,9 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 +# define nokprobe_inline	inline
 +#endif
  #endif /* __LINUX_COMPILER_H */
+<<<<<<< HEAD
+=======
+-- 
+2.7.4
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

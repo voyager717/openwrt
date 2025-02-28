@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,tl-mr3020-v3", "mediatek,mt7628an-soc";
@@ -13,7 +16,10 @@
 		led-failsafe = &led_power;
 		led-running = &led_power;
 		led-upgrade = &led_power;
+<<<<<<< HEAD
 		label-mac-device = &ethernet;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	chosen {
@@ -33,14 +39,20 @@
 			label = "sw1";
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 			linux,code = <BTN_0>;
+<<<<<<< HEAD
 			linux,input-type = <EV_SW>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		modec2 {
 			label = "sw2";
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 			linux,code = <BTN_1>;
+<<<<<<< HEAD
 			linux,input-type = <EV_SW>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 
@@ -48,8 +60,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 37 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -62,19 +78,28 @@
 		};
 
 		wlan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 44 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
@@ -91,6 +116,12 @@
 			gpios = <&gpio 39 GPIO_ACTIVE_HIGH>;
 		};
 	};
+=======
+			label = "green:lan";
+			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
+		};
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &spi0 {
@@ -99,8 +130,12 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
 		m25p,fast-read;
+=======
+		spi-max-frequency = <10000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -125,6 +160,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@7d0000 {
 				label = "factory";
 				reg = <0x7d0000 0x30000>;
@@ -143,6 +179,12 @@
 						reg = <0xf100 0x6>;
 					};
 				};
+=======
+			factory: partition@7d0000 {
+				label = "factory";
+				reg = <0x7d0000 0x30000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -150,13 +192,18 @@
 
 &state_default {
 	gpio {
+<<<<<<< HEAD
 		groups = "i2s", "refclk", "wdt", "p4led_an", "p2led_an", "p1led_an", "p0led_an", "wled_an";
+=======
+		groups = "i2s", "refclk", "wdt", "p2led_an", "p1led_an", "p0led_an", "wled_an";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		function = "gpio";
 	};
 };
 
 &wmac {
 	status = "okay";
+<<<<<<< HEAD
 
 	nvmem-cells = <&eeprom_factory_20000>, <&macaddr_factory_f100>;
 	nvmem-cell-names = "eeprom", "mac-address";
@@ -165,4 +212,12 @@
 &ethernet {
 	nvmem-cells = <&macaddr_factory_f100>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0xf100>;
+	mediatek,mtd-eeprom = <&factory 0x20000>;
+};
+
+&ethernet {
+	mtd-mac-address = <&factory 0xf100>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

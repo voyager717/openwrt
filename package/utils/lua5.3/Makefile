@@ -9,17 +9,28 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=lua
 PKG_VERSION:=5.3.5
+<<<<<<< HEAD
 PKG_RELEASE:=6
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://www.lua.org/ftp/ \
 	https://www.tecgraf.puc-rio.br/lua/ftp/
+=======
+PKG_RELEASE:=4
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=http://www.lua.org/ftp/ \
+	http://www.tecgraf.puc-rio.br/lua/ftp/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_HASH:=0c2eed3f960446e1a3e4b9a1ca2f3ff893b6ce41942cf54d5dd59ab4b3b058ac
 PKG_BUILD_PARALLEL:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYRIGHT
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:lua:lua
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_PATCH_DIR := ./patches-host
 
@@ -30,8 +41,13 @@ define Package/lua5.3/Default
   SUBMENU:=Lua
   SECTION:=lang
   CATEGORY:=Languages
+<<<<<<< HEAD
   TITLE:=Lua programming language (version 5.3)
   URL:=https://www.lua.org/
+=======
+  TITLE:=Lua programming language
+  URL:=http://www.lua.org/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 endef
 
@@ -42,7 +58,11 @@ define Package/lua5.3/Default/description
 endef
 
 define Package/liblua5.3
+<<<<<<< HEAD
 $(call Package/lua5.3/Default)
+=======
+$(call Package/lua53/Default)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUBMENU:=
   SECTION:=libs
   CATEGORY:=Libraries
@@ -51,7 +71,11 @@ $(call Package/lua5.3/Default)
 endef
 
 define Package/liblua5.3/description
+<<<<<<< HEAD
 $(call Package/lua5.3/Default/description)
+=======
+$(call Package/lua53/Default/description)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  This package contains the Lua shared libraries, needed by other programs.
 endef
 
@@ -111,7 +135,11 @@ endif
 
 define Host/Compile
 	$(MAKE) -C $(HOST_BUILD_DIR) \
+<<<<<<< HEAD
 		CC="$(HOSTCC) $(HOST_FPIC) -std=gnu99" \
+=======
+		CC="$(HOSTCC) -std=gnu99" \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(LUA_OS)
 endef
 

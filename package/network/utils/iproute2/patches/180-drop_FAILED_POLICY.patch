@@ -11,7 +11,11 @@ Subject: [PATCH] add support for dropping with FAILED_POLICY
 
 --- a/ip/rtm_map.c
 +++ b/ip/rtm_map.c
+<<<<<<< HEAD
 @@ -49,6 +49,8 @@ char *rtnl_rtntype_n2a(int id, char *buf
+=======
+@@ -54,6 +54,8 @@ char *rtnl_rtntype_n2a(int id, char *buf
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		return "nat";
  	case RTN_XRESOLVE:
  		return "xresolve";
@@ -20,7 +24,11 @@ Subject: [PATCH] add support for dropping with FAILED_POLICY
  	default:
  		snprintf(buf, len, "%d", id);
  		return buf;
+<<<<<<< HEAD
 @@ -84,6 +86,8 @@ int rtnl_rtntype_a2n(int *id, char *arg)
+=======
+@@ -89,6 +91,8 @@ int rtnl_rtntype_a2n(int *id, char *arg)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  		res = RTN_UNICAST;
  	else if (strcmp(arg, "throw") == 0)
  		res = RTN_THROW;
@@ -31,7 +39,11 @@ Subject: [PATCH] add support for dropping with FAILED_POLICY
  		if (!end || end == arg || *end || res > 255)
 --- a/include/uapi/linux/rtnetlink.h
 +++ b/include/uapi/linux/rtnetlink.h
+<<<<<<< HEAD
 @@ -265,6 +265,7 @@ enum {
+=======
+@@ -249,6 +249,7 @@ enum {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	RTN_THROW,		/* Not in this table		*/
  	RTN_NAT,		/* Translate this address	*/
  	RTN_XRESOLVE,		/* Use external resolver	*/

@@ -1,6 +1,7 @@
 DEVICE_VARS += TPLINK_FLASHLAYOUT TPLINK_HWID TPLINK_HWREV TPLINK_HWREVADD
 DEVICE_VARS += TPLINK_HVERSION TPLINK_BOARD_ID TPLINK_HEADER_VERSION
 
+<<<<<<< HEAD
 define Build/tplink-v1-okli-image
 	cp $(IMAGE_KERNEL) $(IMAGE_ROOTFS).$(word 2,$(1))
 	cat $(IMAGE_ROOTFS) >> $(IMAGE_ROOTFS).$(word 2,$(1))
@@ -27,6 +28,8 @@ define Build/uImage-tplink-c9
 	mv $@.new $@
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Device/tplink-v1
   DEVICE_VENDOR := TP-Link
   TPLINK_FLASHLAYOUT :=
@@ -37,6 +40,7 @@ define Device/tplink-v1
   KERNEL_INITRAMFS := $(KERNEL_DTB) | tplink-v1-header -e -O
   IMAGES += factory.bin
   IMAGE/factory.bin := tplink-v1-image factory -e -O
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := tplink-v1-image sysupgrade -e -O | check-size | \
 	append-metadata
 endef
@@ -51,6 +55,10 @@ define Device/tplink-v1-okli
   IMAGE/factory.bin := tplink-v1-okli-image $(1) factory -e -O
   IMAGE/sysupgrade.bin := tplink-v1-okli-image $(1) sysupgrade -e -O | check-size | \
 	append-metadata
+=======
+  IMAGE/sysupgrade.bin := tplink-v1-image sysupgrade -e -O | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/tplink-v2
@@ -64,8 +72,13 @@ define Device/tplink-v2
   KERNEL_INITRAMFS := $(KERNEL_DTB) | tplink-v2-header -e
   IMAGES += factory.bin
   IMAGE/factory.bin := tplink-v2-image -e
+<<<<<<< HEAD
   IMAGE/sysupgrade.bin := tplink-v2-image -s -e | check-size | \
 	append-metadata
+=======
+  IMAGE/sysupgrade.bin := tplink-v2-image -s -e | append-metadata | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Device/tplink-safeloader
@@ -77,6 +90,10 @@ define Device/tplink-safeloader
   KERNEL := $(KERNEL_DTB) | tplink-v1-header -e -O
   IMAGES += factory.bin
   IMAGE/sysupgrade.bin := append-rootfs | tplink-safeloader sysupgrade | \
+<<<<<<< HEAD
 	check-size | append-metadata
+=======
+	append-metadata | check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGE/factory.bin := append-rootfs | tplink-safeloader factory
 endef

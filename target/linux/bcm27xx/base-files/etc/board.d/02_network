@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # Copyright (C) 2014-2016 OpenWrt.org
 # Copyright (C) 2017 LEDE project
 
@@ -10,12 +14,19 @@ board_config_update
 board=$(board_name)
 
 case "$board" in
+<<<<<<< HEAD
+=======
+raspberrypi,model-b |\
+raspberrypi,model-b-plus |\
+raspberrypi,model-b-rev2 |\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 raspberrypi,2-model-b |\
 raspberrypi,2-model-b-rev2 |\
 raspberrypi,3-model-b |\
 raspberrypi,3-model-b-plus |\
 raspberrypi,400 |\
 raspberrypi,4-compute-module |\
+<<<<<<< HEAD
 raspberrypi,4-model-b |\
 raspberrypi,5-model-b |\
 raspberrypi,model-b |\
@@ -25,6 +36,12 @@ raspberrypi,model-b-rev2)
 	;;
 
 raspberrypi,model-zero-2 |\
+=======
+raspberrypi,4-model-b)
+	ucidef_set_interface_lan "eth0"
+	;;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 raspberrypi,model-zero-w)
 	ucidef_set_interface_lan "wlan0"
 	;;

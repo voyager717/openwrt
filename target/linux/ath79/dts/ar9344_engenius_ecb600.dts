@@ -1,8 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
 #include "ar9344_senao_ap-dual.dtsi"
+=======
+#include "ar9344_engenius_exx600.dtsi"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	model = "EnGenius ECB600";
@@ -12,8 +16,12 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -27,6 +35,7 @@
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 0>;
 	nvmem-cell-names = "mac-address";
 };
@@ -35,10 +44,20 @@
 	wifi@0,0 {
 		nvmem-cells = <&macaddr_art_0 (-2)>, <&calibration_art_5000>;
 		nvmem-cell-names = "mac-address", "calibration";
+=======
+	mtd-mac-address = <&art 0x0>;
+};
+
+&pcie {
+	wifi@0,0,0 {
+		mtd-mac-address = <&art 0x0>;
+		mtd-mac-address-increment = <(-2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };
 
 &wmac {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0 (-1)>, <&calibration_art_1000>;
 	nvmem-cell-names = "mac-address", "calibration";
 };
@@ -63,4 +82,8 @@
 			reg = <0x5000 0x440>;
 		};
 	};
+=======
+	mtd-mac-address = <&art 0x0>;
+	mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

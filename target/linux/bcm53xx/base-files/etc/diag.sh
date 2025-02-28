@@ -18,6 +18,12 @@ get_status_led() {
 		status_led=$(basename $status_led_file)
 		return
 	fi;
+<<<<<<< HEAD
+=======
+
+	# And finally, let's also try the device-Tree aliases node
+	status_led="$(get_dt_led status)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 set_state() {

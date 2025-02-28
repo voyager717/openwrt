@@ -26,6 +26,11 @@
 
 &usb0 {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	dr_mode = "host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &usb_phy {
@@ -61,6 +66,7 @@
 				reg = <0x040000 0x040000>;
 			};
 
+<<<<<<< HEAD
 			partition@80000 {
 				label = "art";
 				reg = <0x080000 0x040000>;
@@ -83,6 +89,12 @@
 						reg = <0x1000 0x440>;
 					};
 				};
+=======
+			art: partition@80000 {
+				label = "art";
+				reg = <0x080000 0x040000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@c0000 {
@@ -103,8 +115,12 @@
 
 	phy-handle = <&swphy0>;
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_6>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	gmac-config {
 		device = <&gmac>;
@@ -115,13 +131,21 @@
 };
 
 &eth1 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &wmac {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&cal_art_1000>;
 	nvmem-cell-names = "calibration";
+=======
+	mtd-cal-data = <&art 0x1000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

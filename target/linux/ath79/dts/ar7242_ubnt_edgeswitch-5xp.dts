@@ -67,8 +67,12 @@
 	phy-handle = <&phy0>;
 	phy-mode = "rgmii";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	fixed-link {
 		speed = <1000>;

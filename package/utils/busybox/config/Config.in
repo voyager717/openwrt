@@ -107,6 +107,7 @@ config BUSYBOX_CONFIG_LFS
 	programs that can benefit from large file support include dd, gzip,
 	cp, mount, tar.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_TIME64
 	bool "Support 64bit wide time types"
 	default BUSYBOX_DEFAULT_TIME64
@@ -118,6 +119,8 @@ config BUSYBOX_CONFIG_TIME64
 	(i.e. all 64bit archs and some selected 32bit archs (currently riscv
 	and x32)).
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_PAM
 	bool "Support PAM (Pluggable Authentication Modules)"
 	default BUSYBOX_DEFAULT_PAM

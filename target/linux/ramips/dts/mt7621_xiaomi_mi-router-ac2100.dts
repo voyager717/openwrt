@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7621_xiaomi_router-ac2100.dtsi"
 
 / {
@@ -20,26 +23,42 @@
 		compatible = "gpio-leds";
 
 		wan_yellow {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_YELLOW>;
+=======
+			label = "yellow:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status_yellow: status_yellow {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_YELLOW>;
+=======
+			label = "yellow:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 10 GPIO_ACTIVE_LOW>;
 		};
 
 		led_status_blue: status_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 	};

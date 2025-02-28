@@ -15,7 +15,11 @@ Subject: [PATCH] ncurses 5.9 - patch 20141206
 
 --- a/ncurses/base/MKlib_gen.sh
 +++ b/ncurses/base/MKlib_gen.sh
+<<<<<<< HEAD
 @@ -512,11 +512,22 @@ sed -n -f $ED1 \
+=======
+@@ -502,11 +502,22 @@ sed -n -f $ED1 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	-e 's/gen_$//' \
  	-e 's/  / /g' >>$TMP
  
@@ -39,6 +43,10 @@ Subject: [PATCH] ncurses 5.9 - patch 20141206
 -	-e 's/^ //' \
 -	-e 's/_Bool/NCURSES_BOOL/g' \
 +| sed -f $ED1 \
+<<<<<<< HEAD
  | "$AWK" -f $AW2 \
+=======
+ | $AWK -f $AW2 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  | sed -f $ED3 \
  | sed \

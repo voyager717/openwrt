@@ -1,0 +1,14 @@
+YH = -O2 -rdynamic -DOPENSSL=1 -DOPENSSLDL=1
+
+.PHONY: all
+
+all:
+	rm -rf *.o ngrokc
+	$(CXX)  $(YH)  -c sendmsg.cpp -o sendmsg.o
+	$(CXX)  $(YH)  -c openssldl.cpp -o openssldl.o
+	$(CXX)  $(YH) -c cJSON.c -o cJSON.o
+	$(CXX)  $(YH) -c main.cpp -o main.o
+	$(CXX)  $(YH)  -c nonblocking.cpp -o nonblocking.o
+	$(CXX)  $(YH) -c opensslbio.cpp -o opensslbio.o
+	$(CXX)  $(YH) -c ngrok.cpp  -o ngrok.o
+	$(CXX) main.o cJSON.o sendmsg.o nonblocking.o opensslbio.o  ngrok.o openssldl.o -o ngrokc $(YH) -lpthread -ldl

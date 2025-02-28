@@ -1,6 +1,10 @@
 --- a/src/Makefile.am
 +++ b/src/Makefile.am
+<<<<<<< HEAD
 @@ -48,8 +48,6 @@ endif !HAVE_GCC
+=======
+@@ -45,8 +45,6 @@ endif !HAVE_GCC
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
  if ENABLE_DEBUG
  used_gcc_cflags += -O1 -g

@@ -1,0 +1,4 @@
+chacha-neon.ko
+libchacha.ko
+libchacha20poly1305.ko
+poly1305-neon.ko

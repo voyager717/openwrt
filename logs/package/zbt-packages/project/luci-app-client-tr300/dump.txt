@@ -1,0 +1,20 @@
+
+Package: luci-app-client-tr300 
+Version: v1.0
+Depends: +libc +USE_GLIBC:librt +USE_GLIBC:libpthread 
+Conflicts: 
+Menu-Depends: 
+Provides: 
+Section: opt
+Category: Extra packages
+Repository: base
+Title: 
+Maintainer: 
+Source: 
+License: GPLv2
+Type: ipkg
+Description: 
+
+@@
+
+Makefile:43: *** invalid syntax in conditional.  Stop.

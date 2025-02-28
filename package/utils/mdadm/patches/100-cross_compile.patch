@@ -1,6 +1,10 @@
 --- a/Makefile
 +++ b/Makefile
+<<<<<<< HEAD
 @@ -115,7 +115,7 @@ DLM:=$(shell [ -f /usr/include/libdlm.h
+=======
+@@ -97,7 +97,7 @@ DLM:=$(shell [ -f /usr/include/libdlm.h
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  DIRFLAGS = -DMAP_DIR=\"$(MAP_DIR)\" -DMAP_FILE=\"$(MAP_FILE)\"
  DIRFLAGS += -DMDMON_DIR=\"$(MDMON_DIR)\"
  DIRFLAGS += -DFAILED_SLOTS_DIR=\"$(FAILED_SLOTS_DIR)\"

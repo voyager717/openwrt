@@ -1,11 +1,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ath10k-ct-firmware
+<<<<<<< HEAD
 PKG_VERSION:=2020.11.08
 PKG_RELEASE:=1
 
 DL_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 
+=======
+PKG_VERSION:=2020-11-08
+PKG_RELEASE:=1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/package.mk
 
 CT_FIRMWARE_FILE = $(1)-$($(1)_FIRMWARE_FILE_CT)
@@ -294,6 +300,10 @@ $(Package/ath10k-ct-firmware-default)
   CATEGORY:=Firmware
   PROVIDES:=ath10k-firmware-qca4019
   CONFLICTS:=ath10k-firmware-qca4019
+<<<<<<< HEAD
+=======
+  DEPENDS:=+ath10k-board-qca4019
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 define Package/ath10k-firmware-qca4019-ct-full-htt
 $(Package/ath10k-ct-firmware-default)
@@ -308,6 +318,10 @@ $(Package/ath10k-ct-firmware-default)
     ath10k-firmware-qca4019-ct \
     ath10k-firmware-qca4019-ct-htt
   DEPENDS:=\
+<<<<<<< HEAD
+=======
+    +ath10k-board-qca4019 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     +!PACKAGE_kmod-ath10k-ct-smallbuffers:kmod-ath10k-ct
 endef
 define Package/ath10k-firmware-qca4019-ct-htt
@@ -322,6 +336,10 @@ $(Package/ath10k-firmware-default)
     ath10k-firmware-qca4019 \
     ath10k-firmware-qca4019-ct
   DEPENDS:=\
+<<<<<<< HEAD
+=======
+    +ath10k-board-qca4019 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     +!PACKAGE_kmod-ath10k-ct-smallbuffers:kmod-ath10k-ct
 endef
 

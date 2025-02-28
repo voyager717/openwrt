@@ -10,6 +10,7 @@ VIDEO_MENU:=Video Support
 
 V4L2_DIR=v4l2-core
 V4L2_USB_DIR=usb
+<<<<<<< HEAD
 V4L2_MEM2MEM_DIR=platform
 
 #
@@ -33,11 +34,14 @@ endef
 
 $(eval $(call KernelPackage,media-controller))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #
 # Video Display
 #
 
+<<<<<<< HEAD
 define KernelPackage/acpi-video
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=ACPI Extensions For Display Adapters
@@ -60,6 +64,8 @@ endef
 
 $(eval $(call KernelPackage,acpi-video))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/backlight
 	SUBMENU:=$(VIDEO_MENU)
 	TITLE:=Backlight support
@@ -105,7 +111,10 @@ define KernelPackage/fb
   DEPENDS:=@DISPLAY_SUPPORT
   KCONFIG:= \
 	CONFIG_FB \
+<<<<<<< HEAD
 	CONFIG_FB_DEVICE=y \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_FB_MXS=n \
 	CONFIG_FB_SM750=n \
 	CONFIG_FRAMEBUFFER_CONSOLE=y \
@@ -128,8 +137,12 @@ define KernelPackage/fb
 	CONFIG_VT_CONSOLE=y \
 	CONFIG_VT_HW_CONSOLE_BINDING=y
   FILES:=$(LINUX_DIR)/drivers/video/fbdev/core/fb.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/lib/fonts/font.ko \
 	$(LINUX_DIR)/drivers/video/fbdev/core/fb_io_fops.ko
+=======
+	$(LINUX_DIR)/lib/fonts/font.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,06,fb font)
 endef
 
@@ -272,8 +285,12 @@ define KernelPackage/drm
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Direct Rendering Manager (DRM) support
   HIDDEN:=1
+<<<<<<< HEAD
   DEPENDS:=+kmod-dma-buf +kmod-i2c-core +PACKAGE_kmod-backlight:kmod-backlight \
 	+kmod-fb
+=======
+  DEPENDS:=+kmod-dma-buf +kmod-i2c-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM
   FILES:= \
 	$(LINUX_DIR)/drivers/gpu/drm/drm.ko \
@@ -287,6 +304,7 @@ endef
 
 $(eval $(call KernelPackage,drm))
 
+<<<<<<< HEAD
 define KernelPackage/drm-buddy
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=A page based buddy allocator
@@ -365,6 +383,8 @@ endef
 
 $(eval $(call KernelPackage,drm-mipi-dbi))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/drm-ttm
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=GPU memory management subsystem
@@ -381,6 +401,7 @@ endef
 
 $(eval $(call KernelPackage,drm-ttm))
 
+<<<<<<< HEAD
 
 define KernelPackage/drm-ttm-helper
   SUBMENU:=$(VIDEO_MENU)
@@ -395,6 +416,8 @@ endef
 $(eval $(call KernelPackage,drm-ttm-helper))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/drm-kms-helper
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=CRTC helpers for KMS drivers
@@ -413,6 +436,7 @@ endef
 
 $(eval $(call KernelPackage,drm-kms-helper))
 
+<<<<<<< HEAD
 define KernelPackage/drm-suballoc-helper
   SUBMENU:=$(VIDEO_MENU)
   HIDDEN:=1
@@ -436,14 +460,25 @@ define KernelPackage/drm-amdgpu
 	+kmod-drm-ttm-helper +kmod-drm-kms-helper +kmod-i2c-algo-bit +amdgpu-firmware \
 	+kmod-drm-display-helper +kmod-drm-buddy +kmod-acpi-video \
 	+kmod-drm-exec +kmod-drm-suballoc-helper
+=======
+define KernelPackage/drm-amdgpu
+  SUBMENU:=$(VIDEO_MENU)
+  TITLE:=AMDGPU DRM support
+  DEPENDS:=@TARGET_x86 @DISPLAY_SUPPORT +kmod-backlight +kmod-drm-ttm \
+	+kmod-drm-kms-helper +kmod-i2c-algo-bit +amdgpu-firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM_AMDGPU \
 	CONFIG_DRM_AMDGPU_SI=y \
 	CONFIG_DRM_AMDGPU_CIK=y \
 	CONFIG_DRM_AMD_DC=y \
 	CONFIG_DEBUG_KERNEL_DC=n
   FILES:=$(LINUX_DIR)/drivers/gpu/drm/amd/amdgpu/amdgpu.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/gpu/drm/scheduler/gpu-sched.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/amd/amdxcp/amdxcp.ko
+=======
+	$(LINUX_DIR)/drivers/gpu/drm/scheduler/gpu-sched.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoProbe,amdgpu)
 endef
 
@@ -451,6 +486,7 @@ define KernelPackage/drm-amdgpu/description
   Direct Rendering Manager (DRM) support for AMDGPU Cards
 endef
 
+<<<<<<< HEAD
 define KernelPackage/drm-amdgpu/loongarch64
   KCONFIG+=CONFIG_DRM_AMDGPU_USERPTR=y \
 	CONFIG_DRM_AMD_DC=y \
@@ -503,11 +539,19 @@ endef
 
 $(eval $(call KernelPackage,drm-i915))
 
+=======
+$(eval $(call KernelPackage,drm-amdgpu))
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/drm-imx
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Freescale i.MX DRM support
+<<<<<<< HEAD
   DEPENDS:=@TARGET_imx +kmod-drm-kms-helper
+=======
+  DEPENDS:=@TARGET_imx6 +kmod-drm-kms-helper
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM_IMX \
 	CONFIG_DRM_FBDEV_EMULATION=y \
 	CONFIG_DRM_FBDEV_OVERALLOC=100 \
@@ -523,8 +567,12 @@ define KernelPackage/drm-imx
 	CONFIG_DRM_IMX_LDB=n \
 	CONFIG_DRM_IMX_HDMI=n
   FILES:= \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/gpu/drm/imx/ipuv3/imxdrm.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/drm_dma_helper.ko \
+=======
+	$(LINUX_DIR)/drivers/gpu/drm/imx/imxdrm.ko \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(LINUX_DIR)/drivers/gpu/ipu-v3/imx-ipu-v3.ko
   AUTOLOAD:=$(call AutoLoad,08,imxdrm imx-ipu-v3 imx-ipuv3-crtc)
 endef
@@ -538,14 +586,22 @@ $(eval $(call KernelPackage,drm-imx))
 define KernelPackage/drm-imx-hdmi
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Freescale i.MX HDMI DRM support
+<<<<<<< HEAD
   DEPENDS:=+kmod-sound-core kmod-drm-imx kmod-drm-display-helper
+=======
+  DEPENDS:=+kmod-sound-core kmod-drm-imx
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM_IMX_HDMI \
 	CONFIG_DRM_DW_HDMI_AHB_AUDIO \
 	CONFIG_DRM_DW_HDMI_I2S_AUDIO
   FILES:= \
 	$(LINUX_DIR)/drivers/gpu/drm/bridge/synopsys/dw-hdmi.ko \
 	$(LINUX_DIR)/drivers/gpu/drm/bridge/synopsys/dw-hdmi-ahb-audio.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/drivers/gpu/drm/imx/ipuv3/dw_hdmi-imx.ko
+=======
+	$(LINUX_DIR)/drivers/gpu/drm/imx/dw_hdmi-imx.ko
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   AUTOLOAD:=$(call AutoLoad,08,dw-hdmi dw-hdmi-ahb-audio.ko dw_hdmi-imx)
 endef
 
@@ -558,7 +614,11 @@ $(eval $(call KernelPackage,drm-imx-hdmi))
 define KernelPackage/drm-imx-ldb
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Freescale i.MX LVDS DRM support
+<<<<<<< HEAD
   DEPENDS:=@(TARGET_imx&&TARGET_imx_cortexa9) +kmod-backlight kmod-drm-imx
+=======
+  DEPENDS:=+kmod-backlight kmod-drm-imx
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM_IMX_LDB \
 	CONFIG_DRM_PANEL_SIMPLE \
 	CONFIG_DRM_PANEL=y \
@@ -569,8 +629,12 @@ define KernelPackage/drm-imx-ldb
 	CONFIG_DRM_PANEL_LVDS=n \
 	CONFIG_DRM_PANEL_S6E8AA0=n \
 	CONFIG_DRM_PANEL_SITRONIX_ST7789V=n
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/drivers/gpu/drm/imx/ipuv3/imx-ldb.ko \
+=======
+  FILES:=$(LINUX_DIR)/drivers/gpu/drm/imx/imx-ldb.ko \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(LINUX_DIR)/drivers/gpu/drm/panel/panel-simple.ko
   AUTOLOAD:=$(call AutoLoad,08,imx-ldb)
 endef
@@ -581,6 +645,7 @@ endef
 
 $(eval $(call KernelPackage,drm-imx-ldb))
 
+<<<<<<< HEAD
 define KernelPackage/drm-panel-mipi-dbi
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Generic MIPI DBI LCD panel
@@ -599,12 +664,18 @@ endef
 
 $(eval $(call KernelPackage,drm-panel-mipi-dbi))
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/drm-radeon
   SUBMENU:=$(VIDEO_MENU)
   TITLE:=Radeon DRM support
   DEPENDS:=@TARGET_x86 @DISPLAY_SUPPORT +kmod-backlight +kmod-drm-kms-helper \
+<<<<<<< HEAD
 	+kmod-drm-ttm +kmod-drm-ttm-helper +kmod-i2c-algo-bit +radeon-firmware \
 	+kmod-drm-display-helper +kmod-acpi-video +kmod-drm-suballoc-helper
+=======
+	+kmod-drm-ttm +kmod-i2c-algo-bit +radeon-firmware
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_DRM_RADEON
   FILES:=$(LINUX_DIR)/drivers/gpu/drm/radeon/radeon.ko
   AUTOLOAD:=$(call AutoProbe,radeon)
@@ -623,6 +694,7 @@ $(eval $(call KernelPackage,drm-radeon))
 define KernelPackage/video-core
   SUBMENU:=$(VIDEO_MENU)
   TITLE=Video4Linux support
+<<<<<<< HEAD
   DEPENDS:=+PACKAGE_kmod-i2c-core:kmod-i2c-core +kmod-media-controller
   KCONFIG:= \
 	CONFIG_MEDIA_CAMERA_SUPPORT=y \
@@ -632,6 +704,23 @@ define KernelPackage/video-core
   FILES:= \
 	$(LINUX_DIR)/drivers/media/$(V4L2_DIR)/videodev.ko
   AUTOLOAD:=$(call AutoLoad,60,videodev)
+=======
+  DEPENDS:=@PCI_SUPPORT||USB_SUPPORT +PACKAGE_kmod-i2c-core:kmod-i2c-core
+  KCONFIG:= \
+	CONFIG_MEDIA_SUPPORT \
+	CONFIG_MEDIA_CAMERA_SUPPORT=y \
+	CONFIG_VIDEO_DEV \
+	CONFIG_VIDEO_V4L1=y \
+	CONFIG_VIDEO_ALLOW_V4L1=y \
+	CONFIG_VIDEO_CAPTURE_DRIVERS=y \
+	CONFIG_V4L_USB_DRIVERS=y \
+	CONFIG_V4L_PCI_DRIVERS=y \
+	CONFIG_V4L_PLATFORM_DRIVERS=y \
+	CONFIG_V4L_ISA_PARPORT_DRIVERS=y
+  FILES:= \
+	$(LINUX_DIR)/drivers/media/$(V4L2_DIR)/videodev.ko
+  AUTOLOAD:=$(call AutoLoad,60, videodev v4l2-common)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/video-core/description
@@ -652,10 +741,13 @@ $(AddDepends/video)
 	 CONFIG_MEDIA_CAMERA_SUPPORT=y
 endef
 
+<<<<<<< HEAD
 define AddDepends/framegrabber
 $(AddDepends/video)
   KCONFIG+=CONFIG_MEDIA_PCI_SUPPORT=y
 endef
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define KernelPackage/video-videobuf2
   TITLE:=videobuf2 lib
@@ -663,7 +755,10 @@ define KernelPackage/video-videobuf2
   KCONFIG:= \
 	CONFIG_VIDEOBUF2_CORE \
 	CONFIG_VIDEOBUF2_MEMOPS \
+<<<<<<< HEAD
 	CONFIG_VIDEOBUF2_V4L2 \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_VIDEOBUF2_VMALLOC
   FILES:= \
 	$(LINUX_DIR)/drivers/media/common/videobuf2/videobuf2-common.ko \
@@ -680,6 +775,7 @@ endef
 
 $(eval $(call KernelPackage,video-videobuf2))
 
+<<<<<<< HEAD
 define KernelPackage/video-async
   TITLE:=V4L2 ASYNC support
   KCONFIG:=CONFIG_V4L2_ASYNC
@@ -703,6 +799,12 @@ $(eval $(call KernelPackage,video-fwnode))
 define KernelPackage/video-cpia2
   TITLE:=CPIA2 video driver
   DEPENDS:=@USB_SUPPORT
+=======
+
+define KernelPackage/video-cpia2
+  TITLE:=CPIA2 video driver
+  DEPENDS:=@USB_SUPPORT +kmod-usb-core
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_VIDEO_CPIA2
   FILES:=$(LINUX_DIR)/drivers/media/$(V4L2_USB_DIR)/cpia2/cpia2.ko
   AUTOLOAD:=$(call AutoProbe,cpia2)
@@ -737,10 +839,16 @@ $(eval $(call KernelPackage,video-pwc))
 define KernelPackage/video-uvc
   TITLE:=USB Video Class (UVC) support
   DEPENDS:=@USB_SUPPORT +kmod-usb-core +kmod-video-videobuf2 +kmod-input-core
+<<<<<<< HEAD
   KCONFIG:= CONFIG_USB_VIDEO_CLASS CONFIG_UVC_COMMON
   FILES:=$(LINUX_DIR)/drivers/media/$(V4L2_USB_DIR)/uvc/uvcvideo.ko \
 	$(LINUX_DIR)/drivers/media/common/uvc.ko
   AUTOLOAD:=$(call AutoProbe,uvc uvcvideo)
+=======
+  KCONFIG:= CONFIG_USB_VIDEO_CLASS
+  FILES:=$(LINUX_DIR)/drivers/media/$(V4L2_USB_DIR)/uvc/uvcvideo.ko
+  AUTOLOAD:=$(call AutoProbe,uvcvideo)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/camera)
 endef
 
@@ -910,6 +1018,7 @@ endef
 $(eval $(call KernelPackage,video-gspca-pac207))
 
 
+<<<<<<< HEAD
 define KernelPackage/video-gspca-pac7302
   TITLE:=pac7302 webcam support
   KCONFIG:=CONFIG_USB_GSPCA_PAC7302
@@ -925,6 +1034,8 @@ endef
 $(eval $(call KernelPackage,video-gspca-pac7302))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/video-gspca-pac7311
   TITLE:=pac7311 webcam support
   KCONFIG:=CONFIG_USB_GSPCA_PAC7311
@@ -1120,6 +1231,7 @@ endef
 $(eval $(call KernelPackage,video-gspca-sq905c))
 
 
+<<<<<<< HEAD
 define KernelPackage/video-gspca-sq930x
   TITLE:=sq930x webcam support
   KCONFIG:=CONFIG_USB_GSPCA_SQ930X
@@ -1135,6 +1247,8 @@ endef
 $(eval $(call KernelPackage,video-gspca-sq930x))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/video-gspca-stk014
   TITLE:=stk014 webcam support
   KCONFIG:=CONFIG_USB_GSPCA_STK014
@@ -1298,6 +1412,7 @@ define KernelPackage/video-gspca-konica/description
 endef
 
 $(eval $(call KernelPackage,video-gspca-konica))
+<<<<<<< HEAD
 
 #
 # Video Processing
@@ -1409,3 +1524,5 @@ define KernelPackage/video-tw686x/description
 endef
 
 $(eval $(call KernelPackage,video-tw686x))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -8,7 +8,11 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nvram
+<<<<<<< HEAD
 PKG_RELEASE:=12
+=======
+PKG_RELEASE:=10
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_BUILD_DIR := $(BUILD_DIR)/$(PKG_NAME)
 
@@ -44,11 +48,15 @@ define Package/nvram/install
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/nvram $(1)/usr/sbin/
 ifneq ($(CONFIG_TARGET_bcm47xx),)
 	$(INSTALL_DIR) $(1)/etc/init.d
+<<<<<<< HEAD
 	$(INSTALL_BIN) ./files/nvram-bcm47xx.init $(1)/etc/init.d/nvram
 endif
 ifneq ($(CONFIG_TARGET_bcm53xx),)
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./files/nvram-bcm53xx.init $(1)/etc/init.d/nvram
+=======
+	$(INSTALL_BIN) ./files/nvram.init $(1)/etc/init.d/nvram
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endif
 endef
 

@@ -107,7 +107,11 @@ static int mt7620_gsw_config(struct fe_priv *priv)
 	return 0;
 }
 
+<<<<<<< HEAD
 static void mt7620_set_mac(struct fe_priv *priv, const unsigned char *mac)
+=======
+static void mt7620_set_mac(struct fe_priv *priv, unsigned char *mac)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct mt7620_gsw *gsw = (struct mt7620_gsw *)priv->soc->swpriv;
 	unsigned long flags;
@@ -144,8 +148,12 @@ static void mt7620_port_init(struct fe_priv *priv, struct device_node *np)
 	struct mt7620_gsw *gsw = (struct mt7620_gsw *)priv->soc->swpriv;
 	const __be32 *_id = of_get_property(np, "reg", NULL);
 	const __be32 *phy_addr;
+<<<<<<< HEAD
 	phy_interface_t phy_mode = PHY_INTERFACE_MODE_NA;
 	int size, id;
+=======
+	int phy_mode, size, id;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	int shift = 12;
 	u32 val, mask = 0;
 	u32 val_delay = 0;
@@ -174,7 +182,11 @@ static void mt7620_port_init(struct fe_priv *priv, struct device_node *np)
 		priv->phy->phy_fixed[id] = NULL;
 	}
 
+<<<<<<< HEAD
 	of_get_phy_mode(np, &phy_mode);
+=======
+	phy_mode = of_get_phy_mode(np);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	switch (phy_mode) {
 	case PHY_INTERFACE_MODE_RGMII:
 		mask = 0;
@@ -286,6 +298,14 @@ static void mt7620_port_init(struct fe_priv *priv, struct device_node *np)
 	}
 }
 
+<<<<<<< HEAD
+=======
+static void mt7620_fe_reset(void)
+{
+	fe_reset(MT7620A_RESET_FE | MT7620A_RESET_ESW);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void mt7620_rxcsum_config(bool enable)
 {
 	if (enable)
@@ -343,6 +363,10 @@ static void mt7620_init_data(struct fe_soc_data *data,
 
 static struct fe_soc_data mt7620_data = {
 	.init_data = mt7620_init_data,
+<<<<<<< HEAD
+=======
+	.reset_fe = mt7620_fe_reset,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.set_mac = mt7620_set_mac,
 	.fwd_config = mt7620_fwd_config,
 	.tx_dma = mt7620_tx_dma,

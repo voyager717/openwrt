@@ -1,0 +1,11 @@
+prefix=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4/openwrt-build
+srcdir=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/target-aarch64_cortex-a53_musl/glib-2.66.4
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: GThread
+Description: Thread support for GLib
+Version: 2.66.4
+Requires: glib-2.0
+Libs: -L${prefix}/gthread -lgthread-2.0 -pthread
+Cflags: -I${prefix}/gthread -I${srcdir}/gthread -I${prefix}/. -I${srcdir}/. -I${prefix}/glib -I${srcdir}/glib -pthread

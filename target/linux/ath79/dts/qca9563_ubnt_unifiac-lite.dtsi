@@ -11,6 +11,10 @@
 &mdio0 {
 	status = "okay";
 
+<<<<<<< HEAD
+=======
+	phy-mask = <4>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy4: ethernet-phy@4 {
 		phy-mode = "sgmii";
 		reg = <4>;
@@ -20,8 +24,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phy-mode = "sgmii";
 	phy-handle = <&phy4>;
 

@@ -8,9 +8,12 @@
  * that is Not copyrighted -- provided to the public domain
  * Version 1.4  11 December 2005  Mark Adler
  *
+<<<<<<< HEAD
  * Modifications to also handle calibration data in reversed byte order
  * (c) 2024 by <dzsoftware@posteo.org>.
  *
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -31,13 +34,17 @@
 #include <assert.h>
 #include <unistd.h>
 #include <stdint.h>
+<<<<<<< HEAD
 #include <stdbool.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <stdlib.h>
 #include <endian.h>
 #include <errno.h>
 #include "zlib.h"
 
 #define CHUNK 1024
+<<<<<<< HEAD
 #define DEFAULT_BUFFERSIZE (129 * 1024)
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
@@ -127,11 +134,84 @@ static int inflate_to_buffer(FILE *source, unsigned char *buf, size_t *limit)
 	/* clean up and return */
 	(void)inflateEnd(&strm);
 	return (ret == Z_STREAM_END ? Z_STREAM_END : (strm.avail_out == 0 ? Z_OK : Z_DATA_ERROR));
+=======
+
+static inline size_t special_min(size_t a, size_t b)
+{
+	return a == 0 ? b : (a < b ? a : b);
+}
+
+/* Decompress from file source to file dest until stream ends or EOF.
+   inf() returns Z_OK on success, Z_MEM_ERROR if memory could not be
+   allocated for processing, Z_DATA_ERROR if the deflate data is
+   invalid or incomplete, Z_VERSION_ERROR if the version of zlib.h and
+   the version of the library linked do not match, or Z_ERRNO if there
+   is an error reading or writing the files. */
+static int inf(FILE *source, FILE *dest, size_t limit, size_t skip)
+{
+    int ret;
+    size_t have;
+    z_stream strm;
+    unsigned char in[CHUNK];
+    unsigned char out[CHUNK];
+
+    /* allocate inflate state */
+    strm.zalloc = Z_NULL;
+    strm.zfree = Z_NULL;
+    strm.opaque = Z_NULL;
+    strm.avail_in = 0;
+    strm.next_in = Z_NULL;
+    ret = inflateInit(&strm);
+    if (ret != Z_OK)
+        return ret;
+
+    /* decompress until deflate stream ends or end of file */
+    do {
+        strm.avail_in = fread(in, 1, CHUNK, source);
+        if (ferror(source)) {
+            (void)inflateEnd(&strm);
+            return Z_ERRNO;
+        }
+        if (strm.avail_in == 0)
+            break;
+        strm.next_in = in;
+
+        /* run inflate() on input until output buffer not full */
+        do {
+            strm.avail_out = CHUNK;
+            strm.next_out = out;
+            ret = inflate(&strm, Z_NO_FLUSH);
+            assert(ret != Z_STREAM_ERROR);  /* state not clobbered */
+            switch (ret) {
+            case Z_NEED_DICT:
+                ret = Z_DATA_ERROR;     /* and fall through */
+            case Z_DATA_ERROR:
+            case Z_MEM_ERROR:
+                (void)inflateEnd(&strm);
+                return ret;
+            }
+            have = special_min(limit, CHUNK - strm.avail_out) - skip;
+            if (fwrite(&out[skip], have, 1, dest) != 1 || ferror(dest)) {
+                (void)inflateEnd(&strm);
+                return Z_ERRNO;
+            }
+	    skip = 0;
+	    limit -= have;
+        } while (strm.avail_out == 0 && limit > 0);
+
+        /* done when inflate() says it's done */
+    } while (ret != Z_STREAM_END && limit > 0);
+
+    /* clean up and return */
+    (void)inflateEnd(&strm);
+    return (limit == 0 ? Z_OK : (ret == Z_STREAM_END ? Z_OK : Z_DATA_ERROR));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 /* report a zlib or i/o error */
 static void zerr(int ret)
 {
+<<<<<<< HEAD
 	switch (ret) {
 	case Z_ERRNO:
 		if (ferror(stdin))
@@ -151,6 +231,27 @@ static void zerr(int ret)
 	case Z_VERSION_ERROR:
 		fputs("zlib version mismatch!\n", stderr);
 	}
+=======
+    switch (ret) {
+    case Z_ERRNO:
+        if (ferror(stdin))
+            fputs("error reading stdin\n", stderr);
+        if (ferror(stdout))
+            fputs("error writing stdout\n", stderr);
+        break;
+    case Z_STREAM_ERROR:
+        fputs("invalid compression level\n", stderr);
+        break;
+    case Z_DATA_ERROR:
+        fputs("invalid or incomplete deflate data\n", stderr);
+        break;
+    case Z_MEM_ERROR:
+        fputs("out of memory\n", stderr);
+        break;
+    case Z_VERSION_ERROR:
+        fputs("zlib version mismatch!\n", stderr);
+    }
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static unsigned int get_num(char *str)
@@ -163,8 +264,12 @@ static unsigned int get_num(char *str)
 
 static void usage(void)
 {
+<<<<<<< HEAD
 	fprintf(stderr, "Usage: fritz_cal_extract -e entry_id [-s seek offset] [-l limit]\n"
 			"\t[-r reverse extracted data] [-i skip n bytes] [-o output file] [infile]\n"
+=======
+	fprintf(stderr, "Usage: fritz_cal_extract [-s seek offset] [-i skip] [-o output file] [-l limit] [infile] -e entry_id\n"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			"Finds and extracts zlib compressed calibration data in the EVA loader\n");
 	exit(EXIT_FAILURE);
 }
@@ -178,6 +283,7 @@ struct cal_entry {
 int main(int argc, char **argv)
 {
 	struct cal_entry cal = { .len = 0 };
+<<<<<<< HEAD
 	unsigned char *buf = NULL;
 	FILE *in = stdin;
 	FILE *out = stdout;
@@ -190,6 +296,17 @@ int main(int argc, char **argv)
 	int opt;
 
 	while ((opt = getopt(argc, argv, "s:e:o:l:i:r")) != -1) {
+=======
+	FILE *in = stdin;
+	FILE *out = stdout;
+	size_t limit = 0, skip = 0;
+	int initial_offset = 0;
+	int entry = -1;
+	int ret;
+	int opt;
+
+	while ((opt = getopt(argc, argv, "s:e:o:l:i:")) != -1) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		switch (opt) {
 		case 's':
 			initial_offset = (int)get_num(optarg);
@@ -226,9 +343,12 @@ int main(int argc, char **argv)
 				goto out_bad;
 			}
 			break;
+<<<<<<< HEAD
 		case 'r':
 			reversed = true;
 			break;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default: /* '?' */
 			usage();
 		}
@@ -240,7 +360,11 @@ int main(int argc, char **argv)
 	if (argc > 1 && optind <= argc) {
 		in = fopen(argv[optind], "r");
 		if (!in) {
+<<<<<<< HEAD
 			perror("Failed to open input file");
+=======
+			perror("Failed to create output file");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			goto out_bad;
 		}
 	}
@@ -273,6 +397,7 @@ int main(int argc, char **argv)
 		goto out_bad;
 	}
 
+<<<<<<< HEAD
 	/* Set boundaries. Only keep default datasize if we need complete data
 	 * for reversal and didn't set a higher limit. */
 	if (!limit) {
@@ -317,15 +442,27 @@ int main(int argc, char **argv)
 	}
 
 	goto out;
+=======
+	ret = inf(in, out, limit, skip);
+	if (ret == Z_OK)
+		goto out;
+
+	zerr(ret);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 out_bad:
 	ret = EXIT_FAILURE;
 
 out:
+<<<<<<< HEAD
 	if (in)
 		fclose(in);
 	if (out)
 		fclose(out);
 	free(buf);
+=======
+	fclose(in);
+	fclose(out);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return ret;
 }

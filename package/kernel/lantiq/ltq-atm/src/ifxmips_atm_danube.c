@@ -141,7 +141,11 @@ static void danube_fw_ver(unsigned int *major, unsigned int *minor)
 	*minor = FW_VER_ID->minor;
 }
 
+<<<<<<< HEAD
 static int danube_init(struct platform_device *pdev)
+=======
+static void danube_init(struct platform_device *pdev)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
             volatile u32 *p = SB_RAM0_ADDR(0);
     unsigned int i;
@@ -190,8 +194,11 @@ static int danube_init(struct platform_device *pdev)
 
     for ( i = 0; i < SB_RAM0_DWLEN + SB_RAM1_DWLEN + SB_RAM2_DWLEN + SB_RAM3_DWLEN; i++ )
         IFX_REG_W32(0, p++);
+<<<<<<< HEAD
 
     return 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void danube_shutdown(void)

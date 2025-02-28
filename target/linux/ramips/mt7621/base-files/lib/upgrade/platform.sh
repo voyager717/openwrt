@@ -9,6 +9,7 @@ RAMFS_COPY_BIN='fw_printenv fw_setenv'
 RAMFS_COPY_DATA='/etc/fw_env.config /var/lock/fw_printenv.lock'
 
 platform_check_image() {
+<<<<<<< HEAD
 	local board=$(board_name)
 	local magic="$(get_magic_long "$1")"
 
@@ -21,6 +22,8 @@ platform_check_image() {
 		;;
 	esac
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return 0
 }
 
@@ -45,12 +48,15 @@ platform_do_upgrade() {
 			fw_setenv --lock / bootImage 0 || exit 1
 		fi
 		;;
+<<<<<<< HEAD
 	iptime,ax2004m)
 		if [ "$(fw_printenv -n boot_from 2>/dev/null)" != "firmware1" ]; then
 			fw_setenv boot_from firmware1 || exit 1
 		fi
 		;;
 	mikrotik,ltap-2hnd|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mikrotik,routerboard-750gr3|\
 	mikrotik,routerboard-760igs|\
 	mikrotik,routerboard-m11g|\
@@ -69,6 +75,7 @@ platform_do_upgrade() {
 	case "$board" in
 	ampedwireless,ally-00x19k|\
 	ampedwireless,ally-r1900k|\
+<<<<<<< HEAD
 	arcadyan,we420223-99|\
 	asus,rt-ac65p|\
 	asus,rt-ac85p|\
@@ -110,19 +117,33 @@ platform_do_upgrade() {
 	linksys,e5600|\
 	linksys,e7350|\
 	linksys,ea6350-v4|\
+=======
+	asus,rt-ac65p|\
+	asus,rt-ac85p|\
+	dlink,dir-1960-a1|\
+	dlink,dir-2640-a1|\
+	dlink,dir-2660-a1|\
+	hiwifi,hc5962|\
+	jcg,q20|\
+	linksys,e5600|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	linksys,ea7300-v1|\
 	linksys,ea7300-v2|\
 	linksys,ea7500-v2|\
 	linksys,ea8100-v1|\
+<<<<<<< HEAD
 	linksys,ea8100-v2|\
 	mts,wg430223|\
 	netgear,eax12|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	netgear,r6220|\
 	netgear,r6260|\
 	netgear,r6350|\
 	netgear,r6700-v2|\
 	netgear,r6800|\
 	netgear,r6850|\
+<<<<<<< HEAD
 	netgear,r6900-v2|\
 	netgear,r7200|\
 	netgear,r7450|\
@@ -140,10 +161,17 @@ platform_do_upgrade() {
 	sim,simax1800t|\
 	tplink,ec330-g5u-v1|\
 	wifire,s1500-nbn|\
+=======
+	netgear,wac104|\
+	netgear,wac124|\
+	netis,wf2881|\
+	sercomm,na502|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	xiaomi,mi-router-3g|\
 	xiaomi,mi-router-3-pro|\
 	xiaomi,mi-router-4|\
 	xiaomi,mi-router-ac2100|\
+<<<<<<< HEAD
 	xiaomi,mi-router-cr6606|\
 	xiaomi,mi-router-cr6608|\
 	xiaomi,mi-router-cr6609|\
@@ -164,10 +192,14 @@ platform_do_upgrade() {
 		[ "$(fw_printenv -n bootmenu_delay)" != "0" ] || \
 			fw_setenv bootmenu_delay 3
 		iodata_mstc_set_flag "bootnum" "persist" "0x4" "1,2" "1"
+=======
+	xiaomi,redmi-router-ac2100)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		nand_do_upgrade "$1"
 		;;
 	iodata,wn-ax1167gr2|\
 	iodata,wn-ax2033gr|\
+<<<<<<< HEAD
 	iodata,wn-dx1167r|\
 	iodata,wn-dx2033gr)
 		iodata_mstc_set_flag "debugflag" "factory" "0xfe75" "0,1" "1"
@@ -187,18 +219,32 @@ platform_do_upgrade() {
 		echo "Upgrading tplink,er605-v2"
 		CI_UBIPART="firmware"
 		CI_KERNPART="kernel"
+=======
+	iodata,wn-dx1167r)
+		iodata_mstc_upgrade_prepare "0xfe75"
+		nand_do_upgrade "$1"
+		;;
+	iodata,wn-dx1200gr)
+		iodata_mstc_upgrade_prepare "0x1fe75"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		nand_do_upgrade "$1"
 		;;
 	ubnt,edgerouter-x|\
 	ubnt,edgerouter-x-sfp)
 		platform_upgrade_ubnt_erx "$1"
 		;;
+<<<<<<< HEAD
 	zyxel,lte3301-plus|\
 	zyxel,lte5398-m904|\
 	zyxel,nr7101)
 		fw_setenv CheckBypass 0
 		fw_setenv Image1Stable 0
 		[ "$(fw_printenv -n BootingFlag)" = "0" ] || fw_setenv BootingFlag 0
+=======
+	zyxel,nr7101)
+		fw_setenv CheckBypass 0
+		fw_setenv Image1Stable 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		CI_KERNPART="Kernel"
 		nand_do_upgrade "$1"
 		;;
@@ -211,10 +257,13 @@ platform_do_upgrade() {
 		CI_KERNPART="Kernel"
 		nand_do_upgrade "$1"
 		;;
+<<<<<<< HEAD
 	zyxel,wsm20)
 		zyxel_mstc_upgrade_prepare
 		nand_do_upgrade "$1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*)
 		default_do_upgrade "$1"
 		;;

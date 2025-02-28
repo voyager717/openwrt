@@ -8,10 +8,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=px5g-mbedtls
+<<<<<<< HEAD
 PKG_RELEASE:=11
 PKG_LICENSE:=LGPL-2.1
 
 PKG_BUILD_FLAGS:=no-mips16
+=======
+PKG_RELEASE:=9
+PKG_LICENSE:=LGPL-2.1
+
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 

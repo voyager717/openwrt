@@ -3,11 +3,18 @@
  * Copyright (C) 2002 Roman Zippel <zippel@linux-m68k.org>
  */
 
+<<<<<<< HEAD
 #include <sys/types.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
 #include <regex.h>
+<<<<<<< HEAD
+=======
+#include <sys/utsname.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include "lkc.h"
 
@@ -15,6 +22,7 @@ struct symbol symbol_yes = {
 	.name = "y",
 	.curr = { "y", yes },
 	.flags = SYMBOL_CONST|SYMBOL_VALID,
+<<<<<<< HEAD
 };
 
 struct symbol symbol_mod = {
@@ -30,13 +38,30 @@ struct symbol symbol_no = {
 };
 
 static struct symbol symbol_empty = {
+=======
+}, symbol_mod = {
+	.name = "m",
+	.curr = { "m", mod },
+	.flags = SYMBOL_CONST|SYMBOL_VALID,
+}, symbol_no = {
+	.name = "n",
+	.curr = { "n", no },
+	.flags = SYMBOL_CONST|SYMBOL_VALID,
+}, symbol_empty = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.name = "",
 	.curr = { "", no },
 	.flags = SYMBOL_VALID,
 };
 
+<<<<<<< HEAD
 struct symbol *modules_sym;
 static tristate modules_val;
+=======
+struct symbol *sym_defconfig_list;
+struct symbol *modules_sym;
+tristate modules_val;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 int recursive_is_error;
 
 enum symbol_type sym_get_type(struct symbol *sym)
@@ -123,9 +148,15 @@ static long long sym_get_range_val(struct symbol *sym, int base)
 static void sym_validate_range(struct symbol *sym)
 {
 	struct property *prop;
+<<<<<<< HEAD
 	struct symbol *range_sym;
 	int base;
 	long long val, val2;
+=======
+	int base;
+	long long val, val2;
+	char str[64];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	switch (sym->type) {
 	case S_INT:
@@ -141,6 +172,7 @@ static void sym_validate_range(struct symbol *sym)
 	if (!prop)
 		return;
 	val = strtoll(sym->curr.val, NULL, base);
+<<<<<<< HEAD
 	range_sym = prop->expr->left.sym;
 	val2 = sym_get_range_val(range_sym, base);
 	if (val >= val2) {
@@ -150,6 +182,19 @@ static void sym_validate_range(struct symbol *sym)
 			return;
 	}
 	sym->curr.val = range_sym->curr.val;
+=======
+	val2 = sym_get_range_val(prop->expr->left.sym, base);
+	if (val >= val2) {
+		val2 = sym_get_range_val(prop->expr->right.sym, base);
+		if (val <= val2)
+			return;
+	}
+	if (sym->type == S_INT)
+		sprintf(str, "%lld", val2);
+	else
+		sprintf(str, "0x%llx", val2);
+	sym->curr.val = xstrdup(str);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static void sym_set_changed(struct symbol *sym)
@@ -225,7 +270,11 @@ static void sym_calc_visibility(struct symbol *sym)
 		sym_set_changed(sym);
 	}
 	tri = no;
+<<<<<<< HEAD
 	if (sym->implied.expr)
+=======
+	if (sym->implied.expr && sym->dir_dep.tri != no)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		tri = expr_calc_value(sym->implied.expr);
 	if (tri == mod && sym_get_type(sym) == S_BOOLEAN)
 		tri = yes;
@@ -376,8 +425,11 @@ void sym_calc_value(struct symbol *sym)
 				if (sym->implied.tri != no) {
 					sym->flags |= SYMBOL_WRITE;
 					newval.tri = EXPR_OR(newval.tri, sym->implied.tri);
+<<<<<<< HEAD
 					newval.tri = EXPR_AND(newval.tri,
 							      sym->dir_dep.tri);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				}
 			}
 		calc_newval:
@@ -386,7 +438,12 @@ void sym_calc_value(struct symbol *sym)
 			else
 				newval.tri = EXPR_OR(newval.tri, sym->rev_dep.tri);
 		}
+<<<<<<< HEAD
 		if (newval.tri == mod && sym_get_type(sym) == S_BOOLEAN)
+=======
+		if (newval.tri == mod &&
+		    (sym_get_type(sym) == S_BOOLEAN || sym->implied.tri == yes))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			newval.tri = yes;
 		break;
 	case S_STRING:
@@ -450,7 +507,11 @@ void sym_clear_all_valid(void)
 
 	for_all_symbols(i, sym)
 		sym->flags &= ~SYMBOL_VALID;
+<<<<<<< HEAD
 	conf_set_changed(true);
+=======
+	sym_add_change_count(1);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	sym_calc_value(modules_sym);
 }
 
@@ -468,6 +529,11 @@ bool sym_tristate_within_range(struct symbol *sym, tristate val)
 		return false;
 	if (sym->visible <= sym->rev_dep.tri)
 		return false;
+<<<<<<< HEAD
+=======
+	if (sym->implied.tri == yes && val == mod)
+		return false;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (sym_is_choice_value(sym) && sym->visible == yes)
 		return val == yes;
 	return val >= sym->rev_dep.tri && val <= sym->visible;
@@ -814,7 +880,11 @@ struct symbol *sym_lookup(const char *name, int flags)
 	memset(symbol, 0, sizeof(*symbol));
 	symbol->name = new_name;
 	symbol->type = S_UNKNOWN;
+<<<<<<< HEAD
 	symbol->flags = flags;
+=======
+	symbol->flags |= flags;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	symbol->next = symbol_hash[hash];
 	symbol_hash[hash] = symbol;
@@ -849,6 +919,52 @@ struct symbol *sym_find(const char *name)
 	return symbol;
 }
 
+<<<<<<< HEAD
+=======
+const char *sym_escape_string_value(const char *in)
+{
+	const char *p;
+	size_t reslen;
+	char *res;
+	size_t l;
+
+	reslen = strlen(in) + strlen("\"\"") + 1;
+
+	p = in;
+	for (;;) {
+		l = strcspn(p, "\"\\");
+		p += l;
+
+		if (p[0] == '\0')
+			break;
+
+		reslen++;
+		p++;
+	}
+
+	res = xmalloc(reslen);
+	res[0] = '\0';
+
+	strcat(res, "\"");
+
+	p = in;
+	for (;;) {
+		l = strcspn(p, "\"\\");
+		strncat(res, p, l);
+		p += l;
+
+		if (p[0] == '\0')
+			break;
+
+		strcat(res, "\\");
+		strncat(res, p++, 1);
+	}
+
+	strcat(res, "\"");
+	return res;
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 struct sym_match {
 	struct symbol	*sym;
 	off_t		so, eo;

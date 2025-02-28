@@ -1,5 +1,6 @@
 --- a/tools/fiptool/Makefile
 +++ b/tools/fiptool/Makefile
+<<<<<<< HEAD
 @@ -74,7 +74,7 @@ all: --openssl ${PROJECT}
  
  ${PROJECT}: ${OBJECTS} Makefile
@@ -9,3 +10,14 @@
  	$(s)echo
  	$(s)echo "Built $@ successfully"
  	$(s)echo
+=======
+@@ -38,7 +38,7 @@
+ 
+ ${PROJECT}: ${OBJECTS} Makefile
+ 	@echo "  HOSTLD  $@"
+-	${Q}${HOSTCC} ${OBJECTS} -o $@ ${LDLIBS}
++	${Q}${HOSTCC} ${OBJECTS} -o $@ ${LDLIBS} $(LDFLAGS)
+ 	@${ECHO_BLANK_LINE}
+ 	@echo "Built $@ successfully"
+ 	@${ECHO_BLANK_LINE}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

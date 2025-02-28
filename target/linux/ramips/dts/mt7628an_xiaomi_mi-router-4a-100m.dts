@@ -1,12 +1,16 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_xiaomi_mi-router-4.dtsi"
 
 / {
 	compatible = "xiaomi,mi-router-4a-100m", "mediatek,mt7628an-soc";
 	model = "Xiaomi Mi Router 4A (100M Edition)";
+<<<<<<< HEAD
 
 	aliases {
 		led-boot = &led_power_yellow;
@@ -38,6 +42,8 @@
 		};
 	};
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &partitions {
@@ -62,15 +68,24 @@
 	wifi@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4 (-1)>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x4>;
+	mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {

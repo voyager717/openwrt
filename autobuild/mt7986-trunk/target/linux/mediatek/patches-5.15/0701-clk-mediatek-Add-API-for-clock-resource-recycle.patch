@@ -1,0 +1,34 @@
+diff --git a/drivers/clk/mediatek/clk-mtk.c b/drivers/clk/mediatek/clk-mtk.c
+index 4b6096c44d74..c3d385c0cfcb 100644
+--- a/drivers/clk/mediatek/clk-mtk.c
++++ b/drivers/clk/mediatek/clk-mtk.c
+@@ -43,6 +43,15 @@ struct clk_onecell_data *mtk_alloc_clk_data(unsigned int clk_num)
+ 	return NULL;
+ }
+ 
++void mtk_free_clk_data(struct clk_onecell_data *clk_data)
++{
++	if (!clk_data)
++		return;
++
++	kfree(clk_data->clks);
++	kfree(clk_data);
++}
++
+ void mtk_clk_register_fixed_clks(const struct mtk_fixed_clk *clks,
+ 		int num, struct clk_onecell_data *clk_data)
+ {
+diff --git a/drivers/clk/mediatek/clk-mtk.h b/drivers/clk/mediatek/clk-mtk.h
+index 7de41c3b3206..0ff289d93452 100644
+--- a/drivers/clk/mediatek/clk-mtk.h
++++ b/drivers/clk/mediatek/clk-mtk.h
+@@ -202,6 +202,7 @@ void mtk_clk_register_dividers(const struct mtk_clk_divider *mcds,
+ 				struct clk_onecell_data *clk_data);
+ 
+ struct clk_onecell_data *mtk_alloc_clk_data(unsigned int clk_num);
++void mtk_free_clk_data(struct clk_onecell_data *clk_data);
+ 
+ #define HAVE_RST_BAR	BIT(0)
+ #define PLL_AO		BIT(1)
+-- 
+2.18.0

@@ -1,5 +1,8 @@
 #!/bin/sh
+<<<<<<< HEAD
 make ./scripts/config/conf >/dev/null || { make ./scripts/config/conf; exit 1; }
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 grep \^CONFIG_TARGET_ .config | head -n3 > tmp/.diffconfig.head
 grep \^CONFIG_TARGET_DEVICE_ .config >> tmp/.diffconfig.head
 grep '^CONFIG_ALL=y' .config >> tmp/.diffconfig.head

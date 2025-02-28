@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+<<<<<<< HEAD
+=======
+#include <unistd.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <glob.h>
 #include <libgen.h>
 
@@ -37,7 +41,11 @@ struct buffer {
 	YY_BUFFER_STATE state;
 };
 
+<<<<<<< HEAD
 static struct buffer *current_buf;
+=======
+struct buffer *current_buf;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static int last_ts, first_ts;
 
@@ -86,12 +94,21 @@ static void warn_ignored_character(char chr)
 n	[A-Za-z0-9_-]
 
 %%
+<<<<<<< HEAD
 	char open_quote = 0;
+=======
+	int str = 0;
+	int ts, i;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #.*			/* ignore comment */
 [ \t]*			/* whitespaces */
 \\\n			/* escaped new line */
 \n			return T_EOL;
+<<<<<<< HEAD
+=======
+"allnoconfig_y"		return T_ALLNOCONFIG_Y;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "bool"			return T_BOOL;
 "choice"		return T_CHOICE;
 "comment"		return T_COMMENT;
@@ -99,11 +116,19 @@ n	[A-Za-z0-9_-]
 "def_bool"		return T_DEF_BOOL;
 "def_tristate"		return T_DEF_TRISTATE;
 "default"		return T_DEFAULT;
+<<<<<<< HEAD
+=======
+"defconfig_list"	return T_DEFCONFIG_LIST;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "depends"		return T_DEPENDS;
 "endchoice"		return T_ENDCHOICE;
 "endif"			return T_ENDIF;
 "endmenu"		return T_ENDMENU;
+<<<<<<< HEAD
 "help"			return T_HELP;
+=======
+"help"|"---help---"	return T_HELP;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "hex"			return T_HEX;
 "if"			return T_IF;
 "imply"			return T_IMPLY;
@@ -113,6 +138,10 @@ n	[A-Za-z0-9_-]
 "menuconfig"		return T_MENUCONFIG;
 "modules"		return T_MODULES;
 "on"			return T_ON;
+<<<<<<< HEAD
+=======
+"option"		return T_OPTION;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 "optional"		return T_OPTIONAL;
 "prompt"		return T_PROMPT;
 "range"			return T_RANGE;
@@ -136,7 +165,11 @@ n	[A-Za-z0-9_-]
 ":="			return T_COLON_EQUAL;
 "+="			return T_PLUS_EQUAL;
 \"|\'			{
+<<<<<<< HEAD
 				open_quote = yytext[0];
+=======
+				str = yytext[0];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				new_string();
 				BEGIN(STRING);
 			}
@@ -173,7 +206,11 @@ n	[A-Za-z0-9_-]
 		append_string(yytext + 1, yyleng - 1);
 	}
 	\'|\"	{
+<<<<<<< HEAD
 		if (open_quote == yytext[0]) {
+=======
+		if (str == yytext[0]) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			BEGIN(INITIAL);
 			yylval.string = text;
 			return T_WORD_QUOTE;
@@ -198,8 +235,11 @@ n	[A-Za-z0-9_-]
 
 <HELP>{
 	[ \t]+	{
+<<<<<<< HEAD
 		int ts, i;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ts = 0;
 		for (i = 0; i < yyleng; i++) {
 			if (yytext[i] == '\t')

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 Package/wl12xx-firmware = $(call Package/firmware-default,TI WL12xx firmware,,LICENCE.ti-connectivity)
+=======
+Package/wl12xx-firmware = $(call Package/firmware-default,TI WL12xx firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/wl12xx-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ti-connectivity
 	$(INSTALL_DATA) \
@@ -15,7 +19,11 @@ define Package/wl12xx-firmware/install
 endef
 $(eval $(call BuildPackage,wl12xx-firmware))
 
+<<<<<<< HEAD
 Package/wl18xx-firmware = $(call Package/firmware-default,TI WL18xx firmware,,LICENCE.ti-connectivity)
+=======
+Package/wl18xx-firmware = $(call Package/firmware-default,TI WL18xx firmware)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/wl18xx-firmware/install
 	$(INSTALL_DIR) $(1)/lib/firmware/ti-connectivity
 	$(INSTALL_DATA) \

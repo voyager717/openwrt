@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions.sh
 . /lib/functions/uci-defaults.sh
@@ -28,19 +32,28 @@ ramips_setup_interfaces()
 	zbtlink,zbt-we826-32m|\
 	zbtlink,zbt-we826-e|\
 	zbtlink,zbt-wr8305rt|\
+<<<<<<< HEAD
 	zyxel,keenetic-lite-iii-a|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zyxel,keenetic-omni)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6@eth0"
 		;;
 	alfa-network,r36m-e4g|\
+<<<<<<< HEAD
 	bolt,bl100|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zbtlink,zbt-we1026-h-32m)
 		ucidef_add_switch "switch0" \
 			"3:lan" "4:wan" "6@eth0"
 		;;
 	alfa-network,tube-e4g|\
+<<<<<<< HEAD
 	ampedwireless,b1200ex|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	buffalo,wmr-300|\
 	dlink,dch-m225|\
 	edimax,ew-7476rpc|\
@@ -57,7 +70,10 @@ ramips_setup_interfaces()
 	netgear,ex6120|\
 	netgear,ex6130|\
 	netgear,wn3000rp-v3|\
+<<<<<<< HEAD
 	netgear,wn3100rp-v2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	planex,cs-qr10|\
 	planex,mzk-ex300np|\
 	planex,mzk-ex750np|\
@@ -65,7 +81,10 @@ ramips_setup_interfaces()
 	sercomm,na930|\
 	tplink,re200-v1|\
 	tplink,re210-v1|\
+<<<<<<< HEAD
 	trendnet,tha103ac|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	yukai,bocco|\
 	zbtlink,zbt-cpe102|\
 	zte,q7)
@@ -81,34 +100,52 @@ ramips_setup_interfaces()
 	asus,rt-ac54u|\
 	asus,rt-n14u|\
 	bdcom,wap2100-sk|\
+<<<<<<< HEAD
 	dlink,dir-806a-b1|\
 	domywifi,dm202|\
 	domywifi,dm203|\
 	domywifi,dw22d|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	edimax,ew-7478apc|\
 	glinet,gl-mt300a|\
 	glinet,gl-mt300n|\
 	glinet,gl-mt750|\
 	hiwifi,hc5661|\
+<<<<<<< HEAD
 	snr,cpe-w4n-mt|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	wrtnode,wrtnode|\
 	zbtlink,zbt-wa05|\
 	zyxel,keenetic-omni-ii)
 		ucidef_add_switch "switch0" \
 			"1:lan" "2:lan" "3:lan" "4:lan" "0:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	buffalo,whr-1166d)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "5:wan" "6@eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	buffalo,whr-300hp2|\
 	buffalo,whr-600d)
 		ucidef_add_switch "switch0" \
 			"0:lan:1" "1:lan:2" "2:lan:3" "3:lan:4" "4:wan:5" "6@eth0"
 		;;
+<<<<<<< HEAD
 	comfast,cf-wr800n|\
 	hnet,c108|\
 	humax,e2)
+=======
+	buffalo,whr-1166d)
+		ucidef_add_switch "switch0" \
+			"0:lan" "1:lan" "2:lan" "3:lan" "5:wan" "6@eth0"
+		;;
+	comfast,cf-wr800n|\
+	hnet,c108)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ucidef_add_switch "switch0" \
 			"4:lan" "6@eth0"
 		;;
@@ -117,12 +154,17 @@ ramips_setup_interfaces()
 			"0:lan" "6@eth0"
 		;;
 	dlink,dir-810l|\
+<<<<<<< HEAD
 	netcore,nw5212|\
 	netgear,jwnr2010-v5|\
 	phicomm,k2-v22.4|\
 	phicomm,k2-v22.5|\
 	rostelecom,rt-fl-1|\
 	rostelecom,s1010|\
+=======
+	netgear,jwnr2010-v5|\
+	phicomm,psg1218a|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	trendnet,tew-810dr|\
 	zbtlink,zbt-we2026)
 		ucidef_add_switch "switch0" \
@@ -140,6 +182,7 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan" "2:lan" "3:lan" "5:lan" "0:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	dlink,dwr-961-a1)
 		ucidef_add_switch "switch0" \
 			"2:lan:1" "3:lan:2" "4:lan:3" "5:lan:4" "1:wan" "0@eth0"
@@ -151,6 +194,8 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan:3" "2:lan:2" "3:lan:1" "4:wan" "6@eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	edimax,br-6478ac-v2|\
 	lb-link,bl-w1200|\
 	tplink,archer-c2-v1)
@@ -159,9 +204,13 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch1" \
 			"1:lan" "2:lan" "3:lan" "4:lan" "0:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	engenius,epg600|\
 	engenius,esr600|\
 	lava,lr-25g001|\
+=======
+	engenius,esr600|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	sitecom,wlr-4100-v1-002)
 		ucidef_add_switch "switch0" \
 			"1:lan:4" "2:lan:3" "3:lan:2" "4:lan:1" "5:wan" "0@eth0"
@@ -169,8 +218,12 @@ ramips_setup_interfaces()
 			"5:lan" "6@eth0"
 		ucidef_add_switch_attr "switch1" "enable" "false"
 		;;
+<<<<<<< HEAD
 	fon,fon2601|\
 	vonets,var11n-300)
+=======
+	fon,fon2601)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ucidef_add_switch "switch0" \
 			"0:lan" "4:wan" "6@eth0"
 		;;
@@ -198,6 +251,16 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"1:lan:4" "2:lan:3" "3:lan:2" "4:lan:1" "0:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
+=======
+	lava,lr-25g001)
+		ucidef_add_switch "switch0" \
+			"1:lan" "2:lan" "3:lan" "4:lan" "5:wan" "0@eth0"
+		ucidef_add_switch "switch1" \
+			"5:lan" "6@eth0"
+		ucidef_add_switch_attr "switch1" "enable" "false"
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	lenovo,newifi-y1|\
 	xiaomi,miwifi-mini)
 		ucidef_add_switch "switch0" \
@@ -209,14 +272,21 @@ ramips_setup_interfaces()
 		;;
 	linksys,e1700|\
 	netis,wf2770|\
+<<<<<<< HEAD
 	ralink,mt7620a-mt7530-evb|\
 	wevo,air-duo)
+=======
+	ralink,mt7620a-mt7530-evb)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ucidef_add_switch "switch0"
 		ucidef_add_switch_attr "switch0" "enable" "false"
 		ucidef_add_switch "switch1" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "4:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	netgear,pr2000|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	nexx,wt3020-4m|\
 	nexx,wt3020-8m)
 		ucidef_add_switch "switch0" \
@@ -231,23 +301,32 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0:lan:3" "1:lan:2" "2:lan:1" "3:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	tplink,archer-c20-v1|\
 	tplink,archer-c20i|\
+=======
+	tplink,archer-c20i|\
+	tplink,archer-c20-v1|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	tplink,archer-c50-v1)
 		ucidef_add_switch "switch0" \
 			"1:lan:3" "2:lan:4" "3:lan:1" "4:lan:2" "0:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	tplink,archer-c5-v4)
 		ucidef_add_switch "switch0"
 		ucidef_add_switch_attr "switch0" "enable" "0"
 		ucidef_add_switch "switch1" \
 			"0:lan:4" "1:lan:3" "2:lan:2" "3:lan:1" "4:wan" "7@eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	tplink,archer-mr200)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "6t@eth0"
 		ucidef_set_interface_wan "usb0"
 		;;
+<<<<<<< HEAD
 	tplink,ec220-g5-v2)
 		ucidef_add_switch "switch0"
 		ucidef_add_switch_attr "switch0" "enable" "0"
@@ -265,15 +344,23 @@ ramips_setup_interfaces()
 	wavlink,wl-wn535k1)
 		ucidef_add_switch "switch0" \
 			"2:lan:2" "5:lan:1" "4:wan" "6@eth0"
+=======
+	vonets,var11n-300)
+		ucidef_add_switch "switch0" \
+			"0:lan" "4:wan" "6@eth0"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	wavlink,wl-wn579x3)
 		ucidef_add_switch "switch0" \
 			"5:lan" "4:wan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	youku,x2)
 		ucidef_add_switch "switch0" \
 			"1:lan:2" "4:lan:1" "0:wan" "6@eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	youku,yk-l1|\
 	youku,yk-l1c)
 		ucidef_add_switch "switch0" \
@@ -302,7 +389,10 @@ ramips_setup_macs()
 	asus,rt-n12p|\
 	asus,rt-n14u|\
 	bdcom,wap2100-sk|\
+<<<<<<< HEAD
 	edimax,br-6208ac-v2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	edimax,ew-7478apc|\
 	fon,fon2601|\
 	head-weblink,hdrm200|\
@@ -330,9 +420,12 @@ ramips_setup_macs()
 		wan_mac=$(macaddr_add "$(mtd_get_mac_binary factory 0x28)" 1)
 		;;
 	alfa-network,r36m-e4g|\
+<<<<<<< HEAD
 	domywifi,dm202|\
 	domywifi,dm203|\
 	domywifi,dw22d|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zbtlink,zbt-we1026-h-32m)
 		wan_mac=$(mtd_get_mac_binary factory 0x2e)
 		label_mac=$(mtd_get_mac_binary factory 0x4)
@@ -341,8 +434,12 @@ ramips_setup_macs()
 	asus,rt-ac54u)
 		lan_mac=$(mtd_get_mac_binary factory 0x22)
 		;;
+<<<<<<< HEAD
 	dlink,dch-m225|\
 	trendnet,tha103ac)
+=======
+	dlink,dch-m225)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		lan_mac=$(mtd_get_mac_ascii factory lanmac)
 		;;
 	dlink,dir-510l|\
@@ -352,7 +449,10 @@ ramips_setup_macs()
 	dlink,dwr-921-c1|\
 	dlink,dwr-922-e2|\
 	dlink,dwr-960|\
+<<<<<<< HEAD
 	dlink,dwr-961-a1|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	lava,lr-25g001)
 		wan_mac=$(jboot_config_read -m -i $(find_mtd_part "config") -o 0xE000)
 		lan_mac=$(macaddr_add "$wan_mac" 1)
@@ -365,11 +465,17 @@ ramips_setup_macs()
 	edimax,br-6478ac-v2)
 		wan_mac=$(macaddr_add "$(mtd_get_mac_binary factory 0x4)" 2)
 		;;
+<<<<<<< HEAD
 	engenius,epg600|\
 	engenius,esr600)
 		lan_mac=$(mtd_get_mac_ascii u-boot-env ethaddr)
 		wan_mac=$(mtd_get_mac_ascii u-boot-env wanaddr)
 		label_mac=$wan_mac
+=======
+	engenius,esr600)
+		lan_mac=$(mtd_get_mac_ascii u-boot-env ethaddr)
+		wan_mac=$(mtd_get_mac_ascii u-boot-env wanaddr)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		;;
 	glinet,gl-mt300a|\
 	glinet,gl-mt300n|\
@@ -396,10 +502,15 @@ ramips_setup_macs()
 		wan_mac=$(macaddr_add "$(mtd_get_mac_binary u-boot 0x1fc20)" 2)
 		;;
 	lb-link,bl-w1200|\
+<<<<<<< HEAD
 	netis,wf2770|\
 	phicomm,k2-v22.4|\
 	phicomm,k2-v22.5|\
 	phicomm,k2g|\
+=======
+	phicomm,k2g|\
+	phicomm,psg1218a|\
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	phicomm,psg1218b)
 		wan_mac=$(mtd_get_mac_binary factory 0x2e)
 		label_mac=$wan_mac
@@ -408,8 +519,11 @@ ramips_setup_macs()
 	lenovo,newifi-y1s|\
 	ohyeah,oy-0001|\
 	wavlink,wl-wn530hg4|\
+<<<<<<< HEAD
 	wevo,air-duo|\
 	youku,x2|\
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	youku,yk-l1|\
 	youku,yk-l1c)
 		wan_mac=$(mtd_get_mac_binary factory 0x2e)
@@ -417,6 +531,7 @@ ramips_setup_macs()
 	linksys,e1700)
 		wan_mac=$(mtd_get_mac_ascii config WAN_MAC_ADDR)
 		;;
+<<<<<<< HEAD
 	rostelecom,rt-fl-1|\
 	rostelecom,s1010)
 		label_mac=$(mtd_get_mac_binary "SC Nvram(permanent data)" 0x0)
@@ -425,11 +540,16 @@ ramips_setup_macs()
 	snr,cpe-w4n-mt)
 		lan_mac=$(mtd_get_mac_binary Factory 0x28)
 		wan_mac=$(mtd_get_mac_binary Factory 0x2e)
+=======
+	netis,wf2770)
+		wan_mac=$(mtd_get_mac_binary factory 0x2e)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		label_mac=$wan_mac
 		;;
 	tplink,archer-c2-v1|\
 	tplink,archer-c20-v1|\
 	tplink,archer-c20i|\
+<<<<<<< HEAD
 	tplink,archer-c5-v4|\
 	tplink,archer-c50-v1|\
 	tplink,archer-mr200|\
@@ -450,6 +570,15 @@ ramips_setup_macs()
 		wan_mac=$(mtd_get_mac_binary RF-EEPROM 0x28)
 		label_mac=$wan_mac
 		;;
+=======
+	tplink,archer-c50-v1|\
+	tplink,archer-mr200)
+		wan_mac=$(macaddr_add "$(mtd_get_mac_binary rom 0xf100)" 1)
+		;;
+	zbtlink,zbt-we1026-5g-16m)
+		label_mac=$(mtd_get_mac_binary factory 0x4)
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	zyxel,keenetic-omni|\
 	zyxel,keenetic-omni-ii|\
 	zyxel,keenetic-viva)

@@ -6,6 +6,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libsepol
+<<<<<<< HEAD
 PKG_VERSION:=3.5
 PKG_RELEASE:=1
 
@@ -17,6 +18,16 @@ PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
 PKG_CPE_ID:=cpe:/a:selinuxproject:libsepol
 
 PKG_BUILD_FLAGS:=no-lto
+=======
+PKG_VERSION:=3.2
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://github.com/SELinuxProject/selinux/releases/download/3.2
+PKG_HASH:=dfc7f662af8000116e56a01de6a0394ed79be1b34b999e551346233c5dd19508
+
+PKG_MAINTAINER:=Thomas Petazzoni <thomas.petazzoni@bootlin.com>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/host-build.mk

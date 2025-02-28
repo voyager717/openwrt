@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 /* A Bison parser, made by GNU Bison 3.8.2.  */
 
 /* Bison interface for Yacc-like parsers in C
 
    Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
    Inc.
+=======
+/* A Bison parser, made by GNU Bison 3.1.  */
+
+/* Bison interface for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018 Free Software Foundation, Inc.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -16,7 +24,11 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
+<<<<<<< HEAD
    along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+=======
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -31,10 +43,13 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+<<<<<<< HEAD
 /* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifndef YY_YY_PARSER_TAB_H_INCLUDED
 # define YY_YY_PARSER_TAB_H_INCLUDED
 /* Debug traces.  */
@@ -45,11 +60,16 @@
 extern int yydebug;
 #endif
 
+<<<<<<< HEAD
 /* Token kinds.  */
+=======
+/* Token type.  */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
   enum yytokentype
   {
+<<<<<<< HEAD
     YYEMPTY = -2,
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
@@ -104,13 +124,75 @@ extern int yydebug;
     T_NOT = 305                    /* T_NOT  */
   };
   typedef enum yytokentype yytoken_kind_t;
+=======
+    T_HELPTEXT = 258,
+    T_WORD = 259,
+    T_WORD_QUOTE = 260,
+    T_ALLNOCONFIG_Y = 261,
+    T_BOOL = 262,
+    T_CHOICE = 263,
+    T_CLOSE_PAREN = 264,
+    T_COLON_EQUAL = 265,
+    T_COMMENT = 266,
+    T_CONFIG = 267,
+    T_DEFAULT = 268,
+    T_DEFCONFIG_LIST = 269,
+    T_DEF_BOOL = 270,
+    T_DEF_TRISTATE = 271,
+    T_DEPENDS = 272,
+    T_ENDCHOICE = 273,
+    T_ENDIF = 274,
+    T_ENDMENU = 275,
+    T_HELP = 276,
+    T_HEX = 277,
+    T_IF = 278,
+    T_IMPLY = 279,
+    T_INT = 280,
+    T_MAINMENU = 281,
+    T_MENU = 282,
+    T_MENUCONFIG = 283,
+    T_MODULES = 284,
+    T_ON = 285,
+    T_OPEN_PAREN = 286,
+    T_OPTION = 287,
+    T_OPTIONAL = 288,
+    T_PLUS_EQUAL = 289,
+    T_PROMPT = 290,
+    T_RANGE = 291,
+    T_RESET = 292,
+    T_SELECT = 293,
+    T_SOURCE = 294,
+    T_STRING = 295,
+    T_TRISTATE = 296,
+    T_VISIBLE = 297,
+    T_EOL = 298,
+    T_ASSIGN_VAL = 299,
+    T_OR = 300,
+    T_AND = 301,
+    T_EQUAL = 302,
+    T_UNEQUAL = 303,
+    T_LESS = 304,
+    T_LESS_EQUAL = 305,
+    T_GREATER = 306,
+    T_GREATER_EQUAL = 307,
+    T_NOT = 308
+  };
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #endif
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+<<<<<<< HEAD
 union YYSTYPE
 {
 
+=======
+
+union YYSTYPE
+{
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	char *string;
 	struct symbol *symbol;
 	struct expr *expr;
@@ -120,6 +202,10 @@ union YYSTYPE
 
 
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
@@ -128,8 +214,13 @@ typedef union YYSTYPE YYSTYPE;
 
 extern YYSTYPE yylval;
 
+<<<<<<< HEAD
 
 int yyparse (void);
 
 
+=======
+int yyparse (void);
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */

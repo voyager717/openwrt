@@ -1,0 +1,11 @@
+Package: ca-certificates
+Version: 20210119-1
+Depends: libc
+Provides: ca-certs
+Source: package/system/ca-certificates
+SourceName: ca-certificates
+Section: base
+SourceDateEpoch: 1686910314
+Architecture: all
+Installed-Size: 125671
+Description:  System CA certificates

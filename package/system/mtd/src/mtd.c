@@ -94,7 +94,10 @@ int mtdsize = 0;
 int erasesize = 0;
 int jffs2_skip_bytes=0;
 int mtdtype = 0;
+<<<<<<< HEAD
 uint32_t opt_trxmagic = TRX_MAGIC;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 int mtd_open(const char *mtd, bool block)
 {
@@ -206,7 +209,11 @@ image_check(int imagefd, const char *mtd)
 
 	magic = ((uint32_t *)buf)[0];
 
+<<<<<<< HEAD
 	if (be32_to_cpu(magic) == opt_trxmagic)
+=======
+	if (be32_to_cpu(magic) == TRX_MAGIC)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		imageformat = MTD_IMAGE_FORMAT_TRX;
 	else if (be32_to_cpu(magic) == SEAMA_MAGIC)
 		imageformat = MTD_IMAGE_FORMAT_SEAMA;
@@ -811,7 +818,10 @@ static void usage(void)
 	"        -l <length>             the length of data that we want to dump\n");
 	if (mtd_fixtrx) {
 	    fprintf(stderr,
+<<<<<<< HEAD
 	"        -M <magic>              magic number of the image header in the partition (for fixtrx)\n"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	"        -o offset               offset of the image header in the partition(for fixtrx)\n");
 	}
 	if (mtd_fixtrx || mtd_fixseama || mtd_fixwrg || mtd_fixwrgg) {
@@ -879,7 +889,11 @@ int main (int argc, char **argv)
 #ifdef FIS_SUPPORT
 			"F:"
 #endif
+<<<<<<< HEAD
 			"frnqe:d:s:j:p:o:c:t:l:M:")) != -1)
+=======
+			"frnqe:d:s:j:p:o:c:t:l:")) != -1)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		switch (ch) {
 			case 'f':
 				force = 1;
@@ -931,6 +945,7 @@ int main (int argc, char **argv)
 					usage();
 				}
 				break;
+<<<<<<< HEAD
 			case 'M':
 				errno = 0;
 				opt_trxmagic = strtoul(optarg, 0, 0);
@@ -939,6 +954,8 @@ int main (int argc, char **argv)
 					usage();
 				}
 				break;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			case 'o':
 				errno = 0;
 				offset = strtoul(optarg, 0, 0);

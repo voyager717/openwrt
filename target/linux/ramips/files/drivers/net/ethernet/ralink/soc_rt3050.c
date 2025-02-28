@@ -17,9 +17,17 @@
 #include <asm/mach-ralink/ralink_regs.h>
 
 #include "mtk_eth_soc.h"
+<<<<<<< HEAD
 #include "esw_rt3050.h"
 #include "mdio_rt2880.h"
 
+=======
+#include "mdio_rt2880.h"
+
+#define RT305X_RESET_FE         BIT(21)
+#define RT305X_RESET_ESW        BIT(23)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static const u16 rt5350_reg_table[FE_REG_COUNT] = {
 	[FE_REG_PDMA_GLO_CFG] = RT5350_PDMA_GLO_CFG,
 	[FE_REG_PDMA_RST_CFG] = RT5350_PDMA_RST_CFG,
@@ -67,6 +75,14 @@ static int rt3050_fwd_config(struct fe_priv *priv)
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+static void rt305x_fe_reset(void)
+{
+	fe_reset(RT305X_RESET_FE);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 static void rt5350_init_data(struct fe_soc_data *data,
 			     struct net_device *netdev)
 {
@@ -76,7 +92,11 @@ static void rt5350_init_data(struct fe_soc_data *data,
 	netdev->hw_features = NETIF_F_SG | NETIF_F_RXCSUM;
 }
 
+<<<<<<< HEAD
 static void rt5350_set_mac(struct fe_priv *priv, const unsigned char *mac)
+=======
+static void rt5350_set_mac(struct fe_priv *priv, unsigned char *mac)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	unsigned long flags;
 
@@ -113,10 +133,22 @@ static void rt5350_tx_dma(struct fe_tx_dma *txd)
 	txd->txd4 = 0;
 }
 
+<<<<<<< HEAD
 static struct fe_soc_data rt3050_data = {
 	.init_data = rt305x_init_data,
 	.fwd_config = rt3050_fwd_config,
 	.switch_init = rt3050_esw_init,
+=======
+static void rt5350_fe_reset(void)
+{
+	fe_reset(RT305X_RESET_FE | RT305X_RESET_ESW);
+}
+
+static struct fe_soc_data rt3050_data = {
+	.init_data = rt305x_init_data,
+	.reset_fe = rt305x_fe_reset,
+	.fwd_config = rt3050_fwd_config,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.pdma_glo_cfg = FE_PDMA_SIZE_8DWORDS,
 	.checksum_bit = RX_DMA_L4VALID,
 	.rx_int = FE_RX_DONE_INT,
@@ -127,9 +159,15 @@ static struct fe_soc_data rt3050_data = {
 static struct fe_soc_data rt5350_data = {
 	.init_data = rt5350_init_data,
 	.reg_table = rt5350_reg_table,
+<<<<<<< HEAD
 	.set_mac = rt5350_set_mac,
 	.fwd_config = rt5350_fwd_config,
 	.switch_init = rt3050_esw_init,
+=======
+	.reset_fe = rt5350_fe_reset,
+	.set_mac = rt5350_set_mac,
+	.fwd_config = rt5350_fwd_config,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.tx_dma = rt5350_tx_dma,
 	.pdma_glo_cfg = FE_PDMA_SIZE_8DWORDS,
 	.checksum_bit = RX_DMA_L4VALID,

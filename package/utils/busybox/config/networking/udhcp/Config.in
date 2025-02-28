@@ -11,6 +11,7 @@ config BUSYBOX_CONFIG_UDHCPD
 	udhcpd is a DHCP server geared primarily toward embedded systems,
 	while striving to be fully functional and RFC compliant.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_UDHCPD_BOOTP
 	bool "Answer to BOOTP requests as well"
 	default BUSYBOX_DEFAULT_FEATURE_UDHCPD_BOOTP
@@ -18,6 +19,8 @@ config BUSYBOX_CONFIG_FEATURE_UDHCPD_BOOTP
 	help
 	Support old BOOTP protocol too.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_FEATURE_UDHCPD_BASE_IP_ON_MAC
 	bool "Select IP address based on client MAC"
 	default BUSYBOX_DEFAULT_FEATURE_UDHCPD_BASE_IP_ON_MAC
@@ -51,7 +54,11 @@ config BUSYBOX_CONFIG_DHCPD_LEASES_FILE
 	of the file. Normally it is safe to leave it untouched.
 
 config BUSYBOX_CONFIG_DUMPLEASES
+<<<<<<< HEAD
 	bool "dumpleases (5.3 kb)"
+=======
+	bool "dumpleases (5.1 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_DUMPLEASES
 	help
 	dumpleases displays the leases written out by the udhcpd.
@@ -59,7 +66,11 @@ config BUSYBOX_CONFIG_DUMPLEASES
 	by the absolute time that it expires in seconds from epoch.
 
 config BUSYBOX_CONFIG_DHCPRELAY
+<<<<<<< HEAD
 	bool "dhcprelay (5.5 kb)"
+=======
+	bool "dhcprelay (5.2 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_DHCPRELAY
 	help
 	dhcprelay listens for DHCP requests on one or more interfaces
@@ -100,17 +111,24 @@ config BUSYBOX_CONFIG_FEATURE_UDHCPC_SANITIZEOPT
 config BUSYBOX_CONFIG_UDHCPC_DEFAULT_SCRIPT
 	string "Absolute path to config script"
 	default BUSYBOX_DEFAULT_UDHCPC_DEFAULT_SCRIPT
+<<<<<<< HEAD
 	depends on BUSYBOX_CONFIG_UDHCPC
+=======
+	depends on BUSYBOX_CONFIG_UDHCPC || BUSYBOX_CONFIG_UDHCPC6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	help
 	This script is called after udhcpc receives an answer. See
 	examples/udhcp for a working example. Normally it is safe
 	to leave this untouched.
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_UDHCPC6_DEFAULT_SCRIPT
 	string "Absolute path to config script for IPv6"
 	default BUSYBOX_DEFAULT_UDHCPC6_DEFAULT_SCRIPT
 	depends on BUSYBOX_CONFIG_UDHCPC6
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # udhcpc6 config is inserted here:
 config BUSYBOX_CONFIG_UDHCPC6
 	bool "udhcpc6 (21 kb)"
@@ -154,6 +172,7 @@ config BUSYBOX_CONFIG_FEATURE_UDHCPC6_RFC5970
 comment "Common options for DHCP applets"
         depends on BUSYBOX_CONFIG_UDHCPD || BUSYBOX_CONFIG_UDHCPC || BUSYBOX_CONFIG_UDHCPC6 || BUSYBOX_CONFIG_DHCPRELAY
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_UDHCPC_DEFAULT_INTERFACE
 	string "Default interface name"
 	default BUSYBOX_DEFAULT_UDHCPC_DEFAULT_INTERFACE
@@ -162,6 +181,8 @@ config BUSYBOX_CONFIG_UDHCPC_DEFAULT_INTERFACE
 	The interface that will be used if no other interface is
 	specified on the commandline.
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config BUSYBOX_CONFIG_FEATURE_UDHCP_PORT
 	bool "Enable '-P port' option for udhcpd and udhcpc"
 	default BUSYBOX_DEFAULT_FEATURE_UDHCP_PORT

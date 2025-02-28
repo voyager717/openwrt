@@ -9,6 +9,7 @@ include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=ipset
+<<<<<<< HEAD
 PKG_VERSION:=7.21
 PKG_RELEASE:=1
 
@@ -19,6 +20,17 @@ PKG_HASH:=e2c6ce4fcf3acb3893ca5d35c86935f80ad76fc5ccae601185842df760e0bc69
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 PKG_LICENSE:=GPL-2.0
 PKG_CPE_ID:=cpe:/a:netfilter:ipset
+=======
+PKG_VERSION:=7.6
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE_URL:=http://ipset.netfilter.org
+PKG_HASH:=0e7d44caa9c153d96a9b5f12644fbe35a632537a5a7f653792b72e53d9d5c2db
+
+PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
+PKG_LICENSE:=GPL-2.0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_FIXUP:=autoreconf
 PKG_INSTALL:=1
@@ -63,7 +75,10 @@ endef
 define Package/ipset/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ipset $(1)/usr/sbin/
+<<<<<<< HEAD
 	$(CP) $(PKG_INSTALL_DIR)/usr/sbin/ipset-translate $(1)/usr/sbin/
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/libipset/install

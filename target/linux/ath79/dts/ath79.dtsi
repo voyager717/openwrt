@@ -52,7 +52,10 @@
 
 			interrupts = <4>;
 			phy-mode = "mii";
+<<<<<<< HEAD
 			syscon-no-reset;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			mdio0: mdio {
 				status = "disabled";
@@ -76,7 +79,10 @@
 
 			interrupts = <5>;
 			phy-mode = "mii";
+<<<<<<< HEAD
 			syscon-no-reset;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			mdio1: mdio {
 				status = "disabled";

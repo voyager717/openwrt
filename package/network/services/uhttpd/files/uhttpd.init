@@ -56,9 +56,14 @@ generate_keys() {
 	[ -x "$PX5G_BIN" ] && GENKEY_CMD="$PX5G_BIN selfsigned -der"
 	[ -n "$GENKEY_CMD" ] && {
 		$GENKEY_CMD \
+<<<<<<< HEAD
 			-days ${days:-397} -newkey ${KEY_OPTS} -keyout "${UHTTPD_KEY}.new" -out "${UHTTPD_CERT}.new" \
 			-subj /C="${country:-ZZ}"/ST="${state:-Somewhere}"/L="${location:-Unknown}"/O="${organization:-OpenWrt$UNIQUEID}"/CN="${commonname:-OpenWrt}" \
 			-addext extendedKeyUsage=serverAuth -addext subjectAltName=DNS:"${commonname:-OpenWrt}"
+=======
+			-days ${days:-730} -newkey ${KEY_OPTS} -keyout "${UHTTPD_KEY}.new" -out "${UHTTPD_CERT}.new" \
+			-subj /C="${country:-ZZ}"/ST="${state:-Somewhere}"/L="${location:-Unknown}"/O="${organization:-OpenWrt$UNIQUEID}"/CN="${commonname:-OpenWrt}"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		sync
 		mv "${UHTTPD_KEY}.new" "${UHTTPD_KEY}"
 		mv "${UHTTPD_CERT}.new" "${UHTTPD_CERT}"
@@ -92,6 +97,7 @@ append_lua_prefix() {
 	fi
 }
 
+<<<<<<< HEAD
 append_ucode_prefix() {
 	local v="$1"
 	local prefix="${v%%=*}"
@@ -104,6 +110,8 @@ append_ucode_prefix() {
 	fi
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 start_instance()
 {
 	UHTTPD_CERT=""
@@ -155,9 +163,12 @@ start_instance()
 		append_arg "$cfg" ubus_socket "-U"
 		append_bool "$cfg" ubus_cors "-X" 0
 	}
+<<<<<<< HEAD
 	[ -f /usr/lib/uhttpd_ucode.so ] && {
 		config_list_foreach "$cfg" ucode_prefix append_ucode_prefix
 	}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	append_arg "$cfg" script_timeout "-t"
 	append_arg "$cfg" network_timeout "-T"
 	append_arg "$cfg" http_keepalive "-k"
@@ -204,9 +215,12 @@ start_instance()
 			append_arg "$cfg" cert "-C"
 			append_arg "$cfg" key  "-K"
 
+<<<<<<< HEAD
 			procd_append_param file "$UHTTPD_CERT"
 			procd_append_param file "$UHTTPD_KEY"
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			for listen in $https; do
 				procd_append_param command -s "$listen"
 			done
@@ -215,14 +229,19 @@ start_instance()
 		append_bool "$cfg" redirect_https "-q" 0
 	}
 
+<<<<<<< HEAD
 	config_get json_script "$cfg" json_script
 	for file in $json_script; do
+=======
+	for file in /etc/uhttpd/*.json; do
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		[ -s "$file" ] && procd_append_param command -H "$file"
 	done
 
 	procd_close_instance
 }
 
+<<<<<<< HEAD
 uhttpd_interfaces()
 {
 	local cfg="$1"
@@ -293,6 +312,11 @@ service_triggers()
 			procd_add_raw_trigger "interface.$iface.up" 1000 /etc/init.d/uhttpd start
 		done
 	fi
+=======
+service_triggers()
+{
+	procd_add_reload_trigger "uhttpd"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 start_service() {

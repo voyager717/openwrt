@@ -102,6 +102,7 @@ speed_str(int speed)
 }
 
 static void
+<<<<<<< HEAD
 free_attr_val(const struct switch_attr *attr, const struct switch_val *val)
 {
 	switch (attr->type) {
@@ -120,6 +121,8 @@ free_attr_val(const struct switch_attr *attr, const struct switch_val *val)
 }
 
 static void
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 print_attr_val(const struct switch_attr *attr, const struct switch_val *val)
 {
 	struct switch_port_link *link;
@@ -168,10 +171,15 @@ show_attrs(struct switch_dev *dev, struct switch_attr *attr, struct switch_val *
 			printf("\t%s: ", attr->name);
 			if (swlib_get_attr(dev, attr, val) < 0)
 				printf("???");
+<<<<<<< HEAD
 			else {
 				print_attr_val(attr, val);
 				free_attr_val(attr, val);
 			}
+=======
+			else
+				print_attr_val(attr, val);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			putchar('\n');
 		}
 		attr = attr->next;
@@ -374,7 +382,10 @@ int main(int argc, char **argv)
 			goto out;
 		}
 		print_attr_val(a, &val);
+<<<<<<< HEAD
 		free_attr_val(a, &val);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		putchar('\n');
 		break;
 	case CMD_LOAD:

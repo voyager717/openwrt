@@ -1,6 +1,10 @@
 --- a/pppd/plugins/radius/config.c
 +++ b/pppd/plugins/radius/config.c
+<<<<<<< HEAD
 @@ -379,31 +379,37 @@ static int test_config(char *filename)
+=======
+@@ -371,31 +371,37 @@ static int test_config(char *filename)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	}
  #endif
  
@@ -40,7 +44,11 @@
  }
 --- a/pppd/plugins/radius/options.h
 +++ b/pppd/plugins/radius/options.h
+<<<<<<< HEAD
 @@ -29,24 +29,21 @@ typedef struct _option {
+=======
+@@ -31,24 +31,21 @@ typedef struct _option {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  static SERVER acctserver = {0};
  static SERVER authserver = {0};
  

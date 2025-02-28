@@ -1,0 +1,89 @@
+#!/bin/sh
+
+#
+# This script computes the various flags needed to run GNU C++ testsuites
+# (compiler specific as well as library specific). 
+#
+# Written by Benjamin Kosnik <bkoz@redhat.com>
+#            Gabriel Dos Reis <gdr@codesourcery.com>
+#
+
+# Print a message saying how this script is intended to be invoked
+print_usage() {
+    cat <<EOF
+Usage: 
+    testsuite_flags --install-includes
+		    --build-includes
+		    --build-cxx
+		    --build-cc
+		    --install-cxx
+		    --cxxflags
+		    --cxxldflags
+		    --cxxpchflags
+		    --cxxvtvflags
+
+EOF
+}
+
+# Establish configure-generated directory structure.
+BUILD_DIR=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3
+SRC_DIR=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libstdc++-v3
+PREFIX_DIR=/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl
+query=$1
+
+case ${query} in
+    --install-includes)
+      INCLUDES="-I${SRC_DIR}/testsuite/util"
+      echo ${INCLUDES}
+      ;;
+    --build-includes)
+      INCLUDES="-nostdinc++ -I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3/include/aarch64-openwrt-linux-musl -I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3/include -I/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0/libstdc++-v3/libsupc++ 
+                -I${SRC_DIR}/include/backward -I${SRC_DIR}/testsuite/util"
+      echo ${INCLUDES}
+      ;;
+    --install-cxx)
+      CXX=${PREFIX_DIR}/bin/g++
+      echo ${CXX}
+      ;;
+    --build-cxx)
+      CXX_build=" /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/./gcc/xgcc -shared-libgcc -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/./gcc -nostdinc++ -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3/src -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3/src/.libs -L/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/aarch64-openwrt-linux-musl/libstdc++-v3/libsupc++/.libs -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/bin/ -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/lib/ -isystem /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/include -isystem /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/sys-include   "
+      CXX=`echo "$CXX_build" | sed 's,gcc/xgcc ,gcc/xg++ ,'`
+      echo ${CXX}
+      ;;
+    --build-cc)
+      CC_build="/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/./gcc/xgcc -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/build_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/gcc-8.4.0-final/./gcc/ -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/bin/ -B/home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/lib/ -isystem /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/include -isystem /home/voyager717/Downloads/SDK_Sourcecode/build_openwrt_new/AX3000-MT7981-Z8102AX/staging_dir/toolchain-aarch64_cortex-a53_gcc-8.4.0_musl/aarch64-openwrt-linux-musl/sys-include   "
+      CC="$CC_build"
+      echo ${CC}
+      ;;
+    --cxxflags)
+      CXXFLAGS_default="-fmessage-length=0 -fno-show-column"
+      CXXFLAGS_config="-ffunction-sections -fdata-sections  "
+      echo ${CXXFLAGS_default} ${CXXFLAGS_config} 
+      ;;
+    --cxxvtvflags)
+      CXXFLAGS_vtv=""
+      LDFLAGS_vtv=""
+      echo ${CXXFLAGS_vtv} ${LDFLAGS_vtv}
+      ;;
+    --cxxparallelflags)
+      CXXFLAGS_parallel="-D_GLIBCXX_PARALLEL -fopenmp
+			 -B${BUILD_DIR}/../libgomp 
+                         -I${BUILD_DIR}/../libgomp 
+			 -L${BUILD_DIR}/../libgomp/.libs -lgomp"
+      echo ${CXXFLAGS_parallel}
+      ;;
+    --cxxpchflags)
+      PCHFLAGS=""
+      echo ${PCHFLAGS}
+      ;;
+    --cxxldflags)
+      SECTIONLDFLAGS="-Wl,--gc-sections  
+                      -L${BUILD_DIR}/src/filesystem/.libs"
+      echo ${SECTIONLDFLAGS}
+      ;;
+    *)
+      print_usage
+      ;;
+esac
+
+exit 0

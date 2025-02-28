@@ -82,7 +82,11 @@ provides them.
  int totfails = 0;
  
  int main (int argc, char *argv[]);
+<<<<<<< HEAD
 @@ -123,13 +107,3 @@ put8 (char *cp)
+=======
+@@ -120,13 +104,3 @@ put8 (char *cp)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	  printf("%02x", t);
  	}
  }
@@ -469,7 +473,11 @@ provides them.
  * Encode Binary Data::          Encoding and Decoding of Binary Data.
  * Argz and Envz Vectors::       Null-separated string vectors.
  @end menu
+<<<<<<< HEAD
 @@ -2512,73 +2512,73 @@ functionality under a different name, su
+=======
+@@ -2426,73 +2426,73 @@ functionality under a different name, su
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  systems it may be in @file{strings.h} instead.
  @end deftypefun
  
@@ -596,7 +604,11 @@ provides them.
  /* The enhanced internationalization capabilities according to XPG4.2
     are present.  */
  #define	_XOPEN_ENH_I18N	1
+<<<<<<< HEAD
 @@ -1150,17 +1153,25 @@ ssize_t copy_file_range (int __infd, __o
+=======
+@@ -1128,17 +1131,25 @@ ssize_t copy_file_range (int __infd, __o
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  extern int fdatasync (int __fildes);
  #endif /* Use POSIX199309 */
  
@@ -627,7 +639,11 @@ provides them.
     range [FROM - N + 1, FROM - 1].  If N is odd the first byte in FROM
 --- a/stdlib/stdlib.h
 +++ b/stdlib/stdlib.h
+<<<<<<< HEAD
 @@ -1103,6 +1103,12 @@ extern int getsubopt (char **__restrict
+=======
+@@ -962,6 +962,12 @@ extern int getsubopt (char **__restrict
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #endif
  
  

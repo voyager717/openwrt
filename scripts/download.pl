@@ -11,9 +11,13 @@ use strict;
 use warnings;
 use File::Basename;
 use File::Copy;
+<<<<<<< HEAD
 use File::Path;
 use Text::ParseWords;
 use JSON::PP;
+=======
+use Text::ParseWords;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 @ARGV > 2 or die "Syntax: $0 <target dir> <filename> <hash> <url filename> [<mirror> ...]\n";
 
@@ -27,8 +31,11 @@ my @mirrors;
 my $ok;
 
 my $check_certificate = $ENV{DOWNLOAD_CHECK_CERTIFICATE} eq "y";
+<<<<<<< HEAD
 my $custom_tool = $ENV{DOWNLOAD_TOOL_CUSTOM};
 my $download_tool;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 $url_filename or $url_filename = $filename;
 
@@ -58,6 +65,7 @@ sub localmirrors {
 	return @mlist;
 }
 
+<<<<<<< HEAD
 sub projectsmirrors {
 	my $project = shift;
 	my $append = shift;
@@ -77,6 +85,14 @@ sub which($) {
 	my $prog = shift;
 	my $res = `command -v $prog`;
 	$res or return undef;
+=======
+sub which($) {
+	my $prog = shift;
+	my $res = `which $prog`;
+	$res or return undef;
+	$res =~ /^no / and return undef;
+	$res =~ /not found/ and return undef;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	return $res;
 }
 
@@ -84,6 +100,7 @@ sub hash_cmd() {
 	my $len = length($file_hash);
 	my $cmd;
 
+<<<<<<< HEAD
 	$len == 64 and return "$ENV{'MKHASH'} sha256";
 	$len == 32 and return "$ENV{'MKHASH'} md5";
 	return undef;
@@ -153,6 +170,34 @@ sub download_cmd {
 	} else {
 		return join(" ", $download_tool, $url);
 	}
+=======
+	$len == 64 and return "mkhash sha256";
+	$len == 32 and return "mkhash md5";
+	return undef;
+}
+
+sub download_cmd($) {
+	my $url = shift;
+	my $have_curl = 0;
+
+	if (open CURL, "curl --version 2>/dev/null |") {
+		if (defined(my $line = readline CURL)) {
+			$have_curl = 1 if $line =~ /^curl /;
+		}
+		close CURL;
+	}
+
+	return $have_curl
+		? (qw(curl -f --connect-timeout 20 --retry 5 --location),
+			$check_certificate ? () : '--insecure',
+			shellwords($ENV{CURL_OPTIONS} || ''),
+			$url)
+		: (qw(wget --tries=5 --timeout=20 --output-document=-),
+			$check_certificate ? () : '--no-check-certificate',
+			shellwords($ENV{WGET_OPTIONS} || ''),
+			$url)
+	;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 my $hash_cmd = hash_cmd();
@@ -162,7 +207,10 @@ sub download
 {
 	my $mirror = shift;
 	my $download_filename = shift;
+<<<<<<< HEAD
 	my @additional_mirrors = @_;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	$mirror =~ s!/$!!;
 
@@ -174,7 +222,11 @@ sub download
 		}
 
 		if (! -d "$target") {
+<<<<<<< HEAD
 			make_path($target);
+=======
+			system("mkdir", "-p", "$target/");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 
 		if (! open TMPDLS, "find $mirror -follow -name $filename 2>/dev/null |") {
@@ -209,9 +261,15 @@ sub download
 			}
 		};
 	} else {
+<<<<<<< HEAD
 		my @cmd = download_cmd("$mirror/$download_filename", $download_filename, @additional_mirrors);
 		print STDERR "+ ".join(" ",@cmd)."\n";
 		open(FETCH_FD, '-|', @cmd) or die "Cannot launch aria2c, curl or wget.\n";
+=======
+		my @cmd = download_cmd("$mirror/$download_filename");
+		print STDERR "+ ".join(" ",@cmd)."\n";
+		open(FETCH_FD, '-|', @cmd) or die "Cannot launch curl or wget.\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$hash_cmd and do {
 			open MD5SUM, "| $hash_cmd > '$target/$filename.hash'" or die "Cannot launch $hash_cmd.\n";
 		};
@@ -245,7 +303,11 @@ sub download
 	};
 
 	unlink "$target/$filename";
+<<<<<<< HEAD
 	move("$target/$filename.dl", "$target/$filename");
+=======
+	system("mv", "$target/$filename.dl", "$target/$filename");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	cleanup();
 }
 
@@ -261,6 +323,7 @@ foreach my $mirror (@ARGV) {
 	if ($mirror =~ /^\@SF\/(.+)$/) {
 		# give sourceforge a few more tries, because it redirects to different mirrors
 		for (1 .. 5) {
+<<<<<<< HEAD
 			projectsmirrors '@SF', $1;
 		}
 	} elsif ($mirror =~ /^\@OPENWRT$/) {
@@ -278,6 +341,44 @@ foreach my $mirror (@ARGV) {
 		projectsmirrors '@GNU', $1;
 	} elsif ($mirror =~ /^\@SAVANNAH\/(.+)$/) {
 		projectsmirrors '@SAVANNAH', $1;
+=======
+			push @mirrors, "https://downloads.sourceforge.net/$1";
+		}
+	} elsif ($mirror =~ /^\@OPENWRT$/) {
+		# use OpenWrt source server directly
+	} elsif ($mirror =~ /^\@APACHE\/(.+)$/) {
+		push @mirrors, "https://mirror.netcologne.de/apache.org/$1";
+		push @mirrors, "https://mirror.aarnet.edu.au/pub/apache/$1";
+		push @mirrors, "https://mirror.csclub.uwaterloo.ca/apache/$1";
+		push @mirrors, "https://archive.apache.org/dist/$1";
+		push @mirrors, "http://mirror.cogentco.com/pub/apache/$1";
+		push @mirrors, "http://mirror.navercorp.com/apache/$1";
+		push @mirrors, "http://ftp.jaist.ac.jp/pub/apache/$1";
+		push @mirrors, "ftp://apache.cs.utah.edu/apache.org/$1";
+		push @mirrors, "ftp://apache.mirrors.ovh.net/ftp.apache.org/dist/$1";
+	} elsif ($mirror =~ /^\@GITHUB\/(.+)$/) {
+		# give github a few more tries (different mirrors)
+		for (1 .. 5) {
+			push @mirrors, "https://raw.githubusercontent.com/$1";
+		}
+	} elsif ($mirror =~ /^\@GNU\/(.+)$/) {
+		push @mirrors, "https://mirror.csclub.uwaterloo.ca/gnu/$1";
+		push @mirrors, "https://mirror.netcologne.de/gnu/$1";
+		push @mirrors, "http://ftp.kddilabs.jp/GNU/gnu/$1";
+		push @mirrors, "http://www.nic.funet.fi/pub/gnu/gnu/$1";
+		push @mirrors, "http://mirror.internode.on.net/pub/gnu/$1";
+		push @mirrors, "http://mirror.navercorp.com/gnu/$1";
+		push @mirrors, "ftp://mirrors.rit.edu/gnu/$1";
+		push @mirrors, "ftp://download.xs4all.nl/pub/gnu/";
+	} elsif ($mirror =~ /^\@SAVANNAH\/(.+)$/) {
+		push @mirrors, "https://mirror.netcologne.de/savannah/$1";
+		push @mirrors, "https://mirror.csclub.uwaterloo.ca/nongnu/$1";
+		push @mirrors, "http://ftp.acc.umu.se/mirror/gnu.org/savannah/$1";
+		push @mirrors, "http://nongnu.uib.no/$1";
+		push @mirrors, "http://ftp.igh.cnrs.fr/pub/nongnu/$1";
+		push @mirrors, "ftp://cdimage.debian.org/mirror/gnu.org/savannah/$1";
+		push @mirrors, "ftp://ftp.acc.umu.se/mirror/gnu.org/savannah/$1";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	} elsif ($mirror =~ /^\@KERNEL\/(.+)$/) {
 		my @extra = ( $1 );
 		if ($filename =~ /linux-\d+\.\d+(?:\.\d+)?-rc/) {
@@ -286,16 +387,42 @@ foreach my $mirror (@ARGV) {
 			push @extra, "$extra[0]/longterm/v$1";
 		}
 		foreach my $dir (@extra) {
+<<<<<<< HEAD
 			projectsmirrors '@KERNEL', $dir;
 		}
 	} elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
 		projectsmirrors '@GNOME', $1;
+=======
+			push @mirrors, "https://cdn.kernel.org/pub/$dir";
+			push @mirrors, "https://download.xs4all.nl/ftp.kernel.org/pub/$dir";
+			push @mirrors, "https://mirrors.mit.edu/kernel/$dir";
+			push @mirrors, "http://ftp.nara.wide.ad.jp/pub/kernel.org/$dir";
+			push @mirrors, "http://www.ring.gr.jp/archives/linux/kernel.org/$dir";
+			push @mirrors, "ftp://ftp.riken.jp/Linux/kernel.org/$dir";
+			push @mirrors, "ftp://www.mirrorservice.org/sites/ftp.kernel.org/pub/$dir";
+		}
+	} elsif ($mirror =~ /^\@GNOME\/(.+)$/) {
+		push @mirrors, "https://mirror.csclub.uwaterloo.ca/gnome/sources/$1";
+		push @mirrors, "http://ftp.acc.umu.se/pub/GNOME/sources/$1";
+		push @mirrors, "http://ftp.kaist.ac.kr/gnome/sources/$1";
+		push @mirrors, "http://www.mirrorservice.org/sites/ftp.gnome.org/pub/GNOME/sources/$1";
+		push @mirrors, "http://mirror.internode.on.net/pub/gnome/sources/$1";
+		push @mirrors, "http://ftp.belnet.be/ftp.gnome.org/sources/$1";
+		push @mirrors, "ftp://ftp.cse.buffalo.edu/pub/Gnome/sources/$1";
+		push @mirrors, "ftp://ftp.nara.wide.ad.jp/pub/X11/GNOME/sources/$1";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	} else {
 		push @mirrors, $mirror;
 	}
 }
 
+<<<<<<< HEAD
 projectsmirrors '@OPENWRT';
+=======
+push @mirrors, 'https://sources.cdn.openwrt.org';
+push @mirrors, 'https://sources.openwrt.org';
+push @mirrors, 'https://mirror2.openwrt.org/sources';
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 if (-f "$target/$filename") {
 	$hash_cmd and do {
@@ -315,16 +442,29 @@ if (-f "$target/$filename") {
 	};
 }
 
+<<<<<<< HEAD
 $download_tool = select_tool();
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 while (!-f "$target/$filename") {
 	my $mirror = shift @mirrors;
 	$mirror or die "No more mirrors to try - giving up.\n";
 
+<<<<<<< HEAD
 	download($mirror, $url_filename, @mirrors);
 	if (!-f "$target/$filename" && $url_filename ne $filename) {
 		download($mirror, $filename, @mirrors);
+=======
+	download($mirror, $url_filename);
+	if (!-f "$target/$filename" && $url_filename ne $filename) {
+		download($mirror, $filename);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 }
 
 $SIG{INT} = \&cleanup;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

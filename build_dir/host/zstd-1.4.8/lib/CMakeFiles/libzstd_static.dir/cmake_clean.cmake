@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/libzstd_static.dir/common/debug.c.o"
+  "CMakeFiles/libzstd_static.dir/common/entropy_common.c.o"
+  "CMakeFiles/libzstd_static.dir/common/error_private.c.o"
+  "CMakeFiles/libzstd_static.dir/common/fse_decompress.c.o"
+  "CMakeFiles/libzstd_static.dir/common/pool.c.o"
+  "CMakeFiles/libzstd_static.dir/common/threading.c.o"
+  "CMakeFiles/libzstd_static.dir/common/xxhash.c.o"
+  "CMakeFiles/libzstd_static.dir/common/zstd_common.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/fse_compress.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/hist.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/huf_compress.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_compress.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_compress_literals.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_compress_sequences.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_compress_superblock.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_double_fast.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_fast.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_lazy.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_ldm.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstd_opt.c.o"
+  "CMakeFiles/libzstd_static.dir/compress/zstdmt_compress.c.o"
+  "CMakeFiles/libzstd_static.dir/decompress/huf_decompress.c.o"
+  "CMakeFiles/libzstd_static.dir/decompress/zstd_ddict.c.o"
+  "CMakeFiles/libzstd_static.dir/decompress/zstd_decompress.c.o"
+  "CMakeFiles/libzstd_static.dir/decompress/zstd_decompress_block.c.o"
+  "CMakeFiles/libzstd_static.dir/deprecated/zbuff_common.c.o"
+  "CMakeFiles/libzstd_static.dir/deprecated/zbuff_compress.c.o"
+  "CMakeFiles/libzstd_static.dir/deprecated/zbuff_decompress.c.o"
+  "CMakeFiles/libzstd_static.dir/dictBuilder/cover.c.o"
+  "CMakeFiles/libzstd_static.dir/dictBuilder/divsufsort.c.o"
+  "CMakeFiles/libzstd_static.dir/dictBuilder/fastcover.c.o"
+  "CMakeFiles/libzstd_static.dir/dictBuilder/zdict.c.o"
+  "libzstd.a"
+  "libzstd.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/libzstd_static.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	aliases {
@@ -13,6 +16,16 @@
 		led-upgrade = &led_diag;
 	};
 
+<<<<<<< HEAD
+=======
+	extosc: ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+		clock-output-names = "ref";
+		clock-frequency = <40000000>;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	leds {
 		compatible = "gpio-leds";
 
@@ -31,8 +44,12 @@
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&ath9k0 3 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&usb_ohci_port>, <&usb_ehci_port>;
 			linux,default-trigger = "usbport";
@@ -70,28 +87,40 @@
 		compatible = "gpio-keys";
 
 		reset {
+<<<<<<< HEAD
 			label = "reset";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <KEY_RESTART>;
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 			debounce-interval = <60>;
 		};
 
 		usb {
+<<<<<<< HEAD
 			label = "usb";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <BTN_2>;
 			gpios = <&gpio 3 GPIO_ACTIVE_LOW>;
 			debounce-interval = <60>;
 		};
 
 		aoss {
+<<<<<<< HEAD
 			label = "aoss";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <KEY_WPS_BUTTON>;
 			gpios = <&gpio 5 GPIO_ACTIVE_LOW>;
 			debounce-interval = <60>;
 		};
 
 		router_auto {
+<<<<<<< HEAD
 			label = "router_auto";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <BTN_6>;
 			linux,input-type = <EV_SW>;
 			gpios = <&gpio 6 GPIO_ACTIVE_LOW>;
@@ -99,7 +128,10 @@
 		};
 
 		router_off {
+<<<<<<< HEAD
 			label = "router_off";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <BTN_5>;
 			linux,input-type = <EV_SW>;
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
@@ -107,7 +139,10 @@
 		};
 
 		movie_engine {
+<<<<<<< HEAD
 			label = "movie_engine";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			linux,code = <BTN_7>;
 			linux,input-type = <EV_SW>;
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
@@ -146,6 +181,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@50000 {
 				label = "art";
 				reg = <0x0050000 0x0010000>;
@@ -166,6 +202,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			art: partition@50000 {
+				label = "art";
+				reg = <0x0050000 0x0010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@60000 {
@@ -188,17 +230,43 @@
 };
 
 &usb1 {
+<<<<<<< HEAD
 	status = "okay";
 };
 
 &usb2 {
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ohci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+};
+
+&usb2 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	usb_ehci_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	ath9k0: wifi@11,0 {
+=======
+	ath9k0: wifi@0,11 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "pci168c,0029";
 		reg = <0x8800 0 0 0 0>;
 		qca,no-eeprom;
@@ -206,7 +274,11 @@
 		gpio-controller;
 	};
 
+<<<<<<< HEAD
 	ath9k1: wifi@12,0 {
+=======
+	ath9k1: wifi@0,12 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		compatible = "pci168c,0029";
 		reg = <0x9000 0 0 0 0>;
 		qca,no-eeprom;
@@ -215,9 +287,20 @@
 	};
 };
 
+<<<<<<< HEAD
 &spi {
 	status = "okay";
 
+=======
+&pll {
+	clocks = <&extosc>;
+};
+
+&spi {
+	status = "okay";
+
+	cs-gpios = <0>, <0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	flash0: flash@0 {
 		compatible = "jedec,spi-nor";
@@ -246,8 +329,12 @@
 &eth0 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_120c>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x120c>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	fixed-link {
 		speed = <1000>;
@@ -258,8 +345,13 @@
 &eth1 {
 	status = "okay";
 
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_520c 1>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x520c>;
+	mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	phy-handle = <&phy4>;
 };

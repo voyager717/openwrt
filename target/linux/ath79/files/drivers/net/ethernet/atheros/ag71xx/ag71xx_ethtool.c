@@ -80,11 +80,16 @@ static void ag71xx_ethtool_set_msglevel(struct net_device *dev, u32 msg_level)
 	ag->msg_enable = msg_level;
 }
 
+<<<<<<< HEAD
 static void
 ag71xx_ethtool_get_ringparam(struct net_device *dev,
 			     struct ethtool_ringparam *er,
 			     struct kernel_ethtool_ringparam *kernel_ring,
 			     struct netlink_ext_ack *extack)
+=======
+static void ag71xx_ethtool_get_ringparam(struct net_device *dev,
+					 struct ethtool_ringparam *er)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct ag71xx *ag = netdev_priv(dev);
 
@@ -102,11 +107,16 @@ ag71xx_ethtool_get_ringparam(struct net_device *dev,
 		er->tx_pending /= AG71XX_TX_RING_DS_PER_PKT;
 }
 
+<<<<<<< HEAD
 static int
 ag71xx_ethtool_set_ringparam(struct net_device *dev,
 			     struct ethtool_ringparam *er,
 			     struct kernel_ethtool_ringparam *kernel_ring,
 			     struct netlink_ext_ack *extack)
+=======
+static int ag71xx_ethtool_set_ringparam(struct net_device *dev,
+					struct ethtool_ringparam *er)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct ag71xx *ag = netdev_priv(dev);
 	unsigned tx_size;
@@ -161,7 +171,12 @@ static void ag71xx_ethtool_get_strings(struct net_device *netdev, u32 sset,
 		int i;
 
 		for (i = 0; i < ARRAY_SIZE(ag71xx_statistics); i++)
+<<<<<<< HEAD
 			ethtool_puts(&data, ag71xx_statistics[i].name);
+=======
+			memcpy(data + i * ETH_GSTRING_LEN,
+			       ag71xx_statistics[i].name, ETH_GSTRING_LEN);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 }
 

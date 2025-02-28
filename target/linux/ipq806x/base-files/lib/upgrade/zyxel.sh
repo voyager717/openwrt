@@ -90,7 +90,11 @@ zyxel_do_upgrade() {
 	[ -b "${rootfs}" ] || return 1
 	case "$board" in
 	zyxel,nbg6817)
+<<<<<<< HEAD
 		local dualflagmtd="$(find_mtd_part 0:dual_flag)"
+=======
+		local dualflagmtd="$(find_mtd_part 0:DUAL_FLAG)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		[ -b $dualflagmtd ] || return 1
 
 		case "$rootfs" in

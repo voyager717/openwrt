@@ -11,7 +11,10 @@
 		led-failsafe = &led_usr;
 		led-running = &led_usr;
 		led-upgrade = &led_usr;
+<<<<<<< HEAD
 		label-mac-device = &gmac1;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	leds {
@@ -36,6 +39,7 @@
 		function = "gpio";
 	};
 };
+<<<<<<< HEAD
 
 &gmac1 {
 	status = "okay";
@@ -57,3 +61,5 @@
 		};
 	};
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

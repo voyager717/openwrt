@@ -1,13 +1,20 @@
 --- a/Makefile
 +++ b/Makefile
+<<<<<<< HEAD
 @@ -128,10 +128,6 @@ CRTTOOL			?=	${CRTTOOLPATH}/cert_create$
  ENCTOOLPATH		?=	tools/encrypt_fw
  ENCTOOL			?=	${ENCTOOLPATH}/encrypt_fw${BIN_EXT}
+=======
+@@ -448,10 +448,6 @@ endif
+ CRTTOOLPATH		?=	tools/cert_create
+ CRTTOOL			?=	${CRTTOOLPATH}/cert_create${BIN_EXT}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
 -# Variables for use with Firmware Image Package
 -FIPTOOLPATH		?=	tools/fiptool
 -FIPTOOL			?=	${FIPTOOLPATH}/fiptool${BIN_EXT}
 -
+<<<<<<< HEAD
  # Variables for use with sptool
  SPTOOLPATH		?=	tools/sptool
  SPTOOL			?=	${SPTOOLPATH}/sptool.py
@@ -58,6 +65,44 @@
  	${Q}${FIPTOOL} create ${FWU_FIP_ARGS} $@
  	${Q}${FIPTOOL} info $@
 @@ -1699,19 +1681,9 @@ ${BUILD_PLAT}/${FWU_FIP_NAME}: ${FWU_FIP
+=======
+ ################################################################################
+ # Include BL specific makefiles
+ ################################################################################
+@@ -661,14 +657,12 @@ endif
+ clean:
+ 	@echo "  CLEAN"
+ 	$(call SHELL_REMOVE_DIR,${BUILD_PLAT})
+-	${Q}${MAKE} --no-print-directory -C ${FIPTOOLPATH} clean
+ 	${Q}${MAKE} PLAT=${PLAT} --no-print-directory -C ${CRTTOOLPATH} clean
+ 
+ realclean distclean:
+ 	@echo "  REALCLEAN"
+ 	$(call SHELL_REMOVE_DIR,${BUILD_BASE})
+ 	$(call SHELL_DELETE_ALL, ${CURDIR}/cscope.*)
+-	${Q}${MAKE} --no-print-directory -C ${FIPTOOLPATH} clean
+ 	${Q}${MAKE} PLAT=${PLAT} --no-print-directory -C ${CRTTOOLPATH} clean
+ 
+ checkcodebase:		locate-checkpatch
+@@ -717,7 +711,7 @@ certificates: ${CRT_DEPS} ${CRTTOOL}
+ 	@${ECHO_BLANK_LINE}
+ endif
+ 
+-${BUILD_PLAT}/${FIP_NAME}: ${FIP_DEPS} ${FIPTOOL}
++${BUILD_PLAT}/${FIP_NAME}: ${FIP_DEPS}
+ 	${Q}${FIPTOOL} create ${FIP_ARGS} $@
+ 	${Q}${FIPTOOL} info $@
+ 	@${ECHO_BLANK_LINE}
+@@ -733,21 +727,16 @@ fwu_certificates: ${FWU_CRT_DEPS} ${CRTT
+ 	@${ECHO_BLANK_LINE}
+ endif
+ 
+-${BUILD_PLAT}/${FWU_FIP_NAME}: ${FWU_FIP_DEPS} ${FIPTOOL}
++${BUILD_PLAT}/${FWU_FIP_NAME}: ${FWU_FIP_DEPS}
+ 	${Q}${FIPTOOL} create ${FWU_FIP_ARGS} $@
+ 	${Q}${FIPTOOL} info $@
+ 	@${ECHO_BLANK_LINE}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	@echo "Built $@ successfully"
  	@${ECHO_BLANK_LINE}
  
@@ -65,6 +110,7 @@
  fip: ${BUILD_PLAT}/${FIP_NAME}
  fwu_fip: ${BUILD_PLAT}/${FWU_FIP_NAME}
  
+<<<<<<< HEAD
 -${FIPTOOL}: FORCE
 -ifdef UNIX_MK
 -	${Q}${MAKE} CPPFLAGS="-DVERSION='\"${VERSION_STRING}\"'" FIPTOOL=${FIPTOOL} OPENSSL_DIR=${OPENSSL_DIR} DEBUG=${DEBUG} V=${V} --no-print-directory -C ${FIPTOOLPATH} all
@@ -104,3 +150,23 @@
  PLAT_OBJECTS += ${PLAT_DEF_UUID_CONFIG_FILE_PATH}/${PLAT_DEF_UUID_CONFIG_FILE_NAME}.o
  endif
  
+=======
+-.PHONY: ${FIPTOOL}
+-${FIPTOOL}:
+-	${Q}${MAKE} CPPFLAGS="-DVERSION='\"${VERSION_STRING}\"'" --no-print-directory -C ${FIPTOOLPATH}
+-
+ cscope:
+ 	@echo "  CSCOPE"
+ 	${Q}find ${CURDIR} -name "*.[chsS]" > cscope.files
+--- a/tools/fiptool/Makefile
++++ b/tools/fiptool/Makefile
+@@ -37,7 +37,7 @@ all: ${PROJECT} fip_create
+ 
+ ${PROJECT}: ${OBJECTS} Makefile
+ 	@echo "  LD      $@"
+-	${Q}${HOSTCC} ${OBJECTS} -o $@ ${LDLIBS}
++	${Q}${HOSTCC} ${OBJECTS} -o $@ ${LDLIBS} $(LDFLAGS)
+ 	@${ECHO_BLANK_LINE}
+ 	@echo "Built $@ successfully"
+ 	@${ECHO_BLANK_LINE}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dnsmasq
+<<<<<<< HEAD
 PKG_UPSTREAM_VERSION:=2.90
 PKG_VERSION:=$(subst test,~~test,$(subst rc,~rc,$(PKG_UPSTREAM_VERSION)))
 PKG_RELEASE:=4
@@ -15,6 +16,15 @@ PKG_RELEASE:=4
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_UPSTREAM_VERSION).tar.xz
 PKG_SOURCE_URL:=https://thekelleys.org.uk/dnsmasq/
 PKG_HASH:=8e50309bd837bfec9649a812e066c09b6988b73d749b7d293c06c57d46a109e4
+=======
+PKG_UPSTREAM_VERSION:=2.85
+PKG_VERSION:=$(subst test,~~test,$(subst rc,~rc,$(PKG_UPSTREAM_VERSION)))
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_UPSTREAM_VERSION).tar.xz
+PKG_SOURCE_URL:=http://thekelleys.org.uk/dnsmasq
+PKG_HASH:=ad98d3803df687e5b938080f3d25c628fe41c878752d03fbc6199787fee312fa
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=GPL-2.0
 PKG_LICENSE_FILES:=COPYING
@@ -24,14 +34,20 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_UPSTR
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=lto
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_ASLR_PIE_REGULAR:=1
 PKG_CONFIG_DEPENDS:= CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_dhcp \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_dhcpv6 \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_dnssec \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_auth \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_ipset \
+<<<<<<< HEAD
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_nftset \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_conntrack \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_noid \
 	CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_broken_rtc \
@@ -63,11 +79,18 @@ endef
 
 define Package/dnsmasq-full
 $(call Package/dnsmasq/Default)
+<<<<<<< HEAD
   TITLE += (with DNSSEC, DHCPv6, Auth DNS, IPset, Nftset, Conntrack, NO_ID enabled by default)
   DEPENDS+=+PACKAGE_dnsmasq_full_dnssec:libnettle \
 	+PACKAGE_dnsmasq_full_ipset:kmod-ipt-ipset \
 	+PACKAGE_dnsmasq_full_conntrack:libnetfilter-conntrack \
 	+PACKAGE_dnsmasq_full_nftset:nftables-json
+=======
+  TITLE += (with DNSSEC, DHCPv6, Auth DNS, IPset, Conntrack, NO_ID enabled by default)
+  DEPENDS+=+PACKAGE_dnsmasq_full_dnssec:libnettle \
+	+PACKAGE_dnsmasq_full_ipset:kmod-ipt-ipset \
+	+PACKAGE_dnsmasq_full_conntrack:libnetfilter-conntrack
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   VARIANT:=full
   PROVIDES:=dnsmasq
 endef
@@ -86,7 +109,11 @@ define Package/dnsmasq-full/description
 $(call Package/dnsmasq/description)
 
 This is a fully configurable variant with DHCPv4, DHCPv6, DNSSEC, Authoritative DNS
+<<<<<<< HEAD
 and nftset, Conntrack support & NO_ID enabled by default.
+=======
+and IPset, Conntrack support & NO_ID enabled by default.
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/dnsmasq/conffiles
@@ -112,9 +139,12 @@ define Package/dnsmasq-full/config
 		default y
 	config PACKAGE_dnsmasq_full_ipset
 		bool "Build with IPset support."
+<<<<<<< HEAD
 		default n
 	config PACKAGE_dnsmasq_full_nftset
 		bool "Build with Nftset support."
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		default y
 	config PACKAGE_dnsmasq_full_conntrack
 		bool "Build with Conntrack support."
@@ -134,6 +164,12 @@ endef
 Package/dnsmasq-dhcpv6/conffiles = $(Package/dnsmasq/conffiles)
 Package/dnsmasq-full/conffiles = $(Package/dnsmasq/conffiles)
 
+<<<<<<< HEAD
+=======
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto=jobserver
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 COPTS = -DHAVE_UBUS -DHAVE_POLL_H \
 	$(if $(CONFIG_IPV6),,-DNO_IPV6)
 
@@ -147,7 +183,10 @@ ifeq ($(BUILD_VARIANT),full)
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_dnssec),-DHAVE_DNSSEC) \
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_auth),,-DNO_AUTH) \
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_ipset),,-DNO_IPSET) \
+<<<<<<< HEAD
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_nftset),-DHAVE_NFTSET,) \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_conntrack),-DHAVE_CONNTRACK,) \
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_noid),-DNO_ID,) \
 		$(if $(CONFIG_PACKAGE_dnsmasq_$(BUILD_VARIANT)_broken_rtc),-DHAVE_BROKEN_RTC) \
@@ -186,7 +225,10 @@ define Package/dnsmasq/install
 	$(INSTALL_DATA) ./files/dnsmasq_acl.json $(1)/usr/share/acl.d/
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	$(INSTALL_BIN) ./files/50-dnsmasq-migrate-resolv-conf-auto.sh $(1)/etc/uci-defaults
+<<<<<<< HEAD
 	$(INSTALL_BIN) ./files/50-dnsmasq-migrate-ipset.sh $(1)/etc/uci-defaults
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 Package/dnsmasq-dhcpv6/install = $(Package/dnsmasq/install)

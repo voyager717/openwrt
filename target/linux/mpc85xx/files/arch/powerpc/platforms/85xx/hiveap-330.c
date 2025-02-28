@@ -18,6 +18,10 @@
 #include <linux/kernel.h>
 #include <linux/delay.h>
 #include <linux/interrupt.h>
+<<<<<<< HEAD
+=======
+#include <linux/of_platform.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <asm/time.h>
 #include <asm/machdep.h>
@@ -33,7 +37,11 @@
 
 #include "mpc85xx.h"
 
+<<<<<<< HEAD
 static void __init hiveap_330_pic_init(void)
+=======
+void __init hiveap_330_pic_init(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct mpic *mpic;
 
@@ -63,9 +71,25 @@ static void __init hiveap_330_setup_arch(void)
 
 machine_arch_initcall(hiveap_330, mpc85xx_common_publish_devices);
 
+<<<<<<< HEAD
 define_machine(hiveap_330) {
 	.name			= "P1020 RDB",
 	.compatible		= "aerohive,hiveap-330",
+=======
+/*
+ * Called very early, device-tree isn't unflattened
+ */
+static int __init hiveap_330_probe(void)
+{
+	if (of_machine_is_compatible("aerohive,hiveap-330"))
+		return 1;
+	return 0;
+}
+
+define_machine(hiveap_330) {
+	.name			= "P1020 RDB",
+	.probe			= hiveap_330_probe,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.setup_arch		= hiveap_330_setup_arch,
 	.init_IRQ		= hiveap_330_pic_init,
 #ifdef CONFIG_PCI
@@ -73,5 +97,9 @@ define_machine(hiveap_330) {
 	.pcibios_fixup_phb      = fsl_pcibios_fixup_phb,
 #endif
 	.get_irq		= mpic_get_irq,
+<<<<<<< HEAD
+=======
+	.calibrate_decr		= generic_calibrate_decr,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	.progress		= udbg_progress,
 };

@@ -1,6 +1,10 @@
 --- a/Makefile
 +++ b/Makefile
+<<<<<<< HEAD
 @@ -217,7 +217,7 @@ $(DESTDIR)$(includedir)/%: $(srcdir)/inc
+=======
+@@ -215,7 +215,7 @@ $(DESTDIR)$(includedir)/%: $(srcdir)/inc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  	$(INSTALL) -D -m 644 $< $@
  
  $(DESTDIR)$(LDSO_PATHNAME): $(DESTDIR)$(libdir)/libc.so

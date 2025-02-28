@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=ncurses
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:gnu:ncurses
 PKG_VERSION:=6.4
 PKG_RELEASE:=2
@@ -15,6 +16,14 @@ PKG_RELEASE:=2
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@GNU/$(PKG_NAME)
 PKG_HASH:=6931283d9ac87c5073f30b6290c4c75f21632bb4fc3603ac8100812bed248159
+=======
+PKG_VERSION:=6.2
+PKG_RELEASE:=3
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=@GNU/$(PKG_NAME)
+PKG_HASH:=30306e0c76e0f9f1f0de987cf1c82a5c21e1ce6568b9227f7da5b71cbea86c9d
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=README
@@ -82,7 +91,10 @@ CONFIGURE_VARS += \
 HOST_CFLAGS += $(HOST_FPIC)
 
 HOST_CONFIGURE_ARGS += \
+<<<<<<< HEAD
 	--enable-pc-files \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	--without-cxx \
 	--without-cxx-binding \
 	--without-ada \
@@ -124,9 +136,13 @@ ifneq ($(HOST_OS),FreeBSD)
 	)
 	for file in \
 		a/ansi \
+<<<<<<< HEAD
 		a/alacritty \
 		d/dumb \
 		f/foot \
+=======
+		d/dumb \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		l/linux \
 		r/rxvt \
 		r/rxvt-unicode \
@@ -181,8 +197,11 @@ define Build/InstallDev
 	$(SED) 's,^\(prefix\|exec_prefix\)=.*,\1=$(STAGING_DIR)/usr,g' -e 's/$$$$INCS //g' \
 		$(2)/bin/ncursesw6-config
 	ln -sf $(STAGING_DIR)/host/bin/ncursesw6-config $(1)/usr/bin/ncursesw6-config
+<<<<<<< HEAD
 	$(SED) 's,$(TOOLCHAIN_DIR),$(STAGING_DIR),g' \
 		$(1)/usr/lib/pkgconfig/ncursesw.pc
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Host/Compile

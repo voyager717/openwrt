@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #
 # Copyright (C) 2014-2016 OpenWrt.org
 # Copyright (C) 2016 LEDE-Project.org
@@ -12,6 +16,7 @@ mvebu_setup_interfaces()
 	local board="$1"
 
 	case "$board" in
+<<<<<<< HEAD
 	ctera,c200-v2|\
 	synology,ds213j|\
 	wd,cloud-mirror-gen2)
@@ -21,6 +26,11 @@ mvebu_setup_interfaces()
 		ucidef_set_interfaces_lan_wan "lan0 lan1 lan2 lan3 lan4" "eth2"
 		;;
 	fortinet,fg-30e|\
+=======
+	cznic,turris-omnia)
+		ucidef_set_interfaces_lan_wan "lan0 lan1 lan2 lan3 lan4" "eth2"
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	linksys,wrt1200ac|\
 	linksys,wrt1900ac-v1|\
 	linksys,wrt1900ac-v2|\
@@ -29,6 +39,7 @@ mvebu_setup_interfaces()
 	linksys,wrt32x)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" "wan"
 		;;
+<<<<<<< HEAD
 	fortinet,fg-50e|\
 	fortinet,fg-51e|\
 	fortinet,fg-52e|\
@@ -42,6 +53,8 @@ mvebu_setup_interfaces()
 	iptime,nas1dual)
 		ucidef_set_interface_lan "eth0 eth1" "dhcp"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	marvell,a385-db-ap)
 		ucidef_set_interfaces_lan_wan "eth0 eth1" "eth2"
 		;;
@@ -74,6 +87,7 @@ mvebu_setup_macs()
 	local label_mac=""
 
 	case "$board" in
+<<<<<<< HEAD
 	buffalo,ls220de|\
 	buffalo,ls421de)
 		lan_mac=$(mtd_get_mac_ascii u-boot-env eth1addr)
@@ -82,6 +96,11 @@ mvebu_setup_macs()
 		label_mac=$(mtd_get_mac_ascii dev_params mac)
 		lan_mac=$label_mac
 		;;
+=======
+	buffalo,ls421de)
+		lan_mac=$(mtd_get_mac_ascii u-boot-env eth1addr)
+		;;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	linksys,wrt1200ac|\
 	linksys,wrt1900ac-v2|\
 	linksys,wrt1900acs|\
@@ -95,12 +114,15 @@ mvebu_setup_macs()
 		lan_mac=$label_mac
 		wan_mac=$label_mac
 		;;
+<<<<<<< HEAD
 	wd,cloud-mirror-gen2)
 		# mac address is on ubi "config" or ubi "reserve2" in text file.
 		# ubi "reserve2" /dev/mtd7 is twice small and only contains basic OEM factory info
 		label_mac=$(macaddr_canonicalize $(strings /dev/mtd7|grep -E '([0-9A-F]{2}[:])'))
 		lan_mac=$label_mac
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 
 	[ -n "$lan_mac" ] && ucidef_set_interface_macaddr "lan" $lan_mac

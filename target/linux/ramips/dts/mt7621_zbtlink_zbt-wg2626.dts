@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "zbtlink,zbt-wg2626", "mediatek,mt7621-soc";
@@ -33,8 +36,12 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 24 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -73,6 +80,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -97,6 +105,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -118,8 +132,12 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_8000>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x8000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
@@ -127,12 +145,17 @@
 &pcie1 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_factory_0>;
 		nvmem-cell-names = "eeprom";
+=======
+		mediatek,mtd-eeprom = <&factory 0x0000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <2400000 2500000>;
 	};
 };
 
+<<<<<<< HEAD
 &ethernet {
 	pinctrl-0 = <&mdio_pins>, <&rgmii1_pins>;
 };
@@ -140,35 +163,60 @@
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000 0>;
 	nvmem-cell-names = "mac-address";
+=======
+&gmac0 {
+	mtd-mac-address = <&factory 0xe000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
 		port@0 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "lan4";
+=======
+			label = "lan1";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@1 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "lan3";
+=======
+			label = "lan2";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@2 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "lan2";
+=======
+			label = "lan3";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@3 {
 			status = "okay";
+<<<<<<< HEAD
 			label = "lan1";
+=======
+			label = "lan4";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@4 {
 			status = "okay";
 			label = "wan";
+<<<<<<< HEAD
 			nvmem-cells = <&macaddr_factory_e000 1>;
 			nvmem-cell-names = "mac-address";
+=======
+			mtd-mac-address = <&factory 0xe000>;
+			mtd-mac-address-increment = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };

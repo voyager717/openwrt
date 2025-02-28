@@ -13,9 +13,12 @@ config HAS_SPE_FPU
 config HAS_FPU
 	bool
 
+<<<<<<< HEAD
 config HAS_DT_OVERLAY_SUPPORT
 	bool
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config AUDIO_SUPPORT
 	bool
 
@@ -54,9 +57,12 @@ config USES_DEVICETREE
 config USES_INITRAMFS
 	bool
 
+<<<<<<< HEAD
 config USES_SEPARATE_INITRAMFS
 	bool
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config USES_SQUASHFS
 	bool
 
@@ -98,6 +104,7 @@ config HAS_MIPS16
 config RFKILL_SUPPORT
 	bool
 
+<<<<<<< HEAD
 config EMMC_SUPPORT
 	bool
 
@@ -107,6 +114,11 @@ config NAND_SUPPORT
 config LEGACY_SDCARD_SUPPORT
 	bool
 
+=======
+config NAND_SUPPORT
+	bool
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config ARCH_64BIT
 	bool
 
@@ -156,10 +168,13 @@ config i386
 config i686
 	bool 
 
+<<<<<<< HEAD
 config loongarch64
 	select ARCH_64BIT
 	bool
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config m68k
 	bool
 
@@ -188,10 +203,13 @@ config powerpc64
 	select ARCH_64BIT
 	bool
 
+<<<<<<< HEAD
 config riscv64
 	select ARCH_64BIT
 	bool
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 config sh3
 	bool
 
@@ -224,7 +242,10 @@ config ARCH
 	default "armeb"     if armeb
 	default "i386"      if i386
 	default "i686"      if i686
+<<<<<<< HEAD
 	default "loongarch64" if loongarch64
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default "m68k"      if m68k
 	default "mips"      if mips
 	default "mipsel"    if mipsel
@@ -232,7 +253,10 @@ config ARCH
 	default "mips64el"  if mips64el
 	default "powerpc"   if powerpc
 	default "powerpc64" if powerpc64
+<<<<<<< HEAD
 	default "riscv64"   if riscv64
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default "sh3"       if sh3
 	default "sh3eb"     if sh3eb
 	default "sh4"       if sh4

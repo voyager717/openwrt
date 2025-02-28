@@ -8,10 +8,16 @@ ARCH:=arc
 CPU_TYPE:=archs
 BOARD:=archs38
 BOARDNAME:=Synopsys DesignWare ARC HS38
+<<<<<<< HEAD
 FEATURES:=source-only
 SUBTARGETS:=generic
 
 KERNEL_PATCHVER:=6.6
+=======
+SUBTARGETS:=generic
+
+KERNEL_PATCHVER:=5.4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 DEVICE_TYPE:=basic
 

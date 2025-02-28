@@ -109,10 +109,16 @@ define KernelPackage/lib-lzo
   HIDDEN:=1
   FILES:= \
 	$(LINUX_DIR)/crypto/lzo.ko \
+<<<<<<< HEAD
 	$(LINUX_DIR)/crypto/lzo-rle.ko \
 	$(LINUX_DIR)/lib/lzo/lzo_compress.ko \
 	$(LINUX_DIR)/lib/lzo/lzo_decompress.ko
   AUTOLOAD:=$(call AutoProbe,lzo lzo-rle lzo_compress lzo_decompress)
+=======
+	$(LINUX_DIR)/lib/lzo/lzo_compress.ko \
+	$(LINUX_DIR)/lib/lzo/lzo_decompress.ko
+  AUTOLOAD:=$(call AutoProbe,lzo lzo_compress lzo_decompress)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/lib-lzo/description
@@ -122,6 +128,7 @@ endef
 $(eval $(call KernelPackage,lib-lzo))
 
 
+<<<<<<< HEAD
 define KernelPackage/lib-xxhash
   SUBMENU:=$(LIB_MENU)
   TITLE:=xxhash support
@@ -147,6 +154,23 @@ define KernelPackage/lib-zstd
 	$(LINUX_DIR)/lib/zstd/zstd_compress.ko \
 	$(LINUX_DIR)/lib/zstd/zstd_decompress.ko
   AUTOLOAD:=$(call AutoProbe,zstd zstd_compress zstd_decompress)
+=======
+define KernelPackage/lib-zstd
+  SUBMENU:=$(LIB_MENU)
+  TITLE:=ZSTD support
+  DEPENDS:=+kmod-crypto-acompress
+  KCONFIG:= \
+	CONFIG_CRYPTO_ZSTD \
+	CONFIG_ZSTD_COMPRESS \
+	CONFIG_ZSTD_DECOMPRESS \
+	CONFIG_XXHASH
+  FILES:= \
+	$(LINUX_DIR)/crypto/zstd.ko \
+	$(LINUX_DIR)/lib/xxhash.ko \
+	$(LINUX_DIR)/lib/zstd/zstd_compress.ko \
+	$(LINUX_DIR)/lib/zstd/zstd_decompress.ko
+  AUTOLOAD:=$(call AutoProbe,xxhash zstd zstd_compress zstd_decompress)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/lib-zstd/description
@@ -156,6 +180,7 @@ endef
 $(eval $(call KernelPackage,lib-zstd))
 
 
+<<<<<<< HEAD
 define KernelPackage/lib-lz4-decompress
   SUBMENU:=$(LIB_MENU)
   TITLE:=LZ4 decompress
@@ -178,6 +203,21 @@ define KernelPackage/lib-lz4
 	$(LINUX_DIR)/crypto/lz4.ko \
 	$(LINUX_DIR)/lib/lz4/lz4_compress.ko
   AUTOLOAD:=$(call AutoProbe,lz4 lz4_compress)
+=======
+define KernelPackage/lib-lz4
+  SUBMENU:=$(LIB_MENU)
+  TITLE:=LZ4 support
+  DEPENDS:=+kmod-crypto-acompress
+  KCONFIG:= \
+	CONFIG_CRYPTO_LZ4 \
+	CONFIG_LZ4_COMPRESS \
+	CONFIG_LZ4_DECOMPRESS
+  FILES:= \
+	$(LINUX_DIR)/crypto/lz4.ko \
+	$(LINUX_DIR)/lib/lz4/lz4_compress.ko \
+	$(LINUX_DIR)/lib/lz4/lz4_decompress.ko
+  AUTOLOAD:=$(call AutoProbe,lz4 lz4_compress lz4_decompress)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/lib-lz4/description
@@ -187,6 +227,7 @@ endef
 $(eval $(call KernelPackage,lib-lz4))
 
 
+<<<<<<< HEAD
 define KernelPackage/lib-lz4hc
   SUBMENU:=$(LIB_MENU)
   TITLE:=LZ4HC support
@@ -229,6 +270,8 @@ endef
 $(eval $(call KernelPackage,lib-842))
 
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/lib-raid6
   SUBMENU:=$(LIB_MENU)
   TITLE:=RAID6 algorithm support
@@ -334,6 +377,7 @@ define KernelPackage/asn1-decoder
 endef
 
 $(eval $(call KernelPackage,asn1-decoder))
+<<<<<<< HEAD
 
 define KernelPackage/asn1-encoder
   SUBMENU:=$(LIB_MENU)
@@ -380,3 +424,5 @@ define KernelPackage/lib-parman
 endef
 
 $(eval $(call KernelPackage,lib-parman))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

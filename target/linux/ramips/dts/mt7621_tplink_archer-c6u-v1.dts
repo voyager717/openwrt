@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "tplink,archer-c6u-v1", "mediatek,mt7621-soc";
@@ -42,28 +45,44 @@
 		compatible = "gpio-leds";
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 4 GPIO_ACTIVE_LOW>;
 		};
 
 		usb {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 13 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&ehci_port2>;
 			linux,default-trigger = "usbport";
 		};
 
 		wan-orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 14 GPIO_ACTIVE_LOW>;
 		};
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 15 GPIO_ACTIVE_LOW>;
 		};
 
@@ -80,8 +99,12 @@
 		};
 
 		wan-green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 45 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -91,7 +114,11 @@
 		regulator-name = "usb_vbus";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		gpios = <&gpio 3 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 3 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 	};
 };
@@ -102,7 +129,11 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
+=======
+		spi-max-frequency = <80000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -121,6 +152,7 @@
 				reg = <0x040000 0xf60000>;
 			};
 
+<<<<<<< HEAD
 			partition@fa0000 {
 				label = "config";
 				reg = <0xfa0000 0x010000>;
@@ -137,6 +169,12 @@
 						#nvmem-cell-cells = <1>;
 					};
 				};
+=======
+			config: partition@fa0000 {
+				label = "config";
+				reg = <0xfa0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@fb0000 {
@@ -145,6 +183,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@ff0000 {
 				label = "radio";
 				reg = <0xff0000 0x010000>;
@@ -163,6 +202,12 @@
 						reg = <0x8000 0x4da8>;
 					};
 				};
+=======
+			radio: partition@ff0000 {
+				label = "radio";
+				reg = <0xff0000 0x010000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 		};
 	};
@@ -176,8 +221,13 @@
 	mt76@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_radio_0>, <&macaddr_config_8 0>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mediatek,mtd-eeprom = <&radio 0x0>;
+		mtd-mac-address = <&config 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <2400000 2500000>;
 	};
 };
@@ -186,12 +236,19 @@
 	mt76@0,0 {
 		compatible = "mediatek,mt76";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&eeprom_radio_8000>, <&macaddr_config_8 (-1)>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mediatek,mtd-eeprom = <&radio 0x8000>;
+		mtd-mac-address = <&config 0x8>;
+		mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		ieee80211-freq-limit = <5000000 6000000>;
 	};
 };
 
+<<<<<<< HEAD
 &gmac0 {
 	nvmem-cells = <&macaddr_config_8 0>;
 	nvmem-cell-names = "mac-address";
@@ -208,10 +265,29 @@
 
 &ethphy0 {
 	/delete-property/ interrupts;
+=======
+&ethernet {
+	pinctrl-names = "default";
+	pinctrl-0 = <&rgmii1_pins &mdio_pins>;
+};
+
+&gmac0 {
+	mtd-mac-address = <&config 0x8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &switch0 {
 	ports {
+<<<<<<< HEAD
+=======
+		port@0 {
+			status = "okay";
+			label = "wan";
+			mtd-mac-address = <&config 0x8>;
+			mtd-mac-address-increment = <1>;
+		};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		port@1 {
 			status = "okay";
 			label = "lan1";

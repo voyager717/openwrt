@@ -12,7 +12,11 @@ define Build/netgear-squashfs
 	rm -rf $@.fs $@.squashfs
 	mkdir -p $@.fs/image
 	cp $@ $@.fs/image/uImage
+<<<<<<< HEAD
 	$(STAGING_DIR_HOST)/bin/mksquashfs3-lzma  \
+=======
+	$(STAGING_DIR_HOST)/bin/mksquashfs-lzma  \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		$@.fs $@.squashfs -be \
 		-noappend -root-owned -b 65536 \
 		$(if $(SOURCE_DATE_EPOCH),-fixed-time $(SOURCE_DATE_EPOCH))
@@ -32,8 +36,17 @@ define Device/netgear_generic
   KERNEL := kernel-bin | append-dtb | lzma -d20 | uImage lzma
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma -d20 | uImage lzma
   IMAGES += factory.img
+<<<<<<< HEAD
   IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | \
 	netgear-squashfs | append-rootfs | pad-rootfs
   IMAGE/sysupgrade.bin := $$(IMAGE/default) | check-size | append-metadata
   IMAGE/factory.img := $$(IMAGE/default) | netgear-dni | check-size
+=======
+  IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | netgear-squashfs | \
+	append-rootfs | pad-rootfs
+  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | \
+	check-size
+  IMAGE/factory.img := $$(IMAGE/default) | netgear-dni | \
+	check-size
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef

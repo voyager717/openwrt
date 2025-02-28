@@ -1,0 +1,83 @@
+# Test that patch names including special characters such as a colons,
+# brackets or parentheses are properly handled by all quilt commands
+
+$ mkdir patches
+
+$ quilt new "patch_with:strange[name]"
+> Patch %{P}patch_with:strange[name] is now on top
+
+$ echo foo > foo
+$ quilt add foo
+> File foo added to patch %{P}patch_with:strange[name]
+
+$ quilt files
+> foo
+
+$ echo bar > foo
+$ quilt diff -p ab -P "patch_with:strange[name]"
+> Index: b/foo
+> ===================================================================
+> --- a/foo
+> +++ b/foo
+> @@ -1 +1 @@
+> -foo
+> +bar
+
+$ quilt refresh -p ab
+> Refreshed patch %{P}patch_with:strange[name]
+
+$ quilt applied
+> %{P}patch_with:strange[name]
+
+$ quilt pop -q
+> Removing patch %{P}patch_with:strange[name]
+> No patches applied
+
+$ quilt next
+> %{P}patch_with:strange[name]
+
+$ quilt push -q "patch_with:strange[name]"
+> Applying patch %{P}patch_with:strange[name]
+> Now at patch %{P}patch_with:strange[name]
+
+$ quilt top
+> %{P}patch_with:strange[name]
+
+$ quilt rename "another:strange(name)"
+> Patch %{P}patch_with:strange[name] renamed to %{P}another:strange(name)
+
+$ quilt new "{%'}.patch"
+> Patch %{P}{%'}.patch is now on top
+
+$ quilt add foo
+> File foo added to patch %{P}{%'}.patch
+
+$ echo baz > foo
+"
+$ quilt previous
+> %{P}another:strange(name)
+
+$ quilt series
+> %{P}another:strange(name)
+> %{P}{%'}.patch
+
+$ quilt refresh -p0 "{%'}.patch"
+> Refreshed patch %{P}{%'}.patch
+
+$ cat "patches/{%'}.patch"
+> Index: foo
+> ===================================================================
+> --- foo.orig
+> +++ foo
+> @@ -1 +1 @@
+> -bar
+> +baz
+
+$ quilt pop "another:strange(name)"
+> Removing patch %{P}{%'}.patch
+> Restoring foo
+>
+> Now at patch %{P}another:strange(name)
+
+$ quilt remove foo
+> File foo removed from patch %{P}another:strange(name)

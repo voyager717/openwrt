@@ -1,7 +1,11 @@
 . "$IPKG_INSTROOT/lib/functions.sh"
 
 asrock_bootconfig_mangle() {
+<<<<<<< HEAD
 	local mtdnum="$(find_mtd_index 0:bootconfig)"
+=======
+	local mtdnum="$( find_mtd_index 0:BOOTCONFIG )"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if [ -z "$mtdnum" ]; then
 		echo "cannot find bootconfig mtd partition"

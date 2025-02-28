@@ -1,5 +1,6 @@
 --- a/Incremental.c
 +++ b/Incremental.c
+<<<<<<< HEAD
 @@ -985,6 +985,10 @@ static int array_try_spare(char *devname
  				goto next;
  		}
@@ -14,6 +15,22 @@
 --- a/util.c
 +++ b/util.c
 @@ -1192,7 +1192,9 @@ void wait_for(char *dev, int fd)
+=======
+@@ -1619,6 +1619,10 @@ static int Incremental_container(struct
+ 	if (ra_all == ra_blocked)
+ 		return 0;
+ 
++#ifndef MDADM_FULL
++	return 0;
++#endif
++
+ 	/* Now move all suitable spares from spare container */
+ 	domains = domain_from_array(list, st->ss->name);
+ 	memcpy(suuid, uuid_zero, sizeof(int[4]));
+--- a/util.c
++++ b/util.c
+@@ -1220,7 +1220,9 @@ void wait_for(char *dev, int fd)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  struct superswitch *superlist[] =
  {
  	&super0, &super1,

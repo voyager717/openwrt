@@ -111,16 +111,24 @@
     DSL_int_t i;
  
     printk(DSL_DRV_CRLF DSL_DRV_CRLF "Infineon CPE API Driver version: %s" DSL_DRV_CRLF,
+<<<<<<< HEAD
 @@ -1104,7 +1119,12 @@ int __init DSL_ModuleInit(void)
+=======
+@@ -1104,7 +1119,8 @@ int __init DSL_ModuleInit(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
  
     DSL_DRV_DevNodeInit();
 -
+<<<<<<< HEAD
 +#if LINUX_VERSION_CODE < KERNEL_VERSION(6, 4, 0)
 +   dsl_class = class_create(THIS_MODULE, "dsl_cpe_api");
 +#else
 +   dsl_class = class_create("dsl_cpe_api");
 +#endif
+=======
++   dsl_class = class_create(THIS_MODULE, "dsl_cpe_api");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 +   device_create(dsl_class, NULL, MKDEV(DRV_DSL_CPE_API_DEV_MAJOR, 0), NULL, "dsl_cpe_api");
     return 0;
  }

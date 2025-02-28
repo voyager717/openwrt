@@ -126,9 +126,13 @@ out_get_link:
 }
 
 static int fe_set_ringparam(struct net_device *dev,
+<<<<<<< HEAD
 			    struct ethtool_ringparam *ring,
 			    struct kernel_ethtool_ringparam *kernel_rp,
 			    struct netlink_ext_ack *extack)
+=======
+			    struct ethtool_ringparam *ring)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct fe_priv *priv = netdev_priv(dev);
 
@@ -149,9 +153,13 @@ static int fe_set_ringparam(struct net_device *dev,
 }
 
 static void fe_get_ringparam(struct net_device *dev,
+<<<<<<< HEAD
 			     struct ethtool_ringparam *ring,
 			     struct kernel_ethtool_ringparam *kernel_rp,
 			     struct netlink_ext_ack *extack)
+=======
+			     struct ethtool_ringparam *ring)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct fe_priv *priv = netdev_priv(dev);
 
@@ -165,7 +173,11 @@ static void fe_get_strings(struct net_device *dev, u32 stringset, u8 *data)
 {
 	switch (stringset) {
 	case ETH_SS_STATS:
+<<<<<<< HEAD
 		ethtool_puts(&data, *fe_gdma_str);
+=======
+		memcpy(data, *fe_gdma_str, sizeof(fe_gdma_str));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	}
 }
@@ -199,12 +211,20 @@ static void fe_get_ethtool_stats(struct net_device *dev,
 	do {
 		data_src = &hwstats->tx_bytes;
 		data_dst = data;
+<<<<<<< HEAD
 		start = u64_stats_fetch_begin(&hwstats->syncp);
+=======
+		start = u64_stats_fetch_begin_irq(&hwstats->syncp);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		for (i = 0; i < ARRAY_SIZE(fe_gdma_str); i++)
 			*data_dst++ = *data_src++;
 
+<<<<<<< HEAD
 	} while (u64_stats_fetch_retry(&hwstats->syncp, start));
+=======
+	} while (u64_stats_fetch_retry_irq(&hwstats->syncp, start));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static struct ethtool_ops fe_ethtool_ops = {

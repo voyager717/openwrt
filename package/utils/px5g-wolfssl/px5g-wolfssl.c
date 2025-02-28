@@ -7,8 +7,11 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+<<<<<<< HEAD
 #include <fcntl.h>
 #include <unistd.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <wolfssl/options.h>
 #include <wolfssl/wolfcrypt/asn.h>
 #include <wolfssl/wolfcrypt/asn_public.h>
@@ -26,6 +29,7 @@ enum {
   RSA_KEY_TYPE = 1,
 };
 
+<<<<<<< HEAD
 int write_file(byte *buf, int bufSz, char *path, bool cert) {
   mode_t mode = S_IRUSR | S_IWUSR;
   ssize_t written;
@@ -38,10 +42,19 @@ int write_file(byte *buf, int bufSz, char *path, bool cert) {
   if (path) {
     fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);
     if (fd < 0) {
+=======
+int write_file(byte *buf, int bufSz, char *path) {
+  int ret;
+  FILE *file;
+  if (path) {
+    file = fopen(path, "wb");
+    if (file == NULL) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       perror("Error opening file");
       exit(1);
     }
   } else {
+<<<<<<< HEAD
     fd = STDERR_FILENO;
   }
   written = write(fd, buf, bufSz);
@@ -58,6 +71,19 @@ int write_file(byte *buf, int bufSz, char *path, bool cert) {
     close(fd);
   }
   return 0;
+=======
+    file = stdout;
+  }
+  ret = (int)fwrite(buf, 1, bufSz, file);
+  if (path) {
+    fclose(file);
+  }
+  if (ret > 0) {
+    /* ret > 0 indicates a successful file write, set to zero for return */
+    ret = 0;
+  }
+  return ret;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 int write_key(ecc_key *ecKey, RsaKey *rsaKey, int type, int keySz, char *fName,
@@ -86,9 +112,15 @@ int write_key(ecc_key *ecKey, RsaKey *rsaKey, int type, int keySz, char *fName,
       fprintf(stderr, "DER to PEM failed: %d\n", ret);
     }
     pemSz = ret;
+<<<<<<< HEAD
     ret = write_file(pem, pemSz, fName, false);
   } else {
     ret = write_file(der, derSz, fName, false);
+=======
+    ret = write_file(pem, pemSz, fName);
+  } else {
+    ret = write_file(der, derSz, fName);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   }
   return ret;
 }
@@ -155,6 +187,7 @@ int selfsigned(WC_RNG *rng, char **arg) {
   newCert.isCA = 0;
 
   while (*arg && **arg == '-') {
+<<<<<<< HEAD
     if (!strcmp(*arg, "-der")) {
       pem = false;
     } else if (!strcmp(*arg, "-newkey") && arg[1]) {
@@ -162,35 +195,66 @@ int selfsigned(WC_RNG *rng, char **arg) {
         type = RSA_KEY_TYPE;
         keySz = atoi(arg[1] + 4);
       } else if (!strcmp(arg[1], "ec")) {
+=======
+    if (!strncmp(*arg, "-der", 4)) {
+      pem = false;
+    } else if (!strncmp(*arg, "-newkey", 6) && arg[1]) {
+      if (!strncmp(arg[1], "rsa:", 4)) {
+        type = RSA_KEY_TYPE;
+        keySz = (unsigned int)atoi(arg[1] + 4);
+      } else if (!strncmp(arg[1], "ec", 2)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         type = EC_KEY_TYPE;
       } else {
         fprintf(stderr, "error: invalid algorithm\n");
         return 1;
       }
       arg++;
+<<<<<<< HEAD
     } else if (!strcmp(*arg, "-days") && arg[1]) {
       days = (unsigned int)atoi(arg[1]);
       arg++;
     } else if (!strcmp(*arg, "-pkeyopt") && arg[1]) {
+=======
+    } else if (!strncmp(*arg, "-days", 5) && arg[1]) {
+      days = (unsigned int)atoi(arg[1]);
+      arg++;
+    } else if (!strncmp(*arg, "-pkeyopt", 8) && arg[1]) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       if (strncmp(arg[1], "ec_paramgen_curve:", 18)) {
         fprintf(stderr, "error: invalid pkey option: %s\n", arg[1]);
         return 1;
       }
+<<<<<<< HEAD
       if (!strcmp(arg[1] + 18, "P-256")) {
         curve = ECC_SECP256R1;
       } else if (!strcmp(arg[1] + 18, "P-384")) {
         curve = ECC_SECP384R1;
       } else if (!strcmp(arg[1] + 18, "P-521")) {
+=======
+      if (!strncmp(arg[1] + 18, "P-256:", 5)) {
+        curve = ECC_SECP256R1;
+      } else if (!strncmp(arg[1] + 18, "P-384:", 5)) {
+        curve = ECC_SECP384R1;
+      } else if (!strncmp(arg[1] + 18, "P-521:", 5)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         curve = ECC_SECP521R1;
       } else {
         fprintf(stderr, "error: invalid curve name: %s\n", arg[1] + 18);
         return 1;
       }
       arg++;
+<<<<<<< HEAD
     } else if (!strcmp(*arg, "-keyout") && arg[1]) {
       keypath = arg[1];
       arg++;
     } else if (!strcmp(*arg, "-out") && arg[1]) {
+=======
+    } else if (!strncmp(*arg, "-keyout", 7) && arg[1]) {
+      keypath = arg[1];
+      arg++;
+    } else if (!strncmp(*arg, "-out", 4) && arg[1]) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       certpath = arg[1];
       arg++;
     } else if (!strcmp(*arg, "-subj") && arg[1]) {
@@ -216,6 +280,7 @@ int selfsigned(WC_RNG *rng, char **arg) {
             strncpy(newCert.subject.org, val, CTC_NAME_SIZE);
           else if (!strcmp(key, "OU"))
             strncpy(newCert.subject.unit, val, CTC_NAME_SIZE);
+<<<<<<< HEAD
           else if (!strcmp(key, "CN")) {
             strncpy(newCert.subject.commonName, val, CTC_NAME_SIZE);
 
@@ -233,6 +298,10 @@ int selfsigned(WC_RNG *rng, char **arg) {
             newCert.altNamesSz = strlen(val) + 4;
 #endif
           }
+=======
+          else if (!strcmp(key, "CN"))
+            strncpy(newCert.subject.commonName, val, CTC_NAME_SIZE);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
           else if (!strcmp(key, "EMAIL"))
             strncpy(newCert.subject.email, val, CTC_NAME_SIZE);
           else
@@ -244,9 +313,12 @@ int selfsigned(WC_RNG *rng, char **arg) {
   }
   newCert.daysValid = days;
 
+<<<<<<< HEAD
   newCert.keyUsage = KEYUSE_DIGITAL_SIG | KEYUSE_CONTENT_COMMIT | KEYUSE_KEY_ENCIPHER;
   newCert.extKeyUsage = EXTKEYUSE_SERVER_AUTH;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   gen_key(rng, &ecKey, &rsaKey, type, keySz, exp, curve);
   write_key(&ecKey, &rsaKey, type, keySz, keypath, pem);
 
@@ -294,7 +366,11 @@ int selfsigned(WC_RNG *rng, char **arg) {
   }
   pemSz = ret;
 
+<<<<<<< HEAD
   ret = write_file(pemBuf, pemSz, certpath, true);
+=======
+  ret = write_file(pemBuf, pemSz, certpath);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   if (ret != 0) {
     fprintf(stderr, "Write Cert failed: %d\n", ret);
     return ret;
@@ -319,18 +395,28 @@ int dokey(WC_RNG *rng, int type, char **arg) {
   bool pem = true;
 
   while (*arg && **arg == '-') {
+<<<<<<< HEAD
     if (!strcmp(*arg, "-out") && arg[1]) {
       path = arg[1];
       arg++;
     } else if (!strcmp(*arg, "-3")) {
       exp = 3;
     } else if (!strcmp(*arg, "-der")) {
+=======
+    if (!strncmp(*arg, "-out", 4) && arg[1]) {
+      path = arg[1];
+      arg++;
+    } else if (!strncmp(*arg, "-3", 2)) {
+      exp = 3;
+    } else if (!strncmp(*arg, "-der", 4)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       pem = false;
     }
     arg++;
   }
 
   if (*arg && type == RSA_KEY_TYPE) {
+<<<<<<< HEAD
     keySz = atoi(*arg);
   } else if (*arg) {
     if (!strcmp(*arg, "P-256")) {
@@ -338,6 +424,15 @@ int dokey(WC_RNG *rng, int type, char **arg) {
     } else if (!strcmp(*arg, "P-384")) {
       curve = ECC_SECP384R1;
     } else if (!strcmp(*arg, "P-521")) {
+=======
+    keySz = (unsigned int)atoi(*arg);
+  } else if (*arg) {
+    if (!strncmp(*arg, "P-256", 5)) {
+      curve = ECC_SECP256R1;
+    } else if (!strncmp(*arg, "P-384", 5)) {
+      curve = ECC_SECP384R1;
+    } else if (!strncmp(*arg, "P-521", 5)) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       curve = ECC_SECP521R1;
     } else {
       fprintf(stderr, "Invalid Curve Name: %s\n", *arg);
@@ -369,6 +464,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (argv[1]) {
+<<<<<<< HEAD
     if (!strcmp(argv[1], "eckey"))
       return dokey(&rng, EC_KEY_TYPE, argv + 2);
 
@@ -376,6 +472,15 @@ int main(int argc, char *argv[]) {
       return dokey(&rng, RSA_KEY_TYPE, argv + 2);
 
     if (!strcmp(argv[1], "selfsigned"))
+=======
+    if (!strncmp(argv[1], "eckey", 5))
+      return dokey(&rng, EC_KEY_TYPE, argv + 2);
+
+    if (!strncmp(argv[1], "rsakey", 5))
+      return dokey(&rng, RSA_KEY_TYPE, argv + 2);
+
+    if (!strncmp(argv[1], "selfsigned", 10))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
       return selfsigned(&rng, argv + 2);
   }
 

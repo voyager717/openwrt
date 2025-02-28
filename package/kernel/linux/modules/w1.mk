@@ -83,7 +83,11 @@ $(eval $(call KernelPackage,w1-master-ds2490))
 
 define KernelPackage/w1-master-mxc
   TITLE:=Freescale MXC 1-wire busmaster
+<<<<<<< HEAD
   DEPENDS:=@TARGET_imx
+=======
+  DEPENDS:=@TARGET_imx6
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   KCONFIG:=CONFIG_W1_MASTER_MXC
   FILES:=$(W1_MASTERS_DIR)/mxc_w1.ko
   AUTOLOAD:=$(call AutoProbe,mxc_w1)
@@ -160,6 +164,26 @@ endef
 $(eval $(call KernelPackage,w1-slave-ds2433))
 
 
+<<<<<<< HEAD
+=======
+define KernelPackage/w1-slave-ds2760
+  TITLE:=Dallas 2760 battery monitor chip (HP iPAQ & others)
+  KCONFIG:= \
+	CONFIG_W1_SLAVE_DS2760 \
+	CONFIG_W1_SLAVE_DS2433_CRC=n
+  FILES:=$(W1_SLAVES_DIR)/w1_ds2760.ko
+  AUTOLOAD:=$(call AutoProbe,w1_ds2760)
+  $(call AddDepends/w1)
+endef
+
+define KernelPackage/w1-slave-ds2760/description
+ Kernel module for 1-wire DS2760 battery monitor chip support
+endef
+
+$(eval $(call KernelPackage,w1-slave-ds2760))
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define KernelPackage/w1-slave-ds2413
   TITLE:=DS2413 2 Ch. Addressable Switch
   KCONFIG:= \

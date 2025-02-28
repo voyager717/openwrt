@@ -1,6 +1,7 @@
 # DO NOT EDIT. This file is generated from Config.src
 menu "Mail Utilities"
 
+<<<<<<< HEAD
 config BUSYBOX_CONFIG_FEATURE_MIME_CHARSET
 	string "Default charset"
 	default BUSYBOX_DEFAULT_FEATURE_MIME_CHARSET
@@ -10,11 +11,19 @@ config BUSYBOX_CONFIG_FEATURE_MIME_CHARSET
 
 config BUSYBOX_CONFIG_MAKEMIME
 	bool "makemime (5.6 kb)"
+=======
+config BUSYBOX_CONFIG_MAKEMIME
+	bool "makemime (5.4 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_MAKEMIME
 	help
 	Create MIME-formatted messages.
 config BUSYBOX_CONFIG_POPMAILDIR
+<<<<<<< HEAD
 	bool "popmaildir (11 kb)"
+=======
+	bool "popmaildir (10 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_POPMAILDIR
 	help
 	Simple yet powerful POP3 mail popper. Delivers content
@@ -30,7 +39,11 @@ config BUSYBOX_CONFIG_FEATURE_POPMAILDIR_DELIVERY
 	Allow to use a custom program for message actual delivery
 	(-M "prog [args...]").
 config BUSYBOX_CONFIG_REFORMIME
+<<<<<<< HEAD
 	bool "reformime (7.6 kb)"
+=======
+	bool "reformime (7.5 kb)"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	default BUSYBOX_DEFAULT_REFORMIME
 	help
 	Parse MIME-formatted messages.
@@ -48,4 +61,14 @@ config BUSYBOX_CONFIG_SENDMAIL
 	help
 	Barebones sendmail.
 
+<<<<<<< HEAD
+=======
+config BUSYBOX_CONFIG_FEATURE_MIME_CHARSET
+	string "Default charset"
+	default BUSYBOX_DEFAULT_FEATURE_MIME_CHARSET
+	depends on BUSYBOX_CONFIG_MAKEMIME || BUSYBOX_CONFIG_REFORMIME || BUSYBOX_CONFIG_SENDMAIL
+	help
+	Default charset of the message.
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endmenu

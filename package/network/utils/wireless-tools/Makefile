@@ -8,7 +8,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wireless-tools
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:wireless_tools_project:wireless_tools
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_VERSION:=29
 PKG_MINOR:=
 PKG_RELEASE:=6

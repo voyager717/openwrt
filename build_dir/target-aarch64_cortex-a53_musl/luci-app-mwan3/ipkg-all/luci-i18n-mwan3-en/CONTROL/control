@@ -1,0 +1,12 @@
+Package: luci-i18n-mwan3-en
+Version: git-22.240.58472-bdaec14
+Depends: libc, luci-app-mwan3
+Source: feeds/luci/applications/luci-app-mwan3
+SourceName: luci-i18n-mwan3-en
+License: GPLv2
+Section: luci
+SourceDateEpoch: 1661703272
+Maintainer: Aedan Renner <chipdankly@gmail.com> Florian Eckert <fe@dev.tdt.de>
+Architecture: all
+Installed-Size: 439
+Description:  Translation for luci-app-mwan3 - English

@@ -1,6 +1,10 @@
 --- a/bin/aclocal.in
 +++ b/bin/aclocal.in
+<<<<<<< HEAD
 @@ -371,6 +371,12 @@ sub scan_m4_dirs ($$@)
+=======
+@@ -356,6 +356,12 @@ sub scan_m4_dirs ($$@)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
    foreach my $m4dir (@dirlist)
      {

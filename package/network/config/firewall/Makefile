@@ -9,6 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=firewall
+<<<<<<< HEAD
 PKG_RELEASE:=2
 
 PKG_SOURCE_PROTO:=git
@@ -16,13 +17,25 @@ PKG_SOURCE_URL=$(PROJECT_GIT)/project/firewall3.git
 PKG_SOURCE_DATE:=2024-10-18
 PKG_SOURCE_VERSION:=1aef9791a21e3d15d4357060f09a7bb9ed3d6e4e
 PKG_MIRROR_HASH:=61a4f03a34edf5bf25c13b7ae04e4be40ecbaebff77b9f2d1e730dcaa2c77143
+=======
+PKG_RELEASE:=1.1
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL=$(PROJECT_GIT)/project/firewall3.git
+PKG_SOURCE_DATE:=2021-03-23
+PKG_SOURCE_VERSION:=61db17edddb1f05e8107f0dbef6f7d060ce67483
+PKG_MIRROR_HASH:=b2eb09816640e14e2dae21fb54ea05c33858fe0004844fe8d99e541a2e19e9c0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 PKG_LICENSE:=ISC
 
 PKG_CONFIG_DEPENDS := CONFIG_IPV6
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=gc-sections lto
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
@@ -30,9 +43,13 @@ define Package/firewall
   SECTION:=net
   CATEGORY:=Base system
   TITLE:=OpenWrt C Firewall
+<<<<<<< HEAD
   DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libiptext +IPV6:libiptext6 +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +kmod-ipt-nat
   PROVIDES:=uci-firewall
   CONFLICTS:=firewall4
+=======
+  DEPENDS:=+libubox +libubus +libuci +libip4tc +IPV6:libip6tc +libxtables +kmod-ipt-core +kmod-ipt-conntrack +IPV6:kmod-nf-conntrack6 +kmod-ipt-nat
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/firewall/description
@@ -44,6 +61,11 @@ define Package/firewall/conffiles
 /etc/firewall.user
 endef
 
+<<<<<<< HEAD
+=======
+TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto
+TARGET_LDFLAGS += -Wl,--gc-sections -flto
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CMAKE_OPTIONS += $(if $(CONFIG_IPV6),,-DDISABLE_IPV6=1)
 
 define Package/firewall/install

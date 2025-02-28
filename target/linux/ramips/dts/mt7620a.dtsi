@@ -5,12 +5,15 @@
 	#size-cells = <1>;
 	compatible = "ralink,mt7620a-soc";
 
+<<<<<<< HEAD
 	aliases {
 		spi0 = &spi0;
 		spi1 = &spi1;
 		serial0 = &uartlite;
 	};
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	cpus {
 		#address-cells = <1>;
 		#size-cells = <0>;
@@ -32,6 +35,7 @@
 		compatible = "mti,cpu-interrupt-controller";
 	};
 
+<<<<<<< HEAD
 	mmc_reg_1v8: regulator-1v8 {
 		compatible = "regulator-fixed";
 
@@ -52,6 +56,12 @@
 		regulator-max-microvolt = <3300000>;
 		regulator-min-microvolt = <3300000>;
 		regulator-name = "mmc_power";
+=======
+	aliases {
+		spi0 = &spi0;
+		spi1 = &spi1;
+		serial0 = &uartlite;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	palmbus: palmbus@10000000 {
@@ -62,6 +72,7 @@
 		#address-cells = <1>;
 		#size-cells = <1>;
 
+<<<<<<< HEAD
 		sysc: syscon@0 {
 			compatible = "ralink,mt7620-sysc", "syscon";
 			reg = <0x0 0x100>;
@@ -75,17 +86,35 @@
 
 			clocks = <&sysc 7>;
 
+=======
+		sysc: sysc@0 {
+			compatible = "ralink,mt7620a-sysc", "ralink,rt3050-sysc", "syscon";
+			reg = <0x0 0x100>;
+		};
+
+		timer: timer@100 {
+			compatible = "ralink,mt7620a-timer", "ralink,rt2880-timer";
+			reg = <0x100 0x20>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-parent = <&intc>;
 			interrupts = <1>;
 		};
 
 		watchdog: watchdog@120 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-wdt";
 			reg = <0x120 0x10>;
 
 			clocks = <&sysc 8>;
 
 			resets = <&sysc 8>;
+=======
+			compatible = "ralink,mt7620a-wdt", "ralink,rt2880-wdt";
+			reg = <0x120 0x10>;
+
+			resets = <&rstctrl 8>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "wdt";
 
 			interrupt-parent = <&intc>;
@@ -93,9 +122,18 @@
 		};
 
 		intc: intc@200 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-intc";
 			reg = <0x200 0x100>;
 
+=======
+			compatible = "ralink,mt7620a-intc", "ralink,rt2880-intc";
+			reg = <0x200 0x100>;
+
+			resets = <&rstctrl 19>;
+			reset-names = "intc";
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-controller;
 			#interrupt-cells = <1>;
 
@@ -107,6 +145,12 @@
 			compatible = "ralink,mt7620a-memc", "ralink,rt3050-memc";
 			reg = <0x300 0x100>;
 
+<<<<<<< HEAD
+=======
+			resets = <&rstctrl 20>;
+			reset-names = "mc";
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-parent = <&intc>;
 			interrupts = <3>;
 		};
@@ -115,9 +159,14 @@
 			compatible = "ralink,mt7620a-uart", "ralink,rt2880-uart", "ns16550a";
 			reg = <0x500 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 9>;
 
 			resets = <&sysc 12>;
+=======
+			resets = <&rstctrl 12>;
+			reset-names = "uart";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			interrupt-parent = <&intc>;
 			interrupts = <5>;
@@ -128,6 +177,7 @@
 		};
 
 		gpio0: gpio@600 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
 			reg = <0x600 0x34>;
 
@@ -135,29 +185,56 @@
 			interrupts = <6>;
 			interrupt-controller;
 			#interrupt-cells = <2>;
+=======
+			compatible = "ralink,mt7620a-gpio", "ralink,rt2880-gpio";
+			reg = <0x600 0x34>;
+
+			resets = <&rstctrl 13>;
+			reset-names = "pio";
+
+			interrupt-parent = <&intc>;
+			interrupts = <6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			ngpios = <24>;
+=======
+			ralink,gpio-base = <0>;
+			ralink,num-gpios = <24>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						20 24 28 2c
 						30 34 ];
 		};
 
 		gpio1: gpio@638 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
+=======
+			compatible = "ralink,mt7620a-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x638 0x24>;
 
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
+<<<<<<< HEAD
 			interrupt-controller;
 			#interrupt-cells = <2>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			ngpios = <16>;
+=======
+			ralink,gpio-base = <24>;
+			ralink,num-gpios = <16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						10 14 18 1c
 						20 24 ];
@@ -166,18 +243,30 @@
 		};
 
 		gpio2: gpio@660 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
+=======
+			compatible = "ralink,mt7620a-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x660 0x24>;
 
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
+<<<<<<< HEAD
 			interrupt-controller;
 			#interrupt-cells = <2>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			ngpios = <32>;
+=======
+			ralink,gpio-base = <40>;
+			ralink,num-gpios = <32>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						10 14 18 1c
 						20 24 ];
@@ -186,18 +275,30 @@
 		};
 
 		gpio3: gpio@688 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-gpio";
+=======
+			compatible = "ralink,mt7620a-gpio", "ralink,rt2880-gpio";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <0x688 0x24>;
 
 			interrupt-parent = <&intc>;
 			interrupts = <6>;
+<<<<<<< HEAD
 			interrupt-controller;
 			#interrupt-cells = <2>;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			gpio-controller;
 			#gpio-cells = <2>;
 
+<<<<<<< HEAD
 			ngpios = <1>;
+=======
+			ralink,gpio-base = <72>;
+			ralink,num-gpios = <1>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ralink,register-map = [ 00 04 08 0c
 						10 14 18 1c
 						20 24 ];
@@ -209,9 +310,13 @@
 			compatible = "ralink,rt2880-i2c";
 			reg = <0x900 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 10>;
 
 			resets = <&sysc 16>;
+=======
+			resets = <&rstctrl 16>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "i2c";
 
 			#address-cells = <1>;
@@ -227,9 +332,13 @@
 			compatible = "mediatek,mt7620-i2s";
 			reg = <0xa00 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 11>;
 
 			resets = <&sysc 17>;
+=======
+			resets = <&rstctrl 17>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "i2s";
 
 			interrupt-parent = <&intc>;
@@ -246,12 +355,19 @@
 		};
 
 		spi0: spi@b00 {
+<<<<<<< HEAD
 			compatible = "ralink,rt2880-spi";
 			reg = <0xb00 0x40>;
 
 			clocks = <&sysc 12>;
 
 			resets = <&sysc 18>;
+=======
+			compatible = "ralink,mt7620a-spi", "ralink,rt2880-spi";
+			reg = <0xb00 0x40>;
+
+			resets = <&rstctrl 18>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "spi";
 
 			#address-cells = <1>;
@@ -267,9 +383,13 @@
 			compatible = "ralink,rt2880-spi";
 			reg = <0xb40 0x60>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 13>;
 
 			resets = <&sysc 18>;
+=======
+			resets = <&rstctrl 18>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "spi";
 
 			#address-cells = <1>;
@@ -285,9 +405,14 @@
 			compatible = "ralink,mt7620a-uart", "ralink,rt2880-uart", "ns16550a";
 			reg = <0xc00 0x100>;
 
+<<<<<<< HEAD
 			clocks = <&sysc 14>;
 
 			resets = <&sysc 19>;
+=======
+			resets = <&rstctrl 19>;
+			reset-names = "uartl";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			interrupt-parent = <&intc>;
 			interrupts = <12>;
@@ -302,6 +427,12 @@
 			compatible = "ralink,mt7620a-systick", "ralink,cevt-systick";
 			reg = <0xd00 0x10>;
 
+<<<<<<< HEAD
+=======
+			resets = <&rstctrl 28>;
+			reset-names = "intc";
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			interrupt-parent = <&cpuintc>;
 			interrupts = <7>;
 		};
@@ -310,7 +441,11 @@
 			compatible = "ralink,mt7620a-pcm";
 			reg = <0x2000 0x800>;
 
+<<<<<<< HEAD
 			resets = <&sysc 11>;
+=======
+			resets = <&rstctrl 11>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "pcm";
 
 			interrupt-parent = <&intc>;
@@ -320,10 +455,17 @@
 		};
 
 		gdma: gdma@2800 {
+<<<<<<< HEAD
 			compatible = "ralink,rt3883-gdma";
 			reg = <0x2800 0x800>;
 
 			resets = <&sysc 14>;
+=======
+			compatible = "ralink,mt7620a-gdma", "ralink,rt3883-gdma";
+			reg = <0x2800 0x800>;
+
+			resets = <&rstctrl 14>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reset-names = "dma";
 
 			interrupt-parent = <&intc>;
@@ -450,6 +592,7 @@
 			};
 		};
 
+<<<<<<< HEAD
 		pa_gpio_pins: pa_gpio {
 			pa {
 				groups = "pa";
@@ -457,6 +600,8 @@
 			};
 		};
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		sdhci_pins: sdhci {
 			sdhci {
 				groups = "nd_sd";
@@ -465,14 +610,35 @@
 		};
 	};
 
+<<<<<<< HEAD
+=======
+	rstctrl: rstctrl {
+		compatible = "ralink,mt7620a-reset", "ralink,rt2880-reset";
+		#reset-cells = <1>;
+	};
+
+	clkctrl: clkctrl {
+		compatible = "ralink,rt2880-clock";
+		#clock-cells = <1>;
+	};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	usbphy: usbphy {
 		compatible = "mediatek,mt7620-usbphy";
 		#phy-cells = <0>;
 
 		ralink,sysctl = <&sysc>;
+<<<<<<< HEAD
 		/* usb phy reset is only controled by RSTCTRL bit 25 */
 		resets = <&sysc 25>, <&sysc 22>;
 		reset-names = "host", "device";
+=======
+		resets = <&rstctrl 22 &rstctrl 25>;
+		reset-names = "host", "device";
+
+		clocks = <&clkctrl 22 &clkctrl 25>;
+		clock-names = "host", "device";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	ethernet: ethernet@10100000 {
@@ -485,20 +651,32 @@
 		interrupt-parent = <&cpuintc>;
 		interrupts = <5>;
 
+<<<<<<< HEAD
 		resets = <&sysc 21>, <&sysc 23>;
+=======
+		resets = <&rstctrl 21 &rstctrl 23>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		reset-names = "fe", "esw";
 
 		mediatek,switch = <&gsw>;
 
 		port@4 {
+<<<<<<< HEAD
 			compatible = "mediatek,eth-port";
+=======
+			compatible = "mediatek,mt7620a-gsw-port", "mediatek,eth-port";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <4>;
 
 			status = "disabled";
 		};
 
 		port@5 {
+<<<<<<< HEAD
 			compatible = "mediatek,eth-port";
+=======
+			compatible = "mediatek,mt7620a-gsw-port", "mediatek,eth-port";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			reg = <5>;
 
 			status = "disabled";
@@ -516,13 +694,19 @@
 		compatible = "mediatek,mt7620-gsw";
 		reg = <0x10110000 0x8000>;
 
+<<<<<<< HEAD
 		resets = <&sysc 24>;
 		reset-names = "ephy";
+=======
+		resets = <&rstctrl 23>;
+		reset-names = "esw";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		interrupt-parent = <&intc>;
 		interrupts = <17>;
 	};
 
+<<<<<<< HEAD
 	sdhci: mmc@10130000 {
 		compatible = "mediatek,mt7620-mmc", "ralink,mt7620-sdhci";
 		reg = <0x10130000 0x4000>;
@@ -551,6 +735,17 @@
 
 		vmmc-supply = <&mmc_reg_3v3>;
 		vqmmc-supply = <&mmc_reg_1v8>;
+=======
+	sdhci: sdhci@10130000 {
+		compatible = "ralink,mt7620-sdhci";
+		reg = <0x10130000 0x4000>;
+
+		interrupt-parent = <&intc>;
+		interrupts = <14>;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&sdhci_pins>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		status = "disabled";
 	};
@@ -603,9 +798,18 @@
 		#address-cells = <3>;
 		#size-cells = <2>;
 
+<<<<<<< HEAD
 		resets = <&sysc 26>;
 		reset-names = "pcie0";
 
+=======
+		resets = <&rstctrl 26>;
+		reset-names = "pcie0";
+
+		clocks = <&clkctrl 26>;
+		clock-names = "pcie0";
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		interrupt-parent = <&cpuintc>;
 		interrupts = <4>;
 
@@ -638,8 +842,11 @@
 		compatible = "ralink,rt7620-wmac", "ralink,rt2880-wmac";
 		reg = <0x10180000 0x40000>;
 
+<<<<<<< HEAD
 		clocks = <&sysc 16>;
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		interrupt-parent = <&cpuintc>;
 		interrupts = <6>;
 

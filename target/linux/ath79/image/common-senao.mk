@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 DEVICE_VARS += SENAO_IMGNAME WATCHGUARD_MAGIC
 
 # This needs to make OEM config archive 'sysupgrade.tgz' an empty file prior to OEM
+=======
+DEVICE_VARS += SENAO_IMGNAME
+
+# This needs to make /tmp/_sys/sysupgrade.tgz an empty file prior to
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 # sysupgrade, as otherwise it will implant the old configuration from
 # OEM firmware when writing rootfs from factory.bin
 # rootfs size and checksum is taken from a squashfs header
@@ -9,9 +15,13 @@ define Build/senao-tar-gz
 	-[ -f "$@" ] && \
 	mkdir -p $@.tmp && \
 	touch $@.tmp/failsafe.bin && \
+<<<<<<< HEAD
 	touch $@.tmp/FWINFO-$(word 1,$(1))-$(REVISION) && \
 	echo '#!/bin/sh' > $@.tmp/before-upgrade.sh && \
 	echo ': > /tmp/sysupgrade.tgz' >> $@.tmp/before-upgrade.sh && \
+=======
+	echo '#!/bin/sh' > $@.tmp/before-upgrade.sh && \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	echo ': > /tmp/_sys/sysupgrade.tgz' >> $@.tmp/before-upgrade.sh && \
 	echo -n $$(( $$(cat $@ | wc -c) / 4096 * 4096 )) > $@.len && \
 	dd if=$@ bs=$$(cat $@.len) count=1 | md5sum - | cut -d ' ' -f 1 > $@.md5 && \
@@ -27,6 +37,7 @@ define Build/senao-tar-gz
 	rm -rf $@.tmp $@.len $@.md5
 endef
 
+<<<<<<< HEAD
 define Build/watchguard-cksum
 	-echo -n $(word 1,$(1)) | cat $@ - | md5sum | \
 		cut -d ' ' -f1 | tr -d '\n' > $@.md5 && \
@@ -39,6 +50,16 @@ define Device/senao_loader_okli
   KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x73714f4b
   KERNEL_INITRAMFS := kernel-bin | append-dtb | lzma | loader-kernel | uImage none
   LOADER_KERNEL_MAGIC := 0x73714f4b
+=======
+define Device/senao_loader_okli
+  KERNEL := kernel-bin | append-dtb | lzma | uImage lzma -M 0x73714f4b
+  LOADER_KERNEL_MAGIC := 0x73714f4b
+  LOADER_TYPE := bin
+  COMPILE := loader-$(1).bin loader-$(1).uImage
+  COMPILE/loader-$(1).bin := loader-okli-compile
+  COMPILE/loader-$(1).uImage := append-loader-okli $(1) | pad-to 64k | lzma | \
+	uImage lzma
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   IMAGES += factory.bin
   IMAGE/factory.bin := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs | \
 	check-size | senao-tar-gz $$$$(SENAO_IMGNAME)

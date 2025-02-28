@@ -1,6 +1,10 @@
 --- a/configure
 +++ b/configure
+<<<<<<< HEAD
 @@ -342,7 +342,7 @@ check_libbpf()
+=======
+@@ -354,7 +354,7 @@ check_libbpf()
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  check_selinux()
  # SELinux is a compile time option in the ss utility
  {

@@ -8,12 +8,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=valgrind
+<<<<<<< HEAD
 PKG_VERSION:=3.23.0
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://sourceware.org/pub/valgrind/
 PKG_HASH:=c5c34a3380457b9b75606df890102e7df2c702b9420c2ebef9540f8b5d56264d
+=======
+PKG_VERSION:=3.16.1
+PKG_RELEASE:=1
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE_URL:=http://sourceware.org/pub/valgrind/
+PKG_HASH:=c91f3a2f7b02db0f3bc99479861656154d241d2fdb265614ba918cc6720a33ca
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=GPL-2.0+
@@ -22,7 +31,11 @@ PKG_CPE_ID:=cpe:/a:valgrind:valgrind
 PKG_FIXUP = autoreconf
 PKG_INSTALL := 1
 PKG_BUILD_PARALLEL := 1
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=no-mips16
+=======
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_SSP:=0
 
 STRIP:=:
@@ -33,7 +46,11 @@ include $(INCLUDE_DIR)/kernel.mk
 define Package/valgrind
   SECTION:=devel
   CATEGORY:=Development
+<<<<<<< HEAD
   DEPENDS:=@mips||mipsel||mips64||mips64el||i386||x86_64||powerpc||arm_v7||aarch64 +libpthread +librt
+=======
+  DEPENDS:=@mips||mipsel||i386||x86_64||powerpc||arm_v7||aarch64 +libpthread +librt
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=debugging and profiling tools for Linux
   URL:=http://www.valgrind.org
 endef
@@ -97,6 +114,7 @@ else
 	BITS := 32bit
 endif
 
+<<<<<<< HEAD
 ifeq ($(CONFIG_arm_v7),y)
 	CONFIGURE_ARGS += --host=armv7-openwrt-linux$(if $(TARGET_SUFFIX),-$(TARGET_SUFFIX))
 endif
@@ -105,6 +123,19 @@ CONFIGURE_ARGS += \
 	--enable-lto \
 	--enable-tls \
 	--without-mpicc \
+=======
+CONFIGURE_ARGS += \
+	--enable-lto \
+	--enable-tls \
+	--without-x \
+	--without-mpicc \
+	--without-uiout \
+	--disable-valgrindmi \
+	--disable-tui \
+	--disable-valgrindtk \
+	--without-included-gettext \
+	--with-pagesize=4 \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Package/valgrind/install
 	$(INSTALL_DIR) $(1)/usr/bin

@@ -2,7 +2,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 / {
 	compatible = "dlink,dir-610-a1", "ralink,rt5350-soc";
@@ -19,20 +22,33 @@
 		compatible = "gpio-leds";
 
 		led_status: status {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 		};
 	};
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -67,6 +83,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@30000 {
 				label = "devdata";
 				reg = <0x30000 0x10000>;
@@ -88,6 +105,15 @@
 			};
 
 			partition@40000 {
+=======
+			devdata: partition@30000 {
+				label = "devdata";
+				reg = <0x30000 0x10000>;
+				read-only;
+			};
+
+			factory: partition@40000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "factory";
 				reg = <0x40000 0x10000>;
 				read-only;
@@ -110,8 +136,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_devdata_4004>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&devdata 0x4004>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -121,7 +151,13 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	ralink,led-polarity = <1>;
 	nvmem-cells = <&eeprom_devdata_4000>;
 	nvmem-cell-names = "eeprom";
+=======
+	status = "okay";
+	ralink,led-polarity = <1>;
+	ralink,mtd-eeprom = <&devdata 0x4000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

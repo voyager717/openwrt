@@ -128,6 +128,7 @@
 #define AR9300_OTP_STATUS_SM_BUSY	0x1
 #define AR9300_OTP_READ_DATA	0x15f1c
 
+<<<<<<< HEAD
 #define QCA955X_OTP_BASE        (AR71XX_APB_BASE + 0x00130000)
 #define QCA955X_OTP_REG_MEM_0	0x0000
 #define QCA955X_OTP_REG_INTF2	0x1008
@@ -139,6 +140,8 @@
 #define QCA955X_OTP_REG_LDO_STATUS	0x102c
 #define QCA955X_OTP_LDO_STATUS_POWER_ON		BIT(0)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*
  * DDR_CTRL block
  */
@@ -355,7 +358,10 @@
 
 #define QCA955X_RESET_REG_BOOTSTRAP		0xb0
 #define QCA955X_RESET_REG_EXT_INT_STATUS	0xac
+<<<<<<< HEAD
 #define QCA955X_RESET_REG_RESET_MODULE		0x1c
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #define MISC_INT_ETHSW			BIT(12)
 #define MISC_INT_TIMER4			BIT(10)
@@ -448,9 +454,12 @@
 #define AR934X_RESET_MBOX		BIT(1)
 #define AR934X_RESET_I2S		BIT(0)
 
+<<<<<<< HEAD
 #define QCA955X_RESET_SGMII_ANALOG	BIT(12)
 #define QCA955X_RESET_SGMII		BIT(8)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #define AR933X_BOOTSTRAP_MDIO_GPIO_EN	BIT(18)
 #define AR933X_BOOTSTRAP_EEPBUSY	BIT(4)
 #define AR933X_BOOTSTRAP_REF_CLK_40	BIT(0)
@@ -670,9 +679,12 @@
 #define AR934X_GPIO_FUNC_SPI_CS_0_EN	BIT(13)
 
 #define AR934X_GPIO_OUT_GPIO		0x00
+<<<<<<< HEAD
 #define AR934X_GPIO_OUTSEL_CLK_OBS4 0x14
 
 #define QCA955X_GPIO_OUTSEL_CLK_OBS5		0x54
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*
  * MII_CTRL block
@@ -740,8 +752,11 @@
 #define QCA955X_ETH_CFG_RGMII_GMAC0	BIT(0)
 #define QCA955X_ETH_CFG_SGMII_GMAC0	BIT(6)
 
+<<<<<<< HEAD
 #define QCA955X_GMAC_REG_SGMII_SERDES	0x0018
 #define QCA955X_GMAC_REG_MR_AN_CONTROL	0x1c
 #define QCA955X_GMAC_REG_SGMII_CONFIG	0x34
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #endif /* __ASM_MACH_AR71XX_REGS_H */

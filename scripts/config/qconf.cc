@@ -4,6 +4,7 @@
  * Copyright (C) 2015 Boris Barbulovski <bbarbulovski@gmail.com>
  */
 
+<<<<<<< HEAD
 #include <QAction>
 #include <QActionGroup>
 #include <QApplication>
@@ -19,12 +20,39 @@
 #include <QRegularExpression>
 #include <QScreen>
 #include <QToolBar>
+=======
+#include <qglobal.h>
+
+#include <QMainWindow>
+#include <QList>
+#include <qtextbrowser.h>
+#include <QAction>
+#include <QFileDialog>
+#include <QMenu>
+
+#include <qapplication.h>
+#include <qdesktopwidget.h>
+#include <qtoolbar.h>
+#include <qlayout.h>
+#include <qsplitter.h>
+#include <qlineedit.h>
+#include <qlabel.h>
+#include <qpushbutton.h>
+#include <qmenubar.h>
+#include <qmessagebox.h>
+#include <qregexp.h>
+#include <qevent.h>
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include <stdlib.h>
 
 #include "lkc.h"
 #include "qconf.h"
 
+<<<<<<< HEAD
+=======
+#include "qconf.moc"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "images.h"
 
 
@@ -33,6 +61,14 @@ static ConfigSettings *configSettings;
 
 QAction *ConfigMainWindow::saveAction;
 
+<<<<<<< HEAD
+=======
+static inline QString qgettext(const char* str)
+{
+	return QString::fromLocal8Bit(str);
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ConfigSettings::ConfigSettings()
 	: QSettings("kernel.org", "qconf")
 {
@@ -76,6 +112,7 @@ bool ConfigSettings::writeSizes(const QString& key, const QList<int>& value)
 	return true;
 }
 
+<<<<<<< HEAD
 QIcon ConfigItem::symbolYesIcon;
 QIcon ConfigItem::symbolModIcon;
 QIcon ConfigItem::symbolNoIcon;
@@ -83,6 +120,16 @@ QIcon ConfigItem::choiceYesIcon;
 QIcon ConfigItem::choiceNoIcon;
 QIcon ConfigItem::menuIcon;
 QIcon ConfigItem::menubackIcon;
+=======
+
+/*
+ * set the new data
+ * TODO check the value
+ */
+void ConfigItem::okRename(int col)
+{
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 /*
  * update the displayed of a menu entry
@@ -98,14 +145,22 @@ void ConfigItem::updateMenu(void)
 
 	list = listView();
 	if (goParent) {
+<<<<<<< HEAD
 		setIcon(promptColIdx, menubackIcon);
+=======
+		setPixmap(promptColIdx, list->menuBackPix);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		prompt = "..";
 		goto set_prompt;
 	}
 
 	sym = menu->sym;
 	prop = menu->prompt;
+<<<<<<< HEAD
 	prompt = menu_get_prompt(menu);
+=======
+	prompt = qgettext(menu_get_prompt(menu));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (prop) switch (prop->type) {
 	case P_MENU:
@@ -115,6 +170,7 @@ void ConfigItem::updateMenu(void)
 			 */
 			if (sym && list->rootEntry == menu)
 				break;
+<<<<<<< HEAD
 			setIcon(promptColIdx, menuIcon);
 		} else {
 			if (sym)
@@ -125,6 +181,17 @@ void ConfigItem::updateMenu(void)
 	case P_COMMENT:
 		setIcon(promptColIdx, QIcon());
 		prompt = "*** " + prompt + " ***";
+=======
+			setPixmap(promptColIdx, list->menuPix);
+		} else {
+			if (sym)
+				break;
+			setPixmap(promptColIdx, QIcon());
+		}
+		goto set_prompt;
+	case P_COMMENT:
+		setPixmap(promptColIdx, QIcon());
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		goto set_prompt;
 	default:
 		;
@@ -132,7 +199,11 @@ void ConfigItem::updateMenu(void)
 	if (!sym)
 		goto set_prompt;
 
+<<<<<<< HEAD
 	setText(nameColIdx, sym->name);
+=======
+	setText(nameColIdx, QString::fromLocal8Bit(sym->name));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	type = sym_get_type(sym);
 	switch (type) {
@@ -141,13 +212,21 @@ void ConfigItem::updateMenu(void)
 		char ch;
 
 		if (!sym_is_changeable(sym) && list->optMode == normalOpt) {
+<<<<<<< HEAD
 			setIcon(promptColIdx, QIcon());
+=======
+			setPixmap(promptColIdx, QIcon());
+			setText(noColIdx, QString::null);
+			setText(modColIdx, QString::null);
+			setText(yesColIdx, QString::null);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		}
 		expr = sym_get_tristate_value(sym);
 		switch (expr) {
 		case yes:
 			if (sym_is_choice_value(sym) && type == S_BOOLEAN)
+<<<<<<< HEAD
 				setIcon(promptColIdx, choiceYesIcon);
 			else
 				setIcon(promptColIdx, symbolYesIcon);
@@ -155,23 +234,62 @@ void ConfigItem::updateMenu(void)
 			break;
 		case mod:
 			setIcon(promptColIdx, symbolModIcon);
+=======
+				setPixmap(promptColIdx, list->choiceYesPix);
+			else
+				setPixmap(promptColIdx, list->symbolYesPix);
+			setText(yesColIdx, "Y");
+			ch = 'Y';
+			break;
+		case mod:
+			setPixmap(promptColIdx, list->symbolModPix);
+			setText(modColIdx, "M");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			ch = 'M';
 			break;
 		default:
 			if (sym_is_choice_value(sym) && type == S_BOOLEAN)
+<<<<<<< HEAD
 				setIcon(promptColIdx, choiceNoIcon);
 			else
 				setIcon(promptColIdx, symbolNoIcon);
 			ch = 'N';
 			break;
 		}
+=======
+				setPixmap(promptColIdx, list->choiceNoPix);
+			else
+				setPixmap(promptColIdx, list->symbolNoPix);
+			setText(noColIdx, "N");
+			ch = 'N';
+			break;
+		}
+		if (expr != no)
+			setText(noColIdx, sym_tristate_within_range(sym, no) ? "_" : 0);
+		if (expr != mod)
+			setText(modColIdx, sym_tristate_within_range(sym, mod) ? "_" : 0);
+		if (expr != yes)
+			setText(yesColIdx, sym_tristate_within_range(sym, yes) ? "_" : 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		setText(dataColIdx, QChar(ch));
 		break;
 	case S_INT:
 	case S_HEX:
 	case S_STRING:
+<<<<<<< HEAD
 		setText(dataColIdx, sym_get_string_value(sym));
+=======
+		const char* data;
+
+		data = sym_get_string_value(sym);
+
+		setText(dataColIdx, data);
+		if (type == S_STRING)
+			prompt = QString("%1: %2").arg(prompt).arg(data);
+		else
+			prompt = QString("(%2) %1").arg(prompt).arg(data);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	}
 	if (!sym_has_value(sym) && visible)
@@ -212,6 +330,7 @@ void ConfigItem::init(void)
 		if (list->mode != fullMode)
 			setExpanded(true);
 		sym_calc_value(menu->sym);
+<<<<<<< HEAD
 
 		if (menu->sym) {
 			enum symbol_type type = menu->sym->type;
@@ -223,6 +342,8 @@ void ConfigItem::init(void)
 			if (type == S_INT || type == S_HEX || type == S_STRING)
 				setFlags(flags() | Qt::ItemIsEditable);
 		}
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	updateMenu();
 }
@@ -243,6 +364,7 @@ ConfigItem::~ConfigItem(void)
 	}
 }
 
+<<<<<<< HEAD
 QWidget *ConfigItemDelegate::createEditor(QWidget *parent,
 					  const QStyleOptionViewItem &option,
 					  const QModelIndex &index) const
@@ -304,6 +426,55 @@ ConfigList::ConfigList(QWidget *parent, const char *name)
 	  showName(false), mode(singleMode), optMode(normalOpt),
 	  rootEntry(0), headerPopup(0)
 {
+=======
+ConfigLineEdit::ConfigLineEdit(ConfigView* parent)
+	: Parent(parent)
+{
+	connect(this, SIGNAL(editingFinished()), SLOT(hide()));
+}
+
+void ConfigLineEdit::show(ConfigItem* i)
+{
+	item = i;
+	if (sym_get_string_value(item->menu->sym))
+		setText(QString::fromLocal8Bit(sym_get_string_value(item->menu->sym)));
+	else
+		setText(QString::null);
+	Parent::show();
+	setFocus();
+}
+
+void ConfigLineEdit::keyPressEvent(QKeyEvent* e)
+{
+	switch (e->key()) {
+	case Qt::Key_Escape:
+		break;
+	case Qt::Key_Return:
+	case Qt::Key_Enter:
+		sym_set_string_value(item->menu->sym, text().toLatin1());
+		parent()->updateList(item);
+		break;
+	default:
+		Parent::keyPressEvent(e);
+		return;
+	}
+	e->accept();
+	parent()->list->setFocus();
+	hide();
+}
+
+ConfigList::ConfigList(ConfigView* p, const char *name)
+	: Parent(p),
+	  updateAll(false),
+	  symbolYesPix(xpm_symbol_yes), symbolModPix(xpm_symbol_mod), symbolNoPix(xpm_symbol_no),
+	  choiceYesPix(xpm_choice_yes), choiceNoPix(xpm_choice_no),
+	  menuPix(xpm_menu), menuInvPix(xpm_menu_inv), menuBackPix(xpm_menuback), voidPix(xpm_void),
+	  showName(false), showRange(false), showData(false), mode(singleMode), optMode(normalOpt),
+	  rootEntry(0), headerPopup(0)
+{
+	int i;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	setObjectName(name);
 	setSortingEnabled(false);
 	setRootIsDecorated(true);
@@ -311,14 +482,22 @@ ConfigList::ConfigList(QWidget *parent, const char *name)
 	setVerticalScrollMode(ScrollPerPixel);
 	setHorizontalScrollMode(ScrollPerPixel);
 
+<<<<<<< HEAD
 	setHeaderLabels(QStringList() << "Option" << "Name" << "Value");
 
 	connect(this, &ConfigList::itemSelectionChanged,
 		this, &ConfigList::updateSelection);
+=======
+	setHeaderLabels(QStringList() << "Option" << "Name" << "N" << "M" << "Y" << "Value");
+
+	connect(this, SIGNAL(itemSelectionChanged(void)),
+		SLOT(updateSelection(void)));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (name) {
 		configSettings->beginGroup(name);
 		showName = configSettings->value("/showName", false).toBool();
+<<<<<<< HEAD
 		optMode = (enum optionMode)configSettings->value("/optionMode", 0).toInt();
 		configSettings->endGroup();
 		connect(configApp, &QApplication::aboutToQuit,
@@ -330,15 +509,28 @@ ConfigList::ConfigList(QWidget *parent, const char *name)
 	setItemDelegate(new ConfigItemDelegate(this));
 
 	allLists.append(this);
+=======
+		showRange = configSettings->value("/showRange", false).toBool();
+		showData = configSettings->value("/showData", false).toBool();
+		optMode = (enum optionMode)configSettings->value("/optionMode", 0).toInt();
+		configSettings->endGroup();
+		connect(configApp, SIGNAL(aboutToQuit()), SLOT(saveSettings()));
+	}
+
+	addColumn(promptColIdx);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	reinit();
 }
 
+<<<<<<< HEAD
 ConfigList::~ConfigList()
 {
 	allLists.removeOne(this);
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 bool ConfigList::menuSkip(struct menu *menu)
 {
 	if (optMode == normalOpt && menu_is_visible(menu))
@@ -352,6 +544,7 @@ bool ConfigList::menuSkip(struct menu *menu)
 
 void ConfigList::reinit(void)
 {
+<<<<<<< HEAD
 	hideColumn(nameColIdx);
 
 	if (showName)
@@ -368,6 +561,23 @@ void ConfigList::setOptionMode(QAction *action)
 		optMode = allOpt;
 	else
 		optMode = promptOpt;
+=======
+	removeColumn(dataColIdx);
+	removeColumn(yesColIdx);
+	removeColumn(modColIdx);
+	removeColumn(noColIdx);
+	removeColumn(nameColIdx);
+
+	if (showName)
+		addColumn(nameColIdx);
+	if (showRange) {
+		addColumn(noColIdx);
+		addColumn(modColIdx);
+		addColumn(yesColIdx);
+	}
+	if (showData)
+		addColumn(dataColIdx);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	updateListAll();
 }
@@ -377,6 +587,11 @@ void ConfigList::saveSettings(void)
 	if (!objectName().isEmpty()) {
 		configSettings->beginGroup(objectName());
 		configSettings->setValue("/showName", showName);
+<<<<<<< HEAD
+=======
+		configSettings->setValue("/showRange", showRange);
+		configSettings->setValue("/showData", showData);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		configSettings->setValue("/optionMode", (int)optMode);
 		configSettings->endGroup();
 	}
@@ -415,15 +630,25 @@ void ConfigList::updateSelection(void)
 		emit menuSelected(menu);
 }
 
+<<<<<<< HEAD
 void ConfigList::updateList()
 {
 	ConfigItem* last = 0;
 	ConfigItem *item;
+=======
+void ConfigList::updateList(ConfigItem* item)
+{
+	ConfigItem* last = 0;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!rootEntry) {
 		if (mode != listMode)
 			goto update;
 		QTreeWidgetItemIterator it(this);
+<<<<<<< HEAD
+=======
+		ConfigItem* item;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		while (*it) {
 			item = (ConfigItem*)(*it);
@@ -445,7 +670,11 @@ void ConfigList::updateList()
 	}
 	if ((mode == singleMode || (mode == symbolMode && !(rootEntry->flags & MENU_ROOT))) &&
 	    rootEntry->sym && rootEntry->prompt) {
+<<<<<<< HEAD
 		item = last ? last->nextSibling() : nullptr;
+=======
+		item = last ? last->nextSibling() : firstChild();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (!item)
 			item = new ConfigItem(this, last, rootEntry, true);
 		else
@@ -457,11 +686,16 @@ void ConfigList::updateList()
 		return;
 	}
 update:
+<<<<<<< HEAD
 	updateMenuList(rootEntry);
+=======
+	updateMenuList(this, rootEntry);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	update();
 	resizeColumnToContents(0);
 }
 
+<<<<<<< HEAD
 void ConfigList::updateListForAll()
 {
 	QListIterator<ConfigList *> it(allLists);
@@ -484,6 +718,8 @@ void ConfigList::updateListAllForAll()
 	}
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 void ConfigList::setValue(ConfigItem* item, tristate val)
 {
 	struct symbol* sym;
@@ -504,7 +740,11 @@ void ConfigList::setValue(ConfigItem* item, tristate val)
 			return;
 		if (oldval == no && item->menu->list)
 			item->setExpanded(true);
+<<<<<<< HEAD
 		ConfigList::updateListForAll();
+=======
+		parent()->updateList(item);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	}
 }
@@ -538,9 +778,18 @@ void ConfigList::changeValue(ConfigItem* item)
 				item->setExpanded(true);
 		}
 		if (oldexpr != newexpr)
+<<<<<<< HEAD
 			ConfigList::updateListForAll();
 		break;
 	default:
+=======
+			parent()->updateList(item);
+		break;
+	case S_INT:
+	case S_HEX:
+	case S_STRING:
+		parent()->lineEdit->show(item);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		break;
 	}
 }
@@ -554,11 +803,19 @@ void ConfigList::setRootMenu(struct menu *menu)
 	type = menu && menu->prompt ? menu->prompt->type : P_UNKNOWN;
 	if (type != P_MENU)
 		return;
+<<<<<<< HEAD
 	updateMenuList(0);
 	rootEntry = menu;
 	updateListAll();
 	if (currentItem()) {
 		setSelected(currentItem(), hasFocus());
+=======
+	updateMenuList(this, 0);
+	rootEntry = menu;
+	updateListAll();
+	if (currentItem()) {
+		currentItem()->setSelected(hasFocus());
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		scrollToItem(currentItem());
 	}
 }
@@ -646,7 +903,11 @@ void ConfigList::updateMenuList(ConfigItem *parent, struct menu* menu)
 			last = item;
 			continue;
 		}
+<<<<<<< HEAD
 hide:
+=======
+	hide:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (item && item->menu == child) {
 			last = parent->firstChild();
 			if (last == item)
@@ -658,7 +919,11 @@ hide:
 	}
 }
 
+<<<<<<< HEAD
 void ConfigList::updateMenuList(struct menu *menu)
+=======
+void ConfigList::updateMenuList(ConfigList *parent, struct menu* menu)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
 	struct menu* child;
 	ConfigItem* item;
@@ -667,19 +932,33 @@ void ConfigList::updateMenuList(struct menu *menu)
 	enum prop_type type;
 
 	if (!menu) {
+<<<<<<< HEAD
 		while (topLevelItemCount() > 0)
 		{
 			delete takeTopLevelItem(0);
+=======
+		while (parent->topLevelItemCount() > 0)
+		{
+			delete parent->takeTopLevelItem(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 
 		return;
 	}
 
+<<<<<<< HEAD
 	last = (ConfigItem *)topLevelItem(0);
 	if (last && !last->goParent)
 		last = 0;
 	for (child = menu->list; child; child = child->next) {
 		item = last ? last->nextSibling() : (ConfigItem *)topLevelItem(0);
+=======
+	last = (ConfigItem*)parent->topLevelItem(0);
+	if (last && !last->goParent)
+		last = 0;
+	for (child = menu->list; child; child = child->next) {
+		item = last ? last->nextSibling() : (ConfigItem*)parent->topLevelItem(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		type = child->prompt ? child->prompt->type : P_UNKNOWN;
 
 		switch (mode) {
@@ -700,7 +979,11 @@ void ConfigList::updateMenuList(struct menu *menu)
 			if (!child->sym && !child->list && !child->prompt)
 				continue;
 			if (!item || item->menu != child)
+<<<<<<< HEAD
 				item = new ConfigItem(this, last, child, visible);
+=======
+				item = new ConfigItem(parent, last, child, visible);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			else
 				item->testUpdateMenu(visible);
 
@@ -711,9 +994,15 @@ void ConfigList::updateMenuList(struct menu *menu)
 			last = item;
 			continue;
 		}
+<<<<<<< HEAD
 hide:
 		if (item && item->menu == child) {
 			last = (ConfigItem *)topLevelItem(0);
+=======
+	hide:
+		if (item && item->menu == child) {
+			last = (ConfigItem*)parent->topLevelItem(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			if (last == item)
 				last = 0;
 			else while (last->nextSibling() != item)
@@ -755,10 +1044,14 @@ void ConfigList::keyPressEvent(QKeyEvent* ev)
 		type = menu->prompt ? menu->prompt->type : P_UNKNOWN;
 		if (type == P_MENU && rootEntry != menu &&
 		    mode != fullMode && mode != menuMode) {
+<<<<<<< HEAD
 			if (mode == menuMode)
 				emit menuSelected(menu);
 			else
 				emit itemSelected(menu);
+=======
+			emit menuSelected(menu);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		}
 	case Qt::Key_Space:
@@ -804,7 +1097,11 @@ void ConfigList::mouseReleaseEvent(QMouseEvent* e)
 	idx = header()->logicalIndexAt(x);
 	switch (idx) {
 	case promptColIdx:
+<<<<<<< HEAD
 		icon = item->icon(promptColIdx);
+=======
+		icon = item->pixmap(promptColIdx);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (!icon.isNull()) {
 			int off = header()->sectionPosition(0) + visualRect(indexAt(p)).x() + 4; // 4 is Hardcoded image offset. There might be a way to do it properly.
 			if (x >= off && x < off + icon.availableSizes().first().width()) {
@@ -815,14 +1112,30 @@ void ConfigList::mouseReleaseEvent(QMouseEvent* e)
 					break;
 				ptype = menu->prompt ? menu->prompt->type : P_UNKNOWN;
 				if (ptype == P_MENU && rootEntry != menu &&
+<<<<<<< HEAD
 				    mode != fullMode && mode != menuMode &&
                                     mode != listMode)
+=======
+				    mode != fullMode && mode != menuMode)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					emit menuSelected(menu);
 				else
 					changeValue(item);
 			}
 		}
 		break;
+<<<<<<< HEAD
+=======
+	case noColIdx:
+		setValue(item, no);
+		break;
+	case modColIdx:
+		setValue(item, mod);
+		break;
+	case yesColIdx:
+		setValue(item, yes);
+		break;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	case dataColIdx:
 		changeValue(item);
 		break;
@@ -842,7 +1155,11 @@ void ConfigList::mouseMoveEvent(QMouseEvent* e)
 
 void ConfigList::mouseDoubleClickEvent(QMouseEvent* e)
 {
+<<<<<<< HEAD
 	QPoint p = e->pos();
+=======
+	QPoint p = e->pos(); // TODO: Check if this works(was contentsToViewport).
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	ConfigItem* item = (ConfigItem*)itemAt(p);
 	struct menu *menu;
 	enum prop_type ptype;
@@ -857,12 +1174,18 @@ void ConfigList::mouseDoubleClickEvent(QMouseEvent* e)
 	if (!menu)
 		goto skip;
 	ptype = menu->prompt ? menu->prompt->type : P_UNKNOWN;
+<<<<<<< HEAD
 	if (ptype == P_MENU && mode != listMode) {
 		if (mode == singleMode)
 			emit itemSelected(menu);
 		else if (mode == symbolMode)
 			emit menuSelected(menu);
 	} else if (menu->sym)
+=======
+	if (ptype == P_MENU && (mode == singleMode || mode == symbolMode))
+		emit menuSelected(menu);
+	else if (menu->sym)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		changeValue(item);
 
 skip:
@@ -878,7 +1201,11 @@ void ConfigList::focusInEvent(QFocusEvent *e)
 
 	ConfigItem* item = (ConfigItem *)currentItem();
 	if (item) {
+<<<<<<< HEAD
 		setSelected(item, true);
+=======
+		item->setSelected(true);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		menu = item->menu;
 	}
 	emit gotFocus(menu);
@@ -886,6 +1213,7 @@ void ConfigList::focusInEvent(QFocusEvent *e)
 
 void ConfigList::contextMenuEvent(QContextMenuEvent *e)
 {
+<<<<<<< HEAD
 	if (!headerPopup) {
 		QAction *action;
 
@@ -918,6 +1246,116 @@ QList<ConfigList *> ConfigList::allLists;
 QAction *ConfigList::showNormalAction;
 QAction *ConfigList::showAllAction;
 QAction *ConfigList::showPromptAction;
+=======
+	if (e->y() <= header()->geometry().bottom()) {
+		if (!headerPopup) {
+			QAction *action;
+
+			headerPopup = new QMenu(this);
+			action = new QAction("Show Name", this);
+			  action->setCheckable(true);
+			  connect(action, SIGNAL(toggled(bool)),
+				  parent(), SLOT(setShowName(bool)));
+			  connect(parent(), SIGNAL(showNameChanged(bool)),
+				  action, SLOT(setOn(bool)));
+			  action->setChecked(showName);
+			  headerPopup->addAction(action);
+			action = new QAction("Show Range", this);
+			  action->setCheckable(true);
+			  connect(action, SIGNAL(toggled(bool)),
+				  parent(), SLOT(setShowRange(bool)));
+			  connect(parent(), SIGNAL(showRangeChanged(bool)),
+				  action, SLOT(setOn(bool)));
+			  action->setChecked(showRange);
+			  headerPopup->addAction(action);
+			action = new QAction("Show Data", this);
+			  action->setCheckable(true);
+			  connect(action, SIGNAL(toggled(bool)),
+				  parent(), SLOT(setShowData(bool)));
+			  connect(parent(), SIGNAL(showDataChanged(bool)),
+				  action, SLOT(setOn(bool)));
+			  action->setChecked(showData);
+			  headerPopup->addAction(action);
+		}
+		headerPopup->exec(e->globalPos());
+		e->accept();
+	} else
+		e->ignore();
+}
+
+ConfigView*ConfigView::viewList;
+QAction *ConfigView::showNormalAction;
+QAction *ConfigView::showAllAction;
+QAction *ConfigView::showPromptAction;
+
+ConfigView::ConfigView(QWidget* parent, const char *name)
+	: Parent(parent)
+{
+	setObjectName(name);
+	QVBoxLayout *verticalLayout = new QVBoxLayout(this);
+	verticalLayout->setContentsMargins(0, 0, 0, 0);
+
+	list = new ConfigList(this);
+	verticalLayout->addWidget(list);
+	lineEdit = new ConfigLineEdit(this);
+	lineEdit->hide();
+	verticalLayout->addWidget(lineEdit);
+
+	this->nextView = viewList;
+	viewList = this;
+}
+
+ConfigView::~ConfigView(void)
+{
+	ConfigView** vp;
+
+	for (vp = &viewList; *vp; vp = &(*vp)->nextView) {
+		if (*vp == this) {
+			*vp = nextView;
+			break;
+		}
+	}
+}
+
+void ConfigView::setOptionMode(QAction *act)
+{
+	if (act == showNormalAction)
+		list->optMode = normalOpt;
+	else if (act == showAllAction)
+		list->optMode = allOpt;
+	else
+		list->optMode = promptOpt;
+
+	list->updateListAll();
+}
+
+void ConfigView::setShowName(bool b)
+{
+	if (list->showName != b) {
+		list->showName = b;
+		list->reinit();
+		emit showNameChanged(b);
+	}
+}
+
+void ConfigView::setShowRange(bool b)
+{
+	if (list->showRange != b) {
+		list->showRange = b;
+		list->reinit();
+		emit showRangeChanged(b);
+	}
+}
+
+void ConfigView::setShowData(bool b)
+{
+	if (list->showData != b) {
+		list->showData = b;
+		list->reinit();
+		emit showDataChanged(b);
+	}
+}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 void ConfigList::setAllOpen(bool open)
 {
@@ -930,16 +1368,40 @@ void ConfigList::setAllOpen(bool open)
 	}
 }
 
+<<<<<<< HEAD
+=======
+void ConfigView::updateList(ConfigItem* item)
+{
+	ConfigView* v;
+
+	for (v = viewList; v; v = v->nextView)
+		v->list->updateList(item);
+}
+
+void ConfigView::updateListAll(void)
+{
+	ConfigView* v;
+
+	for (v = viewList; v; v = v->nextView)
+		v->list->updateListAll();
+}
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ConfigInfoView::ConfigInfoView(QWidget* parent, const char *name)
 	: Parent(parent), sym(0), _menu(0)
 {
 	setObjectName(name);
+<<<<<<< HEAD
 	setOpenLinks(false);
+=======
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	if (!objectName().isEmpty()) {
 		configSettings->beginGroup(objectName());
 		setShowDebug(configSettings->value("/showDebug", false).toBool());
 		configSettings->endGroup();
+<<<<<<< HEAD
 		connect(configApp, &QApplication::aboutToQuit,
 			this, &ConfigInfoView::saveSettings);
 	}
@@ -955,6 +1417,10 @@ ConfigInfoView::ConfigInfoView(QWidget* parent, const char *name)
 	action->setChecked(showDebug());
 	contextMenu->addSeparator();
 	contextMenu->addAction(action);
+=======
+		connect(configApp, SIGNAL(aboutToQuit()), SLOT(saveSettings()));
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ConfigInfoView::saveSettings(void)
@@ -1009,12 +1475,17 @@ void ConfigInfoView::symbolInfo(void)
 void ConfigInfoView::menuInfo(void)
 {
 	struct symbol* sym;
+<<<<<<< HEAD
 	QString info;
 	QTextStream stream(&info);
+=======
+	QString head, debug, help;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	sym = _menu->sym;
 	if (sym) {
 		if (_menu->prompt) {
+<<<<<<< HEAD
 			stream << "<big><b>";
 			stream << print_filter(_menu->prompt->text);
 			stream << "</b></big>";
@@ -1064,11 +1535,60 @@ void ConfigInfoView::menuInfo(void)
 	}
 
 	setText(info);
+=======
+			head += "<big><b>";
+			head += print_filter(_menu->prompt->text);
+			head += "</b></big>";
+			if (sym->name) {
+				head += " (";
+				if (showDebug())
+					head += QString().sprintf("<a href=\"s%p\">", sym);
+				head += print_filter(sym->name);
+				if (showDebug())
+					head += "</a>";
+				head += ")";
+			}
+		} else if (sym->name) {
+			head += "<big><b>";
+			if (showDebug())
+				head += QString().sprintf("<a href=\"s%p\">", sym);
+			head += print_filter(sym->name);
+			if (showDebug())
+				head += "</a>";
+			head += "</b></big>";
+		}
+		head += "<br><br>";
+
+		if (showDebug())
+			debug = debug_info(sym);
+
+		struct gstr help_gstr = str_new();
+		menu_get_ext_help(_menu, &help_gstr);
+		help = print_filter(str_get(&help_gstr));
+		str_free(&help_gstr);
+	} else if (_menu->prompt) {
+		head += "<big><b>";
+		head += print_filter(_menu->prompt->text);
+		head += "</b></big><br><br>";
+		if (showDebug()) {
+			if (_menu->prompt->visible.expr) {
+				debug += "&nbsp;&nbsp;dep: ";
+				expr_print(_menu->prompt->visible.expr, expr_print_help, &debug, E_NONE);
+				debug += "<br><br>";
+			}
+		}
+	}
+	if (showDebug())
+		debug += QString().sprintf("defined at %s:%d<br><br>", _menu->file->name, _menu->lineno);
+
+	setText(head + debug + help);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 QString ConfigInfoView::debug_info(struct symbol *sym)
 {
 	QString debug;
+<<<<<<< HEAD
 	QTextStream stream(&debug);
 
 	stream << "type: ";
@@ -1080,18 +1600,37 @@ QString ConfigInfoView::debug_info(struct symbol *sym)
 		stream << "reverse dep: ";
 		expr_print(sym->rev_dep.expr, expr_print_help, &stream, E_NONE);
 		stream << "<br>";
+=======
+
+	debug += "type: ";
+	debug += print_filter(sym_type_name(sym->type));
+	if (sym_is_choice(sym))
+		debug += " (choice)";
+	debug += "<br>";
+	if (sym->rev_dep.expr) {
+		debug += "reverse dep: ";
+		expr_print(sym->rev_dep.expr, expr_print_help, &debug, E_NONE);
+		debug += "<br>";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	}
 	for (struct property *prop = sym->prop; prop; prop = prop->next) {
 		switch (prop->type) {
 		case P_PROMPT:
 		case P_MENU:
+<<<<<<< HEAD
 			stream << "prompt: <a href=\"m" << sym->name << "\">";
 			stream << print_filter(prop->text);
 			stream << "</a><br>";
+=======
+			debug += QString().sprintf("prompt: <a href=\"m%p\">", prop->menu);
+			debug += print_filter(prop->text);
+			debug += "</a><br>";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			break;
 		case P_DEFAULT:
 		case P_SELECT:
 		case P_RANGE:
+<<<<<<< HEAD
 		case P_COMMENT:
 		case P_IMPLY:
 		case P_SYMBOL:
@@ -1122,13 +1661,43 @@ QString ConfigInfoView::debug_info(struct symbol *sym)
 		}
 	}
 	stream << "<br>";
+=======
+			debug += prop_get_type_name(prop->type);
+			debug += ": ";
+			expr_print(prop->expr, expr_print_help, &debug, E_NONE);
+			debug += "<br>";
+			break;
+		case P_CHOICE:
+			if (sym_is_choice(sym)) {
+				debug += "choice: ";
+				expr_print(prop->expr, expr_print_help, &debug, E_NONE);
+				debug += "<br>";
+			}
+			break;
+		default:
+			debug += "unknown property: ";
+			debug += prop_get_type_name(prop->type);
+			debug += "<br>";
+		}
+		if (prop->visible.expr) {
+			debug += "&nbsp;&nbsp;&nbsp;&nbsp;dep: ";
+			expr_print(prop->visible.expr, expr_print_help, &debug, E_NONE);
+			debug += "<br>";
+		}
+	}
+	debug += "<br>";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	return debug;
 }
 
 QString ConfigInfoView::print_filter(const QString &str)
 {
+<<<<<<< HEAD
 	QRegularExpression re("[<>&\"\\n]");
+=======
+	QRegExp re("[<>&\"\\n]");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	QString res = str;
 	for (int i = 0; (i = res.indexOf(re, i)) >= 0;) {
 		switch (res[i].toLatin1()) {
@@ -1159,6 +1728,7 @@ QString ConfigInfoView::print_filter(const QString &str)
 
 void ConfigInfoView::expr_print_help(void *data, struct symbol *sym, const char *str)
 {
+<<<<<<< HEAD
 	QTextStream *stream = reinterpret_cast<QTextStream *>(data);
 
 	if (sym && sym->name && !(sym->flags & SYMBOL_CONST)) {
@@ -1227,17 +1797,57 @@ ConfigSearchWindow::ConfigSearchWindow(ConfigMainWindow *parent)
 	: Parent(parent), result(NULL)
 {
 	setObjectName("search");
+=======
+	QString* text = reinterpret_cast<QString*>(data);
+	QString str2 = print_filter(str);
+
+	if (sym && sym->name && !(sym->flags & SYMBOL_CONST)) {
+		*text += QString().sprintf("<a href=\"s%p\">", sym);
+		*text += str2;
+		*text += "</a>";
+	} else
+		*text += str2;
+}
+
+QMenu* ConfigInfoView::createStandardContextMenu(const QPoint & pos)
+{
+	QMenu* popup = Parent::createStandardContextMenu(pos);
+	QAction* action = new QAction("Show Debug Info", popup);
+	  action->setCheckable(true);
+	  connect(action, SIGNAL(toggled(bool)), SLOT(setShowDebug(bool)));
+	  connect(this, SIGNAL(showDebugChanged(bool)), action, SLOT(setOn(bool)));
+	  action->setChecked(showDebug());
+	popup->addSeparator();
+	popup->addAction(action);
+	return popup;
+}
+
+void ConfigInfoView::contextMenuEvent(QContextMenuEvent *e)
+{
+	Parent::contextMenuEvent(e);
+}
+
+ConfigSearchWindow::ConfigSearchWindow(ConfigMainWindow* parent, const char *name)
+	: Parent(parent), result(NULL)
+{
+	setObjectName(name);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	setWindowTitle("Search Config");
 
 	QVBoxLayout* layout1 = new QVBoxLayout(this);
 	layout1->setContentsMargins(11, 11, 11, 11);
 	layout1->setSpacing(6);
+<<<<<<< HEAD
 
 	QHBoxLayout* layout2 = new QHBoxLayout();
+=======
+	QHBoxLayout* layout2 = new QHBoxLayout(0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	layout2->setContentsMargins(0, 0, 0, 0);
 	layout2->setSpacing(6);
 	layout2->addWidget(new QLabel("Find:", this));
 	editField = new QLineEdit(this);
+<<<<<<< HEAD
 	connect(editField, &QLineEdit::returnPressed,
 		this, &ConfigSearchWindow::search);
 	layout2->addWidget(editField);
@@ -1245,11 +1855,19 @@ ConfigSearchWindow::ConfigSearchWindow(ConfigMainWindow *parent)
 	searchButton->setAutoDefault(false);
 	connect(searchButton, &QPushButton::clicked,
 		this, &ConfigSearchWindow::search);
+=======
+	connect(editField, SIGNAL(returnPressed()), SLOT(search()));
+	layout2->addWidget(editField);
+	searchButton = new QPushButton("Search", this);
+	searchButton->setAutoDefault(false);
+	connect(searchButton, SIGNAL(clicked()), SLOT(search()));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	layout2->addWidget(searchButton);
 	layout1->addLayout(layout2);
 
 	split = new QSplitter(this);
 	split->setOrientation(Qt::Vertical);
+<<<<<<< HEAD
 	list = new ConfigList(split, "search");
 	list->mode = listMode;
 	info = new ConfigInfoView(split, "search");
@@ -1278,6 +1896,37 @@ ConfigSearchWindow::ConfigSearchWindow(ConfigMainWindow *parent)
 	configSettings->endGroup();
 	connect(configApp, &QApplication::aboutToQuit,
 		this, &ConfigSearchWindow::saveSettings);
+=======
+	list = new ConfigView(split, name);
+	list->list->mode = listMode;
+	info = new ConfigInfoView(split, name);
+	connect(list->list, SIGNAL(menuChanged(struct menu *)),
+		info, SLOT(setInfo(struct menu *)));
+	connect(list->list, SIGNAL(menuChanged(struct menu *)),
+		parent, SLOT(setMenuLink(struct menu *)));
+
+	layout1->addWidget(split);
+
+	if (name) {
+		QVariant x, y;
+		int width, height;
+		bool ok;
+
+		configSettings->beginGroup(name);
+		width = configSettings->value("/window width", parent->width() / 2).toInt();
+		height = configSettings->value("/window height", parent->height() / 2).toInt();
+		resize(width, height);
+		x = configSettings->value("/window x");
+		y = configSettings->value("/window y");
+		if ((x.isValid())&&(y.isValid()))
+			move(x.toInt(), y.toInt());
+		QList<int> sizes = configSettings->readSizes("/split", &ok);
+		if (ok)
+			split->setSizes(sizes);
+		configSettings->endGroup();
+		connect(configApp, SIGNAL(aboutToQuit()), SLOT(saveSettings()));
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ConfigSearchWindow::saveSettings(void)
@@ -1300,7 +1949,11 @@ void ConfigSearchWindow::search(void)
 	ConfigItem *lastItem = NULL;
 
 	free(result);
+<<<<<<< HEAD
 	list->clear();
+=======
+	list->list->clear();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	info->clear();
 
 	result = sym_re_search(editField->text().toLatin1());
@@ -1308,7 +1961,11 @@ void ConfigSearchWindow::search(void)
 		return;
 	for (p = result; *p; p++) {
 		for_all_prompts((*p), prop)
+<<<<<<< HEAD
 			lastItem = new ConfigItem(list, lastItem, prop->menu,
+=======
+			lastItem = new ConfigItem(list->list, lastItem, prop->menu,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 						  menu_is_visible(prop->menu));
 	}
 }
@@ -1319,26 +1976,40 @@ void ConfigSearchWindow::search(void)
 ConfigMainWindow::ConfigMainWindow(void)
 	: searchWindow(0)
 {
+<<<<<<< HEAD
+=======
+	QMenuBar* menu;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	bool ok = true;
 	QVariant x, y;
 	int width, height;
 	char title[256];
 
+<<<<<<< HEAD
+=======
+	QDesktopWidget *d = configApp->desktop();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	snprintf(title, sizeof(title), "%s%s",
 		rootmenu.prompt->text,
 		""
 		);
 	setWindowTitle(title);
 
+<<<<<<< HEAD
 	QRect g = configApp->primaryScreen()->geometry();
 	width = configSettings->value("/window width", g.width() - 64).toInt();
 	height = configSettings->value("/window height", g.height() - 64).toInt();
+=======
+	width = configSettings->value("/window width", d->width() - 64).toInt();
+	height = configSettings->value("/window height", d->height() - 64).toInt();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	resize(width, height);
 	x = configSettings->value("/window x");
 	y = configSettings->value("/window y");
 	if ((x.isValid())&&(y.isValid()))
 		move(x.toInt(), y.toInt());
 
+<<<<<<< HEAD
 	// set up icons
 	ConfigItem::symbolYesIcon = QIcon(QPixmap(xpm_symbol_yes));
 	ConfigItem::symbolModIcon = QIcon(QPixmap(xpm_symbol_mod));
@@ -1372,10 +2043,28 @@ ConfigMainWindow::ConfigMainWindow(void)
 	split1->addWidget(configList);
 	split1->addWidget(menuList);
 	split2->addWidget(helpText);
+=======
+	split1 = new QSplitter(this);
+	split1->setOrientation(Qt::Horizontal);
+	setCentralWidget(split1);
+
+	menuView = new ConfigView(split1, "menu");
+	menuList = menuView->list;
+
+	split2 = new QSplitter(split1);
+	split2->setOrientation(Qt::Vertical);
+
+	// create config tree
+	configView = new ConfigView(split2, "config");
+	configList = configView->list;
+
+	helpText = new ConfigInfoView(split2, "help");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	setTabOrder(configList, helpText);
 	configList->setFocus();
 
+<<<<<<< HEAD
 	backAction = new QAction(QPixmap(xpm_back), "Back", this);
 	connect(backAction, &QAction::triggered,
 		this, &ConfigMainWindow::goBack);
@@ -1397,11 +2086,31 @@ ConfigMainWindow::ConfigMainWindow(void)
 
 	conf_set_changed_callback(conf_changed);
 
+=======
+	menu = menuBar();
+	toolBar = new QToolBar("Tools", this);
+	addToolBar(toolBar);
+
+	backAction = new QAction(QPixmap(xpm_back), "Back", this);
+	  connect(backAction, SIGNAL(triggered(bool)), SLOT(goBack()));
+	  backAction->setEnabled(false);
+	QAction *quitAction = new QAction("&Quit", this);
+	quitAction->setShortcut(Qt::CTRL + Qt::Key_Q);
+	  connect(quitAction, SIGNAL(triggered(bool)), SLOT(close()));
+	QAction *loadAction = new QAction(QPixmap(xpm_load), "&Load", this);
+	loadAction->setShortcut(Qt::CTRL + Qt::Key_L);
+	  connect(loadAction, SIGNAL(triggered(bool)), SLOT(loadConfig()));
+	saveAction = new QAction(QPixmap(xpm_save), "&Save", this);
+	saveAction->setShortcut(Qt::CTRL + Qt::Key_S);
+	  connect(saveAction, SIGNAL(triggered(bool)), SLOT(saveConfig()));
+	conf_set_changed_callback(conf_changed);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	// Set saveAction's initial state
 	conf_changed();
 	configname = xstrdup(conf_get_configname());
 
 	QAction *saveAsAction = new QAction("Save &As...", this);
+<<<<<<< HEAD
 	connect(saveAsAction, &QAction::triggered,
 		this, &ConfigMainWindow::saveConfigAs);
 	QAction *searchAction = new QAction("&Find", this);
@@ -1456,6 +2165,58 @@ ConfigMainWindow::ConfigMainWindow(void)
 
 	// init tool bar
 	QToolBar *toolBar = addToolBar("Tools");
+=======
+	  connect(saveAsAction, SIGNAL(triggered(bool)), SLOT(saveConfigAs()));
+	QAction *searchAction = new QAction("&Find", this);
+	searchAction->setShortcut(Qt::CTRL + Qt::Key_F);
+	  connect(searchAction, SIGNAL(triggered(bool)), SLOT(searchConfig()));
+	singleViewAction = new QAction(QPixmap(xpm_single_view), "Single View", this);
+	singleViewAction->setCheckable(true);
+	  connect(singleViewAction, SIGNAL(triggered(bool)), SLOT(showSingleView()));
+	splitViewAction = new QAction(QPixmap(xpm_split_view), "Split View", this);
+	splitViewAction->setCheckable(true);
+	  connect(splitViewAction, SIGNAL(triggered(bool)), SLOT(showSplitView()));
+	fullViewAction = new QAction(QPixmap(xpm_tree_view), "Full View", this);
+	fullViewAction->setCheckable(true);
+	  connect(fullViewAction, SIGNAL(triggered(bool)), SLOT(showFullView()));
+
+	QAction *showNameAction = new QAction("Show Name", this);
+	  showNameAction->setCheckable(true);
+	  connect(showNameAction, SIGNAL(toggled(bool)), configView, SLOT(setShowName(bool)));
+	  showNameAction->setChecked(configView->showName());
+	QAction *showRangeAction = new QAction("Show Range", this);
+	  showRangeAction->setCheckable(true);
+	  connect(showRangeAction, SIGNAL(toggled(bool)), configView, SLOT(setShowRange(bool)));
+	QAction *showDataAction = new QAction("Show Data", this);
+	  showDataAction->setCheckable(true);
+	  connect(showDataAction, SIGNAL(toggled(bool)), configView, SLOT(setShowData(bool)));
+
+	QActionGroup *optGroup = new QActionGroup(this);
+	optGroup->setExclusive(true);
+	connect(optGroup, SIGNAL(triggered(QAction*)), configView,
+		SLOT(setOptionMode(QAction *)));
+	connect(optGroup, SIGNAL(triggered(QAction *)), menuView,
+		SLOT(setOptionMode(QAction *)));
+
+	configView->showNormalAction = new QAction("Show Normal Options", optGroup);
+	configView->showAllAction = new QAction("Show All Options", optGroup);
+	configView->showPromptAction = new QAction("Show Prompt Options", optGroup);
+	configView->showNormalAction->setCheckable(true);
+	configView->showAllAction->setCheckable(true);
+	configView->showPromptAction->setCheckable(true);
+
+	QAction *showDebugAction = new QAction("Show Debug Info", this);
+	  showDebugAction->setCheckable(true);
+	  connect(showDebugAction, SIGNAL(toggled(bool)), helpText, SLOT(setShowDebug(bool)));
+	  showDebugAction->setChecked(helpText->showDebug());
+
+	QAction *showIntroAction = new QAction("Introduction", this);
+	  connect(showIntroAction, SIGNAL(triggered(bool)), SLOT(showIntro()));
+	QAction *showAboutAction = new QAction("About", this);
+	  connect(showAboutAction, SIGNAL(triggered(bool)), SLOT(showAbout()));
+
+	// init tool bar
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	toolBar->addAction(backAction);
 	toolBar->addSeparator();
 	toolBar->addAction(loadAction);
@@ -1465,6 +2226,7 @@ ConfigMainWindow::ConfigMainWindow(void)
 	toolBar->addAction(splitViewAction);
 	toolBar->addAction(fullViewAction);
 
+<<<<<<< HEAD
 	// create file menu
 	QMenu *menu = menuBar()->addMenu("&File");
 	menu->addAction(loadAction);
@@ -1514,6 +2276,55 @@ ConfigMainWindow::ConfigMainWindow(void)
 		this, &ConfigMainWindow::listFocusChanged);
 	connect(helpText, &ConfigInfoView::menuSelected,
 		this, &ConfigMainWindow::setMenuLink);
+=======
+	// create config menu
+	QMenu* config = menu->addMenu("&File");
+	config->addAction(loadAction);
+	config->addAction(saveAction);
+	config->addAction(saveAsAction);
+	config->addSeparator();
+	config->addAction(quitAction);
+
+	// create edit menu
+	QMenu* editMenu = menu->addMenu("&Edit");
+	editMenu->addAction(searchAction);
+
+	// create options menu
+	QMenu* optionMenu = menu->addMenu("&Option");
+	optionMenu->addAction(showNameAction);
+	optionMenu->addAction(showRangeAction);
+	optionMenu->addAction(showDataAction);
+	optionMenu->addSeparator();
+	optionMenu->addActions(optGroup->actions());
+	optionMenu->addSeparator();
+	optionMenu->addAction(showDebugAction);
+
+	// create help menu
+	menu->addSeparator();
+	QMenu* helpMenu = menu->addMenu("&Help");
+	helpMenu->addAction(showIntroAction);
+	helpMenu->addAction(showAboutAction);
+
+	connect(configList, SIGNAL(menuChanged(struct menu *)),
+		helpText, SLOT(setInfo(struct menu *)));
+	connect(configList, SIGNAL(menuSelected(struct menu *)),
+		SLOT(changeMenu(struct menu *)));
+	connect(configList, SIGNAL(parentSelected()),
+		SLOT(goBack()));
+	connect(menuList, SIGNAL(menuChanged(struct menu *)),
+		helpText, SLOT(setInfo(struct menu *)));
+	connect(menuList, SIGNAL(menuSelected(struct menu *)),
+		SLOT(changeMenu(struct menu *)));
+
+	connect(configList, SIGNAL(gotFocus(struct menu *)),
+		helpText, SLOT(setInfo(struct menu *)));
+	connect(menuList, SIGNAL(gotFocus(struct menu *)),
+		helpText, SLOT(setInfo(struct menu *)));
+	connect(menuList, SIGNAL(gotFocus(struct menu *)),
+		SLOT(listFocusChanged(void)));
+	connect(helpText, SIGNAL(menuSelected(struct menu *)),
+		SLOT(setMenuLink(struct menu *)));
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	QString listMode = configSettings->value("/listMode", "symbol").toString();
 	if (listMode == "single")
@@ -1552,7 +2363,11 @@ void ConfigMainWindow::loadConfig(void)
 	free(configname);
 	configname = xstrdup(name);
 
+<<<<<<< HEAD
 	ConfigList::updateListAllForAll();
+=======
+	ConfigView::updateListAll();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 bool ConfigMainWindow::saveConfig(void)
@@ -1591,6 +2406,7 @@ void ConfigMainWindow::saveConfigAs(void)
 void ConfigMainWindow::searchConfig(void)
 {
 	if (!searchWindow)
+<<<<<<< HEAD
 		searchWindow = new ConfigSearchWindow(this);
 	searchWindow->show();
 }
@@ -1603,6 +2419,19 @@ void ConfigMainWindow::changeItens(struct menu *menu)
 void ConfigMainWindow::changeMenu(struct menu *menu)
 {
 	menuList->setRootMenu(menu);
+=======
+		searchWindow = new ConfigSearchWindow(this, "search");
+	searchWindow->show();
+}
+
+void ConfigMainWindow::changeMenu(struct menu *menu)
+{
+	configList->setRootMenu(menu);
+	if (configList->rootEntry->parent == &rootmenu)
+		backAction->setEnabled(false);
+	else
+		backAction->setEnabled(true);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ConfigMainWindow::setMenuLink(struct menu *menu)
@@ -1622,6 +2451,7 @@ void ConfigMainWindow::setMenuLink(struct menu *menu)
 			return;
 		list->setRootMenu(parent);
 		break;
+<<<<<<< HEAD
 	case menuMode:
 		if (menu->flags & MENU_ROOT) {
 			menuList->setRootMenu(menu);
@@ -1642,6 +2472,24 @@ void ConfigMainWindow::setMenuLink(struct menu *menu)
 			menuList->setRootMenu(parent);
 			menuList->clearSelection();
 			list = menuList;
+=======
+	case symbolMode:
+		if (menu->flags & MENU_ROOT) {
+			configList->setRootMenu(menu);
+			configList->clearSelection();
+			list = menuList;
+		} else {
+			list = configList;
+			parent = menu_get_parent_menu(menu->parent);
+			if (!parent)
+				return;
+			item = menuList->findConfigItem(parent);
+			if (item) {
+				item->setSelected(true);
+				menuList->scrollToItem(item);
+			}
+			list->setRootMenu(parent);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 		break;
 	case fullMode:
@@ -1654,10 +2502,16 @@ void ConfigMainWindow::setMenuLink(struct menu *menu)
 	if (list) {
 		item = list->findConfigItem(menu);
 		if (item) {
+<<<<<<< HEAD
 			list->setSelected(item, true);
 			list->scrollToItem(item);
 			list->setFocus();
 			helpText->setInfo(menu);
+=======
+			item->setSelected(true);
+			list->scrollToItem(item);
+			list->setFocus();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		}
 	}
 }
@@ -1670,10 +2524,32 @@ void ConfigMainWindow::listFocusChanged(void)
 
 void ConfigMainWindow::goBack(void)
 {
+<<<<<<< HEAD
 	if (configList->rootEntry == &rootmenu)
 		return;
 
 	configList->setParentMenu();
+=======
+	ConfigItem* item, *oldSelection;
+
+	configList->setParentMenu();
+	if (configList->rootEntry == &rootmenu)
+		backAction->setEnabled(false);
+
+	if (menuList->selectedItems().count() == 0)
+		return;
+
+	item = (ConfigItem*)menuList->selectedItems().first();
+	oldSelection = item;
+	while (item) {
+		if (item->menu == configList->rootEntry) {
+			oldSelection->setSelected(false);
+			item->setSelected(true);
+			break;
+		}
+		item = (ConfigItem*)item->parent();
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ConfigMainWindow::showSingleView(void)
@@ -1685,9 +2561,13 @@ void ConfigMainWindow::showSingleView(void)
 	fullViewAction->setEnabled(true);
 	fullViewAction->setChecked(false);
 
+<<<<<<< HEAD
 	backAction->setEnabled(true);
 
 	menuList->hide();
+=======
+	menuView->hide();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	menuList->setRootMenu(0);
 	configList->mode = singleMode;
 	if (configList->rootEntry == &rootmenu)
@@ -1706,19 +2586,30 @@ void ConfigMainWindow::showSplitView(void)
 	fullViewAction->setEnabled(true);
 	fullViewAction->setChecked(false);
 
+<<<<<<< HEAD
 	backAction->setEnabled(false);
 
 	configList->mode = menuMode;
+=======
+	configList->mode = symbolMode;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (configList->rootEntry == &rootmenu)
 		configList->updateListAll();
 	else
 		configList->setRootMenu(&rootmenu);
 	configList->setAllOpen(true);
 	configApp->processEvents();
+<<<<<<< HEAD
 	menuList->mode = symbolMode;
 	menuList->setRootMenu(&rootmenu);
 	menuList->setAllOpen(true);
 	menuList->show();
+=======
+	menuList->mode = menuMode;
+	menuList->setRootMenu(&rootmenu);
+	menuList->setAllOpen(true);
+	menuView->show();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	menuList->setFocus();
 }
 
@@ -1731,9 +2622,13 @@ void ConfigMainWindow::showFullView(void)
 	fullViewAction->setEnabled(false);
 	fullViewAction->setChecked(true);
 
+<<<<<<< HEAD
 	backAction->setEnabled(false);
 
 	menuList->hide();
+=======
+	menuView->hide();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	menuList->setRootMenu(0);
 	configList->mode = fullMode;
 	if (configList->rootEntry == &rootmenu)
@@ -1745,6 +2640,10 @@ void ConfigMainWindow::showFullView(void)
 
 /*
  * ask for saving configuration before quitting
+<<<<<<< HEAD
+=======
+ * TODO ask only when something changed
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  */
 void ConfigMainWindow::closeEvent(QCloseEvent* e)
 {
@@ -1752,6 +2651,7 @@ void ConfigMainWindow::closeEvent(QCloseEvent* e)
 		e->accept();
 		return;
 	}
+<<<<<<< HEAD
 
 	QMessageBox mb(QMessageBox::Icon::Warning, "qconf",
 		       "Save configuration?");
@@ -1767,6 +2667,13 @@ void ConfigMainWindow::closeEvent(QCloseEvent* e)
 	mb.setDefaultButton(yb);
 	mb.setEscapeButton(cb);
 
+=======
+	QMessageBox mb("qconf", "Save configuration?", QMessageBox::Warning,
+			QMessageBox::Yes | QMessageBox::Default, QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape);
+	mb.setButtonText(QMessageBox::Yes, "&Save Changes");
+	mb.setButtonText(QMessageBox::No, "&Discard Changes");
+	mb.setButtonText(QMessageBox::Cancel, "Cancel Exit");
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	switch (mb.exec()) {
 	case QMessageBox::Yes:
 		if (saveConfig())
@@ -1785,6 +2692,7 @@ void ConfigMainWindow::closeEvent(QCloseEvent* e)
 
 void ConfigMainWindow::showIntro(void)
 {
+<<<<<<< HEAD
 	static const QString str =
 		"Welcome to the qconf graphical configuration tool.\n"
 		"\n"
@@ -1805,6 +2713,19 @@ void ConfigMainWindow::showIntro(void)
 		"Toggling Show Debug Info under the Options menu will show the "
 		"dependencies, which you can then match by examining other "
 		"options.\n";
+=======
+	static const QString str = "Welcome to the qconf graphical configuration tool.\n\n"
+		"For each option, a blank box indicates the feature is disabled, a check\n"
+		"indicates it is enabled, and a dot indicates that it is to be compiled\n"
+		"as a module.  Clicking on the box will cycle through the three states.\n\n"
+		"If you do not see an option (e.g., a device driver) that you believe\n"
+		"should be present, try turning on Show All Options under the Options menu.\n"
+		"Although there is no cross reference yet to help you figure out what other\n"
+		"options must be enabled to support the option you are interested in, you can\n"
+		"still view the help of a grayed-out option.\n\n"
+		"Toggling Show Debug Info under the Options menu will show the dependencies,\n"
+		"which you can then match by examining other options.\n\n";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	QMessageBox::information(this, "qconf", str);
 }
@@ -1812,6 +2733,7 @@ void ConfigMainWindow::showIntro(void)
 void ConfigMainWindow::showAbout(void)
 {
 	static const QString str = "qconf is Copyright (C) 2002 Roman Zippel <zippel@linux-m68k.org>.\n"
+<<<<<<< HEAD
 		"Copyright (C) 2015 Boris Barbulovski <bbarbulovski@gmail.com>.\n"
 		"\n"
 		"Bug reports and feature request can also be entered at http://bugzilla.kernel.org/\n"
@@ -1819,6 +2741,12 @@ void ConfigMainWindow::showAbout(void)
 		"Qt Version: ";
 
 	QMessageBox::information(this, "qconf", str + qVersion());
+=======
+		"Copyright (C) 2015 Boris Barbulovski <bbarbulovski@gmail.com>.\n\n"
+		"Bug reports and feature request can also be entered at http://bugzilla.kernel.org/\n";
+
+	QMessageBox::information(this, "qconf", str);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 void ConfigMainWindow::saveSettings(void)
@@ -1887,6 +2815,10 @@ int main(int ac, char** av)
 	const char *name;
 
 	progname = av[0];
+<<<<<<< HEAD
+=======
+	configApp = new QApplication(ac, av);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	if (ac > 1 && av[1][0] == '-') {
 		switch (av[1][1]) {
 		case 's':
@@ -1907,8 +2839,11 @@ int main(int ac, char** av)
 	conf_read(NULL);
 	//zconfdump(stdout);
 
+<<<<<<< HEAD
 	configApp = new QApplication(ac, av);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	configSettings = new ConfigSettings();
 	configSettings->beginGroup("/kconfig/qconf");
 	v = new ConfigMainWindow();

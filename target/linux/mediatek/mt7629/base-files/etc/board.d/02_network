@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+#!/bin/sh
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 . /lib/functions.sh
 . /lib/functions/uci-defaults.sh
@@ -8,19 +12,25 @@ mediatek_setup_interfaces()
 	local board="$1"
 
 	case $board in
+<<<<<<< HEAD
 	iptime,a6004mx|\
 	linksys,ea7500-v3)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" "eth1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mediatek,mt7629-rfb)
 		ucidef_set_interface_wan "eth1"
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:lan" "3:lan" "6@eth0"
 		;;
+<<<<<<< HEAD
 	netgear,ex6250-v2|\
 	tplink,eap225-v5)
 		ucidef_set_interface_lan "eth0"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	esac
 }
 
@@ -29,6 +39,7 @@ mediatek_setup_macs()
 	local board="$1"
 
 	case $board in
+<<<<<<< HEAD
 	linksys,ea7500-v3)
 		lan_mac=$(mtd_get_mac_ascii devinfo hw_mac_addr)
 		wan_mac=$lan_mac
@@ -43,6 +54,9 @@ mediatek_setup_macs()
 	[ -n "$lan_mac" ] && ucidef_set_interface_macaddr "lan" $lan_mac
 	[ -n "$wan_mac" ] && ucidef_set_interface_macaddr "wan" $wan_mac
 	[ -n "$label_mac" ] && ucidef_set_label_macaddr $label_mac
+=======
+	esac
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 board_config_update

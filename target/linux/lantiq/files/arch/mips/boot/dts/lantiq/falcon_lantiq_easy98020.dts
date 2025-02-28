@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "falcon.dtsi"
 #include "falcon_sflash-16m.dtsi"
 
@@ -50,8 +53,12 @@
 			default-state = "keep";
 		};
 		ETH {
+<<<<<<< HEAD
 			function = LED_FUNCTION_STATUS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:status";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio0 11 GPIO_ACTIVE_HIGH>;
 			default-state = "keep";
 		};

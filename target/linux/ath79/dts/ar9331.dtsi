@@ -4,4 +4,12 @@
 
 / {
 	compatible = "qca,ar9331";
+<<<<<<< HEAD
+=======
+
+	ref: ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

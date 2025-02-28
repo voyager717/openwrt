@@ -12,7 +12,10 @@ service_triggers() {
 
 start_service() {
 	local tty="$(uci get gps.@gps[-1].tty)"
+<<<<<<< HEAD
 	local baudrate="$(uci get gps.@gps[-1].baudrate || echo 0)"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	local atime="$(uci get gps.@gps[-1].adjust_time)"
 	local disabled="$(uci get gps.@gps[-1].disabled || echo 0)"
 
@@ -30,7 +33,10 @@ start_service() {
 
 	procd_open_instance
 	procd_set_param command "$PROG"
+<<<<<<< HEAD
 	[ "$baudrate" -eq 0 ] || procd_append_param command "-b ${baudrate}"
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	[ "$atime" -eq 0 ] || procd_append_param command "-a"
 	procd_append_param command "$tty"
 	procd_set_param respawn

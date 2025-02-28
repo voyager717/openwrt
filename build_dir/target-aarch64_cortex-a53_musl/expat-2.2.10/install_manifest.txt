@@ -1,0 +1,13 @@
+/usr/include/expat_config.h
+/usr/lib/libexpat.so.1.6.12
+/usr/lib/libexpat.so.1
+/usr/lib/libexpat.so
+/usr/include/expat.h
+/usr/include/expat_external.h
+/usr/lib/pkgconfig/expat.pc
+/usr/share/doc/expat/AUTHORS
+/usr/share/doc/expat/changelog
+/usr/lib/cmake/expat-2.2.10/expat-config.cmake
+/usr/lib/cmake/expat-2.2.10/expat-config-version.cmake
+/usr/lib/cmake/expat-2.2.10/expat.cmake
+/usr/lib/cmake/expat-2.2.10/expat-release.cmake

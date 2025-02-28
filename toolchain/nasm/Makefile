@@ -5,12 +5,21 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nasm
+<<<<<<< HEAD
 PKG_VERSION:=2.16.03
 
 PKG_SOURCE_URL:=https://www.nasm.us/pub/nasm/releasebuilds/$(PKG_VERSION)/
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_HASH:=5bc940dd8a4245686976a8f7e96ba9340a0915f2d5b88356874890e207bdb581
 PKG_CPE_ID:=cpe:/a:nasm:netwide_assembler
+=======
+PKG_VERSION:=2.15.05
+
+PKG_SOURCE_URL:=https://www.nasm.us/pub/nasm/releasebuilds/$(PKG_VERSION)/
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+
+PKG_HASH:=3caf6729c1073bf96629b57cee31eeb54f4f8129b01902c73428836550b30a3f
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_BUILD_PARALLEL:=1
 

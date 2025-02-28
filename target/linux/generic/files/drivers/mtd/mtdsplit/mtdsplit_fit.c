@@ -21,11 +21,15 @@
 #include <linux/types.h>
 #include <linux/byteorder/generic.h>
 #include <linux/slab.h>
+<<<<<<< HEAD
 #include <linux/libfdt.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <linux/of_fdt.h>
 
 #include "mtdsplit.h"
 
+<<<<<<< HEAD
 // string macros from git://git.denx.de/u-boot.git/include/image.h
 
 #define FIT_IMAGES_PATH         "/images"
@@ -188,12 +192,33 @@ static int fit_image_get_data_and_size(const void *fit, int noffset,
 
 	return ret;
 }
+=======
+struct fdt_header {
+	uint32_t magic;			 /* magic word FDT_MAGIC */
+	uint32_t totalsize;		 /* total size of DT block */
+	uint32_t off_dt_struct;		 /* offset to structure */
+	uint32_t off_dt_strings;	 /* offset to strings */
+	uint32_t off_mem_rsvmap;	 /* offset to memory reserve map */
+	uint32_t version;		 /* format version */
+	uint32_t last_comp_version;	 /* last compatible version */
+
+	/* version 2 fields below */
+	uint32_t boot_cpuid_phys;	 /* Which physical CPU id we're
+					    booting on */
+	/* version 3 fields below */
+	uint32_t size_dt_strings;	 /* size of the strings block */
+
+	/* version 17 fields below */
+	uint32_t size_dt_struct;	 /* size of the structure block */
+};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 static int
 mtdsplit_fit_parse(struct mtd_info *mtd,
 		   const struct mtd_partition **pparts,
 	           struct mtd_part_parser_data *data)
 {
+<<<<<<< HEAD
 	struct device_node *np = mtd_get_of_node(mtd);
 	const char *cmdline_match = NULL;
 	struct fdt_header hdr;
@@ -213,12 +238,25 @@ mtdsplit_fit_parse(struct mtd_info *mtd,
 		return -ENODEV;
 
 	of_property_read_u32(np, "openwrt,fit-offset", &offset_start);
+=======
+	struct fdt_header hdr;
+	size_t hdr_len, retlen;
+	size_t offset;
+	size_t fit_offset, fit_size;
+	size_t rootfs_offset, rootfs_size;
+	struct mtd_partition *parts;
+	int ret;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	hdr_len = sizeof(struct fdt_header);
 
 	/* Parse the MTD device & search for the FIT image location */
 	for(offset = 0; offset + hdr_len <= mtd->size; offset += mtd->erasesize) {
+<<<<<<< HEAD
 		ret = mtd_read(mtd, offset + offset_start, hdr_len, &retlen, (void*) &hdr);
+=======
+		ret = mtd_read(mtd, offset, hdr_len, &retlen, (void*) &hdr);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		if (ret) {
 			pr_err("read error in \"%s\" at offset 0x%llx\n",
 			       mtd->name, (unsigned long long) offset);
@@ -250,6 +288,7 @@ mtdsplit_fit_parse(struct mtd_info *mtd,
 		return -ENODEV;
 	}
 
+<<<<<<< HEAD
 	/*
 	 * Classic uImage.FIT has all data embedded into the FDT
 	 * data structure. Hence the total size of the image equals
@@ -336,6 +375,33 @@ mtdsplit_fit_parse(struct mtd_info *mtd,
 
 		return 1;
 	}
+=======
+	/* Search for the rootfs partition after the FIT image */
+	ret = mtd_find_rootfs_from(mtd, fit_offset + fit_size, mtd->size,
+				   &rootfs_offset, NULL);
+	if (ret) {
+		pr_info("no rootfs found after FIT image in \"%s\"\n",
+			mtd->name);
+		return ret;
+	}
+
+	rootfs_size = mtd->size - rootfs_offset;
+
+	parts = kzalloc(2 * sizeof(*parts), GFP_KERNEL);
+	if (!parts)
+		return -ENOMEM;
+
+	parts[0].name = KERNEL_PART_NAME;
+	parts[0].offset = fit_offset;
+	parts[0].size = mtd_rounddown_to_eb(fit_size, mtd) + mtd->erasesize;
+
+	parts[1].name = ROOTFS_PART_NAME;
+	parts[1].offset = rootfs_offset;
+	parts[1].size = rootfs_size;
+
+	*pparts = parts;
+	return 2;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 static const struct of_device_id mtdsplit_fit_of_match_table[] = {

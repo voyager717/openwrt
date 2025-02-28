@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "qca953x_dlink_dap-2xxx.dtsi"
 
 / {
@@ -29,8 +32,12 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 			default-state = "on";
 		};
@@ -49,4 +56,13 @@
 		reg = <0xf50000 0xa0000>;
 		read-only;
 	};
+<<<<<<< HEAD
+=======
+
+	art: partition@ff0000 {
+		label = "art";
+		reg = <0xff0000 0x10000>;
+		read-only;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

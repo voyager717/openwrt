@@ -10,9 +10,15 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=perf
 PKG_VERSION:=$(LINUX_VERSION)
+<<<<<<< HEAD
 PKG_RELEASE:=5
 
 PKG_BUILD_FLAGS:=no-mips16 no-lto
+=======
+PKG_RELEASE:=4
+
+PKG_USE_MIPS16:=0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 PKG_BUILD_PARALLEL:=1
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
 PKG_FLAGS:=nonshared
@@ -27,10 +33,16 @@ include $(INCLUDE_DIR)/nls.mk
 define Package/perf
   SECTION:=devel
   CATEGORY:=Development
+<<<<<<< HEAD
   DEPENDS:= +libelf +libdw +PACKAGE_libunwind:libunwind +libpthread +librt +objdump @!IN_SDK @KERNEL_PERF_EVENTS \
 	    +PACKAGE_libbfd:libbfd +PACKAGE_libopcodes:libopcodes +libtraceevent
   TITLE:=Linux performance monitoring tool
   VERSION:=$(LINUX_VERSION)-r$(PKG_RELEASE)
+=======
+  DEPENDS:= +libelf +libdw +PACKAGE_libunwind:libunwind +libpthread +librt +objdump @!IN_SDK @!TARGET_arc770 @KERNEL_PERF_EVENTS
+  TITLE:=Linux performance monitoring tool
+  VERSION:=$(LINUX_VERSION)-$(PKG_RELEASE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   URL:=http://www.kernel.org
 endef
 
@@ -63,14 +75,18 @@ MAKE_FLAGS = \
 	LDFLAGS="$(TARGET_LDFLAGS)" \
 	KBUILD_HOSTCFLAGS="$(HOST_CFLAGS)" \
 	$(if $(findstring c,$(OPENWRT_VERBOSE)),V=1,V='') \
+<<<<<<< HEAD
 	PKG_CONFIG="$(PKG_CONFIG)" \
 	PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" \
 	EXCLUDE_EXTLIBS="-lstdc++" \
 	EXTRA_PERFLIBS="$(shell $(TARGET_CC) -print-file-name=libstdc++.a)" \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	WERROR=0 \
 	O=$(PKG_BUILD_DIR) \
 	prefix=/usr
 
+<<<<<<< HEAD
 ifeq ($(LINUX_KARCH),powerpc)
 	MAKE_FLAGS += NO_AUXTRACE=1
 endif
@@ -80,6 +96,12 @@ define Build/Compile
 		--no-print-directory \
 		-C $(LINUX_DIR)/tools/perf \
 		-f Makefile.perf
+=======
+define Build/Compile
+	+$(MAKE_FLAGS) $(MAKE) $(PKG_JOBS) \
+		--no-print-directory \
+		-C $(LINUX_DIR)/tools/perf
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/perf/install

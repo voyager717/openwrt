@@ -1,7 +1,10 @@
 #include "vr9.dtsi"
 
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <dt-bindings/mips/lantiq_rcu_gphy.h>
 
 / {
@@ -56,6 +59,7 @@
 		compatible = "gpio-leds";
 
 		power_amber: power_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_AMBER>;
 			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
@@ -63,10 +67,18 @@
 		power_green: power_green {
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "amber:power";
+			gpios = <&gpio 0 GPIO_ACTIVE_HIGH>;
+		};
+		power_green: power_green {
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 1 GPIO_ACTIVE_HIGH>;
 		};
 
 		lan_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_AMBER>;
 			gpios = <&gpio 33 GPIO_ACTIVE_HIGH>;
@@ -74,6 +86,13 @@
 		lan_green {
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "amber:lan";
+			gpios = <&gpio 33 GPIO_ACTIVE_HIGH>;
+		};
+		lan_green {
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
 		};
 
@@ -88,10 +107,43 @@
 	};
 };
 
+<<<<<<< HEAD
+=======
+&eth0 {
+	lantiq,phys = <&gphy1>;
+
+	interface@0 {
+		compatible = "lantiq,xrx200-pdi";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0>;
+
+		ethernet@4 {
+			compatible = "lantiq,xrx200-pdi-port";
+			reg = <4>;
+			phy-mode = "mii";
+			phy-handle = <&phy13>;
+		};
+	};
+
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		compatible = "lantiq,xrx200-mdio";
+
+		phy13: ethernet-phy@13 {
+			reg = <0x13>;
+			compatible = "lantiq,phy22f", "ethernet-phy-ieee802.3-c22";
+		};
+	};
+};
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &gphy1 {
 	lantiq,gphy-mode = <GPHY_MODE_FE>;
 };
 
+<<<<<<< HEAD
 &gswip_mdio {
 	phy13: ethernet-phy@13 {
 		reg = <0x13>;
@@ -107,6 +159,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &pcie0 {
 	status = "disabled";
 };

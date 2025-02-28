@@ -12,9 +12,15 @@ Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
 
 --- a/drivers/net/wireless/broadcom/brcm80211/brcmfmac/of.c
 +++ b/drivers/net/wireless/broadcom/brcm80211/brcmfmac/of.c
+<<<<<<< HEAD
 @@ -65,6 +65,36 @@ static int brcmf_of_get_country_codes(st
  	return 0;
  }
+=======
+@@ -12,6 +12,36 @@
+ #include "common.h"
+ #include "of.h"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  
 +/* TODO: FIXME: Use DT */
 +static void brcmf_of_probe_cc(struct device *dev,
@@ -49,6 +55,7 @@ Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
  void brcmf_of_probe(struct device *dev, enum brcmf_bus_type bus_type,
  		    struct brcmf_mp_device *settings)
  {
+<<<<<<< HEAD
 @@ -113,6 +143,8 @@ void brcmf_of_probe(struct device *dev,
  	}
  	of_node_put(root);
@@ -58,3 +65,14 @@ Signed-off-by: Rafał Miłecki <rafal@milecki.pl>
  	if (!np || !of_device_is_compatible(np, "brcm,bcm4329-fmac"))
  		return;
  
+=======
+@@ -43,6 +73,8 @@ void brcmf_of_probe(struct device *dev,
+ 		of_node_put(root);
+ 	}
+ 
++	brcmf_of_probe_cc(dev, settings);
++
+ 	if (!np || bus_type != BRCMF_BUSTYPE_SDIO ||
+ 	    !of_device_is_compatible(np, "brcm,bcm4329-fmac"))
+ 		return;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

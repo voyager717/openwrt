@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_tplink_8m.dtsi"
 
 / {
@@ -17,26 +20,42 @@
 		compatible = "gpio-leds";
 
 		lan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_LAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:lan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 42 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power: power {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 2 GPIO_ACTIVE_LOW>;
 		};
 
 		wan {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 43 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_orange {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_ORANGE>;
+=======
+			label = "orange:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 11 GPIO_ACTIVE_LOW>;
 		};
 
@@ -53,8 +72,12 @@
 		};
 
 		wps {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 41 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -85,6 +108,7 @@
 };
 
 &wmac {
+<<<<<<< HEAD
 	status = "okay";
 
 	nvmem-cells = <&eeprom_factory_20000>, <&macaddr_factory_f100 (-2)>;
@@ -94,6 +118,9 @@
 &ethernet {
 	nvmem-cells = <&macaddr_factory_f100 0>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address-increment = <(-2)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {
@@ -114,8 +141,15 @@
 &pcie0 {
 	mt76@0,0 {
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		ieee80211-freq-limit = <5000000 6000000>;
 		nvmem-cells = <&eeprom_factory_28000>, <&macaddr_factory_f100 (-1)>;
 		nvmem-cell-names = "eeprom", "mac-address";
+=======
+		mediatek,mtd-eeprom = <&factory 0x28000>;
+		ieee80211-freq-limit = <5000000 6000000>;
+		mtd-mac-address = <&factory 0xf100>;
+		mtd-mac-address-increment = <(-1)>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

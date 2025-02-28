@@ -1,0 +1,13 @@
+./
+./usr
+./usr/include
+./usr/include/iwinfo.h
+./usr/include/iwinfo
+./usr/include/iwinfo/utils.h
+./usr/include/iwinfo/lua.h
+./usr/lib
+./usr/lib/libiwinfo.so.20210430
+./usr/lib/lua
+./usr/lib/lua/iwinfo.so
+./usr/lib/libiwinfo.so
+./host

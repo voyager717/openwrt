@@ -1,6 +1,10 @@
 --- a/gdbserver/configure
 +++ b/gdbserver/configure
+<<<<<<< HEAD
 @@ -2698,7 +2698,7 @@ $as_echo "$as_me: error: \`$ac_var' was
+=======
+@@ -2661,7 +2661,7 @@ $as_echo "$as_me: error: \`$ac_var' was
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
        ac_cache_corrupted=: ;;
      ,);;
      *)

@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 --- a/src/lnum.c
 +++ b/src/lnum.c
 @@ -127,6 +127,8 @@ static int luaO_str2i (const char *s, lu
+=======
+diff --git a/src/lnum.c b/src/lnum.c
+index 1456b6a2ed23..b0632b04c2b7 100644
+--- a/src/lnum.c
++++ b/src/lnum.c
+@@ -127,6 +127,8 @@ static int luaO_str2i (const char *s, lua_Integer *res, char **endptr_ref) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #else
        return 0;  /* Reject the number */
  #endif
@@ -9,7 +17,11 @@
      }
    } else if ((v > LUA_INTEGER_MAX) || (*endptr && (!isspace(*endptr)))) {
      return TK_NUMBER;	/* not in signed range, or has '.', 'e' etc. trailing */
+<<<<<<< HEAD
 @@ -310,3 +312,13 @@ int try_unmint( lua_Integer *r, lua_Inte
+=======
+@@ -310,3 +312,13 @@ int try_unmint( lua_Integer *r, lua_Integer ib ) {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
    return 0;
  }
  
@@ -23,6 +35,11 @@
 +  return (unsigned LUA_INTEGER)v;
 +}
 +#endif
+<<<<<<< HEAD
+=======
+diff --git a/src/lnum_config.h b/src/lnum_config.h
+index 19d7a4231a49..1092eead6629 100644
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 --- a/src/lnum_config.h
 +++ b/src/lnum_config.h
 @@ -141,7 +141,12 @@
@@ -39,3 +56,9 @@
  #endif
  #ifndef LUA_INTEGER_MIN
  # define LUA_INTEGER_MIN (-LUA_INTEGER_MAX -1)  /* -2^16|32 */
+<<<<<<< HEAD
+=======
+-- 
+1.9.1
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

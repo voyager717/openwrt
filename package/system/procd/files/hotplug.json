@@ -8,6 +8,7 @@
 				],
 				[
 					[ "if",
+<<<<<<< HEAD
 						[ "eq", "DEVNAME", "null" ],
 						[
 							[ "makedev", "/dev/%DEVNAME%", "0666" ],
@@ -21,6 +22,10 @@
 					[ "if",
 						[ "eq", "DEVNAME",
 							[ "full", "ptmx", "zero", "tty", "net", "random", "urandom" ]
+=======
+						[ "eq", "DEVNAME",
+							[ "null", "full", "ptmx", "zero", "tty", "net", "random", "urandom" ]
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 						],
 						[
 							[ "makedev", "/dev/%DEVNAME%", "0666" ],

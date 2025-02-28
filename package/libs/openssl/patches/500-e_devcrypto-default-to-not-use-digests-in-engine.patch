@@ -19,9 +19,17 @@ turn them on if it is safe and fast enough.
 
 Signed-off-by: Eneas U de Queiroz <cote2004-github@yahoo.com>
 
+<<<<<<< HEAD
 --- a/engines/e_devcrypto.c
 +++ b/engines/e_devcrypto.c
 @@ -905,7 +905,7 @@ static void prepare_digest_methods(void)
+=======
+diff --git a/engines/e_devcrypto.c b/engines/e_devcrypto.c
+index 3fcd81de7a..d25230d366 100644
+--- a/engines/e_devcrypto.c
++++ b/engines/e_devcrypto.c
+@@ -852,7 +852,7 @@ static void prepare_digest_methods(void)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
      for (i = 0, known_digest_nids_amount = 0; i < OSSL_NELEM(digest_data);
           i++) {
  
@@ -30,7 +38,11 @@ Signed-off-by: Eneas U de Queiroz <cote2004-github@yahoo.com>
  
          /*
           * Check that the digest is usable
+<<<<<<< HEAD
 @@ -1119,7 +1119,7 @@ static const ENGINE_CMD_DEFN devcrypto_c
+=======
+@@ -1072,7 +1072,7 @@ static const ENGINE_CMD_DEFN devcrypto_cmds[] = {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  #ifdef IMPLEMENT_DIGEST
     {DEVCRYPTO_CMD_DIGESTS,
      "DIGESTS",

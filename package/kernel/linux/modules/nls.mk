@@ -135,10 +135,15 @@ define KernelPackage/nls-cp932
   SUBMENU:=Native Language Support
   TITLE:=Codepage 932 (Japanese)
   KCONFIG:=CONFIG_NLS_CODEPAGE_932
+<<<<<<< HEAD
   FILES:= \
 	$(LINUX_DIR)/fs/nls/nls_cp932.ko \
 	$(LINUX_DIR)/fs/nls/nls_euc-jp.ko
   AUTOLOAD:=$(call AutoLoad,25,nls_cp932 nls_euc-jp)
+=======
+  FILES:=$(LINUX_DIR)/fs/nls/nls_cp932.ko
+  AUTOLOAD:=$(call AutoLoad,25,nls_cp932)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   $(call AddDepends/nls)
 endef
 
@@ -339,6 +344,7 @@ define KernelPackage/nls-utf8/description
 endef
 
 $(eval $(call KernelPackage,nls-utf8))
+<<<<<<< HEAD
 
 
 define KernelPackage/nls-ucs2-utils
@@ -355,3 +361,5 @@ define KernelPackage/nls-ucs2-utils/description
 endef
 
 $(eval $(call KernelPackage,nls-ucs2-utils))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

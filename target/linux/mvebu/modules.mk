@@ -2,7 +2,15 @@ define KernelPackage/linkstation-poweroff
   SUBMENU:=$(OTHER_MENU)
   DEPENDS:=@TARGET_mvebu
   TITLE:=Buffalo LinkStation power off driver
+<<<<<<< HEAD
   KCONFIG:=CONFIG_POWER_RESET_LINKSTATION
+=======
+  KCONFIG:= \
+	CONFIG_POWER_RESET=y \
+	CONFIG_POWER_RESET_LINKSTATION \
+	CONFIG_POWER_RESET_QNAP=n
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   FILES:=$(LINUX_DIR)/drivers/power/reset/linkstation-poweroff.ko
   AUTOLOAD:=$(call AutoLoad,31,linkstation-poweroff,1)
 endef
@@ -15,6 +23,7 @@ define KernelPackage/linkstation-poweroff/description
 endef
 
 $(eval $(call KernelPackage,linkstation-poweroff))
+<<<<<<< HEAD
 
 
 define KernelPackage/turris-omnia-mcu
@@ -52,3 +61,5 @@ define KernelPackage/leds-turris-omnia/description
 endef
 
 $(eval $(call KernelPackage,leds-turris-omnia))
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

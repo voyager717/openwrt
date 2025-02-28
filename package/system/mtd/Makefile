@@ -18,7 +18,10 @@ PKG_LICENSE:=GPL-2.0+
 PKG_LICENSE_FILES:=
 
 PKG_FLAGS:=nonshared
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=lto
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -37,7 +40,12 @@ endef
 target=$(firstword $(subst -, ,$(BOARD)))
 
 MAKE_FLAGS += TARGET="$(target)"
+<<<<<<< HEAD
 TARGET_CFLAGS += -Dtarget_$(target)=1 -Wall
+=======
+TARGET_CFLAGS += -Dtarget_$(target)=1 -Wall -flto
+TARGET_LDFLAGS += -flto=jobserver
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifdef CONFIG_MTD_REDBOOT_PARTS
   MAKE_FLAGS += FIS_SUPPORT=1

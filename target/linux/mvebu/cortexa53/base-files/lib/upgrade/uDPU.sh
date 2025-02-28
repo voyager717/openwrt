@@ -18,10 +18,17 @@ udpu_check_emmc() {
 }
 
 udpu_part_prep() {
+<<<<<<< HEAD
 	 if grep -q "$1" /proc/mounts; then
 		mounted_part="$(grep -m 1 $1 /proc/mounts | awk '{print $2}')"
 		umount "$mounted_part"
 		grep -woq "$mounted_part" /proc/mounts && umount -l "$mounted_part"
+=======
+	 if [ "$(grep $1 /proc/mounts)" ]; then
+		mounted_part="$(grep $1 /proc/mounts | awk '{print $2}' | head -1)"
+		umount $mounted_part
+		[ "$(grep -wo $mounted_part /proc/mounts)" ] && umount -l $mounted_part
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 }
 
@@ -42,11 +49,16 @@ udpu_do_part_check() {
 		# Format the /misc part right away as we will need it for the firmware
 		printf "Formating /misc partition, this make take a while..\n"
 		udpu_part_prep ${emmc_dev}p4
+<<<<<<< HEAD
 		if mkfs.f2fs -q -l misc -O extra_attr,compression ${emmc_dev}p4; then
 			printf "/misc partition formated successfully\n"
 		else
 			printf "/misc partition formatting failed\n"
 		fi
+=======
+		mkfs.f2fs -q -l misc ${emmc_dev}p4
+		[ $? -eq 0 ] && printf "/misc partition formated successfully\n" || printf "/misc partition formatting failed\n"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		udpu_do_initial_setup
 	else
@@ -55,19 +67,35 @@ udpu_do_part_check() {
 }
 
 udpu_do_misc_prep() {
+<<<<<<< HEAD
 	if ! grep -woq /misc /proc/mounts; then
 		mkdir -p /misc
 
 		# If the mount fails, try to reformat partition
 		# Leaving possiblity for multiple iterations
 		if ! mount ${emmc_dev}p4 /misc; then
+=======
+	if [ ! "$(grep -wo /misc /proc/mounts)" ]; then
+		mkdir -p /misc
+		mount ${emmc_dev}p4 /misc
+
+		# If the mount fails, try to reformat partition
+		# Leaving possiblity for multiple iterations
+		if [ $? -ne 0 ]; then
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			printf "Error while mounting /misc, trying to reformat..\n"
 
 			format_count=0
 			while [ "$format_count" -lt "1" ]; do
 				udpu_part_prep ${emmc_dev}p4
+<<<<<<< HEAD
 				mkfs.f2fs -q -l misc -O extra_attr,compression ${emmc_dev}p4
 				if ! mount ${emmc_dev}p4 /misc; then
+=======
+				mkfs.f2fs -q -l misc ${emmc_dev}p4
+				mount ${emmc_dev}p4 /misc
+				if [ $? -ne 0 ]; then
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 					umount -l /misc
 					printf "Failed while mounting /misc\n"
 					format_count=$((format_count +1))
@@ -83,27 +111,48 @@ udpu_do_misc_prep() {
 udpu_do_initial_setup() {
 	# Prepare /recovery parition
 	udpu_part_prep ${emmc_dev}p2
+<<<<<<< HEAD
 	mkfs.ext4 -qF ${emmc_dev}p2 2>&1 /dev/null
 
 	# Prepare /boot partition
 	udpu_part_prep ${emmc_dev}p1
 	mkfs.ext4 -qF ${emmc_dev}p1 2>&1 /dev/null
+=======
+	mkfs.ext4 -q ${emmc_dev}p2 | echo y &> /dev/null
+
+	# Prepare /boot partition
+	udpu_part_prep ${emmc_dev}p1
+	mkfs.ext4 -q ${emmc_dev}p1 | echo y &> /dev/null
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	# Prepare /root partition
 	printf "Formating /root partition, this may take a while..\n"
 	udpu_part_prep ${emmc_dev}p3
+<<<<<<< HEAD
 	mkfs.f2fs -q -l rootfs -O extra_attr,compression ${emmc_dev}p3 && printf "/root partition reformated\n"
+=======
+	mkfs.f2fs -q -l rootfs ${emmc_dev}p3
+	[ $? -eq 0 ] && printf "/root partition reformated\n"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 }
 
 udpu_do_regular_upgrade() {
 	# Clean /boot partition - mfks.ext4 is not available in chroot
+<<<<<<< HEAD
 	grep -woq /boot /proc/mounts && umount /boot
+=======
+	[ "$(grep -wo /boot /proc/mounts)" ] && umount /boot
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mkdir -p /tmp/boot
 	mount ${emmc_dev}p1 /tmp/boot
 	rm -rf /tmp/boot/*
 
 	# Clean /root partition - mkfs.f2fs is not available in chroot
+<<<<<<< HEAD
 	grep -woq /dev/root /proc/mounts && umount /
+=======
+	[ "$(grep -wo /dev/root /proc/mounts)" ] && umount /
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	mkdir -p /tmp/rootpart
 	mount ${emmc_dev}p3 /tmp/rootpart
 	rm -rf /tmp/rootpart/*
@@ -122,6 +171,7 @@ platform_do_upgrade_uDPU() {
 	udpu_do_regular_upgrade
 
 	printf "Updating /boot partition\n"
+<<<<<<< HEAD
 	if tar xzf /misc/firmware/boot.tgz -C /tmp/boot; then
 		printf "/boot partition updated successfully\n"
 	else
@@ -135,6 +185,15 @@ platform_do_upgrade_uDPU() {
 	else
 		printf "/root partition update failed\n"
 	fi
+=======
+	tar xzf /misc/firmware/boot.tgz -C /tmp/boot
+	[ $? -eq 0 ] && printf "/boot partition updated successfully\n" || printf "/boot partition update failed\n"
+	sync
+
+	printf "Updating /root partition\n"
+	tar xzf /misc/firmware/rootfs.tgz -C /tmp/rootpart
+	[ $? -eq 0 ] && printf "/root partition updated successfully\n" || printf "/root partition update failed\n"
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	sync
 
 	# Saving configuration files over sysupgrade
@@ -143,9 +202,15 @@ platform_do_upgrade_uDPU() {
 	# Remove tmp mounts
 	tmp_parts=$(grep "${emmc_dev}" /proc/mounts | awk '{print $2}')
 	for part in ${tmp_parts}; do
+<<<<<<< HEAD
 		umount "$part"
 		# Force umount is necessary
 		grep -q "${part}" /proc/mounts && umount -l "$part"
+=======
+		umount $part
+		# Force umount is necessary
+		[ "$(grep "${part}" /proc/mounts)" ] && umount -l $part
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	done
 
 	# Sysupgrade complains about /tmp and /dev, so we can detach them here

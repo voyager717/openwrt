@@ -30,6 +30,7 @@ platform_do_upgrade() {
 		}
 		default_do_upgrade "$1"
 		;;
+<<<<<<< HEAD
 	rostelecom,rt-fl-1|\
 	rostelecom,s1010)
 		idx="$(find_mtd_index ftd_and_bootflag)"
@@ -38,6 +39,8 @@ platform_do_upgrade() {
 				of=/dev/mtdblock$idx
 		default_do_upgrade "$1"
 		;;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	*)
 		default_do_upgrade "$1"
 		;;

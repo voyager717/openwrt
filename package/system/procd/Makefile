@@ -8,6 +8,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=procd
+<<<<<<< HEAD
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
@@ -15,6 +16,15 @@ PKG_SOURCE_URL=$(PROJECT_GIT)/project/procd.git
 PKG_MIRROR_HASH:=cad8681f04922a3ba05363330a2896a598572a2beee980692f1cd7c8d7136b5e
 PKG_SOURCE_DATE:=2025-01-30
 PKG_SOURCE_VERSION:=7fcb5a275fcff5ab697357c86ce568c71128b982
+=======
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE_PROTO:=git
+PKG_SOURCE_URL=$(PROJECT_GIT)/project/procd.git
+PKG_SOURCE_DATE:=2021-03-08
+PKG_SOURCE_VERSION:=2cfc26f8456a4d5ba3836c914a742f3d00bad781
+PKG_MIRROR_HASH:=4b514143949b6ea5799a7b0b2f2f4ad5f084f88929eb0ac5a01ffc7852a71d22
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CMAKE_INSTALL:=1
 
 PKG_LICENSE:=GPL-2.0
@@ -22,25 +32,47 @@ PKG_LICENSE_FILES:=
 
 PKG_MAINTAINER:=John Crispin <john@phrozen.org>
 
+<<<<<<< HEAD
 PKG_BUILD_FLAGS:=lto
 PKG_ASLR_PIE_REGULAR:=1
 PKG_CONFIG_DEPENDS:= \
 	CONFIG_TARGET_INIT_PATH CONFIG_KERNEL_SECCOMP CONFIG_PROCD_SHOW_BOOT \
+=======
+PKG_ASLR_PIE_REGULAR:=1
+PKG_CONFIG_DEPENDS:= \
+	CONFIG_TARGET_INIT_PATH CONFIG_KERNEL_SECCOMP \
+	CONFIG_PROCD_SHOW_BOOT CONFIG_PROCD_ZRAM_TMPFS \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	CONFIG_KERNEL_NAMESPACES CONFIG_PACKAGE_procd-ujail CONFIG_PACKAGE_procd-seccomp
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 ifeq ($(DUMP),)
+<<<<<<< HEAD
   STAMP_CONFIGURED:=$(strip $(STAMP_CONFIGURED))_$(shell echo $(CONFIG_TARGET_INIT_PATH) | $(MKHASH) md5)
 endif
 
 CMAKE_OPTIONS += -DEARLY_PATH="$(TARGET_INIT_PATH)"
+=======
+  STAMP_CONFIGURED:=$(strip $(STAMP_CONFIGURED))_$(shell echo $(CONFIG_TARGET_INIT_PATH) | mkhash md5)
+endif
+
+CMAKE_OPTIONS += -DEARLY_PATH="$(TARGET_INIT_PATH)"
+TARGET_LDFLAGS += $(if $(CONFIG_USE_GLIBC),-lrt)
+
+TARGET_CFLAGS += -flto
+TARGET_LDFLAGS += -flto
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Package/procd/Default
   SECTION:=base
   CATEGORY:=Base system
+<<<<<<< HEAD
   DEPENDS:=+ubusd +ubus +libjson-script +ubox +libubox +libudebug \
+=======
+  DEPENDS:=+ubusd +ubus +libjson-script +ubox +USE_GLIBC:librt +libubox \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	  +libubus +libblobmsg-json +libjson-c +jshn
   TITLE:=OpenWrt system process manager
   USERID:=:dialout=20 :audio=29
@@ -64,6 +96,7 @@ define Package/procd-ujail
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=@KERNEL_NAMESPACES +@KERNEL_UTS_NS +@KERNEL_IPC_NS +@KERNEL_PID_NS \
+<<<<<<< HEAD
 	  +libubox +libubus +libuci +libblobmsg-json
   TITLE:=OpenWrt process jail helper
 endef
@@ -72,13 +105,35 @@ define Package/procd-seccomp
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=@USE_SECCOMP +libubox +libblobmsg-json
+=======
+	  +libubox +libubus +libblobmsg-json
+  TITLE:=OpenWrt process jail helper
+endef
+
+define Package/procd-ujail-console
+  SECTION:=base
+  CATEGORY:=Base system
+  DEPENDS:=+procd-ujail +libubus +libubox
+  TITLE:=OpenWrt process jail console
+endef
+
+define Package/procd-seccomp
+  SECTION:=base
+  CATEGORY:=Base system
+  DEPENDS:=@(arm||armeb||mips||mipsel||i386||powerpc||x86_64) @!TARGET_uml \
+	  @KERNEL_SECCOMP +libubox +libblobmsg-json
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=OpenWrt process seccomp helper + utrace
 endef
 
 define Package/uxc
   SECTION:=base
   CATEGORY:=Base system
+<<<<<<< HEAD
   DEPENDS:=+procd-ujail +libubus +libubox +libblobmsg-json +blockd +PACKAGE_uxc:rpcd
+=======
+  DEPENDS:=+procd-ujail +libubus +libubox +libblobmsg-json
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   TITLE:=OpenWrt container management
   MAINTAINER:=Daniel Golle <daniel@makrotopia.org>
 endef
@@ -92,6 +147,13 @@ config PROCD_SHOW_BOOT
 	default n
 	prompt "Print the shutdown to the console as well as logging it to syslog"
 
+<<<<<<< HEAD
+=======
+config PROCD_ZRAM_TMPFS
+	bool
+	default n
+	prompt "Mount /tmp using zram."
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endmenu
 endef
 
@@ -103,6 +165,13 @@ ifeq ($(CONFIG_PROCD_SHOW_BOOT),y)
   CMAKE_OPTIONS += -DSHOW_BOOT_ON_CONSOLE=1
 endif
 
+<<<<<<< HEAD
+=======
+ifeq ($(CONFIG_PROCD_ZRAM_TMPFS),y)
+  CMAKE_OPTIONS += -DZRAM_TMPFS=1
+endif
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 ifdef CONFIG_PACKAGE_procd-ujail
   CMAKE_OPTIONS += -DJAIL_SUPPORT=1
 endif
@@ -118,7 +187,10 @@ define Package/procd/install
 	$(INSTALL_BIN) ./files/reload_config $(1)/sbin/
 	$(INSTALL_CONF) ./files/hotplug*.json $(1)/etc/
 	$(INSTALL_DATA) ./files/procd.sh $(1)/lib/functions/
+<<<<<<< HEAD
 	$(INSTALL_BIN) ./files/service $(1)/sbin/service
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 Package/procd-selinux/install = $(Package/procd/install)
@@ -128,6 +200,14 @@ define Package/procd-ujail/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/ujail $(1)/sbin/
 endef
 
+<<<<<<< HEAD
+=======
+define Package/procd-ujail-console/install
+	$(INSTALL_DIR) $(1)/sbin
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/sbin/ujail-console $(1)/sbin/
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/procd-seccomp/install
 	$(INSTALL_DIR) $(1)/sbin $(1)/lib
 	$(INSTALL_DATA) $(PKG_INSTALL_DIR)/usr/lib/libpreload-seccomp.so $(1)/lib
@@ -150,5 +230,9 @@ endef
 $(eval $(call BuildPackage,procd))
 $(eval $(call BuildPackage,procd-selinux))
 $(eval $(call BuildPackage,procd-ujail))
+<<<<<<< HEAD
+=======
+$(eval $(call BuildPackage,procd-ujail-console))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 $(eval $(call BuildPackage,procd-seccomp))
 $(eval $(call BuildPackage,uxc))

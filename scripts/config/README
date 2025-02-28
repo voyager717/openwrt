@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 These files were taken from the Linux Kernel Configuration System v6.6.16, 
 at commit eb3e299184cc4f40d4bd84fda269b3a20ddcff80 (Feb 5, 2024),  and modified
 for the OpenWrt Buildroot:
+=======
+These files were taken from the Linux Kernel Configuration System at commit
+089b7d890f972f6b649fedc9259f6b93a18fb970 (Feb 4, 2020) and modified for the
+OpenWrt Buildroot:
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
  - Removed gconf, tests and kernel configuration targets.
  - Adjusted the Makefile to compile outside the kernel.
  - Always use default file when running make all{no,mod,yes}config.
@@ -24,4 +30,8 @@ for the OpenWrt Buildroot:
    BUILD_SHIPPED_FILES defined
 
 For a full list of changes, see the repository at:
+<<<<<<< HEAD
 https://github.com/cotequeiroz/linux/commits/openwrt-v6.6.16/scripts/kconfig
+=======
+https://github.com/cotequeiroz/linux/commits/openwrt/scripts/kconfig
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

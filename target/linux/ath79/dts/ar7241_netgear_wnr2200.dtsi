@@ -4,7 +4,10 @@
 
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include <dt-bindings/mtd/partitions/uimage.h>
 
 / {
@@ -17,6 +20,10 @@
 		led-failsafe = &led_power_amber;
 		led-running = &led_power_green;
 		led-upgrade = &led_power_amber;
+<<<<<<< HEAD
+=======
+		label-mac-device = &eth1;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	ath9k-keys {
@@ -52,14 +59,22 @@
 		pinctrl-0 = <&jtag_disable_pins &switch_led_disable_pins &clks_disable_pins>;
 
 		wan_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 17 GPIO_ACTIVE_LOW>;
 		};
 
 		wan_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WAN;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:wan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 12 GPIO_ACTIVE_LOW>;
 		};
 
@@ -104,14 +119,22 @@
 		};
 
 		wps_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WPS;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:wps";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 7 GPIO_ACTIVE_LOW>;
 		};
 
 		usb_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_USB;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:usb";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&gpio 8 GPIO_ACTIVE_LOW>;
 			trigger-sources = <&hub_port>;
 			linux,default-trigger = "usbport";
@@ -122,21 +145,33 @@
 		compatible = "gpio-leds";
 
 		led_power_green: power_green {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_GREEN>;
+=======
+			label = "green:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&ath9k 2 GPIO_ACTIVE_LOW>;
 		};
 
 		led_power_amber: power_amber {
+<<<<<<< HEAD
 			function = LED_FUNCTION_POWER;
 			color = <LED_COLOR_ID_AMBER>;
+=======
+			label = "amber:power";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&ath9k 1 GPIO_ACTIVE_LOW>;
 			default-state = "keep";
 		};
 
 		wlan_blue {
+<<<<<<< HEAD
 			function = LED_FUNCTION_WLAN;
 			color = <LED_COLOR_ID_BLUE>;
+=======
+			label = "blue:wlan";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			gpios = <&ath9k 0 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0tpt";
 		};
@@ -161,10 +196,20 @@
 
 &eth0 {
 	status = "okay";
+<<<<<<< HEAD
+=======
+
+	mtd-mac-address = <&art 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &eth1 {
 	compatible = "qca,ar7241-eth", "syscon", "simple-mfd";
+<<<<<<< HEAD
+=======
+
+	mtd-mac-address = <&art 0x6>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -173,6 +218,12 @@
 	ath9k: wifi@0,0 {
 		compatible = "pci168c,002e";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
+=======
+		mtd-mac-address = <&art 0x0>;
+		mtd-mac-address-increment = <1>;
+		qca,no-eeprom;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		#gpio-cells = <2>;
 		gpio-controller;
 
@@ -190,5 +241,16 @@
 };
 
 &usb {
+<<<<<<< HEAD
 	status = "okay";
+=======
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+
+	hub_port: port@1 {
+		reg = <1>;
+		#trigger-source-cells = <0>;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

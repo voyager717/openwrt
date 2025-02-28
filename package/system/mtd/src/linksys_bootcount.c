@@ -69,10 +69,19 @@ struct bootcounter {
 	uint32_t checksum;
 };
 
+<<<<<<< HEAD
 int mtd_resetbc(const char *mtd)
 {
 	struct mtd_info_user mtd_info;
 	struct bootcounter *curr = NULL;
+=======
+static char page[2048];
+
+int mtd_resetbc(const char *mtd)
+{
+	struct mtd_info_user mtd_info;
+	struct bootcounter *curr = (struct bootcounter *)page;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	unsigned int i;
 	unsigned int bc_offset_increment;
 	int last_count = 0;
@@ -106,6 +115,7 @@ int mtd_resetbc(const char *mtd)
 	}
 
 	num_bc = mtd_info.size / bc_offset_increment;
+<<<<<<< HEAD
 	curr = malloc(bc_offset_increment);
 
 	if(curr == NULL) {
@@ -132,11 +142,29 @@ int mtd_resetbc(const char *mtd)
 		if (curr->magic != BOOTCOUNT_MAGIC || curr->checksum != curr->magic + curr->count) {
 			DLOG_ERR("Unexpected boot-count log at offset 0x%08x: magic 0x%08x boot count 0x%08x checksum 0x%08x; aborting.",
 				 i * bc_offset_increment, curr->magic, curr->count, curr->checksum);
+=======
+
+	for (i = 0; i < num_bc; i++) {
+		pread(fd, curr, sizeof(*curr), i * bc_offset_increment);
+
+		/* Existing code assumes erase is to 0xff; left as-is (2019) */
+
+		if (curr->magic != BOOTCOUNT_MAGIC &&
+		    curr->magic != 0xffffffff) {
+			DLOG_ERR("Unexpected magic %08x at offset %08x; aborting.",
+				 curr->magic, i * bc_offset_increment);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			retval = -2;
 			goto out;
 		}
 
+<<<<<<< HEAD
+=======
+		if (curr->magic == 0xffffffff)
+			break;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		last_count = curr->count;
 	}
 
@@ -193,9 +221,12 @@ int mtd_resetbc(const char *mtd)
 	}
 
 out:
+<<<<<<< HEAD
 	if (curr != NULL)
 		free(curr);
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	close(fd);
 	return retval;
 }

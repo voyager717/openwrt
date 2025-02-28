@@ -12,15 +12,23 @@ obj.gemini = $(obj.wrgg)
 obj.brcm = trx.o
 obj.bcm47xx = $(obj.brcm)
 obj.bcm53xx = $(obj.brcm) $(obj.seama)
+<<<<<<< HEAD
 obj.mediatek = $(obj.brcm) linksys_bootcount.o
 obj.bcm63xx = imagetag.o
 obj.bmips = imagetag.o
 obj.ramips = $(obj.brcm) $(obj.seama) $(obj.tpl) $(obj.wrg) linksys_bootcount.o
+=======
+obj.bcm63xx = imagetag.o
+obj.ramips = $(obj.seama) $(obj.tpl) $(obj.wrg) linksys_bootcount.o
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 obj.mvebu = linksys_bootcount.o
 obj.kirkwood = linksys_bootcount.o
 obj.ipq806x = linksys_bootcount.o
 obj.ipq40xx = linksys_bootcount.o
+<<<<<<< HEAD
 obj.qualcommax = linksys_bootcount.o
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 ifdef FIS_SUPPORT
   obj += fis.o

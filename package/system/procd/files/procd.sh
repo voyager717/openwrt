@@ -101,11 +101,17 @@ _procd_close_service() {
 	_procd_open_trigger
 	service_triggers
 	_procd_close_trigger
+<<<<<<< HEAD
 	type service_data >/dev/null 2>&1 && {
 		_procd_open_data
 		service_data
 		_procd_close_data
 	}
+=======
+	_procd_open_data
+	service_data
+	_procd_close_data
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	_procd_ubus_call ${1:-set}
 }
 
@@ -200,6 +206,10 @@ _procd_add_jail() {
 		netns)	json_add_boolean "netns" "1";;
 		userns)	json_add_boolean "userns" "1";;
 		cgroupsns)	json_add_boolean "cgroupsns" "1";;
+<<<<<<< HEAD
+=======
+		console)	json_add_boolean "console" "1";;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		esac
 	done
 	json_add_object "mount"
@@ -308,6 +318,7 @@ _procd_add_reload_interface_trigger() {
 	_procd_close_trigger
 }
 
+<<<<<<< HEAD
 _procd_add_data_trigger() {
 	json_add_array
 	_procd_add_array_data "service.data.update"
@@ -338,6 +349,8 @@ _procd_add_reload_data_trigger() {
 	_procd_close_trigger
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 _procd_add_config_trigger() {
 	json_add_array
 	_procd_add_array_data "$1"
@@ -360,6 +373,7 @@ _procd_add_config_trigger() {
 	json_close_array
 }
 
+<<<<<<< HEAD
 _procd_add_mount_trigger() {
 	json_add_array
 	_procd_add_array_data "$1"
@@ -433,6 +447,8 @@ _procd_add_reload_mount_trigger() {
 	_procd_add_action_mount_trigger reload "$@"
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 _procd_add_raw_trigger() {
 	json_add_array
 	_procd_add_array_data "$1"
@@ -556,10 +572,14 @@ _procd_send_signal() {
 _procd_status() {
 	local service="$1"
 	local instance="$2"
+<<<<<<< HEAD
 	local data state
 	local n_running=0
 	local n_stopped=0
 	local n_total=0
+=======
+	local data
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 	json_init
 	[ -n "$service" ] && json_add_string name "$service"
@@ -574,6 +594,7 @@ _procd_status() {
 	fi
 
 	[ -n "$instance" ] && instance="\"$instance\"" || instance='*'
+<<<<<<< HEAD
 
 	for state in $(jsonfilter -s "$data" -e '$['"$instance"'].running'); do
 		n_total=$((n_total + 1))
@@ -597,6 +618,12 @@ _procd_status() {
 	else
 		echo "unknown instance $instance"
 		return 4
+=======
+	if [ -z "$(echo "$data" | jsonfilter -e '$['"$instance"']')" ]; then
+		echo "unknown instance $instance"; return 4
+	else
+		echo "running"; return 0
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	fi
 }
 
@@ -624,13 +651,18 @@ _procd_set_config_changed() {
 }
 
 procd_add_mdns_service() {
+<<<<<<< HEAD
 	local service proto port txt_count=0
+=======
+	local service proto port
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	service=$1; shift
 	proto=$1; shift
 	port=$1; shift
 	json_add_object "${service}_$port"
 	json_add_string "service" "_$service._$proto.local"
 	json_add_int port "$port"
+<<<<<<< HEAD
 	for txt in "$@"; do
 		[ -z "$txt" ] && continue
 		txt_count=$((txt_count+1))
@@ -639,6 +671,13 @@ procd_add_mdns_service() {
 	done
 	[ $txt_count -gt 0 ] && json_select ..
 
+=======
+	[ -n "$1" ] && {
+		json_add_array txt
+		for txt in "$@"; do json_add_string "" "$txt"; done
+		json_select ..
+	}
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	json_select ..
 }
 
@@ -689,6 +728,7 @@ _procd_wrapper \
 	procd_add_raw_trigger \
 	procd_add_config_trigger \
 	procd_add_interface_trigger \
+<<<<<<< HEAD
 	procd_add_mount_trigger \
 	procd_add_reload_trigger \
 	procd_add_reload_data_trigger \
@@ -696,6 +736,10 @@ _procd_wrapper \
 	procd_add_action_mount_trigger \
 	procd_add_reload_mount_trigger \
 	procd_add_restart_mount_trigger \
+=======
+	procd_add_reload_trigger \
+	procd_add_reload_interface_trigger \
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	procd_open_trigger \
 	procd_close_trigger \
 	procd_open_instance \

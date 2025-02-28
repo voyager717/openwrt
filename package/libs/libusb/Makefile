@@ -8,17 +8,31 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=libusb
+<<<<<<< HEAD
 PKG_VERSION:=1.0.27
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/libusb/libusb/releases/download/v$(PKG_VERSION)
 PKG_HASH:=ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
+=======
+PKG_VERSION:=1.0.24
+PKG_RELEASE:=$(AUTORELEASE)
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
+PKG_SOURCE_URL:=\
+  https://github.com/libusb/libusb/releases/download/v$(PKG_VERSION) \
+  @SF/$(PKG_NAME)
+PKG_HASH:=7efd2685f7b327326dcfb85cee426d9b871fd70e22caa15bb68d595ce2a2b12a
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_MAINTAINER:= Felix Fietkau <nbd@nbd.name>
 PKG_LICENSE:=LGPL-2.1-or-later
 PKG_LICENSE_FILES:=COPYING
+<<<<<<< HEAD
 PKG_CPE_ID:=cpe:/a:libusb:libusb
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_INSTALL:=1
 PKG_BUILD_PARALLEL:=1
@@ -29,8 +43,13 @@ define Package/libusb-1.0
   SECTION:=libs
   CATEGORY:=Libraries
   TITLE:=A library for accessing Linux USB devices
+<<<<<<< HEAD
   DEPENDS:=+libpthread +librt +libatomic
   URL:=https://libusb.info/
+=======
+  DEPENDS:=+libpthread +librt
+  URL:=http://libusb.info/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   ABI_VERSION:=0
 endef
 
@@ -39,6 +58,7 @@ define Package/libusb-1.0/description
   many different operating systems.
 endef
 
+<<<<<<< HEAD
 define Package/fxload
   SECTION:=utils
   CATEGORY:=Utilities
@@ -59,6 +79,12 @@ CONFIGURE_ARGS += \
 	--enable-examples-build \
 	--disable-log \
 	--disable-udev
+=======
+TARGET_CFLAGS += $(FPIC)
+CONFIGURE_ARGS += \
+	--disable-udev \
+	--disable-log
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include/libusb-1.0
@@ -71,6 +97,7 @@ endef
 
 define Package/libusb-1.0/install
 	$(INSTALL_DIR) $(1)/usr/lib
+<<<<<<< HEAD
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libusb-1.0.so* $(1)/usr/lib/
 endef
 
@@ -81,3 +108,9 @@ endef
 
 $(eval $(call BuildPackage,libusb-1.0))
 $(eval $(call BuildPackage,fxload))
+=======
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libusb-1.0.so.* $(1)/usr/lib/
+endef
+
+$(eval $(call BuildPackage,libusb-1.0))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

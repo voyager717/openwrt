@@ -13,7 +13,11 @@
 	flash@0 {
 		compatible = "jedec,spi-nor";
 		reg = <0>;
+<<<<<<< HEAD
 		spi-max-frequency = <50000000>;
+=======
+		spi-max-frequency = <14000000>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		partitions {
 			compatible = "fixed-partitions";
@@ -32,6 +36,7 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
 				label = "factory";
 				reg = <0x40000 0x10000>;
@@ -58,6 +63,12 @@
 						reg = <0xe006 0x6>;
 					};
 				};
+=======
+			factory: partition@40000 {
+				label = "factory";
+				reg = <0x40000 0x10000>;
+				read-only;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			};
 
 			partition@50000 {
@@ -68,6 +79,7 @@
 		};
 	};
 };
+<<<<<<< HEAD
 
 &gmac0 {
 	nvmem-cells = <&macaddr_factory_e000>;
@@ -78,3 +90,5 @@
 	nvmem-cells = <&macaddr_factory_e006>;
 	nvmem-cell-names = "mac-address";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

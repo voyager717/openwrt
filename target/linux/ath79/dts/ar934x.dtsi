@@ -78,7 +78,11 @@
 
 			gpio: gpio@18040000 {
 				compatible = "qca,ar9340-gpio";
+<<<<<<< HEAD
 				reg = <0x18040000 0x28>;
+=======
+				reg = <0x18040000 0x2c>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 				interrupts = <2>;
 				ngpios = <23>;
@@ -166,10 +170,15 @@
 
 			interrupts = <3>;
 			resets = <&rst 5>;
+<<<<<<< HEAD
+=======
+			reset-names = "usb-host";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 			has-transaction-translator;
 			caps-offset = <0x100>;
 
+<<<<<<< HEAD
 			phy-names = "usb";
 			phys = <&usb_phy>;
 
@@ -182,6 +191,12 @@
 				reg = <1>;
 				#trigger-source-cells = <0>;
 			};
+=======
+			phy-names = "usb-phy";
+			phys = <&usb_phy>;
+
+			status = "disabled";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		nand: nand@1b000200 {
@@ -196,6 +211,12 @@
 
 			nand-ecc-mode = "hw";
 
+<<<<<<< HEAD
+=======
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 			status = "disabled";
 		};
 
@@ -215,7 +236,11 @@
 	usb_phy: usb-phy {
 		compatible = "qca,ar9340-usb-phy", "qca,ar7200-usb-phy";
 
+<<<<<<< HEAD
 		reset-names = "phy-analog", "phy", "suspend-override";
+=======
+		reset-names = "usb-phy-analog", "usb-phy", "usb-suspend-override";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		resets = <&rst 11>, <&rst 4>, <&rst 3>;
 
 		#phy-cells = <0>;

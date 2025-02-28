@@ -7,7 +7,12 @@
 	compatible = "nexx,wt1520", "ralink,rt5350-soc";
 
 	keys {
+<<<<<<< HEAD
 		compatible = "gpio-keys";
+=======
+		compatible = "gpio-keys-polled";
+		poll-interval = <20>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 		reset {
 			label = "reset";
@@ -17,6 +22,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &spi0 {
 	status = "okay";
 
@@ -71,6 +77,8 @@
 	};
 };
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 &state_default {
 	gpio {
 		groups = "jtag", "uartf";
@@ -79,6 +87,7 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_4>;
 	nvmem-cell-names = "mac-address";
 };
@@ -86,4 +95,11 @@
 &wmac {
 	nvmem-cells = <&eeprom_factory_0>;
 	nvmem-cell-names = "eeprom";
+=======
+	mtd-mac-address = <&factory 0x4>;
+};
+
+&wmac {
+	ralink,mtd-eeprom = <&factory 0x0>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };

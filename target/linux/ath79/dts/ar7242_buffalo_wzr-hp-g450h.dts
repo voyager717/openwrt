@@ -64,8 +64,12 @@
 };
 
 &eth0 {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_art_1002>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&art 0x1002>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &pcie {
@@ -74,6 +78,7 @@
 	ath9k: wifi@0,0 {
 		compatible = "pci168c,0030";
 		reg = <0x0000 0 0 0 0>;
+<<<<<<< HEAD
 		nvmem-cells = <&macaddr_art_1002>;
 		nvmem-cell-names = "mac-address";
 		qca,no-eeprom;
@@ -92,5 +97,11 @@
 		macaddr_art_1002: macaddr@1002 {
 			reg = <0x1002 0x6>;
 		};
+=======
+		mtd-mac-address = <&art 0x1002>;
+		qca,no-eeprom;
+		#gpio-cells = <2>;
+		gpio-controller;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 };

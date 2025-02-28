@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 
+<<<<<<< HEAD
 #include <dt-bindings/leds/common.h>
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 #include "mt7628an_xiaomi_mi-router-4.dtsi"
 
 / {
@@ -9,6 +12,7 @@
 	model = "Xiaomi Mi Router 4C";
 
 	aliases {
+<<<<<<< HEAD
 		led-boot = &led_power_yellow;
 		led-failsafe = &led_power_yellow;
 		led-running = &led_power_blue;
@@ -39,6 +43,10 @@
 
 	};
 
+=======
+		label-mac-device = &ethernet;
+	};
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &flash0 {
@@ -68,8 +76,12 @@
 };
 
 &ethernet {
+<<<<<<< HEAD
 	nvmem-cells = <&macaddr_factory_28>;
 	nvmem-cell-names = "mac-address";
+=======
+	mtd-mac-address = <&factory 0x28>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 &esw {

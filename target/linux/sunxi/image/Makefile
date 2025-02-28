@@ -10,6 +10,10 @@ FAT32_BLOCK_SIZE=1024
 FAT32_BLOCKS=$(shell echo $$(($(CONFIG_SUNXI_SD_BOOT_PARTSIZE)*1024*1024/$(FAT32_BLOCK_SIZE))))
 
 DEVICE_VARS := SUNXI_DTS SUNXI_DTS_DIR
+<<<<<<< HEAD
+=======
+KERNEL_LOADADDR:=0x40008000
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Build/sunxi-sdcard
 	rm -f $@.boot
@@ -34,7 +38,11 @@ define Device/Default
   KERNEL := kernel-bin | uImage none
   IMAGES := sdcard.img.gz
   IMAGE/sdcard.img.gz := sunxi-sdcard | append-metadata | gzip
+<<<<<<< HEAD
   SUNXI_DTS_DIR :=allwinner/
+=======
+  SUNXI_DTS_DIR :=
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
   SUNXI_DTS = $$(SUNXI_DTS_DIR)$$(SOC)-$(lastword $(subst _, ,$(1)))
 endef
 

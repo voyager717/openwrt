@@ -10,7 +10,11 @@ include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=drv_vmmc
 PKG_VERSION:=1.9.0
+<<<<<<< HEAD
 PKG_RELEASE:=5
+=======
+PKG_RELEASE:=4
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_HASH:=707f515eb727c032418c4da67d7e86884bb56cdc2a606e8f6ded6057d8767e57
@@ -29,7 +33,10 @@ define KernelPackage/ltq-vmmc
   DEPENDS:=@(TARGET_lantiq_xway||TARGET_lantiq_xrx200) +kmod-ltq-tapi
   FILES:=$(PKG_BUILD_DIR)/src/drv_vmmc.ko
   AUTOLOAD:=$(call AutoProbe,drv_vmmc)
+<<<<<<< HEAD
   USERID:=:vmmc=386
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define KernelPackage/ltq-vmmc/description
@@ -40,9 +47,12 @@ define KernelPackage/ltq-vmmc/config
 	source "$(SOURCE)/Config.in"
 endef
 
+<<<<<<< HEAD
 MAKE_FLAGS += \
 	$(KERNEL_MAKE_FLAGS)
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 CONFIGURE_ARGS += \
 	ARCH=$(LINUX_KARCH) \
 	--enable-linux-26 \

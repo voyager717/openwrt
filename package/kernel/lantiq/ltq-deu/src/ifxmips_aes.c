@@ -57,6 +57,7 @@
 #include <linux/delay.h>
 #include <asm/byteorder.h>
 #include <crypto/algapi.h>
+<<<<<<< HEAD
 #include <crypto/b128ops.h>
 #include <crypto/gcm.h>
 #include <crypto/gf128mul.h>
@@ -65,6 +66,8 @@
 #include <crypto/internal/aead.h>
 #include <crypto/internal/hash.h>
 #include <crypto/internal/skcipher.h>
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #include "ifxmips_deu.h"
 
@@ -91,12 +94,18 @@ spinlock_t aes_lock;
 #define AES_MIN_KEY_SIZE    16
 #define AES_MAX_KEY_SIZE    32
 #define AES_BLOCK_SIZE      16
+<<<<<<< HEAD
 #define AES_BLOCK_WORDS     4
 #define CTR_RFC3686_NONCE_SIZE    4
 #define CTR_RFC3686_IV_SIZE       8
 #define CTR_RFC3686_MIN_KEY_SIZE  (AES_MIN_KEY_SIZE + CTR_RFC3686_NONCE_SIZE)
 #define CTR_RFC3686_MAX_KEY_SIZE  (AES_MAX_KEY_SIZE + CTR_RFC3686_NONCE_SIZE)
 #define AES_CBCMAC_DBN_TEMP_SIZE  128
+=======
+#define CTR_RFC3686_NONCE_SIZE    4
+#define CTR_RFC3686_IV_SIZE       8
+#define CTR_RFC3686_MAX_KEY_SIZE  (AES_MAX_KEY_SIZE + CTR_RFC3686_NONCE_SIZE)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 #ifdef CRYPTO_DEBUG
 extern char debug_level;
@@ -123,6 +132,7 @@ extern void ifx_deu_aes (void *ctx_arg, uint8_t *out_arg, const uint8_t *in_arg,
 
 struct aes_ctx {
     int key_length;
+<<<<<<< HEAD
     u8 buf[AES_MAX_KEY_SIZE];
     u8 tweakkey[AES_MAX_KEY_SIZE];
     u8 nonce[CTR_RFC3686_NONCE_SIZE];
@@ -135,6 +145,10 @@ struct aes_ctx {
     u8 block[AES_BLOCK_SIZE];
     u8 hash[AES_BLOCK_SIZE];
     struct gf128mul_4k *gf128;
+=======
+    u32 buf[AES_MAX_KEY_SIZE];
+    u8 nonce[CTR_RFC3686_NONCE_SIZE];
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 };
 
 extern int disable_deudma;
@@ -151,17 +165,28 @@ extern int disable_multiblock;
 int aes_set_key (struct crypto_tfm *tfm, const u8 *in_key, unsigned int key_len)
 {
     struct aes_ctx *ctx = crypto_tfm_ctx(tfm);
+<<<<<<< HEAD
+=======
+    unsigned long *flags = (unsigned long *) &tfm->crt_flags;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     //printk("set_key in %s\n", __FILE__);
 
     //aes_chip_init();
 
     if (key_len != 16 && key_len != 24 && key_len != 32) {
+<<<<<<< HEAD
+=======
+        *flags |= CRYPTO_TFM_RES_BAD_KEY_LEN;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         return -EINVAL;
     }
 
     ctx->key_length = key_len;
+<<<<<<< HEAD
     ctx->use_tweak = 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     DPRINTF(0, "ctx @%p, key_len %d, ctx->key_length %d\n", ctx, key_len, ctx->key_length);
     memcpy ((u8 *) (ctx->buf), in_key, key_len);
 
@@ -169,6 +194,7 @@ int aes_set_key (struct crypto_tfm *tfm, const u8 *in_key, unsigned int key_len)
 }
 
 
+<<<<<<< HEAD
 /*! \fn int aes_set_key_skcipher (struct crypto_skcipher *tfm, const uint8_t *in_key, unsigned int key_len)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief sets the AES keys for skcipher
@@ -190,16 +216,46 @@ int aes_set_key_skcipher (struct crypto_skcipher *tfm, const u8 *in_key, unsigne
  *  \return
 */
 void aes_set_key_hw (void *ctx_arg)
+=======
+/*! \fn void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg, u8 *iv_arg, size_t nbytes, int encdec, int mode)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief main interface to AES hardware
+ *  \param ctx_arg crypto algo context  
+ *  \param out_arg output bytestream  
+ *  \param in_arg input bytestream   
+ *  \param iv_arg initialization vector  
+ *  \param nbytes length of bytestream  
+ *  \param encdec 1 for encrypt; 0 for decrypt  
+ *  \param mode operation mode such as ebc, cbc, ctr  
+ *
+*/                                 
+void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
+        u8 *iv_arg, size_t nbytes, int encdec, int mode)
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     volatile struct aes_t *aes = (volatile struct aes_t *) AES_START;
     struct aes_ctx *ctx = (struct aes_ctx *)ctx_arg;
+<<<<<<< HEAD
     u8 *in_key = ctx->buf;
     int key_len = ctx->key_length;
     /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
     if (ctx->use_tweak) in_key = ctx->tweakkey;
 
+=======
+    u32 *in_key = ctx->buf;
+    unsigned long flag;
+    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    int key_len = ctx->key_length;
+
+    int i = 0;
+    int byte_cnt = nbytes; 
+
+
+    CRTCL_SECT_START;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     /* 128, 192 or 256 bit key length */
     aes->controlr.K = key_len / 8 - 2;
         if (key_len == 128 / 8) {
@@ -228,7 +284,12 @@ void aes_set_key_hw (void *ctx_arg)
     }
     else {
         printk (KERN_ERR "[%s %s %d]: Invalid key_len : %d\n", __FILE__, __func__, __LINE__, key_len);
+<<<<<<< HEAD
         return; //-EINVAL;
+=======
+        CRTCL_SECT_END;
+        return;// -EINVAL;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     /* let HW pre-process DEcryption key in any case (even if
@@ -236,6 +297,7 @@ void aes_set_key_hw (void *ctx_arg)
        checked in decryption routine! */
     aes->controlr.PNK = 1;
 
+<<<<<<< HEAD
 }
 
 
@@ -266,6 +328,8 @@ void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
     CRTCL_SECT_START;
 
     aes_set_key_hw (ctx_arg);
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     aes->controlr.E_D = !encdec;    //encryption
     aes->controlr.O = mode; //0 ECB 1 CBC 2 OFB 3 CFB 4 CTR 
@@ -302,6 +366,7 @@ void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
 
     /* To handle all non-aligned bytes (not aligned to 16B size) */
     if (byte_cnt) {
+<<<<<<< HEAD
         u8 temparea[16] = {0,};
 
         memcpy(temparea, ((u32 *) in_arg + (i * 4)), byte_cnt);
@@ -310,16 +375,34 @@ void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
         aes->ID2R = INPUT_ENDIAN_SWAP(*((u32 *) temparea + 1));
         aes->ID1R = INPUT_ENDIAN_SWAP(*((u32 *) temparea + 2));
         aes->ID0R = INPUT_ENDIAN_SWAP(*((u32 *) temparea + 3));    /* start crypto */
+=======
+        aes->ID3R = INPUT_ENDIAN_SWAP(*((u32 *) in_arg + (i * 4) + 0));
+        aes->ID2R = INPUT_ENDIAN_SWAP(*((u32 *) in_arg + (i * 4) + 1));
+        aes->ID1R = INPUT_ENDIAN_SWAP(*((u32 *) in_arg + (i * 4) + 2));
+        aes->ID0R = INPUT_ENDIAN_SWAP(*((u32 *) in_arg + (i * 4) + 3));    /* start crypto */
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
         while (aes->controlr.BUS) {
         }
 
+<<<<<<< HEAD
         *((volatile u32 *) temparea + 0) = aes->OD3R;
         *((volatile u32 *) temparea + 1) = aes->OD2R;
         *((volatile u32 *) temparea + 2) = aes->OD1R;
         *((volatile u32 *) temparea + 3) = aes->OD0R;
 
         memcpy(((u32 *) out_arg + (i * 4)), temparea, byte_cnt);
+=======
+        *((volatile u32 *) out_arg + (i * 4) + 0) = aes->OD3R;
+        *((volatile u32 *) out_arg + (i * 4) + 1) = aes->OD2R;
+        *((volatile u32 *) out_arg + (i * 4) + 2) = aes->OD1R;
+        *((volatile u32 *) out_arg + (i * 4) + 3) = aes->OD0R;
+
+        /* to ensure that the extended pages are clean */
+        memset (out_arg + (i * 16) + (nbytes % AES_BLOCK_SIZE), 0,
+                (AES_BLOCK_SIZE - (nbytes % AES_BLOCK_SIZE)));
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     //tc.chen : copy iv_arg back
@@ -346,6 +429,10 @@ void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg,
 int ctr_rfc3686_aes_set_key (struct crypto_tfm *tfm, const uint8_t *in_key, unsigned int key_len)
 {
     struct aes_ctx *ctx = crypto_tfm_ctx(tfm);
+<<<<<<< HEAD
+=======
+    unsigned long *flags = (unsigned long *)&tfm->crt_flags;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     //printk("ctr_rfc3686_aes_set_key in %s\n", __FILE__);
 
@@ -355,17 +442,25 @@ int ctr_rfc3686_aes_set_key (struct crypto_tfm *tfm, const uint8_t *in_key, unsi
     key_len -= CTR_RFC3686_NONCE_SIZE; // remove 4 bytes of nonce
 
     if (key_len != 16 && key_len != 24 && key_len != 32) {
+<<<<<<< HEAD
+=======
+        *flags |= CRYPTO_TFM_RES_BAD_KEY_LEN;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         return -EINVAL;
     }
 
     ctx->key_length = key_len;
+<<<<<<< HEAD
     ctx->use_tweak = 0;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     
     memcpy ((u8 *) (ctx->buf), in_key, key_len);
 
     return 0;
 }
 
+<<<<<<< HEAD
 /*!
  *  \fn int ctr_rfc3686_aes_set_key_skcipher (struct crypto_skcipher *tfm, const uint8_t *in_key, unsigned int key_len)
  *  \ingroup IFX_AES_FUNCTIONS
@@ -381,6 +476,8 @@ int ctr_rfc3686_aes_set_key_skcipher (struct crypto_skcipher *tfm, const uint8_t
     return ctr_rfc3686_aes_set_key(crypto_skcipher_tfm(tfm), in_key, key_len);
 }
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 /*! \fn void ifx_deu_aes (void *ctx_arg, u8 *out_arg, const u8 *in_arg, u8 *iv_arg, u32 nbytes, int encdec, int mode)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief main interface with deu hardware in DMA mode
@@ -487,6 +584,7 @@ void ifx_deu_aes_ctr (void *ctx, uint8_t *dst, const uint8_t *src,
      ifx_deu_aes (ctx, dst, src, iv, nbytes, encdec, 4);
 }
 
+<<<<<<< HEAD
 /*! \fn void ifx_deu_aes_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief encrypt AES_BLOCK_SIZE of data
@@ -495,12 +593,23 @@ void ifx_deu_aes_ctr (void *ctx, uint8_t *dst, const uint8_t *src,
  *  \param in input bytestream
 */
 void ifx_deu_aes_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+=======
+/*! \fn void aes_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief encrypt AES_BLOCK_SIZE of data   
+ *  \param tfm linux crypto algo transform  
+ *  \param out output bytestream  
+ *  \param in input bytestream  
+*/                                 
+void aes_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     struct aes_ctx *ctx = crypto_tfm_ctx(tfm);
     ifx_deu_aes (ctx, out, in, NULL, AES_BLOCK_SIZE,
             CRYPTO_DIR_ENCRYPT, 0);
 }
 
+<<<<<<< HEAD
 /*! \fn void ifx_deu_aes_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief decrypt AES_BLOCK_SIZE of data
@@ -509,20 +618,39 @@ void ifx_deu_aes_encrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *i
  *  \param in input bytestream
 */
 void ifx_deu_aes_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+=======
+/*! \fn void aes_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief decrypt AES_BLOCK_SIZE of data   
+ *  \param tfm linux crypto algo transform  
+ *  \param out output bytestream  
+ *  \param in input bytestream  
+*/                                 
+void aes_decrypt (struct crypto_tfm *tfm, uint8_t *out, const uint8_t *in)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 {
     struct aes_ctx *ctx = crypto_tfm_ctx(tfm);
     ifx_deu_aes (ctx, out, in, NULL, AES_BLOCK_SIZE,
             CRYPTO_DIR_DECRYPT, 0);
 }
 
+<<<<<<< HEAD
 /*
  * \brief AES function mappings
+=======
+/* 
+ * \brief AES function mappings 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 */
 struct crypto_alg ifxdeu_aes_alg = {
     .cra_name       =   "aes",
     .cra_driver_name    =   "ifxdeu-aes",
     .cra_priority   =   300,
+<<<<<<< HEAD
     .cra_flags      =   CRYPTO_ALG_TYPE_CIPHER | CRYPTO_ALG_KERN_DRIVER_ONLY,
+=======
+    .cra_flags      =   CRYPTO_ALG_TYPE_CIPHER,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     .cra_blocksize      =   AES_BLOCK_SIZE,
     .cra_ctxsize        =   sizeof(struct aes_ctx),
     .cra_module     =   THIS_MODULE,
@@ -532,12 +660,18 @@ struct crypto_alg ifxdeu_aes_alg = {
             .cia_min_keysize    =   AES_MIN_KEY_SIZE,
             .cia_max_keysize    =   AES_MAX_KEY_SIZE,
             .cia_setkey     =   aes_set_key,
+<<<<<<< HEAD
             .cia_encrypt        =   ifx_deu_aes_encrypt,
             .cia_decrypt        =   ifx_deu_aes_decrypt,
+=======
+            .cia_encrypt        =   aes_encrypt,
+            .cia_decrypt        =   aes_decrypt,
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
         }
     }
 };
 
+<<<<<<< HEAD
 /*! \fn int ecb_aes_encrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief ECB AES encrypt using linux crypto skcipher
@@ -552,18 +686,45 @@ int ecb_aes_encrypt(struct skcipher_request *req)
     unsigned int enc_bytes, nbytes;
 
     err = skcipher_walk_virt(&walk, req, false);
+=======
+/*! \fn int ecb_aes_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief ECB AES encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ecb_aes_encrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int enc_bytes;
+    
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     while ((nbytes = enc_bytes = walk.nbytes)) {
             enc_bytes -= (nbytes % AES_BLOCK_SIZE);
         ifx_deu_aes_ecb(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        NULL, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
                 nbytes &= AES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
         err = skcipher_walk_done(&walk, nbytes);
+=======
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*! \fn int ecb_aes_decrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief ECB AES decrypt using linux crypto skcipher
@@ -578,18 +739,45 @@ int ecb_aes_decrypt(struct skcipher_request *req)
     unsigned int dec_bytes, nbytes;
 
     err = skcipher_walk_virt(&walk, req, false);
+=======
+/*! \fn int ecb_aes_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief ECB AES decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ecb_aes_decrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int dec_bytes;
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     while ((nbytes = dec_bytes = walk.nbytes)) {
             dec_bytes -= (nbytes % AES_BLOCK_SIZE);
         ifx_deu_aes_ecb(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        NULL, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
         nbytes &= AES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
         err = skcipher_walk_done(&walk, nbytes);
+=======
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*
  * \brief AES function mappings
 */
@@ -623,6 +811,53 @@ int cbc_aes_encrypt(struct skcipher_request *req)
     unsigned int enc_bytes, nbytes;
 
     err = skcipher_walk_virt(&walk, req, false);
+=======
+/* 
+ * \brief AES function mappings
+*/
+struct crypto_alg ifxdeu_ecb_aes_alg = {
+    .cra_name       =   "ecb(aes)",
+    .cra_driver_name    =   "ifxdeu-ecb(aes)",
+    .cra_priority   =   400,
+    .cra_flags      =   CRYPTO_ALG_TYPE_BLKCIPHER,
+    .cra_blocksize      =   AES_BLOCK_SIZE,
+    .cra_ctxsize        =   sizeof(struct aes_ctx),
+    .cra_type       =   &crypto_blkcipher_type,
+    .cra_module     =   THIS_MODULE,
+    .cra_list       =   LIST_HEAD_INIT(ifxdeu_ecb_aes_alg.cra_list),
+    .cra_u          =   {
+        .blkcipher = {
+            .min_keysize        =   AES_MIN_KEY_SIZE,
+            .max_keysize        =   AES_MAX_KEY_SIZE,
+            .setkey         =   aes_set_key,
+            .encrypt        =   ecb_aes_encrypt,
+            .decrypt        =   ecb_aes_decrypt,
+        }
+    }
+};
+
+
+/*! \fn int cbc_aes_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief CBC AES encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int cbc_aes_encrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int enc_bytes;
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     while ((nbytes = enc_bytes = walk.nbytes)) {
             u8 *iv = walk.iv;
@@ -630,12 +865,17 @@ int cbc_aes_encrypt(struct skcipher_request *req)
             ifx_deu_aes_cbc(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        iv, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
         nbytes &= AES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
         err = skcipher_walk_done(&walk, nbytes);
+=======
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*! \fn int cbc_aes_decrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief CBC AES decrypt using linux crypto skcipher
@@ -650,6 +890,28 @@ int cbc_aes_decrypt(struct skcipher_request *req)
     unsigned int dec_bytes, nbytes;
 
     err = skcipher_walk_virt(&walk, req, false);
+=======
+/*! \fn int cbc_aes_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief CBC AES decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int cbc_aes_decrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int dec_bytes;
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     while ((nbytes = dec_bytes = walk.nbytes)) {
         u8 *iv = walk.iv;
@@ -657,7 +919,11 @@ int cbc_aes_decrypt(struct skcipher_request *req)
             ifx_deu_aes_cbc(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        iv, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
         nbytes &= AES_BLOCK_SIZE - 1;
+<<<<<<< HEAD
         err = skcipher_walk_done(&walk, nbytes);
+=======
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
@@ -666,6 +932,7 @@ int cbc_aes_decrypt(struct skcipher_request *req)
 /*
  * \brief AES function mappings
 */
+<<<<<<< HEAD
 struct skcipher_alg ifxdeu_cbc_aes_alg = {
     .base.cra_name           =   "cbc(aes)",
     .base.cra_driver_name    =   "ifxdeu-cbc(aes)",
@@ -1156,11 +1423,65 @@ int ctr_basic_aes_encrypt(struct skcipher_request *req)
         ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
                        walk.iv, walk.nbytes, CRYPTO_DIR_ENCRYPT, 0);
         err = skcipher_walk_done(&walk, 0);
+=======
+struct crypto_alg ifxdeu_cbc_aes_alg = {
+    .cra_name       =   "cbc(aes)",
+    .cra_driver_name    =   "ifxdeu-cbc(aes)",
+    .cra_priority   =   400,
+    .cra_flags      =   CRYPTO_ALG_TYPE_BLKCIPHER,
+    .cra_blocksize      =   AES_BLOCK_SIZE,
+    .cra_ctxsize        =   sizeof(struct aes_ctx),
+    .cra_type       =   &crypto_blkcipher_type,
+    .cra_module     =   THIS_MODULE,
+    .cra_list       =   LIST_HEAD_INIT(ifxdeu_cbc_aes_alg.cra_list),
+    .cra_u          =   {
+        .blkcipher = {
+            .min_keysize        =   AES_MIN_KEY_SIZE,
+            .max_keysize        =   AES_MAX_KEY_SIZE,
+            .ivsize         =   AES_BLOCK_SIZE,
+            .setkey         =   aes_set_key,
+            .encrypt        =   cbc_aes_encrypt,
+            .decrypt        =   cbc_aes_decrypt,
+        }
+    }
+};
+
+
+/*! \fn int ctr_basic_aes_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief Counter mode AES encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ctr_basic_aes_encrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int enc_bytes;
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+
+    while ((nbytes = enc_bytes = walk.nbytes)) {
+            u8 *iv = walk.iv;
+            enc_bytes -= (nbytes % AES_BLOCK_SIZE);
+            ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
+                       iv, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
+        nbytes &= AES_BLOCK_SIZE - 1;
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*! \fn int ctr_basic_aes_encrypt(struct skcipher_req *req)
  *  \ingroup IFX_AES_FUNCTIONS
  *  \brief Counter mode AES decrypt using linux crypto skcipher
@@ -1189,11 +1510,42 @@ int ctr_basic_aes_decrypt(struct skcipher_request *req)
         ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
                        walk.iv, walk.nbytes, CRYPTO_DIR_DECRYPT, 0);
         err = skcipher_walk_done(&walk, 0);
+=======
+/*! \fn  int ctr_basic_aes_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief Counter mode AES decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ctr_basic_aes_decrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err;
+    unsigned int dec_bytes;
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+
+    while ((nbytes = dec_bytes = walk.nbytes)) {
+        u8 *iv = walk.iv;
+            dec_bytes -= (nbytes % AES_BLOCK_SIZE);
+            ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
+                       iv, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
+        nbytes &= AES_BLOCK_SIZE - 1;
+        err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*
  * \brief AES function mappings
 */
@@ -1232,6 +1584,55 @@ int ctr_rfc3686_aes_encrypt(struct skcipher_request *req)
     err = skcipher_walk_virt(&walk, req, false);
     nbytes = walk.nbytes;
 
+=======
+/* 
+ * \brief AES function mappings
+*/
+struct crypto_alg ifxdeu_ctr_basic_aes_alg = {
+    .cra_name       =   "ctr(aes)",
+    .cra_driver_name    =   "ifxdeu-ctr(aes)",
+    .cra_priority   =   400,
+    .cra_flags      =   CRYPTO_ALG_TYPE_BLKCIPHER,
+    .cra_blocksize      =   AES_BLOCK_SIZE,
+    .cra_ctxsize        =   sizeof(struct aes_ctx),
+    .cra_type       =   &crypto_blkcipher_type,
+    .cra_module     =   THIS_MODULE,
+    .cra_list       =   LIST_HEAD_INIT(ifxdeu_ctr_basic_aes_alg.cra_list),
+    .cra_u          =   {
+        .blkcipher = {
+            .min_keysize        =   AES_MIN_KEY_SIZE,
+            .max_keysize        =   AES_MAX_KEY_SIZE,
+            .ivsize         =   AES_BLOCK_SIZE,
+            .setkey         =   aes_set_key,
+            .encrypt        =   ctr_basic_aes_encrypt,
+            .decrypt        =   ctr_basic_aes_decrypt,
+        }
+    }
+};
+
+
+/*! \fn  int ctr_rfc3686_aes_encrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief Counter mode AES (rfc3686) encrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ctr_rfc3686_aes_encrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err, bsize = nbytes;
+    u8 rfc3686_iv[16];
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+    
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     /* set up counter block */
     memcpy(rfc3686_iv, ctx->nonce, CTR_RFC3686_NONCE_SIZE); 
     memcpy(rfc3686_iv + CTR_RFC3686_NONCE_SIZE, walk.iv, CTR_RFC3686_IV_SIZE);
@@ -1240,18 +1641,38 @@ int ctr_rfc3686_aes_encrypt(struct skcipher_request *req)
     *(__be32 *)(rfc3686_iv + CTR_RFC3686_NONCE_SIZE + CTR_RFC3686_IV_SIZE) =
         cpu_to_be32(1);
 
+<<<<<<< HEAD
     while ((nbytes = enc_bytes = walk.nbytes) && (walk.nbytes >= AES_BLOCK_SIZE)) {
             enc_bytes -= (nbytes % AES_BLOCK_SIZE);
             ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        rfc3686_iv, enc_bytes, CRYPTO_DIR_ENCRYPT, 0);
         nbytes &= AES_BLOCK_SIZE - 1;
         err = skcipher_walk_done(&walk, nbytes);
+=======
+    /* scatterlist source is the same size as request size, just process once */
+    if (nbytes == walk.nbytes) {
+	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+			rfc3686_iv, nbytes, CRYPTO_DIR_ENCRYPT, 0);
+	nbytes -= walk.nbytes;
+	err = blkcipher_walk_done(desc, &walk, nbytes);
+	return err;
+    }
+
+    while ((nbytes = walk.nbytes) && (walk.nbytes >= AES_BLOCK_SIZE)) {
+	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+			rfc3686_iv, nbytes, CRYPTO_DIR_ENCRYPT, 0);
+
+	nbytes -= walk.nbytes;
+	bsize -= walk.nbytes;
+	err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     /* to handle remaining bytes < AES_BLOCK_SIZE */
     if (walk.nbytes) {
 	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
 			rfc3686_iv, walk.nbytes, CRYPTO_DIR_ENCRYPT, 0);
+<<<<<<< HEAD
 	err = skcipher_walk_done(&walk, 0);
     }
 
@@ -1274,6 +1695,34 @@ int ctr_rfc3686_aes_decrypt(struct skcipher_request *req)
 
     err = skcipher_walk_virt(&walk, req, false);
     nbytes = walk.nbytes;
+=======
+	err = blkcipher_walk_done(desc, &walk, 0);
+    }
+   
+    return err;
+}
+
+/*! \fn int ctr_rfc3686_aes_decrypt(struct blkcipher_desc *desc, struct scatterlist *dst, struct scatterlist *src, unsigned int nbytes)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief Counter mode AES (rfc3686) decrypt using linux crypto blkcipher    
+ *  \param desc blkcipher descriptor  
+ *  \param dst output scatterlist  
+ *  \param src input scatterlist  
+ *  \param nbytes data size in bytes  
+ *  \return err
+*/                                 
+int ctr_rfc3686_aes_decrypt(struct blkcipher_desc *desc,
+               struct scatterlist *dst, struct scatterlist *src,
+               unsigned int nbytes)
+{
+    struct aes_ctx *ctx = crypto_blkcipher_ctx(desc->tfm);
+    struct blkcipher_walk walk;
+    int err, bsize = nbytes;
+    u8 rfc3686_iv[16];
+
+    blkcipher_walk_init(&walk, dst, src, nbytes);
+    err = blkcipher_walk_virt(desc, &walk);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     /* set up counter block */
     memcpy(rfc3686_iv, ctx->nonce, CTR_RFC3686_NONCE_SIZE); 
@@ -1283,24 +1732,49 @@ int ctr_rfc3686_aes_decrypt(struct skcipher_request *req)
     *(__be32 *)(rfc3686_iv + CTR_RFC3686_NONCE_SIZE + CTR_RFC3686_IV_SIZE) =
         cpu_to_be32(1);
 
+<<<<<<< HEAD
     while ((nbytes = dec_bytes = walk.nbytes) && (walk.nbytes >= AES_BLOCK_SIZE)) {
             dec_bytes -= (nbytes % AES_BLOCK_SIZE);
             ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr, 
                        rfc3686_iv, dec_bytes, CRYPTO_DIR_DECRYPT, 0);
         nbytes &= AES_BLOCK_SIZE - 1;
         err = skcipher_walk_done(&walk, nbytes);
+=======
+    /* scatterlist source is the same size as request size, just process once */
+    if (nbytes == walk.nbytes) {
+	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+			rfc3686_iv, nbytes, CRYPTO_DIR_ENCRYPT, 0);
+	nbytes -= walk.nbytes;
+	err = blkcipher_walk_done(desc, &walk, nbytes);
+	return err;
+    }
+
+    while ((nbytes = walk.nbytes) % (walk.nbytes >= AES_BLOCK_SIZE)) {
+	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+			rfc3686_iv, nbytes, CRYPTO_DIR_DECRYPT, 0);
+
+	nbytes -= walk.nbytes;
+	bsize -= walk.nbytes;
+	err = blkcipher_walk_done(desc, &walk, nbytes);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     /* to handle remaining bytes < AES_BLOCK_SIZE */
     if (walk.nbytes) {
 	ifx_deu_aes_ctr(ctx, walk.dst.virt.addr, walk.src.virt.addr,
+<<<<<<< HEAD
 			rfc3686_iv, walk.nbytes, CRYPTO_DIR_DECRYPT, 0);
 	err = skcipher_walk_done(&walk, 0);
+=======
+			rfc3686_iv, walk.nbytes, CRYPTO_DIR_ENCRYPT, 0);
+	err = blkcipher_walk_done(desc, &walk, 0);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     }
 
     return err;
 }
 
+<<<<<<< HEAD
 /*
  * \brief AES function mappings
 */
@@ -1876,15 +2350,52 @@ struct aead_alg ifxdeu_gcm_aes_alg = {
  *  \brief function to initialize AES driver
  *  \return ret
 */
+=======
+/* 
+ * \brief AES function mappings
+*/
+struct crypto_alg ifxdeu_ctr_rfc3686_aes_alg = {
+    .cra_name       	=   "rfc3686(ctr(aes))",
+    .cra_driver_name    =   "ifxdeu-ctr-rfc3686(aes)",
+    .cra_priority       =   400,
+    .cra_flags      	=   CRYPTO_ALG_TYPE_BLKCIPHER,
+    .cra_blocksize      =   AES_BLOCK_SIZE,
+    .cra_ctxsize        =   sizeof(struct aes_ctx),
+    .cra_type       	=   &crypto_blkcipher_type,
+    .cra_module     	=   THIS_MODULE,
+    .cra_list       	=   LIST_HEAD_INIT(ifxdeu_ctr_rfc3686_aes_alg.cra_list),
+    .cra_u          =   {
+        .blkcipher = {
+            .min_keysize        =   AES_MIN_KEY_SIZE,
+            .max_keysize        =   CTR_RFC3686_MAX_KEY_SIZE,
+            .ivsize         =   CTR_RFC3686_IV_SIZE,
+            .setkey         =   ctr_rfc3686_aes_set_key,
+            .encrypt        =   ctr_rfc3686_aes_encrypt,
+            .decrypt        =   ctr_rfc3686_aes_decrypt,
+        }
+    }
+};
+
+
+/*! \fn int ifxdeu_init_aes (void)
+ *  \ingroup IFX_AES_FUNCTIONS
+ *  \brief function to initialize AES driver   
+ *  \return ret 
+*/                                 
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 int ifxdeu_init_aes (void)
 {
     int ret = -ENOSYS;
 
+<<<<<<< HEAD
     aes_chip_init();
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     if ((ret = crypto_register_alg(&ifxdeu_aes_alg)))
         goto aes_err;
 
+<<<<<<< HEAD
     if ((ret = crypto_register_skcipher(&ifxdeu_ecb_aes_alg)))
         goto ecb_aes_err;
 
@@ -1911,6 +2422,21 @@ int ifxdeu_init_aes (void)
 
     if ((ret = crypto_register_aead(&ifxdeu_gcm_aes_alg)))
         goto gcm_aes_err;
+=======
+    if ((ret = crypto_register_alg(&ifxdeu_ecb_aes_alg)))
+        goto ecb_aes_err;
+
+    if ((ret = crypto_register_alg(&ifxdeu_cbc_aes_alg)))
+        goto cbc_aes_err;
+
+    if ((ret = crypto_register_alg(&ifxdeu_ctr_basic_aes_alg)))
+        goto ctr_basic_aes_err;
+
+    if ((ret = crypto_register_alg(&ifxdeu_ctr_rfc3686_aes_alg)))
+        goto ctr_rfc3686_aes_err;
+
+    aes_chip_init ();
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
     CRTCL_SECT_INIT;
 
@@ -1918,6 +2444,7 @@ int ifxdeu_init_aes (void)
     printk (KERN_NOTICE "IFX DEU AES initialized%s%s.\n", disable_multiblock ? "" : " (multiblock)", disable_deudma ? "" : " (DMA)");
     return ret;
 
+<<<<<<< HEAD
 gcm_aes_err:
     crypto_unregister_aead(&ifxdeu_gcm_aes_alg);
     printk (KERN_ERR "IFX gcm_aes initialization failed!\n");
@@ -1952,6 +2479,22 @@ cbc_aes_err:
     return ret;
 ecb_aes_err:
     crypto_unregister_skcipher(&ifxdeu_ecb_aes_alg);
+=======
+ctr_rfc3686_aes_err:
+    crypto_unregister_alg(&ifxdeu_ctr_rfc3686_aes_alg);
+    printk (KERN_ERR "IFX ctr_rfc3686_aes initialization failed!\n");
+    return ret;
+ctr_basic_aes_err:
+    crypto_unregister_alg(&ifxdeu_ctr_basic_aes_alg);
+    printk (KERN_ERR "IFX ctr_basic_aes initialization failed!\n");
+    return ret;
+cbc_aes_err:
+    crypto_unregister_alg(&ifxdeu_cbc_aes_alg);
+    printk (KERN_ERR "IFX cbc_aes initialization failed!\n");
+    return ret;
+ecb_aes_err:
+    crypto_unregister_alg(&ifxdeu_ecb_aes_alg);
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
     printk (KERN_ERR "IFX aes initialization failed!\n");
     return ret;
 aes_err:
@@ -1962,6 +2505,7 @@ aes_err:
 
 /*! \fn void ifxdeu_fini_aes (void)
  *  \ingroup IFX_AES_FUNCTIONS
+<<<<<<< HEAD
  *  \brief unregister aes driver
 */
 void ifxdeu_fini_aes (void)
@@ -1977,3 +2521,18 @@ void ifxdeu_fini_aes (void)
     crypto_unregister_shash (&ifxdeu_cbcmac_aes_alg);
     crypto_unregister_aead (&ifxdeu_gcm_aes_alg);
 }
+=======
+ *  \brief unregister aes driver   
+*/                                 
+void ifxdeu_fini_aes (void)
+{
+    crypto_unregister_alg (&ifxdeu_aes_alg);
+    crypto_unregister_alg (&ifxdeu_ecb_aes_alg);
+    crypto_unregister_alg (&ifxdeu_cbc_aes_alg);
+    crypto_unregister_alg (&ifxdeu_ctr_basic_aes_alg);
+    crypto_unregister_alg (&ifxdeu_ctr_rfc3686_aes_alg);
+
+}
+
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

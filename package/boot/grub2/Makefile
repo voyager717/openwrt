@@ -1,11 +1,21 @@
+<<<<<<< HEAD
 # SPDX-License-Identifier: GPL-2.0-only
 #
 # Copyright (C) 2006-2021 OpenWrt.org
+=======
+#
+# Copyright (C) 2006-2015 OpenWrt.org
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
 PKG_NAME:=grub
+<<<<<<< HEAD
 PKG_VERSION:=2.12
 PKG_RELEASE:=1
 
@@ -15,10 +25,20 @@ PKG_HASH:=f3c97391f7c4eaa677a78e090c7e97e6dc47b16f655f04683ebd37bef7fe0faa
 
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_CPE_ID:=cpe:/a:gnu:grub2
+=======
+PKG_CPE_ID:=cpe:/a:gnu:grub2
+PKG_VERSION:=2.04
+PKG_RELEASE:=3
+
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=@GNU/grub
+PKG_HASH:=e5292496995ad42dabe843a0192cf2a2c502e7ffcc7479398232b10a472df77d
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 HOST_BUILD_PARALLEL:=1
 PKG_BUILD_DEPENDS:=grub2/host
 
+<<<<<<< HEAD
 ifneq ($(BUILD_VARIANT),none)
   PKG_ASLR_PIE:=0
   PKG_SSP:=0
@@ -26,6 +46,12 @@ endif
 
 PKG_FLAGS:=nonshared
 PKG_BUILD_FLAGS:=no-gc-sections no-lto no-mold
+=======
+PKG_ASLR_PIE:=0
+PKG_SSP:=0
+
+PKG_FLAGS:=nonshared
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 include $(INCLUDE_DIR)/host-build.mk
 include $(INCLUDE_DIR)/package.mk
@@ -33,6 +59,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/grub2/Default
   CATEGORY:=Boot Loaders
   SECTION:=boot
+<<<<<<< HEAD
   TITLE:=GRand Unified Bootloader ($(2))
   URL:=http://www.gnu.org/software/grub/
   DEPENDS:=@TARGET_$(1)
@@ -43,6 +70,16 @@ Package/grub2=$(call Package/grub2/Default,x86,pc)
 Package/grub2-efi=$(call Package/grub2/Default,x86,efi)
 Package/grub2-efi-arm=$(call Package/grub2/Default,armsr,efi)
 Package/grub2-efi-loongarch64=$(call Package/grub2/Default,loongarch64,efi)
+=======
+  TITLE:=GRand Unified Bootloader ($(1))
+  URL:=http://www.gnu.org/software/grub/
+  DEPENDS:=@TARGET_x86
+  VARIANT:=$(1)
+endef
+
+Package/grub2=$(call Package/grub2/Default,pc)
+Package/grub2-efi=$(call Package/grub2/Default,efi)
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Package/grub2-editenv
   CATEGORY:=Utilities
@@ -51,13 +88,18 @@ define Package/grub2-editenv
   TITLE:=Grub2 Environment editor
   URL:=http://www.gnu.org/software/grub/
   DEPENDS:=@TARGET_x86
+<<<<<<< HEAD
   VARIANT:=none
+=======
+  VARIANT:=pc
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/grub2-editenv/description
 	Edit grub2 environment files.
 endef
 
+<<<<<<< HEAD
 define Package/grub2-bios-setup
   CATEGORY:=Utilities
   SECTION:=utils
@@ -72,6 +114,8 @@ define Package/grub2-bios-setup/description
 	Set up images to bootable.
 endef
 
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 HOST_BUILD_PREFIX := $(STAGING_DIR_HOST)
 
 CONFIGURE_VARS += \
@@ -83,7 +127,10 @@ CONFIGURE_ARGS += \
 	--disable-nls \
 	--disable-device-mapper \
 	--disable-libzfs \
+<<<<<<< HEAD
 	--disable-liblzma \
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	--disable-grub-mkfont \
 	--with-platform=$(BUILD_VARIANT)
 
@@ -103,6 +150,7 @@ HOST_MAKE_FLAGS += \
 	TARGET_RANLIB=$(TARGET_RANLIB) \
 	LIBLZMA=$(STAGING_DIR_HOST)/lib/liblzma.a
 
+<<<<<<< HEAD
 
 ifneq ($(BUILD_VARIANT),none)
   TARGET_CFLAGS := $(filter-out -O2 -O3 -fno-plt,$(TARGET_CFLAGS))
@@ -112,6 +160,9 @@ endif
 ifeq ($(CONFIG_arm),y)
   TARGET_CFLAGS := $(filter-out -mfloat-abi=hard,$(TARGET_CFLAGS))
 endif
+=======
+TARGET_CFLAGS := $(filter-out -fno-plt,$(TARGET_CFLAGS))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 
 define Host/Configure
 	$(SED) 's,(RANLIB),(TARGET_RANLIB),' $(HOST_BUILD_DIR)/grub-core/Makefile.in
@@ -119,6 +170,11 @@ define Host/Configure
 endef
 
 define Package/grub2/install
+<<<<<<< HEAD
+=======
+	$(INSTALL_DIR) $(1)/usr/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/grub-bios-setup $(1)/usr/sbin/
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(INSTALL_DIR) $(STAGING_DIR_IMAGE)/grub2
 	$(CP) $(PKG_BUILD_DIR)/grub-core/boot.img $(STAGING_DIR_IMAGE)/grub2/
 	$(CP) $(PKG_BUILD_DIR)/grub-core/cdboot.img $(STAGING_DIR_IMAGE)/grub2/
@@ -129,28 +185,44 @@ define Package/grub2/install
 		-O i386-pc \
 		-c $(PKG_BUILD_DIR)/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/gpt-core.img \
+<<<<<<< HEAD
 		at_keyboard biosdisk boot chain configfile fat linux ls part_gpt reboot search serial test vga
+=======
+		at_keyboard biosdisk boot chain configfile fat linux ls part_gpt reboot serial vga
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(STAGING_DIR_HOST)/bin/grub-mkimage \
 		-d $(PKG_BUILD_DIR)/grub-core \
 		-p /boot/grub \
 		-O i386-pc \
 		-c ./files/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/generic-core.img \
+<<<<<<< HEAD
 		at_keyboard biosdisk boot chain configfile ext2 linux ls part_msdos reboot search serial test vga
+=======
+		at_keyboard biosdisk boot chain configfile ext2 linux ls part_msdos reboot serial vga
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(STAGING_DIR_HOST)/bin/grub-mkimage \
 		-d $(PKG_BUILD_DIR)/grub-core \
 		-p /boot/grub \
 		-O i386-pc \
 		-c ./files/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/eltorito.img \
+<<<<<<< HEAD
 		at_keyboard biosdisk boot chain configfile iso9660 linux ls part_msdos reboot search serial test vga
+=======
+		at_keyboard biosdisk boot chain configfile iso9660 linux ls part_msdos reboot serial test vga
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(STAGING_DIR_HOST)/bin/grub-mkimage \
 		-d $(PKG_BUILD_DIR)/grub-core \
 		-p /boot/grub \
 		-O i386-pc \
 		-c ./files/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/legacy-core.img \
+<<<<<<< HEAD
 		biosdisk boot chain configfile ext2 linux ls part_msdos reboot search serial vga
+=======
+		biosdisk boot chain configfile ext2 linux ls part_msdos reboot serial vga
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 endef
 
 define Package/grub2-efi/install
@@ -161,13 +233,18 @@ define Package/grub2-efi/install
 		-O $(CONFIG_ARCH)-efi \
 		-c $(PKG_BUILD_DIR)/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/boot$(if $(CONFIG_x86_64),x64,ia32).efi \
+<<<<<<< HEAD
 		at_keyboard boot chain configfile fat linux ls part_gpt reboot serial test efi_gop efi_uga
+=======
+		at_keyboard boot chain configfile fat linux ls part_gpt reboot serial efi_gop efi_uga
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	$(STAGING_DIR_HOST)/bin/grub-mkimage \
 		-d $(PKG_BUILD_DIR)/grub-core \
 		-p /boot/grub \
 		-O $(CONFIG_ARCH)-efi \
 		-c ./files/grub-early.cfg \
 		-o $(STAGING_DIR_IMAGE)/grub2/iso-boot$(if $(CONFIG_x86_64),x64,ia32).efi \
+<<<<<<< HEAD
 		boot chain configfile fat iso9660 linux ls part_msdos part_gpt reboot serial test efi_gop efi_uga
 endef
 
@@ -206,11 +283,17 @@ define Package/grub2-efi-loongarch64/install
 endef
 
 
+=======
+		at_keyboard boot chain configfile fat iso9660 linux ls part_msdos part_gpt reboot serial test efi_gop efi_uga
+endef
+
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 define Package/grub2-editenv/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/grub-editenv $(1)/usr/sbin/
 endef
 
+<<<<<<< HEAD
 define Package/grub2-bios-setup/install
 	$(INSTALL_DIR) $(1)/usr/sbin
 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/grub-bios-setup $(1)/usr/sbin/
@@ -223,3 +306,9 @@ $(eval $(call BuildPackage,grub2-efi-arm))
 $(eval $(call BuildPackage,grub2-efi-loongarch64))
 $(eval $(call BuildPackage,grub2-editenv))
 $(eval $(call BuildPackage,grub2-bios-setup))
+=======
+$(eval $(call HostBuild))
+$(eval $(call BuildPackage,grub2))
+$(eval $(call BuildPackage,grub2-efi))
+$(eval $(call BuildPackage,grub2-editenv))
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)

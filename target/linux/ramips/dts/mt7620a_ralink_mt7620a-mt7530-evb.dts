@@ -30,7 +30,11 @@
 				read-only;
 			};
 
+<<<<<<< HEAD
 			partition@40000 {
+=======
+			factory: partition@40000 {
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 				label = "factory";
 				reg = <0x40000 0x10000>;
 				read-only;

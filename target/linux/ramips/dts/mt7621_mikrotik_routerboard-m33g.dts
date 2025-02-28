@@ -9,7 +9,10 @@
 		led-failsafe = &led_usr;
 		led-running = &led_usr;
 		led-upgrade = &led_usr;
+<<<<<<< HEAD
 		label-mac-device = &gmac1;
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 	};
 
 	leds {
@@ -27,7 +30,11 @@
 
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
+<<<<<<< HEAD
 		gpios = <&gpio 9 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 9 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 		regulator-boot-on;
 		regulator-always-on;
@@ -39,7 +46,11 @@
 
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
+<<<<<<< HEAD
 		gpios = <&gpio 10 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 10 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 		regulator-boot-on;
 		regulator-always-on;
@@ -51,7 +62,11 @@
 
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
+<<<<<<< HEAD
 		gpios = <&gpio 11 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 11 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 		regulator-boot-on;
 		regulator-always-on;
@@ -63,7 +78,11 @@
 
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
+<<<<<<< HEAD
 		gpios = <&gpio 12 GPIO_ACTIVE_HIGH>;
+=======
+		gpio = <&gpio 12 GPIO_ACTIVE_HIGH>;
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		enable-active-high;
 		regulator-always-on;
 	};
@@ -91,6 +110,7 @@
 	};
 };
 
+<<<<<<< HEAD
 &gmac1 {
 	status = "okay";
 	label = "wan";
@@ -112,14 +132,29 @@
 
 			nvmem-cells = <&macaddr_hard 1>;
 			nvmem-cell-names = "mac-address";
+=======
+&switch0 {
+	ports {
+		port@0 {
+			status = "okay";
+			label = "wan";
+		};
+
+		port@1 {
+			status = "okay";
+			label = "lan1";
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 
 		port@2 {
 			status = "okay";
 			label = "lan2";
+<<<<<<< HEAD
 
 			nvmem-cells = <&macaddr_hard 2>;
 			nvmem-cell-names = "mac-address";
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
 		};
 	};
 };
@@ -142,7 +177,10 @@
 &pcie {
 	status = "okay";
 };
+<<<<<<< HEAD
 
 &uartlite3 {
 	status = "okay";
 };
+=======
+>>>>>>> 712839d4c6 (Removed unwanted submodules from index)
