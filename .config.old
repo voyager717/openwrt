@@ -47,13 +47,12 @@ CONFIG_TARGET_mediatek=y
 # CONFIG_TARGET_mediatek_mt7986 is not set
 CONFIG_TARGET_mediatek_mt7981=y
 # CONFIG_TARGET_MULTI_PROFILE is not set
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nor-rfb=y
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-2500wan-gmac2=y
+# CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nor-rfb is not set
+# CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-2500wan-gmac2 is not set
 CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb=y
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax=y
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax-w=y
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax-dsim=y
-CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax-capi=y
+# CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax is not set
+# CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax-w is not set
+# CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8102ax-dsim is not set
 # CONFIG_TARGET_mediatek_mt7981_DEVICE_z8102ax-gsw is not set
 # CONFIG_TARGET_mediatek_mt7981_DEVICE_mt7981-spim-nand-rfb-z8103ax is not set
 # CONFIG_TARGET_mediatek_mt7981_DEVICE_z8103ax-pro is not set
@@ -81,7 +80,7 @@ CONFIG_HAS_SUBTARGETS=y
 CONFIG_HAS_DEVICES=y
 CONFIG_TARGET_BOARD="mediatek"
 CONFIG_TARGET_SUBTARGET="mt7981"
-CONFIG_TARGET_PROFILE="DEVICE_mt7981-spim-nand-rfb-z8102ax"
+CONFIG_TARGET_PROFILE="DEVICE_mt7981-spim-nand-rfb"
 CONFIG_TARGET_ARCH_PACKAGES="aarch64_cortex-a53"
 CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe -mcpu=cortex-a53"
 CONFIG_CPU_TYPE="cortex-a53"
@@ -144,8 +143,8 @@ CONFIG_EXTERNAL_CPIO=""
 #
 # Root filesystem archives
 #
-# CONFIG_TARGET_ROOTFS_CPIOGZ is not set
-# CONFIG_TARGET_ROOTFS_TARGZ is not set
+CONFIG_TARGET_ROOTFS_CPIOGZ=y
+CONFIG_TARGET_ROOTFS_TARGZ=y
 
 #
 # Root filesystem images
@@ -363,7 +362,7 @@ CONFIG_PKG_RELRO_FULL=y
 # CONFIG_SELINUX is not set
 # end of Global build settings
 
-# CONFIG_DEVEL is not set
+CONFIG_DEVEL=y
 # CONFIG_BROKEN is not set
 CONFIG_BINARY_FOLDER=""
 CONFIG_DOWNLOAD_FOLDER=""
@@ -377,9 +376,15 @@ CONFIG_CCACHE_DIR=""
 CONFIG_KERNEL_CFLAGS=""
 CONFIG_EXTERNAL_KERNEL_TREE=""
 CONFIG_KERNEL_GIT_CLONE_URI=""
+# CONFIG_BUILD_LOG is not set
 CONFIG_BUILD_LOG_DIR=""
+# CONFIG_SRC_TREE_OVERRIDE is not set
 CONFIG_EXTRA_OPTIMIZATION="-fno-caller-saves -fno-plt"
+# CONFIG_TARGET_OPTIONS is not set
 CONFIG_TARGET_OPTIMIZATION="-Os -pipe -mcpu=cortex-a53"
+# CONFIG_EXTERNAL_TOOLCHAIN is not set
+CONFIG_NEED_TOOLCHAIN=y
+# CONFIG_TOOLCHAINOPTS is not set
 # CONFIG_EXTRA_TARGET_ARCH is not set
 CONFIG_EXTRA_BINUTILS_CONFIG_OPTIONS=""
 CONFIG_EXTRA_GCC_CONFIG_OPTIONS=""
@@ -396,10 +401,11 @@ CONFIG_GCC_VERSION="8.4.0"
 # CONFIG_GCC_USE_IREMAP is not set
 CONFIG_LIBC="musl"
 CONFIG_TARGET_SUFFIX="musl"
-# CONFIG_IB is not set
-# CONFIG_SDK is not set
-# CONFIG_MAKE_TOOLCHAIN is not set
-# CONFIG_IMAGEOPT is not set
+CONFIG_IB=y
+CONFIG_IB_STANDALONE=y
+CONFIG_SDK=y
+CONFIG_MAKE_TOOLCHAIN=y
+CONFIG_IMAGEOPT=y
 # CONFIG_PREINITOPT is not set
 CONFIG_TARGET_PREINIT_SUPPRESS_STDERR=y
 # CONFIG_TARGET_PREINIT_DISABLE_FAILSAFE is not set
@@ -3287,8 +3293,14 @@ CONFIG_PACKAGE_kmod-l2tp=y
 # CONFIG_PACKAGE_kmod-nsh is not set
 # CONFIG_PACKAGE_kmod-openvswitch is not set
 # CONFIG_PACKAGE_kmod-openvswitch-geneve is not set
+# CONFIG_PACKAGE_kmod-openvswitch-geneve-intree is not set
 # CONFIG_PACKAGE_kmod-openvswitch-gre is not set
+# CONFIG_PACKAGE_kmod-openvswitch-gre-intree is not set
+# CONFIG_PACKAGE_kmod-openvswitch-intree is not set
+# CONFIG_PACKAGE_kmod-openvswitch-lisp-intree is not set
+# CONFIG_PACKAGE_kmod-openvswitch-stt-intree is not set
 # CONFIG_PACKAGE_kmod-openvswitch-vxlan is not set
+# CONFIG_PACKAGE_kmod-openvswitch-vxlan-intree is not set
 # CONFIG_PACKAGE_kmod-pf-ring is not set
 # CONFIG_PACKAGE_kmod-pktgen is not set
 CONFIG_PACKAGE_kmod-ppp=y
@@ -3476,6 +3488,7 @@ CONFIG_PACKAGE_kmod-usb-serial-wwan=y
 CONFIG_PACKAGE_kmod-usb-storage=y
 # CONFIG_PACKAGE_kmod-usb-storage-extras is not set
 # CONFIG_PACKAGE_kmod-usb-storage-uas is not set
+# CONFIG_PACKAGE_kmod-usb-test is not set
 # CONFIG_PACKAGE_kmod-usb-uhci is not set
 CONFIG_PACKAGE_kmod-usb-wdm=y
 # CONFIG_PACKAGE_kmod-usb-yealink is not set
@@ -3890,6 +3903,7 @@ CONFIG_PACKAGE_luasocket=y
 # CONFIG_PACKAGE_python3-oauthlib is not set
 # CONFIG_PACKAGE_python3-openpyxl is not set
 # CONFIG_PACKAGE_python3-openssl is not set
+# CONFIG_PACKAGE_python3-packages is not set
 # CONFIG_PACKAGE_python3-packaging is not set
 # CONFIG_PACKAGE_python3-paho-mqtt is not set
 # CONFIG_PACKAGE_python3-paramiko is not set
@@ -7496,6 +7510,7 @@ CONFIG_PACKAGE_jshn=y
 # CONFIG_PACKAGE_kmod is not set
 CONFIG_PACKAGE_kvcedit=y
 # CONFIG_PACKAGE_lcd4linux-custom is not set
+# CONFIG_PACKAGE_lcd4linux-full is not set
 # CONFIG_PACKAGE_lcdproc-clients is not set
 # CONFIG_PACKAGE_lcdproc-drivers is not set
 # CONFIG_PACKAGE_lcdproc-server is not set
@@ -7678,70 +7693,3 @@ CONFIG_PACKAGE_ubi-utils=y
 # CONFIG_PACKAGE_fontconfig is not set
 # end of Font-Utils
 # end of Xorg
-
-#
-# ZBT packages
-#
-
-#
-# application
-#
-CONFIG_PACKAGE_at-cmd=y
-# CONFIG_PACKAGE_at-cmd-long is not set
-CONFIG_PACKAGE_luci-app-cellular=y
-CONFIG_PACKAGE_luci-app-cellularInfo=y
-CONFIG_PACKAGE_luci-app-ngrokc=y
-CONFIG_PACKAGE_luci-app-ttl=y
-CONFIG_PACKAGE_luci-app-watchdog=y
-CONFIG_PACKAGE_rctl=y
-# CONFIG_PACKAGE_zbt_api is not set
-# end of application
-
-#
-# files
-#
-# CONFIG_PACKAGE_MOFI6500-files is not set
-# CONFIG_PACKAGE_RAVIN-MOFI6500-files is not set
-# CONFIG_PACKAGE_Z8101AX-files is not set
-# CONFIG_PACKAGE_Z8102AX-CAPI-files is not set
-# CONFIG_PACKAGE_Z8102AX-eMMC-files is not set
-CONFIG_PACKAGE_Z8102AX-files=y
-# CONFIG_PACKAGE_Z8103AX-PRO-files is not set
-# CONFIG_PACKAGE_Z8103AX-files is not set
-# CONFIG_PACKAGE_Z8103AX-rose-files is not set
-# CONFIG_PACKAGE_Z8103AX-yhioe-files is not set
-# CONFIG_PACKAGE_Z8104AX-GSW-files is not set
-# CONFIG_PACKAGE_Z8105AX-2.5G-DSIM-files is not set
-# CONFIG_PACKAGE_Z8105AX-DSIM-GSW-files is not set
-# CONFIG_PACKAGE_Z8105AX-DSIM-files is not set
-# CONFIG_PACKAGE_Z8105AX-W-PRO-files is not set
-# CONFIG_PACKAGE_Z8106AX-DSIM-files is not set
-# CONFIG_PACKAGE_Z8107AX-TQXX-files is not set
-# CONFIG_PACKAGE_Z8107AX-docker-files is not set
-# CONFIG_PACKAGE_Z8107AX-eMMC-docker-files is not set
-# CONFIG_PACKAGE_Z8107AX-eMMC-files is not set
-# CONFIG_PACKAGE_Z8107AX-files is not set
-# CONFIG_PACKAGE_Z8111AX-files is not set
-# end of files
-
-#
-# kernel
-#
-CONFIG_PACKAGE_kmod-fibocom_gobinet=y
-CONFIG_PACKAGE_kmod-quectel_gobinet=y
-CONFIG_PACKAGE_kmod-quectel_qmi=y
-CONFIG_PACKAGE_quectel-CM=y
-# end of kernel
-
-#
-# project
-#
-# CONFIG_PACKAGE_capi is not set
-# CONFIG_PACKAGE_easy_uci_test is not set
-# CONFIG_PACKAGE_luci-app-cellular-tr300 is not set
-# CONFIG_PACKAGE_luci-app-client-tr300 is not set
-# CONFIG_PACKAGE_luci-app-ethernet is not set
-# CONFIG_PACKAGE_luci-app-tgt_device_info is not set
-# CONFIG_PACKAGE_luci-app-watchdog-tr300 is not set
-# end of project
-# end of ZBT packages
