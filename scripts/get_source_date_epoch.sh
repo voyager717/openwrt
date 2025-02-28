@@ -15,14 +15,9 @@ try_version() {
 }
 
 try_git() {
-<<<<<<< HEAD
-	SOURCE_DATE_EPOCH=$(git -C "$SOURCE" log -1 --no-show-signature \
-		--format=format:%ct "$SOURCE" 2>/dev/null)
-=======
-	SOURCE_DATE_EPOCH=$(git -C "$SOURCE" log -1 --format=format:%ct \
-		"$SOURCE" 2>/dev/null)
->>>>>>> 712839d4c6 (Removed unwanted submodules from index)
-	[ -n "$SOURCE_DATE_EPOCH" ]
+    SOURCE_DATE_EPOCH=$(git -C "$SOURCE" log -1 --no-show-signature \
+            --format=format:%ct "$SOURCE" 2>/dev/null)
+    [ -n "$SOURCE_DATE_EPOCH" ]
 }
 
 try_hg() {
